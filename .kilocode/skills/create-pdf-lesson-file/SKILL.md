@@ -78,3 +78,18 @@ python -m pytest tests/test_json_to_pdf.py -v
 - Topic names normalized for filenames: lowercase, spaces to hyphens
 - Date format in filename: mm-dd-yy
 - Fails fast on any error - does not continue on validation failure
+
+## Typst Syntax — Avoid Hallucination
+
+When modifying the template or debugging Typst compile errors:
+
+1. **Load the `typst-author` skill** for accurate syntax references and examples
+2. **Search local docs** (`.kilocode/skills/typst-author/docs/`) before writing any Typst code
+3. **Follow read-edit-compile-check**: make a change, run `python scripts/json_to_pdf.py ...`, read errors, fix
+4. **Never guess Typst syntax** — models hallucinate heavily on Typst
+
+Key pitfalls:
+- `#set par(leading: Xem)` is **additional** spacing, not a line-height multiplier
+- `#set text(font: "Roboto")` requires `--font-path` pointing to actual OTF files
+- `context { if counter(page).get().first() == 1 { ... } }` for conditional page-1 headers
+- `table.cell(colspan: N)` merges N columns, consuming only one cell position in the row
