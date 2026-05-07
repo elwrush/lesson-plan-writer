@@ -7,6 +7,21 @@
 
 Skills are at `.kilocode/skills/<name>/SKILL.md`. New skills only appear after Kilo restart.
 
+## Typst syntax — avoid hallucination
+
+The **`typst-author`** skill (`.kilocode/skills/typst-author/`) contains a local mirror of the full Typst documentation. When modifying the template or writing new Typst code:
+
+1. **Load the `typst-author` skill first** — it has accurate syntax references and examples
+2. **Search the local docs** before writing any Typst — never guess syntax
+3. **Follow the read-edit-compile-check cycle** — write code, run `python scripts/json_to_pdf.py ...`, read errors, fix
+4. **Template is Jinja2** — most work is template maintenance, not writing raw Typst from scratch
+
+Key Typst pitfalls agents get wrong:
+- `#set par(leading: Xem)` is **additional** spacing, not a line-height multiplier
+- `#set text(font: "Roboto")` needs `--font-path` pointing to actual OTF files
+- `context { if counter(page).get().first() == 1 { ... } }` for conditional page-1 headers
+- `table.cell(colspan: N)` merges N columns, consuming only one cell position in the row
+
 ## Key commands
 
 ```bash
