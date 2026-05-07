@@ -1,0 +1,12 @@
+slides:
+  theme: white
+  highlight_theme: monokai
+  separator_vertical: ^\s*-v-\s*$
+  template: templates/reveal-custom.html.jinja
+
+revealjs:
+  history: true
+  transition: slide
+  width: 1280
+  height: 720
+  slideNumber: c/t

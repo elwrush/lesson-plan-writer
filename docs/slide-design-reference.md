@@ -1,0 +1,412 @@
+# Slide Design Reference — ESL Lesson Presentations
+
+This document defines how lesson plan JSON stages map to reveal.js slides. It is read by `scripts/json_to_markdown.py` at generation time. The teacher updates this file to change slide design without touching code.
+
+---
+
+## Context
+
+- **Teacher controls all slides** — students never interact directly
+- **Slides support the teacher's narration, not replace it**
+- **Reveal.js 6.x** via mkslides, white theme, 1280×720
+- **CEFR levels**: A1, A2, B1, B2, C1, C2
+
+---
+
+## Core Principles
+
+1. **Expository content on screen at once** — task instructions, vocabulary, objectives, discussion questions: ALL visible when the slide appears. Do not use fragments for expository material.
+2. **Procedure text NEVER on screen** — teacher instructions, timing, interaction patterns go in speaker notes (`Notes:`)
+3. **Fragments reserved for answer reveal** — the teacher reveals answers one at a time after students have worked. This is the primary use of fragments.
+4. **Auto-animate for language demonstrations** — use for showing how parts of speech work, word transformations (active/passive, tense changes), or sentence structure. Not for general slides.
+5. **Visual-first** — every lead-in and pre-reading slide uses a Pixabay background image
+6. **Prediction before task** — students guess before doing, confirm with answer reveal
+7. **Answer slides = answer + why + source** (all 3 parts)
+8. **Vocabulary pre-teach** — dedicated slide BEFORE any reading stage
+9. **Section transitions** between stages — brief, one discussion question, colored background
+
+---
+
+## Fragment Policy
+
+| Use fragments for | DO NOT use fragments for |
+|---|---|
+| Revealing answers (one at a time) | Task instructions |
+| Showing wrong→right (highlight-red, then correct) | Vocabulary lists |
+| Parts of speech (highlight-blue on grammar elements) | Objectives/outcomes |
+| Auto-animate word transformations | Discussion questions |
+| Key vocabulary emphasis (grow) | Stage aims |
+| | Lead-in images and prompts |
+| | Material references |
+
+Fragment styles allowed:
+
+| Style | Use |
+|-------|-----|
+| `highlight-green` | Correct answer confirmed |
+| `highlight-red` | Incorrect answer (pair with explanation of why wrong) |
+| `grow` | Emphasize key vocabulary word (single word only) |
+| `highlight-blue` | Grammar point / part of speech labeling |
+| `fade-in` | Smooth reveal of one image element |
+
+---
+
+## Markdown Syntax Rules
+
+These are the ONLY allowed patterns. Agents must not invent alternatives.
+
+### Slide separators
+```
+---           <- horizontal slide (blank line before AND after)
+```
+
+### Fragments (on same line as element)
+```
+✓ **Correct** <!-- .element: class="fragment highlight-green" -->
+✗ **Wrong** <!-- .element: class="fragment highlight-red" -->
+- **word** <!-- .element: class="fragment grow" -->
+```
+
+### Slide attributes (at top of content)
+```
+<!-- .slide: data-background="#e74c3c" -->
+<!-- .slide: data-background-gradient="linear-gradient(to bottom, #2c3e50, #3498db)" -->
+<!-- .slide: data-background-image="/images/photo.jpg" -->
+```
+
+### Speaker notes
+```
+Notes:
+Full teacher script goes here.
+```
+
+---
+
+## Slide Type Templates
+
+### 1. Title Slide
+```markdown
+<!-- .slide: data-background-image="{pixabay_hero_image}" -->
+# {{ topic }} <span class="cefr-badge {{ cefr_level }}">{{ cefr_level }}</span>
+
+**{{ date }}** | {{ duration }}
+
+Teacher: {{ teacher }}
+
+*{{ materials }}*
+```
+
+CEFR badge colors: A1=green, A2=light green, B1=blue, B2=dark blue, C1=purple, C2=red
+
+### 2. Objective Slide (all visible at once)
+```markdown
+## What you will be able to do by the end
+
+- {{ outcome_1 }}
+- {{ outcome_2 }}
+- {{ outcome_3 }}
+```
+
+3 outcomes max, each ≤10 words. NO fragments — students need to see this as orientation.
+
+### 3. Vocabulary Slide (all words visible at once)
+```markdown
+## Key vocabulary
+
+- **{{ word_1 }}** /{{ phonemic_1 }}/ — *{{ example_sentence_1 }}*
+- **{{ word_2 }}** /{{ phonemic_2 }}/ — *{{ example_sentence_2 }}*
+- **{{ word_3 }}** /{{ phonemic_3 }}/ — *{{ example_sentence_3 }}*
+- **{{ word_4 }}** /{{ phonemic_4 }}/ — *{{ example_sentence_4 }}*
+
+Notes:
+Drill each word: teacher says → class repeats (×3).
+Ask: "What does {{ word }} mean? Can you make a sentence?"
+```
+
+Rules:
+- Max 5 words per slide
+- Phonemic script required (IPA, slashes)
+- **Example sentence that implies meaning** — NOT a dictionary definition
+- All visible at once — NO fragments (teacher points to each word while drilling)
+- Speaker notes: drilling instructions
+
+### 4. Lead-In Image Slide
+```markdown
+<!-- .slide: data-background-image="{pixabay_photo}" -->
+
+## {{ open_question }}
+
+Notes:
+{{ teacher_activation_script }}
+Display image for 20 seconds silently.
+Then ask the question. Elicit 3-4 responses.
+Connect responses to today's topic.
+```
+
+One open question only. Image as background. Speaker notes: activation script.
+
+### 5. Pre-Reading Prediction
+```markdown
+<!-- .slide: data-background-image="{pixabay_context_photo}" -->
+
+## Before you read: {{ article_title }}
+
+- What problem does the writer describe?
+- What solution do they suggest?
+
+Notes:
+Students read the title and look at the photo.
+Give them 30 seconds to share predictions in pairs.
+Write 2-3 predictions on the board.
+```
+
+### 6. Task Instruction Slide
+```markdown
+## Exercise {{ number }}
+
+{{ brief_task_instruction }}
+
+*{{ material_reference }}*
+<!-- .element: class="material-ref" -->
+
+Notes:
+{{ full_procedure_with_timing }}
+Students work individually for {{ time }} min.
+Do NOT reveal answer yet.
+```
+
+Brief task: 1-3 short bullet points. Full procedure in speaker notes. Material reference in italic gray.
+
+### 7. Answer Explanation Slide
+```markdown
+## Exercise {{ number }} — Answers
+
+**{{ question_1 }}**
+
+✓ **{{ correct_answer }}** <!-- .element: class="fragment highlight-green" -->
+*{{ explanation }}* — {{ source }}
+
+---
+
+**{{ question_2 }}**
+
+✓ **{{ correct_answer }}** <!-- .element: class="fragment highlight-green" -->
+*{{ explanation }}* — {{ source }}
+```
+
+Rules:
+- Each answer revealed via fragment (teacher controls when answer appears)
+- Correct answer: bold + highlight-green
+- Explanation: 1 sentence
+- Source: "Paragraph C, lines 3-5" or "See instructions"
+- Multiple answers separated by `---`
+
+### 8. Answer Slide — Multiple Choice Variant
+```markdown
+## Exercise {{ number }} — Answer
+
+a. {{ option_a }}
+b. {{ option_b }}
+c. {{ option_c }}
+
+✓ **{{ correct_letter }}** — {{ explanation }} <!-- .element: class="fragment highlight-green" -->
+
+{{ source }}
+<!-- .element: class="source-cite" -->
+```
+
+### 9. Section Transition Slide
+```markdown
+<!-- .slide: data-background="#c0392b" -->
+
+## {{ next_stage_name }}
+
+{{ discussion_question }}
+
+Notes:
+Transition: "Now we're moving from {{ prev_stage }} to {{ next_stage }}."
+Ask the discussion question. 1-2 min.
+```
+
+Red/orange background. One discussion question to warm up for the next stage.
+
+### 10. Post-Reading Discussion Slide
+```markdown
+<!-- .slide: data-background-image="{pixabay_extension_photo}" -->
+
+## Discussion
+
+- {{ question_1 }}
+- {{ question_2 }}
+- {{ question_3 }}
+
+*{{ material_reference }}*
+<!-- .element: class="material-ref" -->
+
+Notes:
+Students discuss in pairs. 5 min.
+Content and language feedback. 2 min.
+```
+
+All questions visible at once. No fragments for discussion.
+
+### 11. Summary Slide
+```markdown
+## What you can do now
+
+✓ {{ outcome_1 }}
+✓ {{ outcome_2 }}
+✓ {{ outcome_3 }}
+
+Notes:
+Elicit from students: What did you learn today?
+Connect back to their predictions from the beginning.
+```
+
+### 12. End Slide (buffer)
+```markdown
+<!-- .slide: data-background="#2c3e50" -->
+
+## Thank you
+
+*{{ topic }}* | {{ cefr_level }}
+```
+
+---
+
+## Auto-Animate for Language Demonstrations
+
+Use auto-animate (`data-auto-animate`) on adjacent slides to demonstrate language transformations. Only use for grammar/language points, not for general slides.
+
+### Example: Active → Passive transformation
+```markdown
+<!-- .slide: data-auto-animate -->
+## Active → Passive
+
+**The dog chased the cat.**
+<!-- .element: class="fragment highlight-blue" data-fragment-index="1" -->
+
+---
+
+<!-- .slide: data-auto-animate -->
+## Active → Passive
+
+**The cat was chased by the dog.**
+<!-- .element: class="fragment highlight-blue" -->
+```
+
+### Example: Vocabulary word in context
+```markdown
+<!-- .slide: data-auto-animate -->
+## empathy /ˈempəθi/
+
+---
+
+<!-- .slide: data-auto-animate -->
+## empathy /ˈempəθi/
+
+"She felt real empathy when she heard his story."
+```
+
+**When to use auto-animate:**
+- Tense changes (present → past → present perfect)
+- Active → passive transformations
+- Word families (empathy → empathetic → empathize)
+- Collocation examples (strong coffee, NOT powerful coffee)
+- Showing a word isolated → in a sentence
+- Sentence structure comparison
+
+**When NOT to use auto-animate:**
+- Answer reveals (use fragments instead)
+- General slide transitions (use regular slide changes)
+- Vocabulary lists (all visible at once)
+
+---
+
+## Max Text Limits
+
+| Slide type | Max total words on screen |
+|---|---|
+| Title | 20 |
+| Objective | 30 (3 × 10-word outcomes) |
+| Vocabulary | 40 (4-5 words × ~8 words each) |
+| Lead-in image | 10 (1 question) |
+| Pre-reading prediction | 6 (2 prompts × 3 words) |
+| Task instruction | 20 |
+| Answer explanation | 40 per question |
+| Section transition | 10 (1 question) |
+| Post-reading discussion | 20 (2-3 questions) |
+| Summary | 15 (3 × 5-word outcomes) |
+| End | 5 |
+
+---
+
+## Example: "What Connects Us" (B2, 46 min, 6 stages)
+
+### Generated slides (~19 slides)
+
+```
+Slide 1:  Title — "What Connects Us" + B2 badge + hero background image
+Slide 2:  Objective — 3 outcomes (all visible, no fragments)
+Slide 3:  Vocabulary — 4 words with phonemic script + example sentences (all visible)
+Slide 4:  Lead-in — background image + "What do you see? What do you wonder?"
+Slide 5:  Pre-reading — article title + 2 prediction prompts
+Slide 6:  TASK — Exercise 2: True/False (brief instruction)
+Slide 7:  ANSWERS — Exercise 2 (statements 1-3, fragments reveal each answer)
+Slide 8:  Transition — "Reading for detail" (red background, brief)
+Slide 9:  TASK — Exercise 3: Paragraph matching (brief instruction)
+Slide 10: ANSWERS — Exercise 3 (1-B, 2-C, 3-A, 4-E, 5-F, 6-D, fragments reveal)
+Slide 11: Transition — "Drawing conclusions" (red background, brief)
+Slide 12: TASK — Exercise 4: Best conclusion a/b/c (brief instruction)
+Slide 13: ANSWERS — Exercise 4 (c is correct + explanation, fragment reveal)
+Slide 14: Transition — "Let's discuss" (red background, brief)
+Slide 15: Post-reading discussion — 3 questions (all visible)
+Slide 16: Transition — "Wrapping up" (brief)
+Slide 17: Summary — "What you can do now" (3 outcomes)
+Slide 18: End — "Thank you"
+
+Backup slides (uncounted, at end):
+- 19: Extra vocabulary challenge
+- 20: Extension discussion prompt
+- 21: Blank buffer
+```
+
+**Fragment count**: Only on slides 7, 10, 13 (answer reveal slides) — that's 3 out of 18 slides using fragments. Expository content stays on screen.
+
+---
+
+## Vocabulary Selection Guidelines
+
+Words must be selected based on:
+1. **CEFR level** — challenging but learnable:
+   - A1/A2: basic concrete nouns, high-frequency verbs
+   - B1/B2: abstract nouns, phrasal verbs, collocations
+   - C1/C2: idiomatic expressions, academic vocabulary
+2. **Relevance** to the lesson topic and reading text
+3. **Comprehension-enabling** — words needed to understand the core text
+4. **Source**: lesson plan materials, answer key, stage procedure text
+
+Phonemic script: Use IPA. Example sentences must imply meaning without defining.
+
+---
+
+## Pixabay Image Strategy
+
+| Slide type | Pixabay query pattern | Position |
+|---|---|---|
+| Title | Topic-relevant hero | Background |
+| Lead-in | Emotional/hook photo | Background |
+| Pre-reading | Context photo | Background |
+| Post-reading discussion | Extension/theme photo | Background |
+| Section transitions | No image — color background | n/a |
+| Task/Answer/Vocabulary | No image — clean text | n/a |
+
+Attribution in speaker notes: `Image by {author} from Pixabay`
+
+---
+
+## Implementation
+
+1. `scripts/json_to_markdown.py` reads this document at generation time
+2. The script generates markdown following these templates
+3. Build: `python -m mkslides build "output/{subfolder}/slides" -d "output/{subfolder}/site"`

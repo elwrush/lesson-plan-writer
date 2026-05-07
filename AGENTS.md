@@ -1,9 +1,15 @@
 # AGENTS.md — Lesson Plan Writer 3
 
-## Two-stage pipeline
+## Pipeline overview
 
+### PDF generation (two-stage)
 1. **`write-lesson-plan` skill** → creates `output/{subfolder}/{mmddyy}-{topic}-lesson-plan.json`
 2. **`create-pdf-lesson-file` skill** → converts JSON → `PDF/{subfolder}/{mm-dd-yy}-{topic}.pdf`
+
+### Slide generation (three-stage)
+1. **`write-lesson-plan` skill** → creates `output/{subfolder}/{mmddyy}-{topic}-lesson-plan.json`
+2. **`lesson-plan-to-reveal` skill** → converts JSON → markdown slides using `scripts/json_to_markdown.py`
+3. **`publish-to-github-pages` skill** → builds with mkslides and deploys to GitHub Pages
 
 Skills are at `.kilocode/skills/<name>/SKILL.md`. New skills only appear after Kilo restart.
 
