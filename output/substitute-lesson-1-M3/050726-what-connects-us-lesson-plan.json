@@ -1,0 +1,68 @@
+{
+  "teacher": "Ed Rush",
+  "duration": "46 minutes",
+  "date": "050726",
+  "topic": "What Connects Us",
+  "objective": "By the end of the lesson, learners will have practiced and developed the sub-skills of reading for gist, detail and specific information and to identify facts and opinions in the context of an article about bridging the generation gap.",
+  "materials": "OFD 3, Student Book, pp 5-6",
+  "lesson_plan": {
+    "shape": "E",
+    "shape_name": "Receptive Skills (Traditional)",
+    "cefr_level": "B2",
+    "class": "M3",
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage": "Lead-in",
+        "stage_aim": "To activate interest in the theme of generational differences",
+        "procedure": "- Display or refer to the photo on page 5. In pairs, Ss discuss: What differences do you notice between the two people? In what ways are they the same? Is each person exactly what we expect of someone their age? 3 min.\n- Feedback – elicit responses from pairs. 2 min.\n- In new pairs, Ss tell each other about a time they disagreed with someone from a different generation. What was it about? Did you resolve it? 3 min.\n- Brief whole-class feedback. 1 min.",
+        "time": 9,
+        "interaction": "Ss-Ss"
+      },
+      {
+        "stage_number": 2,
+        "stage": "Reading for gist",
+        "stage_aim": "To get the general idea of the article",
+        "procedure": "- Tell Ss they are going to read an article called 'Bridging the Generation Gap – with empathy'.\n- Ss read the article quickly and decide: What is the writer's main purpose? (To explore the generation gap and suggest a possible solution.) 3 min.\n- Pair check. Whole-class feedback. 2 min.",
+        "time": 5,
+        "interaction": "Ss-Ss"
+      },
+      {
+        "stage_number": 3,
+        "stage": "Reading for detail and specific information",
+        "stage_aim": "To identify key facts and supporting details in the article",
+        "procedure": "- Ss read the article again and complete the true/false task (Exercise 2). They must correct the false statements. 5 min.\n- Pair check. Whole-class feedback on answers: 1-T, 2-F (By using empathy, people of different ages can communicate and learn to work together better), 3-F (It informs and teaches because it explains what the generation gap is, the problems it might cause, and a possible solution). 3 min.\n- Ss complete the paragraph matching task (Exercise 3). Match statements 1-6 to paragraphs A-F. 5 min.\n- Pair check. Whole-class feedback: 1-B, 2-C, 3-A, 4-E, 5-F, 6-D. 3 min.",
+        "time": 16,
+        "interaction": "Ss-Ss"
+      },
+      {
+        "stage_number": 4,
+        "stage": "Reading for inference and conclusion",
+        "stage_aim": "To draw inferences and evaluate conclusions from the text",
+        "procedure": "- Ss individually decide which statement gives the best conclusion of the article (Exercise 4): a) Learning and change are both easier for younger people, b) Technology often causes conflict between young and old, c) Differences can be good if we take time to understand them. 2 min.\n- Pair check. Feedback – answer: c. Elicit why this is the best conclusion. 2 min.",
+        "time": 4,
+        "interaction": "Ss-Ss"
+      },
+      {
+        "stage_number": 5,
+        "stage": "Post-reading speaking task",
+        "stage_aim": "To discuss and respond personally to ideas from the reading",
+        "procedure": "- In pairs, Ss answer the questions from Exercise 5 using ideas from the article:\n  1. Think of one or two things you have now that you think your parents wish they had when they were your age.\n  2. Explain something about yourself or your life that you wish the older generation understood better.\n  3. Name one or two useful things you've learned from someone in an older generation.\n- 5 min discussion. Content and language feedback. 2 min.",
+        "time": 7,
+        "interaction": "Ss-Ss"
+      },
+      {
+        "stage_number": 6,
+        "stage": "Wrap-up and reflection",
+        "stage_aim": "To reflect on key takeaways and consolidate learning",
+        "procedure": "- Elicit from Ss: What is one thing you learned today about the generation gap? How might you apply the article's tips in your own life? 3 min.\n- Brief error correction if needed. 2 min.",
+        "time": 5,
+        "interaction": "T-Ss"
+      }
+    ]
+  },
+  "transcript": "none",
+  "answer_key": "C:\\PROJECTS\\LESSON PLAN WRITER 3\\inputs\\substitute-lesson-1-M3\\Unit_1_What_Connects_Us.md",
+  "cefr_level": "B2",
+  "class": "M3"
+}

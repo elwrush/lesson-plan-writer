@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Kilo
+.kilocode/node_modules/
+
+# PDF output (generated)
+PDF/
+
+# Temp files
+output/**/_temp_*
+
+# IDE
+.vscode/
+
+# OS
+Thumbs.db
+Desktop.ini

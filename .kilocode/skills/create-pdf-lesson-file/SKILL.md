@@ -1,0 +1,80 @@
+---
+name: create-pdf-lesson-file
+description: Converts a lesson plan JSON file to a formatted PDF using Typst CLI and Jinja2 templating.
+---
+
+# Skill: Create PDF Lesson File
+
+## Purpose
+Convert lesson plan JSON files to professionally formatted PDFs using Typst CLI with Roboto font, logo header, and structured lesson information.
+
+## Workflow
+
+### Step 1: Validate Input
+- Check that the JSON file exists
+- Parse and validate against required schema:
+  - `teacher`, `duration`, `date`, `topic`, `materials`
+  - `lesson_plan.shape`, `lesson_plan.shape_name`, `lesson_plan.cefr_level`, `lesson_plan.class`, `lesson_plan.stages`
+  - Each stage must have: `stage_number`, `stage`, `stage_aim`, `procedure`, `time`, `interaction`
+- Halt on first validation error with descriptive message
+
+### Step 2: Process Content
+- If `answer_key` is a file path to a `.md` file, read its contents
+- If `transcript` is a file path to a `.md` or `.txt` file, read its contents
+- Convert markdown content to Typst markup (headings, bold, italic, bullet lists)
+- Format date from `DDMMYY` or `YYMMDD` to `D Month, YYYY`
+- Humanize robotic stage aims (e.g., "To reading for gist" → "To get the general idea of the text")
+- Strip minute indicators from procedure text (e.g., "3 min.", "2 min.")
+
+### Step 3: Render Template
+- Use Jinja2 to fill `templates/lesson-plan-template.typ` with processed data
+- Template produces:
+  - Page 1 header with Cambridge and ACT logos, title "Lesson Plan"
+  - Lesson Information: Topic line, then table (Teacher, Date, Class, Duration, CEFR, Shape, Materials)
+  - Lesson Aim box with left border
+  - Lesson Stages table (Time, Goal, Procedure, Interaction)
+  - Answer Key and Transcript sections on page breaks
+
+### Step 4: Render PDF with Typst
+- Copy logo images to temp directory alongside the `.typ` file
+- Run: `typst compile <temp.typ> <output.pdf> --font-path <roboto_dir>`
+- Output path: `PDF/{input_subfolder}/{mm-dd-yy}-{topic}.pdf`
+- Clean up temporary `.typ` file and copied images after rendering
+
+### Step 5: Confirm Output
+- Report success with output file path
+- Report any errors with details
+
+## File Locations
+- **Template:** `C:\PROJECTS\LESSON PLAN WRITER 3\templates\lesson-plan-template.typ`
+- **Script:** `C:\PROJECTS\LESSON PLAN WRITER 3\scripts\json_to_pdf.py`
+- **Logos:** `C:\PROJECTS\LESSON PLAN WRITER 3\templates\Image_20260324_141022.png` (ACT), `1135082720.png` (Cambridge)
+- **Roboto fonts:** `%APPDATA%\TinyTeX\texmf-dist\fonts\opentype\google\roboto\`
+- **Output:** `C:\PROJECTS\LESSON PLAN WRITER 3\PDF\{subfolder}\{mm-dd-yy}-{topic}.pdf`
+
+## Usage
+```bash
+python scripts/json_to_pdf.py <json_file_path> [--output-dir <dir>]
+```
+
+## Dependencies
+- Python 3.x
+- Jinja2 (`pip install jinja2`)
+- Typst CLI (v0.13+)
+- Roboto OTF fonts (in TinyTeX or system)
+- pytest (`pip install pytest`) for running tests
+
+## Testing
+Run tests with:
+```bash
+cd C:\PROJECTS\LESSON PLAN WRITER 3
+python -m pytest tests/test_json_to_pdf.py -v
+```
+
+## Notes
+- Black and white formatting only
+- Logos appear only on page 1 header
+- Roboto font used throughout
+- Topic names normalized for filenames: lowercase, spaces to hyphens
+- Date format in filename: mm-dd-yy
+- Fails fast on any error - does not continue on validation failure
