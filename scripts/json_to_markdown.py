@@ -11,11 +11,16 @@ import json
 import os
 import sys
 import re
+import io
 from pathlib import Path
 from datetime import datetime
 
+import requests
+from PIL import Image
+
 PROJECT_ROOT = Path(__file__).parent.parent
 OUTPUT_DIR = PROJECT_ROOT / "output"
+IMAGE_CACHE_DIR = OUTPUT_DIR / ".image-cache"
 REFERENCE_DOC = PROJECT_ROOT / "docs" / "slide-design-reference.md"
 
 REQUIRED_FIELDS = [
@@ -43,6 +48,87 @@ REQUIRED_STAGE_FIELDS = [
     "time",
     "interaction",
 ]
+
+
+def ensure_cache_dir():
+    IMAGE_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def search_pixabay(topic, api_key=None):
+    """Search Pixabay for images matching the topic. Returns image metadata or None."""
+    if api_key is None:
+        api_key = os.environ.get("PIXABAY_API_KEY")
+    if not api_key:
+        return None
+    try:
+        url = "https://pixabay.com/api/"
+        params = {
+            "key": api_key,
+            "q": topic,
+            "image_type": "photo",
+            "orientation": "horizontal",
+            "safesearch": "true",
+            "per_page": 5,
+        }
+        response = requests.get(url, params=params, timeout=15)
+        response.raise_for_status()
+        data = response.json()
+        hits = data.get("hits", [])
+        if hits:
+            return hits[0]
+    except Exception:
+        pass
+    return None
+
+
+def download_and_optimize(image_url, pixabay_id):
+    """Download image from Pixabay, resize to max 1920px width, compress as JPEG."""
+    ensure_cache_dir()
+    cache_path = IMAGE_CACHE_DIR / f"{pixabay_id}.jpg"
+    if cache_path.exists():
+        original_size = cache_path.stat().st_size
+        print(f"Using cached image: {cache_path.name} ({original_size / 1024:.0f}KB)")
+        return cache_path
+
+    try:
+        response = requests.get(image_url, timeout=30)
+        response.raise_for_status()
+        img = Image.open(io.BytesIO(response.content))
+        img = img.convert("RGB")
+
+        original_bytes = len(response.content)
+
+        max_width = 1920
+        if img.width > max_width:
+            ratio = max_width / img.width
+            new_height = int(img.height * ratio)
+            img = img.resize((max_width, new_height), Image.LANCZOS)
+
+        img.save(cache_path, "JPEG", quality=85, optimize=True)
+
+        optimized_size = cache_path.stat().st_size
+        print(
+            f"Background image optimized: {original_bytes / 1024 / 1024:.1f}MB -> {optimized_size / 1024:.0f}KB"
+        )
+        return cache_path
+    except Exception as e:
+        print(f"Warning: Could not download/optimize image: {e}")
+        return None
+
+
+def search_and_get_image(topic):
+    """Search Pixabay and return (image_path, attribution) or (None, None) on failure."""
+    image_data = search_pixabay(topic)
+    if image_data is None:
+        return None, None
+    pixabay_id = image_data.get("id")
+    large_url = image_data.get("largeImageURL")
+    photographer = image_data.get("user", "")
+    if not pixabay_id or not large_url:
+        return None, None
+    image_path = download_and_optimize(large_url, pixabay_id)
+    attribution = f"Photo by {photographer} on Pixabay" if photographer else None
+    return image_path, attribution
 
 
 def validate_json(data):
@@ -227,7 +313,7 @@ def extract_keywords(data):
     return selected[:5]
 
 
-def generate_title_slide(data):
+def generate_title_slide(data, title_image_path=None, title_attribution=None, site_dir=None, logo_path=None):
     teacher = escape_md(data.get("teacher", ""))
     date_str = format_date(data.get("date", ""))
     topic = escape_md(data.get("topic", ""))
@@ -235,8 +321,35 @@ def generate_title_slide(data):
     materials = escape_md(data.get("materials", ""))
     cefr = data.get("lesson_plan", {}).get("cefr_level", "")
 
+    if title_image_path:
+        image_path = Path(title_image_path).resolve()
+        attribution = title_attribution
+    else:
+        image_path, attribution = search_and_get_image(data.get("topic", ""))
+
+    if image_path:
+        if site_dir:
+            rel_path = os.path.relpath(str(image_path), str(site_dir)).replace("\\", "/")
+        else:
+            rel_path = image_path.relative_to(OUTPUT_DIR.parent).as_posix()
+        bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.8" -->'
+    else:
+        bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #2c3e50, #3498db)" -->'
+
     lines = [
-        '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #2c3e50, #3498db)" -->',
+        bg_directive,
+    ]
+
+    if logo_path:
+        logo_path_resolved = Path(logo_path).resolve()
+        if site_dir:
+            logo_rel = os.path.relpath(str(logo_path_resolved), str(site_dir)).replace("\\", "/")
+        else:
+            logo_rel = logo_path_resolved.relative_to(OUTPUT_DIR.parent).as_posix()
+        lines.append(f'<img src="{logo_rel}" class="title-logo" />')
+        lines.append("")
+
+    lines.extend([
         f"# {topic} <span class=\"cefr-badge {cefr}\">{cefr}</span>",
         "",
         f"**{date_str}** | {duration}",
@@ -244,7 +357,10 @@ def generate_title_slide(data):
         f"Teacher: {teacher}",
         "",
         f"*{materials}*",
-    ]
+    ])
+    if attribution:
+        lines.append("")
+        lines.append(f"*{attribution}*")
     return "\n".join(lines)
 
 
@@ -555,7 +671,7 @@ def generate_end_slide(data):
     return "\n".join(lines)
 
 
-def generate_markdown(data):
+def generate_markdown(data, title_image_path=None, title_attribution=None, site_dir=None, logo_path=None):
     """Main: generate complete markdown from lesson plan data."""
     stages = data.get("lesson_plan", {}).get("stages", [])
     total_stages = len(stages)
@@ -564,7 +680,7 @@ def generate_markdown(data):
 
     slides = []
 
-    slides.append(generate_title_slide(data))
+    slides.append(generate_title_slide(data, title_image_path, title_attribution, site_dir, logo_path))
 
     obj_slide = generate_objective_slide(data)
     if obj_slide:
@@ -673,7 +789,7 @@ def get_output_path(json_path, date_str):
     return slides_dir / filename
 
 
-def convert_json_to_markdown(json_path):
+def convert_json_to_markdown(json_path, title_image_path=None, title_attribution=None, logo_path=None):
     json_path = Path(json_path)
 
     if not json_path.exists():
@@ -694,7 +810,14 @@ def convert_json_to_markdown(json_path):
             print(f"  - {error}")
         return None
 
-    markdown_content = generate_markdown(data)
+    try:
+        output_idx = json_path.parts.index("output")
+        subfolder = json_path.parts[output_idx + 1]
+        site_dir = OUTPUT_DIR / subfolder / "site"
+    except (ValueError, IndexError):
+        site_dir = None
+
+    markdown_content = generate_markdown(data, title_image_path, title_attribution, site_dir, logo_path)
 
     output_path = get_output_path(json_path, data.get("date", ""))
 
@@ -710,10 +833,17 @@ def convert_json_to_markdown(json_path):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python scripts/json_to_markdown.py <json_file_path>")
-        sys.exit(1)
+    import argparse
 
-    json_file = sys.argv[1]
-    result = convert_json_to_markdown(json_file)
+    parser = argparse.ArgumentParser(description="Convert lesson plan JSON to mkslides markdown.")
+    parser.add_argument("json_file", help="Path to lesson plan JSON file")
+    parser.add_argument("--title-image", default=None,
+                        help="Pre-downloaded image path for title slide (skips Pixabay search)")
+    parser.add_argument("--title-attribution", default=None,
+                        help="Attribution string for pre-downloaded title image")
+    parser.add_argument("--logo-image", default=None,
+                        help="Path to logo image to display at top of title slide")
+    args = parser.parse_args()
+
+    result = convert_json_to_markdown(args.json_file, args.title_image, args.title_attribution, args.logo_image)
     sys.exit(0 if result else 1)

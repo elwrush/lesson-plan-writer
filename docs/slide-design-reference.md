@@ -401,6 +401,20 @@ Phonemic script: Use IPA. Example sentences must imply meaning without defining.
 | Section transitions | No image — color background | n/a |
 | Task/Answer/Vocabulary | No image — clean text | n/a |
 
+### Title Slide Background
+
+The title slide uses a Pixabay background image with a dark overlay for readability:
+
+```markdown
+<!-- .slide: data-background-image="path/to/image.jpg" data-background-color="rgba(0,0,0,0.8)" -->
+```
+
+- Images are downloaded from Pixabay API, resized to max 1920px width, compressed as JPEG (quality=85)
+- Optimized images are cached in `output/.image-cache/` by Pixabay image ID
+- Target file size: ~150-300KB per image
+- If Pixabay API is unavailable or returns no results, falls back to gradient background
+- Requires `PIXABAY_API_KEY` environment variable
+
 Attribution in speaker notes: `Image by {author} from Pixabay`
 
 ---
