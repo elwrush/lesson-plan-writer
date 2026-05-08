@@ -313,7 +313,7 @@ def extract_keywords(data):
     return selected[:5]
 
 
-def generate_title_slide(data, title_image_path=None, title_attribution=None, site_dir=None, logo_path=None):
+def generate_title_slide(data, title_image_path=None, title_attribution=None, slides_dir=None, logo_path=None):
     teacher = escape_md(data.get("teacher", ""))
     date_str = format_date(data.get("date", ""))
     topic = escape_md(data.get("topic", ""))
@@ -328,8 +328,8 @@ def generate_title_slide(data, title_image_path=None, title_attribution=None, si
         image_path, attribution = search_and_get_image(data.get("topic", ""))
 
     if image_path:
-        if site_dir:
-            rel_path = os.path.relpath(str(image_path), str(site_dir)).replace("\\", "/")
+        if slides_dir:
+            rel_path = os.path.relpath(str(image_path), str(slides_dir)).replace("\\", "/")
         else:
             rel_path = image_path.relative_to(OUTPUT_DIR.parent).as_posix()
         bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.8" -->'
@@ -342,8 +342,8 @@ def generate_title_slide(data, title_image_path=None, title_attribution=None, si
 
     if logo_path:
         logo_path_resolved = Path(logo_path).resolve()
-        if site_dir:
-            logo_rel = os.path.relpath(str(logo_path_resolved), str(site_dir)).replace("\\", "/")
+        if slides_dir:
+            logo_rel = os.path.relpath(str(logo_path_resolved), str(slides_dir)).replace("\\", "/")
         else:
             logo_rel = logo_path_resolved.relative_to(OUTPUT_DIR.parent).as_posix()
         lines.append(f'<img src="{logo_rel}" class="title-logo" />')
@@ -671,7 +671,7 @@ def generate_end_slide(data):
     return "\n".join(lines)
 
 
-def generate_markdown(data, title_image_path=None, title_attribution=None, site_dir=None, logo_path=None):
+def generate_markdown(data, title_image_path=None, title_attribution=None, slides_dir=None, logo_path=None):
     """Main: generate complete markdown from lesson plan data."""
     stages = data.get("lesson_plan", {}).get("stages", [])
     total_stages = len(stages)
@@ -680,7 +680,7 @@ def generate_markdown(data, title_image_path=None, title_attribution=None, site_
 
     slides = []
 
-    slides.append(generate_title_slide(data, title_image_path, title_attribution, site_dir, logo_path))
+    slides.append(generate_title_slide(data, title_image_path, title_attribution, slides_dir, logo_path))
 
     obj_slide = generate_objective_slide(data)
     if obj_slide:
@@ -810,16 +810,10 @@ def convert_json_to_markdown(json_path, title_image_path=None, title_attribution
             print(f"  - {error}")
         return None
 
-    try:
-        output_idx = json_path.parts.index("output")
-        subfolder = json_path.parts[output_idx + 1]
-        site_dir = OUTPUT_DIR / subfolder / "site"
-    except (ValueError, IndexError):
-        site_dir = None
-
-    markdown_content = generate_markdown(data, title_image_path, title_attribution, site_dir, logo_path)
-
     output_path = get_output_path(json_path, data.get("date", ""))
+    slides_dir = output_path.parent
+
+    markdown_content = generate_markdown(data, title_image_path, title_attribution, slides_dir, logo_path)
 
     try:
         with open(output_path, "w", encoding="utf-8") as f:

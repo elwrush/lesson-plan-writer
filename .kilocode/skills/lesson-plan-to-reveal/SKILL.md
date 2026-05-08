@@ -14,11 +14,10 @@ Convert a lesson plan JSON into a reveal.js slideshow for ESL classroom delivery
 ## When to Use This Skill
 
 Use `lesson-plan-to-reveal` when converting a lesson plan JSON to slides. The skill:
-1. Downloads a Pixabay title image to `output/{subfolder}/assets/` via `pixabay_download.py`
-2. Copies the institution logo (`templates/Image_20260324_141022.png`) to `output/{subfolder}/assets/`
-3. Runs `scripts/json_to_markdown.py` with `--title-image`, `--title-attribution`, and `--logo-image`
-4. Runs `python -m mkslides build` to generate HTML
-5. Reports the output path
+1. Downloads a Pixabay title image and copies the institution logo into `output/{subfolder}/slides/assets/`
+2. Runs `scripts/json_to_markdown.py` with `--title-image`, `--title-attribution`, and `--logo-image`
+3. Runs `python -m mkslides build` to generate HTML (auto-copies all assets from slides/ to site/)
+4. Reports the output path
 
 ## Workflow
 
@@ -27,10 +26,10 @@ Use `lesson-plan-to-reveal` when converting a lesson plan JSON to slides. The sk
 - Validate required fields: `teacher`, `duration`, `date`, `topic`, `materials`, `lesson_plan.stages`
 - Read answer key from `answer_key` field (`.md` file or "none")
 
-### Step 2: Download title image via Pixabay & copy logo
+### Step 2: Download title image via Pixabay & copy logo into slides directory
 
 Extract the subfolder and topic from the JSON path, then download 1 matching image
-and copy the institution logo into assets:
+and copy the institution logo into `slides/assets/` so mkslides auto-copies them to the site:
 
 ```powershell
 $jsonFile = "output/{subfolder}/{file}.json"
@@ -38,10 +37,11 @@ $jsonData = Get-Content $jsonFile | ConvertFrom-Json
 $topic = $jsonData.topic
 
 $subfolder = ($jsonFile -split '\\|/')[1]
-$assetsDir = "output/$subfolder/assets"
-New-Item -ItemType Directory -Force -Path $assetsDir | Out-Null
+$slidesDir = "output/$subfolder/slides"
+$slidesAssetsDir = "$slidesDir/assets"
+New-Item -ItemType Directory -Force -Path $slidesAssetsDir | Out-Null
 
-$pixabayOutput = python scripts/pixabay_download.py --query "$topic" --type image --count 1 --output-dir "$assetsDir"
+$pixabayOutput = python scripts/pixabay_download.py --query "$topic" --type image --count 1 --output-dir "$slidesAssetsDir"
 $pixabayResult = $pixabayOutput | ConvertFrom-Json
 
 if ($pixabayResult.files.Count -gt 0) {
@@ -53,12 +53,12 @@ if ($pixabayResult.files.Count -gt 0) {
     $titleAttribution = ""
 }
 
-# Copy institution logo into assets
-Copy-Item -Path "templates/Image_20260324_141022.png" -Destination "$assetsDir/logo.png" -Force
-$logoImage = "$assetsDir/logo.png"
+# Copy institution logo into slides/assets/
+Copy-Item -Path "templates/Image_20260324_141022.png" -Destination "$slidesAssetsDir/logo.png" -Force
+$logoImage = "$slidesAssetsDir/logo.png"
 ```
 
-Output: `output/{subfolder}/assets/pixabay_{id}_1.jpg` and `output/{subfolder}/assets/logo.png`
+Output: `output/{subfolder}/slides/assets/pixabay_{id}_1.jpg` and `output/{subfolder}/slides/assets/logo.png`
 
 ### Step 3: Generate markdown
 
@@ -81,21 +81,14 @@ The script generates slides following `docs/slide-design-reference.md`:
 - End slide
 
 ### Step 4: Build with mkslides
+
+mkslides auto-copies all non-MD files from the slides folder to the site folder (preserving relative structure), so the logo and background image are served alongside the HTML automatically.
+
 ```bash
 python -m mkslides build "output/{subfolder}/slides" -d "output/{subfolder}/site"
 ```
 
-### Step 5: Copy assets to site directory
-
-```powershell
-if ($titleImage) {
-    Copy-Item -Path "output/$subfolder/assets" -Destination "output/$subfolder/site/" -Recurse -Force
-}
-```
-
-This ensures the title slide image is served alongside the built HTML.
-
-### Step 6: Verify output
+### Step 5: Verify output
 - Check `site/index.html` exists
 - Verify title slide contains logo `<img>` tag with class `title-logo`
 - Verify fragment usage: only on answer reveal slides, not on expository content
