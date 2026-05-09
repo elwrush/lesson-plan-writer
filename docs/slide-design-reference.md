@@ -109,26 +109,28 @@ CEFR badge colors: A1=green, A2=light green, B1=blue, B2=dark blue, C1=purple, C
 
 3 outcomes max, each ≤10 words. NO fragments — students need to see this as orientation.
 
-### 3. Vocabulary Slide (all words visible at once)
+### 3. Vocabulary Slides (one word per slide with Pixabay background)
 ```markdown
-## Key vocabulary
+<!-- .slide: data-background-image="{pixabay_word_image}" data-background-opacity="0.7" -->
 
-- **{{ word_1 }}** /{{ phonemic_1 }}/ — *{{ example_sentence_1 }}*
-- **{{ word_2 }}** /{{ phonemic_2 }}/ — *{{ example_sentence_2 }}*
-- **{{ word_3 }}** /{{ phonemic_3 }}/ — *{{ example_sentence_3 }}*
-- **{{ word_4 }}** /{{ phonemic_4 }}/ — *{{ example_sentence_4 }}*
+## Important Words you need to know
+
+**{{ word }}** /{{ phonemic }}/
+
+*There's such a {{ word }} between them; they never agree on anything.*
 
 Notes:
-Drill each word: teacher says → class repeats (×3).
-Ask: "What does {{ word }} mean? Can you make a sentence?"
+Drill: teacher says → class repeats (×3).
+Show image as visual anchor for meaning.
 ```
 
 Rules:
-- Max 5 words per slide
-- Phonemic script required (IPA, slashes)
-- **Example sentence that implies meaning** — NOT a dictionary definition
-- All visible at once — NO fragments (teacher points to each word while drilling)
-- Speaker notes: drilling instructions
+- **One vocabulary item per slide** — max 5 words total
+- Word + phonemic script (IPA) + bolded target word in context sentence
+- **Sentence must imply meaning, NOT define** — e.g., "There's such a **generation gap** between Rico and Ploy; Ploy doesn't understand the slang words Rico uses." (GOOD) vs "generation gap — the difference between two groups or generations" (BAD)
+- **Pixabay background at 70% opacity** — image must precisely convey word meaning and context
+- Title: "Important Words you need to know" (NOT "Key vocabulary")
+- All visible at once — NO fragments
 
 ### 4. Lead-In Image Slide
 ```markdown
@@ -397,9 +399,10 @@ Phonemic script: Use IPA. Example sentences must imply meaning without defining.
 | Title | Topic-relevant hero | Background |
 | Lead-in | Emotional/hook photo | Background |
 | Pre-reading | Context photo | Background |
+| Vocabulary (each word) | Word-meaning context image | Background |
 | Post-reading discussion | Extension/theme photo | Background |
 | Section transitions | No image — color background | n/a |
-| Task/Answer/Vocabulary | No image — clean text | n/a |
+| Task/Answer | No image — clean text | n/a |
 
 ### Title Slide Background
 

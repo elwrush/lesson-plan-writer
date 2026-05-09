@@ -313,19 +313,74 @@ def extract_keywords(data):
     return selected[:5]
 
 
+def generate_lesson_strap(data):
+    objective = data.get("objective", "").lower()
+    topic = data.get("topic", "")
+
+    # Map objective keywords to natural skill labels
+    skill_map = {
+        "gist": "Reading for the main idea",
+        "detail": "Reading for key facts",
+        "specific information": "Reading for specific information",
+        "inference": "Reading between the lines",
+        "conclusion": "Drawing conclusions",
+        "opinion": "Distinguishing facts and opinions",
+        "fact": "Distinguishing facts and opinions",
+        "speaking": "Discussing and sharing ideas",
+        "writing": "Writing about",
+        "listening": "Listening to understand",
+    }
+
+    skills = []
+    for keyword, label in skill_map.items():
+        if keyword in objective:
+            skills.append(label)
+
+    # Extract context after "in the context of" or "about"
+    context = ""
+    for pattern in ["in the context of", "about"]:
+        if pattern in objective:
+            idx = objective.index(pattern) + len(pattern)
+            raw_context = objective[idx:].strip().rstrip(".").strip()
+            # Remove common filler words for natural output
+            for filler in ["an article about ", "a text about ", "the article ", "the text "]:
+                if raw_context.startswith(filler):
+                    raw_context = raw_context[len(filler):]
+            context = raw_context
+            break
+
+    # Build strap with natural teacher voice
+    if skills and context:
+        # Deduplicate skills
+        unique_skills = []
+        for s in skills:
+            if s not in unique_skills:
+                unique_skills.append(s)
+
+        if len(unique_skills) == 1:
+            return f"{unique_skills[0]} \u2014 {context}"
+        elif len(unique_skills) == 2:
+            return f"{unique_skills[0]} and {unique_skills[1].lower()} \u2014 {context}"
+        else:
+            # Multiple skills: use first + "... and more"
+            return f"{unique_skills[0]} and more \u2014 {context}"
+    elif skills:
+        return skills[0]
+    elif context:
+        return f"Understanding {context}"
+    else:
+        return f"Exploring {topic}"
+
+
 def generate_title_slide(data, title_image_path=None, title_attribution=None, slides_dir=None, logo_path=None):
-    teacher = escape_md(data.get("teacher", ""))
-    date_str = format_date(data.get("date", ""))
     topic = escape_md(data.get("topic", ""))
-    duration = escape_md(data.get("duration", ""))
-    materials = escape_md(data.get("materials", ""))
     cefr = data.get("lesson_plan", {}).get("cefr_level", "")
+    strap = generate_lesson_strap(data)
 
     if title_image_path:
         image_path = Path(title_image_path).resolve()
-        attribution = title_attribution
     else:
-        image_path, attribution = search_and_get_image(data.get("topic", ""))
+        image_path, _ = search_and_get_image(data.get("topic", ""))
 
     if image_path:
         if slides_dir:
@@ -336,9 +391,7 @@ def generate_title_slide(data, title_image_path=None, title_attribution=None, sl
     else:
         bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #2c3e50, #3498db)" -->'
 
-    lines = [
-        bg_directive,
-    ]
+    lines = [bg_directive]
 
     if logo_path:
         logo_path_resolved = Path(logo_path).resolve()
@@ -352,119 +405,343 @@ def generate_title_slide(data, title_image_path=None, title_attribution=None, sl
     lines.extend([
         f"# {topic} <span class=\"cefr-badge {cefr}\">{cefr}</span>",
         "",
-        f"**{date_str}** | {duration}",
-        "",
-        f"Teacher: {teacher}",
-        "",
-        f"*{materials}*",
+        f"*{escape_md(strap)}*",
     ])
-    if attribution:
-        lines.append("")
-        lines.append(f"*{attribution}*")
     return "\n".join(lines)
 
 
 def generate_objective_slide(data):
     objective_text = data.get("objective", "")
     cefr = data.get("lesson_plan", {}).get("cefr_level", "")
+    topic = data.get("topic", "")
+
+    outcome_map = {
+        "gist": "Understand what the article is mainly about",
+        "detail": "Find the most important facts and mistakes",
+        "specific information": "Find the most important facts and mistakes",
+        "inference": "Understand what the writer really means",
+        "conclusion": "Understand how the story ends and why",
+        "opinion": "Know the difference between facts and opinions",
+        "fact": "Know the difference between facts and opinions",
+        "speaking": "Talk about ideas from the reading",
+        "writing": "Write your own thoughts about the topic",
+    }
 
     outcomes = []
-    if "gist" in objective_text.lower():
-        outcomes.append("Identify the main purpose of any article")
-    if "detail" in objective_text.lower() or "specific information" in objective_text.lower():
-        outcomes.append("Find key facts and correct false statements")
-    if "inference" in objective_text.lower() or "conclusion" in objective_text.lower():
-        outcomes.append("Draw conclusions using evidence from the text")
-    if "opinion" in objective_text.lower() or "fact" in objective_text.lower():
-        outcomes.append("Distinguish between facts and opinions")
+    seen_outcomes = set()
+    objective_lower = objective_text.lower()
+    for key, simple_outcome in outcome_map.items():
+        if key in objective_lower and simple_outcome not in seen_outcomes:
+            outcomes.append(simple_outcome)
+            seen_outcomes.add(simple_outcome)
 
     if not outcomes:
         outcomes = [
-            escape_md(objective_text[:60]) + "...",
+            "Read and understand the main ideas",
         ]
 
     outcomes = outcomes[:3]
 
     lines = [
-        "## What you will be able to do by the end",
+        "## Here's what you'll be able to do",
         "",
     ]
     for outcome in outcomes:
         lines.append(f"- {outcome}")
 
-    return "\n".join(lines)
-
-
-def generate_vocabulary_slide(data):
-    keywords = extract_keywords(data)
-    if not keywords:
-        return None
-
-    lines = [
-        "## Key vocabulary",
-        "",
-    ]
-    for word, phonemic, example in keywords:
-        lines.append(f"- **{word}** {phonemic} — *{escape_md(example)}*")
-
     lines.extend([
         "",
-        "Notes:",
-        "Drill each word: teacher says → class repeats (×3). "
-        "Ask: 'What does it mean? Can you make a sentence?'",
+        "*These are the same skills you need for the PET reading test!*",
     ])
 
     return "\n".join(lines)
 
 
-def generate_leadin_slide(stage, data):
+def extract_keywords_from_text(data):
+    """Extract vocabulary words from actual lesson content with clean definitions."""
+    answer_key = parse_answer_key(data)
+    cefr = data.get("lesson_plan", {}).get("cefr_level", "")
+
+    if not answer_key:
+        return extract_keywords(data)
+
+    words_to_consider = {
+        "A1": ["family", "friend", "school", "teacher", "student", "house", "name", "like", "love", "help"],
+        "A2": ["agree", "explain", "experience", "opinion", "situation", "belong", "compare", "disagree", "expect", "value"],
+        "B1": ["generation", "empathy", "resolve", "perspective", "influence", "communicate", "conflict", "attitude", "balance", "opportunity"],
+        "B2": ["generational", "gap", "bridge", "assume", "perceive", "inevitable", "frustration", "redefine", "workplace", "expectation"],
+        "C1": ["paradigm", "reconcile", "entrenched", "discourse", "alleviate", "juxtapose", "dichotomy", "ubiquitous"],
+        "C2": ["ostensibly", "acquiescence", "ameliorate", "diametrically", "presuppose", "inherent", "ephemeral", "cogent"],
+    }
+
+    # Clean definitions for common ESL B1-B2 vocabulary (derived from lesson content)
+    definition_map = {
+        "gap": "the difference between two groups or generations",
+        "frustration": "the feeling of being upset because things aren't going as expected",
+        "redefine": "to change how we think about what belongs in a group",
+        "workplace": "the place where you work",
+        "generational": "relating to different age groups",
+        "empathy": "the ability to understand how someone else feels",
+        "resolve": "to find a solution to a problem",
+        "perspective": "the way someone thinks about something",
+        "influence": "the power to change how someone behaves",
+        "communicate": "to share information or ideas with others",
+        "conflict": "a serious disagreement or argument",
+        "attitude": "the way you think and feel about something",
+        "balance": "a state where things are equal",
+        "opportunity": "a good chance to do something",
+        "assume": "to think something is true without proof",
+        "perceive": "to notice or see something",
+        "inevitable": "something that will definitely happen",
+        "expectation": "what you think should happen",
+    }
+
+    level_words = words_to_consider.get(cefr, words_to_consider["B2"])
+    combined = answer_key.lower()
+
+    selected = []
+    for word in level_words:
+        if word in combined:
+            # Use a clean definition from our map, or derive from surrounding text
+            if word in definition_map:
+                definition = definition_map[word]
+            else:
+                # Find a clean sentence context by searching for the word in sentences
+                import re as re_module
+                sentences = re_module.split(r'[.!?]', combined)
+                definition = ""
+                for sentence in sentences:
+                    if word in sentence:
+                        # Clean up the sentence and use it as definition
+                        cleaned = sentence.strip()
+                        if len(cleaned) > 10 and len(cleaned) < 120:
+                            definition = cleaned
+                            break
+                if not definition:
+                    definition = f"relating to {word}"
+
+            phonemic = get_phonemic(word, cefr)
+            selected.append((word, phonemic, definition))
+
+        if len(selected) >= 4:
+            break
+
+    if len(selected) < 3:
+        return extract_keywords(data)
+
+    return selected[:5]
+
+
+def get_phonemic(word, cefr=None):
+    """Return IPA phonemic transcription for a word."""
+    phonemic_bank = {
+        "gap": "/ɡæp/",
+        "frustration": "/frʌˈstreɪʃn/",
+        "redefine": "/ˌriːdɪˈfaɪn/",
+        "workplace": "/ˈwɜːkpleɪs/",
+        "generational": "/ˌdʒenəˈreɪʃənl/",
+        "empathy": "/ˈempəθi/",
+        "resolve": "/rɪˈzɒlv/",
+        "perspective": "/pəˈspektɪv/",
+        "influence": "/ˈɪnfluəns/",
+        "communicate": "/kəˈmjuːnɪkeɪt/",
+        "conflict": "/ˈkɒnflɪkt/",
+        "attitude": "/ˈætɪtjuːd/",
+        "balance": "/ˈbæləns/",
+        "opportunity": "/ˌɒpəˈtjuːnəti/",
+        "assume": "/əˈsjuːm/",
+        "perceive": "/pəˈsiːv/",
+        "inevitable": "/ɪnˈevɪtəbl/",
+        "expectation": "/ˌekspekˈteɪʃn/",
+        "generation": "/ˌdʒenəˈreɪʃn/",
+    }
+    return phonemic_bank.get(word, f"/{word}/")
+
+
+def generate_vocabulary_slides(data):
+    """Generate vocabulary slides - one word per slide with maroon background."""
+    keywords = extract_keywords_from_text(data)
+    if not keywords:
+        return None
+
+    cefr = data.get("lesson_plan", {}).get("cefr_level", "")
+    slides = []
+
+    for word, phonemic, _ in keywords:
+        image_path = None
+
+        vocab_image_queries = {
+            "gap": "young old teenager generation difference",
+            "frustration": "dead phone mobile battery",
+            "redefine": "CEO office business meeting",
+            "workplace": "home office remote work laptop",
+            "generational": "grandparent teenager smartphone",
+            "empathy": "sad friend comfort support",
+            "resolve": "solution agreement handshake",
+        }
+
+        image_query = vocab_image_queries.get(word, f"{word} concept meaning")
+        cached = search_and_get_image(image_query)
+        if cached and cached[0]:
+            image_path = cached[0]
+
+        slide_content = generate_single_vocabulary_slide(word, phonemic, image_path)
+        if slide_content:
+            slides.append(slide_content)
+
+    return slides if slides else None
+
+
+def generate_single_vocabulary_slide(word, phonemic, image_path=None):
+    """Generate a single vocabulary slide with word in context."""
+    context_sentences = {
+        "gap": "There's such a **generation gap** between Rico and Ploy; Ploy doesn't understand the slang words Rico uses.",
+        "frustration": "I felt so much **frustration** when my phone died in the middle of the important call.",
+        "redefine": "The new CEO wants to **redefine** what success means in our company.",
+        "workplace": "The **workplace** is changing — more people work from home now.",
+        "generational": "The **generational** difference is clear — my grandparents don't use smartphones.",
+        "empathy": "She showed great **empathy** when her friend was sad.",
+        "resolve": "They sat down and managed to **resolve** their disagreement.",
+        "perspective": "From my **perspective**, the situation looks very different.",
+        "influence": "Music had a strong **influence** on her career choice.",
+        "communicate": "It's hard to **communicate** when you don't share a language.",
+        "conflict": "The **conflict** started over something very small.",
+        "attitude": "Her positive **attitude** made everyone feel better.",
+        "balance": "It's hard to **balance** work and family life.",
+        "opportunity": "This is a great **opportunity** to learn something new.",
+        "assume": "I **assume** you already know the basics, but I could be wrong.",
+        "perceive": "We each **perceive** the same situation differently.",
+        "inevitable": "Change is **inevitable** — nothing stays the same forever.",
+        "expectation": "My parent's **expectation** is that I go to university.",
+        "generation": "My **generation** grew up with the internet.",
+    }
+
+    display_word = "generation gap" if word == "gap" else word
+    context = context_sentences.get(word, f"I understand **{display_word}** now.")
+
+    lines = []
+
+    if image_path:
+        rel_path = Path(image_path).name
+        lines.extend([
+            f'<!-- .slide: data-background-image="../../.image-cache/{rel_path}" -->',
+            '<!-- .slide: data-background-color="rgba(128,0,0,0.85)" -->',
+        ])
+    else:
+        lines.append('<!-- .slide: data-background-color="#800000" -->')
+
+    lines.extend([
+        "## Important Words you need to know",
+        "",
+        f"**{display_word}** {phonemic}",
+        "",
+        f"*{context}*",
+    ])
+
+    return "\n".join(lines)
+
+
+def generate_leadin_question(topic, procedure):
+    topic_lower = topic.lower()
+
+    if "generation" in topic_lower or "connect" in topic_lower:
+        return "What do these two people have in common? What makes them different?"
+    elif "photo" in procedure.lower() or "image" in procedure.lower():
+        return "What do you see? What do you wonder?"
+    elif "difference" in procedure.lower():
+        return "What differences do you notice?"
+    elif "discuss" in procedure.lower() or "tell" in procedure.lower():
+        return "Think of a time when this happened to you. Can you share?"
+    else:
+        return f"What comes to mind when you think about {escape_md(topic_lower)}?"
+
+
+def generate_leadin_slide(stage, data, slides_dir=None):
     procedure = clean_procedure(stage.get("procedure", ""))
     stage_aim = humanize_stage_aim(stage.get("stage_aim", ""))
     topic = data.get("topic", "")
     stage_name = stage.get("stage", "")
 
-    question = f'What do you notice about the theme of "{escape_md(topic)}"?'
-    if "photo" in procedure.lower() or "image" in procedure.lower():
-        question = "What do you see? What do you wonder?"
-    elif "difference" in procedure.lower():
-        question = "What differences do you notice?"
-    elif "discuss" in procedure.lower() or "tell" in procedure.lower():
-        question = "Think of a time when... can you share?"
+    question = generate_leadin_question(topic, procedure)
+
+    image_path, _ = search_and_get_image(f"{topic} people")
+
+    if image_path:
+        if slides_dir:
+            rel_path = os.path.relpath(str(image_path), str(slides_dir)).replace("\\", "/")
+        else:
+            rel_path = image_path.relative_to(OUTPUT_DIR.parent).as_posix()
+        bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
+    else:
+        bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->'
 
     lines = [
-        '<!-- .slide: data-background="#f5f0eb" -->',
+        bg_directive,
         f"## {escape_md(stage_name)}",
         "",
         f"### {escape_md(question)}",
         "",
         "Notes:",
-        f"Display the photo from the materials. Give students 20 seconds to look.",
-        f"{escape_md(procedure)}",
+        "Display the photo. Give students 20 seconds to look silently.",
+        "Then ask the question. Elicit 3-4 responses.",
+        f"Connect responses to today's topic: {escape_md(topic)}.",
+        f"{escape_md(re.sub(r'\b[Ss]s\b', 'Students', procedure))}",
         f"Goal: {escape_md(stage_aim)}",
     ]
     return "\n".join(lines)
 
 
-def generate_prereading_slide(stage, data):
+def generate_prereading_slide(stage, data, slides_dir=None):
     topic = data.get("topic", "")
     materials = data.get("materials", "")
 
+    image_path, _ = search_and_get_image(f"{topic} reading")
+
+    if image_path:
+        if slides_dir:
+            rel_path = os.path.relpath(str(image_path), str(slides_dir)).replace("\\", "/")
+        else:
+            rel_path = image_path.relative_to(OUTPUT_DIR.parent).as_posix()
+        bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
+    else:
+        bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #f5f0eb, #e8ddd3)" -->'
+
     lines = [
-        '<!-- .slide: data-background="#f5f0eb" -->',
-        f"## Before you read: {escape_md(topic)}",
+        bg_directive,
+        f"## Before you read",
         "",
         "- What is the writer trying to do?",
         "- What solution might they suggest?",
         "",
-        f"*{escape_md(materials)}*",
-        "<!-- .element: class=\"material-ref\" -->",
-        "",
         "Notes:",
-        "Students read the title and predict what the article is about.",
+        "Students read the title and look at the photo.",
         "Give them 30 seconds to share predictions in pairs.",
         "Write 2-3 predictions on the board.",
+        f"Materials: {escape_md(materials)}" if materials else "",
     ]
     return "\n".join(lines)
+
+
+def extract_task_instructions(procedure, stage_name):
+    lines = procedure.strip().split("\n")
+    task_lines = []
+
+    for line in lines:
+        stripped = line.strip().lstrip("- ")
+        if any(skip in stripped.lower() for skip in [
+            "pair check", "whole-class feedback", "feedback",
+            "elicit", "brief ", "tell ss", "teacher"
+        ]):
+            continue
+        if re.match(r"\d+\s*min", stripped):
+            continue
+        # Remove "Ss" prefix for student-facing text
+        stripped = re.sub(r"^[Ss]s\s+", "", stripped)
+        stripped = re.sub(r"\b[Ss]s\b", "Students", stripped)
+        if stripped.strip():
+            task_lines.append(stripped.strip())
+
+    return task_lines[:3]
 
 
 def generate_task_slide(stage, data):
@@ -476,26 +753,27 @@ def generate_task_slide(stage, data):
     interaction = stage.get("interaction", "")
     stage_num = stage.get("stage_number", 0)
 
-    proc_lines = [p.strip()[2:] for p in procedure.split("\n") if p.strip().startswith("- ")]
+    task_lines = extract_task_instructions(procedure, stage_name)
 
     lines = [
         f"## {stage_name}",
-        f'<span class="aim-label">Stage {stage_num} &middot; {time_min} min &middot; {interaction}</span>',
         "",
     ]
-    for i, step in enumerate(proc_lines[:3]):
-        lines.append(f"{i+1}. {escape_md(step)}")
+
+    for task_line in task_lines:
+        lines.append(f"- {escape_md(task_line)}")
 
     lines.extend([
         "",
-        f"*{materials}*",
-        "<!-- .element: class=\"material-ref\" -->",
-        "",
         "Notes:",
-        f"Full procedure: {escape_md(procedure)}",
+        f"Stage {stage_num} · {time_min} min · {interaction}",
         f"Goal: {escape_md(stage_aim)}",
-        f"Students work individually for {time_min} min. Do NOT reveal answers yet.",
     ])
+
+    # Add material ref in notes
+    if materials:
+        lines.append(f"Materials: {materials}")
+
     return "\n".join(lines)
 
 
@@ -511,7 +789,6 @@ def generate_task_slide_no_steps(stage, data):
 
     lines = [
         f"## {stage_name}",
-        f'<span class="aim-label">Stage {stage_num} &middot; {time_min} min &middot; {interaction}</span>',
         "",
     ]
 
@@ -520,19 +797,24 @@ def generate_task_slide_no_steps(stage, data):
         stripped = pl.strip()
         if stripped.startswith("- "):
             content = stripped[2:]
-            lines.append(f"- {escape_md(content)}")
+            # Replace "Ss" with "Students" for teacher reference
+            content = re.sub(r"\b[Ss]s\b", "Students", content)
+            if not any(skip in content.lower() for skip in ["pair check", "feedback", "elicit"]):
+                lines.append(f"- {escape_md(content)}")
         elif re.match(r"^\d+\.\s", stripped):
             lines.append(escape_md(stripped))
 
     lines.extend([
         "",
-        f"*{materials}*",
-        "<!-- .element: class=\"material-ref\" -->",
-        "",
         "Notes:",
-        f"Full procedure: {escape_md(procedure)}",
+        f"Stage {stage_num} · {time_min} min · {interaction}",
         f"Goal: {escape_md(stage_aim)}",
     ])
+
+    # Add material ref in notes
+    if materials:
+        lines.append(f"Materials: {materials}")
+
     return "\n".join(lines)
 
 
@@ -542,61 +824,119 @@ def generate_answer_slides(answer_key_content):
 
     lines = answer_key_content.split("\n")
     slides = []
-    current_slide = []
-    current_heading = ""
-    in_answer_block = False
+    current_slide_lines = []
+    in_article_section = False
 
     for line in lines:
         stripped = line.strip()
 
-        if stripped.startswith("## ") or stripped.startswith("# "):
-            if current_slide:
-                slides.append("\n".join(current_slide))
-                current_slide = []
-            current_heading = stripped.lstrip("#").strip()
-            current_slide.append(f"## Answer key — {escape_md(current_heading)}")
-            current_slide.append('<!-- .element: class="aim-label" -->')
-            current_slide.append("")
+        if stripped.startswith("## Article:"):
+            in_article_section = True
+            continue
+        if in_article_section and stripped.startswith("**Paragraph"):
+            continue
+        if in_article_section:
+            if stripped and not stripped.startswith("#"):
+                continue
+            else:
+                in_article_section = False
 
-        elif stripped.startswith("### "):
-            if current_slide and len(current_slide) > 3:
-                slides.append("\n".join(current_slide))
-                current_slide = [f"## Answer key — {escape_md(current_heading)}", '<!-- .element: class="aim-label" -->', ""]
-            current_slide.append(f"### {escape_md(stripped[4:])}")
+        if stripped.startswith("### Exercise"):
+            if current_slide_lines:
+                slides.append("\n".join(current_slide_lines))
+            exercise_name = stripped.lstrip("#").strip()
+            current_slide_lines = [
+                f"## {escape_md(exercise_name)}",
+                '<!-- .element: class="aim-label" -->',
+                "",
+            ]
+            continue
 
-        elif stripped == "---":
-            if current_slide:
-                slides.append("\n".join(current_slide))
-                current_slide = []
+        if stripped == "---":
+            continue
 
-        elif stripped.startswith("**Answer"):
-            answer_text = stripped.replace("**", "").replace("Answer:", "").replace("Answers:", "").strip()
-            if answer_text.startswith("**"):
-                answer_text = answer_text.strip("*")
-            current_slide.append(f"✓ **{escape_md(answer_text)}** <!-- .element: class=\"fragment highlight-green\" -->")
+        answer_match = re.search(r"\*\*Answer:\*\*\s*(.+)", stripped)
+        if answer_match:
+            answer = answer_match.group(1).strip()
+            if answer.startswith("F."):
+                correction = answer[2:].strip()
+                current_slide_lines.append(
+                    f'✗ **False** <!-- .element: class="fragment highlight-red" -->'
+                )
+                current_slide_lines.append(
+                    f"✓ *{escape_md(correction)}* <!-- .element: class=\"fragment highlight-green\" -->"
+                )
+            elif answer == "T":
+                current_slide_lines.append(
+                    f'✓ **True** <!-- .element: class="fragment highlight-green" -->'
+                )
+            elif answer.lower() in ["students' own answers.", "students own answers."]:
+                current_slide_lines.append(
+                    f"✓ Students' own answers. <!-- .element: class=\"fragment highlight-green\" -->"
+                )
+            elif answer and len(answer) <= 3:
+                current_slide_lines.append(
+                    f'✓ **{escape_md(answer)}** <!-- .element: class="fragment highlight-green" -->'
+                )
+            continue
 
-        elif re.match(r"^\d+\.\s\*\*", stripped):
-            match = re.match(r"^\d+\.\s\*\*(.+?)\*\*", stripped)
-            if match:
-                question_text = escape_md(match.group(1)[:80])
-                current_slide.append(f"**{question_text}**")
+        if stripped == "**Answers:**":
+            current_slide_lines.append(
+                f"✓ Students' own answers. <!-- .element: class=\"fragment highlight-green\" -->"
+            )
+            continue
 
-        elif stripped.startswith("- **Answer:**"):
-            answer = stripped.replace("- **Answer:**", "").strip()
-            current_slide.append(f"✓ **{escape_md(answer)}** <!-- .element: class=\"fragment highlight-green\" -->")
+        if stripped.startswith("*") and not stripped.startswith("**"):
+            continue
+            continue
 
-        elif stripped.startswith("- **Answer:** "):
-            answer = stripped[12:].strip()
-            current_slide.append(f"✓ **{escape_md(answer)}** <!-- .element: class=\"fragment highlight-green\" -->")
+        answer_match = re.search(r"\*\*Answer:\*\*\s*(.+)", stripped)
+        if answer_match:
+            answer = answer_match.group(1).strip()
+            if answer.startswith("F."):
+                correction = answer[2:].strip()
+                current_slide_lines.append(
+                    f'✗ **False** <!-- .element: class="fragment highlight-red" -->'
+                )
+                current_slide_lines.append(
+                    f"✓ *{escape_md(correction)}* <!-- .element: class=\"fragment highlight-green\" -->"
+                )
+            elif answer == "T":
+                current_slide_lines.append(
+                    f'✓ **True** <!-- .element: class="fragment highlight-green" -->'
+                )
+            elif answer.lower() in ["students' own answers.", "students own answers."]:
+                current_slide_lines.append(
+                    f"✓ Students' own answers. <!-- .element: class=\"fragment highlight-green\" -->"
+                )
+            elif answer and len(answer) <= 3:
+                current_slide_lines.append(
+                    f'✓ **{escape_md(answer)}** <!-- .element: class="fragment highlight-green" -->'
+                )
+            continue
 
-        elif stripped == "**Answers:**":
-            current_slide.append(f"✓ Students' own answers. <!-- .element: class=\"fragment highlight-green\" -->")
+        if stripped == "**Answers:**":
+            current_slide_lines.append(
+                f"✓ Students' own answers. <!-- .element: class=\"fragment highlight-green\" -->"
+            )
+            continue
 
-        elif stripped and not stripped.startswith("*") and not stripped.startswith("**Answers**"):
-            current_slide.append(escape_md(stripped))
+        q_match = re.match(r"^(\d+)\.\s+\*\*(.+?)\*\*", stripped)
+        if q_match:
+            num, question_text = q_match.groups()
+            if len(question_text) > 100:
+                question_text = question_text[:97] + "..."
+            current_slide_lines.append(f"**{escape_md(question_text)}**")
+            continue
 
-    if current_slide:
-        slides.append("\n".join(current_slide))
+        opt_match = re.match(r"^([a-c])\.\s+(.+)", stripped)
+        if opt_match:
+            letter, text = opt_match.groups()
+            current_slide_lines.append(f"{letter}. {escape_md(text)}")
+            continue
+
+    if current_slide_lines:
+        slides.append("\n".join(current_slide_lines))
 
     if not slides:
         return ""
@@ -617,7 +957,7 @@ def generate_transition_slide(stage_name, prev_stage="", question=""):
     lines.extend([
         "",
         "Notes:",
-        f"Transition from {escape_md(prev_stage)} to {stage_name}.",
+        f"Moving from {escape_md(prev_stage)}.",
         "Give students a moment to reset. Introduce the next activity.",
     ])
     return "\n".join(lines)
@@ -686,9 +1026,9 @@ def generate_markdown(data, title_image_path=None, title_attribution=None, slide
     if obj_slide:
         slides.append(obj_slide)
 
-    vocab_slide = generate_vocabulary_slide(data)
-    if vocab_slide:
-        slides.append(vocab_slide)
+    vocab_slides = generate_vocabulary_slides(data)
+    if vocab_slides:
+        slides.extend(vocab_slides)
 
     prev_stage_name = ""
 
@@ -701,10 +1041,10 @@ def generate_markdown(data, title_image_path=None, title_attribution=None, slide
             slides.append(generate_transition_slide(stage_name, prev_stage_name, question))
 
         if "lead-in" in stage_lower:
-            slides.append(generate_leadin_slide(stage, data))
+            slides.append(generate_leadin_slide(stage, data, slides_dir))
 
         elif "gist" in stage_lower and i == stages.index(stage):
-            slides.append(generate_prereading_slide(stage, data))
+            slides.append(generate_prereading_slide(stage, data, slides_dir))
 
         elif any(kw in stage_lower for kw in ["gist", "detail", "inference", "conclusion", "exercise"]):
             slides.append(generate_task_slide(stage, data))

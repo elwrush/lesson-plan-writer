@@ -1,11 +1,11 @@
----
+﻿---
 name: lesson-plan-to-reveal
 description: Converts a lesson plan JSON file into a reveal.js presentation using mkslides. Generates pedagogical ESL slides following the design rules in docs/slide-design-reference.md. Builds to static HTML via mkslides.
 ---
 # Skill: Lesson Plan to reveal.js Presentation
 
 ## Purpose
-Convert a lesson plan JSON into a reveal.js slideshow for ESL classroom delivery. The teacher controls all slides — students never interact directly. Slides support the teacher's narration, not replace it.
+Convert a lesson plan JSON into a reveal.js slideshow for ESL classroom delivery. The teacher controls all slides — students never interact directly. **Slides support the teacher's narration, not replace it.** Student-facing content appears on screen; teacher procedure text goes in speaker notes only.
 
 **Pipeline**: JSON → markdown (`json_to_markdown.py`) → mkslides build → `site/index.html`
 
@@ -68,17 +68,17 @@ python scripts/json_to_markdown.py output/{subfolder}/{file}.json --title-image 
 Output: `output/{subfolder}/slides/{mmddyy}-{topic}-slides.md`
 
 The script generates slides following `docs/slide-design-reference.md`:
-- Title + institution logo + CEFR badge + **Pixabay background image at 80% opacity** + title text on solid maroon (`#800020`) background (CSS in `reveal-custom.html.jinja`)
-- Objective slide — 3 outcomes, all visible at once
-- Vocabulary slide — 3-5 CEFR-appropriate words with phonemic script + example sentences
-- Lead-in — Pixabay background image + open question
-- Pre-reading prediction — article title + 2 prompts
-- Task instruction — brief numbered steps, full procedure in speaker notes
-- Answer explanation — answers with fragment reveal + explanation + source citation
-- Section transitions — red backgrounds between stages
-- Post-reading discussion — all questions visible
-- Summary — "What you can do now"
-- End slide
+- **Title** — topic + CEFR badge + strap subheader (derived from objective) + logo + Pixabay background at 80% opacity
+- **Objective** — 3 simple outcomes in accessible language, tied to PET reading test
+- **Vocabulary** — 3-5 words extracted from actual lesson text with phonemic script + clean definitions
+- **Lead-in** — Pixabay background image + topic-specific open question
+- **Pre-reading** — Pixabay background + 2 prediction prompts
+- **Task slides** — brief student-facing task instructions (max 3 lines), full procedure in speaker notes
+- **Answer slides** — properly parsed with ✓/✗ fragment reveals
+- **Section transitions** — red backgrounds, natural language
+- **Post-reading discussion** — all questions visible
+- **Summary** — "What you can do now"
+- **End slide**
 
 ### Step 4: Build with mkslides
 
@@ -94,6 +94,7 @@ python -m mkslides build "output/{subfolder}/slides" -d "output/{subfolder}/site
 - Verify fragment usage: only on answer reveal slides, not on expository content
 - Verify procedure text is in speaker notes (not on screen)
 - Verify vocabulary words have phonemic script
+- Verify title slide has strap subheader (not date/teacher/materials)
 
 ## Fragment Policy
 
@@ -111,33 +112,39 @@ python -m mkslides build "output/{subfolder}/slides" -d "output/{subfolder}/site
 
 Based on `docs/slide-design-reference.md`:
 
-| Slide | Generated when | Fragment use |
-|---|---|---|
-| Title + logo | Always | None |
-| Objective | Always | None |
-| Vocabulary | Always (keyword extraction) | None |
-| Lead-in image | Stage name contains "lead-in" | None |
-| Pre-reading | Stage name contains "gist" | None |
-| Task instruction | "detail"/"inference"/"exercise" stages | None |
-| Answer explanation | Answer key present | YES — highlight-green per answer |
-| Section transition | Between stages | None |
-| Post-reading discussion | "post-reading"/"speaking"/"discussion" stages | None |
-| Summary | Always | None |
-| End | Always | None |
+| Slide | Generated when | On-screen content | Speaker notes |
+|---|---|---|---|
+| Title + logo | Always | Topic, CEFR badge, strap subheader, logo | — |
+| Objective | Always | 3 accessible outcomes tied to PET | — |
+| Vocabulary | Always | 3-5 words from actual lesson text, one word per slide with Pixabay background | Drilling instructions |
+| Lead-in image | "lead-in" stage | Topic-specific question | Photo display script, procedure |
+| Pre-reading | "gist" stage (first) | 2 prediction prompts | Prediction activity script |
+| Task instruction | "detail"/"inference"/"exercise" | Student-facing task steps (max 3) | Full procedure, timing, goal |
+| Answer slides | Answer key present | Questions + fragment-reveal answers | — |
+| Section transition | Between stages | Next stage name + warm-up question | Brief transition reminder |
+| Post-reading discussion | "post-reading"/"speaking" | Discussion questions (all visible) | Timing, feedback notes |
+| Wrap-up | "wrap-up"/"reflection" | Reflection questions | Error correction notes |
+| Summary | Always | 3 "can do now" outcomes | Elicitation script |
+| End | Always | "Thank you" + topic + CEFR | — |
 
 ## Key Design Rules
 
-1. **Procedure text in speaker notes** — never on visible slides
-2. **Task instruction: 3 steps max, numbered** — full procedure in Notes
-3. **Vocabulary: max 5 words per slide** — phonemic script + example sentence (NOT dictionary definition)
-4. **Stage aims humanized** — "To activate interest in..." not "To lead-in to..."
-5.  **Answer slides: answer + why + source** (all 3 parts, fragment reveal)
-6.  **Backgrounds: Pixabay image at 80% opacity (title) with solid maroon `#800020` text background, gradient (fallback), warm (lead-in), red (transitions), dark (end)**
+1. **Student-facing content on screen only** — task instructions, questions, vocabulary, answers. Teacher procedure text ("Students read...", "Pair check", "Feedback") goes in speaker notes. "Ss" is never used on screen.
+2. **Objective slide uses accessible language** — avoid complex words like "identify", "distinguish", "inference". Use simple phrases like "Understand what the article is mainly about", "Find the most important facts and mistakes". Tie outcomes to PET reading test ("These are the same skills you need for the PET reading test!").
+3. **Title slide: topic + CEFR badge + strap subheader** — NO date, teacher name, duration, or materials. Strap is derived from the lesson objective using natural teacher voice (e.g., "Reading for the main idea — bridging the generation gap"). Avoid stilted phrases like "An article about...".
+4. **Task slides: brief student instructions** — extract task description from procedure, skip teacher-only instructions. Max 3 task lines on screen. Material references go in speaker notes, not on screen.
+5. **Lead-in and pre-reading: Pixabay background images** — topic-relevant photos at 70% opacity. Fallback to gradient.
+6. **Vocabulary slides: one word each, with Pixabay background** — "Important Words you need to know" title (NOT "Key Vocabulary"). Each slide: word + phonemic in IPA + bolded target word in context sentence that implies meaning (NOT dictionary definition). Max 5 words total. Pixabay background at 70% opacity that precisely conveys word meaning. All visible at once — NO fragments.
+7. **Answer slides: properly parsed** — True/False with ✓/✗ fragments, letter answers, "Students' own answers" handled correctly. Article text sections are skipped.
+8. **Transitions: natural language** — "Moving from X." not "Transition from X to Y."
+9. **Stage aims humanized** — "To activate interest in..." not "To lead-in to..."
+10. **Backgrounds**: Pixabay image at 80% opacity (title), 70% (lead-in/pre-reading/vocabulary), gradient fallback, red (transitions), dark (end)
+11. **Logo: transparent RGBA PNG** — white backgrounds converted to transparency. Max height 100px, centered with 1em margin below.
 
 ## Files
 
 | File | Purpose |
-|---|---|---|
+|---|---|
 | `docs/slide-design-reference.md` | Slide design rules (authoritative) |
 | `scripts/json_to_markdown.py` | JSON → markdown converter |
 | `scripts/pixabay_download.py` | Pixabay image downloader |

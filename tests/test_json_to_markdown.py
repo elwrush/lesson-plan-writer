@@ -121,13 +121,15 @@ class TestGenerateTitleSlide:
         slide = generate_title_slide(VALID_LESSON_PLAN)
         assert "# Test Topic" in slide
 
-    def test_contains_teacher(self):
+    def test_contains_cefr_badge(self):
         slide = generate_title_slide(VALID_LESSON_PLAN)
-        assert "Test Teacher" in slide
+        assert '<span class="cefr-badge B2">B2</span>' in slide
 
-    def test_contains_materials(self):
+    def test_contains_strap_subheader(self):
+        """Title slide should contain strap subheader instead of teacher/materials."""
         slide = generate_title_slide(VALID_LESSON_PLAN)
-        assert "Student Book" in slide
+        # Should have strap: "Reading for the main idea" pattern or similar
+        assert "Reading for" in slide or "Exploring" in slide
 
 
 class TestGenerateMarkdown:
