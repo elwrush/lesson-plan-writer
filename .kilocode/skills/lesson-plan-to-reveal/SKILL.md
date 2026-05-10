@@ -118,6 +118,37 @@ Based on `docs/slide-design-reference.md`:
 | Summary | Always | 3 "can do now" outcomes | Elicitation script |
 | End | Always | "Thank you" + topic + CEFR | — |
 
+## Slide Indexing System
+
+When the user provides a reveal.js URL like `file:///.../index.html#/N`, the generated markdown and HTML include `<!-- slide: N -->` comments that make it trivial to find the corresponding slide section.
+
+Generated markdown shows:
+```markdown
+<!-- slide: 0 -->
+<!-- slide-section: title -->
+...
+
+---
+
+<!-- slide: 1 -->
+<!-- slide-section: objective -->
+...
+
+---
+
+<!-- slide: 2 -->
+<!-- slide-section: leadin -->
+...
+```
+
+Mapping:
+- URL `index.html#/` or `index.html#/0` → slide 0 (title)
+- URL `index.html#/1` → slide 1 (objective)
+- URL `index.html#/2` → slide 2 (leadin)
+- And so on...
+
+To find which section is at any URL hash `#/N`, search for `<!-- slide: N -->` in the markdown file.
+
 ## Key Design Rules
 
 1. **Student-facing content on screen only** — task instructions, questions, vocabulary, answers. Teacher procedure text ("Students read...", "Pair check", "Feedback") goes in speaker notes. "Ss" is never used on screen.

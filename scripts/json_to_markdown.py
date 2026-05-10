@@ -1160,7 +1160,8 @@ def generate_markdown(data, title_image_path=None, title_attribution=None, slide
     slides.append(generate_summary_slide(data))
     slides.append(generate_end_slide(data))
 
-    return "\n\n---\n\n".join(slides)
+    numbered = [f"<!-- slide: {n} -->\n{slide}" for n, slide in enumerate(slides)]
+    return "\n\n---\n\n".join(numbered)
 
 
 def should_add_transition(prev_name, next_name):
