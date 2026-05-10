@@ -939,9 +939,16 @@ def generate_task_slide(stage, data):
 
     lines = [
         f'<!-- slide-section: task-{stage_num} -->',
+    ]
+
+    timer_seconds = int(stage.get("time", 0)) * 60
+    if timer_seconds > 0:
+        lines.append(f'<!-- .slide: data-timer="{timer_seconds}" -->')
+
+    lines.extend([
         f"## {friendly_stage_name(stage_name)}",
         "",
-    ]
+    ])
 
     for task_line in task_lines:
         lines.append(f"- {escape_md(task_line)}")
@@ -972,9 +979,16 @@ def generate_task_slide_no_steps(stage, data):
 
     lines = [
         f'<!-- slide-section: task-{stage_num} -->',
+    ]
+
+    timer_seconds = int(stage.get("time", 0)) * 60
+    if timer_seconds > 0:
+        lines.append(f'<!-- .slide: data-timer="{timer_seconds}" -->')
+
+    lines.extend([
         f"## {friendly_stage_name(stage_name)}",
         "",
-    ]
+    ])
 
     proc_lines = procedure.split("\n")
     for pl in proc_lines:
@@ -1335,6 +1349,22 @@ def write_index_html(markdown_content, output_dir):
     index_path = Path(output_dir) / "index.html"
     index_path.write_text(html, encoding="utf-8")
     print(f"index.html written: {index_path}")
+
+    # Copy timer plugin files alongside index.html
+    output_path = Path(output_dir)
+    timer_css_src = TEMPLATES_DIR / "timer-plugin.css"
+    timer_js_src = TEMPLATES_DIR / "timer-plugin.js"
+    if timer_css_src.exists():
+        shutil.copy2(timer_css_src, output_path / "timer-plugin.css")
+    if timer_js_src.exists():
+        shutil.copy2(timer_js_src, output_path / "timer-plugin.js")
+
+    # Copy chime audio to slides/assets/
+    chime_src = PROJECT_ROOT / "general-assets" / "audio" / "freesound_community-chime-sound-7143.mp3"
+    if chime_src.exists():
+        assets_dir = output_path / "assets"
+        assets_dir.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(chime_src, assets_dir / "chime.mp3")
 
 
 def load_image_references(md_path):

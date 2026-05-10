@@ -503,3 +503,29 @@ Attribution in speaker notes: `Image by {author} from Pixabay`
 2. The script generates markdown following these templates
 3. Build: `python scripts/json_to_markdown.py output/{subfolder}/{file}.json` — generates both `slides.md` and `index.html`
 4. Open: double-click `output/{subfolder}/slides/index.html` in any browser (no server needed)
+
+---
+
+## Timer Pill
+
+Task instruction slides (generated from stages with `time > 0`) display a floating timer pill at the bottom center of the viewport.
+
+- **Reusability**: The timer plugin is not coupled to task slides. Any slide with `data-timer="{seconds}"` gets a timer pill. The generation script adds it to task slides automatically, but you can also add the attribute manually to vocabulary, pre-reading, discussion, or any other slide type in the markdown.
+
+- **Appearance**: Semi-transparent dark rounded pill with digital MM:SS readout
+
+- **Controls**: ⏵ Start, ⏸ Pause, ↺ Reset (circular buttons)
+
+- **Behavior**: Timer counts down from the stage's prescribed time (minutes converted to seconds, stored in `data-timer` attribute)
+
+- **Warning**: At 10 seconds remaining, a chime plays and the pill turns yellow
+
+- **Expired**: At 0, a second chime plays and the pill turns red; start is disabled until reset
+
+- **Slide change**: Timer resets to the new stage's time on each slide navigation
+
+- **Global pause**: When reveal.js is paused, the timer pauses automatically
+
+- **No auto-start**: The timer never starts automatically — the teacher must click ⏵
+
+- **Attribute**: `<!-- .slide: data-timer="300" -->` (seconds)
