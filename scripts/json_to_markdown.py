@@ -154,17 +154,6 @@ def search_and_get_image(topic):
     return None, None
 
 
-def find_cached_title_image(topic):
-    """Find a cached title image for the topic. Returns None if not found."""
-    if not topic or not IMAGE_CACHE_DIR.exists():
-        return None
-    cache_key = get_cache_key(topic)
-    cached = IMAGE_CACHE_DIR / cache_key
-    if cached.exists():
-        return cached
-    return None
-
-
 def validate_json(data):
     errors = []
     for field in REQUIRED_FIELDS:
@@ -406,23 +395,68 @@ def generate_lesson_strap(data):
         return f"Exploring {topic}"
 
 
+def copy_to_assets(slides_dir, image_path, prefix=""):
+    """Copy an image to slides/assets/. Returns assets-relative path or None."""
+    if not image_path or not slides_dir:
+        return None
+    src = Path(image_path)
+    if not src.exists():
+        return None
+    assets_dir = Path(slides_dir) / "assets"
+    assets_dir.mkdir(parents=True, exist_ok=True)
+    filename = f"{prefix}{src.name}" if prefix else src.name
+    dest = assets_dir / filename
+    shutil.copy2(src, dest)
+    return f"assets/{filename}"
+
+
+def find_existing_asset(slides_dir, file_prefix=None):
+    """Check slides_dir/assets/ for existing images. Returns asset-relative path or None."""
+    if not slides_dir:
+        return None
+    assets_dir = Path(slides_dir) / "assets"
+    if not assets_dir.exists():
+        return None
+    for f in assets_dir.iterdir():
+        if f.is_file() and f.suffix.lower() in (".jpg", ".jpeg", ".png"):
+            if file_prefix:
+                if f.stem.startswith(file_prefix) or file_prefix in f.stem:
+                    return f"assets/{f.name}"
+            elif f.name != "logo.png":
+                return f"assets/{f.name}"
+    return None
+
+
 def generate_title_slide(data, title_image_path=None, title_attribution=None, slides_dir=None, logo_path=None):
     topic = escape_md(data.get("topic", ""))
     cefr = data.get("lesson_plan", {}).get("cefr_level", "")
     strap = generate_lesson_strap(data)
 
+    existing = None
     if title_image_path:
         image_path = Path(title_image_path).resolve()
     else:
-        result = search_and_get_image(data.get("topic", ""))
-        image_path = Path(result[0]) if result and result[0] else None
+        existing = find_existing_asset(slides_dir)
+        if existing:
+            image_path = (Path(slides_dir) / existing).resolve()
+        else:
+            result = search_and_get_image(data.get("topic", ""))
+            if result and result[0]:
+                image_path = Path(result[0])
+                if slides_dir:
+                    copied = copy_to_assets(slides_dir, image_path, "title-")
+                    if copied:
+                        existing = copied
+                        image_path = None
 
     bg_directive = ""
-    if image_path:
-        if slides_dir:
-            rel_path = os.path.relpath(str(image_path), str(slides_dir)).replace("\\", "/")
-        else:
-            rel_path = image_path.relative_to(OUTPUT_DIR.parent).as_posix()
+    if existing:
+        bg_directive = f'<!-- .slide: data-background-image="{existing}" data-background-opacity="0.8" -->'
+    elif image_path and slides_dir:
+        rel_path = os.path.relpath(str(image_path), str(slides_dir)).replace("\\", "/")
+        bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.8" -->'
+    elif image_path:
+        rel_path = image_path.relative_to(OUTPUT_DIR.parent).as_posix()
         bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.8" -->'
     else:
         bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #2c3e50, #3498db)" -->'
@@ -460,8 +494,8 @@ def generate_objective_slide(data):
         "specific information": "Find the most important facts and mistakes",
         "inference": "Understand what the writer really means",
         "conclusion": "Understand how the story ends and why",
-        "opinion": "Know the difference between facts and opinions",
-        "fact": "Know the difference between facts and opinions",
+        "opinion": "Tell the difference between facts and opinions",
+        "fact": "Tell the difference between facts and opinions",
         "speaking": "Talk about ideas from the reading",
         "writing": "Write your own thoughts about the topic",
     }
@@ -609,28 +643,31 @@ def generate_vocabulary_slides(data, slides_dir=None):
 
     for idx, (word, phonemic, _) in enumerate(keywords):
         image_path = None
+        existing = find_existing_asset(slides_dir, f"vocab-{word}")
+        if existing:
+            image_path = existing
+        else:
+            vocab_image_queries = {
+                "gap": "young old teenager generation difference",
+                "frustration": "dead phone mobile battery",
+                "redefine": "CEO office business meeting",
+                "workplace": "home office remote work laptop",
+                "generational": "grandparent teenager smartphone",
+                "empathy": "sad friend comfort support",
+                "resolve": "solution agreement handshake",
+            }
 
-        vocab_image_queries = {
-            "gap": "young old teenager generation difference",
-            "frustration": "dead phone mobile battery",
-            "redefine": "CEO office business meeting",
-            "workplace": "home office remote work laptop",
-            "generational": "grandparent teenager smartphone",
-            "empathy": "sad friend comfort support",
-            "resolve": "solution agreement handshake",
-        }
-
-        image_query = vocab_image_queries.get(word, f"{word} concept meaning")
-        result = search_and_get_image(image_query)
-        if result and result[0]:
-            src = Path(result[0])
-            if src.exists() and slides_dir:
-                assets_dir = Path(slides_dir) / "assets"
-                assets_dir.mkdir(parents=True, exist_ok=True)
-                dest_name = f"vocab-{word}-{src.name}"
-                dest = assets_dir / dest_name
-                shutil.copy2(src, dest)
-                image_path = f"assets/{dest_name}"
+            image_query = vocab_image_queries.get(word, f"{word} concept meaning")
+            result = search_and_get_image(image_query)
+            if result and result[0]:
+                src = Path(result[0])
+                if src.exists() and slides_dir:
+                    assets_dir = Path(slides_dir) / "assets"
+                    assets_dir.mkdir(parents=True, exist_ok=True)
+                    dest_name = f"vocab-{word}-{src.name}"
+                    dest = assets_dir / dest_name
+                    shutil.copy2(src, dest)
+                    image_path = f"assets/{dest_name}"
 
         slide_content = generate_single_vocabulary_slide(word, phonemic, image_path, idx + 1)
         if slide_content:
@@ -642,23 +679,23 @@ def generate_vocabulary_slides(data, slides_dir=None):
 def generate_single_vocabulary_slide(word, phonemic, image_path=None, slide_num=1):
     """Generate a single vocabulary slide with word in context."""
     context_sentences = {
-        "gap": "The **generation gap** between the old and very young is very large; old people cannot understand young people's fashion.",
-        "frustration": "I felt so much **frustration** when my phone died in the middle of the important call.",
-        "redefine": "The new CEO wants to **redefine** what success means in our company.",
-        "workplace": "The **workplace** is changing — more people work from home now.",
-        "generational": "The **generational** difference is clear — my grandparents don't use smartphones.",
-        "empathy": "She showed great **empathy** when her friend was sad.",
-        "resolve": "They sat down and managed to **resolve** their disagreement.",
-        "perspective": "From my **perspective**, the situation looks very different.",
-        "influence": "Music had a strong **influence** on her career choice.",
-        "communicate": "It's hard to **communicate** when you don't share a language.",
-        "conflict": "The **conflict** started over something very small.",
+        "gap": "There is a big **generation gap** between old people and young people.",
+        "frustration": "I felt **frustration** when my phone died during an important call.",
+        "redefine": "The new CEO wants to **redefine** success in our company.",
+        "workplace": "The **workplace** is changing. Now more people work from home.",
+        "generational": "There is a **generational** difference. My grandparents do not use smartphones.",
+        "empathy": "She showed **empathy** when her friend was sad.",
+        "resolve": "They sat down and tried to **resolve** their problem.",
+        "perspective": "From my **perspective**, things look different.",
+        "influence": "Music had a strong **influence** on her career.",
+        "communicate": "It is hard to **communicate** when you do not speak the same language.",
+        "conflict": "The **conflict** started over something small.",
         "attitude": "Her positive **attitude** made everyone feel better.",
-        "balance": "It's hard to **balance** work and family life.",
+        "balance": "It is hard to **balance** work and family.",
         "opportunity": "This is a great **opportunity** to learn something new.",
-        "assume": "I **assume** you already know the basics, but I could be wrong.",
-        "perceive": "We each **perceive** the same situation differently.",
-        "inevitable": "Change is **inevitable** — nothing stays the same forever.",
+        "assume": "I **assume** you already know the basics.",
+        "perceive": "We each **perceive** the situation differently.",
+        "inevitable": "Change is **inevitable**. Nothing stays the same forever.",
         "expectation": "My parent's **expectation** is that I go to university.",
         "generation": "My **generation** grew up with the internet.",
     }
@@ -672,10 +709,16 @@ def generate_single_vocabulary_slide(word, phonemic, image_path=None, slide_num=
     ]
 
     if image_path:
-        rel_path = Path(image_path).name
-        lines.extend([
-            f'<!-- .slide: data-background-image="assets/{rel_path}" -->',
-        ])
+        if image_path.startswith("assets/"):
+            rel_path = Path(image_path).name
+            lines.extend([
+                f'<!-- .slide: data-background-image="{image_path}" -->',
+            ])
+        else:
+            rel_path = Path(image_path).name
+            lines.extend([
+                f'<!-- .slide: data-background-image="assets/{rel_path}" -->',
+            ])
     else:
         lines.append('<!-- .slide: data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->')
 
@@ -724,14 +767,24 @@ def generate_leadin_slide(stage, data, slides_dir=None):
 
     question = generate_leadin_question(topic, procedure)
 
-    result = search_and_get_image(f"{topic} people")
-    image_path = Path(result[0]) if result and result[0] else None
-
-    if image_path:
-        if slides_dir:
-            rel_path = os.path.relpath(str(image_path), str(slides_dir)).replace("\\", "/")
-        else:
+    existing = find_existing_asset(slides_dir, "pixabay")
+    if existing:
+        rel_path = existing
+    else:
+        result = search_and_get_image(f"{topic} people")
+        image_path = Path(result[0]) if result and result[0] else None
+        if image_path and slides_dir:
+            copied = copy_to_assets(slides_dir, image_path, "leadin-")
+            if copied:
+                rel_path = copied
+            else:
+                rel_path = os.path.relpath(str(image_path), str(slides_dir)).replace("\\", "/")
+        elif image_path:
             rel_path = image_path.relative_to(OUTPUT_DIR.parent).as_posix()
+        else:
+            rel_path = None
+
+    if rel_path:
         bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
     else:
         bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->'
@@ -779,14 +832,24 @@ def generate_prereading_slide(stage, data, slides_dir=None):
     topic = data.get("topic", "")
     materials = data.get("materials", "")
 
-    result = search_and_get_image(f"{topic} reading")
-    image_path = Path(result[0]) if result and result[0] else None
-
-    if image_path:
-        if slides_dir:
-            rel_path = os.path.relpath(str(image_path), str(slides_dir)).replace("\\", "/")
-        else:
+    existing = find_existing_asset(slides_dir, "reading")
+    if existing:
+        rel_path = existing
+    else:
+        result = search_and_get_image(f"{topic} reading")
+        image_path = Path(result[0]) if result and result[0] else None
+        if image_path and slides_dir:
+            copied = copy_to_assets(slides_dir, image_path, "reading-")
+            if copied:
+                rel_path = copied
+            else:
+                rel_path = os.path.relpath(str(image_path), str(slides_dir)).replace("\\", "/")
+        elif image_path:
             rel_path = image_path.relative_to(OUTPUT_DIR.parent).as_posix()
+        else:
+            rel_path = None
+
+    if rel_path:
         bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
     else:
         bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #f5f0eb, #e8ddd3)" -->'
@@ -814,20 +877,53 @@ def extract_task_instructions(procedure, stage_name):
 
     for line in lines:
         stripped = line.strip().lstrip("- ")
-        if any(skip in stripped.lower() for skip in [
+        stripped_lower = stripped.lower()
+        if any(skip in stripped_lower for skip in [
             "pair check", "whole-class feedback", "feedback",
             "elicit", "brief ", "tell ss", "teacher"
         ]):
             continue
         if re.match(r"\d+\s*min", stripped):
             continue
-        # Remove "Ss" prefix for student-facing text
-        stripped = re.sub(r"^[Ss]s\s+", "", stripped)
-        stripped = re.sub(r"\b[Ss]s\b", "Students", stripped)
-        if stripped.strip():
-            task_lines.append(stripped.strip())
+        stripped = re.sub(r"\b[Ss]s\b", "you", stripped)
+        instruction = to_imperative(stripped)
+        if instruction and instruction.strip():
+            task_lines.append(instruction.strip())
 
     return task_lines[:3]
+
+
+def to_imperative(text):
+    if not text:
+        return text
+    text = text.strip()
+    if not text:
+        return text
+    if "they" in text.lower():
+        split_sentences = re.split(r"[.]", text)
+        kept = []
+        for s in split_sentences:
+            s = s.strip()
+            if s and "they" not in s.lower():
+                kept.append(s)
+        text = ". ".join(kept)
+        text = text.strip()
+    text = re.sub(r"\(Exercise \d+\)", "", text)
+    text = re.sub(r"(\d+)\.\s*", "", text)
+    text = re.sub(r"^[Ss]s ", "", text).strip()
+    text = re.sub(r"^Students ", "", text, flags=re.IGNORECASE).strip()
+    text = re.sub(r"^in pairs, ", "", text, flags=re.IGNORECASE).strip()
+    text = re.sub(r"^individually, ", "", text, flags=re.IGNORECASE).strip()
+    text = re.sub(r"^You ", "", text, flags=re.IGNORECASE).strip()
+    text = re.sub(r"^you ", "", text, flags=re.IGNORECASE).strip()
+    text = re.sub(r"\b[Ss]s\b", "", text)
+    text = re.sub(r"\byou\b", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"\s+", " ", text).strip()
+    if text and not text[0].isupper():
+        text = text[0].upper() + text[1:]
+    if text and not text.endswith((".", "!")):
+        text = text + "."
+    return text
 
 
 def generate_task_slide(stage, data):
@@ -1057,18 +1153,26 @@ def generate_summary_slide(data):
     objective_text = data.get("objective", "")
     topic = data.get("topic", "")
 
+    outcome_map = {
+        "gist": "I can find the main idea",
+        "detail": "I can find important facts",
+        "specific information": "I can find important facts",
+        "inference": "I can understand what the writer means",
+        "conclusion": "I can explain the ending",
+        "opinion": "I can share my ideas",
+        "fact": "I can tell fact from opinion",
+    }
+
     outcomes = []
-    if "gist" in objective_text.lower():
-        outcomes.append("Identify the main purpose of a text")
-    if "detail" in objective_text.lower() or "specific information" in objective_text.lower():
-        outcomes.append("Find key facts and correct false statements")
-    if "inference" in objective_text.lower() or "conclusion" in objective_text.lower():
-        outcomes.append("Use text evidence to support conclusions")
-    if "opinion" in objective_text.lower():
-        outcomes.append("Express and support opinions about a topic")
+    seen = set()
+    obj_lower = objective_text.lower()
+    for key, outcome in outcome_map.items():
+        if key in obj_lower and outcome not in seen:
+            outcomes.append(outcome)
+            seen.add(outcome)
 
     if not outcomes:
-        outcomes = ["Understand and discuss the topic in more depth"]
+        outcomes = ["I can understand and talk about the topic"]
 
     outcomes = outcomes[:3]
 
@@ -1185,18 +1289,20 @@ def get_transition_question(stage_name, stage):
     stage_lower = stage_name.lower()
     stage_aim = humanize_stage_aim(stage.get("stage_aim", ""))
 
-    if "gist" in stage_lower:
-        return "What do you predict the text will be about?"
-    if "detail" in stage_lower:
-        return "What facts did you notice on your first read?"
-    if "inference" in stage_lower:
-        return "What do you think the writer really means?"
-    if "conclusion" in stage_lower:
-        return "Which point do you find most convincing?"
-    if "post-reading" in stage_lower or "speaking" in stage_lower:
-        return "How does this topic connect to your own life?"
-    if "wrap-up" in stage_lower or "reflection" in stage_lower:
-        return "What is one thing you learned today?"
+    question_map = {
+        "gist": "What do you think the text is about?",
+        "detail": "What did you learn from your first reading?",
+        "inference": "What is the writer's real message?",
+        "conclusion": "Which idea makes the most sense to you?",
+        "post-reading": "Is this true in your life too?",
+        "speaking": "Is this true in your life too?",
+        "wrap-up": "What is one thing you learned today?",
+        "reflection": "What is one thing you learned today?",
+    }
+
+    for key, question in question_map.items():
+        if key in stage_lower:
+            return question
     return ""
 
 
@@ -1231,8 +1337,35 @@ def write_index_html(markdown_content, output_dir):
     print(f"index.html written: {index_path}")
 
 
+def load_image_references(md_path):
+    """Extract existing image references from markdown, keyed by slide section."""
+    references = {}
+    content = Path(md_path).read_text(encoding="utf-8")
+    current_section = None
+    for line in content.split("\n"):
+        m = re.match(r"<!--\s*slide-section:\s*(\S+)\s*-->", line)
+        if m:
+            current_section = m.group(1)
+        img_match = re.search(r'data-background-image="([^"]+)"', line)
+        if img_match and current_section:
+            references[current_section] = img_match.group(1)
+    return references
+
+
+def restore_image_references(markdown_content, preserved_refs):
+    """Replace newly generated image refs with preserved ones by section."""
+    for section, old_path in preserved_refs.items():
+        markdown_content = re.sub(
+            rf'(<!--\s*slide-section:\s*{re.escape(section)}\s*-->.*?data-background-image=")[^"]+(")',
+            r'\1' + old_path + r'\2',
+            markdown_content,
+            flags=re.DOTALL
+        )
+    return markdown_content
+
+
 def convert_json_to_markdown(json_path, title_image_path=None, title_attribution=None, logo_path=None,
-                              sections=None, merge=False):
+                              sections=None, merge=False, no_images=False):
     json_path = Path(json_path)
 
     if not json_path.exists():
@@ -1256,6 +1389,12 @@ def convert_json_to_markdown(json_path, title_image_path=None, title_attribution
     output_path = get_output_path(json_path, data.get("date", ""))
     slides_dir = output_path.parent
 
+    existing_images = {}
+    if no_images and output_path.exists():
+        existing_images = load_image_references(output_path)
+        if existing_images:
+            print(f"Preserving {len(existing_images)} existing image references from {output_path.name}")
+
     topic = data.get("topic", "")
 
     if not logo_path:
@@ -1267,12 +1406,6 @@ def convert_json_to_markdown(json_path, title_image_path=None, title_attribution
             dest_logo = assets_dir / "logo.png"
             shutil.copy2(default_logo, dest_logo)
             logo_path = str(dest_logo)
-
-    if not title_image_path:
-        cached = find_cached_title_image(topic)
-        if cached:
-            title_image_path = cached
-            title_attribution = None
 
     if sections and merge and output_path.exists():
         existing = output_path.read_text(encoding="utf-8")
@@ -1303,6 +1436,9 @@ def convert_json_to_markdown(json_path, title_image_path=None, title_attribution
             return output_path
 
     markdown_content = generate_markdown(data, title_image_path, title_attribution, slides_dir, logo_path)
+
+    if existing_images:
+        markdown_content = restore_image_references(markdown_content, existing_images)
 
     try:
         with open(output_path, "w", encoding="utf-8") as f:
@@ -1430,11 +1566,13 @@ if __name__ == "__main__":
                         help="Comma-separated section IDs to regenerate (e.g., 'title,vocab-1,task-2')")
     parser.add_argument("--merge", action="store_true",
                         help="Merge regenerated sections into existing markdown file")
+    parser.add_argument("--no-images", action="store_true",
+                        help="Preserve existing image references from current markdown (text-only regeneration)")
     args = parser.parse_args()
 
     result = convert_json_to_markdown(
         args.json_file, args.title_image, args.title_attribution, args.logo_image,
         sections=args.section.split(",") if args.section else None,
-        merge=args.merge
+        merge=args.merge, no_images=args.no_images
     )
     sys.exit(0 if result else 1)

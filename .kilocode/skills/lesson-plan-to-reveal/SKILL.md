@@ -170,6 +170,68 @@ To find which section is at any URL hash `#/N`, search for `<!-- slide: N -->` i
 11. **Logo: transparent RGBA PNG** — white backgrounds converted to transparency. Max height 100px, centered with 1em margin below.
 12. **Text highlighting** — all slide text (h2, h3 on block display, p/li inline) uses white text on a semi-transparent dark gray background (`rgba(0,0,0,0.5)`) with a subtle dark text outline. Headers have maroon border-bottom accent. Vocabulary words in context sentences use yellow boldface (`#ffdd00`) for emphasis.
 
+## Authorial Voice & Audience
+
+This skill generates slides for **Mathayom 2-3 Thai students (CEFR B1)**. All student-facing text on screen MUST follow these rules:
+
+### 1. Person Rule (most important)
+All on-screen student-facing text — task instructions, questions, objectives, transitions — MUST use **direct "you" imperatives**, never third person:
+
+| Wrong | Correct |
+|-------|---------|
+| "Students read the article again..." | "Read the article again." |
+| "They must correct the false statements." | "Correct the false statements." |
+| "In pairs, Students answer the questions..." | "In pairs, answer these questions." |
+| "Ss complete the task individually." | "Complete the task on your own." |
+
+**Speaker notes (`Notes:`) remain unrestricted** — teacher procedure can use full professional vocabulary.
+
+### 2. B1 Vocabulary Ceiling
+No words above CEFR B1 on screen without inline definition. **Banned words** include:
+- "identify" use "find"
+- "predict" use "guess" or "think...about"
+- "convincing" use "makes sense"
+- "distinguish" use "tell the difference"
+- "evaluate" use "decide" or "choose"
+- "analyze" use "look at carefully"
+- "infer" use "understand what the writer means"
+
+### 3. Sentence Complexity Limits
+- **Max 15 words per sentence** on screen
+- **No semicolons** break into two sentences
+- **One clause preferred**, two max
+- **No passive voice** on screen ("The text is read" "Read the text")
+
+### 4. Thai L1 Cultural Considerations
+- Use **collective framing** where natural ("We can see...", "Our class can think about...")
+- Keep questions **positive** and **concrete** avoid abstract philosophical prompts
+- Questions should invite **group participation**, not individual introspection
+- B1 Thai students can handle "Do you agree?" but struggle with "How does this connect to broader societal themes?"
+
+### 5. Summary Slide Must Use "I Can" Statements
+| Wrong | Correct |
+|-------|---------|
+| "Identify the main purpose" | "I can find the main idea" |
+| "Find key facts" | "I can find important facts" |
+| "Express opinions" | "I can share my ideas" |
+
+### 6. Transition Questions Must Be B1-Accessible
+| Wrong | Correct |
+|-------|---------|
+| "What do you predict the text will be about?" | "What do you think the text is about?" |
+| "Which point do you find most convincing?" | "Which idea makes the most sense to you?" |
+| "How does this topic connect to your own life?" | "Is this true in your life too?" |
+| "What facts did you notice on your first read?" | "What did you learn from your first reading?" |
+
+### 7. Image Preservation (CRITICAL)
+When regenerating slides, **never search Pixabay** — always reuse existing images from `slides/assets/`:
+- The script checks `slides/assets/` FIRST before any Pixabay search
+- If images exist in `slides/assets/`, use them (with `assets/` relative paths)
+- Only fall back to Pixabay search when **no existing image** is found
+- The `--title-image` CLI arg ALWAYS takes priority if provided
+
+This prevents "image stealing" — where regeneration overwrites proper production images with random cached images.
+
 ## Files
 
 | File | Purpose |

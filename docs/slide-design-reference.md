@@ -28,6 +28,49 @@ This document defines how lesson plan JSON stages map to reveal.js slides. It is
 
 ---
 
+## B1 Audience Constraints
+
+This section applies when generating slides for **Mathayom 2-3 Thai students (CEFR B1)**. These constraints ensure student-facing text is immediately comprehensible.
+
+### Vocabulary Ceiling
+No words above CEFR B1 on screen without inline definition:
+- **Banned**: "identify", "predict", "convincing", "distinguish", "evaluate", "analyze", "infer"
+- **Useinstead**: "find", "guess", "makes sense", "tell the difference", "decide", "look at", "understand what the writer means"
+
+### Sentence Complexity
+- Max 15 words per sentence on screen
+- No semicolons — break into two sentences
+- One clause preferred, two max
+- No passive voice on screen
+
+### Per-Slide-Type Language Guidelines
+
+| Slide type | B1 rule | Bad example | Good example |
+|-----------|---------|-----------|--------------|
+| **Objective** | Frame as "what you CAN do" | "By the end, you will have practiced identifying the main idea" | "I can find the main idea of an article" |
+| **Task instruction** | Use direct imperatives only | "Students read the article and complete Exercise 2" | "Read the article. Do Exercise 2." |
+| **Transition** | Simple warm-up questions | "What do you predict the text will be about?" | "What do you think the text is about?" |
+| **Discussion** | Concrete yes/no or choice prompts | "How does this topic connect to broader societal themes?" | "Do you agree? Why or why not?" |
+| **Summary** | Use "I can..." statements | "Identify the main purpose of a text" | "I can find the main idea" |
+
+### Max Text Limits (B1-adjusted)
+
+| Slide type | Max total words on screen |
+|-----------|-------------------------|
+| Title | 18 |
+| Objective | 25 (3  8-word outcomes) |
+| Vocabulary | 35 (4 words  9 words each) |
+| Lead-in image | 8 (1 question) |
+| Pre-reading prediction | 5 (2 prompts  2-3 words) |
+| Task instruction | 15 |
+| Answer explanation | 35 per question |
+| Section transition | 8 (1 question) |
+| Post-reading discussion | 18 (2-3 questions) |
+| Summary | 12 (3  4-word outcomes) |
+| End | 5 |
+
+---
+
 ### Text highlighting (all slides)
 
 All slide text (h2, h3, p, li) uses a consistent highlight style:
