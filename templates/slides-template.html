@@ -4,47 +4,15 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
         <style>
-            .reveal .slides section[data-markdown] {
-                text-align: left;
-                padding: 0 60px;
-            }
-            .reveal h2 {
-                font-size: 1.6em;
-                margin-bottom: 0.4em;
-                border-bottom: 7px solid #800020;
-                padding-bottom: 0.2em;
-            }
-            .reveal h3 {
-                font-size: 1.2em;
-                color: #555;
-                margin-bottom: 0.3em;
-            }
-            .reveal ul {
-                display: block;
-                list-style-type: disc;
-            }
-            .reveal li {
-                margin-bottom: 0.3em;
-            }
-            .reveal .aim-label {
-                font-size: 0.7em;
-                color: #888;
-                text-transform: uppercase;
-                letter-spacing: 0.1em;
-            }
-            .reveal .stage-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: baseline;
-                margin-bottom: 0.4em;
-            }
-            .reveal .stage-meta {
-                font-size: 0.6em;
-                color: #888;
-            }
+            /* =============================================
+               ESSENTIAL UTILITIES ONLY
+               Native reveal.js handles all text styling
+               ============================================= */
+            
+            /* CEFR Badges */
             .cefr-badge {
                 display: inline-block;
                 color: white;
@@ -61,25 +29,26 @@
             .cefr-badge.B2 { background: #2a76dd; }
             .cefr-badge.C1 { background: #9c27b0; }
             .cefr-badge.C2 { background: #f44336; }
+
+            /* Title logo */
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+
+            /* Labels and captions */
+            .reveal .aim-label {
+                font-size: 0.7em;
+                color: #888;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
             .reveal .material-ref {
                 font-size: 0.65em;
                 color: #888;
                 font-style: italic;
                 margin-top: 0.5em;
-            }
-            .reveal .answer-block {
-                background: #e8f5e9;
-                border-left: 4px solid #4caf50;
-                padding: 10px 16px;
-                margin: 0.5em 0;
-            }
-            .reveal .answer-block .correct {
-                font-weight: bold;
-                color: #2e7d32;
-            }
-            .reveal .answer-block .explanation {
-                font-size: 0.85em;
-                margin-top: 0.3em;
             }
             .reveal .source-cite {
                 font-size: 0.7em;
@@ -87,83 +56,14 @@
                 font-style: italic;
                 margin-top: 0.3em;
             }
-            .reveal .summary-box {
-                background: #e3f2fd;
-                border-left: 4px solid #2a76dd;
-                padding: 16px 20px;
-                margin: 0.5em 0;
-            }
-            .reveal .slides section:first-of-type {
-                text-align: center;
-            }
-            .reveal .slides section:first-of-type h1 {
-                font-size: 2em;
-                margin-bottom: 0.3em;
-                color: #ffffff;
-                background: rgba(0, 0, 0, 0.5);
-                padding: 0.2em 0.4em;
-                border-radius: 4px;
-                display: inline-block;
-                text-shadow: 0 -1px 0 rgba(0,0,0,0.3), 0 1px 0 rgba(0,0,0,0.3), 1px 0 0 rgba(0,0,0,0.3), -1px 0 0 rgba(0,0,0,0.3);
-            }
-            .reveal .slides section:first-of-type p {
-                color: #ffffff;
-                background: rgba(0, 0, 0, 0.5);
-                padding: 0.2em 0.4em;
-                border-radius: 4px;
-                display: inline-block;
-                text-shadow: 0 -1px 0 rgba(0,0,0,0.3), 0 1px 0 rgba(0,0,0,0.3), 1px 0 0 rgba(0,0,0,0.3), -1px 0 0 rgba(0,0,0,0.3);
-            }
-            .reveal .slides section:first-of-type .cefr-badge {
-                vertical-align: middle;
-            }
-            .reveal .title-logo {
-                display: block;
-                max-height: 100px;
-                margin: 0 auto 1em;
-                opacity: 1;
-            }
-
-            /* Simple text highlight for all slides */
-            .reveal .slides section h2,
-            .reveal .slides section h3 {
-                display: block;
-                color: #ffffff;
-                background: rgba(0, 0, 0, 0.5);
-                padding: 0.2em 0.4em;
-                border-radius: 4px;
-                text-shadow: 0 -1px 0 rgba(0,0,0,0.3), 0 1px 0 rgba(0,0,0,0.3), 1px 0 0 rgba(0,0,0,0.3), -1px 0 0 rgba(0,0,0,0.3);
-            }
-            .reveal .slides section h2 {
-                font-weight: 700;
-                font-size: 1.8em;
-            }
-            .reveal .slides section h3 {
-                font-weight: 600;
-            }
-            .reveal .slides section p,
-            .reveal .slides section li {
-                color: #ffffff;
-                background: rgba(0, 0, 0, 0.5);
-                padding: 0.2em 0.4em;
-                border-radius: 4px;
-                display: inline-block;
-                text-shadow: 0 -1px 0 rgba(0,0,0,0.3), 0 1px 0 rgba(0,0,0,0.3), 1px 0 0 rgba(0,0,0,0.3), -1px 0 0 rgba(0,0,0,0.3);
-            }
-            .reveal .slides section p strong,
-            .reveal .slides section li strong {
-                color: #ffdd00;
-                font-weight: 700;
-                background: transparent;
-                text-shadow: none;
-            }
-
             .reveal .image-caption {
                 font-size: 0.55em;
                 color: #888;
                 text-align: center;
                 margin-top: 0.2em;
             }
+
+            /* Images */
             .reveal img {
                 max-height: 400px;
                 margin: 0 auto;

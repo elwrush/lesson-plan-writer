@@ -4,47 +4,15 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
         <style>
-            .reveal .slides section[data-markdown] {
-                text-align: left;
-                padding: 0 60px;
-            }
-            .reveal h2 {
-                font-size: 1.6em;
-                margin-bottom: 0.4em;
-                border-bottom: 7px solid #800020;
-                padding-bottom: 0.2em;
-            }
-            .reveal h3 {
-                font-size: 1.2em;
-                color: #555;
-                margin-bottom: 0.3em;
-            }
-            .reveal ul {
-                display: block;
-                list-style-type: disc;
-            }
-            .reveal li {
-                margin-bottom: 0.3em;
-            }
-            .reveal .aim-label {
-                font-size: 0.7em;
-                color: #888;
-                text-transform: uppercase;
-                letter-spacing: 0.1em;
-            }
-            .reveal .stage-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: baseline;
-                margin-bottom: 0.4em;
-            }
-            .reveal .stage-meta {
-                font-size: 0.6em;
-                color: #888;
-            }
+            /* =============================================
+               ESSENTIAL UTILITIES ONLY
+               Native reveal.js handles all text styling
+               ============================================= */
+            
+            /* CEFR Badges */
             .cefr-badge {
                 display: inline-block;
                 color: white;
@@ -61,25 +29,26 @@
             .cefr-badge.B2 { background: #2a76dd; }
             .cefr-badge.C1 { background: #9c27b0; }
             .cefr-badge.C2 { background: #f44336; }
+
+            /* Title logo */
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+
+            /* Labels and captions */
+            .reveal .aim-label {
+                font-size: 0.7em;
+                color: #888;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
             .reveal .material-ref {
                 font-size: 0.65em;
                 color: #888;
                 font-style: italic;
                 margin-top: 0.5em;
-            }
-            .reveal .answer-block {
-                background: #e8f5e9;
-                border-left: 4px solid #4caf50;
-                padding: 10px 16px;
-                margin: 0.5em 0;
-            }
-            .reveal .answer-block .correct {
-                font-weight: bold;
-                color: #2e7d32;
-            }
-            .reveal .answer-block .explanation {
-                font-size: 0.85em;
-                margin-top: 0.3em;
             }
             .reveal .source-cite {
                 font-size: 0.7em;
@@ -87,96 +56,29 @@
                 font-style: italic;
                 margin-top: 0.3em;
             }
-            .reveal .summary-box {
-                background: #e3f2fd;
-                border-left: 4px solid #2a76dd;
-                padding: 16px 20px;
-                margin: 0.5em 0;
-            }
-            .reveal .slides section:first-of-type {
-                text-align: center;
-            }
-            .reveal .slides section:first-of-type h1 {
-                font-size: 2em;
-                margin-bottom: 0.3em;
-                color: #ffffff;
-                background: rgba(0, 0, 0, 0.5);
-                padding: 0.2em 0.4em;
-                border-radius: 4px;
-                display: inline-block;
-                text-shadow: 0 -1px 0 rgba(0,0,0,0.3), 0 1px 0 rgba(0,0,0,0.3), 1px 0 0 rgba(0,0,0,0.3), -1px 0 0 rgba(0,0,0,0.3);
-            }
-            .reveal .slides section:first-of-type p {
-                color: #ffffff;
-                background: rgba(0, 0, 0, 0.5);
-                padding: 0.2em 0.4em;
-                border-radius: 4px;
-                display: inline-block;
-                text-shadow: 0 -1px 0 rgba(0,0,0,0.3), 0 1px 0 rgba(0,0,0,0.3), 1px 0 0 rgba(0,0,0,0.3), -1px 0 0 rgba(0,0,0,0.3);
-            }
-            .reveal .slides section:first-of-type .cefr-badge {
-                vertical-align: middle;
-            }
-            .reveal .title-logo {
-                display: block;
-                max-height: 100px;
-                margin: 0 auto 1em;
-                opacity: 1;
-            }
-
-            /* Simple text highlight for all slides */
-            .reveal .slides section h2,
-            .reveal .slides section h3 {
-                display: block;
-                color: #ffffff;
-                background: rgba(0, 0, 0, 0.5);
-                padding: 0.2em 0.4em;
-                border-radius: 4px;
-                text-shadow: 0 -1px 0 rgba(0,0,0,0.3), 0 1px 0 rgba(0,0,0,0.3), 1px 0 0 rgba(0,0,0,0.3), -1px 0 0 rgba(0,0,0,0.3);
-            }
-            .reveal .slides section h2 {
-                font-weight: 700;
-                font-size: 1.8em;
-            }
-            .reveal .slides section h3 {
-                font-weight: 600;
-            }
-            .reveal .slides section p,
-            .reveal .slides section li {
-                color: #ffffff;
-                background: rgba(0, 0, 0, 0.5);
-                padding: 0.2em 0.4em;
-                border-radius: 4px;
-                display: inline-block;
-                text-shadow: 0 -1px 0 rgba(0,0,0,0.3), 0 1px 0 rgba(0,0,0,0.3), 1px 0 0 rgba(0,0,0,0.3), -1px 0 0 rgba(0,0,0,0.3);
-            }
-            .reveal .slides section p strong,
-            .reveal .slides section li strong {
-                color: #ffdd00;
-                font-weight: 700;
-                background: transparent;
-                text-shadow: none;
-            }
-
             .reveal .image-caption {
                 font-size: 0.55em;
                 color: #888;
                 text-align: center;
                 margin-top: 0.2em;
             }
+
+            /* Images */
             .reveal img {
                 max-height: 400px;
                 margin: 0 auto;
             }
         </style>
+        <link rel="stylesheet" href="timer-plugin.css" />
     </head>
     <body>
         <div class="reveal">
             <div class="slides">
                 <section data-markdown data-separator-notes="^[Nn]otes?:">
                     <textarea data-template>
+<!-- slide: 0 -->
 <!-- slide-section: title -->
-<!-- .slide: data-background-image="../../.image-cache/cache_7a8596e2.jpg" data-background-opacity="0.8" -->
+<!-- .slide: data-background-image="assets/pixabay_4867454_1.jpg" data-background-opacity="0.8" -->
 <img src="assets/logo.png" class="title-logo" />
 
 # What Connects Us <span class="cefr-badge B2">B2</span>
@@ -185,19 +87,21 @@
 
 ---
 
+<!-- slide: 1 -->
 <!-- slide-section: objective -->
 ## Here's what you'll be able to do
 
 - Understand what the article is mainly about
 - Find the most important facts and mistakes
-- Know the difference between facts and opinions
+- Tell the difference between facts and opinions
 
 *These are the same skills you need for the PET reading test!*
 
 ---
 
+<!-- slide: 2 -->
 <!-- slide-section: leadin -->
-<!-- .slide: data-background-image="../../.image-cache/cache_92233ea7.jpg" data-background-opacity="0.7" -->
+<!-- .slide: data-background-image="assets/pixabay_7338021_1.jpg" data-background-opacity="0.7" -->
 ## Let's get Started
 
 ### What do these two people have in common? What makes them different?
@@ -214,6 +118,7 @@ Goal: To activate interest in the theme of generational differences
 
 ---
 
+<!-- slide: 3 -->
 <!-- slide-section: vocab-1 -->
 <!-- .slide: data-background-image="assets/vocab-gap-cache_20c895dd.jpg" -->
 ## Important Words
@@ -221,42 +126,46 @@ Goal: To activate interest in the theme of generational differences
 **generation gap**
 _/ˌdʒenəˈreɪʃn ɡæp/_
 
-*The **generation gap** between the old and very young is very large; old people cannot understand young people's fashion.*
+*There is a big **generation gap** between old people and young people.*
 
 ---
 
+<!-- slide: 4 -->
 <!-- slide-section: vocab-2 -->
 <!-- .slide: data-background-image="assets/vocab-frustration-cache_d2a63bdf.jpg" -->
 **frustration**
 _/frʌˈstreɪʃn/_
 
-*I felt so much **frustration** when my phone died in the middle of the important call.*
+*I felt **frustration** when my phone died during an important call.*
 
 ---
 
+<!-- slide: 5 -->
 <!-- slide-section: vocab-3 -->
 <!-- .slide: data-background-image="assets/vocab-redefine-cache_f014d1ce.jpg" -->
 **redefine**
 _/ˌriːdɪˈfaɪn/_
 
-*The new CEO wants to **redefine** what success means in our company.*
+*The new CEO wants to **redefine** success in our company.*
 
 ---
 
+<!-- slide: 6 -->
 <!-- slide-section: vocab-4 -->
 <!-- .slide: data-background-image="assets/vocab-workplace-cache_fc0e748d.jpg" -->
 **workplace**
 _/ˈwɜːkpleɪs/_
 
-*The **workplace** is changing — more people work from home now.*
+*The **workplace** is changing. Now more people work from home.*
 
 ---
 
+<!-- slide: 7 -->
 <!-- slide-section: transition-2 -->
 <!-- .slide: data-background="#c0392b" -->
 ## What's the idea?
 
-What do you predict the text will be about?
+What do you think the text is about?
 
 Notes:
 Moving from Lead-in.
@@ -264,8 +173,9 @@ Give students a moment to reset. Introduce the next activity.
 
 ---
 
+<!-- slide: 8 -->
 <!-- slide-section: prereading -->
-<!-- .slide: data-background-image="../../.image-cache/cache_532f81f6.jpg" data-background-opacity="0.7" -->
+<!-- .slide: data-background-image="assets/reading-cache_532f81f6.jpg" data-background-opacity="0.7" -->
 ## Before you read
 
 - What is the writer trying to do?
@@ -279,11 +189,12 @@ Materials: OFD 3, Student Book, pp 5-6
 
 ---
 
+<!-- slide: 9 -->
 <!-- slide-section: transition-3 -->
 <!-- .slide: data-background="#c0392b" -->
 ## Finding details
 
-What facts did you notice on your first read?
+What did you learn from your first reading?
 
 Notes:
 Moving from Reading for gist.
@@ -291,11 +202,13 @@ Give students a moment to reset. Introduce the next activity.
 
 ---
 
+<!-- slide: 10 -->
 <!-- slide-section: task-3 -->
+<!-- .slide: data-timer="960" -->
 ## Finding details
 
-- read the article again and complete the true/false task (Exercise 2). They must correct the false statements..
-- complete the paragraph matching task (Exercise 3). Match statements 1-6 to paragraphs A-F..
+- Read the article again and complete the true/false task.
+- Complete the paragraph matching task . Match statements 1-6 to paragraphs A-F..
 
 Notes:
 Stage 3 · 16 min · Ss-Ss
@@ -304,11 +217,12 @@ Materials: OFD 3, Student Book, pp 5-6
 
 ---
 
+<!-- slide: 11 -->
 <!-- slide-section: transition-4 -->
 <!-- .slide: data-background="#c0392b" -->
 ## Making conclusions
 
-What do you think the writer really means?
+What is the writer's real message?
 
 Notes:
 Moving from Reading for detail and specific information.
@@ -316,10 +230,12 @@ Give students a moment to reset. Introduce the next activity.
 
 ---
 
+<!-- slide: 12 -->
 <!-- slide-section: task-4 -->
+<!-- .slide: data-timer="240" -->
 ## Making conclusions
 
-- individually decide which statement gives the best conclusion of the article (Exercise 4): a) Learning and change are both easier for younger people, b) Technology often causes conflict between young and old, c) Differences can be good if we take time to understand them..
+- Individually decide which statement gives the best conclusion of the article : a) Learning and change are both easier for younger people, b) Technology often causes conflict between young and old, c) Differences can be good if we take time to understand them..
 
 Notes:
 Stage 4 · 4 min · Ss-Ss
@@ -328,11 +244,12 @@ Materials: OFD 3, Student Book, pp 5-6
 
 ---
 
+<!-- slide: 13 -->
 <!-- slide-section: transition-5 -->
 <!-- .slide: data-background="#c0392b" -->
 ## Let's Discuss
 
-How does this topic connect to your own life?
+Is this true in your life too?
 
 Notes:
 Moving from Reading for inference and conclusion.
@@ -340,7 +257,9 @@ Give students a moment to reset. Introduce the next activity.
 
 ---
 
+<!-- slide: 14 -->
 <!-- slide-section: task-5 -->
+<!-- .slide: data-timer="420" -->
 ## Let's Discuss
 
 - In pairs, Students answer the questions from Exercise 5 using ideas from the article:
@@ -355,6 +274,7 @@ Materials: OFD 3, Student Book, pp 5-6
 
 ---
 
+<!-- slide: 15 -->
 <!-- slide-section: transition-6 -->
 <!-- .slide: data-background="#c0392b" -->
 ## Let's Review
@@ -367,7 +287,9 @@ Give students a moment to reset. Introduce the next activity.
 
 ---
 
+<!-- slide: 16 -->
 <!-- slide-section: task-6 -->
+<!-- .slide: data-timer="300" -->
 ## Let's Review
 
 - Brief error correction if needed.
@@ -379,6 +301,7 @@ Materials: OFD 3, Student Book, pp 5-6
 
 ---
 
+<!-- slide: 17 -->
 <!-- slide-section: answers -->
 ## Exercise 1
 <!-- .element: class="aim-label" -->
@@ -434,12 +357,13 @@ c. Differences can be good if we take time to understand them.
 
 ---
 
+<!-- slide: 18 -->
 <!-- slide-section: summary -->
 ## What you can do now
 
-✓ Identify the main purpose of a text
-✓ Find key facts and correct false statements
-✓ Express and support opinions about a topic
+✓ I can find the main idea
+✓ I can find important facts
+✓ I can share my ideas
 
 Notes:
 Elicit from students: What did you learn today?
@@ -448,6 +372,7 @@ Praise effort, mention one thing to improve.
 
 ---
 
+<!-- slide: 19 -->
 <!-- slide-section: end -->
 <!-- .slide: data-background="#2c3e50" -->
 ## Thank you
@@ -457,6 +382,7 @@ Praise effort, mention one thing to improve.
                 </section>
             </div>
         </div>
+        <script src="timer-plugin.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/markdown/markdown.js"></script>
@@ -478,6 +404,7 @@ Praise effort, mention one thing to improve.
                     RevealNotes,
                     RevealSearch,
                     RevealZoom,
+                    TimerPlugin,
                 ],
             });
         </script>
