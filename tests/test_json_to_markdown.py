@@ -159,7 +159,7 @@ class TestGenerateMarkdown:
     def test_stage_aims_included(self):
         md = generate_markdown(VALID_LESSON_PLAN)
         assert "Lead-in" in md
-        assert "Reading for gist" in md
+        assert "What's the idea?" in md
 
     def test_no_banned_patterns(self):
         """Ensure no banned patterns (----, ***, ___) are used as separators."""

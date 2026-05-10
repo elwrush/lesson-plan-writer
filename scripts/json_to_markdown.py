@@ -642,7 +642,7 @@ def generate_vocabulary_slides(data, slides_dir=None):
 def generate_single_vocabulary_slide(word, phonemic, image_path=None, slide_num=1):
     """Generate a single vocabulary slide with word in context."""
     context_sentences = {
-        "gap": "There's such a **generation gap** between Rico and Ploy; Ploy doesn't understand the slang words Rico uses.",
+        "gap": "The **generation gap** between the old and very young is very large; old people cannot understand young people's fashion.",
         "frustration": "I felt so much **frustration** when my phone died in the middle of the important call.",
         "redefine": "The new CEO wants to **redefine** what success means in our company.",
         "workplace": "The **workplace** is changing — more people work from home now.",
@@ -664,6 +664,7 @@ def generate_single_vocabulary_slide(word, phonemic, image_path=None, slide_num=
     }
 
     display_word = "generation gap" if word == "gap" else word
+    phonemic_display = "/ˌdʒenəˈreɪʃn ɡæp/" if word == "gap" else phonemic
     context = context_sentences.get(word, f"I understand **{display_word}** now.")
 
     lines = [
@@ -674,18 +675,28 @@ def generate_single_vocabulary_slide(word, phonemic, image_path=None, slide_num=
         rel_path = Path(image_path).name
         lines.extend([
             f'<!-- .slide: data-background-image="assets/{rel_path}" -->',
-            '<!-- .slide: data-background-color="rgba(128,0,0,0.85)" -->',
         ])
     else:
-        lines.append('<!-- .slide: data-background-color="#800000" -->')
+        lines.append('<!-- .slide: data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->')
 
-    lines.extend([
-        "## Important Words you need to know",
-        "",
-        f"**{display_word}** {phonemic}",
-        "",
-        f"*{context}*",
-    ])
+    if slide_num == 1:
+        lines.extend([
+            "## Important Words",
+            "",
+        ])
+        lines.extend([
+            f"**{display_word}**",
+            f"_{phonemic_display}_",
+            "",
+            f"*{context}*",
+        ])
+    else:
+        lines.extend([
+            f"**{display_word}**",
+            f"_{phonemic_display}_",
+            "",
+            f"*{context}*",
+        ])
 
     return "\n".join(lines)
 
@@ -728,7 +739,7 @@ def generate_leadin_slide(stage, data, slides_dir=None):
     lines = [
         '<!-- slide-section: leadin -->',
         bg_directive,
-        f"## {escape_md(stage_name)}",
+        f"## {escape_md(friendly_stage_name(stage_name))}",
         "",
         f"### {escape_md(question)}",
         "",
@@ -740,6 +751,28 @@ def generate_leadin_slide(stage, data, slides_dir=None):
         f"Goal: {escape_md(stage_aim)}",
     ]
     return "\n".join(lines)
+
+
+def friendly_stage_name(stage_name):
+    """Convert formal stage names to friendly student-facing language."""
+    mappings = {
+        "Lead-in": "Let's get Started",
+        "Lead in": "Let's get Started",
+        "lead-in": "Let's get Started",
+        "lead in": "Let's get Started",
+        "Reading for gist": "What's the idea?",
+        "Reading for detail and specific information": "Finding details",
+        "Reading for detail": "Finding details",
+        "Reading for inference and conclusion": "Making conclusions",
+        "Reading for inference": "Making conclusions",
+        "Post-reading speaking task": "Let's Discuss",
+        "Post reading speaking task": "Let's Discuss",
+        "post-reading speaking task": "Let's Discuss",
+        "Wrap-up and reflection": "Let's Review",
+        "Wrap up and reflection": "Let's Review",
+        "Wrap-up": "Let's Review",
+    }
+    return mappings.get(stage_name, stage_name)
 
 
 def generate_prereading_slide(stage, data, slides_dir=None):
@@ -810,7 +843,7 @@ def generate_task_slide(stage, data):
 
     lines = [
         f'<!-- slide-section: task-{stage_num} -->',
-        f"## {stage_name}",
+        f"## {friendly_stage_name(stage_name)}",
         "",
     ]
 
@@ -843,7 +876,7 @@ def generate_task_slide_no_steps(stage, data):
 
     lines = [
         f'<!-- slide-section: task-{stage_num} -->',
-        f"## {stage_name}",
+        f"## {friendly_stage_name(stage_name)}",
         "",
     ]
 
@@ -1005,7 +1038,7 @@ def generate_transition_slide(stage_name, stage_num=0, prev_stage="", question="
     lines = [
         f'<!-- slide-section: transition-{stage_num} -->',
         '<!-- .slide: data-background="#c0392b" -->',
-        f"## {stage_name}",
+        f"## {friendly_stage_name(stage_name)}",
     ]
     if question:
         lines.append("")
@@ -1085,10 +1118,6 @@ def generate_markdown(data, title_image_path=None, title_attribution=None, slide
     if obj_slide:
         slides.append(obj_slide)
 
-    vocab_slides = generate_vocabulary_slides(data, slides_dir)
-    if vocab_slides:
-        slides.extend(vocab_slides)
-
     prev_stage_name = ""
 
     for i, stage in enumerate(stages):
@@ -1102,6 +1131,9 @@ def generate_markdown(data, title_image_path=None, title_attribution=None, slide
 
         if "lead-in" in stage_lower:
             slides.append(generate_leadin_slide(stage, data, slides_dir))
+            vocab_slides = generate_vocabulary_slides(data, slides_dir)
+            if vocab_slides:
+                slides.extend(vocab_slides)
 
         elif "gist" in stage_lower and i == stages.index(stage):
             slides.append(generate_prereading_slide(stage, data, slides_dir))

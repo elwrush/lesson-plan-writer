@@ -124,13 +124,20 @@ Based on `docs/slide-design-reference.md`:
 2. **Objective slide uses accessible language** — avoid complex words like "identify", "distinguish", "inference". Use simple phrases like "Understand what the article is mainly about", "Find the most important facts and mistakes". Tie outcomes to PET reading test ("These are the same skills you need for the PET reading test!").
 3. **Title slide: topic + CEFR badge + strap subheader** — NO date, teacher name, duration, or materials. Strap is derived from the lesson objective using natural teacher voice (e.g., "Reading for the main idea — bridging the generation gap"). Avoid stilted phrases like "An article about...".
 4. **Task slides: brief student instructions** — extract task description from procedure, skip teacher-only instructions. Max 3 task lines on screen. Material references go in speaker notes, not on screen.
-5. **Lead-in and pre-reading: Pixabay background images** — topic-relevant photos at 70% opacity. Fallback to gradient.
-6. **Vocabulary slides: one word each, with Pixabay background** — "Important Words you need to know" title (NOT "Key Vocabulary"). Each slide: word + phonemic in IPA + bolded target word in context sentence that implies meaning (NOT dictionary definition). Max 5 words total. Pixabay background at 70% opacity that precisely conveys word meaning. All visible at once — NO fragments.
+5. **Stage names: student-friendly language** — the script automatically converts formal teacher-talk names to friendly equivalents:
+   - "Lead-in" → "Let's get Started"
+   - "Reading for gist" → "What's the idea?"
+   - "Reading for detail" → "Finding details"
+   - "Reading for inference" → "Making conclusions"
+   - "Post-reading" → "Let's Discuss"
+   - "Wrap-up" → "Let's Review"
+6. **Vocabulary slides** — generated AFTER lead-in stage. One word per slide with Pixabay background, "Important Words" title on first slide only.
 7. **Answer slides: properly parsed** — True/False with ✓/✗ fragments, letter answers, "Students' own answers" handled correctly. Article text sections are skipped.
 8. **Transitions: natural language** — "Moving from X." not "Transition from X to Y."
 9. **Stage aims humanized** — "To activate interest in..." not "To lead-in to..."
 10. **Backgrounds**: Pixabay image at 80% opacity (title), 70% (lead-in/pre-reading/vocabulary), gradient fallback, red (transitions), dark (end)
 11. **Logo: transparent RGBA PNG** — white backgrounds converted to transparency. Max height 100px, centered with 1em margin below.
+12. **Text highlighting** — all slide text (h2, h3 on block display, p/li inline) uses white text on a semi-transparent dark gray background (`rgba(0,0,0,0.5)`) with a subtle dark text outline. Headers have maroon border-bottom accent. Vocabulary words in context sentences use yellow boldface (`#ffdd00`) for emphasis.
 
 ## Files
 

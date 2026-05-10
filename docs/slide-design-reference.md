@@ -22,8 +22,25 @@ This document defines how lesson plan JSON stages map to reveal.js slides. It is
 5. **Visual-first** — every lead-in and pre-reading slide uses a Pixabay background image
 6. **Prediction before task** — students guess before doing, confirm with answer reveal
 7. **Answer slides = answer + why + source** (all 3 parts)
-8. **Vocabulary pre-teach** — dedicated slide BEFORE any reading stage
+7. **Vocabulary pre-teach** — slides AFTER lead-in stage, one word per slide on Pixabay background
 9. **Section transitions** between stages — brief, one discussion question, colored background
+10. **Text highlighting** — all slide text uses white text on a semi-transparent dark gray background with dark text outline
+
+---
+
+### Text highlighting (all slides)
+
+All slide text (h2, h3, p, li) uses a consistent highlight style:
+
+- **Background**: dark gray at 50% opacity (`rgba(0,0,0,0.5)`)
+- **Text**: white (`#ffffff`)
+- **Text outline**: subtle dark outline using 4-direction text-shadow (`rgba(0,0,0,0.3)`)
+- **Header display**: block (renders on own line)
+- **Inline text display**: inline-block (p and li render inline)
+- **Vocabulary words in context**: yellow boldface (`#ffdd00`) for emphasis
+- **Header border-bottom**: maroon (`#800020`)
+
+This applies to ALL slides regardless of background type.
 
 ---
 
@@ -110,12 +127,27 @@ CEFR badge colors: A1=green, A2=light green, B1=blue, B2=dark blue, C1=purple, C
 3 outcomes max, each ≤10 words. NO fragments — students need to see this as orientation.
 
 ### 3. Vocabulary Slides (one word per slide with Pixabay background)
+**Generated after lead-in stage**
+
+The script automatically converts formal stage names to friendly student-facing language:
+- "Lead-in" → "Let's get Started"
+- "Post-reading speaking task" → "Let's Discuss"
+- "Wrap-up and reflection" → "Let's Review"
 ```markdown
 <!-- .slide: data-background-image="{pixabay_word_image}" data-background-opacity="0.7" -->
 
-## Important Words you need to know
+## Important Words
 
-**{{ word }}** /{{ phonemic }}/
+**{{ word }}**
+_{{ phonemic }}_
+
+*There's such a {{ word }} between them; they never agree on anything.*
+
+---
+
+<!-- subsequent vocab slides omit the header -->
+**{{ word }}**
+_{{ phonemic }}_
 
 *There's such a {{ word }} between them; they never agree on anything.*
 
@@ -129,7 +161,7 @@ Rules:
 - Word + phonemic script (IPA) + bolded target word in context sentence
 - **Sentence must imply meaning, NOT define** — e.g., "There's such a **generation gap** between Rico and Ploy; Ploy doesn't understand the slang words Rico uses." (GOOD) vs "generation gap — the difference between two groups or generations" (BAD)
 - **Pixabay background at 70% opacity** — image must precisely convey word meaning and context
-- Title: "Important Words you need to know" (NOT "Key vocabulary")
+- Title: "Important Words"
 - All visible at once — NO fragments
 
 ### 4. Lead-In Image Slide
