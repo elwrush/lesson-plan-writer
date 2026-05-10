@@ -18,7 +18,9 @@ from json_to_markdown import (
     generate_title_slide,
     generate_markdown,
     convert_json_to_markdown,
+    write_index_html,
     OUTPUT_DIR,
+    SLIDES_TEMPLATE,
 )
 
 VALID_LESSON_PLAN = {
@@ -197,3 +199,44 @@ class TestConvertJsonToMarkdown:
         bad_json.write_text("not json", encoding="utf-8")
         result = convert_json_to_markdown(bad_json)
         assert result is None
+
+
+class TestWriteIndexHtml:
+    def test_placeholder_replaced(self, tmp_path):
+        markdown = "# Test Slide\n\n---\n\n## Slide 2"
+        output_dir = tmp_path / "slides"
+        output_dir.mkdir()
+        write_index_html(markdown, output_dir)
+        index_path = output_dir / "index.html"
+        assert index_path.exists()
+        html = index_path.read_text(encoding="utf-8")
+        assert "{{ MARKDOWN }}" not in html
+        assert "Test Slide" in html
+        assert "Slide 2" in html
+
+    def test_revealjs_initialization_present(self, tmp_path):
+        markdown = "# Test"
+        output_dir = tmp_path / "slides"
+        output_dir.mkdir()
+        write_index_html(markdown, output_dir)
+        html = (output_dir / "index.html").read_text(encoding="utf-8")
+        assert "Reveal.initialize" in html
+        assert "RevealMarkdown" in html
+        assert "RevealNotes" in html
+        assert "RevealHighlight" in html
+
+    def test_speaker_notes_separator(self, tmp_path):
+        markdown = "# Test"
+        output_dir = tmp_path / "slides"
+        output_dir.mkdir()
+        write_index_html(markdown, output_dir)
+        html = (output_dir / "index.html").read_text(encoding="utf-8")
+        assert 'data-separator-notes="^[Nn]otes?:"' in html
+
+    def test_cdn_loaded(self, tmp_path):
+        markdown = "# Test"
+        output_dir = tmp_path / "slides"
+        output_dir.mkdir()
+        write_index_html(markdown, output_dir)
+        html = (output_dir / "index.html").read_text(encoding="utf-8")
+        assert "cdn.jsdelivr.net/npm/reveal.js" in html

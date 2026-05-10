@@ -6,10 +6,10 @@
 1. **`write-lesson-plan` skill** → `output/{subfolder}/{mmddyy}-{topic}-lesson-plan.json`
 2. **`create-pdf-lesson-file` skill** → converts JSON → `PDF/{subfolder}/{mm-dd-yy}-{topic}.pdf`
 
-### Slides (3-stage)
+### Slides (2-stage)
 1. **`write-lesson-plan` skill** → JSON (same as above)
-2. **`lesson-plan-to-reveal` skill** → `scripts/json_to_markdown.py <json_path>` → markdown in `output/{subfolder}/slides/`
-3. **`publish-to-github-pages` skill** → `python -m mkslides build "output/{subfolder}/slides" -d "output/{subfolder}/site"` then deploys to gh-pages
+2. **`lesson-plan-to-reveal` skill** → `scripts/json_to_markdown.py <json_path>` → generates `slides.md` + `index.html` in `output/{subfolder}/slides/`
+3. **`publish-to-github-pages` skill** → deploys `output/{subfolder}/slides/` to gh-pages
 
 ## Key commands
 
@@ -17,9 +17,12 @@
 # PDF (from project root)
 python scripts/json_to_pdf.py output/<subfolder>/<file>.json
 
-# Slides — convert JSON to markdown, then build site
+# Slides — convert JSON to markdown + self-contained HTML
 python scripts/json_to_markdown.py output/<subfolder>/<file>.json
-python -m mkslides build "output/<subfolder>/slides" -d "output/<subfolder>/site"
+# Then open output/<subfolder>/slides/index.html directly in browser (no server needed)
+
+# Partial update — regenerate specific sections only
+python scripts/json_to_markdown.py output/<subfolder>/<file>.json --section title,vocab --merge
 
 # Pixabay image download (for slide backgrounds)
 python scripts/pixabay_download.py --query "topic" --type image --count 3
@@ -70,8 +73,7 @@ Acceptable: "To activate interest in...", "To get the general idea of the text",
 
 `docs/slide-design-reference.md` defines slide types (vocabulary, task, answer, transition), fragment policy, auto-animate rules, and Pixabay image strategy. The `json_to_markdown.py` script reads this doc at generation time.
 
-- `mkslides.yml` at root configures reveal.js theme (white), 1280×720, slide numbers
-- `templates/reveal-custom.html.jinja` customizes slide CSS
+- `templates/slides-template.html` — standalone reveal.js HTML template with CDN, inlines markdown
 - `PIXABAY_API_KEY` env var required for background images (falls back to gradients if unset)
 
 ## Dependencies
@@ -80,6 +82,29 @@ Acceptable: "To activate interest in...", "To get the general idea of the text",
 - Typst CLI (NOT Quarto-embedded version)
 - Roboto OTF fonts (TinyTeX or system)
 - `@kilocode/plugin` in `.kilo/` and `.kilocode/` (tool internal, not for edits)
+- reveal.js 5.x via CDN (loaded from `templates/slides-template.html`, no npm needed)
+
+## Image replacement workflow (frequent task)
+
+When asked to replace a slide background image with a Pixabay URL:
+
+1. **Extract image ID** from the URL — e.g. `1407880` from `https://pixabay.com/photos/men-smoke-grill-picnic-forest-1407880/`
+2. **Construct CDN URL** — `https://cdn.pixabay.com/photo/{year}/{month}/{day}/{id}_1280.jpg`  
+   (Use the `_1280` variant for good resolution with reasonable size)
+3. **Download + compress** using `compress_image()` from `scripts/pixabay_download.py`:
+   ```python
+   python -c "
+   import sys; sys.path.insert(0, 'scripts')
+   from pixabay_download import compress_image
+   from pathlib import Path
+   compress_image('CDN_URL', Path('output/SUBFOLDER/slides/assets/FILENAME.jpg'), ID, 1)
+   "
+   ```
+4. **Place output** in `output/{subfolder}/slides/assets/` (the new pipeline output)
+5. **Update HTML** — change the `data-background-image` attribute on the target slide to `assets/FILENAME.jpg`
+6. **If no `assets/` dir exists**, create it first
+
+The `compress_image` function applies: resize to 1920px max edge, JPEG quality=80, optimize=True (Pillow).
 
 ## Config dirs (do not edit manually)
 

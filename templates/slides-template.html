@@ -3,28 +3,9 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-        {% if favicon %}
-            <link rel="icon" href="{{ favicon }}">
-        {% endif %}
-
-        <link rel="stylesheet" href="{{ revealjs_path }}/dist/reveal.css" />
-
-        {% if theme %}
-            <link rel="stylesheet" href="{{ theme }}" />
-        {% endif %}
-        {% if highlight_theme %}
-            <link rel="stylesheet" href="{{ highlight_theme }}" />
-        {% endif %}
-
-        {% for plugin in plugins %}
-            {% if plugin.extra_css %}
-                {% for css in plugin.extra_css %}
-                    <link rel="stylesheet" href="{{ css }}" />
-                {% endfor %}
-            {% endif %}
-        {% endfor %}
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
         <style>
             .reveal .slides section[data-markdown] {
                 text-align: left;
@@ -164,42 +145,27 @@
     <body>
         <div class="reveal">
             <div class="slides">
-                <section data-markdown
-                {% for key, value in markdown_data_options.items() %}
-                    {{ key }}="{{ value }}"
-                {% endfor %}
-                >
+                <section data-markdown data-separator-notes="^[Nn]otes?:">
                     <textarea data-template>
-{{ markdown }}
+{{ MARKDOWN }}
                     </textarea>
                 </section>
             </div>
         </div>
-        <script src="{{ revealjs_path }}/dist/reveal.js"></script>
-        <script src="{{ revealjs_path }}/dist/plugin/highlight.js"></script>
-        <script src="{{ revealjs_path }}/dist/plugin/markdown.js"></script>
-        <script src="{{ revealjs_path }}/dist/plugin/math.js"></script>
-        <script src="{{ revealjs_path }}/dist/plugin/notes.js"></script>
-        <script src="{{ revealjs_path }}/dist/plugin/search.js"></script>
-        <script src="{{ revealjs_path }}/dist/plugin/zoom.js"></script>
-
-        {% if plugins %}
-            {% for plugin in plugins %}
-                {% if plugin.extra_javascript %}
-                    {% for javascript in plugin.extra_javascript %}
-                        <script src="{{ javascript }}"></script>
-                    {% endfor %}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/markdown/markdown.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
         <script>
             Reveal.initialize({
-                {% if revealjs_config %}
-                    {% for key, value in revealjs_config.items() %}
-                        {{ key }}: {{ value | tojson | safe }},
-                    {% endfor %}
-                {% endif %}
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
                 plugins: [
                     RevealMarkdown,
                     RevealHighlight,
@@ -207,14 +173,6 @@
                     RevealNotes,
                     RevealSearch,
                     RevealZoom,
-
-                    {% if plugins %}
-                        {% for plugin in plugins %}
-                            {% if plugin.name %}
-                                {{ plugin.name }},
-                            {% endif %}
-                        {% endfor %}
-                    {% endif %}
                 ],
             });
         </script>

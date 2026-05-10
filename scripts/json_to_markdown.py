@@ -12,6 +12,8 @@ import os
 import sys
 import re
 import io
+import hashlib
+import shutil
 from pathlib import Path
 from datetime import datetime
 
@@ -21,7 +23,9 @@ from PIL import Image
 PROJECT_ROOT = Path(__file__).parent.parent
 OUTPUT_DIR = PROJECT_ROOT / "output"
 IMAGE_CACHE_DIR = OUTPUT_DIR / ".image-cache"
+TEMPLATES_DIR = PROJECT_ROOT / "templates"
 REFERENCE_DOC = PROJECT_ROOT / "docs" / "slide-design-reference.md"
+SLIDES_TEMPLATE = PROJECT_ROOT / "templates" / "slides-template.html"
 
 REQUIRED_FIELDS = [
     "teacher",
@@ -52,6 +56,12 @@ REQUIRED_STAGE_FIELDS = [
 
 def ensure_cache_dir():
     IMAGE_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def get_cache_key(query):
+    """Generate a stable cache filename from the search query."""
+    h = hashlib.md5(query.lower().strip().encode()).hexdigest()[:8]
+    return f"cache_{h}.jpg"
 
 
 def search_pixabay(topic, api_key=None):
@@ -117,7 +127,16 @@ def download_and_optimize(image_url, pixabay_id):
 
 
 def search_and_get_image(topic):
-    """Search Pixabay and return (image_path, attribution) or (None, None) on failure."""
+    """Search Pixabay and return (image_path, attribution) or (None, None) on failure.
+    Uses deterministic cache key so the same query always returns the same file.
+    """
+    cache_key = get_cache_key(topic)
+    cached = IMAGE_CACHE_DIR / cache_key
+    if cached.exists():
+        original_size = cached.stat().st_size
+        print(f"Using cached image: {cached.name} ({original_size / 1024:.0f}KB)")
+        return cached, None
+
     image_data = search_pixabay(topic)
     if image_data is None:
         return None, None
@@ -127,8 +146,23 @@ def search_and_get_image(topic):
     if not pixabay_id or not large_url:
         return None, None
     image_path = download_and_optimize(large_url, pixabay_id)
-    attribution = f"Photo by {photographer} on Pixabay" if photographer else None
-    return image_path, attribution
+    if image_path:
+        # Copy to stable cache location
+        shutil.copy2(image_path, cached)
+        attribution = f"Photo by {photographer} on Pixabay" if photographer else None
+        return cached, attribution
+    return None, None
+
+
+def find_cached_title_image(topic):
+    """Find a cached title image for the topic. Returns None if not found."""
+    if not topic or not IMAGE_CACHE_DIR.exists():
+        return None
+    cache_key = get_cache_key(topic)
+    cached = IMAGE_CACHE_DIR / cache_key
+    if cached.exists():
+        return cached
+    return None
 
 
 def validate_json(data):
@@ -380,8 +414,10 @@ def generate_title_slide(data, title_image_path=None, title_attribution=None, sl
     if title_image_path:
         image_path = Path(title_image_path).resolve()
     else:
-        image_path, _ = search_and_get_image(data.get("topic", ""))
+        result = search_and_get_image(data.get("topic", ""))
+        image_path = Path(result[0]) if result and result[0] else None
 
+    bg_directive = ""
     if image_path:
         if slides_dir:
             rel_path = os.path.relpath(str(image_path), str(slides_dir)).replace("\\", "/")
@@ -391,7 +427,10 @@ def generate_title_slide(data, title_image_path=None, title_attribution=None, sl
     else:
         bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #2c3e50, #3498db)" -->'
 
-    lines = [bg_directive]
+    lines = [
+        '<!-- slide-section: title -->',
+        bg_directive,
+    ]
 
     if logo_path:
         logo_path_resolved = Path(logo_path).resolve()
@@ -443,6 +482,7 @@ def generate_objective_slide(data):
     outcomes = outcomes[:3]
 
     lines = [
+        '<!-- slide-section: objective -->',
         "## Here's what you'll be able to do",
         "",
     ]
@@ -558,7 +598,7 @@ def get_phonemic(word, cefr=None):
     return phonemic_bank.get(word, f"/{word}/")
 
 
-def generate_vocabulary_slides(data):
+def generate_vocabulary_slides(data, slides_dir=None):
     """Generate vocabulary slides - one word per slide with maroon background."""
     keywords = extract_keywords_from_text(data)
     if not keywords:
@@ -567,7 +607,7 @@ def generate_vocabulary_slides(data):
     cefr = data.get("lesson_plan", {}).get("cefr_level", "")
     slides = []
 
-    for word, phonemic, _ in keywords:
+    for idx, (word, phonemic, _) in enumerate(keywords):
         image_path = None
 
         vocab_image_queries = {
@@ -581,18 +621,25 @@ def generate_vocabulary_slides(data):
         }
 
         image_query = vocab_image_queries.get(word, f"{word} concept meaning")
-        cached = search_and_get_image(image_query)
-        if cached and cached[0]:
-            image_path = cached[0]
+        result = search_and_get_image(image_query)
+        if result and result[0]:
+            src = Path(result[0])
+            if src.exists() and slides_dir:
+                assets_dir = Path(slides_dir) / "assets"
+                assets_dir.mkdir(parents=True, exist_ok=True)
+                dest_name = f"vocab-{word}-{src.name}"
+                dest = assets_dir / dest_name
+                shutil.copy2(src, dest)
+                image_path = f"assets/{dest_name}"
 
-        slide_content = generate_single_vocabulary_slide(word, phonemic, image_path)
+        slide_content = generate_single_vocabulary_slide(word, phonemic, image_path, idx + 1)
         if slide_content:
             slides.append(slide_content)
 
     return slides if slides else None
 
 
-def generate_single_vocabulary_slide(word, phonemic, image_path=None):
+def generate_single_vocabulary_slide(word, phonemic, image_path=None, slide_num=1):
     """Generate a single vocabulary slide with word in context."""
     context_sentences = {
         "gap": "There's such a **generation gap** between Rico and Ploy; Ploy doesn't understand the slang words Rico uses.",
@@ -619,12 +666,14 @@ def generate_single_vocabulary_slide(word, phonemic, image_path=None):
     display_word = "generation gap" if word == "gap" else word
     context = context_sentences.get(word, f"I understand **{display_word}** now.")
 
-    lines = []
+    lines = [
+        f'<!-- slide-section: vocab-{slide_num} -->',
+    ]
 
     if image_path:
         rel_path = Path(image_path).name
         lines.extend([
-            f'<!-- .slide: data-background-image="../../.image-cache/{rel_path}" -->',
+            f'<!-- .slide: data-background-image="assets/{rel_path}" -->',
             '<!-- .slide: data-background-color="rgba(128,0,0,0.85)" -->',
         ])
     else:
@@ -664,7 +713,8 @@ def generate_leadin_slide(stage, data, slides_dir=None):
 
     question = generate_leadin_question(topic, procedure)
 
-    image_path, _ = search_and_get_image(f"{topic} people")
+    result = search_and_get_image(f"{topic} people")
+    image_path = Path(result[0]) if result and result[0] else None
 
     if image_path:
         if slides_dir:
@@ -676,6 +726,7 @@ def generate_leadin_slide(stage, data, slides_dir=None):
         bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->'
 
     lines = [
+        '<!-- slide-section: leadin -->',
         bg_directive,
         f"## {escape_md(stage_name)}",
         "",
@@ -695,7 +746,8 @@ def generate_prereading_slide(stage, data, slides_dir=None):
     topic = data.get("topic", "")
     materials = data.get("materials", "")
 
-    image_path, _ = search_and_get_image(f"{topic} reading")
+    result = search_and_get_image(f"{topic} reading")
+    image_path = Path(result[0]) if result and result[0] else None
 
     if image_path:
         if slides_dir:
@@ -707,6 +759,7 @@ def generate_prereading_slide(stage, data, slides_dir=None):
         bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #f5f0eb, #e8ddd3)" -->'
 
     lines = [
+        '<!-- slide-section: prereading -->',
         bg_directive,
         f"## Before you read",
         "",
@@ -756,6 +809,7 @@ def generate_task_slide(stage, data):
     task_lines = extract_task_instructions(procedure, stage_name)
 
     lines = [
+        f'<!-- slide-section: task-{stage_num} -->',
         f"## {stage_name}",
         "",
     ]
@@ -788,6 +842,7 @@ def generate_task_slide_no_steps(stage, data):
     stage_num = stage.get("stage_number", 0)
 
     lines = [
+        f'<!-- slide-section: task-{stage_num} -->',
         f"## {stage_name}",
         "",
     ]
@@ -846,6 +901,7 @@ def generate_answer_slides(answer_key_content):
                 slides.append("\n".join(current_slide_lines))
             exercise_name = stripped.lstrip("#").strip()
             current_slide_lines = [
+                '<!-- slide-section: answers -->',
                 f"## {escape_md(exercise_name)}",
                 '<!-- .element: class="aim-label" -->',
                 "",
@@ -944,9 +1000,10 @@ def generate_answer_slides(answer_key_content):
     return "\n\n---\n\n".join(slides)
 
 
-def generate_transition_slide(stage_name, prev_stage="", question=""):
+def generate_transition_slide(stage_name, stage_num=0, prev_stage="", question=""):
     stage_name = escape_md(stage_name)
     lines = [
+        f'<!-- slide-section: transition-{stage_num} -->',
         '<!-- .slide: data-background="#c0392b" -->',
         f"## {stage_name}",
     ]
@@ -983,6 +1040,7 @@ def generate_summary_slide(data):
     outcomes = outcomes[:3]
 
     lines = [
+        '<!-- slide-section: summary -->',
         "## What you can do now",
         "",
     ]
@@ -1003,6 +1061,7 @@ def generate_end_slide(data):
     topic = escape_md(data.get("topic", ""))
     cefr = data.get("lesson_plan", {}).get("cefr_level", "")
     lines = [
+        '<!-- slide-section: end -->',
         '<!-- .slide: data-background="#2c3e50" -->',
         "## Thank you",
         "",
@@ -1026,7 +1085,7 @@ def generate_markdown(data, title_image_path=None, title_attribution=None, slide
     if obj_slide:
         slides.append(obj_slide)
 
-    vocab_slides = generate_vocabulary_slides(data)
+    vocab_slides = generate_vocabulary_slides(data, slides_dir)
     if vocab_slides:
         slides.extend(vocab_slides)
 
@@ -1034,11 +1093,12 @@ def generate_markdown(data, title_image_path=None, title_attribution=None, slide
 
     for i, stage in enumerate(stages):
         stage_name = stage.get("stage", "")
+        stage_num = stage.get("stage_number", i)
         stage_lower = stage_name.lower()
 
         if i > 0 and should_add_transition(prev_stage_name, stage_name):
             question = get_transition_question(stage_name, stage)
-            slides.append(generate_transition_slide(stage_name, prev_stage_name, question))
+            slides.append(generate_transition_slide(stage_name, stage_num, prev_stage_name, question))
 
         if "lead-in" in stage_lower:
             slides.append(generate_leadin_slide(stage, data, slides_dir))
@@ -1129,7 +1189,17 @@ def get_output_path(json_path, date_str):
     return slides_dir / filename
 
 
-def convert_json_to_markdown(json_path, title_image_path=None, title_attribution=None, logo_path=None):
+def write_index_html(markdown_content, output_dir):
+    """Write a self-contained index.html with markdown inlined."""
+    template = SLIDES_TEMPLATE.read_text(encoding="utf-8")
+    html = template.replace("{{ MARKDOWN }}", markdown_content)
+    index_path = Path(output_dir) / "index.html"
+    index_path.write_text(html, encoding="utf-8")
+    print(f"index.html written: {index_path}")
+
+
+def convert_json_to_markdown(json_path, title_image_path=None, title_attribution=None, logo_path=None,
+                              sections=None, merge=False):
     json_path = Path(json_path)
 
     if not json_path.exists():
@@ -1153,6 +1223,52 @@ def convert_json_to_markdown(json_path, title_image_path=None, title_attribution
     output_path = get_output_path(json_path, data.get("date", ""))
     slides_dir = output_path.parent
 
+    topic = data.get("topic", "")
+
+    if not logo_path:
+        default_logo = TEMPLATES_DIR / "Image_20260324_141022.png"
+        if default_logo.exists():
+            import shutil
+            assets_dir = slides_dir / "assets"
+            assets_dir.mkdir(parents=True, exist_ok=True)
+            dest_logo = assets_dir / "logo.png"
+            shutil.copy2(default_logo, dest_logo)
+            logo_path = str(dest_logo)
+
+    if not title_image_path:
+        cached = find_cached_title_image(topic)
+        if cached:
+            title_image_path = cached
+            title_attribution = None
+
+    if sections and merge and output_path.exists():
+        existing = output_path.read_text(encoding="utf-8")
+        new_sections = {}
+
+        for section_id in sections:
+            section_content = generate_section(
+                data, section_id.strip(), slides_dir,
+                title_image_path, title_attribution, logo_path
+            )
+            if section_content:
+                new_sections[section_id.strip()] = section_content
+
+        if new_sections:
+            merged = merge_sections(existing, new_sections)
+            try:
+                with open(output_path, "w", encoding="utf-8") as f:
+                    f.write(merged)
+                print(f"Sections updated: {', '.join(sections)}")
+                write_index_html(merged, slides_dir)
+                return output_path
+            except Exception as e:
+                print(f"Error writing merged markdown file: {e}")
+                return None
+        else:
+            print("No sections generated, file unchanged")
+            write_index_html(existing, slides_dir)
+            return output_path
+
     markdown_content = generate_markdown(data, title_image_path, title_attribution, slides_dir, logo_path)
 
     try:
@@ -1163,13 +1279,113 @@ def convert_json_to_markdown(json_path, title_image_path=None, title_attribution
         return None
 
     print(f"Markdown created: {output_path}")
+    write_index_html(markdown_content, slides_dir)
     return output_path
+
+
+def merge_sections(existing_md, new_sections):
+    """Merge new slide sections into existing markdown.
+
+    existing_md: full markdown content of the existing file
+    new_sections: dict of {section_id: new_content}
+
+    Returns: merged markdown content
+    """
+    lines = existing_md.split("\n")
+    result = []
+    current_section = None
+    in_section = False
+
+    for line in lines:
+        marker_match = re.match(r'<!-- slide-section: (\S+) -->', line)
+        if marker_match:
+            section_id = marker_match.group(1)
+            if section_id in new_sections:
+                # Replace this section with new content
+                result.append(f'<!-- slide-section: {section_id} -->')
+                result.append(new_sections[section_id])
+                in_section = True
+                current_section = section_id
+                continue
+            else:
+                in_section = False
+                current_section = None
+
+        if in_section:
+            if line.strip() == "---":
+                # End of current section
+                in_section = False
+                result.append(line)
+            # Skip old section content
+            continue
+
+        result.append(line)
+
+    return "\n".join(result)
+
+
+def generate_section(data, section_id, slides_dir, title_image_path, title_attribution, logo_path):
+    """Generate a single slide section by ID."""
+    if section_id == "title":
+        return generate_title_slide(data, title_image_path, title_attribution, slides_dir, logo_path)
+    elif section_id == "objective":
+        return generate_objective_slide(data)
+    elif section_id.startswith("vocab"):
+        vocab_slides = generate_vocabulary_slides(data, slides_dir)
+        if vocab_slides:
+            return "\n\n---\n\n".join(vocab_slides)
+        return None
+    elif section_id == "leadin":
+        stages = data.get("lesson_plan", {}).get("stages", [])
+        for stage in stages:
+            if "lead-in" in stage.get("stage", "").lower():
+                return generate_leadin_slide(stage, data, slides_dir)
+        return None
+    elif section_id == "prereading":
+        stages = data.get("lesson_plan", {}).get("stages", [])
+        for stage in stages:
+            if "gist" in stage.get("stage", "").lower():
+                return generate_prereading_slide(stage, data, slides_dir)
+        return None
+    elif section_id.startswith("task-"):
+        try:
+            stage_num = int(section_id.split("-")[1])
+        except (ValueError, IndexError):
+            return None
+        stages = data.get("lesson_plan", {}).get("stages", [])
+        for stage in stages:
+            if stage.get("stage_number", 0) == stage_num:
+                return generate_task_slide(stage, data)
+        return None
+    elif section_id.startswith("transition-"):
+        try:
+            stage_num = int(section_id.split("-")[1])
+        except (ValueError, IndexError):
+            return None
+        stages = data.get("lesson_plan", {}).get("stages", [])
+        prev_name = ""
+        for i, stage in enumerate(stages):
+            if stage.get("stage_number", i) == stage_num and i > 0:
+                question = get_transition_question(stage.get("stage", ""), stage)
+                return generate_transition_slide(stage.get("stage", ""), stage_num,
+                                                  stages[i - 1].get("stage", ""), question)
+        return None
+    elif section_id == "answers":
+        answer_key_content = parse_answer_key(data)
+        if answer_key_content:
+            return generate_answer_slides(answer_key_content)
+        return None
+    elif section_id == "summary":
+        return generate_summary_slide(data)
+    elif section_id == "end":
+        return generate_end_slide(data)
+    return None
 
 
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Convert lesson plan JSON to mkslides markdown.")
+    parser = argparse.ArgumentParser(description="Convert lesson plan JSON to reveal.js slides (markdown + self-contained HTML).")
     parser.add_argument("json_file", help="Path to lesson plan JSON file")
     parser.add_argument("--title-image", default=None,
                         help="Pre-downloaded image path for title slide (skips Pixabay search)")
@@ -1177,7 +1393,15 @@ if __name__ == "__main__":
                         help="Attribution string for pre-downloaded title image")
     parser.add_argument("--logo-image", default=None,
                         help="Path to logo image to display at top of title slide")
+    parser.add_argument("--section", default=None,
+                        help="Comma-separated section IDs to regenerate (e.g., 'title,vocab-1,task-2')")
+    parser.add_argument("--merge", action="store_true",
+                        help="Merge regenerated sections into existing markdown file")
     args = parser.parse_args()
 
-    result = convert_json_to_markdown(args.json_file, args.title_image, args.title_attribution, args.logo_image)
+    result = convert_json_to_markdown(
+        args.json_file, args.title_image, args.title_attribution, args.logo_image,
+        sections=args.section.split(",") if args.section else None,
+        merge=args.merge
+    )
     sys.exit(0 if result else 1)

@@ -1,13 +1,13 @@
 ﻿---
 name: lesson-plan-to-reveal
-description: Converts a lesson plan JSON file into a reveal.js presentation using mkslides. Generates pedagogical ESL slides following the design rules in docs/slide-design-reference.md. Builds to static HTML via mkslides.
+description: Converts a lesson plan JSON file into a reveal.js presentation using direct inline markdown. Generates pedagogical ESL slides following the design rules in docs/slide-design-reference.md. Builds to static HTML via template injection.
 ---
 # Skill: Lesson Plan to reveal.js Presentation
 
 ## Purpose
 Convert a lesson plan JSON into a reveal.js slideshow for ESL classroom delivery. The teacher controls all slides — students never interact directly. **Slides support the teacher's narration, not replace it.** Student-facing content appears on screen; teacher procedure text goes in speaker notes only.
 
-**Pipeline**: JSON → markdown (`json_to_markdown.py`) → mkslides build → `site/index.html`
+**Pipeline**: JSON → markdown + index.html (`json_to_markdown.py`) → open `slides/index.html` directly
 
 **Slide design authority**: `docs/slide-design-reference.md` — this file defines all slide types, fragment policies, text limits, and vocabulary rules. The Python script reads this reference at generation time.
 
@@ -15,9 +15,8 @@ Convert a lesson plan JSON into a reveal.js slideshow for ESL classroom delivery
 
 Use `lesson-plan-to-reveal` when converting a lesson plan JSON to slides. The skill:
 1. Downloads a Pixabay title image and copies the institution logo into `output/{subfolder}/slides/assets/`
-2. Runs `scripts/json_to_markdown.py` with `--title-image`, `--title-attribution`, and `--logo-image`
-3. Runs `python -m mkslides build` to generate HTML (auto-copies all assets from slides/ to site/)
-4. Reports the output path
+2. Runs `scripts/json_to_markdown.py` with `--title-image`, `--title-attribution`, and `--logo-image` — generates both `slides.md` and `index.html`
+3. Reports the output path
 
 ## Workflow
 
@@ -60,12 +59,12 @@ $logoImage = "$slidesAssetsDir/logo.png"
 
 Output: `output/{subfolder}/slides/assets/pixabay_{id}_1.jpg` and `output/{subfolder}/slides/assets/logo.png`
 
-### Step 3: Generate markdown
+### Step 3: Generate markdown and HTML
 
 ```bash
 python scripts/json_to_markdown.py output/{subfolder}/{file}.json --title-image "$titleImage" --title-attribution "$titleAttribution" --logo-image "$logoImage"
 ```
-Output: `output/{subfolder}/slides/{mmddyy}-{topic}-slides.md`
+Output: `output/{subfolder}/slides/{mmddyy}-{topic}-slides.md` and `output/{subfolder}/slides/index.html`
 
 The script generates slides following `docs/slide-design-reference.md`:
 - **Title** — topic + CEFR badge + strap subheader (derived from objective) + logo + Pixabay background at 80% opacity
@@ -80,16 +79,8 @@ The script generates slides following `docs/slide-design-reference.md`:
 - **Summary** — "What you can do now"
 - **End slide**
 
-### Step 4: Build with mkslides
-
-mkslides auto-copies all non-MD files from the slides folder to the site folder (preserving relative structure), so the logo and background image are served alongside the HTML automatically.
-
-```bash
-python -m mkslides build "output/{subfolder}/slides" -d "output/{subfolder}/site"
-```
-
-### Step 5: Verify output
-- Check `site/index.html` exists
+### Step 4: Verify output
+- Check `index.html` exists in the slides directory
 - Verify title slide contains logo `<img>` tag with class `title-logo`
 - Verify fragment usage: only on answer reveal slides, not on expository content
 - Verify procedure text is in speaker notes (not on screen)
@@ -148,12 +139,10 @@ Based on `docs/slide-design-reference.md`:
 | `docs/slide-design-reference.md` | Slide design rules (authoritative) |
 | `scripts/json_to_markdown.py` | JSON → markdown converter |
 | `scripts/pixabay_download.py` | Pixabay image downloader |
-| `mkslides.yml` | mkslides config (theme, transitions) |
-| `templates/reveal-custom.html.jinja` | Custom template with ESL CSS |
+| `templates/slides-template.html` | Static reveal.js HTML template (CDN, inline markdown) |
 | `templates/Image_20260324_141022.png` | Institution logo (ACT) for title slide |
 
 ## Dependencies
-- Python 3.x + Jinja2
-- mkslides v2.0.17 (`pip install mkslides`)
+- Python 3.x + Pillow, requests
 - Pixabay API key (`PIXABAY_API_KEY` env var — loaded by `pixabay_download.py`)
-- Pillow, requests (Python packages)
+- reveal.js 5.x via CDN (no npm needed)

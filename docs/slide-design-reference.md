@@ -8,7 +8,7 @@ This document defines how lesson plan JSON stages map to reveal.js slides. It is
 
 - **Teacher controls all slides** — students never interact directly
 - **Slides support the teacher's narration, not replace it**
-- **Reveal.js 6.x** via mkslides, white theme, 1280×720
+- **Reveal.js 5.x** via CDN (inline markdown), white theme, 1280×720
 - **CEFR levels**: A1, A2, B1, B2, C1, C2
 
 ---
@@ -426,4 +426,5 @@ Attribution in speaker notes: `Image by {author} from Pixabay`
 
 1. `scripts/json_to_markdown.py` reads this document at generation time
 2. The script generates markdown following these templates
-3. Build: `python -m mkslides build "output/{subfolder}/slides" -d "output/{subfolder}/site"`
+3. Build: `python scripts/json_to_markdown.py output/{subfolder}/{file}.json` — generates both `slides.md` and `index.html`
+4. Open: double-click `output/{subfolder}/slides/index.html` in any browser (no server needed)
