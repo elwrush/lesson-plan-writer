@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                padding: 4px 12px;
+                border-radius: 4px;
+                font-size: 0.4em;
+                vertical-align: middle;
+                margin-left: 10px;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+            .reveal .aim-label {
+                font-size: 0.7em;
+                color: #888;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word { color: #ffdd00; font-weight: bold; }
+            .reveal .slides > section.pedagogical {
+                align-self: flex-start;
+                margin-top: 0;
+                padding-top: 30px;
+            }
+            .reveal section.pedagogical {
+                background: #1a6b5a;
+            }
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal p, .reveal li, .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+            .reveal .fragment.highlight-red {
+                background: rgba(100, 0, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .highlight-green {
+                background: rgba(0, 100, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .highlight-red {
+                background: rgba(100, 0, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+.reveal .fragment.strike {
+                text-decoration: line-through;
+                opacity: 0.6;
+            }
+            .reveal .slide-icon {
+                font-size: 2.5em;
+                margin-bottom: 0.3em;
+                display: block;
+                text-align: center;
+            }
+            .reveal .slide-icon.transition-icon { color: rgba(255,255,255,0.85); }
+            .reveal .slide-icon.pedagogical-icon { color: rgba(255,255,255,0.9); }
+            .reveal .slide-icon.objective-icon { color: rgba(255,221,0,0.85); }
+            .reveal .answer-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 0.5em;
+                font-size: 0.75em;
+            }
+            .reveal .answer-table th {
+                background: rgba(255,255,255,0.15);
+                color: #fff;
+                padding: 0.4em 0.6em;
+                text-align: left;
+                border: 2px solid rgba(255,255,255,0.6);
+            }
+            .reveal .answer-table td {
+                padding: 0.5em 0.6em;
+                border: 2px solid rgba(255,255,255,0.4);
+                vertical-align: top;
+                color: #fff;
+            }
+            .reveal .answer-table td:nth-child(2) {
+                font-weight: bold;
+                color: #ffcccc;
+                white-space: nowrap;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+                <!-- SLIDE 0: Title -->
+                <section data-background-image="assets/pixabay_4867454_1.jpg" data-background-opacity="0.7">
+                    <img src="assets/logo.png" class="title-logo" />
+                    <h1>What Connects Us <span class="cefr-badge B2">B2</span></h1>
+                    <p><em>Reading for the main idea and more — bridging the generation gap</em></p>
+                </section>
+
+<!-- SLIDE 1: Objective -->
+                <section>
+                    <i class="fa-solid fa-seedling slide-icon objective-icon"></i>
+                    <h2>Here's what you'll be able to do</h2>
+                    <ul>
+                        <li>Understand what the article is mainly about</li>
+                        <li>Find the most important facts and mistakes</li>
+                        <li>Tell the difference between facts and opinions</li>
+                    </ul>
+                    <p><em>These are the same skills you need for the PET reading test!</em></p>
+                </section>
+
+<!-- SLIDE 2: Lead-in -->
+                <section data-background-image="assets/pixabay_7338021_1.jpg" data-background-opacity="0.7">
+                    <i class="fa-solid fa-eye slide-icon"></i>
+                    <h2>Let's get Started</h2>
+                    <h3>What do these two people have in common? What makes them different?</h3>
+                    <aside class="notes">
+Display the photo. Give students 20 seconds to look silently.
+Then ask the question. Elicit 3-4 responses.
+Connect responses to today's topic: What Connects Us.
+- Display or refer to the photo on page 5. In pairs, Students discuss: What differences do you notice between the two people? In what ways are they the same? Is each person exactly what we expect of someone their age?.
+- Feedback – elicit responses from pairs..
+- In new pairs, Students tell each other about a time they disagreed with someone from a different generation. What was it about? Did you resolve it?.
+- Brief whole-class feedback.
+Goal: To activate interest in the theme of generational differences
+                    </aside>
+                </section>
+
+<!-- SLIDE 3: Vocab - generation gap -->
+                <section class="vocab-slide" data-background-image="assets/vocab-gap-cache_20c895dd.jpg" data-background-opacity="0.7">
+                    <i class="fa-solid fa-spell-check slide-icon"></i>
+                    <h2>Important Words</h2>
+                    <p><span class="vocab-word">generation gap</span></p>
+                    <p><em>/ˌdʒenəˈreɪʃn ɡæp/</em></p>
+                    <p><em>There is a big <span class="vocab-word">generation gap</span> between old people and young people.</em></p>
+                </section>
+
+                <!-- SLIDE 4: Vocab - frustration -->
+                <section class="vocab-slide" data-background-image="assets/vocab-frustration-cache_d2a63bdf.jpg" data-background-opacity="0.7">
+                    <p><span class="vocab-word">frustration</span></p>
+                    <p><em>/frʌˈstreɪʃn/</em></p>
+                    <p><em>I felt <span class="vocab-word">frustration</span> when my phone died during an important call.</em></p>
+                </section>
+
+                <!-- SLIDE 5: Vocab - redefine -->
+                <section class="vocab-slide" data-background-image="assets/vocab-redefine-cache_f014d1ce.jpg" data-background-opacity="0.7">
+                    <p><span class="vocab-word">redefine</span></p>
+                    <p><em>/ˌriːdɪˈfaɪn/</em></p>
+                    <p><em>The new CEO wants to <span class="vocab-word">redefine</span> success in our company.</em></p>
+                </section>
+
+                <!-- SLIDE 6: Vocab - workplace -->
+                <section class="vocab-slide" data-background-image="assets/vocab-workplace-cache_fc0e748d.jpg" data-background-opacity="0.7">
+                    <p><span class="vocab-word">workplace</span></p>
+                    <p><em>/ˈwɜːkpleɪs/</em></p>
+                    <p><em>The <span class="vocab-word">workplace</span> is changing. Now more people work from home.</em></p>
+                </section>
+
+<!-- SLIDE 7: Transition - What's the main idea? -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>What's the main idea?</h2>
+                    <p>Look at the main reading, the photos and the headlines.</p>
+                    <p>What do you think the text is about?</p>
+                </section>
+
+<!-- SLIDE 8: Transition - Finding details -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Finding details</h2>
+                    <p>We're now going to read the story in more detail.</p>
+                    <p>Let's start with some True/False questions.</p>
+                    <p>They may look easy, but they can have some surprises!</p>
+                </section>
+
+                <!-- SLIDES 9-13: True/False Strategy (simple slides, no auto-animate) -->
+                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+                    <i class="fa-solid fa-list-check slide-icon pedagogical-icon"></i>
+                    <h2>True/False Strategy</h2>
+                    <p style="color:#ffdd00;"><em>"The author wrote the text to explore the generation gap and problems it can cause, and to suggest a possible solution."</em></p>
+                    <p><u><strong>Step 1:</strong> Read the statement carefully</u></p>
+                    <p>Sometimes there is more than one question to think about in a True/False statement — note each part separately.</p>
+                </section>
+                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+                    <p><u><strong>Step 2:</strong> Work out what the question is asking you</u></p>
+                    <ul>
+                        <li>Did the author write the text to explore the generation gap? <em>(Yes/No)</em></li>
+                        <li>Did the author write about the problems it can cause? <em>(Yes/No)</em></li>
+                        <li>Did the author suggest a possible solution? <em>(Yes/No)</em></li>
+                    </ul>
+                    <p><strong>Rule:</strong> If you answer "Yes" to all → it's TRUE.<br />If you answer "No" to even one → it's FALSE.</p>
+                </section>
+                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+                    <p><u><strong>Step 3:</strong> Find the evidence</u></p>
+                    <p>If we skim through the text, we can see keywords like "author" and "solution" are found in <strong>paragraphs A and F</strong>. Now we can answer each question from Step 2.</p>
+                </section>
+                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+                    <p><u><strong>Step 4:</strong> Answer the question</u></p>
+                    <p style="color:#ffdd00;"><em>"The author wrote the text to explore the generation gap and problems it can cause, and to suggest a possible solution."</em></p>
+                    <p>You can see that the author:</p>
+                    <ul>
+                        <li>talks about the generation gap → <em>"There is a growing generation gap between people..."</em></li>
+                        <li>writes about the problems → <em>"This can cause serious problems in families and workplaces..."</em></li>
+                        <li>offers solutions → <em>"The only way to close the gap is through empathy..."</em></li>
+                    </ul>
+                    <p><strong>So the answer is: TRUE.</strong></p>
+                </section>
+<!-- NEW SLIDE: True/False practice task (after True/False Strategy block, before general task) -->
+                <section data-background="#2196f3" data-timer="60">
+                    <i class="fa-solid fa-pencil slide-icon" style="color: rgba(255,255,255,0.9);"></i>
+                    <h2>True/False — Your turn</h2>
+                    <p>Complete Exercise 2, items 2 and 3.</p>
+                    <p>Use the strategy we just learned.</p>
+                    <aside class="notes">
+Stage 3 · 1 min · Ss (individual)
+Goal: To apply the True/False strategy independently
+Materials: Student Book, p 5
+                    </aside>
+                </section>
+
+<!-- NEW SLIDE 14: Answer slide - True/False items 2 and 3 (table design) -->
+                <section data-background="#1e7e34">
+                    <i class="fa-solid fa-lightbulb slide-icon" style="color: rgba(255,255,255,0.9);"></i>
+                    <h2>Exercise 2 — Answers</h2>
+                    <table class="answer-table">
+                        <thead>
+                            <tr>
+                                <th>Question</th>
+                                <th>Answer</th>
+                                <th>Why?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><em>The main idea is that it is almost impossible for people from different generations to understand one another.</em></td>
+                                <td class="fragment">✗</td>
+                                <td class="fragment">The article says people <em>can</em> understand each other through empathy. The gap is real, but it is not impossible to bridge.</td>
+                            </tr>
+                            <tr>
+                                <td><em>The text does not inform or teach us, because its purpose is to persuade and influence.</em></td>
+                                <td class="fragment">✗</td>
+                                <td class="fragment">The text informs and teaches. It explains what the generation gap is, the problems it causes, and a possible solution.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+<!-- SLIDE 15: Task - Finding details -->
+                <section data-timer="960">
+                    <i class="fa-solid fa-pencil slide-icon"></i>
+                    <h2>Finding details</h2>
+                    <ul>
+                        <li>Read the article again and complete the true/false task.</li>
+                        <li>Complete the paragraph matching task. Match statements 1-6 to paragraphs A-F.</li>
+                    </ul>
+                    <aside class="notes">
+Stage 3 · 16 min · Ss-Ss
+Goal: To identify key facts and supporting details in the article
+Materials: OFD 3, Student Book, pp 5-6
+                    </aside>
+                </section>
+
+<!-- SLIDE 16: Transition - Making conclusions -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Making conclusions</h2>
+                    <p>Now let's think about what the writer really wants us to understand. Pay attention to the details...</p>
+                </section>
+
+<!-- SLIDE 17: Multiple Choice Strategy -->
+                <section class="pedagogical">
+                    <i class="fa-solid fa-chess slide-icon pedagogical-icon"></i>
+                    <h2>Multiple Choice Strategy</h2>
+                    <p><strong>Step 1: Read all options first</strong> <span class="fragment"> — look at all three choices before deciding</span></p>
+                    <ul class="fragment">
+                        <li>a) Learning and change are both easier for younger people.</li>
+                        <li>b) Technology often causes conflict between young and old.</li>
+                        <li>c) Differences can be good if we take time to understand them.</li>
+                    </ul>
+                    <p class="fragment"><strong>Step 2: Eliminate wrong answers</strong></p>
+                    <p class="fragment strike">a) "Learning and change are easier for younger people" — Not the main conclusion. The article is about bridging the gap, not who learns faster. <strong>Eliminate.</strong></p>
+                    <p class="fragment strike">b) "Technology causes conflict" — Too narrow. Only one example in paragraph D, not the main message. <strong>Eliminate.</strong></p>
+                    <p class="fragment"><strong>Step 3: Confirm the answer</strong></p>
+                    <p class="fragment highlight-green">c) Matches the article's main message about using empathy to bridge differences. ✓ <strong>c is correct!</strong></p>
+                </section>
+
+<!-- SLIDE 18: Task - Making conclusions -->
+                <section data-timer="240">
+                    <i class="fa-solid fa-pencil slide-icon"></i>
+                    <h2>Making conclusions</h2>
+                    <ul>
+                        <li>Individually decide which statement gives the best conclusion of the article:</li>
+                        <li>a) Learning and change are both easier for younger people</li>
+                        <li>b) Technology often causes conflict between young and old</li>
+                        <li>c) Differences can be good if we take time to understand them</li>
+                    </ul>
+                    <aside class="notes">
+Stage 4 · 4 min · Ss-Ss
+Goal: To draw inferences and evaluate conclusions from the text
+Materials: OFD 3, Student Book, pp 5-6
+                    </aside>
+                </section>
+
+<!-- SLIDE 19: Transition - Let's Discuss -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-comments slide-icon transition-icon"></i>
+                    <h2>Let's Discuss</h2>
+                    <p>Now let's talk about how this applies to your life.</p>
+                </section>
+
+<!-- SLIDE 20: Task - Let's Discuss -->
+                <section data-timer="420">
+                    <i class="fa-solid fa-pencil slide-icon"></i>
+                    <h2>Let's Discuss</h2>
+                    <p>In pairs, discuss the questions from Exercise 5 using ideas from the article:</p>
+                    <ol>
+                        <li>Think of one or two things you have now that you think your parents wish they had when they were your age.</li>
+                        <li>Explain something about yourself or your life that you wish the older generation understood better.</li>
+                        <li>Name one or two useful things you've learned from someone in an older generation.</li>
+                    </ol>
+                    <aside class="notes">
+Stage 5 · 7 min · Ss-Ss
+Goal: To discuss and respond personally to ideas from the reading
+Materials: OFD 3, Student Book, pp 5-6
+                    </aside>
+                </section>
+
+<!-- SLIDE 21: Transition - Let's Review -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Let's Review</h2>
+                    <p>Let's review what we've learned today.</p>
+                </section>
+
+<!-- SLIDE 22: Task - Let's Review -->
+                <section data-timer="300">
+                    <i class="fa-solid fa-pencil slide-icon"></i>
+                    <h2>Let's Review</h2>
+                    <ul><li>Brief error correction if needed.</li></ul>
+                    <aside class="notes">
+Stage 6 · 5 min · T-Ss
+Goal: To reflect on key takeaways and consolidate learning
+Materials: OFD 3, Student Book, pp 5-6
+                    </aside>
+                </section>
+
+                <!-- SLIDES 23-27: Answers -->
+<section data-background="#27ae60">
+                    <i class="fa-solid fa-lightbulb slide-icon" style="color: rgba(255,255,255,0.9);"></i>
+                    <h2>Exercise 1</h2>
+                    <p class="aim-label">Answers</p>
+                    <p class="fragment highlight-green">✓ Students' own answers.</p>
+                </section>
+                <section data-background="#27ae60">
+                    <i class="fa-solid fa-lightbulb slide-icon" style="color: rgba(255,255,255,0.9);"></i>
+                    <h2>Exercise 2</h2>
+                    <p class="aim-label">True/False</p>
+                    <p class="fragment">The author wrote the text to explore the generation gap and problems it can cause, and to suggest a possible solution.</p>
+                    <p class="fragment highlight-green">✓</p>
+                </section>
+                <section data-background="#27ae60">
+                    <i class="fa-solid fa-lightbulb slide-icon" style="color: rgba(255,255,255,0.9);"></i>
+                    <h2>Exercise 3</h2>
+                    <p class="aim-label">Paragraph Matching</p>
+                    <p class="fragment highlight-green">✓ <strong>B</strong></p>
+                    <p class="fragment highlight-green">✓ <strong>C</strong></p>
+                    <p class="fragment highlight-green">✓ <strong>A</strong></p>
+                    <p class="fragment highlight-green">✓ <strong>E</strong></p>
+                    <p class="fragment highlight-green">✓ <strong>F</strong></p>
+                    <p class="fragment highlight-green">✓ <strong>D</strong></p>
+                </section>
+                <section data-background="#27ae60">
+                    <i class="fa-solid fa-lightbulb slide-icon" style="color: rgba(255,255,255,0.9);"></i>
+                    <h2>Exercise 4</h2>
+                    <p class="aim-label">Multiple Choice</p>
+                    <p>a. Learning and change are both easier for younger people.</p>
+                    <p>b. Technology often causes conflict between young and old.</p>
+                    <p>c. Differences can be good if we take time to understand them.</p>
+                    <p class="fragment highlight-green">✓ <strong>c</strong></p>
+                </section>
+                <section data-background="#27ae60">
+                    <i class="fa-solid fa-lightbulb slide-icon" style="color: rgba(255,255,255,0.9);"></i>
+                    <h2>Exercise 5</h2>
+                    <p class="aim-label">Discussion</p>
+                    <p class="fragment highlight-green">✓ Students' own answers.</p>
+                </section>
+
+<!-- SLIDE 28: Summary -->
+                <section>
+                    <i class="fa-solid fa-flag-checkered slide-icon"></i>
+                    <h2>What you can do now</h2>
+                    <ul>
+                        <li>✓ I can find the main idea</li>
+                        <li>✓ I can find important facts</li>
+                        <li>✓ I can share my ideas</li>
+                    </ul>
+                    <aside class="notes">
+Elicit from students: What did you learn today?
+Connect back to their predictions from the beginning.
+Praise effort, mention one thing to improve.
+                    </aside>
+                </section>
+
+<!-- SLIDE 29: End -->
+                <section data-background="#2c3e50">
+                    <i class="fa-solid fa-star slide-icon"></i>
+                    <h2>Thank you</h2>
+                    <p><em>What Connects Us</em> | B2</p>
+                </section>
+
+            </div>
+        </div>
+        <script src="timer-plugin.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/markdown/markdown.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+plugins: [
+                    RevealMarkdown,
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                    TimerPlugin,
+                ],
+            });
+        </script>
+    </body>
+</html>
+
+

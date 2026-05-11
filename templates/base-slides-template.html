@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title><!-- TOPIC --></title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            /* =============================================
+               LESSON PLAN WRITER 3 — BASE SLIDE STYLES
+               Authoritative stylesheet for all presentations.
+               ============================================= */
+
+            /* --- CEFR Badges --- */
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                padding: 4px 12px;
+                border-radius: 4px;
+                font-size: 0.4em;
+                vertical-align: middle;
+                margin-left: 10px;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+
+            /* --- Title logo --- */
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+
+            /* --- Labels & captions --- */
+            .reveal .aim-label {
+                font-size: 0.7em;
+                color: #888;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            .reveal .material-ref {
+                font-size: 0.65em;
+                color: #888;
+                font-style: italic;
+                margin-top: 0.5em;
+            }
+            .reveal .source-cite {
+                font-size: 0.7em;
+                color: #666;
+                font-style: italic;
+                margin-top: 0.3em;
+            }
+            .reveal .image-caption {
+                font-size: 0.55em;
+                color: #888;
+                text-align: center;
+                margin-top: 0.2em;
+            }
+
+            /* --- Vocabulary slides --- */
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            }
+
+            /* --- Slide type icons (Font Awesome, teal/red/orange) --- */
+            .reveal .slide-icon {
+                font-size: 2.5em;
+                margin-bottom: 0.3em;
+                display: block;
+                text-align: center;
+            }
+            .reveal .slide-icon.transition-icon { color: rgba(255,255,255,0.85); }
+            .reveal .slide-icon.pedagogical-icon { color: rgba(255,255,255,0.9); }
+            .reveal .slide-icon.objective-icon { color: rgba(255,221,0,0.85); }
+
+            /* --- Pedagogical strategy slides (teal background) --- */
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal section.pedagogical .strategy-tip {
+                font-size: 0.85em;
+                font-style: italic;
+                color: rgba(255,255,255,0.85);
+                margin-bottom: 0.5em;
+            }
+            .reveal section.pedagogical .evidence {
+                font-size: 0.8em;
+                background: rgba(0,0,0,0.3);
+                padding: 0.4em 0.6em;
+                border-radius: 4px;
+                border-left: 3px solid rgba(255,255,255,0.4);
+            }
+
+            /* --- Global text shadow for readability --- */
+            .reveal p,
+            .reveal li,
+            .reveal h1, .reveal h2, .reveal h3,
+            .reveal h4, .reveal h5, .reveal h6 {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+
+            /* --- Fragment styles --- */
+            .reveal .fragment.highlight-green {
+                background: rgba(0, 100, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.highlight-red {
+                background: rgba(100, 0, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.strike {
+                text-decoration: line-through;
+                opacity: 0.6;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+                <!-- ============================================================
+                     SLIDE PATTERNS — copy, paste, and adapt for each slide.
+                     Delete all comment blocks before publishing.
+                     ============================================================ -->
+
+                <!-- ─── PATTERN: Title Slide ──────────────────────────────── -->
+                <!--
+                <section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
+                    <img src="assets/logo.png" class="title-logo" alt="Logo" />
+                    <h1>Topic Title <span class="cefr-badge B1">B1</span></h1>
+                    <p><em>Strap subheader — derived from lesson objective</em></p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Objective Slide ──────────────────────────── -->
+                <!--
+                <section>
+                    <i class="fa-solid fa-seedling slide-icon objective-icon"></i>
+                    <h2>Here's what you'll be able to do</h2>
+                    <ul>
+                        <li>Understand what the article is mainly about</li>
+                        <li>Find the most important facts and mistakes</li>
+                        <li>Share your ideas with a partner</li>
+                    </ul>
+                    <p><em>These are the same skills you need for the PET reading test!</em></p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Lead-in Slide (Pixabay background) ───────── -->
+                <!--
+                <section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
+                    <h2>Let's get Started</h2>
+                    <h3>What do you see? What do you think the lesson is about?</h3>
+                    <aside class="notes">
+                        Display the photo. Give students 20 seconds to look silently.
+                        Then ask the question. Elicit 3-4 responses.
+                        Connect responses to today's topic.
+                    </aside>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Vocabulary Slide (HEADER — first word only) ─ -->
+                <!--
+                <section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="0.7">
+                    <h2>Important Words</h2>
+                    <p><span class="vocab-word">generation gap</span></p>
+                    <p><em>/ˌdʒenəˈreɪʃn ɡæp/</em></p>
+                    <p><em>There is a big <span class="vocab-word">generation gap</span> between old people and young people.</em></p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Vocabulary Slide (NO HEADER — subsequent words) ─ -->
+                <!--
+                <section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="0.7">
+                    <p><span class="vocab-word">frustration</span></p>
+                    <p><em>/frʌˈstreɪʃn/</em></p>
+                    <p><em>I felt <span class="vocab-word">frustration</span> when my phone died during an important call.</em></p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Transition Slide (red background) ────────── -->
+                <!--
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Finding details</h2>
+                    <p>We're now going to read the story in more detail.</p>
+                    <p>Let's start with some True/False questions.</p>
+                    <p>They may look easy, but they can have some surprises!</p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Auto-Animate Strategy Block ──────────────── -->
+                <!--
+                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+                    <i class="fa-solid fa-list-check slide-icon pedagogical-icon"></i>
+                    <h2>True/False Strategy</h2>
+                    <p><strong>Step 1:</strong> Read the statement carefully</p>
+                    <p><em>Statement text goes here.</em></p>
+                </section>
+                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+                    <h2>True/False Strategy</h2>
+                    <p><strong>Step 1:</strong> Read the statement carefully</p>
+                    <p><em>Statement text goes here.</em></p>
+                    <p><strong>Step 2:</strong> Find the keywords</p>
+                    <p>"keyword1" · "keyword2" · "keyword3"</p>
+                </section>
+                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+                    <h2>True/False Strategy</h2>
+                    <p><strong>Step 1:</strong> Read the statement carefully</p>
+                    <p><em>Statement text goes here.</em></p>
+                    <p><strong>Step 2:</strong> Find the keywords</p>
+                    <p>"keyword1" · "keyword2" · "keyword3"</p>
+                    <p><strong>Step 3:</strong> Find the evidence</p>
+                    <p>Look in paragraphs X and Y. Do the meanings match?</p>
+                </section>
+                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+                    <h2>True/False Strategy</h2>
+                    <p><strong>Step 1:</strong> Read the statement carefully</p>
+                    <p><em>Statement text goes here.</em></p>
+                    <p><strong>Step 2:</strong> Find the keywords</p>
+                    <p>"keyword1" · "keyword2" · "keyword3"</p>
+                    <p><strong>Step 3:</strong> Find the evidence</p>
+                    <p>Look in paragraphs X and Y. Do the meanings match?</p>
+                    <p><strong>Step 4:</strong> Check your answer</p>
+                </section>
+                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+                    <h2>True/False Strategy</h2>
+                    <p><strong>Step 1:</strong> Read the statement carefully</p>
+                    <p><em>Statement text goes here.</em></p>
+                    <p><strong>Step 2:</strong> Find the keywords</p>
+                    <p>"keyword1" · "keyword2" · "keyword3"</p>
+                    <p><strong>Step 3:</strong> Find the evidence</p>
+                    <p>Look in paragraphs X and Y. Do the meanings match?</p>
+                    <p><strong>Step 4:</strong> Check your answer</p>
+                    <p class="fragment highlight-green">TRUE — Explanation of why it's true.</p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Task Instruction Slide ───────────────────── -->
+                <!--
+                <section data-timer="960">
+                    <h2>Finding details</h2>
+                    <ul>
+                        <li>Read the article again and complete the true/false task.</li>
+                        <li>Complete the paragraph matching task.</li>
+                    </ul>
+                    <aside class="notes">
+                        Stage 3 · 16 min · Ss-Ss
+                        Goal: To identify key facts and supporting details
+                        Materials: Student Book, pp 5-6
+                    </aside>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Pedagogical Strategy Slide (non-auto-animate) ─ -->
+                <!--
+                <section class="pedagogical" data-background="#1a6b5a">
+                    <i class="fa-solid fa-list-check slide-icon pedagogical-icon"></i>
+                    <h2>Multiple Choice Strategy</h2>
+                    <p><strong>Step 1: Read all options first</strong> <span class="fragment"> — look at all three choices</span></p>
+                    <ul class="fragment">
+                        <li>a) Option A text</li>
+                        <li>b) Option B text</li>
+                        <li>c) Option C text</li>
+                    </ul>
+                    <p class="fragment"><strong>Step 2: Eliminate wrong answers</strong></p>
+                    <p class="fragment strike">a) Reason for elimination. <strong>Eliminate.</strong></p>
+                    <p class="fragment strike">b) Reason for elimination. <strong>Eliminate.</strong></p>
+                    <p class="fragment"><strong>Step 3: Confirm the answer</strong></p>
+                    <p class="fragment highlight-green">c) Correct answer explanation. ✓ <strong>c is correct!</strong></p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Answer Slide (True/False) ─────────────────── -->
+                <!--
+                <section>
+                    <h2>Exercise 2</h2>
+                    <p class="aim-label">True/False</p>
+                    <p class="fragment">Statement text goes here.</p>
+                    <p class="fragment highlight-green">✓ <strong>True</strong></p>
+                    <p class="fragment">Another statement text.</p>
+                    <p class="fragment highlight-red">✗ <strong>False</strong></p>
+                    <p class="fragment highlight-green">✓ <em>Corrected statement.</em></p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Answer Slide (Multiple Choice) ────────────── -->
+                <!--
+                <section>
+                    <h2>Exercise 4</h2>
+                    <p class="aim-label">Multiple Choice</p>
+                    <p>a. Option A</p>
+                    <p>b. Option B</p>
+                    <p>c. Option C</p>
+                    <p class="fragment highlight-green">✓ <strong>c</strong></p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Answer Slide (Paragraph Matching) ─────────── -->
+                <!--
+                <section>
+                    <h2>Exercise 3</h2>
+                    <p class="aim-label">Paragraph Matching</p>
+                    <p class="fragment highlight-green">✓ <strong>B</strong></p>
+                    <p class="fragment highlight-green">✓ <strong>C</strong></p>
+                    <p class="fragment highlight-green">✓ <strong>A</strong></p>
+                    <p class="fragment highlight-green">✓ <strong>E</strong></p>
+                    <p class="fragment highlight-green">✓ <strong>F</strong></p>
+                    <p class="fragment highlight-green">✓ <strong>D</strong></p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Summary Slide ─────────────────────────────── -->
+                <!--
+                <section>
+                    <h2>What you can do now</h2>
+                    <ul>
+                        <li>✓ I can find the main idea</li>
+                        <li>✓ I can find important facts</li>
+                        <li>✓ I can share my ideas</li>
+                    </ul>
+                    <aside class="notes">
+                        Elicit from students: What did you learn today?
+                        Connect back to their predictions from the beginning.
+                        Praise effort, mention one thing to improve.
+                    </aside>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: End Slide ─────────────────────────────────── -->
+                <!--
+                <section data-background="#2c3e50">
+                    <h2>Thank you</h2>
+                    <p><em>Topic Name</em> | B2</p>
+                </section>
+                -->
+
+            </div>
+        </div>
+
+        <!-- Timer plugin (local) -->
+        <script src="timer-plugin.js"></script>
+
+        <!-- reveal.js 5.1.0 via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                plugins: [
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                ],
+            });
+        </script>
+    </body>
+</html>

@@ -12,10 +12,12 @@
 1. **`write-lesson-plan` skill** → `output/{subfolder}/{mmddyy}-{topic}-lesson-plan.json`
 2. **`create-pdf-lesson-file` skill** → converts JSON → `PDF/{subfolder}/{mm-dd-yy}-{topic}.pdf`
 
-### Slides (2-stage)
+### Slides (template-based)
 1. **`write-lesson-plan` skill** → JSON (same as above)
-2. **`lesson-plan-to-reveal` skill** → `scripts/json_to_markdown.py <json_path>` → generates `slides.md` + `index.html` in `output/{subfolder}/slides/`
+2. **`lesson-plan-to-reveal` skill** → copies `templates/base-slides-template.html` → hand-builds `index.html` with raw HTML `<section>` elements in `output/{subfolder}/slides/`
 3. **`publish-to-github-pages` skill** → deploys `output/{subfolder}/slides/` to gh-pages
+
+**Markdown pipeline is permanently abandoned.** All slides are raw HTML `<section>` elements. `scripts/json_to_markdown.py` is deprecated — do not use for new presentations. Auto-animate requires sibling `<section data-auto-animate>` elements, which cannot be produced from the markdown plugin.
 
 ## Key commands
 
@@ -23,12 +25,10 @@
 # PDF (from project root)
 python scripts/json_to_pdf.py output/<subfolder>/<file>.json
 
-# Slides — convert JSON to markdown + self-contained HTML
-python scripts/json_to_markdown.py output/<subfolder>/<file>.json
-# Then open output/<subfolder>/slides/index.html directly in browser (no server needed)
-
-# Partial update — regenerate specific sections only
-python scripts/json_to_markdown.py output/<subfolder>/<file>.json --section title,vocab --merge
+# Slides — copy base template + hand-build sections
+cp "templates/base-slides-template.html" "output/<subfolder>/slides/index.html"
+# Then add raw HTML <section> elements between <div class="slides"> and </div>
+# Open output/<subfolder>/slides/index.html directly in browser (no server needed)
 
 # Pixabay image download (for slide backgrounds)
 python scripts/pixabay_download.py --query "topic" --type image --count 3
@@ -83,8 +83,101 @@ Acceptable: "To activate interest in...", "To get the general idea of the text",
 
 `docs/slide-design-reference.md` defines slide types (vocabulary, task, answer, transition), fragment policy, auto-animate rules, and Pixabay image strategy. The `json_to_markdown.py` script reads this doc at generation time.
 
-- `templates/slides-template.html` — standalone reveal.js HTML template with CDN, inlines markdown
-- `PIXABAY_API_KEY` env var required for background images (falls back to gradients if unset)
+## Pedagogical Strategy Slides — Design Principles
+
+Strategy slides teach a test-taking or reading skill explicitly. The design follows a **modelled whole-task approach** consistent with Strategy-Based Instruction (SBI) in EFL/ESL reading pedagogy.
+
+### Core Pattern: One Consistent Worked Example
+
+Pick one real exam question and carry it through every step of the strategy. Never mix examples mid-flow. The student sees the complete process on a single item before attempting it alone.
+
+Example: A True/False statement about the "generation gap" article runs through Steps 1–4. A Multiple Choice question runs through its own 3 steps. Do not switch between different exam items within the same strategy block.
+
+### Step Structure
+
+| Step | Cognitive function | What goes on the slide |
+|---|---|---|
+| 1 | Decode | Read the statement carefully. Note each separate claim. |
+| 2 | Analyse | Break into Yes/No sub-questions. State the decision rule (Yes→TRUE / No→FALSE). |
+| 3 | Locate | Identify which paragraph(s) contain the evidence. Name them explicitly. |
+| 4 | Confirm | Show the original question in yellow. Quote the text that confirms each sub-answer. Conclude. |
+
+### Slide Layout Rules
+
+- **One step per slide** — each `<section>` covers a single step. This lets the teacher pause and check understanding at each decision point.
+- **Header on first slide only** — `True/False Strategy` heading on Slide 1 of the block. Remaining slides show only the step label.
+- **Original question in yellow** on first and last slides — `<p style="color:#ffdd00;"><em>"Statement text"</em></p>`
+- **Underline step labels** — `<u><strong>Step N:</strong> ...</u>`
+- **Real quotes on Step 4** — actual text excerpts from the article, in italics with the relevant phrase highlighted
+- **Rule embedded at Step 2** — not a separate slide. Include it: "If you answer Yes to all → TRUE. If you answer No to even one → FALSE."
+- **No auto-animate** — use `data-background-transition="none"` on all pedagogical sections. Teacher controls pacing.
+- **Teal background** — `data-background="#1a6b5a"` + `class="pedagogical"` on all strategy slides.
+- **Top alignment** — use `padding-top: 30px` on `.reveal .slides > section.pedagogical` in CSS. Do NOT use negative margins (they clip content off-screen). Inline `style="top: 0;"` on the section element if needed.
+
+### Vertical Alignment Fix
+
+Reveal.js `.slides` is a flex container that defaults to vertically centering its section children. To top-align pedagogical slides:
+
+```css
+.reveal .slides > section.pedagogical {
+    align-self: flex-start;
+    margin-top: 0;
+    padding-top: 30px;
+}
+```
+
+Do not use `margin-top: -X%` — it pushes content off-screen. A small positive `padding-top` on the section or its CSS parent is more reliable.
+
+## Slide Icons — Font Awesome 6
+
+All slides use Font Awesome 6 icons via CDN to visually signal slide function. Icons are placed at the top of the slide, centered, before the heading.
+
+**Add CDN once** in the `<head>` of the base template:
+```html
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+```
+
+**CSS** (in `<style>` block):
+```css
+.slide-icon {
+    font-size: 2.5em;
+    margin-bottom: 0.3em;
+    display: block;
+    text-align: center;
+}
+.transition-icon  { color: rgba(255,255,255,0.85); }  /* red bg slides    */
+.pedagogical-icon { color: rgba(255,255,255,0.9);  }  /* teal bg slides   */
+.objective-icon   { color: rgba(255,221,0,0.85);    }  /* white bg slides */
+```
+
+**Icon mapping** — one icon on the first slide of each block, before the `<h2>`:
+
+| Slide / Block | Icon | Class | Background |
+|---|---|---|---|
+| Objective: "Here's what you'll be able to do" | `fa-seedling` | `objective-icon` | white |
+| Lead-in: "Let's get Started" | `fa-eye` | inherit | Pixabay image |
+| Vocabulary: "Important Words" | `fa-spell-check` | inherit | Pixabay image |
+| Transition (forward to next stage) | `fa-forward` | `transition-icon` | `#c0392b` |
+| True/False Strategy block header | `fa-list-check` | `pedagogical-icon` | `#1a6b5a` |
+| Strategy step slides (Steps 1–4) | `fa-chess` | `pedagogical-icon` | `#1a6b5a` |
+| Multiple Choice Strategy block | `fa-list-check` | `pedagogical-icon` | `#1a6b5a` |
+| Task instruction | `fa-pencil` | inherit | white |
+| Discussion ("Let's Discuss") | `fa-comments` | `transition-icon` | `#c0392b` |
+| Summary ("What you can do now") | `fa-flag-checkered` | inherit | white |
+| End ("Thank you") | `fa-star` | inherit | `#2c3e50` |
+
+**Placement pattern:**
+```html
+<section data-background="#c0392b">
+    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+    <h2>Finding details</h2>
+    ...
+</section>
+```
+
+For strategy blocks, the icon appears on the **first slide only** (the block header). Subsequent step slides in the same block do not show an icon.
+
+**Key rule**: The icon describes the *function* of the slide, not the topic. A transition moves forward; a discussion invites talking; a strategy teaches a step-by-step method.
 
 ## Dependencies
 
@@ -92,7 +185,7 @@ Acceptable: "To activate interest in...", "To get the general idea of the text",
 - Typst CLI (NOT Quarto-embedded version)
 - Roboto OTF fonts (TinyTeX or system)
 - `@kilocode/plugin` in `.kilo/` and `.kilocode/` (tool internal, not for edits)
-- reveal.js 5.x via CDN (loaded from `templates/slides-template.html`, no npm needed)
+- reveal.js 5.x via CDN (loaded from `templates/base-slides-template.html`, no npm needed)
 
 ## Image replacement workflow (frequent task)
 
@@ -155,15 +248,9 @@ When the user asks to edit a slide at a reveal.js URL (e.g., `index.html#/7`):
    python scripts/locate_slide.py 7 --slides-dir path/to/slides/
    ```
 2. The script outputs JSON with slide index, section name, heading, and line numbers
-3. Edit the markdown file directly using the line numbers from the output
-4. Regenerate HTML:
-   ```bash
-   python -c "
-   from scripts.json_to_markdown import write_index_html
-   md = open('path/to/slides.md', encoding='utf-8').read()
-   write_index_html(md, 'path/to/slides')
-   "
-   ```
+3. Edit `index.html` directly using the line numbers from the output — the slide is a raw HTML `<section>` element
+4. No regeneration needed — just reload the browser
+5. **When adding a new slide**, insert a new `<section>` element at the correct position in `<div class="slides">`. All subsequent slide indices shift by +1.
 
 This prevents the agent from editing the wrong slide due to index confusion.
 

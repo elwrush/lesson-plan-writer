@@ -1,264 +1,666 @@
 ﻿---
 name: lesson-plan-to-reveal
-description: Converts a lesson plan JSON file into a reveal.js presentation using direct inline markdown. Generates pedagogical ESL slides following the design rules in docs/slide-design-reference.md. Builds to static HTML via template injection.
+description: Converts a lesson plan JSON into a reveal.js presentation using raw HTML sections. All slides are hand-crafted <section> elements inside the base template. Markdown pipeline is permanently abandoned — auto-animate and pedagogical slides require native HTML.
 ---
 # Skill: Lesson Plan to reveal.js Presentation
 
 ## Purpose
 Convert a lesson plan JSON into a reveal.js slideshow for ESL classroom delivery. The teacher controls all slides — students never interact directly. **Slides support the teacher's narration, not replace it.** Student-facing content appears on screen; teacher procedure text goes in speaker notes only.
 
-**Pipeline**: JSON → markdown + index.html (`json_to_markdown.py`) → open `slides/index.html` directly
+**Pipeline**: JSON → hand-built `index.html` with raw HTML `<section>` elements → open directly in browser (no server needed).
 
-**Slide design authority**: `docs/slide-design-reference.md` — this file defines all slide types, fragment policies, text limits, and vocabulary rules. The Python script reads this reference at generation time.
+**Markdown is permanently abandoned** for slide generation. The reveal.js auto-animate feature requires sibling `<section data-auto-animate>` elements, which cannot be produced from a single `<section data-markdown>` container. All new presentations start from `templates/base-slides-template.html`.
+
+**Slide design authority**: `docs/slide-design-reference.md` defines all slide types, fragment policies, text limits, vocabulary rules, and auto-animate patterns.
 
 ## When to Use This Skill
 
 Use `lesson-plan-to-reveal` when converting a lesson plan JSON to slides. The skill:
-1. Downloads a Pixabay title image and copies the institution logo into `output/{subfolder}/slides/assets/`
-2. Runs `scripts/json_to_markdown.py` with `--title-image`, `--title-attribution`, and `--logo-image` — generates both `slides.md` and `index.html`
-3. Reports the output path
+1. (Optional) Downloads a Pixabay title image and copies the institution logo into `output/{subfolder}/slides/assets/`
+2. Copies `templates/base-slides-template.html` to `output/{subfolder}/slides/index.html`
+3. Builds slides one by one as raw HTML `<section>` elements, inserting them between `<div class="slides">` and `</div>`
+4. Reports the output path
 
 ## Workflow
 
-### Step 1: Validate input
-- Verify lesson plan JSON exists and parses
-- Validate required fields: `teacher`, `duration`, `date`, `topic`, `materials`, `lesson_plan.stages`
-- Read answer key from `answer_key` field (`.md` file or "none")
-
-### Step 2: Download title image via Pixabay & copy logo into slides directory
-
-Extract the subfolder and topic from the JSON path, then download 1 matching image
-and copy the institution logo into `slides/assets/` so mkslides auto-copies them to the site:
+### Step 0: Create the slides directory
 
 ```powershell
-$jsonFile = "output/{subfolder}/{file}.json"
-$jsonData = Get-Content $jsonFile | ConvertFrom-Json
-$topic = $jsonData.topic
-
-$subfolder = ($jsonFile -split '\\|/')[1]
-$slidesDir = "output/$subfolder/slides"
-$slidesAssetsDir = "$slidesDir/assets"
-New-Item -ItemType Directory -Force -Path $slidesAssetsDir | Out-Null
-
-$pixabayOutput = python scripts/pixabay_download.py --query "$topic" --type image --count 1 --output-dir "$slidesAssetsDir"
-$pixabayResult = $pixabayOutput | ConvertFrom-Json
-
-if ($pixabayResult.files.Count -gt 0) {
-    $titleImage = $pixabayResult.files[0].path
-    $titleAttribution = $pixabayResult.files[0].attribution
-} else {
-    Write-Warning "Pixabay search returned no results for '$topic' — falling back to gradient"
-    $titleImage = ""
-    $titleAttribution = ""
-}
-
-# Copy institution logo into slides/assets/
-Copy-Item -Path "templates/Image_20260324_141022.png" -Destination "$slidesAssetsDir/logo.png" -Force
-$logoImage = "$slidesAssetsDir/logo.png"
+mkdir "output/{subfolder}/slides/assets"
 ```
 
-Output: `output/{subfolder}/slides/assets/pixabay_{id}_1.jpg` and `output/{subfolder}/slides/assets/logo.png`
+### Step 1: Copy the base template
 
-### Step 3: Generate markdown and HTML
-
-```bash
-python scripts/json_to_markdown.py output/{subfolder}/{file}.json --title-image "$titleImage" --title-attribution "$titleAttribution" --logo-image "$logoImage"
+```powershell
+cp "templates/base-slides-template.html" "output/{subfolder}/slides/index.html"
 ```
-Output: `output/{subfolder}/slides/{mmddyy}-{topic}-slides.md` and `output/{subfolder}/slides/index.html`
 
-The script generates slides following `docs/slide-design-reference.md`:
-- **Title** — topic + CEFR badge + strap subheader (derived from objective) + logo + Pixabay background at 80% opacity
-- **Objective** — 3 simple outcomes in accessible language, tied to PET reading test
-- **Vocabulary** — 3-5 words extracted from actual lesson text with phonemic script + clean definitions
-- **Lead-in** — Pixabay background image + topic-specific open question
-- **Pre-reading** — Pixabay background + 2 prediction prompts
-- **Task slides** — brief student-facing task instructions (max 3 lines), full procedure in speaker notes
-- **Answer slides** — properly parsed with ✓/✗ fragment reveals
-- **Section transitions** — red backgrounds, natural language
-- **Post-reading discussion** — all questions visible
-- **Summary** — "What you can do now"
-- **End slide**
+All slide `<section>` elements go between `<div class="slides">` and `</div>` in `index.html`. The `<head>`, `<style>`, `<body>`, `<script>` boilerplate is already complete — never edit it unless adding a new reveal.js plugin.
 
-### Step 4: Verify output
+### Step 2: Copy the logo
+
+```powershell
+python -c "
+import shutil
+shutil.copy('templates/Image_20260324_141022.png', 'output/{subfolder}/slides/assets/logo.png')
+"
+```
+
+### Step 3: Download images (first generation only)
+
+For **first-time generation** (new lesson, no existing `slides/assets/`), download images:
+
+```powershell
+# Download title hero image
+python scripts/pixabay_download.py --query "topic" --type image --count 3 --output-dir "output/SUBFOLDER/slides/assets"
+
+# Note: Vocabulary background images are downloaded per-word as needed
+python scripts/pixabay_download.py --query "vocabulary word" --type image --count 1 --output-dir "output/SUBFOLDER/slides/assets"
+```
+
+For **regeneration** (existing slides): **Never search Pixabay.** Reuse existing images from `slides/assets/`.
+
+### Step 4: Add slides — copy, paste, adapt
+
+**Rule**: Every slide is a raw `<section>` element. Copy the pattern from `templates/base-slides-template.html`, paste it into the `<div class="slides">` container, and adapt the content.
+
+**Slide ordering convention**:
+1. Title (with Pixabay background + logo)
+2. Objective (3 outcomes, all visible)
+3. Lead-in (Pixabay background + open question)
+4. Vocabulary (one slide per word, with Pixabay background, AFTER lead-in)
+5. Transition (red background, directive + foreshadow)
+6. Strategy block (auto-animate or pedagogical, if applicable)
+7. Task instruction (with timer)
+8. Answer slides (fragment reveals)
+9. (Repeat 5-8 for each reading stage)
+10. Transition → Post-reading discussion
+11. Transition → Wrap-up
+12. Summary ("What you can do now")
+13. End slide
+
+### Step 5: Verify output
 - Check `index.html` exists in the slides directory
-- Verify title slide contains logo `<img>` tag with class `title-logo`
-- Verify fragment usage: only on answer reveal slides, not on expository content
-- Verify procedure text is in speaker notes (not on screen)
-- Verify vocabulary words have phonemic script
+- Verify title slide contains `<img src="assets/logo.png" class="title-logo" />`
+- Verify fragment usage: only on answer reveal slides and strategy demonstrations, not on expository content
+- Verify procedure text is in `<aside class="notes">`, not on screen
+- Verify vocabulary words use `<span class="vocab-word">word</span>`
 - Verify title slide has strap subheader (not date/teacher/materials)
+- Verify `autoAnimateUnmatched: true` is in `Reveal.initialize()`
+- Verify transition slides use `data-background="#c0392b"`
+- Verify pedagogical strategy slides use `data-background="#1a6b5a"` and `class="pedagogical"`
 
 ## Fragment Policy
 
 | Use fragments for | DO NOT use fragments for |
 |---|---|
-| Revealing answers (highlight-green) | Task instructions |
-| Highlighting wrong answers (highlight-red) | Vocabulary lists |
-| Key vocabulary emphasis (grow, single word) | Objectives/outcomes |
-| | Discussion questions |
-| | Lead-in images and prompts |
+| Revealing answers (`highlight-green`) | Task instructions |
+| Highlighting wrong answers (`highlight-red`) | Vocabulary lists |
+| Strategy step reveals (on pedagogical slides) | Objectives/outcomes |
+| Eliminating wrong MC options (`strike`) | Discussion questions |
+| Key vocabulary emphasis (`grow`, single word) | Lead-in images and prompts |
 | | Material references |
 | | Any expository content |
 
-## Slide Types Generated
+Fragment classes:
+- `fragment highlight-green` — correct answer confirmed
+- `fragment highlight-red` — incorrect answer
+- `fragment strike` — eliminated wrong answer
+- `fragment grow` — emphasize single vocabulary word
+- `fragment` (bare) — generic reveal
 
-Based on `docs/slide-design-reference.md`:
+## Slide Icons — Font Awesome 6
 
-| Slide | Generated when | On-screen content | Speaker notes |
+Every slide type gets a **function-icon** that signals its role (not its topic). Icons are centered at the top, above the heading, using Font Awesome 6 via CDN. The CDN is already in `templates/base-slides-template.html`.
+
+**Icon CSS** (in template):
+```css
+.slide-icon {
+    font-size: 2.5em;
+    margin-bottom: 0.3em;
+    display: block;
+    text-align: center;
+}
+.transition-icon  { color: rgba(255,255,255,0.85); }  /* #c0392b slides */
+.pedagogical-icon { color: rgba(255,255,255,0.9);  }  /* #1a6b5a slides */
+.objective-icon   { color: rgba(255,221,0,0.85);    }  /* white slides    */
+```
+
+**Icon mapping** — one icon on the first slide of each block, before the `<h2>`:
+
+| Slide / Block | Icon | CSS class | Background |
 |---|---|---|---|
-| Title + logo | Always | Topic, CEFR badge, strap subheader, logo | — |
-| Objective | Always | 3 accessible outcomes tied to PET | — |
-| Vocabulary | Always | 3-5 words from actual lesson text, one word per slide with Pixabay background | Drilling instructions |
-| Lead-in image | "lead-in" stage | Topic-specific question | Photo display script, procedure |
-| Pre-reading | "gist" stage (first) | 2 prediction prompts | Prediction activity script |
-| Task instruction | "detail"/"inference"/"exercise" | Student-facing task steps (max 3) | Full procedure, timing, goal |
-| Answer slides | Answer key present | Questions + fragment-reveal answers | — |
-| Section transition | Between stages | Next stage name + warm-up question | Brief transition reminder |
-| Post-reading discussion | "post-reading"/"speaking" | Discussion questions (all visible) | Timing, feedback notes |
-| Wrap-up | "wrap-up"/"reflection" | Reflection questions | Error correction notes |
-| Summary | Always | 3 "can do now" outcomes | Elicitation script |
-| End | Always | "Thank you" + topic + CEFR | — |
+| Objective | `fa-seedling` | `objective-icon` | white |
+| Lead-in | `fa-eye` | inherit | Pixabay |
+| Vocabulary (first word) | `fa-spell-check` | inherit | Pixabay |
+| Transition | `fa-forward` | `transition-icon` | `#c0392b` |
+| Strategy block header | `fa-list-check` | `pedagogical-icon` | `#1a6b5a` |
+| Strategy step slides | `fa-chess` | `pedagogical-icon` | `#1a6b5a` |
+| Task instruction | `fa-pencil` | inherit | white |
+| Discussion | `fa-comments` | `transition-icon` | `#c0392b` |
+| Summary | `fa-flag-checkered` | inherit | white |
+| End | `fa-star` | inherit | `#2c3e50` |
+
+**Example — Objective slide:**
+```html
+<section>
+    <i class="fa-solid fa-seedling slide-icon objective-icon"></i>
+    <h2>Here's what you'll be able to do</h2>
+    ...
+</section>
+```
+
+**Example — Transition slide:**
+```html
+<section data-background="#c0392b">
+    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+    <h2>Finding details</h2>
+    ...
+</section>
+```
+
+**Example — Strategy block header:**
+```html
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+    <i class="fa-solid fa-list-check slide-icon pedagogical-icon"></i>
+    <h2>True/False Strategy</h2>
+    ...
+</section>
+```
+
+Only the **first slide** of a strategy block gets the icon. Steps 2–4 do not repeat it — the teacher and students see the icon once as the block begins.
+
+## Slide Type Templates (Raw HTML)
+
+All patterns live in `templates/base-slides-template.html` as HTML comments. **Copy the pattern, paste it into `<div class="slides">`, and adapt the content.** Do not invent new patterns — only use variants of the ones documented here.
+
+### 1. Title Slide
+```html
+<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
+    <img src="assets/logo.png" class="title-logo" alt="Logo" />
+    <h1>Topic Title <span class="cefr-badge B1">B1</span></h1>
+    <p><em>Strap subheader — derived from lesson objective</em></p>
+</section>
+```
+- CEFR badge colors: A1=green, A2=light green, B1=blue, B2=dark blue, C1=purple, C2=red
+- Strap is derived from the lesson objective using natural teacher voice
+- NO date, teacher name, duration, or materials on title slide
+- Logo: `assets/logo.png`, max-height 100px (set in CSS)
+
+### 2. Objective Slide
+```html
+<section>
+    <h2>Here's what you'll be able to do</h2>
+    <ul>
+        <li>Understand what the article is mainly about</li>
+        <li>Find the most important facts and mistakes</li>
+        <li>Share your ideas with a partner</li>
+    </ul>
+    <p><em>These are the same skills you need for the PET reading test!</em></p>
+</section>
+```
+- 3 outcomes max, each ≤10 words
+- NO fragments — students see this as orientation
+- Tie to PET reading test where applicable
+
+### 3. Vocabulary Slides (one word per slide)
+```html
+<!-- First word (with header) -->
+<section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="0.7">
+    <h2>Important Words</h2>
+    <p><span class="vocab-word">generation gap</span></p>
+    <p><em>/ˌdʒenəˈreɪʃn ɡæp/</em></p>
+    <p><em>There is a big <span class="vocab-word">generation gap</span> between old people and young people.</em></p>
+</section>
+
+<!-- Subsequent words (no header) -->
+<section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="0.7">
+    <p><span class="vocab-word">frustration</span></p>
+    <p><em>/frʌˈstreɪʃn/</em></p>
+    <p><em>I felt <span class="vocab-word">frustration</span> when my phone died.</em></p>
+</section>
+```
+- **One word per slide** — max 5 words total
+- `<span class="vocab-word">` renders yellow (#ffdd00) bold
+- Word + phonemic script (IPA) + context sentence with word highlighted
+- **Sentence must imply meaning, NOT define** — e.g., "There's such a **generation gap** between them" (GOOD) vs "generation gap — the difference between groups" (BAD)
+- Pixabay background at 70% opacity
+- Class: `vocab-slide`
+
+### 4. Lead-in Slide
+```html
+<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
+    <h2>Let's get Started</h2>
+    <h3>What do these two people have in common?</h3>
+    <aside class="notes">
+        Display the photo. Give students 20 seconds to look silently.
+        Then ask the question. Elicit 3-4 responses.
+        Connect responses to today's topic.
+    </aside>
+</section>
+```
+- One open question only
+- Pixabay background image
+- Speaker notes in `<aside class="notes">`
+
+### 5. Transition Slide (red background)
+```html
+<section data-background="#c0392b">
+    <h2>Finding details</h2>
+    <p>We're now going to read the story in more detail.</p>
+    <p>Let's start with some True/False questions.</p>
+    <p>They may look easy, but they can have some surprises!</p>
+</section>
+```
+- Red background `#c0392b`
+- Directive + foreshadow + engagement hook
+- NOT reflective ("What did you learn?")
+
+### 6. Auto-Animate Strategy Block
+```html
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+    <h2>True/False Strategy</h2>
+    <p><strong>Step 1:</strong> Read the statement carefully</p>
+    <p><em>Statement text goes here.</em></p>
+</section>
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+    <h2>True/False Strategy</h2>
+    <p><strong>Step 1:</strong> Read the statement carefully</p>
+    <p><em>Statement text goes here.</em></p>
+    <p><strong>Step 2:</strong> Find the keywords</p>
+    <p>"keyword1" · "keyword2" · "keyword3"</p>
+</section>
+<!-- ... up to 5 slides, each adding one more step ... -->
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+    <h2>True/False Strategy</h2>
+    <!-- ... all previous steps ... -->
+    <p class="fragment highlight-green">TRUE — Explanation of why it's true.</p>
+</section>
+```
+**Critical rules for auto-animate:**
+- All sections in one auto-animate block MUST be **consecutive siblings** in `<div class="slides">` — no other sections between them
+- `data-auto-animate-id` MUST match across all sections in the block (e.g., `"tf-strategy"`)
+- Each section builds on the previous one by adding new elements
+- Use `data-auto-animate` (not `data-auto-animate-unmatched`) — `autoAnimateUnmatched: true` in Reveal.initialize handles unmatched elements
+- All sections in the block share `class="pedagogical"` and `data-background="#1a6b5a"`
+- The final section may include a `fragment highlight-green` for the answer reveal
+- Auto-animate sections CANNOT be placed inside `<section data-markdown>` — this is the core reason markdown was abandoned
+
+### 7. Task Instruction Slide
+```html
+<section data-timer="960">
+    <h2>Finding details</h2>
+    <ul>
+        <li>Read the article again and complete the true/false task.</li>
+        <li>Complete the paragraph matching task.</li>
+    </ul>
+    <aside class="notes">
+        Stage 3 · 16 min · Ss-Ss
+        Goal: To identify key facts and supporting details
+        Materials: Student Book, pp 5-6
+    </aside>
+</section>
+```
+- `data-timer="seconds"` — time in seconds (minutes × 60)
+- Brief student-facing instructions (max 3 bullet points)
+- Full procedure, timing, and materials in `<aside class="notes">`
+
+### 8. Pedagogical Strategy Slide (non-auto-animate)
+```html
+<section class="pedagogical" data-background="#1a6b5a">
+    <h2>Multiple Choice Strategy</h2>
+    <p><strong>Step 1: Read all options first</strong> <span class="fragment"> — look at all three choices</span></p>
+    <ul class="fragment">
+        <li>a) Option A text</li>
+        <li>b) Option B text</li>
+        <li>c) Option C text</li>
+    </ul>
+    <p class="fragment"><strong>Step 2: Eliminate wrong answers</strong></p>
+    <p class="fragment strike">a) Reason. <strong>Eliminate.</strong></p>
+    <p class="fragment strike">b) Reason. <strong>Eliminate.</strong></p>
+    <p class="fragment"><strong>Step 3: Confirm the answer</strong></p>
+    <p class="fragment highlight-green">c) Explanation. ✓ <strong>c is correct!</strong></p>
+</section>
+```
+- Teal background `#1a6b5a` via `data-background`
+- `class="pedagogical"` for white text styling
+- Fragments used for step-by-step reveal of strategy
+
+### 9. Answer Slide (True/False)
+```html
+<section>
+    <h2>Exercise 2</h2>
+    <p class="aim-label">True/False</p>
+    <p class="fragment">Statement text goes here.</p>
+    <p class="fragment highlight-green">✓ <strong>True</strong></p>
+    <p class="fragment">Another statement text.</p>
+    <p class="fragment highlight-red">✗ <strong>False</strong></p>
+    <p class="fragment highlight-green">✓ <em>Corrected statement.</em></p>
+</section>
+```
+
+### 10. Answer Slide (Multiple Choice / Matching)
+```html
+<section>
+    <h2>Exercise 4</h2>
+    <p class="aim-label">Multiple Choice</p>
+    <p>a. Option A</p>
+    <p>b. Option B</p>
+    <p>c. Option C</p>
+    <p class="fragment highlight-green">✓ <strong>c</strong></p>
+</section>
+```
+
+### 11. Summary Slide
+```html
+<section>
+    <h2>What you can do now</h2>
+    <ul>
+        <li>✓ I can find the main idea</li>
+        <li>✓ I can find important facts</li>
+        <li>✓ I can share my ideas</li>
+    </ul>
+    <aside class="notes">
+        Elicit from students: What did you learn today?
+        Connect back to their predictions from the beginning.
+        Praise effort, mention one thing to improve.
+    </aside>
+</section>
+```
+- 3 "I can..." outcomes with checkmarks
+- Speaker notes: elicitation script
+
+### 12. End Slide
+```html
+<section data-background="#2c3e50">
+    <h2>Thank you</h2>
+    <p><em>Topic Name</em> | B2</p>
+</section>
+```
+- Dark background `#2c3e50`
 
 ## Slide Indexing System
 
-When the user provides a reveal.js URL like `file:///.../index.html#/N`, the generated markdown and HTML include `<!-- slide: N -->` comments that make it trivial to find the corresponding slide section.
+When the user provides a reveal.js URL like `file:///.../index.html#/N`, use `scripts/locate_slide.py` to map the slide index to its HTML section.
 
-Generated markdown shows:
-```markdown
-<!-- slide: 0 -->
-<!-- slide-section: title -->
-...
-
----
-
-<!-- slide: 1 -->
-<!-- slide-section: objective -->
-...
-
----
-
-<!-- slide: 2 -->
-<!-- slide-section: leadin -->
-...
+```bash
+python scripts/locate_slide.py "file:///path/to/index.html#/7"
+python scripts/locate_slide.py 7 --slides-dir path/to/slides/
 ```
 
+The script reads `index.html` directly (not a markdown file). The slide index equals the 0-based position of the `<section>` element within `<div class="slides">`.
+
 Mapping:
-- URL `index.html#/` or `index.html#/0` → slide 0 (title)
-- URL `index.html#/1` → slide 1 (objective)
-- URL `index.html#/2` → slide 2 (leadin)
+- URL `index.html#/` or `index.html#/0` → first `<section>` (title)
+- URL `index.html#/1` → second `<section>` (objective)
+- URL `index.html#/7` → eighth `<section>`
 - And so on...
 
-To find which section is at any URL hash `#/N`, search for `<!-- slide: N -->` in the markdown file.
+### Slide Editing Workflow (HTML)
+
+When asked to edit a slide at a reveal.js URL:
+
+1. **Run `scripts/locate_slide.py`** to determine the section index and line numbers:
+   ```bash
+   python scripts/locate_slide.py "file:///path/to/index.html#/7"
+   ```
+2. The script outputs JSON with slide index, heading text, and line numbers
+3. **Edit `index.html` directly** using the line numbers from the output — no intermediate markdown file
+4. **No regeneration needed** — the HTML is already complete. Just reload the browser.
+5. **When adding a new slide**, insert a new `<section>` element at the correct position in `<div class="slides">`. Shift all subsequent slide indices by +1.
 
 ## Key Design Rules
 
-1. **Student-facing content on screen only** — task instructions, questions, vocabulary, answers. Teacher procedure text ("Students read...", "Pair check", "Feedback") goes in speaker notes. "Ss" is never used on screen.
-2. **Objective slide uses accessible language** — avoid complex words like "identify", "distinguish", "inference". Use simple phrases like "Understand what the article is mainly about", "Find the most important facts and mistakes". Tie outcomes to PET reading test ("These are the same skills you need for the PET reading test!").
-3. **Title slide: topic + CEFR badge + strap subheader** — NO date, teacher name, duration, or materials. Strap is derived from the lesson objective using natural teacher voice (e.g., "Reading for the main idea — bridging the generation gap"). Avoid stilted phrases like "An article about...".
-4. **Task slides: brief student instructions** — extract task description from procedure, skip teacher-only instructions. Max 3 task lines on screen. Material references go in speaker notes, not on screen.
-5. **Stage names: student-friendly language** — the script automatically converts formal teacher-talk names to friendly equivalents:
-   - "Lead-in" → "Let's get Started"
-   - "Reading for gist" → "What's the idea?"
-   - "Reading for detail" → "Finding details"
-   - "Reading for inference" → "Making conclusions"
-   - "Post-reading" → "Let's Discuss"
-   - "Wrap-up" → "Let's Review"
-6. **Vocabulary slides** — generated AFTER lead-in stage. One word per slide with Pixabay background, "Important Words" title on first slide only.
-7. **Answer slides: properly parsed** — True/False with ✓/✗ fragments, letter answers, "Students' own answers" handled correctly. Article text sections are skipped.
-8. **Transitions: natural language** — "Moving from X." not "Transition from X to Y."
-9. **Stage aims humanized** — "To activate interest in..." not "To lead-in to..."
-10. **Backgrounds**: Pixabay image at 100% opacity across all slide sections (title, lead-in, vocabulary, pre-reading), gradient fallback, red (transitions), dark (end)
-11. **Logo: transparent RGBA PNG** — white backgrounds converted to transparency. Max height 100px, centered with 1em margin below.
-12. **Text highlighting** — all slide text (h2, h3 on block display, p/li inline) uses white text on a semi-transparent dark gray background (`rgba(0,0,0,0.5)`) with a subtle dark text outline. Headers have maroon border-bottom accent. Vocabulary words in context sentences use yellow boldface (`#ffdd00`) for emphasis.
+1. **Student-facing content on screen only** — task instructions, questions, vocabulary, answers. Teacher procedure text goes in `<aside class="notes">`. "Ss" is never used on screen.
+2. **Objective slide uses accessible language** — avoid complex words like "identify", "distinguish", "inference". Use simple phrases. Tie outcomes to PET reading test.
+3. **Title slide: topic + CEFR badge + strap subheader** — NO date, teacher name, duration, or materials.
+4. **Task slides: brief student instructions** — extract task description from procedure, skip teacher-only instructions. Max 3 task lines on screen.
+5. **Stage names: student-friendly language** — "Lead-in" → "Let's get Started", "Reading for gist" → "What's the main idea?", "Reading for detail" → "Finding details", "Reading for inference" → "Making conclusions", "Post-reading" → "Let's Discuss", "Wrap-up" → "Let's Review"
+6. **Vocabulary slides** — generated AFTER lead-in stage. One word per slide with Pixabay background. "Important Words" title on first slide only. Yellow bold (#ffdd00) via `<span class="vocab-word">`.
+7. **Answer slides** — fragment reveals with ✓/✗ markers.
+8. **Transitions: directive + foreshadow + engagement** — "We're now going to read...", not "What did you learn?"
+9. **Backgrounds**: Pixabay image at 70% opacity (title, lead-in, vocabulary, pre-reading), red `#c0392b` (transitions), teal `#1a6b5a` (pedagogical/strategy), dark `#2c3e50` (end)
+10. **Logo**: `assets/logo.png`, transparent RGBA PNG, max-height 100px, centered
+11. **Text highlighting**: white text, dark text-shadow, pedagogical sections use white-on-teal
+12. **Vocabulary words**: yellow boldface (`#ffdd00`) via `<span class="vocab-word">` — in both the word heading AND context sentence
 
 ## Authorial Voice & Audience
 
 This skill generates slides for **Mathayom 2-3 Thai students (CEFR B1)**. All student-facing text on screen MUST follow these rules:
 
-### 1. Person Rule (most important)
-All on-screen student-facing text — task instructions, questions, objectives, transitions — MUST use **direct "you" imperatives**, never third person:
+### 1. Person Rule
+All on-screen student-facing text MUST use **direct "you" imperatives**, never third person:
 
 | Wrong | Correct |
 |-------|---------|
 | "Students read the article again..." | "Read the article again." |
 | "They must correct the false statements." | "Correct the false statements." |
-| "In pairs, Students answer the questions..." | "In pairs, answer these questions." |
 | "Ss complete the task individually." | "Complete the task on your own." |
 
-**Speaker notes (`Notes:`) remain unrestricted** — teacher procedure can use full professional vocabulary.
+**`<aside class="notes">` remains unrestricted** — teacher procedure can use full professional vocabulary.
 
 ### 2. B1 Vocabulary Ceiling
-No words above CEFR B1 on screen without inline definition. **Banned words** include:
-- "identify" use "find"
-- "predict" use "guess" or "think...about"
-- "convincing" use "makes sense"
-- "distinguish" use "tell the difference"
-- "evaluate" use "decide" or "choose"
-- "analyze" use "look at carefully"
-- "infer" use "understand what the writer means"
+No words above CEFR B1 on screen without inline definition:
+- "identify" → use "find"
+- "predict" → use "guess"
+- "convincing" → use "makes sense"
+- "distinguish" → use "tell the difference"
+- "evaluate" → use "decide"
+- "analyze" → use "look at carefully"
+- "infer" → use "understand what the writer means"
 
-### 3. Sentence Complexity Limits
-- **Max 15 words per sentence** on screen
-- **No semicolons** break into two sentences
-- **One clause preferred**, two max
-- **No passive voice** on screen ("The text is read" "Read the text")
+### 3. Sentence Complexity
+- Max 15 words per sentence on screen
+- No semicolons — break into two sentences
+- One clause preferred, two max
+- No passive voice on screen
 
-### 4. Thai L1 Cultural Considerations
-- Use **collective framing** where natural ("We can see...", "Our class can think about...")
-- Keep questions **positive** and **concrete** avoid abstract philosophical prompts
-- Questions should invite **group participation**, not individual introspection
-- B1 Thai students can handle "Do you agree?" but struggle with "How does this connect to broader societal themes?"
+### 4. Thai L1 Considerations
+- Collective framing: "We can see...", "Our class can think about..."
+- Positive, concrete questions — avoid abstract philosophical prompts
+- Group participation questions, not individual introspection
 
-### 5. Summary Slide Must Use "I Can" Statements
+### 5. Summary: "I Can" Statements
 | Wrong | Correct |
 |-------|---------|
 | "Identify the main purpose" | "I can find the main idea" |
 | "Find key facts" | "I can find important facts" |
 | "Express opinions" | "I can share my ideas" |
 
-### 6. Transition Slides: Directive & Foreshadowing (NOT Reflective)
-
-Transition slides set expectations for the coming activity. Use **directive** language (what students will do) + **foreshadowing** (what's coming) + **engagement** (hook interest), NOT **reflective** language (what was just done).
-
-| Old (reflective) | New (directive + foreshadow + engagement) |
-|----------------|-------------------------------|
-| "What's the idea?" | "WHAT'S THE MAIN IDEA? Look at the main reading, the photos and the headlines. What do you think the text is about?" |
-| "What did you learn from the first reading?" | "We're now going to read the story in more detail. Let's start with some True/False questions. They may look easy, but they can have some surprises!" |
-| "What is the writer's real message?" | "Now let's think about what the writer really wants us to understand." |
-| "Is this true in your life too?" | "Now let's talk about how this applies to your life." |
-| "What is one thing you learned today?" | "Let's review what we've learned today." |
-
-The body text should serve **three functions**:
-1. **Foreshadow** — signal what's coming next ("We're now going to...", "Let's start with...")
-2. **Be directive** — tell students what to do ("Now let's...", "Read...")
-3. **Engage** — create anticipation/curiosity ("They may look easy, but they can have some surprises!")
-4. **NOT reflect** — avoid asking about past work ("What did you learn?")
-
-**Examples of good hooks:**
-- "They may look easy, but they can have some surprises!"
-- "This one might trick you!"
-- "Pay attention to the details..."
-- "You might be surprised by the answer!"
+### 6. Transition Slides: Directive + Foreshadow + Engagement
+| Old (reflective) | New (directive + foreshadow + engage) |
+|-------------------|---------------------------------------|
+| "What's the idea?" | "WHAT'S THE MAIN IDEA? Look at the main reading. What do you think the text is about?" |
+| "What did you learn?" | "We're now going to read in more detail. Let's start with True/False questions. They may look easy, but they can have some surprises!" |
 
 ### 7. No Automatic Image Downloads
-When regenerating slides, **never search Pixabay** — always reuse existing images from `slides/assets/`:
-- The script checks `slides/assets/` FIRST before any Pixabay search
-- If images exist in `slides/assets/`, use them (with `assets/` relative paths)
-- Only fall back to Pixabay search when **no existing image** is found
-- The `--title-image` CLI arg ALWAYS takes priority if provided
+When regenerating slides, **never search Pixabay** — always reuse existing images from `slides/assets/`.
 
-This prevents "image stealing" — where regeneration overwrites proper production images with random cached images.
+## Auto-Animate vs. Simple Slides for Strategy Blocks
+
+**For step-by-step strategy teaching (SBI), prefer simple slides without auto-animate.**
+
+Use separate `<section>` elements with `data-background-transition="none"` — one step per slide. Teacher advances manually, pausing at each decision point. This is more effective than auto-animate for pedagogical slides because:
+
+1. Each step is a discrete teaching moment
+2. Teacher controls pacing, not the animation
+3. No content disappears mid-step (avoids negative-margin clipping issues)
+
+Use auto-animate only when the strategy block is a quick demonstration, not explicit instruction.
+
+**Rules for simple (non-auto-animate) pedagogical slides:**
+- Each step = one `<section>` with `class="pedagogical"` and `data-background="#1a6b5a"`
+- All sections: `data-background-transition="none"` (prevents flash of color on entry)
+- Inline `style="top: 0;"` on each section to prevent vertical centering issues
+- Step label underlined: `<u><strong>Step N:</strong> ...</u>`
+- Rule (if applicable) embedded in Step 2, not a separate slide
+- Real quotes from the article on Step 4, in italics
+- Original question in yellow (`#ffdd00`) on first and last slides
+
+**Why markdown was abandoned**: reveal.js auto-animate requires consecutive sibling `<section data-auto-animate>` elements in `<div class="slides">`. The markdown plugin wraps all content in a single `<section data-markdown>`, making auto-animate impossible.
+
+**Rules for auto-animate blocks:**
+1. All sections in one block must be **consecutive siblings** — no other sections between them
+2. `data-auto-animate-id` must match across all sections in the block
+3. Each section adds content to what was shown in the previous section
+4. `autoAnimateUnmatched: true` in `Reveal.initialize()` handles elements that appear/disappear between slides
+5. All sections share `class="pedagogical"` and `data-background="#1a6b5a"` for visual consistency
+6. The final section may use `fragment highlight-green` for answer reveal
+7. Use for: strategy demonstrations (True/False, Multiple Choice), step-by-step language analysis, grammar transformations
+
+**When NOT to use auto-animate:**
+- Answer reveal slides (use fragments instead)
+- General slide transitions (use regular slide changes)
+- Vocabulary lists (all visible at once)
+- Expository content (no animation)
+
+## Pedagogical Strategy Slides — Design Principles
+
+Strategy slides teach a test-taking or reading skill explicitly. The design follows a **modelled whole-task approach** consistent with Strategy-Based Instruction (SBI) in EFL/ESL reading pedagogy.
+
+### Core Pattern: One Consistent Worked Example
+
+Pick one real exam question and carry it through every step of the strategy. Never mix examples mid-flow. The student sees the complete process on a single item before attempting it alone.
+
+Example: A True/False statement about the "generation gap" article runs through Steps 1–4. A Multiple Choice question runs through its own 3 steps. Do not switch between different exam items within the same strategy block.
+
+### Step Structure
+
+| Step | Cognitive function | What goes on the slide |
+|---|---|---|
+| 1 | Decode | Read the statement carefully. Note each separate claim. |
+| 2 | Analyse | Break into Yes/No sub-questions. State the decision rule (Yes→TRUE / No→FALSE). |
+| 3 | Locate | Identify which paragraph(s) contain the evidence. Name them explicitly. |
+| 4 | Confirm | Show the original question in yellow. Quote the text that confirms each sub-answer. Conclude. |
+
+### Slide Layout Rules
+
+- **One step per slide** — each `<section>` covers a single step. This lets the teacher pause and check understanding at each decision point.
+- **Header on first slide only** — `True/False Strategy` heading on Slide 1 of the block. Remaining slides show only the step label.
+- **Original question in yellow** on first and last slides — `<p style="color:#ffdd00;"><em>"Statement text"</em></p>`
+- **Underline step labels** — `<u><strong>Step N:</strong> ...</u>`
+- **Real quotes on Step 4** — actual text excerpts from the article, in italics with the relevant phrase highlighted
+- **Rule embedded at Step 2** — not a separate slide. Include it: "If you answer Yes to all → TRUE. If you answer No to even one → FALSE."
+- **No auto-animate** — use `data-background-transition="none"` on all pedagogical sections. Teacher controls pacing.
+- **Teal background** — `data-background="#1a6b5a"` + `class="pedagogical"` on all strategy slides.
+- **Top alignment** — CSS: `align-self: flex-start; margin-top: 0; padding-top: 30px` on `.reveal .slides > section.pedagogical`. Do NOT use negative margins (they clip content off-screen). Add `style="top: 0;"` inline on each section if needed.
+
+### Vertical Alignment Fix
+
+Reveal.js `.slides` is a flex container that defaults to vertically centering its section children. The correct fix is positive padding, not negative margin:
+
+```css
+.reveal .slides > section.pedagogical {
+    align-self: flex-start;
+    margin-top: 0;
+    padding-top: 30px;
+}
+```
+
+Using `margin-top: -2.5%` pushes content off-screen top. A small positive `padding-top` on the section is reliable.
+
+### Vertical Alignment for Pedagogical Slides
+
+```html
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+    <h2>True/False Strategy</h2>
+    ...
+</section>
+```
+
+### Example: True/False Strategy (4 slides + worked example)
+
+```html
+<!-- Slide 1: Header + Step 1 + yellow question + tip -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+    <h2>True/False Strategy</h2>
+    <p style="color:#ffdd00;"><em>"The author wrote the text to explore the generation gap and problems it can cause, and to suggest a possible solution."</em></p>
+    <p><u><strong>Step 1:</strong> Read the statement carefully</u></p>
+    <p>Sometimes there is more than one question to think about — note each part separately.</p>
+</section>
+
+<!-- Slide 2: Step 2 + sub-questions + rule -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+    <p><u><strong>Step 2:</strong> Work out what the question is asking you</u></p>
+    <ul>
+        <li>Did the author write about the generation gap? <em>(Yes/No)</em></li>
+        <li>Did the author write about the problems it can cause? <em>(Yes/No)</em></li>
+        <li>Did the author suggest a possible solution? <em>(Yes/No)</em></li>
+    </ul>
+    <p><strong>Rule:</strong> If you answer "Yes" to all → it's TRUE.<br />If you answer "No" to even one → it's FALSE.</p>
+</section>
+
+<!-- Slide 3: Step 3 + paragraph names -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+    <p><u><strong>Step 3:</strong> Find the evidence</u></p>
+    <p>Keywords like "author" and "solution" are found in <strong>paragraphs A and F</strong>. Now we can answer each question from Step 2.</p>
+</section>
+
+<!-- Slide 4: Step 4 + yellow question + real quotes + answer -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+    <p><u><strong>Step 4:</strong> Answer the question</u></p>
+    <p style="color:#ffdd00;"><em>"The author wrote the text to explore the generation gap..."</em></p>
+    <p>You can see that the author:</p>
+    <ul>
+        <li>talks about the generation gap → <em>"There is a growing generation gap between people..."</em></li>
+        <li>writes about the problems → <em>"This can cause serious problems in families and workplaces..."</em></li>
+        <li>offers solutions → <em>"The only way to close the gap is through empathy..."</em></li>
+    </ul>
+    <p><strong>So the answer is: TRUE.</strong></p>
+</section>
+```
+
+## reveal.js Codebase
+
+When making changes to reveal.js code (e.g., custom themes, configuration, or plugin modifications), **always consult the stored reveal.js codebase first**. Do not attempt to write reveal.js API code from memory.
+
+The packed reveal.js codebase is stored at: `knowledge-base\revealjs-packed.json`
+
+```bash
+# Load and query the packed JSON
+$json = Get-Content "knowledge-base\revealjs-packed.json" | ConvertFrom-Json
+
+# List all files
+$json.files.PSObject.Properties.Name | Sort-Object
+
+# Get specific file content
+$json.files.'js/reveal.js'
+$json.files.'css/reveal.scss'
+$json.files.'css/theme/white.scss'
+
+# Search for specific code
+$json.files.PSObject.Properties | Where-Object { $_.Value -match "transition" }
+
+# View the auto-animate example (canonical pattern reference)
+$json.files.'examples/auto-animate.html'
+```
+
+### Update reveal.js Pack
+
+To update the stored codebase when reveal.js releases a new version:
+
+```bash
+repomix --remote https://github.com/hakimel/reveal.js --style json --output knowledge-base\revealjs-packed.json --top-files-len 15
+```
+
+### Global Repomix Skill
+
+See: `C:\Users\elwru\.kilo\skills\repomix-codebase-search\SKILL.md`
 
 ## Files
 
 | File | Purpose |
 |---|---|
 | `docs/slide-design-reference.md` | Slide design rules (authoritative) |
-| `scripts/json_to_markdown.py` | JSON → markdown converter |
-| `scripts/pixabay_download.py` | Pixabay image downloader |
-| `templates/slides-template.html` | Static reveal.js HTML template (CDN, inline markdown) |
-| `templates/Image_20260324_141022.png` | Institution logo (ACT) for title slide |
+| `templates/base-slides-template.html` | **Base template for ALL new presentations** |
+| `templates/slides-template.html` | **DEPRECATED** — markdown-based (kept for backward compat) |
+| `scripts/json_to_markdown.py` | **DEPRECATED** — markdown generator (not for new work) |
+| `scripts/pixabay_download.py` | Pixabay image downloader (first-gen only) |
+| `scripts/locate_slide.py` | Map reveal.js URL index to HTML section |
+| `templates/Image_20260324_141022.png` | Institution logo (ACT) — copy to `assets/logo.png` |
 
 ## Dependencies
 - Python 3.x + Pillow, requests
-- Pixabay API key (`PIXABAY_API_KEY` env var — loaded by `pixabay_download.py`)
-- reveal.js 5.x via CDN (no npm needed)
+- Pixabay API key (`PIXABAY_API_KEY` env var)
+- reveal.js 5.1.0 via CDN (no npm needed)
+- `templates/base-slides-template.html` (copied to `output/{subfolder}/slides/index.html`)
