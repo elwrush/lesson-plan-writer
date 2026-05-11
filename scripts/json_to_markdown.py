@@ -47,8 +47,7 @@ REQUIRED_STAGE_FIELDS = [
 ]
 
 
-# Note: Pixabay search/download functions were removed to prevent automatic image downloads.
-# Images should be manually placed in assets/ and the script will pick them up via find_existing_asset().
+# Note: Pixabay search/download functions were removed. Images must be passed via --image CLI arg.
 
 def validate_json(data):
     errors = []
@@ -306,23 +305,6 @@ def copy_to_assets(slides_dir, image_path, prefix=""):
     return f"assets/{filename}"
 
 
-def find_existing_asset(slides_dir, file_prefix=None):
-    """Check slides_dir/assets/ for existing images. Returns asset-relative path or None."""
-    if not slides_dir:
-        return None
-    assets_dir = Path(slides_dir) / "assets"
-    if not assets_dir.exists():
-        return None
-    for f in assets_dir.iterdir():
-        if f.is_file() and f.suffix.lower() in (".jpg", ".jpeg", ".png"):
-            if file_prefix:
-                if f.stem.startswith(file_prefix) or file_prefix in f.stem:
-                    return f"assets/{f.name}"
-            elif f.name != "logo.png":
-                return f"assets/{f.name}"
-    return None
-
-
 def generate_title_slide(data, title_image_path=None, title_attribution=None, slides_dir=None, logo_path=None):
     topic = escape_md(data.get("topic", ""))
     cefr = data.get("lesson_plan", {}).get("cefr_level", "")
@@ -332,23 +314,17 @@ def generate_title_slide(data, title_image_path=None, title_attribution=None, sl
     if title_image_path:
         image_path = Path(title_image_path).resolve()
     else:
-        existing = find_existing_asset(slides_dir, "pixabay_486")
-        if not existing:
-            existing = find_existing_asset(slides_dir, "title")
-        if existing:
-            image_path = None
-        else:
-            image_path = None
+        image_path = None
 
     bg_directive = ""
-    if existing:
-        bg_directive = f'<!-- .slide: data-background-image="{existing}" data-background-opacity="0.8" -->'
+    if image_path and slides_dir:
+        bg_directive = f'<!-- .slide: data-background-image="{existing}" data-background-opacity="0.7" -->'
     elif image_path and slides_dir:
         rel_path = os.path.relpath(str(image_path), str(slides_dir)).replace("\\", "/")
-        bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.8" -->'
+        bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
     elif image_path:
         rel_path = image_path.relative_to(OUTPUT_DIR.parent).as_posix()
-        bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.8" -->'
+        bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
     else:
         bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #2c3e50, #3498db)" -->'
 
@@ -534,10 +510,6 @@ def generate_vocabulary_slides(data, slides_dir=None):
 
     for idx, (word, phonemic, _) in enumerate(keywords):
         image_path = None
-        existing = find_existing_asset(slides_dir, f"vocab-{word}")
-        if existing:
-            image_path = existing
-
         slide_content = generate_single_vocabulary_slide(word, phonemic, image_path, idx + 1)
         if slide_content:
             slides.append(slide_content)
@@ -581,15 +553,15 @@ def generate_single_vocabulary_slide(word, phonemic, image_path=None, slide_num=
         if image_path.startswith("assets/"):
             rel_path = Path(image_path).name
             lines.extend([
-                f'<!-- .slide: data-background-image="{image_path}" -->',
+                f'<!-- .slide: class="vocab-slide" data-background-image="{image_path}" data-background-opacity="0.7" -->',
             ])
         else:
             rel_path = Path(image_path).name
             lines.extend([
-                f'<!-- .slide: data-background-image="assets/{rel_path}" -->',
+                f'<!-- .slide: class="vocab-slide" data-background-image="assets/{rel_path}" data-background-opacity="0.7" -->',
             ])
     else:
-        lines.append('<!-- .slide: data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->')
+        lines.append('<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->')
 
     if slide_num == 1:
         lines.extend([
@@ -636,18 +608,7 @@ def generate_leadin_slide(stage, data, slides_dir=None):
 
     question = generate_leadin_question(topic, procedure)
 
-    existing = find_existing_asset(slides_dir, "pixabay_733")
-    if not existing:
-        existing = find_existing_asset(slides_dir, "leadin")
-    if existing:
-        rel_path = existing
-    else:
-        rel_path = None
-
-    if rel_path:
-        bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
-    else:
-        bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->'
+    bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->'
 
     lines = [
         '<!-- slide-section: leadin -->',
@@ -692,16 +653,7 @@ def generate_prereading_slide(stage, data, slides_dir=None):
     topic = data.get("topic", "")
     materials = data.get("materials", "")
 
-    existing = find_existing_asset(slides_dir, "reading")
-    if existing:
-        rel_path = existing
-    else:
-        rel_path = None
-
-    if rel_path:
-        bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
-    else:
-        bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #f5f0eb, #e8ddd3)" -->'
+    bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #f5f0eb, #e8ddd3)" -->'
 
     lines = [
         '<!-- slide-section: prereading -->',
@@ -1216,33 +1168,6 @@ def write_index_html(markdown_content, output_dir):
         shutil.copy2(chime_src, assets_dir / "chime.mp3")
 
 
-def load_image_references(md_path):
-    """Extract existing image references from markdown, keyed by slide section."""
-    references = {}
-    content = Path(md_path).read_text(encoding="utf-8")
-    current_section = None
-    for line in content.split("\n"):
-        m = re.match(r"<!--\s*slide-section:\s*(\S+)\s*-->", line)
-        if m:
-            current_section = m.group(1)
-        img_match = re.search(r'data-background-image="([^"]+)"', line)
-        if img_match and current_section:
-            references[current_section] = img_match.group(1)
-    return references
-
-
-def restore_image_references(markdown_content, preserved_refs):
-    """Replace newly generated image refs with preserved ones by section."""
-    for section, old_path in preserved_refs.items():
-        markdown_content = re.sub(
-            rf'(<!--\s*slide-section:\s*{re.escape(section)}\s*-->.*?data-background-image=")[^"]+(")',
-            r'\1' + old_path + r'\2',
-            markdown_content,
-            flags=re.DOTALL
-        )
-    return markdown_content
-
-
 def convert_json_to_markdown(json_path, title_image_path=None, title_attribution=None, logo_path=None,
                               sections=None, merge=False):
     json_path = Path(json_path)
@@ -1267,12 +1192,6 @@ def convert_json_to_markdown(json_path, title_image_path=None, title_attribution
 
     output_path = get_output_path(json_path, data.get("date", ""))
     slides_dir = output_path.parent
-
-    existing_images = {}
-    if output_path.exists():
-        existing_images = load_image_references(output_path)
-        if existing_images:
-            print(f"Preserving {len(existing_images)} existing image references from {output_path.name}")
 
     topic = data.get("topic", "")
 
@@ -1315,9 +1234,6 @@ def convert_json_to_markdown(json_path, title_image_path=None, title_attribution
             return output_path
 
     markdown_content = generate_markdown(data, title_image_path, title_attribution, slides_dir, logo_path)
-
-    if existing_images:
-        markdown_content = restore_image_references(markdown_content, existing_images)
 
     try:
         with open(output_path, "w", encoding="utf-8") as f:

@@ -63,10 +63,21 @@
                 margin-top: 0.2em;
             }
 
-            /* Images */
-            .reveal img {
-                max-height: 400px;
-                margin: 0 auto;
+            /* Vocabulary slides - larger text */
+            .reveal section.vocab-slide h2 {
+                font-size: 2.2em;
+            }
+            .reveal section.vocab-slide p {
+                font-size: 1.3em;
+                line-height: 1.4;
+            }
+
+            /* Text shadow for readability - native reveal.js feature */
+            .reveal p,
+            .reveal li,
+            .reveal h1, .reveal h2, .reveal h3,
+            .reveal h4, .reveal h5, .reveal h6 {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             }
         </style>
         <link rel="stylesheet" href="timer-plugin.css" />
@@ -78,7 +89,7 @@
                     <textarea data-template>
 <!-- slide: 0 -->
 <!-- slide-section: title -->
-<!-- .slide: data-background-image="assets/pixabay_4867454_1.jpg" data-background-opacity="0.8" -->
+<!-- .slide: data-background-gradient="linear-gradient(to bottom, #2c3e50, #3498db)" -->
 <img src="assets/logo.png" class="title-logo" />
 
 # What Connects Us <span class="cefr-badge B2">B2</span>
@@ -101,7 +112,7 @@
 
 <!-- slide: 2 -->
 <!-- slide-section: leadin -->
-<!-- .slide: data-background-image="assets/pixabay_7338021_1.jpg" data-background-opacity="0.7" -->
+<!-- .slide: data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
 ## Let's get Started
 
 ### What do these two people have in common? What makes them different?
@@ -120,7 +131,7 @@ Goal: To activate interest in the theme of generational differences
 
 <!-- slide: 3 -->
 <!-- slide-section: vocab-1 -->
-<!-- .slide: data-background-image="assets/vocab-gap-cache_20c895dd.jpg" -->
+<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
 ## Important Words
 
 **generation gap**
@@ -132,7 +143,7 @@ _/ˌdʒenəˈreɪʃn ɡæp/_
 
 <!-- slide: 4 -->
 <!-- slide-section: vocab-2 -->
-<!-- .slide: data-background-image="assets/vocab-frustration-cache_d2a63bdf.jpg" -->
+<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
 **frustration**
 _/frʌˈstreɪʃn/_
 
@@ -142,7 +153,7 @@ _/frʌˈstreɪʃn/_
 
 <!-- slide: 5 -->
 <!-- slide-section: vocab-3 -->
-<!-- .slide: data-background-image="assets/vocab-redefine-cache_f014d1ce.jpg" -->
+<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
 **redefine**
 _/ˌriːdɪˈfaɪn/_
 
@@ -152,7 +163,7 @@ _/ˌriːdɪˈfaɪn/_
 
 <!-- slide: 6 -->
 <!-- slide-section: vocab-4 -->
-<!-- .slide: data-background-image="assets/vocab-workplace-cache_fc0e748d.jpg" -->
+<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
 **workplace**
 _/ˈwɜːkpleɪs/_
 
@@ -163,8 +174,9 @@ _/ˈwɜːkpleɪs/_
 <!-- slide: 7 -->
 <!-- slide-section: transition-2 -->
 <!-- .slide: data-background="#c0392b" -->
-## What's the idea?
+## What's the Main Idea?
 
+Look at the main reading, the photos and the headlines.  
 What do you think the text is about?
 
 Notes:
@@ -173,28 +185,14 @@ Give students a moment to reset. Introduce the next activity.
 
 ---
 
-<!-- slide: 8 -->
-<!-- slide-section: prereading -->
-<!-- .slide: data-background-image="assets/reading-cache_532f81f6.jpg" data-background-opacity="0.7" -->
-## Before you read
-
-- What is the writer trying to do?
-- What solution might they suggest?
-
-Notes:
-Students read the title and look at the photo.
-Give them 30 seconds to share predictions in pairs.
-Write 2-3 predictions on the board.
-Materials: OFD 3, Student Book, pp 5-6
-
----
-
 <!-- slide: 9 -->
 <!-- slide-section: transition-3 -->
 <!-- .slide: data-background="#c0392b" -->
 ## Finding details
 
-What did you learn from your first reading?
+We're now going to read the story in more detail.  
+Let's start with some True/False questions.  
+They may look easy, but they can have some surprises!
 
 Notes:
 Moving from Reading for gist.
@@ -207,8 +205,7 @@ Give students a moment to reset. Introduce the next activity.
 <!-- .slide: data-timer="960" -->
 ## Finding details
 
-- Read the article again and complete the true/false task.
-- Complete the paragraph matching task . Match statements 1-6 to paragraphs A-F..
+Read the article again and complete the true/false task.
 
 Notes:
 Stage 3 · 16 min · Ss-Ss
@@ -218,11 +215,26 @@ Materials: OFD 3, Student Book, pp 5-6
 ---
 
 <!-- slide: 11 -->
+<!-- slide-section: task-3b -->
+<!-- .slide: data-timer="600" -->
+## Finding details
+
+Complete the paragraph matching task. Match statements 1-6 to paragraphs A-F.
+
+Notes:
+Stage 3b · 10 min · Ss-Ss
+Goal: To match main ideas to paragraphs
+Materials: OFD 3, Student Book, pp 5-6
+
+---
+
+<!-- slide: 12 -->
 <!-- slide-section: transition-4 -->
 <!-- .slide: data-background="#c0392b" -->
 ## Making conclusions
 
-What is the writer's real message?
+Now let's think about what the writer really wants us to understand.  
+Pay attention to the details...
 
 Notes:
 Moving from Reading for detail and specific information.
@@ -249,7 +261,8 @@ Materials: OFD 3, Student Book, pp 5-6
 <!-- .slide: data-background="#c0392b" -->
 ## Let's Discuss
 
-Is this true in your life too?
+Now let's talk about how this applies to your life.  
+You might be surprised by what others think!
 
 Notes:
 Moving from Reading for inference and conclusion.
@@ -279,7 +292,8 @@ Materials: OFD 3, Student Book, pp 5-6
 <!-- .slide: data-background="#c0392b" -->
 ## Let's Review
 
-What is one thing you learned today?
+Let's review what we've learned today.  
+Can you remember all the key points?
 
 Notes:
 Moving from Post-reading speaking task.

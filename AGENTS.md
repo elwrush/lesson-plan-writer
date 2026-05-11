@@ -1,5 +1,11 @@
 # AGENTS.md — Lesson Plan Writer 3
 
+## Environment
+
+- **OS:** Windows AMD64 (win32 sys.platform)
+- **Shell:** PowerShell
+- **Python:** 3.x
+
 ## Two pipelines
 
 ### PDF (2-stage)
@@ -31,6 +37,10 @@ python scripts/pixabay_download.py --query "topic" --type image --count 3
 python -m pytest tests/ -v
 python -m pytest tests/test_json_to_pdf.py -v       # 18 tests
 python -m pytest tests/test_json_to_markdown.py -v  # 23 tests
+
+# Locate slide by reveal.js index (deterministic editing)
+python scripts/locate_slide.py "file:///path/to/index.html#/7"
+python scripts/locate_slide.py 7 --slides-dir path/to/slides/
 ```
 
 ## JSON schema
@@ -111,3 +121,84 @@ The `compress_image` function applies: resize to 1920px max edge, JPEG quality=8
 - `.kilo/` — session plans, package.json (Kilo internal)
 - `.kilocode/` — skills, node_modules (Kilo internal)
 - Skills at `.kilocode/skills/<name>/SKILL.md` — new skills require Kilo restart
+
+## Windows Path Handling
+
+When processing `file://` URLs containing Windows paths with forward slashes (e.g., `file:///C:/PROJECTS/...`), the `/C:/` is misinterpreted. Use this pattern in Python:
+
+```python
+from pathlib import Path
+url = url.strip()
+if "#" in url:
+    url = url.split("#")[0]
+url = url.replace("file:///", "")
+url = url.replace("file://", "")
+path = Path(url)
+if not path.exists():
+    path = Path(url.replace("/", "\\"))  # Fix forward slashes for Windows
+```
+
+Alternatively, convert forward slashes to backslashes:
+```python
+windows_path = url.replace("/", "\\")
+path = Path(windows_path)
+```
+
+## Slide Editing Workflow
+
+When the user asks to edit a slide at a reveal.js URL (e.g., `index.html#/7`):
+
+1. **Run `scripts/locate_slide.py`** to determine the slide section:
+   ```bash
+   python scripts/locate_slide.py "file:///path/to/index.html#/7"
+   # OR
+   python scripts/locate_slide.py 7 --slides-dir path/to/slides/
+   ```
+2. The script outputs JSON with slide index, section name, heading, and line numbers
+3. Edit the markdown file directly using the line numbers from the output
+4. Regenerate HTML:
+   ```bash
+   python -c "
+   from scripts.json_to_markdown import write_index_html
+   md = open('path/to/slides.md', encoding='utf-8').read()
+   write_index_html(md, 'path/to/slides')
+   "
+   ```
+
+This prevents the agent from editing the wrong slide due to index confusion.
+
+## reveal.js Codebase
+
+When making changes to reveal.js code (e.g., custom themes, configuration, or plugin modifications), **always use the global repomix skill to query the stored reveal.js codebase first**.
+
+### Query Stored reveal.js
+
+The packed reveal.js codebase is stored at: `knowledge-base\revealjs-packed.json`
+
+```bash
+# Load and query the packed JSON
+$json = Get-Content "knowledge-base\revealjs-packed.json" | ConvertFrom-Json
+
+# List all files
+$json.files.PSObject.Properties.Name | Sort-Object
+
+# Get specific file content
+$json.files.'js/reveal.js'
+$json.files.'css/reveal.scss'
+$json.files.'css/theme/white.scss'
+
+# Search for specific code
+$json.files.PSObject.Properties | Where-Object { $_.Value -match "transition" }
+```
+
+### Update reveal.js Pack
+
+To update the stored codebase when reveal.js releases a new version:
+
+```bash
+repomix --remote https://github.com/hakimel/reveal.js --style json --output knowledge-base\revealjs-packed.json --top-files-len 15
+```
+
+### Global Repomix Skill
+
+See: `C:\Users\elwru\.kilo\skills\repomix-codebase-search\SKILL.md`

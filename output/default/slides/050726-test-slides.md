@@ -1,5 +1,6 @@
+<!-- slide: 0 -->
 <!-- slide-section: title -->
-<!-- .slide: data-background-image="../../.image-cache/cache_88073b10.jpg" data-background-opacity="0.8" -->
+<!-- .slide: data-background-gradient="linear-gradient(to bottom, #2c3e50, #3498db)" -->
 <img src="assets/logo.png" class="title-logo" />
 
 # Test Topic <span class="cefr-badge B2">B2</span>
@@ -8,6 +9,7 @@
 
 ---
 
+<!-- slide: 1 -->
 <!-- slide-section: objective -->
 ## Here's what you'll be able to do
 
@@ -17,8 +19,9 @@
 
 ---
 
+<!-- slide: 2 -->
 <!-- slide-section: leadin -->
-<!-- .slide: data-background-image="../../.image-cache/cache_a6db93b8.jpg" data-background-opacity="0.7" -->
+<!-- .slide: data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
 ## Let's get Started
 
 ### What do you see? What do you wonder?
@@ -33,40 +36,44 @@ Goal: To activate interest in the theme
 
 ---
 
+<!-- slide: 3 -->
 <!-- slide-section: vocab-1 -->
-<!-- .slide: data-background-image="assets/vocab-empathy-cache_595a4ab1.jpg" -->
+<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
 ## Important Words
 
 **empathy**
 _/ˈempəθi/_
 
-*She showed great **empathy** when her friend was sad.*
+*She showed **empathy** when her friend was sad.*
 
 ---
 
+<!-- slide: 4 -->
 <!-- slide-section: vocab-2 -->
-<!-- .slide: data-background-image="assets/vocab-generational-cache_3ef8896b.jpg" -->
+<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
 **generational**
 _/ˌdʒenəˈreɪʃənl/_
 
-*The **generational** difference is clear — my grandparents don't use smartphones.*
+*There is a **generational** difference. My grandparents do not use smartphones.*
 
 ---
 
+<!-- slide: 5 -->
 <!-- slide-section: vocab-3 -->
-<!-- .slide: data-background-image="assets/vocab-resolve-cache_309c216f.jpg" -->
+<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
 **resolve**
 _/rɪˈzɒlv/_
 
-*They sat down and managed to **resolve** their disagreement.*
+*They sat down and tried to **resolve** their problem.*
 
 ---
 
+<!-- slide: 6 -->
 <!-- slide-section: transition-2 -->
 <!-- .slide: data-background="#c0392b" -->
 ## What's the idea?
 
-What do you predict the text will be about?
+What do you think the text is about?
 
 Notes:
 Moving from Lead-in.
@@ -74,8 +81,9 @@ Give students a moment to reset. Introduce the next activity.
 
 ---
 
+<!-- slide: 7 -->
 <!-- slide-section: prereading -->
-<!-- .slide: data-background-image="../../.image-cache/cache_6e1d39fa.jpg" data-background-opacity="0.7" -->
+<!-- .slide: data-background-gradient="linear-gradient(to bottom, #f5f0eb, #e8ddd3)" -->
 ## Before you read
 
 - What is the writer trying to do?
@@ -89,10 +97,11 @@ Materials: Student Book, pp 10-12
 
 ---
 
+<!-- slide: 8 -->
 <!-- slide-section: summary -->
 ## What you can do now
 
-✓ Understand and discuss the topic in more depth
+✓ I can understand and talk about the topic
 
 Notes:
 Elicit from students: What did you learn today?
@@ -101,6 +110,7 @@ Praise effort, mention one thing to improve.
 
 ---
 
+<!-- slide: 9 -->
 <!-- slide-section: end -->
 <!-- .slide: data-background="#2c3e50" -->
 ## Thank you

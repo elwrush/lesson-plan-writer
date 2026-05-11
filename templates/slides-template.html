@@ -63,10 +63,21 @@
                 margin-top: 0.2em;
             }
 
-            /* Images */
-            .reveal img {
-                max-height: 400px;
-                margin: 0 auto;
+            /* Vocabulary slides - larger text */
+            .reveal section.vocab-slide h2 {
+                font-size: 2.2em;
+            }
+            .reveal section.vocab-slide p {
+                font-size: 1.3em;
+                line-height: 1.4;
+            }
+
+            /* Text shadow for readability - native reveal.js feature */
+            .reveal p,
+            .reveal li,
+            .reveal h1, .reveal h2, .reveal h3,
+            .reveal h4, .reveal h5, .reveal h6 {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             }
         </style>
         <link rel="stylesheet" href="timer-plugin.css" />

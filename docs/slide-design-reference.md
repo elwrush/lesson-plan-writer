@@ -177,7 +177,7 @@ The script automatically converts formal stage names to friendly student-facing 
 - "Post-reading speaking task" → "Let's Discuss"
 - "Wrap-up and reflection" → "Let's Review"
 ```markdown
-<!-- .slide: data-background-image="{pixabay_word_image}" data-background-opacity="0.7" -->
+<!-- .slide: data-background-image="{pixabay_word_image}" data-background-opacity="1.0" -->
 
 ## Important Words
 
@@ -203,7 +203,7 @@ Rules:
 - **One vocabulary item per slide** — max 5 words total
 - Word + phonemic script (IPA) + bolded target word in context sentence
 - **Sentence must imply meaning, NOT define** — e.g., "There's such a **generation gap** between Rico and Ploy; Ploy doesn't understand the slang words Rico uses." (GOOD) vs "generation gap — the difference between two groups or generations" (BAD)
-- **Pixabay background at 70% opacity** — image must precisely convey word meaning and context
+- **Pixabay background at 100% opacity** — image must precisely convey word meaning and context
 - Title: "Important Words"
 - All visible at once — NO fragments
 

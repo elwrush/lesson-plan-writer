@@ -166,7 +166,7 @@ To find which section is at any URL hash `#/N`, search for `<!-- slide: N -->` i
 7. **Answer slides: properly parsed** — True/False with ✓/✗ fragments, letter answers, "Students' own answers" handled correctly. Article text sections are skipped.
 8. **Transitions: natural language** — "Moving from X." not "Transition from X to Y."
 9. **Stage aims humanized** — "To activate interest in..." not "To lead-in to..."
-10. **Backgrounds**: Pixabay image at 80% opacity (title), 70% (lead-in/pre-reading/vocabulary), gradient fallback, red (transitions), dark (end)
+10. **Backgrounds**: Pixabay image at 100% opacity across all slide sections (title, lead-in, vocabulary, pre-reading), gradient fallback, red (transitions), dark (end)
 11. **Logo: transparent RGBA PNG** — white backgrounds converted to transparency. Max height 100px, centered with 1em margin below.
 12. **Text highlighting** — all slide text (h2, h3 on block display, p/li inline) uses white text on a semi-transparent dark gray background (`rgba(0,0,0,0.5)`) with a subtle dark text outline. Headers have maroon border-bottom accent. Vocabulary words in context sentences use yellow boldface (`#ffdd00`) for emphasis.
 
@@ -215,15 +215,31 @@ No words above CEFR B1 on screen without inline definition. **Banned words** inc
 | "Find key facts" | "I can find important facts" |
 | "Express opinions" | "I can share my ideas" |
 
-### 6. Transition Questions Must Be B1-Accessible
-| Wrong | Correct |
-|-------|---------|
-| "What do you predict the text will be about?" | "What do you think the text is about?" |
-| "Which point do you find most convincing?" | "Which idea makes the most sense to you?" |
-| "How does this topic connect to your own life?" | "Is this true in your life too?" |
-| "What facts did you notice on your first read?" | "What did you learn from your first reading?" |
+### 6. Transition Slides: Directive & Foreshadowing (NOT Reflective)
 
-### 7. Image Preservation (CRITICAL)
+Transition slides set expectations for the coming activity. Use **directive** language (what students will do) + **foreshadowing** (what's coming) + **engagement** (hook interest), NOT **reflective** language (what was just done).
+
+| Old (reflective) | New (directive + foreshadow + engagement) |
+|----------------|-------------------------------|
+| "What's the idea?" | "WHAT'S THE MAIN IDEA? Look at the main reading, the photos and the headlines. What do you think the text is about?" |
+| "What did you learn from the first reading?" | "We're now going to read the story in more detail. Let's start with some True/False questions. They may look easy, but they can have some surprises!" |
+| "What is the writer's real message?" | "Now let's think about what the writer really wants us to understand." |
+| "Is this true in your life too?" | "Now let's talk about how this applies to your life." |
+| "What is one thing you learned today?" | "Let's review what we've learned today." |
+
+The body text should serve **three functions**:
+1. **Foreshadow** — signal what's coming next ("We're now going to...", "Let's start with...")
+2. **Be directive** — tell students what to do ("Now let's...", "Read...")
+3. **Engage** — create anticipation/curiosity ("They may look easy, but they can have some surprises!")
+4. **NOT reflect** — avoid asking about past work ("What did you learn?")
+
+**Examples of good hooks:**
+- "They may look easy, but they can have some surprises!"
+- "This one might trick you!"
+- "Pay attention to the details..."
+- "You might be surprised by the answer!"
+
+### 7. No Automatic Image Downloads
 When regenerating slides, **never search Pixabay** — always reuse existing images from `slides/assets/`:
 - The script checks `slides/assets/` FIRST before any Pixabay search
 - If images exist in `slides/assets/`, use them (with `assets/` relative paths)

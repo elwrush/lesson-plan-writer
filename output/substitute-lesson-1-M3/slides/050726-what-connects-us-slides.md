@@ -1,5 +1,6 @@
+<!-- slide: 0 -->
 <!-- slide-section: title -->
-<!-- .slide: data-background-image="../../.image-cache/cache_7a8596e2.jpg" data-background-opacity="0.8" -->
+<!-- .slide: data-background-gradient="linear-gradient(to bottom, #2c3e50, #3498db)" -->
 <img src="assets/logo.png" class="title-logo" />
 
 # What Connects Us <span class="cefr-badge B2">B2</span>
@@ -8,19 +9,21 @@
 
 ---
 
+<!-- slide: 1 -->
 <!-- slide-section: objective -->
 ## Here's what you'll be able to do
 
 - Understand what the article is mainly about
 - Find the most important facts and mistakes
-- Know the difference between facts and opinions
+- Tell the difference between facts and opinions
 
 *These are the same skills you need for the PET reading test!*
 
 ---
 
+<!-- slide: 2 -->
 <!-- slide-section: leadin -->
-<!-- .slide: data-background-image="../../.image-cache/cache_92233ea7.jpg" data-background-opacity="0.7" -->
+<!-- .slide: data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
 ## Let's get Started
 
 ### What do these two people have in common? What makes them different?
@@ -37,49 +40,55 @@ Goal: To activate interest in the theme of generational differences
 
 ---
 
+<!-- slide: 3 -->
 <!-- slide-section: vocab-1 -->
-<!-- .slide: data-background-image="assets/vocab-gap-cache_20c895dd.jpg" -->
+<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
 ## Important Words
 
 **generation gap**
 _/ˌdʒenəˈreɪʃn ɡæp/_
 
-*The **generation gap** between the old and very young is very large; old people cannot understand young people's fashion.*
+*There is a big **generation gap** between old people and young people.*
 
 ---
 
+<!-- slide: 4 -->
 <!-- slide-section: vocab-2 -->
-<!-- .slide: data-background-image="assets/vocab-frustration-cache_d2a63bdf.jpg" -->
+<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
 **frustration**
 _/frʌˈstreɪʃn/_
 
-*I felt so much **frustration** when my phone died in the middle of the important call.*
+*I felt **frustration** when my phone died during an important call.*
 
 ---
 
+<!-- slide: 5 -->
 <!-- slide-section: vocab-3 -->
-<!-- .slide: data-background-image="assets/vocab-redefine-cache_f014d1ce.jpg" -->
+<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
 **redefine**
 _/ˌriːdɪˈfaɪn/_
 
-*The new CEO wants to **redefine** what success means in our company.*
+*The new CEO wants to **redefine** success in our company.*
 
 ---
 
+<!-- slide: 6 -->
 <!-- slide-section: vocab-4 -->
-<!-- .slide: data-background-image="assets/vocab-workplace-cache_fc0e748d.jpg" -->
+<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
 **workplace**
 _/ˈwɜːkpleɪs/_
 
-*The **workplace** is changing — more people work from home now.*
+*The **workplace** is changing. Now more people work from home.*
 
 ---
 
+<!-- slide: 7 -->
 <!-- slide-section: transition-2 -->
 <!-- .slide: data-background="#c0392b" -->
-## What's the idea?
+## What's the Main Idea?
 
-What do you predict the text will be about?
+Look at the main reading, the photos and the headlines.  
+What do you think the text is about?
 
 Notes:
 Moving from Lead-in.
@@ -87,26 +96,14 @@ Give students a moment to reset. Introduce the next activity.
 
 ---
 
-<!-- slide-section: prereading -->
-<!-- .slide: data-background-image="../../.image-cache/cache_532f81f6.jpg" data-background-opacity="0.7" -->
-## Before you read
-
-- What is the writer trying to do?
-- What solution might they suggest?
-
-Notes:
-Students read the title and look at the photo.
-Give them 30 seconds to share predictions in pairs.
-Write 2-3 predictions on the board.
-Materials: OFD 3, Student Book, pp 5-6
-
----
-
+<!-- slide: 9 -->
 <!-- slide-section: transition-3 -->
 <!-- .slide: data-background="#c0392b" -->
 ## Finding details
 
-What facts did you notice on your first read?
+We're now going to read the story in more detail.  
+Let's start with some True/False questions.  
+They may look easy, but they can have some surprises!
 
 Notes:
 Moving from Reading for gist.
@@ -114,11 +111,12 @@ Give students a moment to reset. Introduce the next activity.
 
 ---
 
+<!-- slide: 10 -->
 <!-- slide-section: task-3 -->
+<!-- .slide: data-timer="960" -->
 ## Finding details
 
-- read the article again and complete the true/false task (Exercise 2). They must correct the false statements..
-- complete the paragraph matching task (Exercise 3). Match statements 1-6 to paragraphs A-F..
+Read the article again and complete the true/false task.
 
 Notes:
 Stage 3 · 16 min · Ss-Ss
@@ -127,11 +125,27 @@ Materials: OFD 3, Student Book, pp 5-6
 
 ---
 
+<!-- slide: 11 -->
+<!-- slide-section: task-3b -->
+<!-- .slide: data-timer="600" -->
+## Finding details
+
+Complete the paragraph matching task. Match statements 1-6 to paragraphs A-F.
+
+Notes:
+Stage 3b · 10 min · Ss-Ss
+Goal: To match main ideas to paragraphs
+Materials: OFD 3, Student Book, pp 5-6
+
+---
+
+<!-- slide: 12 -->
 <!-- slide-section: transition-4 -->
 <!-- .slide: data-background="#c0392b" -->
 ## Making conclusions
 
-What do you think the writer really means?
+Now let's think about what the writer really wants us to understand.  
+Pay attention to the details...
 
 Notes:
 Moving from Reading for detail and specific information.
@@ -139,10 +153,12 @@ Give students a moment to reset. Introduce the next activity.
 
 ---
 
+<!-- slide: 12 -->
 <!-- slide-section: task-4 -->
+<!-- .slide: data-timer="240" -->
 ## Making conclusions
 
-- individually decide which statement gives the best conclusion of the article (Exercise 4): a) Learning and change are both easier for younger people, b) Technology often causes conflict between young and old, c) Differences can be good if we take time to understand them..
+- Individually decide which statement gives the best conclusion of the article : a) Learning and change are both easier for younger people, b) Technology often causes conflict between young and old, c) Differences can be good if we take time to understand them..
 
 Notes:
 Stage 4 · 4 min · Ss-Ss
@@ -151,11 +167,13 @@ Materials: OFD 3, Student Book, pp 5-6
 
 ---
 
+<!-- slide: 13 -->
 <!-- slide-section: transition-5 -->
 <!-- .slide: data-background="#c0392b" -->
 ## Let's Discuss
 
-How does this topic connect to your own life?
+Now let's talk about how this applies to your life.  
+You might be surprised by what others think!
 
 Notes:
 Moving from Reading for inference and conclusion.
@@ -163,7 +181,9 @@ Give students a moment to reset. Introduce the next activity.
 
 ---
 
+<!-- slide: 14 -->
 <!-- slide-section: task-5 -->
+<!-- .slide: data-timer="420" -->
 ## Let's Discuss
 
 - In pairs, Students answer the questions from Exercise 5 using ideas from the article:
@@ -178,11 +198,13 @@ Materials: OFD 3, Student Book, pp 5-6
 
 ---
 
+<!-- slide: 15 -->
 <!-- slide-section: transition-6 -->
 <!-- .slide: data-background="#c0392b" -->
 ## Let's Review
 
-What is one thing you learned today?
+Let's review what we've learned today.  
+Can you remember all the key points?
 
 Notes:
 Moving from Post-reading speaking task.
@@ -190,7 +212,9 @@ Give students a moment to reset. Introduce the next activity.
 
 ---
 
+<!-- slide: 16 -->
 <!-- slide-section: task-6 -->
+<!-- .slide: data-timer="300" -->
 ## Let's Review
 
 - Brief error correction if needed.
@@ -202,6 +226,7 @@ Materials: OFD 3, Student Book, pp 5-6
 
 ---
 
+<!-- slide: 17 -->
 <!-- slide-section: answers -->
 ## Exercise 1
 <!-- .element: class="aim-label" -->
@@ -257,12 +282,13 @@ c. Differences can be good if we take time to understand them.
 
 ---
 
+<!-- slide: 18 -->
 <!-- slide-section: summary -->
 ## What you can do now
 
-✓ Identify the main purpose of a text
-✓ Find key facts and correct false statements
-✓ Express and support opinions about a topic
+✓ I can find the main idea
+✓ I can find important facts
+✓ I can share my ideas
 
 Notes:
 Elicit from students: What did you learn today?
@@ -271,6 +297,7 @@ Praise effort, mention one thing to improve.
 
 ---
 
+<!-- slide: 19 -->
 <!-- slide-section: end -->
 <!-- .slide: data-background="#2c3e50" -->
 ## Thank you
