@@ -110,9 +110,49 @@ Example: A True/False statement about the "generation gap" article runs through 
 - **Underline step labels** — `<u><strong>Step N:</strong> ...</u>`
 - **Real quotes on Step 4** — actual text excerpts from the article, in italics with the relevant phrase highlighted
 - **Rule embedded at Step 2** — not a separate slide. Include it: "If you answer Yes to all → TRUE. If you answer No to even one → FALSE."
-- **No auto-animate** — use `data-background-transition="none"` on all pedagogical sections. Teacher controls pacing.
+- **Auto-animate for keyword underlines** — use `data-auto-animate` on a pair of adjacent slides to animate keyword underlines appearing. See pattern below.
 - **Teal background** — `data-background="#1a6b5a"` + `class="pedagogical"` on all strategy slides.
 - **Top alignment** — use `padding-top: 30px` on `.reveal .slides > section.pedagogical` in CSS. Do NOT use negative margins (they clip content off-screen). Inline `style="top: 0;"` on the section element if needed.
+
+### Auto-Animate for Underline Reveal
+
+When a pedagogical slide needs to show key words being underlined (e.g. Step 2 of a strategy: "Underline key words"), use TWO successive `<section>` elements with matching `data-auto-animate`. The first shows the text with transparent borders; the second shows white borders. The transition is triggered by advancing through slides (click/right arrow), NOT by fragments.
+
+**DO NOT use `class="fragment"`** for this purpose. Fragments hide text (`opacity: 0`) which produces blank spaces. Auto-animate between two slides is the correct approach.
+
+Pattern (both sections need `data-auto-animate`):
+
+```html
+<!-- Enter state: plain sentence, borders invisible -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate>
+    <div style="overflow: hidden;">
+        <p><u><strong>Step 2:</strong> Underline key words</u></p>
+        <p data-id="mcq" style="color:#ffdd00;">
+            <em>"What is the <span data-id="w1" style="border-bottom: 2px solid transparent;">main message</span>
+            of this <span data-id="w2" style="border-bottom: 2px solid transparent;">article</span>?"</em>
+        </p>
+    </div>
+</section>
+<!-- After click: borders become visible, animate via auto-animate -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate>
+    <div style="overflow: hidden;">
+        <p><u><strong>Step 2:</strong> Underline key words</u></p>
+        <p data-id="mcq" style="color:#ffdd00;">
+            <em>"What is the <span data-id="w1" style="border-bottom: 2px solid white;">main message</span>
+            of this <span data-id="w2" style="border-bottom: 2px solid white;">article</span>?"</em>
+        </p>
+    </div>
+</section>
+```
+
+Requirements:
+- Both `<section>` elements MUST have `data-auto-animate`
+- The `<p>` wrapping the question MUST have a `data-id` attribute (same value on both)
+- Each `<span>` wrapping a keyword MUST have a `data-id` attribute (same on both)
+- Slide 1 uses `transparent` border color so the text appears plain but the border space is reserved
+- Slide 2 uses `white` border color - auto-animate animates the color transition during slide advance
+- The previous slide (e.g. Step 1) should NOT have `data-auto-animate` — this prevents unwanted animation between unrelated slides
+- Use `data-background-transition="none"` to keep background from animating (teacher controls pacing)
 
 ### Vertical Alignment Fix
 
