@@ -305,26 +305,53 @@ def copy_to_assets(slides_dir, image_path, prefix=""):
     return f"assets/{filename}"
 
 
+def find_existing_asset(slides_dir, file_prefix=None):
+    """Check slides_dir/assets/ for existing images. Returns asset-relative path or None."""
+    if not slides_dir:
+        return None
+    assets_dir = Path(slides_dir) / "assets"
+    if not assets_dir.exists():
+        return None
+    for f in assets_dir.iterdir():
+        if f.is_file() and f.suffix.lower() in (".jpg", ".jpeg", ".png"):
+            if file_prefix:
+                if f.stem.startswith(file_prefix) or file_prefix in f.stem:
+                    return f"assets/{f.name}"
+            elif f.name != "logo.png":
+                return f"assets/{f.name}"
+    return None
+
+
 def generate_title_slide(data, title_image_path=None, title_attribution=None, slides_dir=None, logo_path=None):
     topic = escape_md(data.get("topic", ""))
     cefr = data.get("lesson_plan", {}).get("cefr_level", "")
     strap = generate_lesson_strap(data)
 
-    existing = None
     if title_image_path:
         image_path = Path(title_image_path).resolve()
     else:
+        # Auto-discover title image in assets/ if none passed
         image_path = None
+        if slides_dir:
+            # Try multiple prefixes to find title image
+            for prefix in ("title", "pixabay_486", "pixabay_437", "pixabay_182"):
+                found = find_existing_asset(slides_dir, prefix)
+                if found:
+                    image_path = found
+                    break
 
     bg_directive = ""
-    if image_path and slides_dir:
-        bg_directive = f'<!-- .slide: data-background-image="{existing}" data-background-opacity="0.7" -->'
-    elif image_path and slides_dir:
-        rel_path = os.path.relpath(str(image_path), str(slides_dir)).replace("\\", "/")
-        bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
-    elif image_path:
-        rel_path = image_path.relative_to(OUTPUT_DIR.parent).as_posix()
-        bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
+    if image_path:
+        if isinstance(image_path, str) and image_path.startswith("assets/"):
+            bg_directive = f'<!-- .slide: data-background-image="{image_path}" data-background-opacity="0.7" -->'
+        elif slides_dir and image_path.exists():
+            rel_path = os.path.relpath(str(image_path), str(slides_dir)).replace("\\", "/")
+            bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
+        elif image_path:
+            rel_path = Path(image_path).relative_to(OUTPUT_DIR.parent).as_posix()
+            bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
+        else:
+            bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #2c3e50, #3498db)" -->'
     else:
         bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #2c3e50, #3498db)" -->'
 
@@ -510,6 +537,16 @@ def generate_vocabulary_slides(data, slides_dir=None):
 
     for idx, (word, phonemic, _) in enumerate(keywords):
         image_path = None
+        # Auto-discover vocab image in assets/ if none passed
+        if slides_dir:
+            found = find_existing_asset(slides_dir, f"vocab-{word}")
+            if found:
+                image_path = found
+            else:
+                # Try shorter prefix for vocab words (just the word)
+                found = find_existing_asset(slides_dir, word[:8])
+                if found:
+                    image_path = found
         slide_content = generate_single_vocabulary_slide(word, phonemic, image_path, idx + 1)
         if slide_content:
             slides.append(slide_content)
@@ -608,7 +645,17 @@ def generate_leadin_slide(stage, data, slides_dir=None):
 
     question = generate_leadin_question(topic, procedure)
 
+    # Auto-discover lead-in image in assets/ if none passed
     bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->'
+    if slides_dir:
+        found = find_existing_asset(slides_dir, "leadin")
+        if found:
+            bg_directive = f'<!-- .slide: data-background-image="{found}" data-background-opacity="0.7" -->'
+        else:
+            # Try pixabay_ prefix
+            found = find_existing_asset(slides_dir, "pixabay_733")
+            if found:
+                bg_directive = f'<!-- .slide: data-background-image="{found}" data-background-opacity="0.7" -->'
 
     lines = [
         '<!-- slide-section: leadin -->',
@@ -1361,11 +1408,27 @@ if __name__ == "__main__":
                         help="Comma-separated section IDs to regenerate (e.g., 'title,vocab-1,task-2')")
     parser.add_argument("--merge", action="store_true",
                         help="Merge regenerated sections into existing markdown file")
+    parser.add_argument("--full-regen", action="store_true",
+                        help="Regenerate full markdown from JSON (overwrites manual edits)")
     args = parser.parse_args()
 
-    result = convert_json_to_markdown(
-        args.json_file, args.title_image, args.title_attribution, args.logo_image,
-        sections=args.section.split(",") if args.section else None,
-        merge=args.merge
-    )
+    # Use get_output_path() to find the correct markdown output path
+    with open(args.json_file, encoding="utf-8") as f:
+        json_data = json.load(f)
+    date_str = json_data.get("date", "000000")
+    output_md = get_output_path(args.json_file, date_str)
+    slides_dir = output_md.parent
+
+    # Default: just regenerate HTML from existing markdown (preserves manual edits)
+    result = True
+    if not args.full_regen and output_md.exists():
+        existing_md = output_md.read_text(encoding="utf-8")
+        write_index_html(existing_md, slides_dir)
+        print(f"HTML regenerated from existing markdown: {output_md}")
+    else:
+        result = convert_json_to_markdown(
+            args.json_file, args.title_image, args.title_attribution, args.logo_image,
+            sections=args.section.split(",") if args.section else None,
+            merge=args.merge
+        )
     sys.exit(0 if result else 1)

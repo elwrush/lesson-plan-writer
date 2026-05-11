@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<!--
+    DEPRECATED — Markdown-based template. No longer used.
+    All new presentations must start from: templates/base-slides-template.html
+    This file is kept for backward compatibility with existing markdown-based slide sets.
+    Last used: May 2026 (prior to auto-animate requirement).
+-->
 <html>
     <head>
         <meta charset="utf-8" />
@@ -70,6 +76,45 @@
             .reveal section.vocab-slide p {
                 font-size: 1.3em;
                 line-height: 1.4;
+            }
+
+            /* Vocabulary word emphasis - yellow bold */
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            }
+
+            /* Pedagogical slides - teal background */
+            .reveal section.pedagogical {
+                background: #1a6b5a;
+            }
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 {
+                color: #fff;
+            }
+            .reveal section.pedagogical p {
+                color: #fff;
+            }
+            .reveal section.pedagogical li {
+                color: #fff;
+            }
+            .reveal section.pedagogical .strategy-tip {
+                font-size: 0.85em;
+                font-style: italic;
+                color: rgba(255,255,255,0.85);
+                margin-bottom: 0.5em;
+            }
+            .reveal section.pedagogical .evidence {
+                font-size: 0.8em;
+                background: rgba(0,0,0,0.3);
+                padding: 0.4em 0.6em;
+                border-radius: 4px;
+                border-left: 3px solid rgba(255,255,255,0.4);
             }
 
             /* Text shadow for readability - native reveal.js feature */

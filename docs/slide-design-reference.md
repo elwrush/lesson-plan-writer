@@ -1,6 +1,8 @@
 # Slide Design Reference — ESL Lesson Presentations
 
-This document defines how lesson plan JSON stages map to reveal.js slides. It is read by `scripts/json_to_markdown.py` at generation time. The teacher updates this file to change slide design without touching code.
+This document defines how lesson plan JSON stages map to reveal.js slides. It is the **authoritative design reference** for all presentations. Agents build slides by following these patterns using raw HTML `<section>` elements inside the base template.
+
+The base template is at `templates/base-slides-template.html` — copy it to `output/{subfolder}/slides/index.html` for each new presentation.
 
 ---
 
@@ -8,7 +10,9 @@ This document defines how lesson plan JSON stages map to reveal.js slides. It is
 
 - **Teacher controls all slides** — students never interact directly
 - **Slides support the teacher's narration, not replace it**
-- **Reveal.js 5.x** via CDN (inline markdown), white theme, 1280×720
+- **Reveal.js 5.x** via CDN, raw HTML `<section>` elements, 1280×720
+- **Base template**: `templates/base-slides-template.html` — copy to `output/{subfolder}/slides/index.html`, then add `<section>` elements
+- **Markdown is permanently abandoned** — auto-animate requires sibling `<section>` elements, incompatible with the `<section data-markdown>` wrapper
 - **CEFR levels**: A1, A2, B1, B2, C1, C2
 
 ---
@@ -16,15 +20,16 @@ This document defines how lesson plan JSON stages map to reveal.js slides. It is
 ## Core Principles
 
 1. **Expository content on screen at once** — task instructions, vocabulary, objectives, discussion questions: ALL visible when the slide appears. Do not use fragments for expository material.
-2. **Procedure text NEVER on screen** — teacher instructions, timing, interaction patterns go in speaker notes (`Notes:`)
+2. **Procedure text NEVER on screen** — teacher instructions, timing, interaction patterns go in `<aside class="notes">`
 3. **Fragments reserved for answer reveal** — the teacher reveals answers one at a time after students have worked. This is the primary use of fragments.
-4. **Auto-animate for language demonstrations** — use for showing how parts of speech work, word transformations (active/passive, tense changes), or sentence structure. Not for general slides.
-5. **Visual-first** — every lead-in and pre-reading slide uses a Pixabay background image
-6. **Prediction before task** — students guess before doing, confirm with answer reveal
-7. **Answer slides = answer + why + source** (all 3 parts)
-7. **Vocabulary pre-teach** — slides AFTER lead-in stage, one word per slide on Pixabay background
-9. **Section transitions** between stages — brief, one discussion question, colored background
-10. **Text highlighting** — all slide text uses white text on a semi-transparent dark gray background with dark text outline
+4. **Auto-animate for strategy demonstrations** — use for showing step-by-step strategies (True/False, Multiple Choice) across consecutive slides. Not for general slide transitions.
+5. **Pedagogical slides** — strategy/teaching content uses teal background (`data-background="#1a6b5a"`, `class="pedagogical"`) with white text
+6. **Visual-first** — every lead-in and pre-reading slide uses a Pixabay background image
+7. **Prediction before task** — students guess before doing, confirm with answer reveal
+8. **Answer slides = answer + why + source** (all 3 parts)
+9. **Vocabulary pre-teach** — slides AFTER lead-in stage, one word per slide on Pixabay background
+10. **Section transitions** between stages — brief, one discussion question, red background (`#c0392b`)
+11. **Text highlighting** — all slides use text-shadow for readability; pedagogical slides use white-on-teal; vocabulary words use yellow boldface (`#ffdd00`)
 
 ---
 
@@ -73,17 +78,13 @@ No words above CEFR B1 on screen without inline definition:
 
 ### Text highlighting (all slides)
 
-All slide text (h2, h3, p, li) uses a consistent highlight style:
+All slide text (h2, h3, p, li) uses consistent styling via CSS in `templates/base-slides-template.html`:
 
-- **Background**: dark gray at 50% opacity (`rgba(0,0,0,0.5)`)
-- **Text**: white (`#ffffff`)
-- **Text outline**: subtle dark outline using 4-direction text-shadow (`rgba(0,0,0,0.3)`)
-- **Header display**: block (renders on own line)
-- **Inline text display**: inline-block (p and li render inline)
-- **Vocabulary words in context**: yellow boldface (`#ffdd00`) for emphasis
-- **Header border-bottom**: maroon (`#800020`)
-
-This applies to ALL slides regardless of background type.
+- **Text shadow**: `<text-shadow: 2px 2px 4px rgba(0,0,0,0.8)>` on all headings and body text
+- **Pedagogical slides**: `class="pedagogical"` + `data-background="#1a6b5a"` — white text with teal background, white border-bottom on h2
+- **Vocabulary words**: `<span class="vocab-word">word</span>` — yellow (`#ffdd00`) bold with text shadow
+- **Transitions**: `data-background="#c0392b"` — red background
+- **End slide**: `data-background="#2c3e50"` — dark background
 
 ---
 
@@ -111,33 +112,44 @@ Fragment styles allowed:
 
 ---
 
-## Markdown Syntax Rules
+## HTML Section Rules
 
-These are the ONLY allowed patterns. Agents must not invent alternatives.
+These are the ONLY allowed patterns. Agents must not invent alternatives. All slides are raw HTML `<section>` elements.
 
-### Slide separators
-```
----           <- horizontal slide (blank line before AND after)
-```
-
-### Fragments (on same line as element)
-```
-✓ **Correct** <!-- .element: class="fragment highlight-green" -->
-✗ **Wrong** <!-- .element: class="fragment highlight-red" -->
-- **word** <!-- .element: class="fragment grow" -->
+### Slide elements
+```html
+<section>                    ← standalone slide
+<section data-background="#c0392b">   ← slide with attributes
+<section data-auto-animate data-auto-animate-id="same-id">  ← auto-animate pair
+<section data-background-image="assets/image.jpg" data-background-opacity="0.7">  ← image background
+<section data-timer="300">   ← timer pill (seconds)
 ```
 
-### Slide attributes (at top of content)
-```
-<!-- .slide: data-background="#e74c3c" -->
-<!-- .slide: data-background-gradient="linear-gradient(to bottom, #2c3e50, #3498db)" -->
-<!-- .slide: data-background-image="/images/photo.jpg" -->
+### Fragments (classes on elements)
+```html
+<p class="fragment highlight-green">✓ <strong>Correct</strong></p>
+<p class="fragment highlight-red">✗ <strong>Wrong</strong></p>
+<p class="fragment strike">Eliminated answer</p>
+<span class="fragment grow">word</span>
+<span class="fragment">Generic reveal</span>
 ```
 
 ### Speaker notes
+```html
+<aside class="notes">
+    Full teacher script goes here.
+    Multi-line notes supported.
+</aside>
 ```
-Notes:
-Full teacher script goes here.
+
+### Vocabulary words
+```html
+<span class="vocab-word">generation gap</span>
+```
+
+### CEFR badges
+```html
+<span class="cefr-badge B1">B1</span>
 ```
 
 ---
@@ -145,26 +157,27 @@ Full teacher script goes here.
 ## Slide Type Templates
 
 ### 1. Title Slide
-```markdown
-<!-- .slide: data-background-image="{pixabay_hero_image}" -->
-# {{ topic }} <span class="cefr-badge {{ cefr_level }}">{{ cefr_level }}</span>
-
-**{{ date }}** | {{ duration }}
-
-Teacher: {{ teacher }}
-
-*{{ materials }}*
+```html
+<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
+    <img src="assets/logo.png" class="title-logo" alt="Logo" />
+    <h1>{{ topic }} <span class="cefr-badge {{ cefr_level }}">{{ cefr_level }}</span></h1>
+    <p><em>{{ strap_subheader }}</em></p>
+</section>
 ```
 
 CEFR badge colors: A1=green, A2=light green, B1=blue, B2=dark blue, C1=purple, C2=red
 
 ### 2. Objective Slide (all visible at once)
-```markdown
-## What you will be able to do by the end
-
-- {{ outcome_1 }}
-- {{ outcome_2 }}
-- {{ outcome_3 }}
+```html
+<section>
+    <h2>Here's what you'll be able to do</h2>
+    <ul>
+        <li>{{ outcome_1 }}</li>
+        <li>{{ outcome_2 }}</li>
+        <li>{{ outcome_3 }}</li>
+    </ul>
+    <p><em>These are the same skills you need for the PET reading test!</em></p>
+</section>
 ```
 
 3 outcomes max, each ≤10 words. NO fragments — students need to see this as orientation.
@@ -176,27 +189,25 @@ The script automatically converts formal stage names to friendly student-facing 
 - "Lead-in" → "Let's get Started"
 - "Post-reading speaking task" → "Let's Discuss"
 - "Wrap-up and reflection" → "Let's Review"
-```markdown
-<!-- .slide: data-background-image="{pixabay_word_image}" data-background-opacity="1.0" -->
+```html
+<!-- First word (with header) -->
+<section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="0.7">
+    <h2>Important Words</h2>
+    <p><span class="vocab-word">{{ word }}</span></p>
+    <p><em>{{ phonemic }}</em></p>
+    <p><em>There's such a <span class="vocab-word">{{ word }}</span> between them; they never agree on anything.</em></p>
+</section>
 
-## Important Words
-
-**{{ word }}**
-_{{ phonemic }}_
-
-*There's such a {{ word }} between them; they never agree on anything.*
-
----
-
-<!-- subsequent vocab slides omit the header -->
-**{{ word }}**
-_{{ phonemic }}_
-
-*There's such a {{ word }} between them; they never agree on anything.*
-
-Notes:
-Drill: teacher says → class repeats (×3).
-Show image as visual anchor for meaning.
+<!-- Subsequent words (no header) -->
+<section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="0.7">
+    <p><span class="vocab-word">{{ word }}</span></p>
+    <p><em>{{ phonemic }}</em></p>
+    <p><em>There's such a <span class="vocab-word">{{ word }}</span> between them; they never agree on anything.</em></p>
+    <aside class="notes">
+        Drill: teacher says → class repeats (×3).
+        Show image as visual anchor for meaning.
+    </aside>
+</section>
 ```
 
 Rules:
@@ -208,195 +219,219 @@ Rules:
 - All visible at once — NO fragments
 
 ### 4. Lead-In Image Slide
-```markdown
-<!-- .slide: data-background-image="{pixabay_photo}" -->
-
-## {{ open_question }}
-
-Notes:
-{{ teacher_activation_script }}
-Display image for 20 seconds silently.
-Then ask the question. Elicit 3-4 responses.
-Connect responses to today's topic.
+```html
+<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
+    <h2>Let's get Started</h2>
+    <h3>{{ open_question }}</h3>
+    <aside class="notes">
+        {{ teacher_activation_script }}
+        Display image for 20 seconds silently.
+        Then ask the question. Elicit 3-4 responses.
+        Connect responses to today's topic.
+    </aside>
+</section>
 ```
 
 One open question only. Image as background. Speaker notes: activation script.
 
 ### 5. Pre-Reading Prediction
-```markdown
-<!-- .slide: data-background-image="{pixabay_context_photo}" -->
-
-## Before you read: {{ article_title }}
-
-- What problem does the writer describe?
-- What solution do they suggest?
-
-Notes:
-Students read the title and look at the photo.
-Give them 30 seconds to share predictions in pairs.
-Write 2-3 predictions on the board.
+```html
+<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
+    <h2>Before you read: {{ article_title }}</h2>
+    <ul>
+        <li>What problem does the writer describe?</li>
+        <li>What solution do they suggest?</li>
+    </ul>
+    <aside class="notes">
+        Students read the title and look at the photo.
+        Give them 30 seconds to share predictions in pairs.
+        Write 2-3 predictions on the board.
+    </aside>
+</section>
 ```
 
 ### 6. Task Instruction Slide
-```markdown
-## Exercise {{ number }}
-
-{{ brief_task_instruction }}
-
-*{{ material_reference }}*
-<!-- .element: class="material-ref" -->
-
-Notes:
-{{ full_procedure_with_timing }}
-Students work individually for {{ time }} min.
-Do NOT reveal answer yet.
+```html
+<section data-timer="{{ seconds }}">
+    <h2>{{ stage_name }}</h2>
+    <ul>
+        <li>{{ brief_task_instruction_1 }}</li>
+        <li>{{ brief_task_instruction_2 }}</li>
+    </ul>
+    <aside class="notes">
+        Stage {{ number }} · {{ time }} min · {{ interaction }}
+        Goal: {{ stage_aim }}
+        Materials: {{ material_reference }}
+    </aside>
+</section>
 ```
 
 Brief task: 1-3 short bullet points. Full procedure in speaker notes. Material reference in italic gray.
 
-### 7. Answer Explanation Slide
-```markdown
-## Exercise {{ number }} — Answers
-
-**{{ question_1 }}**
-
-✓ **{{ correct_answer }}** <!-- .element: class="fragment highlight-green" -->
-*{{ explanation }}* — {{ source }}
-
----
-
-**{{ question_2 }}**
-
-✓ **{{ correct_answer }}** <!-- .element: class="fragment highlight-green" -->
-*{{ explanation }}* — {{ source }}
+### 7. Answer Slide — True/False
+```html
+<section>
+    <h2>Exercise {{ number }}</h2>
+    <p class="aim-label">True/False</p>
+    <p class="fragment">{{ statement_text }}</p>
+    <p class="fragment highlight-green">✓ <strong>{{ correct_answer }}</strong></p>
+    <p class="fragment">{{ another_statement }}</p>
+    <p class="fragment highlight-red">✗ <strong>False</strong></p>
+    <p class="fragment highlight-green">✓ <em>{{ corrected_statement }}</em></p>
+</section>
 ```
 
 Rules:
 - Each answer revealed via fragment (teacher controls when answer appears)
-- Correct answer: bold + highlight-green
+- Correct answer: bold + `highlight-green`
 - Explanation: 1 sentence
-- Source: "Paragraph C, lines 3-5" or "See instructions"
-- Multiple answers separated by `---`
+- Source: paragraph reference in speaker notes
 
-### 8. Answer Slide — Multiple Choice Variant
-```markdown
-## Exercise {{ number }} — Answer
-
-a. {{ option_a }}
-b. {{ option_b }}
-c. {{ option_c }}
-
-✓ **{{ correct_letter }}** — {{ explanation }} <!-- .element: class="fragment highlight-green" -->
-
-{{ source }}
-<!-- .element: class="source-cite" -->
+### 8. Answer Slide — Multiple Choice
+```html
+<section>
+    <h2>Exercise {{ number }}</h2>
+    <p class="aim-label">Multiple Choice</p>
+    <p>a. {{ option_a }}</p>
+    <p>b. {{ option_b }}</p>
+    <p>c. {{ option_c }}</p>
+    <p class="fragment highlight-green">✓ <strong>{{ correct_letter }}</strong></p>
+</section>
 ```
 
 ### 9. Section Transition Slide
-```markdown
-<!-- .slide: data-background="#c0392b" -->
-
-## {{ next_stage_name }}
-
-{{ discussion_question }}
-
-Notes:
-Transition: "Now we're moving from {{ prev_stage }} to {{ next_stage }}."
-Ask the discussion question. 1-2 min.
+```html
+<section data-background="#c0392b">
+    <h2>{{ next_stage_name }}</h2>
+    <p>{{ discussion_question }}</p>
+    <aside class="notes">
+        Transition: "Now we're moving from {{ prev_stage }} to {{ next_stage }}."
+        Ask the discussion question. 1-2 min.
+    </aside>
+</section>
 ```
 
 Red/orange background. One discussion question to warm up for the next stage.
 
 ### 10. Post-Reading Discussion Slide
-```markdown
-<!-- .slide: data-background-image="{pixabay_extension_photo}" -->
-
-## Discussion
-
-- {{ question_1 }}
-- {{ question_2 }}
-- {{ question_3 }}
-
-*{{ material_reference }}*
-<!-- .element: class="material-ref" -->
-
-Notes:
-Students discuss in pairs. 5 min.
-Content and language feedback. 2 min.
+```html
+<section>
+    <h2>Let's Discuss</h2>
+    <ol>
+        <li>{{ question_1 }}</li>
+        <li>{{ question_2 }}</li>
+        <li>{{ question_3 }}</li>
+    </ol>
+    <aside class="notes">
+        Students discuss in pairs. 5 min.
+        Content and language feedback. 2 min.
+    </aside>
+</section>
 ```
 
 All questions visible at once. No fragments for discussion.
 
 ### 11. Summary Slide
-```markdown
-## What you can do now
-
-✓ {{ outcome_1 }}
-✓ {{ outcome_2 }}
-✓ {{ outcome_3 }}
-
-Notes:
-Elicit from students: What did you learn today?
-Connect back to their predictions from the beginning.
+```html
+<section>
+    <h2>What you can do now</h2>
+    <ul>
+        <li>✓ {{ outcome_1 }}</li>
+        <li>✓ {{ outcome_2 }}</li>
+        <li>✓ {{ outcome_3 }}</li>
+    </ul>
+    <aside class="notes">
+        Elicit from students: What did you learn today?
+        Connect back to their predictions from the beginning.
+    </aside>
+</section>
 ```
 
 ### 12. End Slide (buffer)
-```markdown
-<!-- .slide: data-background="#2c3e50" -->
-
-## Thank you
-
-*{{ topic }}* | {{ cefr_level }}
+```html
+<section data-background="#2c3e50">
+    <h2>Thank you</h2>
+    <p><em>{{ topic }}</em> | {{ cefr_level }}</p>
+</section>
 ```
 
 ---
 
-## Auto-Animate for Language Demonstrations
+## Auto-Animate for Strategy Demonstrations
 
-Use auto-animate (`data-auto-animate`) on adjacent slides to demonstrate language transformations. Only use for grammar/language points, not for general slides.
+Use `data-auto-animate` on consecutive sibling `<section>` elements to build up strategies step by step. **Auto-animate is the primary reason markdown was abandoned** — consecutive `<section data-auto-animate>` elements must be direct siblings in `<div class="slides">`, not nested inside `<section data-markdown>`.
 
-### Example: Active → Passive transformation
-```markdown
-<!-- .slide: data-auto-animate -->
-## Active → Passive
-
-**The dog chased the cat.**
-<!-- .element: class="fragment highlight-blue" data-fragment-index="1" -->
-
----
-
-<!-- .slide: data-auto-animate -->
-## Active → Passive
-
-**The cat was chased by the dog.**
-<!-- .element: class="fragment highlight-blue" -->
+### Example: True/False Strategy (5 slides)
+```html
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+    <h2>True/False Strategy</h2>
+    <p><strong>Step 1:</strong> Read the statement carefully</p>
+    <p><em>Statement text goes here.</em></p>
+</section>
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+    <h2>True/False Strategy</h2>
+    <p><strong>Step 1:</strong> Read the statement carefully</p>
+    <p><em>Statement text goes here.</em></p>
+    <p><strong>Step 2:</strong> Find the keywords</p>
+    <p>"keyword1" · "keyword2" · "keyword3"</p>
+</section>
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+    <h2>True/False Strategy</h2>
+    <!-- ... all previous steps ... -->
+    <p><strong>Step 3:</strong> Find the evidence</p>
+    <p>Look in paragraphs X and Y. Do the meanings match?</p>
+</section>
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+    <h2>True/False Strategy</h2>
+    <!-- ... all previous steps ... -->
+    <p><strong>Step 4:</strong> Check your answer</p>
+</section>
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+    <h2>True/False Strategy</h2>
+    <!-- ... all previous steps ... -->
+    <p class="fragment highlight-green">TRUE — Explanation of why it's true.</p>
+</section>
 ```
 
-### Example: Vocabulary word in context
-```markdown
-<!-- .slide: data-auto-animate -->
-## empathy /ˈempəθi/
+**Critical rules:**
+- All sections in one block MUST be consecutive siblings — no other sections between them
+- `data-auto-animate-id` MUST match across all sections in the block
+- Each section builds on the previous by adding new elements while keeping shared elements
+- `autoAnimateUnmatched: true` in `Reveal.initialize()` handles new/removed elements
+- All sections share `class="pedagogical"` and `data-background="#1a6b5a"`
 
----
-
-<!-- .slide: data-auto-animate -->
-## empathy /ˈempəθi/
-
-"She felt real empathy when she heard his story."
+### Example: Multiple Choice Strategy (non-stacked, single slide with fragments)
+```html
+<section class="pedagogical" data-background="#1a6b5a">
+    <h2>Multiple Choice Strategy</h2>
+    <p><strong>Step 1: Read all options first</strong> <span class="fragment"> — look at all three choices</span></p>
+    <ul class="fragment">
+        <li>a) Option A text</li>
+        <li>b) Option B text</li>
+        <li>c) Option C text</li>
+    </ul>
+    <p class="fragment"><strong>Step 2: Eliminate wrong answers</strong></p>
+    <p class="fragment strike">a) Reason for elimination. <strong>Eliminate.</strong></p>
+    <p class="fragment strike">b) Reason for elimination. <strong>Eliminate.</strong></p>
+    <p class="fragment"><strong>Step 3: Confirm the answer</strong></p>
+    <p class="fragment highlight-green">c) Explanation. ✓ <strong>c is correct!</strong></p>
+</section>
 ```
 
-**When to use auto-animate:**
-- Tense changes (present → past → present perfect)
-- Active → passive transformations
-- Word families (empathy → empathetic → empathize)
-- Collocation examples (strong coffee, NOT powerful coffee)
-- Showing a word isolated → in a sentence
-- Sentence structure comparison
+**When to use auto-animate (stacked slides):**
+- True/False strategy — building up 4-5 steps incrementally
+- Paragraph matching strategy — showing each paragraph match one at a time
+- Step-by-step grammar analysis
+
+**When to use fragments (single slide):**
+- Multiple choice strategy — eliminate wrong answers in sequence
+- Answer reveal — one slide per exercise with fragment-per-answer
 
 **When NOT to use auto-animate:**
-- Answer reveals (use fragments instead)
 - General slide transitions (use regular slide changes)
 - Vocabulary lists (all visible at once)
+- Answer reveals (use fragments)
+- Expository content (all visible at once)
 
 ---
 
@@ -483,11 +518,11 @@ Phonemic script: Use IPA. Example sentences must imply meaning without defining.
 
 The title slide uses a Pixabay background image with a dark overlay for readability:
 
-```markdown
-<!-- .slide: data-background-image="path/to/image.jpg" data-background-color="rgba(0,0,0,0.8)" -->
+```html
+<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
 ```
 
-- Images are downloaded from Pixabay API, resized to max 1920px width, compressed as JPEG (quality=85)
+- Images are downloaded from Pixabay API, resized to max 1920px width, compressed as JPEG (quality=80)
 - Optimized images are cached in `output/.image-cache/` by Pixabay image ID
 - Target file size: ~150-300KB per image
 - If Pixabay API is unavailable or returns no results, falls back to gradient background
@@ -499,33 +534,44 @@ Attribution in speaker notes: `Image by {author} from Pixabay`
 
 ## Implementation
 
-1. `scripts/json_to_markdown.py` reads this document at generation time
-2. The script generates markdown following these templates
-3. Build: `python scripts/json_to_markdown.py output/{subfolder}/{file}.json` — generates both `slides.md` and `index.html`
-4. Open: double-click `output/{subfolder}/slides/index.html` in any browser (no server needed)
+1. **Template**: Copy `templates/base-slides-template.html` → `output/{subfolder}/slides/index.html`
+2. **Slides**: Add raw HTML `<section>` elements inside `<div class="slides">`
+3. **Images**: Copy logo to `slides/assets/logo.png`, download Pixabay backgrounds to `slides/assets/`
+4. **Edit**: Edit `index.html` directly — no generation step needed
+5. **Open**: Double-click `index.html` in any browser (no server needed)
 
----
+### Timer Pill
 
-## Timer Pill
+Task instruction slides display a floating timer pill at the bottom center of the viewport.
 
-Task instruction slides (generated from stages with `time > 0`) display a floating timer pill at the bottom center of the viewport.
-
-- **Reusability**: The timer plugin is not coupled to task slides. Any slide with `data-timer="{seconds}"` gets a timer pill. The generation script adds it to task slides automatically, but you can also add the attribute manually to vocabulary, pre-reading, discussion, or any other slide type in the markdown.
-
+- **Attribute**: `data-timer="seconds"` on the `<section>` element
 - **Appearance**: Semi-transparent dark rounded pill with digital MM:SS readout
+- **Controls**: ⏵ Start, ⏸ Pause, ↺ Reset
+- **Behavior**: Counts down from prescribed time, chimes at 10s (yellow) and 0s (red)
+- **No auto-start**: Teacher must click ⏵
+- Requires timer-plugin.js and timer-plugin.css in the slides directory
 
-- **Controls**: ⏵ Start, ⏸ Pause, ↺ Reset (circular buttons)
+### Example: "What Connects Us" (B2, 46 min, 6 stages)
 
-- **Behavior**: Timer counts down from the stage's prescribed time (minutes converted to seconds, stored in `data-timer` attribute)
+Generated slides (~29 slides):
 
-- **Warning**: At 10 seconds remaining, a chime plays and the pill turns yellow
-
-- **Expired**: At 0, a second chime plays and the pill turns red; start is disabled until reset
-
-- **Slide change**: Timer resets to the new stage's time on each slide navigation
-
-- **Global pause**: When reveal.js is paused, the timer pauses automatically
-
-- **No auto-start**: The timer never starts automatically — the teacher must click ⏵
-
-- **Attribute**: `<!-- .slide: data-timer="300" -->` (seconds)
+```
+Slide 0:  Title — "What Connects Us" + B2 badge + Pixabay background + logo
+Slide 1:  Objective — 3 outcomes (all visible, no fragments)
+Slide 2:  Lead-in — Pixabay background + open question
+Slide 3-6: Vocabulary — 4 words, one per slide, Pixabay backgrounds
+Slide 7:  Transition — "What's the main idea?" (red #c0392b)
+Slide 8:  Transition — "Finding details" (red #c0392b)
+Slides 9-13: Auto-animate — True/False Strategy (5 slides, teal #1a6b5a)
+Slide 14: Auto-animate — MC Strategy block (teal #1a6b5a)
+Slide 15: Task — True/False + Paragraph Matching (timer)
+Slide 16: Transition — "Making conclusions" (red)
+Slide 17: Task — Multiple Choice (timer)
+Slide 18: Transition — "Let's Discuss" (red)
+Slide 19: Task — Discussion questions (timer)
+Slide 20: Transition — "Let's Review" (red)
+Slide 21: Task — Reflection activity (timer)
+Slides 22-26: Answer slides — fragment reveals
+Slide 27: Summary — "What you can do now"
+Slide 28: End — "Thank you" (dark #2c3e50)
+```

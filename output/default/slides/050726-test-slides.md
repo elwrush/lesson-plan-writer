@@ -21,7 +21,7 @@
 
 <!-- slide: 2 -->
 <!-- slide-section: leadin -->
-<!-- .slide: data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
+<!-- .slide: data-background-image="assets/leadin-cache_a6db93b8.jpg" data-background-opacity="0.7" -->
 ## Let's get Started
 
 ### What do you see? What do you wonder?
@@ -38,7 +38,7 @@ Goal: To activate interest in the theme
 
 <!-- slide: 3 -->
 <!-- slide-section: vocab-1 -->
-<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
+<!-- .slide: class="vocab-slide" data-background-image="assets/vocab-empathy-cache_595a4ab1.jpg" data-background-opacity="0.7" -->
 ## Important Words
 
 **empathy**
@@ -50,7 +50,7 @@ _/ˈempəθi/_
 
 <!-- slide: 4 -->
 <!-- slide-section: vocab-2 -->
-<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
+<!-- .slide: class="vocab-slide" data-background-image="assets/vocab-generational-cache_3ef8896b.jpg" data-background-opacity="0.7" -->
 **generational**
 _/ˌdʒenəˈreɪʃənl/_
 
@@ -60,7 +60,7 @@ _/ˌdʒenəˈreɪʃənl/_
 
 <!-- slide: 5 -->
 <!-- slide-section: vocab-3 -->
-<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->
+<!-- .slide: class="vocab-slide" data-background-image="assets/vocab-resolve-cache_309c216f.jpg" data-background-opacity="0.7" -->
 **resolve**
 _/rɪˈzɒlv/_
 
