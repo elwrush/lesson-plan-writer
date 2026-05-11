@@ -610,6 +610,114 @@ Using `margin-top: -2.5%` pushes content off-screen top. A small positive `paddi
 </section>
 ```
 
+### Example: Multiple Choice Strategy (5 steps + auto-animate + table answers)
+
+```html
+<!-- Step 1: Header + demo question + options -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+    <span style="font-size: 2.5em; color: rgba(255,255,255,0.9);"><i class="fa-solid fa-chess"></i></span>
+    <div style="overflow: hidden;">
+    <h2>Multiple Choice Strategy</h2>
+    <p>Now let's learn how to answer MC questions with an example.</p>
+    <p style="color:#ffdd00;"><em>"What is the main message of this article?"</em></p>
+    <ul>
+        <li><strong>a)</strong> option text</li>
+        <li><strong>b)</strong> option text</li>
+        <li><strong>c)</strong> option text</li>
+    </ul>
+    <p><u><strong>Step 1:</strong> Read the question — Is it asking for detail or main idea?</u></p>
+    </div>
+</section>
+
+<!-- Step 2a: Auto-animate entry — borders invisible -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate>
+    <div style="overflow: hidden;">
+    <p><u><strong>Step 2:</strong> Underline key words</u></p>
+    <p data-id="mcq" style="color:#ffdd00;"><em>"What is the <span data-id="w1" style="border-bottom: 2px solid transparent;">keyword</span> of this <span data-id="w2" style="border-bottom: 2px solid transparent;">word</span>?"</em></p>
+    </div>
+</section>
+
+<!-- Step 2b: Auto-animate reveal — borders turn white -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate>
+    <div style="overflow: hidden;">
+    <p><u><strong>Step 2:</strong> Underline key words</u></p>
+    <p data-id="mcq" style="color:#ffdd00;"><em>"What is the <span data-id="w1" style="border-bottom: 2px solid white;">keyword</span> of this <span data-id="w2" style="border-bottom: 2px solid white;">word</span>?"</em></p>
+    </div>
+</section>
+
+<!-- Step 3: Scan text -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+    <div style="overflow: hidden;">
+    <p><u><strong>Step 3:</strong> Scan the text</u></p>
+    <ul>
+        <li>Detail questions: answer follows the order of the text</li>
+        <li>Main idea: think about what the whole text is about</li>
+    </ul>
+    </div>
+</section>
+
+<!-- Step 4: Eliminate wrong answers — fragment strike table -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+    <div style="overflow: hidden;">
+    <p><u><strong>Step 4:</strong> Eliminate wrong answers</u></p>
+    <table class="answer-table">
+        <thead><tr><th>Option</th><th>Why?</th></tr></thead>
+        <tbody>
+            <tr><td class="fragment strike" data-fragment-index="0"><strong>a)</strong> wrong option text</td><td class="fragment" data-fragment-index="0">Reason why wrong</td></tr>
+            <tr><td class="fragment strike" data-fragment-index="1"><strong>b)</strong> wrong option text</td><td class="fragment" data-fragment-index="1">Reason why wrong</td></tr>
+        </tbody>
+    </table>
+    </div>
+</section>
+
+<!-- Step 5: Confirm correct answer — table with citations -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+    <div style="overflow: hidden;">
+    <p><u><strong>Step 5:</strong> Confirm your answer</u></p>
+    <table class="answer-table wrap">
+        <thead><tr><th>Answer</th><th>Why?</th></tr></thead>
+        <tbody>
+            <tr><td><strong>c)</strong> correct option text</td><td>Matches the article: <em>"quote from text"</em> (para X)</td></tr>
+        </tbody>
+    </table>
+    </div>
+</section>
+```
+
+### Answer Table Patterns (V1)
+
+All answer slides use `answer-table` class with 3-column layout: Statement | Answer | Why?
+
+```html
+<section data-background="#1e7e34">
+    <h2>Exercise N — Answers</h2>
+    <table class="answer-table">
+        <thead><tr><th>Statement</th><th>Answer</th><th>Why?</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>statement text</td>
+                <td class="fragment">✗ / ✓</td>
+                <td class="fragment">explanation with paragraph reference</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+```
+
+For answer tables with long explanation text that must wrap, add class `wrap`:
+```html
+<table class="answer-table wrap">
+```
+
+### Fragment Strike Confirmed Behavior
+
+Per `knowledge-base\revealjs-packed.json` (line 127-134):
+```css
+.reveal .fragment.strike { opacity: 1; visibility: inherit; }
+.reveal .fragment.strike.visible { text-decoration: line-through; }
+```
+**Do NOT override this CSS** in the `<style>` block. Text is always visible; strikethrough appears on click only. Any custom `.reveal .fragment.strike` CSS in the page will break this behavior.
+
 ## reveal.js Codebase
 
 When making changes to reveal.js code (e.g., custom themes, configuration, or plugin modifications), **always consult the stored reveal.js codebase first**. Do not attempt to write reveal.js API code from memory.

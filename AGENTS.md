@@ -83,6 +83,67 @@ Acceptable: "To activate interest in...", "To get the general idea of the text",
 
 `docs/slide-design-reference.md` defines slide types (vocabulary, task, answer, transition), fragment policy, auto-animate rules, and Pixabay image strategy. The `json_to_markdown.py` script reads this doc at generation time.
 
+### V1 Slide Flow (Actual)
+
+```
+SLIDESHOW FLOW — index2.html
+────────────────────────────────────────────
+ 0  Title (Pixabay background, CEFR badge)
+ 1  Objective (fa-seedling, 4 bullets)
+ 2  Lead-in (Pixabay bg, fa-eye, discussion Q)
+ 3  Vocab 1 (generation gap) — h2 + icon on first only
+ 4  Vocab 2 (frustration)
+ 5  Vocab 3 (redefine)
+ 6  Vocab 4 (workplace)
+ 7  Transition → What's the main idea? (red bg, fa-forward)
+ 8  Transition → Finding details (red bg, fa-forward)
+ ─────── T/F Strategy Block (4 steps) ───────
+ 9  T/F Header + Step 1 + tip text (fa-list-check icon-left)
+10  T/F Step 2 (sub-questions + rule)
+11  T/F Step 3 (evidence + keywords)
+12  T/F Step 4 (answer with paragraph quotes)
+13  Exercise 2 Timer (60s, fa-pencil)
+14  Exercise 2 Answers (answer-table, tick/cross, Why column)
+ ─────── Paragraph Matching Block (4 steps) ───────
+15  Transition → Matching ideas (red bg, fa-forward)
+16  Para Matching Header + Step 1 (fa-list-check icon-left)
+17  Para Matching Step 2 (keywords list)
+18  Para Matching Step 3 (scan paragraphs)
+19  Para Matching Step 4 (confirm match + answer)
+20  Exercise 3 Timer (180s, fa-pencil)
+21  Exercise 3 Answers (1–2) (answer-table, Why column)
+22  Exercise 3 Answers (3–4)
+23  Exercise 3 Answers (5–6)
+ ─────── Multiple Choice Strategy Block (5 steps) ───────
+24  Transition → Making conclusions (red bg, fa-forward)
+25  MC Header + Step 1 (fa-chess icon-left, demo Q + options)
+26  MC Step 2a (auto-animate entry, transparent borders)
+27  MC Step 2b (auto-animate reveal, white borders)
+28  MC Step 3 (scan + photo/headline tip)
+29  MC Step 4 (fragment strike table, a/b eliminated)
+30  MC Step 5 (answer-table wrap, answer + citations)
+31  Exercise 4 Timer (240s, fa-pencil)
+32  Exercise 4 Answer (answer-table wrap, tick/cross, Why)
+ ─────── Discussion — Review — Summary ───────
+33  Transition → Let's Discuss (red bg, fa-comments)
+34  Task → Let's Discuss (420s, fa-pencil, 3 Qs)
+35  Transition → Let's Review (red bg, fa-forward)
+36  Summary (fa-flag-checkered, ✓ bullets)
+────────────────────────────────────────────
+```
+
+### Key Design Rules
+
+- **One step per slide** — enforced across all three pedagogy blocks
+- **Step label format**: `<p><u><strong>Step N:</strong> description</u></p>`
+- **Header icon placement**: inline `<span style="font-size: 2.5em;">` left of `<h2>` inside `overflow: hidden` div — NOT centered block
+- **Auto-animate**: only between adjacent slides with matching `data-id` on elements; previous slide must NOT have `data-auto-animate`
+- **Fragment strike**: `class="fragment strike"` on td/p elements. Built-in CSS provides `opacity: 1` (always visible) and `text-decoration: line-through` only when `.visible` class is added on click
+- **Answer tables**: `<table class="answer-table">` with 3 columns (Statement/Answer/Why?). Add `wrap` class for tables with long text. Right column uses `white-space: normal`
+- **Table tick/cross**: middle column with `data-fragment-index` matching explanation cell for simultaneous reveal
+- **Lightbulb removed** from all answer slides (saves screen real estate)
+- **Pedagogical background**: `data-background="#1a6b5a"` + `class="pedagogical"` + `data-background-transition="none"`
+
 ## Pedagogical Strategy Slides — Design Principles
 
 Strategy slides teach a test-taking or reading skill explicitly. The design follows a **modelled whole-task approach** consistent with Strategy-Based Instruction (SBI) in EFL/ESL reading pedagogy.
@@ -170,27 +231,23 @@ Do not use `margin-top: -X%` — it pushes content off-screen. A small positive 
 
 ## Slide Icons — Font Awesome 6
 
-All slides use Font Awesome 6 icons via CDN to visually signal slide function. Icons are placed at the top of the slide, centered, before the heading.
+All slides use Font Awesome 6 icons via CDN. **Icons are placed inline to the left of the heading**, not centered block (unlike transition/answer slides).
 
-**Add CDN once** in the `<head>` of the base template:
+**Placement pattern (pedagogy headers):**
 ```html
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<span style="font-size: 2.5em; color: rgba(255,255,255,0.9);"><i class="fa-solid fa-list-check"></i></span>
+<div style="overflow: hidden;">
+    <h2>True/False Strategy</h2>
+</div>
 ```
 
-**CSS** (in `<style>` block):
-```css
-.slide-icon {
-    font-size: 2.5em;
-    margin-bottom: 0.3em;
-    display: block;
-    text-align: center;
-}
-.transition-icon  { color: rgba(255,255,255,0.85); }  /* red bg slides    */
-.pedagogical-icon { color: rgba(255,255,255,0.9);  }  /* teal bg slides   */
-.objective-icon   { color: rgba(255,221,0,0.85);    }  /* white bg slides */
+**Placement pattern (transition/objective/answer slides):**
+```html
+<i class="fa-solid fa-forward slide-icon transition-icon"></i>
+<h2>Finding details</h2>
 ```
 
-**Icon mapping** — one icon on the first slide of each block, before the `<h2>`:
+**Icon mapping** — one icon on the first slide of each block:
 
 | Slide / Block | Icon | Class | Background |
 |---|---|---|---|
@@ -199,23 +256,11 @@ All slides use Font Awesome 6 icons via CDN to visually signal slide function. I
 | Vocabulary: "Important Words" | `fa-spell-check` | inherit | Pixabay image |
 | Transition (forward to next stage) | `fa-forward` | `transition-icon` | `#c0392b` |
 | True/False Strategy block header | `fa-list-check` | `pedagogical-icon` | `#1a6b5a` |
-| Strategy step slides (Steps 1–4) | `fa-chess` | `pedagogical-icon` | `#1a6b5a` |
-| Multiple Choice Strategy block | `fa-list-check` | `pedagogical-icon` | `#1a6b5a` |
+| Paragraph Matching Strategy block | `fa-list-check` | `pedagogical-icon` | `#1a6b5a` |
+| Multiple Choice Strategy block | `fa-chess` | `pedagogical-icon` | `#1a6b5a` |
 | Task instruction | `fa-pencil` | inherit | white |
 | Discussion ("Let's Discuss") | `fa-comments` | `transition-icon` | `#c0392b` |
 | Summary ("What you can do now") | `fa-flag-checkered` | inherit | white |
-| End ("Thank you") | `fa-star` | inherit | `#2c3e50` |
-
-**Placement pattern:**
-```html
-<section data-background="#c0392b">
-    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
-    <h2>Finding details</h2>
-    ...
-</section>
-```
-
-For strategy blocks, the icon appears on the **first slide only** (the block header). Subsequent step slides in the same block do not show an icon.
 
 **Key rule**: The icon describes the *function* of the slide, not the topic. A transition moves forward; a discussion invites talking; a strategy teaches a step-by-step method.
 
