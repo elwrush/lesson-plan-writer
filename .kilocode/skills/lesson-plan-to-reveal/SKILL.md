@@ -16,7 +16,7 @@ Convert a lesson plan JSON into a reveal.js slideshow for ESL classroom delivery
 ## When to Use This Skill
 
 Use `lesson-plan-to-reveal` when converting a lesson plan JSON to slides. The skill:
-1. (Optional) Downloads a Pixabay title image and copies the institution logo into `output/{subfolder}/slides/assets/`
+1. Copies the institution logo into `output/{subfolder}/slides/assets/`
 2. Copies `templates/base-slides-template.html` to `output/{subfolder}/slides/index.html`
 3. Builds slides one by one as raw HTML `<section>` elements, inserting them between `<div class="slides">` and `</div>`
 4. Reports the output path
@@ -46,29 +46,31 @@ shutil.copy('templates/Image_20260324_141022.png', 'output/{subfolder}/slides/as
 "
 ```
 
-### Step 3: Download images (first generation only)
+### Step 3: Background images
 
-For **first-time generation** (new lesson, no existing `slides/assets/`), download images:
+**Do NOT download Pixabay images.** The user adds custom screenshot backgrounds manually after the slides are produced. All slide backgrounds use solid theme colors only.
 
-```powershell
-# Download title hero image
-python scripts/pixabay_download.py --query "topic" --type image --count 3 --output-dir "output/SUBFOLDER/slides/assets"
+Background color reference:
+| Slide type | Background |
+|---|---|
+| Title, lead-in, general content | `#1a1a2e` (dark navy/black) |
+| Transition (forward to next stage) | `#c0392b` (red) |
+| Pedagogical/strategy blocks | `#1a6b5a` (teal) |
+| Answer tables | `#1e7e34` (green) |
+| Summary | white (default) |
+| End | `#2c3e50` (dark blue-gray) |
 
-# Note: Vocabulary background images are downloaded per-word as needed
-python scripts/pixabay_download.py --query "vocabulary word" --type image --count 1 --output-dir "output/SUBFOLDER/slides/assets"
-```
-
-For **regeneration** (existing slides): **Never search Pixabay.** Reuse existing images from `slides/assets/`.
+Pixabay background images (`data-background-image`, `data-background-opacity`) are NEVER used in generated output. All backgrounds use `data-background="<color>"`.
 
 ### Step 4: Add slides — copy, paste, adapt
 
 **Rule**: Every slide is a raw `<section>` element. Copy the pattern from `templates/base-slides-template.html`, paste it into the `<div class="slides">` container, and adapt the content.
 
 **Slide ordering convention**:
-1. Title (with Pixabay background + logo)
+1. Title (with logo)
 2. Objective (3 outcomes, all visible)
-3. Lead-in (Pixabay background + open question)
-4. Vocabulary (one slide per word, with Pixabay background, AFTER lead-in)
+3. Lead-in (open question)
+4. Vocabulary (one slide per word, AFTER lead-in)
 5. Transition (red background, directive + foreshadow)
 6. Strategy block (auto-animate or pedagogical, if applicable)
 7. Task instruction (with timer)
@@ -152,8 +154,8 @@ Every slide type gets a **function-icon** that signals its role (not its topic).
 | Slide / Block | Icon | CSS class | Background |
 |---|---|---|---|
 | Objective | `fa-seedling` | `objective-icon` | white |
-| Lead-in | `fa-eye` | inherit | Pixabay |
-| Vocabulary (first word) | `fa-spell-check` | inherit | Pixabay |
+| Lead-in | `fa-eye` | inherit | `#1a1a2e` |
+| Vocabulary (first word) | `fa-spell-check` | inherit | `#1a1a2e` |
 | Transition | `fa-forward` | `transition-icon` | `#c0392b` |
 | Strategy block header | `fa-list-check` | `pedagogical-icon` | `#1a6b5a` |
 | Strategy step slides | `fa-chess` | `pedagogical-icon` | `#1a6b5a` |
@@ -197,7 +199,7 @@ All patterns live in `templates/base-slides-template.html` as HTML comments. **C
 
 ### 1. Title Slide
 ```html
-<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
+<section data-background="#1a1a2e">
     <img src="assets/logo.png" class="title-logo" alt="Logo" />
     <h1>Topic Title <span class="cefr-badge B1">B1</span></h1>
     <p><em>Strap subheader — derived from lesson objective</em></p>
@@ -227,7 +229,7 @@ All patterns live in `templates/base-slides-template.html` as HTML comments. **C
 ### 3. Vocabulary Slides (one word per slide)
 ```html
 <!-- First word (with header) -->
-<section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="0.7">
+<section class="vocab-slide" data-background="#1a1a2e">
     <h2>Important Words</h2>
     <p><span class="vocab-word">generation gap</span></p>
     <p><em>/ˌdʒenəˈreɪʃn ɡæp/</em></p>
@@ -235,7 +237,7 @@ All patterns live in `templates/base-slides-template.html` as HTML comments. **C
 </section>
 
 <!-- Subsequent words (no header) -->
-<section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="0.7">
+<section class="vocab-slide" data-background="#1a1a2e">
     <p><span class="vocab-word">frustration</span></p>
     <p><em>/frʌˈstreɪʃn/</em></p>
     <p><em>I felt <span class="vocab-word">frustration</span> when my phone died.</em></p>
@@ -245,12 +247,12 @@ All patterns live in `templates/base-slides-template.html` as HTML comments. **C
 - `<span class="vocab-word">` renders yellow (#ffdd00) bold
 - Word + phonemic script (IPA) + context sentence with word highlighted
 - **Sentence must imply meaning, NOT define** — e.g., "There's such a **generation gap** between them" (GOOD) vs "generation gap — the difference between groups" (BAD)
-- Pixabay background at 70% opacity
+- Background: `#1a1a2e`
 - Class: `vocab-slide`
 
 ### 4. Lead-in Slide
 ```html
-<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
+<section data-background="#1a1a2e">
     <h2>Let's get Started</h2>
     <h3>What do these two people have in common?</h3>
     <aside class="notes">
@@ -261,7 +263,6 @@ All patterns live in `templates/base-slides-template.html` as HTML comments. **C
 </section>
 ```
 - One open question only
-- Pixabay background image
 - Speaker notes in `<aside class="notes">`
 
 ### 5. Transition Slide (red background)
@@ -437,10 +438,10 @@ When asked to edit a slide at a reveal.js URL:
 3. **Title slide: topic + CEFR badge + strap subheader** — NO date, teacher name, duration, or materials.
 4. **Task slides: brief student instructions** — extract task description from procedure, skip teacher-only instructions. Max 3 task lines on screen.
 5. **Stage names: student-friendly language** — "Lead-in" → "Let's get Started", "Reading for gist" → "What's the main idea?", "Reading for detail" → "Finding details", "Reading for inference" → "Making conclusions", "Post-reading" → "Let's Discuss", "Wrap-up" → "Let's Review"
-6. **Vocabulary slides** — generated AFTER lead-in stage. One word per slide with Pixabay background. "Important Words" title on first slide only. Yellow bold (#ffdd00) via `<span class="vocab-word">`.
+6. **Vocabulary slides** — generated AFTER lead-in stage. One word per slide with dark navy background. "Important Words" title on first slide only. Yellow bold (#ffdd00) via `<span class="vocab-word">`.
 7. **Answer slides** — fragment reveals with ✓/✗ markers.
 8. **Transitions: directive + foreshadow + engagement** — "We're now going to read...", not "What did you learn?"
-9. **Backgrounds**: Pixabay image at 70% opacity (title, lead-in, vocabulary, pre-reading), red `#c0392b` (transitions), teal `#1a6b5a` (pedagogical/strategy), dark `#2c3e50` (end)
+9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#1a6b5a` (pedagogical/strategy), green `#1e7e34` (answer tables), dark `#2c3e50` (end)
 10. **Logo**: `assets/logo.png`, transparent RGBA PNG, max-height 100px, centered
 11. **Text highlighting**: white text, dark text-shadow, pedagogical sections use white-on-teal
 12. **Vocabulary words**: yellow boldface (`#ffdd00`) via `<span class="vocab-word">` — in both the word heading AND context sentence
@@ -495,7 +496,7 @@ No words above CEFR B1 on screen without inline definition:
 | "What did you learn?" | "We're now going to read in more detail. Let's start with True/False questions. They may look easy, but they can have some surprises!" |
 
 ### 7. No Automatic Image Downloads
-When regenerating slides, **never search Pixabay** — always reuse existing images from `slides/assets/`.
+When regenerating slides, **do not download images**. All backgrounds use solid theme colors only.
 
 ## Auto-Animate vs. Simple Slides for Strategy Blocks
 
@@ -787,9 +788,9 @@ See: `C:\Users\elwru\.kilo\skills\repomix-codebase-search\SKILL.md`
 | `scripts/pixabay_download.py` | Pixabay image downloader (first-gen only) |
 | `scripts/locate_slide.py` | Map reveal.js URL index to HTML section |
 | `templates/Image_20260324_141022.png` | Institution logo (ACT) — copy to `assets/logo.png` |
+| `templates/Image_20260324_141022.png` | Institution logo (ACT) — copy to `assets/logo.png` |
 
 ## Dependencies
-- Python 3.x + Pillow, requests
-- Pixabay API key (`PIXABAY_API_KEY` env var)
+- Python 3.x + Pillow
 - reveal.js 5.1.0 via CDN (no npm needed)
 - `templates/base-slides-template.html` (copied to `output/{subfolder}/slides/index.html`)
