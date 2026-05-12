@@ -78,7 +78,9 @@ All asked directly in chat. Only ask if the item was not auto-detected in Step 9
 - If transcript not found and audio/video files exist: "Do you have a transcript? If so, what path?"
 - If transcript not found and no audio/video files: set to "none" automatically — do NOT ask.
 
-### Step 11: Generate and Write Lesson Plan
+### Step 11: Check for special requests (chat)
+
+### Step 12: Generate and Write Lesson Plan
 
 #### Output Path
 ```
@@ -128,7 +130,7 @@ Use the shape's `main_aim_format` template combined with:
 - Topic provided by user
 - CEFR level
 
-### Step 12: Confirm Output
+### Step 13: Confirm Output
 Inform the user where the lesson plan has been saved.
 
 ## Template Files Location
