@@ -1,0 +1,14 @@
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/json_to_markdown.py" = ["F841"]
+"tavily_search.py" = ["E402"]
+
+[tool.ruff.format]
+quote-style = "double"

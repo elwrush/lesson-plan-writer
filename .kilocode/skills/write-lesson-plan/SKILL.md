@@ -96,6 +96,7 @@ Where:
   },
   "transcript": "[Transcript location or 'none']",
   "answer_key": "[Answer key location or 'none']",
+  "slideshow_url": "[URL or empty]",
   "cefr_level": "[CEFR Level]",
   "class": "[Class]"
 }
@@ -129,6 +130,7 @@ Available templates:
 - Always use today's date in `mmddyy` format for the filename
 - Normalize topic names for filenames (lowercase, spaces to hyphens)
 - Set `transcript` and `answer-key` to "none" if not provided
+- `slideshow_url` is an optional field; populated by `lesson-plan-to-reveal` after deployment
 - The `lesson plan` section uses the selected shape's template structure
 - **CRITICAL: Always read the input folder contents BEFORE asking about materials, answer keys, or transcripts**
 - Scan markdown files for answer patterns ("Answer:", "**Answer:**", "Answers:") to auto-detect answer keys

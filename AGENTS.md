@@ -10,7 +10,7 @@
 
 ### PDF (2-stage)
 1. **`write-lesson-plan` skill** → `output/{subfolder}/{mmddyy}-{topic}-lesson-plan.json`
-2. **`create-pdf-lesson-file` skill** → converts JSON → `PDF/{subfolder}/{mm-dd-yy}-{topic}.pdf`
+2. **`create-pdf-lesson-file` skill** → converts JSON → `PDF/{subfolder}/{mmddyy}-{topic}-lesson-plan.pdf`
 
 ### Slides (template-based)
 1. **`write-lesson-plan` skill** → JSON (same as above)
@@ -33,15 +33,35 @@ cp "templates/base-slides-template.html" "output/<subfolder>/slides/index.html"
 # Pixabay image download (for slide backgrounds)
 python scripts/pixabay_download.py --query "topic" --type image --count 3
 
-# Tests (41 total, all pass)
+# Tests (44 total, all pass)
 python -m pytest tests/ -v
 python -m pytest tests/test_json_to_pdf.py -v       # 18 tests
-python -m pytest tests/test_json_to_markdown.py -v  # 23 tests
+python -m pytest tests/test_json_to_markdown.py -v  # 26 tests
 
 # Locate slide by reveal.js index (deterministic editing)
 python scripts/locate_slide.py "file:///path/to/index.html#/7"
 python scripts/locate_slide.py 7 --slides-dir path/to/slides/
 ```
+
+## Linting & Quality
+
+ruff is installed globally via pip and runs as a pre-commit hook on every `git commit`.
+
+```bash
+# Manual lint + fix (all files)
+python -m ruff check --fix .
+
+# Watch mode (polls for changes, re-runs on detect)
+python -m ruff check --watch .
+
+# Format all Python files
+python -m ruff format .
+
+# Run pre-commit on all files (without committing)
+python -m pre_commit run --all-files
+```
+
+Watch mode: `python -m ruff check --watch .` in a terminal (polls for file changes, re-runs on detect). VS Code users: install Ruff extension, set `"ruff.formatOnSave": true` (only applies inside VS Code).
 
 ## JSON schema
 

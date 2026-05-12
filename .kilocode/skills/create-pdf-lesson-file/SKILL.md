@@ -30,7 +30,7 @@ Convert lesson plan JSON files to professionally formatted PDFs using Typst CLI 
 - Use Jinja2 to fill `templates/lesson-plan-template.typ` with processed data
 - Template produces:
   - Page 1 header with Cambridge and ACT logos, title "Lesson Plan"
-  - Lesson Information: Topic line, then table (Teacher, Date, Class, Duration, CEFR, Shape, Materials)
+  - Lesson Information: Topic line, then table (Teacher, Date, Class, Duration, CEFR, Shape, Materials, Slideshow URL)
   - Lesson Aim box with left border
   - Lesson Stages table (Time, Goal, Procedure, Interaction)
   - Answer Key and Transcript sections on page breaks
@@ -38,7 +38,7 @@ Convert lesson plan JSON files to professionally formatted PDFs using Typst CLI 
 ### Step 4: Render PDF with Typst
 - Copy logo images to temp directory alongside the `.typ` file
 - Run: `typst compile <temp.typ> <output.pdf> --font-path <roboto_dir>`
-- Output path: `PDF/{input_subfolder}/{mm-dd-yy}-{topic}.pdf`
+- Output path: `PDF/{input_subfolder}/{mmddyy}-{topic}-lesson-plan.pdf`
 - Clean up temporary `.typ` file and copied images after rendering
 
 ### Step 5: Confirm Output
@@ -50,7 +50,7 @@ Convert lesson plan JSON files to professionally formatted PDFs using Typst CLI 
 - **Script:** `C:\PROJECTS\LESSON PLAN WRITER 3\scripts\json_to_pdf.py`
 - **Logos:** `C:\PROJECTS\LESSON PLAN WRITER 3\templates\Image_20260324_141022.png` (ACT), `1135082720.png` (Cambridge)
 - **Roboto fonts:** `%APPDATA%\TinyTeX\texmf-dist\fonts\opentype\google\roboto\`
-- **Output:** `C:\PROJECTS\LESSON PLAN WRITER 3\PDF\{subfolder}\{mm-dd-yy}-{topic}.pdf`
+- **Output:** `C:\PROJECTS\LESSON PLAN WRITER 3\PDF\{subfolder}\{mmddyy}-{topic}-lesson-plan.pdf`
 
 ## Usage
 ```bash
@@ -76,7 +76,8 @@ python -m pytest tests/test_json_to_pdf.py -v
 - Logos appear only on page 1 header
 - Roboto font used throughout
 - Topic names normalized for filenames: lowercase, spaces to hyphens
-- Date format in filename: mm-dd-yy
+- Date format in filename: mmddyy (no hyphens)
+- Filename suffix: `-lesson-plan` (e.g. `051226-what-connects-us-lesson-plan.pdf`)
 - Fails fast on any error - does not continue on validation failure
 
 ## Typst Syntax — Avoid Hallucination

@@ -9,9 +9,9 @@ Usage:
 
 import json
 import os
-import sys
 import re
 import shutil
+import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -49,6 +49,7 @@ REQUIRED_STAGE_FIELDS = [
 
 # Note: Pixabay search/download functions were removed. Images must be passed via --image CLI arg.
 
+
 def validate_json(data):
     errors = []
     for field in REQUIRED_FIELDS:
@@ -72,8 +73,18 @@ def validate_json(data):
 
 def format_date(date_str):
     months = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
     ]
     date_str = date_str.strip()
     if len(date_str) == 6 and date_str.isdigit():
@@ -129,7 +140,7 @@ def parse_answer_key(data):
     answer_key_path = Path(answer_key)
     if answer_key_path.exists() and answer_key_path.suffix == ".md":
         try:
-            with open(answer_key_path, "r", encoding="utf-8") as f:
+            with open(answer_key_path, encoding="utf-8") as f:
                 return f.read()
         except Exception:
             return ""
@@ -160,52 +171,139 @@ def extract_keywords(data):
         "A2": {
             "agree": ("/əˈɡriː/", "We both think pizza is the best food — we agree."),
             "explain": ("/ɪkˈspleɪn/", "She drew a picture to explain how the machine works."),
-            "experience": ("/ɪkˈspɪəriəns/", "Flying alone for the first time was a scary experience."),
-            "opinion": ("/əˈpɪnjən/", "She thinks this book is boring but that is just her opinion."),
-            "situation": ("/ˌsɪtjuˈeɪʃn/", "We were lost and the phone was dead — a difficult situation."),
+            "experience": (
+                "/ɪkˈspɪəriəns/",
+                "Flying alone for the first time was a scary experience.",
+            ),
+            "opinion": (
+                "/əˈpɪnjən/",
+                "She thinks this book is boring but that is just her opinion.",
+            ),
+            "situation": (
+                "/ˌsɪtjuˈeɪʃn/",
+                "We were lost and the phone was dead — a difficult situation.",
+            ),
             "belong": ("/bɪˈlɒŋ/", "I finally felt I belong here when everyone smiled at me."),
             "compare": ("/kəmˈpeə/", "When you compare a car to a bicycle, the car is faster."),
             "disagree": ("/ˌdɪsəˈɡriː/", "I think it's cold but you think it's hot — we disagree."),
         },
         "B1": {
-            "generation": ("/ˌdʒenəˈreɪʃn/", "My grandmother and I are from different generations."),
-            "empathy": ("/ˈempəθi/", "When her friend lost his dog, she cried too — she has empathy."),
+            "generation": (
+                "/ˌdʒenəˈreɪʃn/",
+                "My grandmother and I are from different generations.",
+            ),
+            "empathy": (
+                "/ˈempəθi/",
+                "When her friend lost his dog, she cried too — she has empathy.",
+            ),
             "resolve": ("/rɪˈzɒlv/", "After they talked calmly, they resolved the problem."),
-            "perspective": ("/pəˈspektɪv/", "From a child's perspective, school can feel very long."),
+            "perspective": (
+                "/pəˈspektɪv/",
+                "From a child's perspective, school can feel very long.",
+            ),
             "influence": ("/ˈɪnfluəns/", "Her sister's love of art had a big influence on her."),
-            "communicate": ("/kəˈmjuːnɪkeɪt/", "They communicate better now — they listen to each other."),
-            "conflict": ("/ˈkɒnflɪkt/", "The conflict started when each side wanted different things."),
+            "communicate": (
+                "/kəˈmjuːnɪkeɪt/",
+                "They communicate better now — they listen to each other.",
+            ),
+            "conflict": (
+                "/ˈkɒnflɪkt/",
+                "The conflict started when each side wanted different things.",
+            ),
             "attitude": ("/ˈætɪtjuːd/", "Her calm attitude helped everyone stay relaxed."),
         },
         "B2": {
-            "empathy": ("/ˈempəθi/", "Without understanding how others feel, we cannot connect — that is what empathy gives us."),
-            "generational": ("/ˌdʒenəˈreɪʃənl/", "My parents and I see phones differently — that's a generational divide."),
-            "resolve": ("/rɪˈzɒlv/", "After weeks of fighting, a simple apology was enough to resolve it."),
-            "gap": ("/ɡæp/", "A 40-year age gap means they grew up in completely different worlds."),
-            "bridge": ("/brɪdʒ/", "Talking openly helps bridge the distance between young and old."),
+            "empathy": (
+                "/ˈempəθi/",
+                "Without understanding how others feel, we cannot connect — that is what empathy gives us.",
+            ),
+            "generational": (
+                "/ˌdʒenəˈreɪʃənl/",
+                "My parents and I see phones differently — that's a generational divide.",
+            ),
+            "resolve": (
+                "/rɪˈzɒlv/",
+                "After weeks of fighting, a simple apology was enough to resolve it.",
+            ),
+            "gap": (
+                "/ɡæp/",
+                "A 40-year age gap means they grew up in completely different worlds.",
+            ),
+            "bridge": (
+                "/brɪdʒ/",
+                "Talking openly helps bridge the distance between young and old.",
+            ),
             "assume": ("/əˈsjuːm/", "I assumed she was angry, but really she was just tired."),
-            "perceive": ("/pəˈsiːv/", "Two people can watch the same film and perceive it differently."),
-            "inevitable": ("/ɪnˈevɪtəbl/", "People grow older — it's inevitable, like the seasons changing."),
+            "perceive": (
+                "/pəˈsiːv/",
+                "Two people can watch the same film and perceive it differently.",
+            ),
+            "inevitable": (
+                "/ɪnˈevɪtəbl/",
+                "People grow older — it's inevitable, like the seasons changing.",
+            ),
         },
         "C1": {
-            "paradigm": ("/ˈpærədaɪm/", "The internet changed the whole paradigm — how we shop, learn, and talk."),
-            "reconcile": ("/ˈrekənsaɪl/", "Trying to reconcile freedom with safety is a constant challenge."),
-            "entrenched": ("/ɪnˈtrentʃt/", "His habits were so entrenched he couldn't imagine breakfast without coffee."),
-            "discourse": ("/ˈdɪskɔːs/", "The way we speak about immigration — the public discourse — shapes opinion."),
+            "paradigm": (
+                "/ˈpærədaɪm/",
+                "The internet changed the whole paradigm — how we shop, learn, and talk.",
+            ),
+            "reconcile": (
+                "/ˈrekənsaɪl/",
+                "Trying to reconcile freedom with safety is a constant challenge.",
+            ),
+            "entrenched": (
+                "/ɪnˈtrentʃt/",
+                "His habits were so entrenched he couldn't imagine breakfast without coffee.",
+            ),
+            "discourse": (
+                "/ˈdɪskɔːs/",
+                "The way we speak about immigration — the public discourse — shapes opinion.",
+            ),
             "alleviate": ("/əˈliːvieɪt/", "A good joke can alleviate tension in an awkward room."),
-            "juxtapose": ("/ˌdʒʌkstəˈpəʊz/", "Old black-and-white photos juxtaposed with modern selfies."),
-            "dichotomy": ("/daɪˈkɒtəmi/", "The simple dichotomy of good versus bad rarely captures real life."),
-            "ubiquitous": ("/juːˈbɪkwɪtəs/", "Smartphones went from rare gadgets to being ubiquitous in ten years."),
+            "juxtapose": (
+                "/ˌdʒʌkstəˈpəʊz/",
+                "Old black-and-white photos juxtaposed with modern selfies.",
+            ),
+            "dichotomy": (
+                "/daɪˈkɒtəmi/",
+                "The simple dichotomy of good versus bad rarely captures real life.",
+            ),
+            "ubiquitous": (
+                "/juːˈbɪkwɪtəs/",
+                "Smartphones went from rare gadgets to being ubiquitous in ten years.",
+            ),
         },
         "C2": {
-            "ostensibly": ("/ɒˈstensəbli/", "The meeting was ostensibly about budgets but everyone knew it was about layoffs."),
-            "acquiescence": ("/ˌækwiˈesns/", "His silence was taken as acquiescence — he didn't object, so they went ahead."),
-            "ameliorate": ("/əˈmiːliəreɪt/", "Building parks in poor areas helped ameliorate living conditions."),
-            "diametrically": ("/ˌdaɪəˈmetrɪkli/", "North and South — their opinions were diametrically opposite."),
-            "presuppose": ("/ˌpriːsəˈpəʊz/", "This question presupposes that money makes people happy."),
-            "inherent": ("/ɪnˈhɪərənt/", "Risk is inherent in adventure — you cannot separate the two."),
+            "ostensibly": (
+                "/ɒˈstensəbli/",
+                "The meeting was ostensibly about budgets but everyone knew it was about layoffs.",
+            ),
+            "acquiescence": (
+                "/ˌækwiˈesns/",
+                "His silence was taken as acquiescence — he didn't object, so they went ahead.",
+            ),
+            "ameliorate": (
+                "/əˈmiːliəreɪt/",
+                "Building parks in poor areas helped ameliorate living conditions.",
+            ),
+            "diametrically": (
+                "/ˌdaɪəˈmetrɪkli/",
+                "North and South — their opinions were diametrically opposite.",
+            ),
+            "presuppose": (
+                "/ˌpriːsəˈpəʊz/",
+                "This question presupposes that money makes people happy.",
+            ),
+            "inherent": (
+                "/ɪnˈhɪərənt/",
+                "Risk is inherent in adventure — you cannot separate the two.",
+            ),
             "ephemeral": ("/ɪˈfemərəl/", "A mayfly lives only one day — its life is ephemeral."),
-            "cogent": ("/ˈkəʊdʒnt/", "Her argument was so cogent that nobody could find a flaw in it."),
+            "cogent": (
+                "/ˈkəʊdʒnt/",
+                "Her argument was so cogent that nobody could find a flaw in it.",
+            ),
         },
     }
 
@@ -263,7 +361,7 @@ def generate_lesson_strap(data):
             # Remove common filler words for natural output
             for filler in ["an article about ", "a text about ", "the article ", "the text "]:
                 if raw_context.startswith(filler):
-                    raw_context = raw_context[len(filler):]
+                    raw_context = raw_context[len(filler) :]
             context = raw_context
             break
 
@@ -322,7 +420,9 @@ def find_existing_asset(slides_dir, file_prefix=None):
     return None
 
 
-def generate_title_slide(data, title_image_path=None, title_attribution=None, slides_dir=None, logo_path=None):
+def generate_title_slide(
+    data, title_image_path=None, title_attribution=None, slides_dir=None, logo_path=None
+):
     topic = escape_md(data.get("topic", ""))
     cefr = data.get("lesson_plan", {}).get("cefr_level", "")
     strap = generate_lesson_strap(data)
@@ -346,17 +446,21 @@ def generate_title_slide(data, title_image_path=None, title_attribution=None, sl
             bg_directive = f'<!-- .slide: data-background-image="{image_path}" data-background-opacity="0.7" -->'
         elif slides_dir and image_path.exists():
             rel_path = os.path.relpath(str(image_path), str(slides_dir)).replace("\\", "/")
-            bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
+            bg_directive = (
+                f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
+            )
         elif image_path:
             rel_path = Path(image_path).relative_to(OUTPUT_DIR.parent).as_posix()
-            bg_directive = f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
+            bg_directive = (
+                f'<!-- .slide: data-background-image="{rel_path}" data-background-opacity="0.7" -->'
+            )
         else:
             bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #2c3e50, #3498db)" -->'
     else:
         bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #2c3e50, #3498db)" -->'
 
     lines = [
-        '<!-- slide-section: title -->',
+        "<!-- slide-section: title -->",
         bg_directive,
     ]
 
@@ -369,11 +473,13 @@ def generate_title_slide(data, title_image_path=None, title_attribution=None, sl
         lines.append(f'<img src="{logo_rel}" class="title-logo" />')
         lines.append("")
 
-    lines.extend([
-        f"# {topic} <span class=\"cefr-badge {cefr}\">{cefr}</span>",
-        "",
-        f"*{escape_md(strap)}*",
-    ])
+    lines.extend(
+        [
+            f'# {topic} <span class="cefr-badge {cefr}">{cefr}</span>',
+            "",
+            f"*{escape_md(strap)}*",
+        ]
+    )
     return "\n".join(lines)
 
 
@@ -410,17 +516,19 @@ def generate_objective_slide(data):
     outcomes = outcomes[:3]
 
     lines = [
-        '<!-- slide-section: objective -->',
+        "<!-- slide-section: objective -->",
         "## Here's what you'll be able to do",
         "",
     ]
     for outcome in outcomes:
         lines.append(f"- {outcome}")
 
-    lines.extend([
-        "",
-        "*These are the same skills you need for the PET reading test!*",
-    ])
+    lines.extend(
+        [
+            "",
+            "*These are the same skills you need for the PET reading test!*",
+        ]
+    )
 
     return "\n".join(lines)
 
@@ -434,12 +542,74 @@ def extract_keywords_from_text(data):
         return extract_keywords(data)
 
     words_to_consider = {
-        "A1": ["family", "friend", "school", "teacher", "student", "house", "name", "like", "love", "help"],
-        "A2": ["agree", "explain", "experience", "opinion", "situation", "belong", "compare", "disagree", "expect", "value"],
-        "B1": ["generation", "empathy", "resolve", "perspective", "influence", "communicate", "conflict", "attitude", "balance", "opportunity"],
-        "B2": ["generational", "gap", "bridge", "assume", "perceive", "inevitable", "frustration", "redefine", "workplace", "expectation"],
-        "C1": ["paradigm", "reconcile", "entrenched", "discourse", "alleviate", "juxtapose", "dichotomy", "ubiquitous"],
-        "C2": ["ostensibly", "acquiescence", "ameliorate", "diametrically", "presuppose", "inherent", "ephemeral", "cogent"],
+        "A1": [
+            "family",
+            "friend",
+            "school",
+            "teacher",
+            "student",
+            "house",
+            "name",
+            "like",
+            "love",
+            "help",
+        ],
+        "A2": [
+            "agree",
+            "explain",
+            "experience",
+            "opinion",
+            "situation",
+            "belong",
+            "compare",
+            "disagree",
+            "expect",
+            "value",
+        ],
+        "B1": [
+            "generation",
+            "empathy",
+            "resolve",
+            "perspective",
+            "influence",
+            "communicate",
+            "conflict",
+            "attitude",
+            "balance",
+            "opportunity",
+        ],
+        "B2": [
+            "generational",
+            "gap",
+            "bridge",
+            "assume",
+            "perceive",
+            "inevitable",
+            "frustration",
+            "redefine",
+            "workplace",
+            "expectation",
+        ],
+        "C1": [
+            "paradigm",
+            "reconcile",
+            "entrenched",
+            "discourse",
+            "alleviate",
+            "juxtapose",
+            "dichotomy",
+            "ubiquitous",
+        ],
+        "C2": [
+            "ostensibly",
+            "acquiescence",
+            "ameliorate",
+            "diametrically",
+            "presuppose",
+            "inherent",
+            "ephemeral",
+            "cogent",
+        ],
     }
 
     # Clean definitions for common ESL B1-B2 vocabulary (derived from lesson content)
@@ -476,7 +646,8 @@ def extract_keywords_from_text(data):
             else:
                 # Find a clean sentence context by searching for the word in sentences
                 import re as re_module
-                sentences = re_module.split(r'[.!?]', combined)
+
+                sentences = re_module.split(r"[.!?]", combined)
                 definition = ""
                 for sentence in sentences:
                     if word in sentence:
@@ -583,41 +754,53 @@ def generate_single_vocabulary_slide(word, phonemic, image_path=None, slide_num=
     context = context_sentences.get(word, f"I understand **{display_word}** now.")
 
     lines = [
-        f'<!-- slide-section: vocab-{slide_num} -->',
+        f"<!-- slide-section: vocab-{slide_num} -->",
     ]
 
     if image_path:
         if image_path.startswith("assets/"):
             rel_path = Path(image_path).name
-            lines.extend([
-                f'<!-- .slide: class="vocab-slide" data-background-image="{image_path}" data-background-opacity="0.7" -->',
-            ])
+            lines.extend(
+                [
+                    f'<!-- .slide: class="vocab-slide" data-background-image="{image_path}" data-background-opacity="0.7" -->',
+                ]
+            )
         else:
             rel_path = Path(image_path).name
-            lines.extend([
-                f'<!-- .slide: class="vocab-slide" data-background-image="assets/{rel_path}" data-background-opacity="0.7" -->',
-            ])
+            lines.extend(
+                [
+                    f'<!-- .slide: class="vocab-slide" data-background-image="assets/{rel_path}" data-background-opacity="0.7" -->',
+                ]
+            )
     else:
-        lines.append('<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->')
+        lines.append(
+            '<!-- .slide: class="vocab-slide" data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->'
+        )
 
     if slide_num == 1:
-        lines.extend([
-            "## Important Words",
-            "",
-        ])
-        lines.extend([
-            f"**{display_word}**",
-            f"_{phonemic_display}_",
-            "",
-            f"*{context}*",
-        ])
+        lines.extend(
+            [
+                "## Important Words",
+                "",
+            ]
+        )
+        lines.extend(
+            [
+                f"**{display_word}**",
+                f"_{phonemic_display}_",
+                "",
+                f"*{context}*",
+            ]
+        )
     else:
-        lines.extend([
-            f"**{display_word}**",
-            f"_{phonemic_display}_",
-            "",
-            f"*{context}*",
-        ])
+        lines.extend(
+            [
+                f"**{display_word}**",
+                f"_{phonemic_display}_",
+                "",
+                f"*{context}*",
+            ]
+        )
 
     return "\n".join(lines)
 
@@ -646,11 +829,15 @@ def generate_leadin_slide(stage, data, slides_dir=None):
     question = generate_leadin_question(topic, procedure)
 
     # Auto-discover lead-in image in assets/ if none passed
-    bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->'
+    bg_directive = (
+        '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #667eea, #764ba2)" -->'
+    )
     if slides_dir:
         found = find_existing_asset(slides_dir, "leadin")
         if found:
-            bg_directive = f'<!-- .slide: data-background-image="{found}" data-background-opacity="0.7" -->'
+            bg_directive = (
+                f'<!-- .slide: data-background-image="{found}" data-background-opacity="0.7" -->'
+            )
         else:
             # Try pixabay_ prefix
             found = find_existing_asset(slides_dir, "pixabay_733")
@@ -658,7 +845,7 @@ def generate_leadin_slide(stage, data, slides_dir=None):
                 bg_directive = f'<!-- .slide: data-background-image="{found}" data-background-opacity="0.7" -->'
 
     lines = [
-        '<!-- slide-section: leadin -->',
+        "<!-- slide-section: leadin -->",
         bg_directive,
         f"## {escape_md(friendly_stage_name(stage_name))}",
         "",
@@ -700,12 +887,14 @@ def generate_prereading_slide(stage, data, slides_dir=None):
     topic = data.get("topic", "")
     materials = data.get("materials", "")
 
-    bg_directive = '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #f5f0eb, #e8ddd3)" -->'
+    bg_directive = (
+        '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #f5f0eb, #e8ddd3)" -->'
+    )
 
     lines = [
-        '<!-- slide-section: prereading -->',
+        "<!-- slide-section: prereading -->",
         bg_directive,
-        f"## Before you read",
+        "## Before you read",
         "",
         "- What is the writer trying to do?",
         "- What solution might they suggest?",
@@ -726,10 +915,18 @@ def extract_task_instructions(procedure, stage_name):
     for line in lines:
         stripped = line.strip().lstrip("- ")
         stripped_lower = stripped.lower()
-        if any(skip in stripped_lower for skip in [
-            "pair check", "whole-class feedback", "feedback",
-            "elicit", "brief ", "tell ss", "teacher"
-        ]):
+        if any(
+            skip in stripped_lower
+            for skip in [
+                "pair check",
+                "whole-class feedback",
+                "feedback",
+                "elicit",
+                "brief ",
+                "tell ss",
+                "teacher",
+            ]
+        ):
             continue
         if re.match(r"\d+\s*min", stripped):
             continue
@@ -786,27 +983,31 @@ def generate_task_slide(stage, data):
     task_lines = extract_task_instructions(procedure, stage_name)
 
     lines = [
-        f'<!-- slide-section: task-{stage_num} -->',
+        f"<!-- slide-section: task-{stage_num} -->",
     ]
 
     timer_seconds = int(stage.get("time", 0)) * 60
     if timer_seconds > 0:
         lines.append(f'<!-- .slide: data-timer="{timer_seconds}" -->')
 
-    lines.extend([
-        f"## {friendly_stage_name(stage_name)}",
-        "",
-    ])
+    lines.extend(
+        [
+            f"## {friendly_stage_name(stage_name)}",
+            "",
+        ]
+    )
 
     for task_line in task_lines:
         lines.append(f"- {escape_md(task_line)}")
 
-    lines.extend([
-        "",
-        "Notes:",
-        f"Stage {stage_num} · {time_min} min · {interaction}",
-        f"Goal: {escape_md(stage_aim)}",
-    ])
+    lines.extend(
+        [
+            "",
+            "Notes:",
+            f"Stage {stage_num} · {time_min} min · {interaction}",
+            f"Goal: {escape_md(stage_aim)}",
+        ]
+    )
 
     # Add material ref in notes
     if materials:
@@ -826,17 +1027,19 @@ def generate_task_slide_no_steps(stage, data):
     stage_num = stage.get("stage_number", 0)
 
     lines = [
-        f'<!-- slide-section: task-{stage_num} -->',
+        f"<!-- slide-section: task-{stage_num} -->",
     ]
 
     timer_seconds = int(stage.get("time", 0)) * 60
     if timer_seconds > 0:
         lines.append(f'<!-- .slide: data-timer="{timer_seconds}" -->')
 
-    lines.extend([
-        f"## {friendly_stage_name(stage_name)}",
-        "",
-    ])
+    lines.extend(
+        [
+            f"## {friendly_stage_name(stage_name)}",
+            "",
+        ]
+    )
 
     proc_lines = procedure.split("\n")
     for pl in proc_lines:
@@ -850,12 +1053,14 @@ def generate_task_slide_no_steps(stage, data):
         elif re.match(r"^\d+\.\s", stripped):
             lines.append(escape_md(stripped))
 
-    lines.extend([
-        "",
-        "Notes:",
-        f"Stage {stage_num} · {time_min} min · {interaction}",
-        f"Goal: {escape_md(stage_aim)}",
-    ])
+    lines.extend(
+        [
+            "",
+            "Notes:",
+            f"Stage {stage_num} · {time_min} min · {interaction}",
+            f"Goal: {escape_md(stage_aim)}",
+        ]
+    )
 
     # Add material ref in notes
     if materials:
@@ -892,7 +1097,7 @@ def generate_answer_slides(answer_key_content):
                 slides.append("\n".join(current_slide_lines))
             exercise_name = stripped.lstrip("#").strip()
             current_slide_lines = [
-                '<!-- slide-section: answers -->',
+                "<!-- slide-section: answers -->",
                 f"## {escape_md(exercise_name)}",
                 '<!-- .element: class="aim-label" -->',
                 "",
@@ -908,18 +1113,18 @@ def generate_answer_slides(answer_key_content):
             if answer.startswith("F."):
                 correction = answer[2:].strip()
                 current_slide_lines.append(
-                    f'✗ **False** <!-- .element: class="fragment highlight-red" -->'
+                    '✗ **False** <!-- .element: class="fragment highlight-red" -->'
                 )
                 current_slide_lines.append(
-                    f"✓ *{escape_md(correction)}* <!-- .element: class=\"fragment highlight-green\" -->"
+                    f'✓ *{escape_md(correction)}* <!-- .element: class="fragment highlight-green" -->'
                 )
             elif answer == "T":
                 current_slide_lines.append(
-                    f'✓ **True** <!-- .element: class="fragment highlight-green" -->'
+                    '✓ **True** <!-- .element: class="fragment highlight-green" -->'
                 )
             elif answer.lower() in ["students' own answers.", "students own answers."]:
                 current_slide_lines.append(
-                    f"✓ Students' own answers. <!-- .element: class=\"fragment highlight-green\" -->"
+                    '✓ Students\' own answers. <!-- .element: class="fragment highlight-green" -->'
                 )
             elif answer and len(answer) <= 3:
                 current_slide_lines.append(
@@ -929,7 +1134,7 @@ def generate_answer_slides(answer_key_content):
 
         if stripped == "**Answers:**":
             current_slide_lines.append(
-                f"✓ Students' own answers. <!-- .element: class=\"fragment highlight-green\" -->"
+                '✓ Students\' own answers. <!-- .element: class="fragment highlight-green" -->'
             )
             continue
 
@@ -943,18 +1148,18 @@ def generate_answer_slides(answer_key_content):
             if answer.startswith("F."):
                 correction = answer[2:].strip()
                 current_slide_lines.append(
-                    f'✗ **False** <!-- .element: class="fragment highlight-red" -->'
+                    '✗ **False** <!-- .element: class="fragment highlight-red" -->'
                 )
                 current_slide_lines.append(
-                    f"✓ *{escape_md(correction)}* <!-- .element: class=\"fragment highlight-green\" -->"
+                    f'✓ *{escape_md(correction)}* <!-- .element: class="fragment highlight-green" -->'
                 )
             elif answer == "T":
                 current_slide_lines.append(
-                    f'✓ **True** <!-- .element: class="fragment highlight-green" -->'
+                    '✓ **True** <!-- .element: class="fragment highlight-green" -->'
                 )
             elif answer.lower() in ["students' own answers.", "students own answers."]:
                 current_slide_lines.append(
-                    f"✓ Students' own answers. <!-- .element: class=\"fragment highlight-green\" -->"
+                    '✓ Students\' own answers. <!-- .element: class="fragment highlight-green" -->'
                 )
             elif answer and len(answer) <= 3:
                 current_slide_lines.append(
@@ -964,7 +1169,7 @@ def generate_answer_slides(answer_key_content):
 
         if stripped == "**Answers:**":
             current_slide_lines.append(
-                f"✓ Students' own answers. <!-- .element: class=\"fragment highlight-green\" -->"
+                '✓ Students\' own answers. <!-- .element: class="fragment highlight-green" -->'
             )
             continue
 
@@ -994,7 +1199,7 @@ def generate_answer_slides(answer_key_content):
 def generate_transition_slide(stage_name, stage_num=0, prev_stage="", question=""):
     stage_name = escape_md(stage_name)
     lines = [
-        f'<!-- slide-section: transition-{stage_num} -->',
+        f"<!-- slide-section: transition-{stage_num} -->",
         '<!-- .slide: data-background="#c0392b" -->',
         f"## {friendly_stage_name(stage_name)}",
     ]
@@ -1002,12 +1207,14 @@ def generate_transition_slide(stage_name, stage_num=0, prev_stage="", question="
         lines.append("")
         lines.append(escape_md(question))
 
-    lines.extend([
-        "",
-        "Notes:",
-        f"Moving from {escape_md(prev_stage)}.",
-        "Give students a moment to reset. Introduce the next activity.",
-    ])
+    lines.extend(
+        [
+            "",
+            "Notes:",
+            f"Moving from {escape_md(prev_stage)}.",
+            "Give students a moment to reset. Introduce the next activity.",
+        ]
+    )
     return "\n".join(lines)
 
 
@@ -1039,20 +1246,22 @@ def generate_summary_slide(data):
     outcomes = outcomes[:3]
 
     lines = [
-        '<!-- slide-section: summary -->',
+        "<!-- slide-section: summary -->",
         "## What you can do now",
         "",
     ]
     for outcome in outcomes:
         lines.append(f"✓ {escape_md(outcome)}")
 
-    lines.extend([
-        "",
-        "Notes:",
-        "Elicit from students: What did you learn today?",
-        "Connect back to their predictions from the beginning.",
-        "Praise effort, mention one thing to improve.",
-    ])
+    lines.extend(
+        [
+            "",
+            "Notes:",
+            "Elicit from students: What did you learn today?",
+            "Connect back to their predictions from the beginning.",
+            "Praise effort, mention one thing to improve.",
+        ]
+    )
     return "\n".join(lines)
 
 
@@ -1060,7 +1269,7 @@ def generate_end_slide(data):
     topic = escape_md(data.get("topic", ""))
     cefr = data.get("lesson_plan", {}).get("cefr_level", "")
     lines = [
-        '<!-- slide-section: end -->',
+        "<!-- slide-section: end -->",
         '<!-- .slide: data-background="#2c3e50" -->',
         "## Thank you",
         "",
@@ -1069,7 +1278,9 @@ def generate_end_slide(data):
     return "\n".join(lines)
 
 
-def generate_markdown(data, title_image_path=None, title_attribution=None, slides_dir=None, logo_path=None):
+def generate_markdown(
+    data, title_image_path=None, title_attribution=None, slides_dir=None, logo_path=None
+):
     """Main: generate complete markdown from lesson plan data."""
     stages = data.get("lesson_plan", {}).get("stages", [])
     total_stages = len(stages)
@@ -1078,7 +1289,9 @@ def generate_markdown(data, title_image_path=None, title_attribution=None, slide
 
     slides = []
 
-    slides.append(generate_title_slide(data, title_image_path, title_attribution, slides_dir, logo_path))
+    slides.append(
+        generate_title_slide(data, title_image_path, title_attribution, slides_dir, logo_path)
+    )
 
     obj_slide = generate_objective_slide(data)
     if obj_slide:
@@ -1093,7 +1306,9 @@ def generate_markdown(data, title_image_path=None, title_attribution=None, slide
 
         if i > 0 and should_add_transition(prev_stage_name, stage_name):
             question = get_transition_question(stage_name, stage)
-            slides.append(generate_transition_slide(stage_name, stage_num, prev_stage_name, question))
+            slides.append(
+                generate_transition_slide(stage_name, stage_num, prev_stage_name, question)
+            )
 
         if "lead-in" in stage_lower:
             slides.append(generate_leadin_slide(stage, data, slides_dir))
@@ -1104,7 +1319,9 @@ def generate_markdown(data, title_image_path=None, title_attribution=None, slide
         elif "gist" in stage_lower and i == stages.index(stage):
             slides.append(generate_prereading_slide(stage, data, slides_dir))
 
-        elif any(kw in stage_lower for kw in ["gist", "detail", "inference", "conclusion", "exercise"]):
+        elif any(
+            kw in stage_lower for kw in ["gist", "detail", "inference", "conclusion", "exercise"]
+        ):
             slides.append(generate_task_slide(stage, data))
 
         elif any(kw in stage_lower for kw in ["post-reading", "speaking", "discussion"]):
@@ -1132,8 +1349,15 @@ def generate_markdown(data, title_image_path=None, title_attribution=None, slide
 
 def should_add_transition(prev_name, next_name):
     """Determine if a transition slide is needed between stages."""
-    transition_keywords = ["reading for gist", "reading for detail", "inference",
-                           "post-reading", "wrap-up", "discussion", "exercise"]
+    transition_keywords = [
+        "reading for gist",
+        "reading for detail",
+        "inference",
+        "post-reading",
+        "wrap-up",
+        "discussion",
+        "exercise",
+    ]
     prev_lower = prev_name.lower()
     next_lower = next_name.lower()
 
@@ -1141,7 +1365,8 @@ def should_add_transition(prev_name, next_name):
         return True
 
     if any(kw in prev_lower for kw in ["lead-in", "discussion"]) and any(
-        kw in next_lower for kw in ["reading", "exercise", "detail"]):
+        kw in next_lower for kw in ["reading", "exercise", "detail"]
+    ):
         return True
 
     return False
@@ -1208,15 +1433,23 @@ def write_index_html(markdown_content, output_dir):
         shutil.copy2(timer_js_src, output_path / "timer-plugin.js")
 
     # Copy chime audio to slides/assets/
-    chime_src = PROJECT_ROOT / "general-assets" / "audio" / "freesound_community-chime-sound-7143.mp3"
+    chime_src = (
+        PROJECT_ROOT / "general-assets" / "audio" / "freesound_community-chime-sound-7143.mp3"
+    )
     if chime_src.exists():
         assets_dir = output_path / "assets"
         assets_dir.mkdir(parents=True, exist_ok=True)
         shutil.copy2(chime_src, assets_dir / "chime.mp3")
 
 
-def convert_json_to_markdown(json_path, title_image_path=None, title_attribution=None, logo_path=None,
-                              sections=None, merge=False):
+def convert_json_to_markdown(
+    json_path,
+    title_image_path=None,
+    title_attribution=None,
+    logo_path=None,
+    sections=None,
+    merge=False,
+):
     json_path = Path(json_path)
 
     if not json_path.exists():
@@ -1224,7 +1457,7 @@ def convert_json_to_markdown(json_path, title_image_path=None, title_attribution
         return None
 
     try:
-        with open(json_path, "r", encoding="utf-8") as f:
+        with open(json_path, encoding="utf-8") as f:
             data = json.load(f)
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON in {json_path}: {e}")
@@ -1246,6 +1479,7 @@ def convert_json_to_markdown(json_path, title_image_path=None, title_attribution
         default_logo = TEMPLATES_DIR / "Image_20260324_141022.png"
         if default_logo.exists():
             import shutil
+
             assets_dir = slides_dir / "assets"
             assets_dir.mkdir(parents=True, exist_ok=True)
             dest_logo = assets_dir / "logo.png"
@@ -1258,8 +1492,7 @@ def convert_json_to_markdown(json_path, title_image_path=None, title_attribution
 
         for section_id in sections:
             section_content = generate_section(
-                data, section_id.strip(), slides_dir,
-                title_image_path, title_attribution, logo_path
+                data, section_id.strip(), slides_dir, title_image_path, title_attribution, logo_path
             )
             if section_content:
                 new_sections[section_id.strip()] = section_content
@@ -1280,7 +1513,9 @@ def convert_json_to_markdown(json_path, title_image_path=None, title_attribution
             write_index_html(existing, slides_dir)
             return output_path
 
-    markdown_content = generate_markdown(data, title_image_path, title_attribution, slides_dir, logo_path)
+    markdown_content = generate_markdown(
+        data, title_image_path, title_attribution, slides_dir, logo_path
+    )
 
     try:
         with open(output_path, "w", encoding="utf-8") as f:
@@ -1308,12 +1543,12 @@ def merge_sections(existing_md, new_sections):
     in_section = False
 
     for line in lines:
-        marker_match = re.match(r'<!-- slide-section: (\S+) -->', line)
+        marker_match = re.match(r"<!-- slide-section: (\S+) -->", line)
         if marker_match:
             section_id = marker_match.group(1)
             if section_id in new_sections:
                 # Replace this section with new content
-                result.append(f'<!-- slide-section: {section_id} -->')
+                result.append(f"<!-- slide-section: {section_id} -->")
                 result.append(new_sections[section_id])
                 in_section = True
                 current_section = section_id
@@ -1338,7 +1573,9 @@ def merge_sections(existing_md, new_sections):
 def generate_section(data, section_id, slides_dir, title_image_path, title_attribution, logo_path):
     """Generate a single slide section by ID."""
     if section_id == "title":
-        return generate_title_slide(data, title_image_path, title_attribution, slides_dir, logo_path)
+        return generate_title_slide(
+            data, title_image_path, title_attribution, slides_dir, logo_path
+        )
     elif section_id == "objective":
         return generate_objective_slide(data)
     elif section_id.startswith("vocab"):
@@ -1378,8 +1615,9 @@ def generate_section(data, section_id, slides_dir, title_image_path, title_attri
         for i, stage in enumerate(stages):
             if stage.get("stage_number", i) == stage_num and i > 0:
                 question = get_transition_question(stage.get("stage", ""), stage)
-                return generate_transition_slide(stage.get("stage", ""), stage_num,
-                                                  stages[i - 1].get("stage", ""), question)
+                return generate_transition_slide(
+                    stage.get("stage", ""), stage_num, stages[i - 1].get("stage", ""), question
+                )
         return None
     elif section_id == "answers":
         answer_key_content = parse_answer_key(data)
@@ -1396,20 +1634,36 @@ def generate_section(data, section_id, slides_dir, title_image_path, title_attri
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description="Convert lesson plan JSON to reveal.js slides (markdown + self-contained HTML).")
+    parser = argparse.ArgumentParser(
+        description="Convert lesson plan JSON to reveal.js slides (markdown + self-contained HTML)."
+    )
     parser.add_argument("json_file", help="Path to lesson plan JSON file")
-    parser.add_argument("--title-image", default=None,
-                        help="Pre-downloaded image path for title slide")
-    parser.add_argument("--title-attribution", default=None,
-                        help="Attribution string for pre-downloaded title image")
-    parser.add_argument("--logo-image", default=None,
-                        help="Path to logo image to display at top of title slide")
-    parser.add_argument("--section", default=None,
-                        help="Comma-separated section IDs to regenerate (e.g., 'title,vocab-1,task-2')")
-    parser.add_argument("--merge", action="store_true",
-                        help="Merge regenerated sections into existing markdown file")
-    parser.add_argument("--full-regen", action="store_true",
-                        help="Regenerate full markdown from JSON (overwrites manual edits)")
+    parser.add_argument(
+        "--title-image", default=None, help="Pre-downloaded image path for title slide"
+    )
+    parser.add_argument(
+        "--title-attribution",
+        default=None,
+        help="Attribution string for pre-downloaded title image",
+    )
+    parser.add_argument(
+        "--logo-image", default=None, help="Path to logo image to display at top of title slide"
+    )
+    parser.add_argument(
+        "--section",
+        default=None,
+        help="Comma-separated section IDs to regenerate (e.g., 'title,vocab-1,task-2')",
+    )
+    parser.add_argument(
+        "--merge",
+        action="store_true",
+        help="Merge regenerated sections into existing markdown file",
+    )
+    parser.add_argument(
+        "--full-regen",
+        action="store_true",
+        help="Regenerate full markdown from JSON (overwrites manual edits)",
+    )
     args = parser.parse_args()
 
     # Use get_output_path() to find the correct markdown output path
@@ -1427,8 +1681,11 @@ if __name__ == "__main__":
         print(f"HTML regenerated from existing markdown: {output_md}")
     else:
         result = convert_json_to_markdown(
-            args.json_file, args.title_image, args.title_attribution, args.logo_image,
+            args.json_file,
+            args.title_image,
+            args.title_attribution,
+            args.logo_image,
             sections=args.section.split(",") if args.section else None,
-            merge=args.merge
+            merge=args.merge,
         )
     sys.exit(0 if result else 1)

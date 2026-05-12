@@ -90,6 +90,27 @@ For **regeneration** (existing slides): **Never search Pixabay.** Reuse existing
 - Verify transition slides use `data-background="#c0392b"`
 - Verify pedagogical strategy slides use `data-background="#1a6b5a"` and `class="pedagogical"`
 
+### Step 6: Publish and write URL to lesson plan JSON
+
+After slides are verified, publish to GitHub Pages and write the deployment URL into the lesson plan JSON as `slideshow_url`. This feeds into the PDF template's gray-shaded Slideshow URL cell.
+
+**Prerequisites:** `gh` CLI installed and authenticated. See `publish-to-github-pages` skill for details.
+
+```powershell
+# Extract owner and repo from git remote
+$remoteUrl = git remote get-url origin
+$owner, $repo = if ($remoteUrl -match 'github\.com[:\/](.+?)\/(.+?)\.git') { $matches[1], $matches[2] }
+$url = "https://${owner}.github.io/${repo}/"
+
+# Write URL to the lesson plan JSON
+$jsonPath = "output/{subfolder}/{mmddyy}-{topic}-lesson-plan.json"
+$json = Get-Content $jsonPath -Raw | ConvertFrom-Json
+$json | Add-Member -MemberType NoteProperty -Name "slideshow_url" -Value $url -Force
+$json | ConvertTo-Json -Depth 10 | Set-Content $jsonPath
+
+Write-Host "Slideshow URL written to $jsonPath : $url"
+```
+
 ## Fragment Policy
 
 | Use fragments for | DO NOT use fragments for |

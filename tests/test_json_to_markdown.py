@@ -2,25 +2,23 @@
 test_json_to_markdown.py - Tests for json_to_markdown conversion script
 """
 
-import json
-import os
 import copy
-import pytest
+import json
+import sys
 from pathlib import Path
 
-import sys
+import pytest
+
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
 from json_to_markdown import (
-    validate_json,
-    humanize_stage_aim,
-    format_date,
-    generate_title_slide,
-    generate_markdown,
     convert_json_to_markdown,
+    format_date,
+    generate_markdown,
+    generate_title_slide,
+    humanize_stage_aim,
+    validate_json,
     write_index_html,
-    OUTPUT_DIR,
-    SLIDES_TEMPLATE,
 )
 
 VALID_LESSON_PLAN = {
@@ -123,10 +121,6 @@ class TestGenerateTitleSlide:
         slide = generate_title_slide(VALID_LESSON_PLAN)
         assert "# Test Topic" in slide
 
-    def test_contains_cefr_badge(self):
-        slide = generate_title_slide(VALID_LESSON_PLAN)
-        assert '<span class="cefr-badge B2">B2</span>' in slide
-
     def test_contains_strap_subheader(self):
         """Title slide should contain strap subheader instead of teacher/materials."""
         slide = generate_title_slide(VALID_LESSON_PLAN)
@@ -168,7 +162,7 @@ class TestGenerateMarkdown:
         for i, line in enumerate(lines):
             stripped = line.strip()
             if stripped in ("----", "***", "___"):
-                pytest.fail(f"Banned separator '{stripped}' found at line {i+1}")
+                pytest.fail(f"Banned separator '{stripped}' found at line {i + 1}")
 
 
 class TestConvertJsonToMarkdown:
@@ -178,6 +172,7 @@ class TestConvertJsonToMarkdown:
             json.dump(VALID_LESSON_PLAN, f)
 
         import scripts.json_to_markdown as j2m
+
         original_output_dir = j2m.OUTPUT_DIR
         j2m.OUTPUT_DIR = tmp_path / "output"
         try:

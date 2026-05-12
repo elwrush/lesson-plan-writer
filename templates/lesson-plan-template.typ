@@ -37,6 +37,7 @@
   [*Class:*], [{{ class }}], [*Duration:*], [{{ duration }}],
   [*CEFR Level:*], [{{ cefr_level }}], [*Lesson Shape:*], [{{ shape }} ({{ shape_name }})],
   [*Materials:*], table.cell(colspan: 3)[{{ materials }}],
+  [*Slideshow URL:*], table.cell(colspan: 3, fill: luma(220))[{{ slideshow_url }}],
 )
 
 #v(0.5em)

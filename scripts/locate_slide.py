@@ -20,12 +20,12 @@ import sys
 from pathlib import Path
 from urllib.parse import unquote, urlparse
 
-
 # ── URL and file resolution ────────────────────────────────────────────
+
 
 def resolve_index_html_from_url(url):
     """Find raw-HTML index.html from a file:// URL.
-    
+
     Skips markdown-based HTML files (uses is_markdown_based_html check).
     Falls back to index2.html if index.html is markdown-based.
     """
@@ -37,7 +37,7 @@ def resolve_index_html_from_url(url):
     url = unquote(url)
     url = url.replace("/", "\\")
     path = Path(url)
-    
+
     if path.suffix == ".html" and path.exists():
         if not is_markdown_based_html(path):
             return path
@@ -46,52 +46,53 @@ def resolve_index_html_from_url(url):
         if alt.exists():
             return alt
         return path  # fallback to original
-    
+
     # If the URL points to a directory or missing file, look for index.html
     if path.is_dir():
         return find_index_html_in_slides_dir(path)
     elif path.parent.name:
         return find_index_html_in_slides_dir(path.parent)
-    
+
     return None
 
 
 def is_markdown_based_html(html_path):
     """Check if the HTML file uses the markdown plugin (old style)."""
     content = html_path.read_text(encoding="utf-8")
-    return '<textarea data-template>' in content or 'data-markdown' in content[:2000]
+    return "<textarea data-template>" in content or "data-markdown" in content[:2000]
 
 
 def find_index_html_in_slides_dir(slides_dir):
     """Find a raw-HTML index.html in a slides directory.
-    
+
     Prefers index.html first, falls back to index2.html.
     Skips markdown-based index.html files.
     """
     slides_dir = Path(slides_dir)
-    
+
     # Try index.html
     html = slides_dir / "index.html"
     if html.exists() and not is_markdown_based_html(html):
         return html
-    
+
     # Fall back to index2.html
     html2 = slides_dir / "index2.html"
     if html2.exists():
         return html2
-    
+
     # Last resort: markdown-based index.html (for backward compat)
     if html.exists():
         return html
-    
+
     return None
 
 
 # ── HTML mode (primary) ────────────────────────────────────────────────
 
+
 def parse_html_sections(html_path):
     """Parse index.html to build slide_index -> (heading, start_line, end_line) mapping.
-    
+
     Counts <section> elements directly inside <div class="slides">.
     Returns list of dicts, index 0 = first slide.
     """
@@ -105,15 +106,15 @@ def parse_html_sections(html_path):
         stripped = line.strip()
         if stripped.startswith('<div class="slides"'):
             slides_start = i
-        elif stripped == '</div>' and slides_start is not None and slides_end is None:
+        elif stripped == "</div>" and slides_start is not None and slides_end is None:
             # Find the closing </div> that corresponds to the slides container
             # We count depth to find the right one
             depth = 0
             for j in range(slides_start, len(lines)):
                 tag = lines[j].strip()
-                if tag.startswith('<div'):
+                if tag.startswith("<div"):
                     depth += 1
-                elif tag.startswith('</div>'):
+                elif tag.startswith("</div>"):
                     depth -= 1
                     if depth == 0:
                         slides_end = j
@@ -132,38 +133,40 @@ def parse_html_sections(html_path):
 
     for i in range(slides_start, min(slides_end, len(lines))):
         stripped = lines[i].strip()
-        
-        if stripped.startswith('<section') and not in_section:
+
+        if stripped.startswith("<section") and not in_section:
             in_section = True
             section_start = i
             depth = 0
-        
+
         if in_section:
             # Count nested tags
-            if stripped.startswith('<section'):
+            if stripped.startswith("<section"):
                 depth += 1
-            if stripped.startswith('</section>'):
+            if stripped.startswith("</section>"):
                 depth -= 1
             if depth == 0:
                 # Extract heading
                 heading = None
                 for j in range(section_start, i + 1):
-                    h_match = re.search(r'<h[1-4][^>]*>(.*?)</h[1-4]>', lines[j])
+                    h_match = re.search(r"<h[1-4][^>]*>(.*?)</h[1-4]>", lines[j])
                     if h_match:
                         # Strip HTML tags from heading text
-                        heading = re.sub(r'<[^>]+>', '', h_match.group(1)).strip()
+                        heading = re.sub(r"<[^>]+>", "", h_match.group(1)).strip()
                         break
-                
+
                 section_name = heading or f"slide_{len(sections)}"
-                
-                sections.append({
-                    "slide_index": len(sections),
-                    "section": section_name,
-                    "heading": heading,
-                    "lines": {"start": section_start + 1, "end": i + 1},
-                })
+
+                sections.append(
+                    {
+                        "slide_index": len(sections),
+                        "section": section_name,
+                        "heading": heading,
+                        "lines": {"start": section_start + 1, "end": i + 1},
+                    }
+                )
                 in_section = False
-    
+
     return sections
 
 
@@ -175,6 +178,7 @@ def get_html_section_content(html_path, start_line, end_line):
 
 
 # ── Markdown mode (legacy) ─────────────────────────────────────────────
+
 
 def find_markdown_from_url(url):
     """Find markdown file from a file:// URL (legacy)."""
@@ -304,6 +308,7 @@ def locate_slide_html(index, html_path):
 
 # ── Main ───────────────────────────────────────────────────────────────
 
+
 def main():
     parser = argparse.ArgumentParser(
         description="Map reveal.js slide index to HTML section (primary) or markdown section (legacy)"
@@ -335,9 +340,9 @@ def main():
             hash_part = hash_part[1:]
         if hash_part.isdigit():
             slide_index = int(hash_part)
-        elif hash_part.lstrip('/').isdigit():
-            slide_index = int(hash_part.lstrip('/'))
-        
+        elif hash_part.lstrip("/").isdigit():
+            slide_index = int(hash_part.lstrip("/"))
+
         # Try HTML first
         html_path = resolve_index_html_from_url(url)
         if not html_path:

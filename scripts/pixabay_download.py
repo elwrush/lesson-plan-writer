@@ -8,8 +8,8 @@ Outputs JSON on stdout with file paths and attribution strings.
 """
 
 import argparse
-import json
 import io
+import json
 import os
 import subprocess
 import sys
@@ -101,14 +101,22 @@ def compress_video(video_url, output_path):
             f.write(video_response.content)
 
         cmd = [
-            "ffmpeg", "-y",
-            "-i", temp_path,
-            "-vf", "scale=min(1280,iw):min(720,ih):force_original_aspect_ratio=decrease",
-            "-c:v", "libx264",
-            "-crf", "28",
-            "-preset", "fast",
-            "-c:a", "aac",
-            "-b:a", "128k",
+            "ffmpeg",
+            "-y",
+            "-i",
+            temp_path,
+            "-vf",
+            "scale=min(1280,iw):min(720,ih):force_original_aspect_ratio=decrease",
+            "-c:v",
+            "libx264",
+            "-crf",
+            "28",
+            "-preset",
+            "fast",
+            "-c:a",
+            "aac",
+            "-b:a",
+            "128k",
             str(output_path),
         ]
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
@@ -150,16 +158,17 @@ def get_best_video_url(hit):
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Search Pixabay, download and compress media."
-    )
+    parser = argparse.ArgumentParser(description="Search Pixabay, download and compress media.")
     parser.add_argument("--query", required=True, help="Search term")
-    parser.add_argument("--type", choices=["image", "video"], default="image",
-                        help="Media type (default: image)")
-    parser.add_argument("--count", type=int, default=1,
-                        help="Number of files to download (default: 1, max: 10)")
-    parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR),
-                        help="Output directory (default: assets/)")
+    parser.add_argument(
+        "--type", choices=["image", "video"], default="image", help="Media type (default: image)"
+    )
+    parser.add_argument(
+        "--count", type=int, default=1, help="Number of files to download (default: 1, max: 10)"
+    )
+    parser.add_argument(
+        "--output-dir", default=str(DEFAULT_OUTPUT_DIR), help="Output directory (default: assets/)"
+    )
     args = parser.parse_args()
 
     api_key = get_api_key()
@@ -209,11 +218,13 @@ def main():
         if success:
             size_kb = output_path.stat().st_size / 1024
             print(f"Downloaded: {output_path} ({size_kb:.0f}KB)", file=sys.stderr)
-            results.append({
-                "path": str(output_path),
-                "attribution": f"{'Photo' if args.type == 'image' else 'Video'} by {photographer} on Pixabay",
-                "size_kb": round(size_kb, 1),
-            })
+            results.append(
+                {
+                    "path": str(output_path),
+                    "attribution": f"{'Photo' if args.type == 'image' else 'Video'} by {photographer} on Pixabay",
+                    "size_kb": round(size_kb, 1),
+                }
+            )
         else:
             errors.append(f"Failed to process {pixabay_id}")
 

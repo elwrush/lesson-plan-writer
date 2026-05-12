@@ -10,14 +10,14 @@ Example:
 
 import json
 import os
-import sys
-import subprocess
-import shutil
-from pathlib import Path
-from datetime import datetime
-from jinja2 import Environment, FileSystemLoader
-
 import re
+import shutil
+import subprocess
+import sys
+from datetime import datetime
+from pathlib import Path
+
+from jinja2 import Environment, FileSystemLoader
 
 # Project root
 PROJECT_ROOT = Path(__file__).parent.parent
@@ -25,9 +25,9 @@ TEMPLATES_DIR = PROJECT_ROOT / "templates"
 PDF_OUTPUT_DIR = PROJECT_ROOT / "PDF"
 
 # Roboto OTF font directory (TinyTeX bundled)
-ROBOTO_FONT_DIR = Path(os.path.expandvars(
-    r"%APPDATA%\TinyTeX\texmf-dist\fonts\opentype\google\roboto"
-))
+ROBOTO_FONT_DIR = Path(
+    os.path.expandvars(r"%APPDATA%\TinyTeX\texmf-dist\fonts\opentype\google\roboto")
+)
 
 # Required fields in lesson plan JSON
 REQUIRED_FIELDS = [
@@ -82,7 +82,7 @@ def validate_json(data):
             for i, stage in enumerate(lp["stages"]):
                 for field in REQUIRED_STAGE_FIELDS:
                     if field not in stage:
-                        errors.append(f"Missing required field in stage {i+1}: {field}")
+                        errors.append(f"Missing required field in stage {i + 1}: {field}")
     else:
         errors.append("lesson_plan must be a valid object")
 
@@ -95,7 +95,7 @@ def normalize_topic(topic):
 
 
 def get_output_path(json_path, topic):
-    """Generate output PDF path: PDF/{input_subfolder}/{mm-dd-yy}-{topic}.pdf"""
+    """Generate output PDF path: PDF/{input_subfolder}/{mmddyy}-{topic}-lesson-plan.pdf"""
     json_path = Path(json_path)
 
     try:
@@ -104,9 +104,9 @@ def get_output_path(json_path, topic):
     except (ValueError, IndexError):
         subfolder = "default"
 
-    today = datetime.now().strftime("%m-%d-%y")
+    today = datetime.now().strftime("%m%d%y")
     normalized_topic = normalize_topic(topic)
-    filename = f"{today}-{normalized_topic}.pdf"
+    filename = f"{today}-{normalized_topic}-lesson-plan.pdf"
 
     output_dir = PDF_OUTPUT_DIR / subfolder
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -168,8 +168,18 @@ def format_date(date_str):
     """Convert YYMMDD or DDMMYY to 'D Month, YYYY' format."""
     date_str = date_str.strip()
     months = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
     ]
 
     # Try DDMMYY
@@ -235,7 +245,7 @@ def render_template(data):
         answer_key_path = Path(answer_key)
         if answer_key_path.exists() and answer_key_path.suffix == ".md":
             try:
-                with open(answer_key_path, "r", encoding="utf-8") as f:
+                with open(answer_key_path, encoding="utf-8") as f:
                     answer_key = f.read()
             except Exception:
                 pass
@@ -246,7 +256,7 @@ def render_template(data):
         transcript_path = Path(transcript)
         if transcript_path.exists() and transcript_path.suffix in (".md", ".txt"):
             try:
-                with open(transcript_path, "r", encoding="utf-8") as f:
+                with open(transcript_path, encoding="utf-8") as f:
                     transcript = f.read()
             except Exception:
                 pass
@@ -278,6 +288,7 @@ def render_template(data):
         "shape_name": data.get("lesson_plan", {}).get("shape_name", ""),
         "objective": data.get("objective", ""),
         "materials": data.get("materials", ""),
+        "slideshow_url": data.get("slideshow_url", ""),
         "stages": processed_stages,
         "transcript": transcript_typst,
         "answer_key": answer_key_typst,
@@ -290,7 +301,6 @@ def render_typst(typ_path, output_path):
     """Render the .typ file to PDF using Typst CLI."""
     typ_path = Path(typ_path)
     output_path = Path(output_path)
-    output_dir = output_path.parent
 
     cmd = [
         "typst",
@@ -321,9 +331,7 @@ def render_typst(typ_path, output_path):
         print("Error: Typst compile timed out")
         return False
     except FileNotFoundError:
-        print(
-            "Error: Typst CLI not found. Install from https://github.com/typst/typst"
-        )
+        print("Error: Typst CLI not found. Install from https://github.com/typst/typst")
         return False
 
 
@@ -337,7 +345,7 @@ def convert_json_to_pdf(json_path, output_dir=None):
 
     # Read and parse JSON
     try:
-        with open(json_path, "r", encoding="utf-8") as f:
+        with open(json_path, encoding="utf-8") as f:
             data = json.load(f)
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON in {json_path}: {e}")
@@ -354,7 +362,10 @@ def convert_json_to_pdf(json_path, output_dir=None):
     # Get output path
     topic = data.get("topic", "untitled")
     if output_dir:
-        output_path = Path(output_dir) / f"{datetime.now().strftime('%m-%d-%y')}-{normalize_topic(topic)}.pdf"
+        output_path = (
+            Path(output_dir)
+            / f"{datetime.now().strftime('%m%d%y')}-{normalize_topic(topic)}-lesson-plan.pdf"
+        )
     else:
         output_path = get_output_path(json_path, topic)
 
