@@ -10,9 +10,18 @@ Interactively gather teacher requirements and generate a structured lesson plan 
 
 ## Workflow
 
-Ask questions **one at a time**, each in its own `question` call. After each answer, do a visible action (read a file, confirm receipt, show next step) before asking the next question. This gives the user a clear sense of progress and avoids the feeling of being peppered.
+Two input methods depending on the field type:
 
-**Max one question per `question` call.** Do NOT use the questions array for multiple fields. Do NOT cram multiple data points into one options list.
+| Field type | How to ask | Tool |
+|---|---|---|
+| **Selectable** (shape, CEFR level, materials type) | Use `question` tool with predefined options — user clicks to pick | `question` call with `options` array |
+| **Free text** (teacher, duration, topic, class, subfolder, materials reference, answer key path, transcript path) | Ask directly in the chat message — user types in the normal message input, NOT in a `question` tool form | Plain text message, wait for user reply |
+
+**Rules:**
+- One field at a time. Ask, wait for reply, then move to the next.
+- For selectable fields: use `question` tool with well-defined `options`, each with `label` + `description`.
+- For free-text fields: do NOT use `question` tool. Just write the question in your response text. The user will reply in the chat input.
+- After each answer, do a brief visible action (read a file, confirm receipt) before the next question, so the user sees progress.
 
 ### Step 1: Greet the User
 ```
@@ -20,8 +29,8 @@ Welcome to the Lesson Plan Writer!
 I'll help you create a structured lesson plan.
 ```
 
-### Step 2: Ask About the Shape
-Display the available lesson plan shapes:
+### Step 2: Ask About the Shape (selectable)
+Display the available lesson plan shapes in your message text:
 
 | Shape | Name |
 |-------|------|
@@ -33,34 +42,33 @@ Display the available lesson plan shapes:
 | F | Productive Skills (Traditional) |
 | G | Task-Based Learning/TBT |
 
-Ask: "Which lesson plan shape would you like to use?" with predefined options A–G.
+Use `question` tool with options A–G. After the user answers, read the corresponding shape template file from `knowledge-base/lesson plan shapes/json/shape-{letter}.json` and report back: "Loaded Shape {letter} — {shape name}."
 
-After the user answers, read the corresponding shape template file from `knowledge-base/lesson plan shapes/json/shape-{letter}.json` to load its structure. Report back briefly: "Loaded Shape {letter} — {shape name}."
+### Step 3: Collect Free-Text Basic Info (one per chat message)
+Ask each by writing the question directly in your response text. Do NOT use `question` tool for these:
+1. **Teacher name** — "What's the teacher name?"
+2. **Lesson length** — "Lesson length in minutes?"
+3. **Topic** — "What's the lesson topic?"
+4. **Class** — "What's the class name or identifier?"
 
-### Step 3: Collect Basic Info (One Question at a Time)
-Ask each separately, with a brief message between:
-1. **Teacher name** — empty options, free text
-2. **Lesson length** — empty options, free text (minutes)
-3. **CEFR level** — predefined options: A1, A2, B1, B2, C1, C2
-4. **Topic** — empty options, free text
-5. **Class** — empty options, free text (class name/identifier)
-6. **Materials type** — predefined options: Bespoke, Existing
+### Step 4: CEFR Level (selectable)
+Use `question` tool with predefined options: A1, A2, B1, B2, C1, C2.
 
-### Step 4: Input Subfolder
-Ask: "What is the input subfolder name?" with empty options (free text).
+### Step 5: Materials Type (selectable)
+Use `question` tool with options: Bespoke, Existing.
 
-After receiving the name, check if the folder exists under `inputs\`. If not, create it. Then scan its contents:
+### Step 6: Input Subfolder (free text)
+Ask in chat: "What's the input subfolder name? (under inputs/)" — do NOT use `question` tool.
+
+After receiving the name, check if the folder exists under `inputs\`. If not, create it. Scan its contents:
 - List all files
 - Read files for materials reference (book name, unit, page numbers)
 - Read files for answer keys (look for "Answer", "Answers:", "**Answer:**" patterns, or files with "answer"/"key" in name)
 - Read files for transcripts (look for "Transcript", "Audio transcript", or files with "transcript" in name)
 
-### Step 5: Resolve Remaining Items
-If materials reference was found in files, use it. Otherwise ask the user for it.
-If answer key was found in files, set its path automatically. Otherwise ask.
-If transcript was found in files (or no audio/video files exist), set accordingly. Otherwise ask.
+### Step 7: Resolve Remaining Items (free text, chat only)
 
-### Step 6: Generate and Write Lesson Plan
+### Step 8: Generate and Write Lesson Plan
 
 #### Output Path
 ```
@@ -110,7 +118,7 @@ Use the shape's `main_aim_format` template combined with:
 - Topic provided by user
 - CEFR level
 
-### Step 7: Confirm Output
+### Step 9: Confirm Output
 Inform the user where the lesson plan has been saved.
 
 ## Template Files Location
