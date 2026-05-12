@@ -29,34 +29,40 @@ Display the available lesson plan shapes:
 | F | Productive Skills (Traditional) |
 | G | Task-Based Learning/TBT |
 
-Ask the user to identify their choice.
+Ask the user to identify their choice. This is the only question in this step — issue exactly one `question` call.
 
-### Step 3: Collect Basic Information
-Ask for:
+### Step 3: Collect Basic Information (Batch)
+
+Issue a **single `question` call** containing ALL of the following fields together:
 - Teacher name
 - Lesson length (in minutes)
-- CEFR level (e.g., A1, A2, B1, B2, C1, C2)
+- CEFR level (pre-define options: A1, A2, B1, B2, C1, C2)
 - Topic of lesson
 - Class (class name/identifier)
 - Materials type (bespoke or existing)
-- **Materials reference** (e.g., "OFD 3, Workbook, pp 4-5" or "Life Elementary, SB p. 42") — this is the concise reference that appears in the lesson plan header
 
-### Step 4: Collect Input Subfolder and Scan for Materials
-Ask for:
-- Input subfolder name (the subfolder under `C:\PROJECTS\LESSON PLAN WRITER 3\inputs\`)
+Do NOT split this into multiple question calls. Do NOT ask about materials reference here — that belongs in Step 4.
 
-**After receiving the subfolder name, scan its contents:**
+### Step 4: Collect Input Subfolder, Scan, and Gather Remaining Info
+
+**Step 4a:** Issue a single `question` call asking for the input subfolder name (the subfolder under `C:\PROJECTS\LESSON PLAN WRITER 3\inputs\`).
+
+**Step 4b: Scan the input folder contents** using `read` or `glob`:
 - List all files in the input folder
 - Read the files to check if they contain a materials reference (e.g., book name, unit, page numbers)
 - If a materials reference is found in the files, use it for the `materials` field — do NOT ask the user
-- If no materials reference is found, ask the user: "What is the materials reference for this lesson? (e.g., 'OFD 3, Workbook, pp 4-5')"
 - Check if any file contains answers/answer keys (look for "Answer", "Answers:", "**Answer:**" patterns in markdown files, or files with "answer" or "key" in the name)
 - Check if any file contains transcripts (look for "Transcript", "Audio transcript", or similar patterns, or files with "transcript" in the name)
 - If answers are found in the folder, set `answer-key` to the file path automatically — do NOT ask the user
 - If transcripts are found in the folder, set `transcript` to the file path automatically — do NOT ask the user
-- If no answers exist, ask the user: "No answer key found in the input folder. Do you have one? If so, where?"
-- If no transcripts exist, ask the user: "No transcript found in the input folder. Do you have one? If so, where?"
-- Only ask about transcription if audio/video files are present in the folder
+
+**Step 4c: Batch any remaining questions.** After scanning, issue a **single `question` call** for any remaining items not auto-detected:
+- If no materials reference was found in files, include: "What is the materials reference for this lesson? (e.g., 'OFD 3, Workbook, pp 4-5')"
+- If no answers were found, include: "No answer key found. Do you have one? If so, provide the path, or say 'none'."
+- If no transcripts were found **and** audio/video files exist in the folder, include: "No transcript found. Do you have one? If so, provide the path, or say 'none'."
+- If no transcripts were found and there are NO audio/video files, set `transcript` to "none" automatically — do NOT ask.
+
+Do NOT split Step 4c into multiple question calls. All unresolved items go into one batch.
 
 ### Step 5: Generate and Write Lesson Plan
 
