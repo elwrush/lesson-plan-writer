@@ -10,12 +10,9 @@ Interactively gather teacher requirements and generate a structured lesson plan 
 
 ## Workflow
 
-The entire information-gathering phase must use exactly **two question calls maximum**:
+Ask questions **one at a time**, each in its own `question` call. After each answer, do a visible action (read a file, confirm receipt, show next step) before asking the next question. This gives the user a clear sense of progress and avoids the feeling of being peppered.
 
-1. **Round 1** (single batch): Display shapes + ask EVERYTHING in one `question` call
-2. **Round 2** (single batch, if needed): After folder scan, ask any remaining items not auto-detected
-
-Do NOT split into more than two rounds. The user must not see back-to-back questions.
+**Max one question per `question` call.** Do NOT use the questions array for multiple fields. Do NOT cram multiple data points into one options list.
 
 ### Step 1: Greet the User
 ```
@@ -23,9 +20,9 @@ Welcome to the Lesson Plan Writer!
 I'll help you create a structured lesson plan.
 ```
 
-### Step 2: Collect Everything (Single Batch Question)
+### Step 2: Ask About the Shape
+Display the available lesson plan shapes:
 
-Display the available lesson plan shapes as part of the question:
 | Shape | Name |
 |-------|------|
 | A | Text-based Presentation of Language |
@@ -36,39 +33,34 @@ Display the available lesson plan shapes as part of the question:
 | F | Productive Skills (Traditional) |
 | G | Task-Based Learning/TBT |
 
-Then issue **exactly one `question` call** containing ALL of the following fields:
-- Shape selection (A–G, with the table as context)
-- Teacher name
-- Lesson length (in minutes)
-- CEFR level (pre-define options: A1, A2, B1, B2, C1, C2)
-- Topic of lesson
-- Class (class name/identifier)
-- Materials type (bespoke or existing)
-- Input subfolder name (the subfolder under `C:\PROJECTS\LESSON PLAN WRITER 3\inputs\`)
+Ask: "Which lesson plan shape would you like to use?" with predefined options A–G.
 
-**Critical: All of the above goes into a single `question` call.** Do NOT split shape into its own question. Do NOT split subfolder into its own question. One call.
+After the user answers, read the corresponding shape template file from `knowledge-base/lesson plan shapes/json/shape-{letter}.json` to load its structure. Report back briefly: "Loaded Shape {letter} — {shape name}."
 
-### Step 3: Scan Input Folder and Batch Remaining Questions
+### Step 3: Collect Basic Info (One Question at a Time)
+Ask each separately, with a brief message between:
+1. **Teacher name** — empty options, free text
+2. **Lesson length** — empty options, free text (minutes)
+3. **CEFR level** — predefined options: A1, A2, B1, B2, C1, C2
+4. **Topic** — empty options, free text
+5. **Class** — empty options, free text (class name/identifier)
+6. **Materials type** — predefined options: Bespoke, Existing
 
-**After receiving the Round 1 answers:**
-1. Check if the subfolder exists; if not, create it
-2. List all files in the input folder using `read` or `glob`
-3. Read the files to check if they contain a materials reference (e.g., book name, unit, page numbers)
-4. If materials reference is found in files, use it — do NOT ask
-5. Check for answer keys (look for "Answer", "Answers:", "**Answer:**" patterns, or files with "answer"/"key" in name)
-6. Check for transcripts (look for "Transcript", "Audio transcript", or files with "transcript" in name)
-7. If answers found, set `answer-key` to the file path automatically
-8. If transcripts found, set `transcript` to the file path automatically
+### Step 4: Input Subfolder
+Ask: "What is the input subfolder name?" with empty options (free text).
 
-**If any items remain unresolved after scanning**, issue a **single `question` call** containing all of them:
-- If no materials reference found: "What is the materials reference? (e.g., 'OFD 3, Workbook, pp 4-5')"
-- If no answer key found: "No answer key found. Do you have one? Provide path or say 'none'."
-- If no transcript found AND audio/video files exist: "No transcript found. Do you have one? Provide path or say 'none'."
-- If no transcript found AND no audio/video files: set to "none" automatically — do NOT ask
+After receiving the name, check if the folder exists under `inputs\`. If not, create it. Then scan its contents:
+- List all files
+- Read files for materials reference (book name, unit, page numbers)
+- Read files for answer keys (look for "Answer", "Answers:", "**Answer:**" patterns, or files with "answer"/"key" in name)
+- Read files for transcripts (look for "Transcript", "Audio transcript", or files with "transcript" in name)
 
-If ALL items were auto-detected during scanning, issue zero question calls and proceed directly to Step 4.
+### Step 5: Resolve Remaining Items
+If materials reference was found in files, use it. Otherwise ask the user for it.
+If answer key was found in files, set its path automatically. Otherwise ask.
+If transcript was found in files (or no audio/video files exist), set accordingly. Otherwise ask.
 
-### Step 4: Generate and Write Lesson Plan
+### Step 6: Generate and Write Lesson Plan
 
 #### Output Path
 ```
@@ -118,7 +110,7 @@ Use the shape's `main_aim_format` template combined with:
 - Topic provided by user
 - CEFR level
 
-### Step 5: Confirm Output
+### Step 7: Confirm Output
 Inform the user where the lesson plan has been saved.
 
 ## Template Files Location
