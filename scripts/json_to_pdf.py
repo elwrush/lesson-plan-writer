@@ -165,7 +165,7 @@ def md_to_typst(text):
 
 
 def format_date(date_str):
-    """Convert YYMMDD or DDMMYY to 'D Month, YYYY' format."""
+    """Convert MMDDYY to 'D Month, YYYY' format."""
     date_str = date_str.strip()
     months = [
         "January",
@@ -182,10 +182,10 @@ def format_date(date_str):
         "December",
     ]
 
-    # Try DDMMYY
+    # Try MMDDYY
     if len(date_str) == 6 and date_str.isdigit():
-        dd = int(date_str[0:2])
-        mm = int(date_str[2:4])
+        mm = int(date_str[0:2])
+        dd = int(date_str[2:4])
         yy = int(date_str[4:6])
         year = 2000 + yy
         if 1 <= mm <= 12 and 1 <= dd <= 31:
