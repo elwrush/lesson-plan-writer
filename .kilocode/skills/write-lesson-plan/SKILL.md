@@ -10,18 +10,17 @@ Interactively gather teacher requirements and generate a structured lesson plan 
 
 ## Workflow
 
-Two input methods depending on the field type:
+The workflow asks exactly **one question per turn**. Questions alternate between two input methods:
 
-| Field type | How to ask | Tool |
+| Input method | When to use | How |
 |---|---|---|
-| **Selectable** (shape, CEFR level, materials type) | Use `question` tool with predefined options — user clicks to pick | `question` call with `options` array |
-| **Free text** (teacher, duration, topic, class, subfolder, materials reference, answer key path, transcript path) | Ask directly in the chat message — user types in the normal message input, NOT in a `question` tool form | Plain text message, wait for user reply |
+| **`question` tool with predefined options** | Only for fields with a known closed set: shape (A–G) and CEFR level (A1–C2) | Call `question` with `options` array. User clicks an option to select. |
+| **Chat message** | All other fields: teacher, duration, topic, class, materials type, subfolder name, materials reference, answer key path, transcript path | Write the question directly in your response text. The user types the answer in the normal message input. |
 
-**Rules:**
-- One field at a time. Ask, wait for reply, then move to the next.
-- For selectable fields: use `question` tool with well-defined `options`, each with `label` + `description`.
-- For free-text fields: do NOT use `question` tool. Just write the question in your response text. The user will reply in the chat input.
-- After each answer, do a brief visible action (read a file, confirm receipt) before the next question, so the user sees progress.
+**Critical rules:**
+- If using the `question` tool and the user types a custom answer (rather than picking a predefined option), **use their answer literally**. Do NOT map it back to one of the predefined options.
+- Never use the `question` tool for anything other than shape or CEFR level.
+- After each answer, do a brief visible action (read a file, confirm the value) before asking the next question.
 
 ### Step 1: Greet the User
 ```
@@ -29,8 +28,8 @@ Welcome to the Lesson Plan Writer!
 I'll help you create a structured lesson plan.
 ```
 
-### Step 2: Ask About the Shape (selectable)
-Display the available lesson plan shapes in your message text:
+### Step 2: Shape (question tool with options)
+Display the shapes in your response text, then call `question` with options A–G:
 
 | Shape | Name |
 |-------|------|
@@ -42,33 +41,44 @@ Display the available lesson plan shapes in your message text:
 | F | Productive Skills (Traditional) |
 | G | Task-Based Learning/TBT |
 
-Use `question` tool with options A–G. After the user answers, read the corresponding shape template file from `knowledge-base/lesson plan shapes/json/shape-{letter}.json` and report back: "Loaded Shape {letter} — {shape name}."
+After the user answers, read the corresponding shape template from `knowledge-base/lesson plan shapes/json/shape-{letter}.json`. Report back: "Loaded Shape {letter} — {shape name}."
 
-### Step 3: Collect Free-Text Basic Info (one per chat message)
-Ask each by writing the question directly in your response text. Do NOT use `question` tool for these:
-1. **Teacher name** — "What's the teacher name?"
-2. **Lesson length** — "Lesson length in minutes?"
-3. **Topic** — "What's the lesson topic?"
-4. **Class** — "What's the class name or identifier?"
+### Step 3: Teacher name (chat)
+Write: "What's the teacher name?" in your response text. Wait for the user's chat reply.
 
-### Step 4: CEFR Level (selectable)
-Use `question` tool with predefined options: A1, A2, B1, B2, C1, C2.
+### Step 4: Lesson length (chat)
+Write: "Lesson length in minutes?" in your response text. Wait for the user's chat reply.
 
-### Step 5: Materials Type (selectable)
-Use `question` tool with options: Bespoke, Existing.
+### Step 5: CEFR level (question tool with options)
+Call `question` with options: A1, A2, B1, B2, C1, C2. Each with appropriate description.
 
-### Step 6: Input Subfolder (free text)
-Ask in chat: "What's the input subfolder name? (under inputs/)" — do NOT use `question` tool.
+### Step 6: Topic (chat)
+Write: "What's the lesson topic?" in your response text. Wait for the user's chat reply.
 
-After receiving the name, check if the folder exists under `inputs\`. If not, create it. Scan its contents:
-- List all files
-- Read files for materials reference (book name, unit, page numbers)
-- Read files for answer keys (look for "Answer", "Answers:", "**Answer:**" patterns, or files with "answer"/"key" in name)
-- Read files for transcripts (look for "Transcript", "Audio transcript", or files with "transcript" in name)
+### Step 7: Class (chat)
+Write: "What's the class name or identifier?" in your response text. Wait for the user's chat reply.
 
-### Step 7: Resolve Remaining Items (free text, chat only)
+### Step 8: Materials type (chat — free text, NOT selectable)
+Write: "What type of materials will you use? (e.g., bespoke, existing coursebook, or none for first-day/intro lessons)" in your response text. Wait for the user's chat reply. Accept whatever they say — do NOT force-fit into predefined categories.
 
-### Step 8: Generate and Write Lesson Plan
+### Step 9: Input subfolder (chat)
+Write: "What's the input subfolder name? (under inputs/)" in your response text. Wait for the user's chat reply.
+
+After receiving the name:
+1. Check if the folder exists under `inputs\`. If not, create it.
+2. List all files in the folder using `read` or `glob`.
+3. Read files to check for a materials reference (book name, unit, page numbers).
+4. Check for answer keys ("Answer", "Answers:", "**Answer:**" patterns, or files with "answer"/"key" in name).
+5. Check for transcripts ("Transcript", "Audio transcript" patterns, or files with "transcript" in name).
+
+### Step 10: Resolve remaining items (chat only)
+All asked directly in chat. Only ask if the item was not auto-detected in Step 9:
+- If materials reference not found: "What's the materials reference for this lesson?"
+- If answer key not found: "Do you have an answer key? If so, what path?"
+- If transcript not found and audio/video files exist: "Do you have a transcript? If so, what path?"
+- If transcript not found and no audio/video files: set to "none" automatically — do NOT ask.
+
+### Step 11: Generate and Write Lesson Plan
 
 #### Output Path
 ```
@@ -118,7 +128,7 @@ Use the shape's `main_aim_format` template combined with:
 - Topic provided by user
 - CEFR level
 
-### Step 9: Confirm Output
+### Step 12: Confirm Output
 Inform the user where the lesson plan has been saved.
 
 ## Template Files Location
@@ -148,6 +158,7 @@ Available templates:
 - Only ask the user about answers/transcripts if they are NOT found in the input folder
 - The `materials` field must use a concise reference format (e.g., "OFD 3, Workbook, pp 4-5"), NOT a descriptive summary of file contents
 - If the materials reference is not found in the input folder files, ask the user for it
+- **Rule: When the user types a custom answer in the question tool, accept it literally. Do not remap to a predefined option.**
 - **Language quality: Write with temperature 0.7. Use natural, idiomatic English. Vary sentence structure. Avoid robotic patterns.**
 
 ## Writing Style
