@@ -12,7 +12,7 @@
           stroke: (bottom: 0.5pt + black),
           inset: (bottom: 6pt, top: 12pt),
           grid(
-            columns: (auto, 1fr, auto),
+            columns: (1fr, 1fr, 1fr),
             align: (left + horizon, center + horizon, right + horizon),
             image(logo-left, height: 1.35cm),
             align(center, text(size: 14pt, weight: "bold")[Lesson Plan]),
@@ -59,7 +59,7 @@
   stroke: 1pt,
   table.header([*Time*], [*Goal*], [*Procedure*], [*Int*]),
 {% for stage in stages %}
-  table.cell(colspan: 4)[*STAGE {{ stage.stage_number }}: {{ stage.stage | upper }}*],
+  table.cell(fill: luma(230), colspan: 4)[*STAGE {{ stage.stage_number }}: {{ stage.stage | upper }}*],
   [{{ stage.time }} min], [{{ stage.stage_aim }}], [{{ stage.procedure }}], [{{ stage.interaction }}],
 {% endfor %}
 )
