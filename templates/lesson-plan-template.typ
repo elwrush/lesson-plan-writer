@@ -47,7 +47,7 @@
 #block(
   stroke: (left: 2pt + black),
   inset: 8pt,
-  [*Main Aim:* {{ objective }}]
+  [{{ objective }}]
 )
 
 #v(0.5em)
