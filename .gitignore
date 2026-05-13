@@ -6,8 +6,8 @@ __pycache__/
 .ruff_cache/
 .ruff_cache/
 
-# Kilo
-.kilocode/node_modules/
+# Kilo (tooling config, not source)
+.kilocode/
 
 # PDF output (generated)
 PDF/
