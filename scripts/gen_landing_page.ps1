@@ -1,3 +1,33 @@
+param([string]$Workdir)
+
+Push-Location $Workdir
+
+$allPresentations = @()
+git ls-tree --name-only HEAD | Where-Object { $_ -ne "index.html" } | ForEach-Object {
+    $dir = $_
+    $htmlPath = "$dir/index.html"
+    $title = "Presentation"
+    if (Test-Path $htmlPath) {
+        $content = Get-Content $htmlPath -Raw
+        if ($content -match '<title>(.*?)</title>') {
+            $title = $matches[1]
+        }
+    }
+    $allPresentations += @{ dir = $dir; title = $title }
+}
+
+$cardsHtml = ""
+foreach ($p in $allPresentations) {
+    $cardsHtml += @"
+            <a href="$($p.dir)/" class="card">
+                <div class="card-title">$($p.title)</div>
+                <div class="card-dir">$($p.dir)</div>
+            </a>
+
+"@
+}
+
+$landingPage = @"
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,23 +94,13 @@
 <body>
     <h1>Lesson Plan Slides</h1>
     <div class="grid">
-            <a href="assets/" class="card">
-                <div class="card-title">Presentation</div>
-                <div class="card-dir">assets</div>
-            </a>
-            <a href="timer-plugin.css/" class="card">
-                <div class="card-title">Presentation</div>
-                <div class="card-dir">timer-plugin.css</div>
-            </a>
-            <a href="timer-plugin.js/" class="card">
-                <div class="card-title">Presentation</div>
-                <div class="card-dir">timer-plugin.js</div>
-            </a>
-            <a href="welcome-to-term-1/" class="card">
-                <div class="card-title">Welcome to Term 1 | B2</div>
-                <div class="card-dir">welcome-to-term-1</div>
-            </a>
-    </div>
+$cardsHtml    </div>
     <footer>Lesson Plan Writer 3</footer>
 </body>
 </html>
+"@
+
+Set-Content -Path "index.html" -Value $landingPage -NoNewline
+Write-Host "Landing page generated with $($allPresentations.Count) presentation(s)"
+
+Pop-Location
