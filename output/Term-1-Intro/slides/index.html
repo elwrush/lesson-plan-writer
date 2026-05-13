@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Welcome to Term 1 | B2</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            /* =============================================
+               LESSON PLAN WRITER 3 — BASE SLIDE STYLES
+               Authoritative stylesheet for all presentations.
+               ============================================= */
+
+            /* --- CEFR Badges --- */
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                padding: 4px 12px;
+                border-radius: 4px;
+                font-size: 0.4em;
+                vertical-align: middle;
+                margin-left: 10px;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+
+            /* --- Title logo --- */
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+
+            /* --- Labels & captions --- */
+            .reveal .aim-label {
+                font-size: 0.7em;
+                color: #888;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            .reveal .material-ref {
+                font-size: 0.65em;
+                color: #888;
+                font-style: italic;
+                margin-top: 0.5em;
+            }
+            .reveal .source-cite {
+                font-size: 0.7em;
+                color: #666;
+                font-style: italic;
+                margin-top: 0.3em;
+            }
+            .reveal .image-caption {
+                font-size: 0.55em;
+                color: #888;
+                text-align: center;
+                margin-top: 0.2em;
+            }
+
+            /* --- Vocabulary slides --- */
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            }
+
+            /* --- Slide type icons (Font Awesome, teal/red/orange) --- */
+            .reveal .slide-icon {
+                font-size: 2.5em;
+                margin-bottom: 0.3em;
+                display: block;
+                text-align: center;
+            }
+            .reveal .slide-icon.transition-icon { color: rgba(255,255,255,0.85); }
+            .reveal .slide-icon.pedagogical-icon { color: rgba(255,255,255,0.9); }
+            .reveal .slide-icon.objective-icon { color: rgba(255,221,0,0.85); }
+
+            /* --- Pedagogical strategy slides (teal background) --- */
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal section.pedagogical .strategy-tip {
+                font-size: 0.85em;
+                font-style: italic;
+                color: rgba(255,255,255,0.85);
+                margin-bottom: 0.5em;
+            }
+            .reveal section.pedagogical .evidence {
+                font-size: 0.8em;
+                background: rgba(0,0,0,0.3);
+                padding: 0.4em 0.6em;
+                border-radius: 4px;
+                border-left: 3px solid rgba(255,255,255,0.4);
+            }
+
+            /* --- Global text shadow for readability --- */
+            .reveal p,
+            .reveal li,
+            .reveal h1, .reveal h2, .reveal h3,
+            .reveal h4, .reveal h5, .reveal h6 {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+
+            /* --- Fragment styles --- */
+            .reveal .fragment.highlight-green {
+                background: rgba(0, 100, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.highlight-red {
+                background: rgba(100, 0, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.strike {
+                text-decoration: line-through;
+                opacity: 0.6;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+                <!-- 0: Title -->
+                <section data-background-image="assets/cover.jpg" data-background-opacity="0.7">
+                    <img src="assets/logo.png" class="title-logo" alt="Logo" />
+                    <h1>Welcome to Term 1 <span class="cefr-badge B2">B2</span></h1>
+                    <p><em>Meet your classmates, set your goals, and start the term strong</em></p>
+                </section>
+
+                <!-- 1: Objective -->
+                <section>
+                    <i class="fa-solid fa-seedling slide-icon objective-icon"></i>
+                    <h2>Here's what you'll be able to do</h2>
+                    <ul>
+                        <li>Share your holiday stories with a partner</li>
+                        <li>Set a goal for this term</li>
+                        <li>Show what you already know in English</li>
+                    </ul>
+                    <p><em>Let's start the year with a smile!</em></p>
+                </section>
+
+                <!-- 2: Lead-in -->
+                <section data-background="#1a1a2e">
+                    <i class="fa-solid fa-eye slide-icon"></i>
+                    <h2>Let's get Started</h2>
+                    <h3>What did you do during your holiday?<br />What do you want to achieve this term?</h3>
+                    <aside class="notes">
+                        Display the questions. Give students a moment to think.
+                        Tell them they will share their ideas in pairs first, then with the class.
+                        This is a Think-Pair-Share activity.
+                    </aside>
+                </section>
+
+                <!-- 3: Transition → Think-Pair-Share -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Share your ideas</h2>
+                    <p>First, think quietly by yourself.</p>
+                    <p>Then, share with a partner.</p>
+                    <p>Finally, tell the class what your partner said!</p>
+                </section>
+
+                <!-- 4: Task — Think-Pair-Share timer -->
+                <section data-timer="1080">
+                    <i class="fa-solid fa-pencil slide-icon"></i>
+                    <h2>Think — Pair — Share</h2>
+                    <ol>
+                        <li><strong>Think</strong> (3 min) — Write down what you did and one goal for this term.</li>
+                        <li><strong>Pair</strong> (7 min) — Tell your partner. Listen carefully.</li>
+                        <li><strong>Share</strong> (8 min) — Tell the class about your partner's goal.</li>
+                    </ol>
+                    <aside class="notes">
+                        Stage 2 · 18 min · Ss-Ss
+                        Goal: To activate speaking skills and set personal goals
+                    </aside>
+                </section>
+
+                <!-- 5: Transition → Materials -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Let's look ahead</h2>
+                    <p>This term, you will need some things for class.</p>
+                    <p>Please bring these to the next lesson.</p>
+                </section>
+
+                <!-- 6: Materials list -->
+                <section data-background="#1a1a2e">
+                    <i class="fa-solid fa-pencil slide-icon"></i>
+                    <h2>Please bring to next class</h2>
+                    <ul>
+                        <li>Two notebooks</li>
+                        <li>Course books</li>
+                        <li>A pen</li>
+                        <li>A whiteout marker</li>
+                        <li>A plastic folder</li>
+                    </ul>
+                    <aside class="notes">
+                        Stage 3 · 5 min · T-Ss
+                        Write the list on the board. Explain each item. Ask Ss to take a photo.
+                    </aside>
+                </section>
+
+                <!-- 7: Transition → Writing task -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Time to write!</h2>
+                    <p>Let's see what you can already do in English.</p>
+                    <p>Don't worry — this is just for me to know you better.</p>
+                </section>
+
+                <!-- 8: Diagnostic writing timer -->
+                <section data-timer="600" data-background-image="assets/writing.jpg" data-background-opacity="0.7">
+                    <i class="fa-solid fa-pencil slide-icon"></i>
+                    <h2>Write about yourself</h2>
+                    <p style="color:#ffdd00;"><strong>"What I like most about me"</strong></p>
+                    <p>Write for 5 minutes. There are no wrong answers.</p>
+                    <aside class="notes">
+                        Stage 4 · 10 min · S
+                        Distribute A4 response sheets. Write the prompt on the board.
+                        Collect responses at the end. This is a diagnostic to check linguistic control.
+                    </aside>
+                </section>
+
+                <!-- 9: Summary -->
+                <section>
+                    <i class="fa-solid fa-flag-checkered slide-icon"></i>
+                    <h2>What you can do now</h2>
+                    <ul>
+                        <li>✓ I can share my holiday stories</li>
+                        <li>✓ I can set a goal for this term</li>
+                        <li>✓ I can write about myself in English</li>
+                    </ul>
+                    <aside class="notes">
+                        Elicit from students: What did we do today?
+                        Praise effort and participation.
+                        Remind them to bring materials next class.
+                        End with an encouraging message.
+                    </aside>
+                </section>
+
+                <!-- 10: End -->
+                <section data-background="#2c3e50">
+                    <i class="fa-solid fa-star slide-icon"></i>
+                    <h2>See you next class!</h2>
+                    <p><em>Welcome to Term 1</em> | B2</p>
+                    <p>Don't forget your materials!</p>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- Timer plugin (local) -->
+        <script src="timer-plugin.js"></script>
+
+        <!-- reveal.js 5.1.0 via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                plugins: [
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                ],
+            });
+        </script>
+    </body>
+</html>

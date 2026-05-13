@@ -1,0 +1,61 @@
+{
+  "teacher": "Ed Rush",
+  "duration": "46 minutes",
+  "date": "051226",
+  "topic": "Welcome to Term 1",
+  "objective": "Main aim: By the end of the lesson, learners will have completed a first-day orientation and will be better able to share personal information and reflect on their goals in the context of a new term. Subsidiary aim: Learners will also have practiced writing for linguistic self-assessment in the context of a reflective prompt.",
+  "materials": "A4 writing response sheet",
+  "lesson_plan": {
+    "shape": "G",
+    "shape_name": "Task-Based Learning/TBT",
+    "cefr_level": "B2",
+    "class": "M3",
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage": "Greeting and welcome",
+        "stage_aim": "To establish a welcoming atmosphere and set a positive tone for the new term",
+        "procedure": "- Greet learners at the door with a warm welcome as they enter.\n- Introduce yourself briefly and share something positive about the new term.\n- Ask learners to say their names and one word describing how they feel about starting the term.",
+        "time": 3,
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 2,
+        "stage": "Holiday discussion and goal-setting (Think-Pair-Share)",
+        "stage_aim": "To activate speaking skills, encourage peer interaction, and help learners articulate personal goals for the term ahead",
+        "procedure": "- Think (3 min): Learners individually reflect on their holidays and what they want to achieve this term. Write a few notes.\n- Pair (7 min): In pairs, learners share their holiday highlights and discuss one main goal for the year.\n- Share (8 min): Each pair reports their partner's goal to the class. Write key goals on the board for group awareness.",
+        "time": 18,
+        "interaction": "Ss-Ss"
+      },
+      {
+        "stage_number": 3,
+        "stage": "Materials preparation",
+        "stage_aim": "To ensure learners know what materials to bring for the course",
+        "procedure": "- Write the required materials list on the board: two notebooks, course books, a pen, a whiteout marker, and a plastic folder.\n- Explain where each item can be obtained and why each is needed.\n- Ask learners to make a note of the list. Give them a moment to check in with a partner if anything is unclear.",
+        "time": 5,
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 4,
+        "stage": "Diagnostic writing: 'What I like most about me'",
+        "stage_aim": "To assess learners' current linguistic control and begin the term with a positive, reflective task that builds confidence",
+        "procedure": "- Distribute the A4 writing response sheets.\n- Write the prompt on the board: 'What I like most about me.'\n- Explain that this is not graded — it helps the teacher understand their writing strengths.\n- Give learners 5 minutes to write freely.\n- Collect the responses at the end.",
+        "time": 10,
+        "interaction": "S"
+      },
+      {
+        "stage_number": 5,
+        "stage": "Wrap-up and close",
+        "stage_aim": "To consolidate the session and give learners a sense of what to expect next class",
+        "procedure": "- Briefly recap the main activities of the lesson.\n- Remind learners to bring the required materials to the next class.\n- End with an encouraging message about the term ahead.",
+        "time": 10,
+        "interaction": "T-Ss"
+      }
+    ]
+  },
+  "transcript": "none",
+  "answer_key": "none",
+  "slideshow_url": "https://elwrush.github.io/lesson-plan-writer/welcome-to-term-1/",
+  "cefr_level": "B2",
+  "class": "M3"
+}

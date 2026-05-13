@@ -15,13 +15,18 @@
 ### Slides (template-based)
 1. **`write-lesson-plan` skill** → JSON (same as above)
 2. **`lesson-plan-to-reveal` skill** → copies `templates/base-slides-template.html` → hand-builds `index.html` with raw HTML `<section>` elements in `output/{subfolder}/slides/`
-3. **`publish-to-github-pages` skill** → deploys `output/{subfolder}/slides/` to gh-pages
+3. **`/git-pages` command** (or `publish-to-github-pages` skill in `.kilo/skills/`) → deploys all slideshows in `output/` to gh-pages
 
 **Markdown pipeline is permanently abandoned.** All slides are raw HTML `<section>` elements. `scripts/json_to_markdown.py` is deprecated — do not use for new presentations. Auto-animate requires sibling `<section data-auto-animate>` elements, which cannot be produced from the markdown plugin.
 
 ## Key commands
 
 ```bash
+# Kilo CLI commands
+# /git-backup — Stage all, auto-generate commit message, commit+push to main
+# /git-pages — Deploy slides subfolder to gh-pages with landing page
+# /lint — Run ruff check --fix and ruff format
+
 # PDF (from project root)
 python scripts/json_to_pdf.py output/<subfolder>/<file>.json
 
@@ -45,23 +50,23 @@ python scripts/locate_slide.py 7 --slides-dir path/to/slides/
 
 ## Linting & Quality
 
-ruff is installed globally via pip and runs as a pre-commit hook on every `git commit`.
+ruff is installed globally via pip. **Pre-commit hook is permanently uninstalled** (caused git lock contention). Use the `/lint` command instead — it runs ruff on demand with no background processes.
 
 ```bash
-# Manual lint + fix (all files)
+# Lint + fix (all files) — replaces pre-commit hook
 python -m ruff check --fix .
-
-# Watch mode (polls for changes, re-runs on detect)
-python -m ruff check --watch .
 
 # Format all Python files
 python -m ruff format .
 
-# Run pre-commit on all files (without committing)
+# Both in sequence
+python -m ruff check --fix . ; python -m ruff format .
+
+# Run pre-commit checks on all files (without hook, without committing)
 python -m pre_commit run --all-files
 ```
 
-Watch mode: `python -m ruff check --watch .` in a terminal (polls for file changes, re-runs on detect). VS Code users: install Ruff extension, set `"ruff.formatOnSave": true` (only applies inside VS Code).
+A lint command is defined at `.kilo/command/lint.md` — invoke via Kilo CLI.
 
 ## JSON schema
 
@@ -314,11 +319,12 @@ When asked to replace a slide background image with a Pixabay URL:
 
 The `compress_image` function applies: resize to 1920px max edge, JPEG quality=80, optimize=True (Pillow).
 
-## Config dirs (do not edit manually)
+## Config dirs
 
-- `.kilo/` — session plans, package.json (Kilo internal)
-- `.kilocode/` — skills, node_modules (Kilo internal)
-- Skills at `.kilocode/skills/<name>/SKILL.md` — new skills require Kilo restart
+- `.kilo/` — session plans, package.json (Kilo internal), and `.kilo/command/` for Kilo CLI commands (e.g., `lint.md`). Skills also live in `.kilo/skills/` (tracked by git).
+- `.kilocode/` — legacy skills, node_modules (Kilo internal). **Now gitignored** — switching branches won't delete it anymore
+- Skills at `.kilo/skills/<name>/SKILL.md` — new skills require Kilo restart
+- Commands at `.kilo/command/<name>.md` — no restart needed
 
 ## Windows Path Handling
 
