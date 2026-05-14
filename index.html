@@ -6,67 +6,46 @@
     <title>Lesson Plan Slides</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: #f0f2f5;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 60px 20px;
-        }
-        h1 {
-            font-size: 2.2em;
-            color: #1a1a2e;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            max-width: 960px;
-            width: 100%;
-        }
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 28px 24px;
-            text-decoration: none;
-            color: #333;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-        }
-        .card-title {
-            font-size: 1.15em;
-            font-weight: 600;
-            color: #1a1a2e;
-        }
-        .card-dir {
-            font-size: 0.85em;
-            color: #888;
-            font-family: 'Consolas', monospace;
-        }
-        footer {
-            margin-top: 50px;
-            font-size: 0.85em;
-            color: #aaa;
-        }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: #f0f2f5; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 60px 20px; }
+        h1 { font-size: 2.2em; color: #1a1a2e; margin-bottom: 40px; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 960px; width: 100%; }
+        .card { background: white; border-radius: 12px; padding: 28px 24px; text-decoration: none; color: #333; box-shadow: 0 2px 8px rgba(0,0,0,0.08); transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; gap: 8px; }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+        .card-title { font-size: 1.15em; font-weight: 600; color: #1a1a2e; }
+        .card-dir { font-size: 0.85em; color: #888; font-family: 'Consolas', monospace; }
+        footer { margin-top: 50px; font-size: 0.85em; color: #aaa; }
     </style>
 </head>
 <body>
     <h1>Lesson Plan Slides</h1>
     <div class="grid">
+            <a href="PDF/" class="card">
+                <div class="card-title">Presentation</div>
+                <div class="card-dir">PDF</div>
+            </a>
+            <a href="Term-1-Intro/" class="card">
+                <div class="card-title">Welcome to Term 1 | B2</div>
+                <div class="card-dir">Term-1-Intro</div>
+            </a>
             <a href="assets/" class="card">
                 <div class="card-title">Presentation</div>
                 <div class="card-dir">assets</div>
+            </a>
+            <a href="default/" class="card">
+                <div class="card-title">Presentation</div>
+                <div class="card-dir">default</div>
+            </a>
+            <a href="scripts/" class="card">
+                <div class="card-title">Presentation</div>
+                <div class="card-dir">scripts</div>
+            </a>
+            <a href="substitute-lesson-1-M3/" class="card">
+                <div class="card-title">Presentation</div>
+                <div class="card-dir">substitute-lesson-1-M3</div>
+            </a>
+            <a href="tests/" class="card">
+                <div class="card-title">Presentation</div>
+                <div class="card-dir">tests</div>
             </a>
             <a href="timer-plugin.css/" class="card">
                 <div class="card-title">Presentation</div>
