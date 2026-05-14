@@ -29,7 +29,7 @@
             .cefr-badge.C2 { background: #f44336; }
             .reveal .title-logo {
                 display: block;
-                max-height: 100px;
+                max-height: 125px;
                 margin: 0 auto 1em;
             }
             .reveal .aim-label {
@@ -37,6 +37,9 @@
                 color: #888;
                 text-transform: uppercase;
                 letter-spacing: 0.1em;
+            }
+            section[data-background="#1e7e34"] .aim-label {
+                color: #ffdd00;
             }
             .reveal section.vocab-slide h2 { font-size: 2.2em; }
             .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
@@ -50,6 +53,7 @@
                 margin-bottom: 0.3em;
                 display: block;
                 text-align: center;
+                color: rgba(255,255,255,0.85);
             }
             .reveal .slide-icon.transition-icon { color: rgba(255,255,255,0.85); }
             .reveal .slide-icon.pedagogical-icon { color: rgba(255,255,255,0.9); }
@@ -149,32 +153,32 @@
                     </aside>
                 </section>
 
-                <section class="vocab-slide" data-background="#1a1a2e">
+                <section class="vocab-slide" data-background-image="assets/commons_phishing.jpg" data-background-opacity="0.7">
                     <h2>Important Words</h2>
                     <p><span class="vocab-word">phishing</span></p>
                     <p><em>/ˈfɪʃɪŋ/</em></p>
                     <p><em>Be careful of <span class="vocab-word">phishing</span> emails that ask for your personal information.</em></p>
                 </section>
 
-                <section class="vocab-slide" data-background="#1a1a2e">
+                <section class="vocab-slide" data-background-image="assets/commons_unsecured.jpg" data-background-opacity="0.7">
                     <p><span class="vocab-word">unsecured</span></p>
                     <p><em>/ˌʌnsɪˈkjʊrd/</em></p>
                     <p><em>Free Wi-Fi at a cafe may be <span class="vocab-word">unsecured</span>, so hackers can easily see your data.</em></p>
                 </section>
 
-                <section class="vocab-slide" data-background="#1a1a2e">
+                <section class="vocab-slide" data-background-image="assets/commons_decode.jpg" data-background-opacity="0.7">
                     <p><span class="vocab-word">decode</span></p>
                     <p><em>/diːˈkoʊd/</em></p>
                     <p><em>A hacker can <span class="vocab-word">decode</span> a simple password in just ten minutes.</em></p>
                 </section>
 
-                <section class="vocab-slide" data-background="#1a1a2e">
+                <section class="vocab-slide" data-background-image="assets/commons_symbols.jpg" data-background-opacity="0.7">
                     <p><span class="vocab-word">symbols</span></p>
                     <p><em>/ˈsɪmbəlz/</em></p>
                     <p><em>A strong password has a mix of letters, numbers, and <span class="vocab-word">symbols</span> like @ or #.</em></p>
                 </section>
 
-                <section class="vocab-slide" data-background="#1a1a2e">
+                <section class="vocab-slide" data-background-image="assets/commons_curiosity.jpg" data-background-opacity="0.7">
                     <p><span class="vocab-word">curiosity</span></p>
                     <p><em>/ˌkjʊriˈɑːsəti/</em></p>
                     <p><em>Out of <span class="vocab-word">curiosity</span>, some people click on links in strange emails.</em></p>
@@ -201,8 +205,8 @@
                     <h2>Predict the Answers</h2>
                     <ul>
                         <li>Read the questions in Exercise 3 on page 11.</li>
-                        <li>In pairs, try to guess the answers.</li>
-                        <li>Can you answer them from the web page?</li>
+                        <li>Which ones can you already predict from the web page?</li>
+                        <li>What information will you need to listen for?</li>
                     </ul>
                     <aside class="notes">Stage 3 · Phase B · 2 min · Ss-Ss · Materials: OFD2 p11</aside>
                 </section>
@@ -240,8 +244,28 @@
                         <tbody>
                             <tr><td>1. How do young people feel about identity theft?</td><td class="fragment answer-correct">✓ They worry about it</td><td class="fragment">"76% of teenagers actually worry"</td></tr>
                             <tr><td>2. How many examples of "careless sharing"?</td><td class="fragment answer-correct">✓ Three examples</td><td class="fragment">Passwords, full names, school names</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section data-background="#1e7e34">
+                    <h2>Exercise 3 — Answers</h2>
+                    <p class="aim-label">Listening comprehension</p>
+                    <table class="answer-table wrap">
+                        <thead><tr><th>Question</th><th>Answer</th><th>Why?</th></tr></thead>
+                        <tbody>
                             <tr><td>3. What makes a good password?</td><td class="fragment answer-correct">✓ 8+ characters, mixed</td><td class="fragment">"at least eight characters... mix of letters, numbers, symbols"</td></tr>
                             <tr><td>4. What kind of app does the expert recommend?</td><td class="fragment answer-correct">✓ A password manager</td><td class="fragment">"apps that remember and manage your passwords"</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section data-background="#1e7e34">
+                    <h2>Exercise 3 — Answers</h2>
+                    <p class="aim-label">Listening comprehension</p>
+                    <table class="answer-table wrap">
+                        <thead><tr><th>Question</th><th>Answer</th><th>Why?</th></tr></thead>
+                        <tbody>
                             <tr><td>5. How can hackers affect Wi-Fi in cafes?</td><td class="fragment answer-correct">✓ They create fake hotspots</td><td class="fragment">"create a hotspot with the name of the cafe"</td></tr>
                         </tbody>
                     </table>
@@ -279,6 +303,10 @@
                     <h2>Giving a talk</h2>
                     <p>Now you're going to share your own ideas.</p>
                     <p>Let's learn how to structure your talk first.</p>
+                    <p style="margin-top:0.8em;font-size:0.95em;color:#ffdd00;">
+                        <strong>Your talk:</strong> What is identity theft?<br />
+                        Why is it a problem? Give an example.
+                    </p>
                 </section>
 
                 <section class="pedagogical structure-talk" data-background="#1a6b5a" data-background-transition="none" style="top:0;">
@@ -324,7 +352,7 @@
                 </section>
 
                 <section>
-                    <i class="fa-solid fa-flag-checkered slide-icon" style="color:rgba(0,0,0,0.7);"></i>
+                    <i class="fa-solid fa-flag-checkered slide-icon" style="color:rgba(255,255,255,0.85);"></i>
                     <h2>What you can do now</h2>
                     <ul>
                         <li>✓ I can find key facts from a listening about online safety</li>
