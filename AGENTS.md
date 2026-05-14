@@ -400,3 +400,38 @@ repomix --remote https://github.com/hakimel/reveal.js --style json --output know
 ### Global Repomix Skill
 
 See: `C:\Users\elwru\.kilo\skills\repomix-codebase-search\SKILL.md`
+
+## Known CSS Conflicts with reveal.js
+
+### Fragment `highlight-*` classes set `opacity: 1`
+
+**Problem:** reveal.js built-in CSS forces `opacity: 1; visibility: inherit` on `.highlight-green`, `.highlight-red`, and `.highlight-blue` at all times. These classes are designed for color-change-on-reveal, not hide-reveal. Using `class="fragment highlight-green"` will NOT hide the element — it stays visible, only changing color when `.visible` is added.
+
+**Evidence from compiled `reveal.css`:**
+```css
+.reveal .fragment.highlight-green{opacity:1;visibility:inherit}
+.reveal .fragment.highlight-red{opacity:1;visibility:inherit}
+/* .visible only changes color, not opacity: */
+.reveal .fragment.highlight-green.visible{color:#17ff2e}
+```
+
+**Solution:** Use custom CSS classes that only apply on `.visible`:
+```css
+.reveal .fragment.answer-correct.visible {
+    background: rgba(0, 120, 0, 0.5);
+    padding: 0.3em 0.5em;
+    border-radius: 4px;
+}
+.reveal .fragment.answer-incorrect.visible {
+    background: rgba(120, 0, 0, 0.5);
+    padding: 0.3em 0.5em;
+    border-radius: 4px;
+}
+```
+Then use `class="fragment answer-correct"` — the element starts hidden (default fragment behavior) and only gains background on click.
+
+**To verify:** Check the compiled `reveal.css` from CDN for fragment CSS rules:
+```bash
+Invoke-WebRequest -Uri "https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" -OutFile "$env:TEMP\reveal.css"
+Select-String -Path "$env:TEMP\reveal.css" -Pattern "fragment" -SimpleMatch
+```

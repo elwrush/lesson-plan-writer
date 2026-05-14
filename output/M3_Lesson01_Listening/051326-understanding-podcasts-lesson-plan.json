@@ -1,0 +1,77 @@
+{
+  "teacher": "Ed Rush",
+  "duration": "46 minutes",
+  "date": "051326",
+  "topic": "Understanding podcasts",
+  "objective": "By the end of the lesson, learners will have practised and developed the sub-skills of listening for gist and specific information in the context of YouTubers and their influence on teenagers.",
+  "materials": "OFD 3, Unit 1, pp. 10-11",
+  "lesson_plan": {
+    "shape": "E",
+    "shape_name": "Receptive Skills (Traditional)",
+    "cefr_level": "B2",
+    "class": "M3",
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage": "Lead-in",
+        "stage_aim": "To spark interest in the world of YouTube influencers and draw on learners' own experiences",
+        "procedure": "- Display a stat sheet about Mr Beast on the board (subscriber count, estimated earnings, number of views, charity work). In pairs, Ss discuss what they know about him and whether they've watched his content.\n- Open up the discussion: Who are the most popular YouTubers for people your age? What makes them so popular? Ss share ideas in pairs, then feed back to the class.\n- Ask: Do you think these YouTubers are a positive influence? Why or why not? Take a few responses from different Ss. Don't confirm or deny — let opinions circulate.\n- Briefly preview the lesson: today we'll hear a podcast about how YouTubers influence teenagers and why people listen to them.",
+        "time": 6,
+        "interaction": "T-Ss, Ss-Ss"
+      },
+      {
+        "stage_number": 2,
+        "stage": "Quiz — Being a positive influence",
+        "stage_aim": "To get learners thinking about what it means to positively influence others",
+        "procedure": "- Direct Ss to the quiz on p. 10 (Task 1: 'Are you a positive influence?'). Ss complete it individually — quick fire, 2 min.\n- In pairs, Ss compare answers (Task 2). Were their results similar? Do they agree with what the key says about them?\n- Take a quick show of hands: mostly As, Bs, or Cs? Read out the key descriptions. Brief class reaction.",
+        "time": 5,
+        "interaction": "S, Ss-Ss, T-Ss"
+      },
+      {
+        "stage_number": 3,
+        "stage": "Pre-teach vocabulary",
+        "stage_aim": "To equip learners with key vocabulary they'll need to follow the podcast",
+        "procedure": "- Write the following words on the board: persuade, specific, session, talent, community.\n- Elicit meanings using concept-checking questions. For 'persuade', ask: If I persuade you to do something, do you want to do it at first? Maybe not. What changes your mind? For 'specific', ask: Is it general or exact? Exact — one particular thing. For 'session', ask: What's a Q&A session? A period of time when people ask and answer questions.\n- Drill pronunciation where needed (especially 'persuade' /pəˈsweɪd/).\n- Ss copy the words into their notebooks with a short definition or example sentence.",
+        "time": 4,
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 4,
+        "stage": "Listening for gist",
+        "stage_aim": "To get the overall picture of the podcast and identify which ideas come up",
+        "procedure": "- Set the scene: You're going to hear a podcast about YouTubers and how they influence their followers. First, in pairs, discuss how you think YouTubers influence people.\n- Ss read the six statements in Task 3 (p. 10). Check understanding of any unfamiliar language.\n- Play audio 1.02 once. Ss listen and tick the ideas that are mentioned.\n- Ss compare answers in pairs. Play the audio a second time if needed.\n- Whole-class feedback. Answers: 1 (They give their followers advice), 3 (They share personal information), 4 (They are good listeners).",
+        "time": 7,
+        "interaction": "Ss-Ss, T-Ss"
+      },
+      {
+        "stage_number": 5,
+        "stage": "Listening strategy and listening for detail",
+        "stage_aim": "To pick out specific information using a multiple-choice listening strategy",
+        "procedure": "- Draw attention to the listening strategy box (p. 11): underline key words in each question before looking at the options.\n- Ss read questions 1-5 in Task 4 individually and underline key words. Elicit a few examples (e.g. 'Who', 'teenagers', 'advice' for Q1).\n- Before playing the audio, Ss read the options a-c for each question and guess the most likely answer.\n- Play audio 1.02 again. Ss listen and choose the best answer for each question (Task 5).\n- Ss compare in pairs — do they agree? Which questions are they unsure about?\n- Whole-class feedback with reasoning: Why c for Q1? What did the presenter actually say? Encourage Ss to point to clues. Answers: 1c, 2a, 3b, 4c, 5b.\n- Optional: with a stronger group, replay tricky sections and pause to discuss the exact wording that leads to each answer.",
+        "time": 12,
+        "interaction": "S, Ss-Ss, T-Ss"
+      },
+      {
+        "stage_number": 6,
+        "stage": "Post-listening — Plan a podcast",
+        "stage_aim": "To apply ideas from the listening in a creative, personalised speaking task",
+        "procedure": "- Tell Ss: Now it's your turn. In pairs, you're going to plan a short podcast (about 2 minutes) about influencing friends or family. You won't record it today — you'll prepare and present it next lesson.\n- Elicit a few topic ideas: persuading a friend to try a new hobby, convincing a parent to let you stay out later, talking a sibling into helping with chores, etc.\n- Give each pair a planning sheet with prompts: (1) What's your topic? (2) Who's your audience? (3) What advice or arguments will you give? (4) Will you use any key phrases from p. 11 (Have you considered…? You might not realize this, but…)?\n- Pairs brainstorm and outline their podcast. Monitor and help with vocabulary and structure.\n- In the final minute, each pair shares their topic with another pair for quick peer feedback.",
+        "time": 10,
+        "interaction": "Ss-Ss, T-Ss"
+      },
+      {
+        "stage_number": 7,
+        "stage": "Wrap-up",
+        "stage_aim": "To consolidate the lesson's key takeaways and set up next lesson",
+        "procedure": "- Quick recap: What did we learn about how YouTubers influence people? What listening strategy did we practise?\n- Remind Ss: next lesson you'll present your 2-minute podcast. Think about your script at home — you'll have a few minutes to rehearse before recording.\n- Praise effort and engagement. Dismiss.",
+        "time": 2,
+        "interaction": "T-Ss"
+      }
+    ]
+  },
+  "transcript": "Tape 1.02 — see lesson-1-materials.md (Unit 1, p. 10 ex. 3, p. 11 ex. 5)",
+  "answer_key": "C:\\PROJECTS\\LESSON PLAN WRITER 3\\inputs\\M3_Lesson01_Listening\\lesson-1-materials.md",
+  "slideshow_url": "",
+  "cefr_level": "B2",
+  "class": "M3"
+}

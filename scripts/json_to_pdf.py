@@ -131,7 +131,9 @@ def md_to_typst(text):
         stripped = line.strip()
 
         # Headings
-        if stripped.startswith("### "):
+        if stripped.startswith("#### "):
+            result.append("==== " + stripped[5:])
+        elif stripped.startswith("### "):
             result.append("=== " + stripped[4:])
         elif stripped.startswith("## "):
             result.append("== " + stripped[3:])

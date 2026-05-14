@@ -28,7 +28,7 @@
 
         pauseBtn = document.createElement("button");
         pauseBtn.className = "timer-pill__btn timer-pill__btn--hidden";
-        pauseBtn.innerHTML = "&#9646;&#9646;";  // ⏸ pause
+        pauseBtn.innerHTML = "⏸";  // pause symbol
         pauseBtn.title = "Pause timer";
 
         resetBtn = document.createElement("button");

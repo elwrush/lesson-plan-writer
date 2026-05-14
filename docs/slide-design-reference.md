@@ -270,32 +270,37 @@ Brief task: 1-3 short bullet points. Full procedure in speaker notes. Material r
 
 ### 7. Answer Slide — True/False
 ```html
-<section>
+<section data-background="#1e7e34">
     <h2>Exercise {{ number }}</h2>
     <p class="aim-label">True/False</p>
-    <p class="fragment">{{ statement_text }}</p>
-    <p class="fragment highlight-green">✓ <strong>{{ correct_answer }}</strong></p>
-    <p class="fragment">{{ another_statement }}</p>
-    <p class="fragment highlight-red">✗ <strong>False</strong></p>
-    <p class="fragment highlight-green">✓ <em>{{ corrected_statement }}</em></p>
+    <table class="answer-table">
+        <thead><tr><th>Statement</th><th>Answer</th></tr></thead>
+        <tbody>
+            <tr><td>{{ statement_text }}</td><td class="fragment answer-correct">✓ <strong>{{ correct_answer }}</strong></td></tr>
+            <tr><td>{{ another_statement }}</td><td class="fragment answer-incorrect">✗ <strong>False</strong></td></tr>
+            <tr><td>{{ corrected_statement }}</td><td class="fragment answer-correct">✓ <em>Explanation</em></td></tr>
+        </tbody>
+    </table>
 </section>
 ```
 
 Rules:
-- Each answer revealed via fragment (teacher controls when answer appears)
-- Correct answer: bold + `highlight-green`
-- Explanation: 1 sentence
-- Source: paragraph reference in speaker notes
+- Green background `#1e7e34` for all answer slides
+- Statements visible at slide entry; answer column is a fragment revealed on click
+- Use `answer-correct` (green background on reveal) or `answer-incorrect` (red background on reveal)
+- **Do NOT use `highlight-green`/`highlight-red`** — reveal.js built-in classes force `opacity: 1`, preventing fragment hiding
 
 ### 8. Answer Slide — Multiple Choice
 ```html
-<section>
+<section data-background="#1e7e34">
     <h2>Exercise {{ number }}</h2>
     <p class="aim-label">Multiple Choice</p>
-    <p>a. {{ option_a }}</p>
-    <p>b. {{ option_b }}</p>
-    <p>c. {{ option_c }}</p>
-    <p class="fragment highlight-green">✓ <strong>{{ correct_letter }}</strong></p>
+    <table class="answer-table">
+        <thead><tr><th>Question</th><th>Answer</th><th>Why?</th></tr></thead>
+        <tbody>
+            <tr><td>{{ question_text }}</td><td class="fragment answer-correct">✓ <strong>{{ correct_answer }}</strong></td><td class="fragment">{{ explanation }}</td></tr>
+        </tbody>
+    </table>
 </section>
 ```
 
@@ -550,6 +555,16 @@ Task instruction slides display a floating timer pill at the bottom center of th
 - **Behavior**: Counts down from prescribed time, chimes at 10s (yellow) and 0s (red)
 - **No auto-start**: Teacher must click ⏵
 - Requires timer-plugin.js and timer-plugin.css in the slides directory
+
+### Audio Slideshow
+
+The base template includes the [audio-slideshow](https://github.com/rajgoel/reveal.js-plugins/tree/master/audio-slideshow) plugin (CDN-loaded) for playing audio tracks during presentations.
+
+- **Attribute**: `data-audio-src="assets/filename.mp3"` on the `<section>` element
+- **Audio files**: placed in `slides/assets/` (same directory as images)
+- **Controls**: Appears at bottom of viewport (fully visible). Teacher clicks play/pause. Keyboard shortcut: `A` to toggle.
+- **Configured via** `audio:` block in `Reveal.initialize()` — see `templates/base-slides-template.html` for current settings.
+- **No auto-advance**: `advance: -1` — teacher controls pacing
 
 ### Example: "What Connects Us" (B2, 46 min, 6 stages)
 

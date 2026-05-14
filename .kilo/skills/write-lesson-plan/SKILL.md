@@ -78,9 +78,32 @@ All asked directly in chat. Only ask if the item was not auto-detected in Step 9
 - If transcript not found and audio/video files exist: "Do you have a transcript? If so, what path?"
 - If transcript not found and no audio/video files: set to "none" automatically — do NOT ask.
 
-### Step 11: Check for special requests (chat)
+### Step 11: Pre-teach vocabulary selection (human-in-the-loop)
 
-### Step 12: Generate and Write Lesson Plan
+This step only applies when the lesson involves a reading or listening text (transcript). If there is no text, skip to Step 12.
+
+1. **Read the transcript/reading text** from the input materials.
+2. **Identify 8-10 candidate words** that seem particularly difficult for the target CEFR level, using your own training data and linguistic judgement. Prioritise:
+   - Words central to understanding the text (blocking vocabulary)
+   - Words likely to be unfamiliar at the learners' level
+   - Content words (nouns, verbs, adjectives) over function words
+   - Do NOT include words that are clearly below the target level
+3. **Verify each candidate** — before presenting, use `grep` or `bash` to confirm every candidate word actually appears in the transcript text. Remove any word not found. This prevents hallucinated suggestions.
+4. **Present the candidates** to the teacher as a simple numbered list of word forms only (no definitions). Example:
+   ```
+   Here are words from the transcript that may be challenging for B1 learners:
+   1. persuade
+   2. trust
+   3. session
+   ...
+   Which ones should we pre-teach? (max 5, or "none")
+   ```
+4. **Teacher selects** — the teacher picks 0-5 words from the list. Use their selection exactly.
+5. If the teacher says "none" or "skip", set pre-teach vocab to none.
+
+### Step 12: Check for special requests (chat)
+
+### Step 13: Generate and Write Lesson Plan
 
 #### Output Path
 ```

@@ -128,6 +128,20 @@
                 padding: 0.3em 0.5em;
                 border-radius: 4px;
             }
+            .reveal .fragment.answer-correct.visible {
+                background: rgba(0, 120, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-incorrect.visible {
+                background: rgba(120, 0, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal table.answer-table th {
+                background: rgba(0, 0, 0, 0.2);
+                font-weight: bold;
+            }
             .reveal .fragment.strike {
                 text-decoration: line-through;
                 opacity: 0.6;
@@ -293,40 +307,46 @@
 
                 <!-- ─── PATTERN: Answer Slide (True/False) ─────────────────── -->
                 <!--
-                <section>
+                <section data-background="#1e7e34">
                     <h2>Exercise 2</h2>
                     <p class="aim-label">True/False</p>
-                    <p class="fragment">Statement text goes here.</p>
-                    <p class="fragment highlight-green">✓ <strong>True</strong></p>
-                    <p class="fragment">Another statement text.</p>
-                    <p class="fragment highlight-red">✗ <strong>False</strong></p>
-                    <p class="fragment highlight-green">✓ <em>Corrected statement.</em></p>
+                    <table class="answer-table">
+                        <thead><tr><th>Statement</th><th>Answer</th></tr></thead>
+                        <tbody>
+                            <tr><td>Statement text.</td><td class="fragment answer-correct">✓ <strong>True</strong></td></tr>
+                            <tr><td>Another statement.</td><td class="fragment answer-incorrect">✗ <strong>False</strong></td></tr>
+                            <tr><td>Corrected statement.</td><td class="fragment answer-correct">✓ <em>Explanation</em></td></tr>
+                        </tbody>
+                    </table>
                 </section>
                 -->
 
                 <!-- ─── PATTERN: Answer Slide (Multiple Choice) ────────────── -->
                 <!--
-                <section>
+                <section data-background="#1e7e34">
                     <h2>Exercise 4</h2>
                     <p class="aim-label">Multiple Choice</p>
-                    <p>a. Option A</p>
-                    <p>b. Option B</p>
-                    <p>c. Option C</p>
-                    <p class="fragment highlight-green">✓ <strong>c</strong></p>
+                    <table class="answer-table">
+                        <thead><tr><th>Question</th><th>Answer</th><th>Why?</th></tr></thead>
+                        <tbody>
+                            <tr><td>Question text</td><td class="fragment answer-correct">✓ <strong>c</strong></td><td class="fragment">citation</td></tr>
+                        </tbody>
+                    </table>
                 </section>
                 -->
 
                 <!-- ─── PATTERN: Answer Slide (Paragraph Matching) ─────────── -->
                 <!--
-                <section>
+                <section data-background="#1e7e34">
                     <h2>Exercise 3</h2>
                     <p class="aim-label">Paragraph Matching</p>
-                    <p class="fragment highlight-green">✓ <strong>B</strong></p>
-                    <p class="fragment highlight-green">✓ <strong>C</strong></p>
-                    <p class="fragment highlight-green">✓ <strong>A</strong></p>
-                    <p class="fragment highlight-green">✓ <strong>E</strong></p>
-                    <p class="fragment highlight-green">✓ <strong>F</strong></p>
-                    <p class="fragment highlight-green">✓ <strong>D</strong></p>
+                    <table class="answer-table">
+                        <thead><tr><th>Paragraph</th><th>Match</th></tr></thead>
+                        <tbody>
+                            <tr><td>Paragraph description</td><td class="fragment answer-correct">✓ <strong>B</strong></td></tr>
+                            <tr><td>Another description</td><td class="fragment answer-correct">✓ <strong>C</strong></td></tr>
+                        </tbody>
+                    </table>
                 </section>
                 -->
 
@@ -361,6 +381,9 @@
         <!-- Timer plugin (local) -->
         <script src="timer-plugin.js"></script>
 
+        <!-- Audio slideshow plugin (CDN) -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/audio-slideshow/plugin.js"></script>
+
         <!-- reveal.js 5.1.0 via CDN -->
         <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
@@ -377,12 +400,25 @@
                 width: 1280,
                 height: 720,
                 autoAnimateUnmatched: true,
+                audio: {
+                    prefix: 'assets/',
+                    suffix: '.mp3',
+                    advance: -1,
+                    autoplay: false,
+                    defaultAudios: false,
+                    defaultDuration: 0,
+                    playerOpacity: 1.0,
+                    playerStyle: 'position: fixed; bottom: 30px; left: 25%; width: 50%; height:75px; z-index: 33;',
+                    startAtFragment: false,
+                },
                 plugins: [
+                    TimerPlugin,
                     RevealHighlight,
                     RevealMath.KaTeX,
                     RevealNotes,
                     RevealSearch,
                     RevealZoom,
+                    RevealAudioSlideshow,
                 ],
             });
         </script>

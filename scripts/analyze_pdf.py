@@ -10,8 +10,8 @@ for i, page in enumerate(doc):
     blocks = page.get_text("dict")["blocks"]
     for b in blocks:
         if "lines" in b:
-            for l in b["lines"]:
-                for s in l["spans"]:
+            for line in b["lines"]:
+                for s in line["spans"]:
                     print(
                         f"  Text: '{s['text']}' at y={s['origin'][1]:.1f}, top={s['bbox'][1]:.1f}"
                     )

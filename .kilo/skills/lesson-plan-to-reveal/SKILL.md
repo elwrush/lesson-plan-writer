@@ -37,13 +37,14 @@ cp "templates/base-slides-template.html" "output/{subfolder}/slides/index.html"
 
 All slide `<section>` elements go between `<div class="slides">` and `</div>` in `index.html`. The `<head>`, `<style>`, `<body>`, `<script>` boilerplate is already complete — never edit it unless adding a new reveal.js plugin.
 
-### Step 2: Copy the logo
+**Note:** The base template already includes the [audio-slideshow](https://github.com/rajgoel/reveal.js-plugins/tree/master/audio-slideshow) plugin (CDN-loaded) and the `TimerPlugin` in `Reveal.initialize()`. To add audio to a slide, use `data-audio-src="assets/file.mp3"` on the `<section>` element. Audio files go in `slides/assets/`. The plugin is configured with `advance: -1` (no auto-advance) — teacher controls playback via hover controls or `A` key. See the `audio:` config block in `Reveal.initialize()` for details.
+
+### Step 2: Copy supporting files (timer plugin, logo)
 
 ```powershell
-python -c "
-import shutil
-shutil.copy('templates/Image_20260324_141022.png', 'output/{subfolder}/slides/assets/logo.png')
-"
+cp "templates/timer-plugin.js" "output/{subfolder}/slides/timer-plugin.js"
+cp "templates/timer-plugin.css" "output/{subfolder}/slides/timer-plugin.css"
+cp "templates/Image_20260324_141022.png" "output/{subfolder}/slides/assets/logo.png"
 ```
 
 ### Step 3: Background images
@@ -62,9 +63,30 @@ Background color reference:
 
 Pixabay background images (`data-background-image`, `data-background-opacity`) are NEVER used in generated output. All backgrounds use `data-background="<color>"`.
 
-### Step 4: Add slides — copy, paste, adapt
+### Step 4: Build slides
 
-**Rule**: Every slide is a raw `<section>` element. Copy the pattern from `templates/base-slides-template.html`, paste it into the `<div class="slides">` container, and adapt the content.
+There are two distinct workflows depending on the situation:
+
+#### A. New build (first generation from JSON)
+
+**Always write the entire `index.html` in a single Write tool call.** Do NOT copy the template and then incrementally replace sections with Edit tool calls — this is slow, fragile, and causes timeouts.
+
+Instead:
+1. Read `templates/base-slides-template.html` once to get the `<head>`, `<style>`, `<body>`, and `<script>` boilerplate.
+2. Compose all `<section>` elements in memory.
+3. Write the complete file in one `Write` call to `output/{subfolder}/slides/index.html`.
+4. Then verify the output (Step 5).
+
+The boilerplate (lines 1-136 and lines 358-390 of the template) is always the same. Only the `<section>` elements inside `<div class="slides">` change per lesson.
+
+#### B. Editing an existing slideshow
+
+When the user asks to modify an already-built slideshow (e.g., "change slide 7" or "add a new slide after the vocabulary"):
+1. Read the current `index.html`.
+2. Use the `Edit` tool for targeted incremental changes.
+3. Use `scripts/locate_slide.py` to find the exact line numbers.
+
+**Rule**: Every slide is a raw `<section>` element inside `<div class="slides">`.
 
 **Slide ordering convention**:
 1. Title (with logo)
@@ -83,7 +105,10 @@ Pixabay background images (`data-background-image`, `data-background-opacity`) a
 
 ### Step 5: Verify output
 - Check `index.html` exists in the slides directory
+- Check `timer-plugin.js` and `timer-plugin.css` exist in the slides directory
 - Verify title slide contains `<img src="assets/logo.png" class="title-logo" />`
+- Verify `TimerPlugin` is in the `plugins` array of `Reveal.initialize()`
+- Verify `answer-correct` / `answer-incorrect` are used for answer fragments (NOT `highlight-green`/`highlight-red`)
 - Verify fragment usage: only on answer reveal slides and strategy demonstrations, not on expository content
 - Verify procedure text is in `<aside class="notes">`, not on screen
 - Verify vocabulary words use `<span class="vocab-word">word</span>`
@@ -91,6 +116,7 @@ Pixabay background images (`data-background-image`, `data-background-opacity`) a
 - Verify `autoAnimateUnmatched: true` is in `Reveal.initialize()`
 - Verify transition slides use `data-background="#c0392b"`
 - Verify pedagogical strategy slides use `data-background="#1a6b5a"` and `class="pedagogical"`
+- Verify listening task slides that need audio have `data-audio-src="assets/filename.mp3"`
 
 ### Step 6: Publish and write URL to lesson plan JSON
 
@@ -117,8 +143,8 @@ Write-Host "Slideshow URL written to $jsonPath : $url"
 
 | Use fragments for | DO NOT use fragments for |
 |---|---|
-| Revealing answers (`highlight-green`) | Task instructions |
-| Highlighting wrong answers (`highlight-red`) | Vocabulary lists |
+| Revealing answers (`answer-correct`) | Task instructions |
+| Highlighting wrong answers (`answer-incorrect`) | Vocabulary lists |
 | Strategy step reveals (on pedagogical slides) | Objectives/outcomes |
 | Eliminating wrong MC options (`strike`) | Discussion questions |
 | Key vocabulary emphasis (`grow`, single word) | Lead-in images and prompts |
@@ -126,9 +152,11 @@ Write-Host "Slideshow URL written to $jsonPath : $url"
 | | Any expository content |
 
 Fragment classes:
-- `fragment highlight-green` — correct answer confirmed
-- `fragment highlight-red` — incorrect answer
-- `fragment strike` — eliminated wrong answer
+- `fragment answer-correct` — correct answer revealed (hidden until click, green background on reveal)
+- `fragment answer-incorrect` — incorrect answer revealed (hidden until click, red background on reveal)
+- `fragment highlight-green` — **DO NOT USE** (reveal.js built-in forces `opacity: 1`, prevents hiding)
+- `fragment highlight-red` — **DO NOT USE** (same reason as above)
+- `fragment strike` — eliminated wrong answer (always visible, strikethrough on click)
 - `fragment grow` — emphasize single vocabulary word
 - `fragment` (bare) — generic reveal
 
@@ -326,6 +354,7 @@ All patterns live in `templates/base-slides-template.html` as HTML comments. **C
 - `data-timer="seconds"` — time in seconds (minutes × 60)
 - Brief student-facing instructions (max 3 bullet points)
 - Full procedure, timing, and materials in `<aside class="notes">`
+- **Listening task slides** that play an audio track should also add `data-audio-src="assets/filename.mp3"` on the `<section>` element
 
 ### 8. Pedagogical Strategy Slide (non-auto-animate)
 ```html
@@ -341,7 +370,7 @@ All patterns live in `templates/base-slides-template.html` as HTML comments. **C
     <p class="fragment strike">a) Reason. <strong>Eliminate.</strong></p>
     <p class="fragment strike">b) Reason. <strong>Eliminate.</strong></p>
     <p class="fragment"><strong>Step 3: Confirm the answer</strong></p>
-    <p class="fragment highlight-green">c) Explanation. ✓ <strong>c is correct!</strong></p>
+    <p class="fragment answer-correct">c) Explanation. ✓ <strong>c is correct!</strong></p>
 </section>
 ```
 - Teal background `#1a6b5a` via `data-background`
@@ -349,29 +378,45 @@ All patterns live in `templates/base-slides-template.html` as HTML comments. **C
 - Fragments used for step-by-step reveal of strategy
 
 ### 9. Answer Slide (True/False)
+
+Use the same `answer-table` pattern with green background and fragment reveals:
+
 ```html
-<section>
-    <h2>Exercise 2</h2>
+<section data-background="#1e7e34">
+    <h2>Exercise N — Answers</h2>
     <p class="aim-label">True/False</p>
-    <p class="fragment">Statement text goes here.</p>
-    <p class="fragment highlight-green">✓ <strong>True</strong></p>
-    <p class="fragment">Another statement text.</p>
-    <p class="fragment highlight-red">✗ <strong>False</strong></p>
-    <p class="fragment highlight-green">✓ <em>Corrected statement.</em></p>
+    <table class="answer-table">
+        <thead><tr><th>Statement</th><th>Answer</th></tr></thead>
+        <tbody>
+            <tr><td>Statement text here.</td><td class="fragment answer-correct">✓ <strong>True</strong></td></tr>
+            <tr><td>Another statement.</td><td class="fragment answer-incorrect">✗ <strong>False</strong></td></tr>
+            <tr><td>Corrected statement.</td><td class="fragment answer-correct">✓ <em>Explanation</em></td></tr>
+        </tbody>
+    </table>
 </section>
 ```
+- **Statements visible at slide entry** — teacher and students see all questions immediately
+- **Answer column uses `class="fragment answer-correct"` or `class="fragment answer-incorrect"`** — revealed one row at a time
+- `answer-correct` = green background on reveal, `answer-incorrect` = red background on reveal
+- **Do NOT use `highlight-green`/`highlight-red`** — reveal.js built-in classes force `opacity: 1`, preventing fragment hiding
+- For 3-column tables with explanations, add a `Why?` column (see Answer Table Patterns below)
 
 ### 10. Answer Slide (Multiple Choice / Matching)
+
 ```html
-<section>
-    <h2>Exercise 4</h2>
+<section data-background="#1e7e34">
+    <h2>Exercise N — Answers</h2>
     <p class="aim-label">Multiple Choice</p>
-    <p>a. Option A</p>
-    <p>b. Option B</p>
-    <p>c. Option C</p>
-    <p class="fragment highlight-green">✓ <strong>c</strong></p>
+    <table class="answer-table">
+        <thead><tr><th>Question</th><th>Answer</th><th>Why?</th></tr></thead>
+        <tbody>
+            <tr><td>Question text</td><td class="fragment answer-correct">✓ <strong>c) Option C</strong></td><td class="fragment">citation from text</td></tr>
+        </tbody>
+    </table>
 </section>
 ```
+- **Questions/options visible at slide entry** — students see all choices
+- **Answer and Why columns are fragments** — revealed one row at a time via clickthrough
 
 ### 11. Summary Slide
 ```html
@@ -439,7 +484,7 @@ When asked to edit a slide at a reveal.js URL:
 4. **Task slides: brief student instructions** — extract task description from procedure, skip teacher-only instructions. Max 3 task lines on screen.
 5. **Stage names: student-friendly language** — "Lead-in" → "Let's get Started", "Reading for gist" → "What's the main idea?", "Reading for detail" → "Finding details", "Reading for inference" → "Making conclusions", "Post-reading" → "Let's Discuss", "Wrap-up" → "Let's Review"
 6. **Vocabulary slides** — generated AFTER lead-in stage. One word per slide with dark navy background. "Important Words" title on first slide only. Yellow bold (#ffdd00) via `<span class="vocab-word">`.
-7. **Answer slides** — fragment reveals with ✓/✗ markers.
+7. **Answer slides** — use `<table class="answer-table">` with green background `#1e7e34`. Statements visible on entry; answers use `class="fragment answer-correct"` or `class="fragment answer-incorrect"` for clickthrough reveal. **Do NOT use `highlight-green`/`highlight-red`** (reveal.js keeps them at `opacity: 1`; they never hide).
 8. **Transitions: directive + foreshadow + engagement** — "We're now going to read...", not "What did you learn?"
 9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#1a6b5a` (pedagogical/strategy), green `#1e7e34` (answer tables), dark `#2c3e50` (end)
 10. **Logo**: `assets/logo.png`, transparent RGBA PNG, max-height 100px, centered
@@ -708,7 +753,30 @@ Using `margin-top: -2.5%` pushes content off-screen top. A small positive `paddi
 
 ### Answer Table Patterns (V1)
 
-All answer slides use `answer-table` class with 3-column layout: Statement | Answer | Why?
+All answer slides use `answer-table` class with green background `#1e7e34`. The answer column and optionally the explanation column use fragments for clickthrough reveal.
+
+**2-column table (True/False, simple answers):**
+
+```html
+<section data-background="#1e7e34">
+    <h2>Exercise N — Answers</h2>
+    <table class="answer-table">
+        <thead><tr><th>Statement</th><th>Answer</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>statement text</td>
+                <td class="fragment answer-correct">✓ Correct</td>
+            </tr>
+            <tr>
+                <td>another statement</td>
+                <td class="fragment answer-incorrect">✗ Incorrect</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+```
+
+**3-column table (with explanation):**
 
 ```html
 <section data-background="#1e7e34">
@@ -718,7 +786,12 @@ All answer slides use `answer-table` class with 3-column layout: Statement | Ans
         <tbody>
             <tr>
                 <td>statement text</td>
-                <td class="fragment">✗ / ✓</td>
+                <td class="fragment answer-correct">✓ Correct</td>
+                <td class="fragment">explanation with paragraph reference</td>
+            </tr>
+            <tr>
+                <td>another statement</td>
+                <td class="fragment answer-incorrect">✗ Incorrect</td>
                 <td class="fragment">explanation with paragraph reference</td>
             </tr>
         </tbody>
