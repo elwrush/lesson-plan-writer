@@ -358,6 +358,51 @@ All patterns live in `templates/base-slides-template.html` as HTML comments. **C
 - **Listening task slides** that play an audio track should also add `data-audio-src="assets/filename.mp3"` on the `<section>` element
 - **Never combine `data-timer` and `data-audio-src` on the same `<section>`** — timer pills conflict with audio playback. Use one or the other, not both.
 
+### YouTube / Iframe Embedding
+
+YouTube requires a valid `HTTP Referer` header for embedded players. Without it, YouTube returns Error 153. Use `referrerpolicy="strict-origin-when-cross-origin"` on the iframe to ensure the browser sends the referrer.
+
+```html
+<section data-background="#1a1a2e">
+    <h2>Video Title</h2>
+    <iframe
+        width="760" height="430"
+        src="https://www.youtube.com/embed/VIDEO_ID"
+        frameborder="0"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+        style="border: none; display: block; margin: 0 auto;">
+    </iframe>
+    <p><em>Discussion prompt below the video.</em></p>
+</section>
+```
+
+**Rules:**
+- Use `src` directly (not `data-src`) — the iframe loads immediately. Reveal.js will auto-detect the YouTube URL and manage pause-on-navigate-away via postMessage.
+- `referrerpolicy="strict-origin-when-cross-origin"` — REQUIRED. Without this, YouTube blocks the embed when the page is served from `file://` or any context without a default referrer.
+- Also add `<meta name="referrer" content="strict-origin-when-cross-origin" />` inside `<head>` as a page-wide fallback for any other embedded resources that need a referrer.
+- `allowfullscreen` enables the YouTube fullscreen button.
+- Do NOT add `data-timer` to a slide that has a YouTube iframe.
+- Background: `#1a1a2e` (dark navy).
+
+### Diagnostic Talk Structure Slide
+
+For teaching students how to structure a short talk (thesis → reasons → example):
+
+```html
+<section class="pedagogical structure-talk" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+    <h2>Structure Your Talk</h2>
+    <p class="structure-step"><u><strong>Thesis:</strong> Say your main idea</u></p>
+    <p class="structure-step"><u><strong>Reasons:</strong> Give 1-2 reasons</u></p>
+    <p class="structure-step"><u><strong>Example:</strong> Share an example you know</u></p>
+    <p class="transition-words">First... &nbsp; Also... &nbsp; For example...</p>
+</section>
+```
+
+- Teal background `#1a6b5a`, `class="pedagogical structure-talk"`
+- Three underlined steps teaching basic argument structure
+- Yellow transition word box at bottom: First / Also / For example
+
 ### 8. Pedagogical Strategy Slide (non-auto-animate)
 ```html
 <section class="pedagogical" data-background="#1a6b5a">

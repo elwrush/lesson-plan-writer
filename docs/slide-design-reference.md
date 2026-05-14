@@ -360,6 +360,45 @@ All questions visible at once. No fragments for discussion.
 </section>
 ```
 
+### 13. YouTube Embed Slide
+```html
+<section data-background="#1a1a2e">
+    <h2>Video Title</h2>
+    <iframe
+        width="760" height="430"
+        src="https://www.youtube.com/embed/VIDEO_ID"
+        frameborder="0"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+        style="border: none; display: block; margin: 0 auto;">
+    </iframe>
+    <p><em>Discussion prompt below the video.</em></p>
+</section>
+```
+
+- Uses `src` directly (not `data-src`) — iframe loads immediately with the page
+- `referrerpolicy="strict-origin-when-cross-origin"` — REQUIRED. YouTube now blocks embeds without a valid HTTP Referer (Error 153). This attribute tells the browser to send the referrer header.
+- Also add `<meta name="referrer" content="strict-origin-when-cross-origin" />` inside `<head>` as a page-wide fallback
+- `allowfullscreen` allows the user to enter fullscreen mode
+- Reveal.js automatically detects YouTube URLs and sends `slide:start`/`slide:stop` postMessages
+- Audio is paused when navigating away (reveal.js built-in behavior)
+
+### 14. Diagnostic Talk Structure Slide (Pedagogical)
+```html
+<section class="pedagogical structure-talk" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+    <h2>Structure Your Talk</h2>
+    <p class="structure-step"><u><strong>Thesis:</strong> Say your main idea</u></p>
+    <p class="structure-step"><u><strong>Reasons:</strong> Give 1-2 reasons</u></p>
+    <p class="structure-step"><u><strong>Example:</strong> Share an example you know</u></p>
+    <p class="transition-words">First... &nbsp; Also... &nbsp; For example...</p>
+</section>
+```
+
+- Teal background `#1a6b5a`, `class="pedagogical structure-talk"`
+- Three structure steps (thesis → reasons → example) with underlined labels
+- Transition words at bottom in yellow (`#ffdd00`) inside a semi-transparent box
+- Teacher uses this to model diagnostic speaking task structure
+
 ---
 
 ## Auto-Animate for Strategy Demonstrations

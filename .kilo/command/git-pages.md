@@ -95,13 +95,27 @@ $ghPagesExists = $LASTEXITCODE -eq 0
 
 ### Step 5b: Switch to gh-pages branch
 ```powershell
+# Safety: Stash any uncommitted changes before switching branches
+$hadStashed = $false
+if (-not (git diff --quiet HEAD 2>$null)) {
+    git stash push -m "auto-stash before gh-pages deploy" 2>$null
+    $hadStashed = $true
+}
+
 if ($ghPagesExists) {
     git checkout gh-pages
 } else {
     # First deploy — create orphan branch
+    # SAFETY: git rm -rf . + git clean -fd will DESTROY untracked files
+    # in subdirectories (inputs/, output/, etc.) with no recovery.
+    # Use targeted Remove-Item instead:
+    Write-Host "Creating gh-pages branch..."
     git checkout --orphan gh-pages
-    git rm -rf .
-    git clean -fd
+    git rm -rf . 2>$null
+    # Remove files in project root only — does NOT reach into
+    # nested untracked directories like inputs/ or output/
+    Get-ChildItem -Path "." -File | Remove-Item -Force -ErrorAction SilentlyContinue
+    Get-ChildItem -Path "." -Directory | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
 }
 ```
 

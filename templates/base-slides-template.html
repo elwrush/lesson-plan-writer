@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <title><!-- TOPIC --></title>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
@@ -145,6 +146,46 @@
             .reveal .fragment.strike {
                 text-decoration: line-through;
                 opacity: 0.6;
+            }
+
+            /* --- YouTube iframe container (16:9 responsive) --- */
+            .reveal .iframe-container {
+                position: relative;
+                width: 90%;
+                padding-bottom: 50.625%;
+                height: 0;
+                overflow: hidden;
+                margin: 0 auto 0.5em;
+            }
+            .reveal .iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* --- Diagnostic talk structure slides (pedagogical, teal) --- */
+            .reveal .structure-talk h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal .structure-talk p,
+            .reveal .structure-talk li  { color: #fff; }
+            .reveal .structure-talk .structure-step {
+                font-size: 1.1em;
+                margin-bottom: 0.6em;
+            }
+            .reveal .structure-talk .transition-words {
+                font-size: 0.9em;
+                color: #ffdd00;
+                font-style: italic;
+                margin-top: 0.8em;
+                padding: 0.4em 0.6em;
+                background: rgba(0,0,0,0.2);
+                border-radius: 4px;
             }
         </style>
     </head>
@@ -372,6 +413,33 @@
                 <section data-background="#2c3e50">
                     <h2>Thank you</h2>
                     <p><em>Topic Name</em> | B2</p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: YouTube Embed Slide ────────────────────────── -->
+                <!--
+                <section data-background="#1a1a2e">
+                    <h2>Video Title</h2>
+                    <iframe
+                        width="760" height="430"
+                        src="https://www.youtube.com/embed/VIDEO_ID"
+                        frameborder="0"
+                        allowfullscreen
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        style="border: none; display: block; margin: 0 auto;">
+                    </iframe>
+                    <p><em>Discussion prompt below the video.</em></p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Diagnostic Talk Structure Slide ────────────── -->
+                <!--
+                <section class="pedagogical structure-talk" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+                    <h2>Structure Your Talk</h2>
+                    <p class="structure-step"><u><strong>Thesis:</strong> Say your main idea</u></p>
+                    <p class="structure-step"><u><strong>Reasons:</strong> Give 1-2 reasons</u></p>
+                    <p class="structure-step"><u><strong>Example:</strong> Share an example you know</u></p>
+                    <p class="transition-words">First... &nbsp; Also... &nbsp; For example...</p>
                 </section>
                 -->
 
