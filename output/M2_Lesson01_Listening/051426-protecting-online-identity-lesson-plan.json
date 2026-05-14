@@ -1,0 +1,69 @@
+{
+  "teacher": "Ed Rush",
+  "duration": "46 minutes",
+  "date": "051426",
+  "topic": "Protecting Online Identity",
+  "objective": "By the end of the lesson, learners will have practiced and developed the sub-skills of listening for specific information about online identity protection and speaking to present a structured personal response.",
+  "materials": "OFD2, Student Book pp10-11",
+  "lesson_plan": {
+    "shape": "E",
+    "shape_name": "Receptive Skills (Traditional)",
+    "cefr_level": "B1",
+    "class": "M2",
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage": "Lead-in",
+        "stage_aim": "To spark curiosity about online identity theft through a real-world news clip",
+        "procedure": "Part 1 — Play the YouTube clip (3 min). Students watch without taking notes.\nPart 2 — In pairs, students discuss: \"What themes did you see in this video? What kind of problems did it show?\" (2 min). Elicit 3-4 ideas in feedback.\nPart 3 — In new pairs: \"Has anything like this ever happened to you or someone you know?\" (1 min). Elicit 2-3 responses.\nTransition: \"Today we're going to look at how we can protect our own identity online.\"",
+        "time": 7,
+        "interaction": "T-Ss, Ss-Ss"
+      },
+      {
+        "stage_number": 2,
+        "stage": "Vocabulary pre-teach",
+        "stage_aim": "To pre-teach key vocabulary for the listening text",
+        "procedure": "Present five words: phishing, unsecured, decode, symbols, curiosity.\nFor each word: write on board, model pronunciation, drill chorally and individually.\nConcept-check each word with simple questions.\nLeave words on the board for students to refer to during the listening.",
+        "time": 5,
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 3,
+        "stage": "Listening for specific information",
+        "stage_aim": "To help learners read for specific information and check their answers through listening",
+        "procedure": "Part 1 — Students open OFD2 p10. Read the \"Identity Alert\" webpage silently and complete Exercise 1 (choose the correct number for each gap). (5 min)\nPart 2 — In pairs, students read the Exercise 3 questions (p11) and try to predict the answers based on the webpage. (2 min)\nPart 3 — Play audio. Students listen, check their Exercise 1 answers, and answer the Exercise 3 questions. (8 min)\nPart 4 — Whole-class feedback. Go through Exercise 1 answers, then Exercise 3. Clarify any confusion. (3 min)",
+        "time": 18,
+        "interaction": "S, Ss-Ss"
+      },
+      {
+        "stage_number": 4,
+        "stage": "Controlled pair practice",
+        "stage_aim": "To practise asking and answering personal questions about online safety",
+        "procedure": "Part 1 — Teacher models the activity with a strong student. Ask: \"Do you share your passwords with your friends?\" Elicit answer and follow-up. Show vocabulary words (privacy, hacker, hotspot, PIN, install) on the board. (2 min)\nPart 2 — In pairs, students take turns asking each other the Exercise 4 questions using the highlighted words from the webpage. Teacher monitors and takes notes. (4 min)\nPart 3 — Ask 2-3 pairs to share one interesting thing they learned about their partner. (1 min)",
+        "time": 7,
+        "interaction": "Ss-Ss"
+      },
+      {
+        "stage_number": 5,
+        "stage": "Diagnostic speaking task",
+        "stage_aim": "To diagnose learners' ability to produce a structured short talk about identity theft",
+        "procedure": "Part 1 — Show the Structure Your Talk slide. Explain the three parts: thesis (main idea), reasons (1-2 reasons why), example (a real example). Introduce transition words: \"First...\", \"Also...\", \"For example...\". (2 min)\nPart 2 — Students prepare a 1-minute talk on: \"What is identity theft? Why is it a problem? Give an example you know.\" (2 min)\nPart 3 — 2-3 volunteers deliver their talks to the class. Teacher listens and takes notes (diagnostic — do not correct or grade). (2 min)",
+        "time": 6,
+        "interaction": "S"
+      },
+      {
+        "stage_number": 6,
+        "stage": "Wrap-up",
+        "stage_aim": "To consolidate learning and reflect on key takeaways",
+        "procedure": "Part 1 — In pairs, students share one new word they learned today and one thing they can do to protect their identity online. (1 min)\nPart 2 — Teacher gives brief positive feedback on the diagnostic talks (strengths only). (1 min)\nPart 3 — Preview: \"Next lesson, we'll look at how to make our talks more powerful using emphasis strategies.\" (1 min)",
+        "time": 3,
+        "interaction": "T-Ss"
+      }
+    ]
+  },
+  "transcript": "inputs/M2_Lesson01_Listening/transcript.md",
+  "answer_key": "inputs/M2_Lesson01_Listening/answers.md",
+  "slideshow_url": "",
+  "cefr_level": "B1",
+  "class": "M2"
+}

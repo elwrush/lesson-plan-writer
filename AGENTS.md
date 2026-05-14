@@ -38,10 +38,11 @@ cp "templates/base-slides-template.html" "output/<subfolder>/slides/index.html"
 # Pixabay image download (for slide backgrounds)
 python scripts/pixabay_download.py --query "topic" --type image --count 3
 
-# Tests (44 total, all pass)
+# Tests (56 total, all pass)
 python -m pytest tests/ -v
-python -m pytest tests/test_json_to_pdf.py -v       # 18 tests
-python -m pytest tests/test_json_to_markdown.py -v  # 26 tests
+python -m pytest tests/test_json_to_pdf.py -v          # 18 tests
+python -m pytest tests/test_json_to_markdown.py -v      # 26 tests
+python -m pytest tests/test_git_pages_safety.py -v      # 12 tests — red-green safety guard for /git-pages
 
 # Locate slide by reveal.js index (deterministic editing)
 python scripts/locate_slide.py "file:///path/to/index.html#/7"

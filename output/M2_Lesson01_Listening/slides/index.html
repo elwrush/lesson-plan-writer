@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Protecting Online Identity</title>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                padding: 4px 12px;
+                border-radius: 4px;
+                font-size: 0.4em;
+                vertical-align: middle;
+                margin-left: 10px;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+            .reveal .title-logo {
+                display: block;
+                max-height: 125px;
+                margin: 0 auto 1em;
+            }
+            .reveal .aim-label {
+                font-size: 0.7em;
+                color: #888;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            section[data-background="#1e7e34"] .aim-label {
+                color: #ffdd00;
+            }
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            }
+            .reveal .slide-icon {
+                font-size: 2.5em;
+                margin-bottom: 0.3em;
+                display: block;
+                text-align: center;
+                color: rgba(255,255,255,0.85);
+            }
+            .reveal .slide-icon.transition-icon { color: rgba(255,255,255,0.85); }
+            .reveal .slide-icon.pedagogical-icon { color: rgba(255,255,255,0.9); }
+            .reveal .slide-icon.objective-icon { color: rgba(255,221,0,0.85); }
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal p, .reveal li, .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            }
+            .reveal .fragment.answer-correct.visible {
+                background: rgba(0,120,0,0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-incorrect.visible {
+                background: rgba(120,0,0,0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal table.answer-table th {
+                background: rgba(0,0,0,0.2);
+                font-weight: bold;
+            }
+            .reveal .structure-talk h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal .structure-talk p, .reveal .structure-talk li { color: #fff; }
+            .reveal .structure-talk .structure-step {
+                font-size: 1.1em;
+                margin-bottom: 0.6em;
+            }
+            .reveal .structure-talk .transition-words {
+                font-size: 0.9em;
+                color: #ffdd00;
+                font-style: italic;
+                margin-top: 0.8em;
+                padding: 0.4em 0.6em;
+                background: rgba(0,0,0,0.2);
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+                <section data-background-image="assets/pixabay_2964100_1.jpg" data-background-opacity="0.7">
+                    <img src="assets/logo.png" class="title-logo" alt="Logo" />
+                    <h1>Protecting Online Identity <span class="cefr-badge B1">B1</span></h1>
+                    <p><em>Listen for key facts about staying safe online, then share your ideas</em></p>
+                    <aside class="notes">Image by methodshop from Pixabay</aside>
+                </section>
+
+                <section>
+                    <i class="fa-solid fa-seedling slide-icon objective-icon"></i>
+                    <h2>Here's what you'll be able to do</h2>
+                    <ul>
+                        <li>Find key facts from a listening about online safety</li>
+                        <li>Use new words to talk about identity theft</li>
+                        <li>Give a short talk about staying safe online</li>
+                    </ul>
+                </section>
+
+                <section data-background="#1a1a2e">
+                    <h2 style="font-size: 1.4em;">Identity Theft in Progress</h2>
+                    <iframe
+                        width="760" height="430"
+                        src="https://www.youtube.com/embed/jXRHb4sCM8c"
+                        frameborder="0"
+                        allowfullscreen
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        style="border: none; display: block; margin: 0 auto;">
+                    </iframe>
+                    <p><em>What themes did you see in this video?</em></p>
+                    <aside class="notes">
+                        Play the YouTube clip. Students watch without taking notes.
+                        After the video, ask: "What themes did you see? What kind of problem did it show?"
+                        Connect to the lesson topic: Protecting your identity online.
+                    </aside>
+                </section>
+
+                <section data-background="#1a1a2e">
+                    <i class="fa-solid fa-eye slide-icon" style="color: rgba(255,255,255,0.85);"></i>
+                    <h2>Let's get Started</h2>
+                    <h3>What kind of problem did the video show?</h3>
+                    <h3>Has anything like this ever happened to someone you know?</h3>
+                    <aside class="notes">
+                        Give students 20 seconds to think. Elicit 3-4 responses.
+                        Connect responses to today's topic.
+                    </aside>
+                </section>
+
+                <section class="vocab-slide" data-background-image="assets/commons_phishing.jpg" data-background-opacity="0.7">
+                    <h2>Important Words</h2>
+                    <p><span class="vocab-word">phishing</span></p>
+                    <p><em>/ˈfɪʃɪŋ/</em></p>
+                    <p><em>Be careful of <span class="vocab-word">phishing</span> emails that ask for your personal information.</em></p>
+                </section>
+
+                <section class="vocab-slide" data-background-image="assets/commons_unsecured.jpg" data-background-opacity="0.7">
+                    <p><span class="vocab-word">unsecured</span></p>
+                    <p><em>/ˌʌnsɪˈkjʊrd/</em></p>
+                    <p><em>Free Wi-Fi at a cafe may be <span class="vocab-word">unsecured</span>, so hackers can easily see your data.</em></p>
+                </section>
+
+                <section class="vocab-slide" data-background-image="assets/commons_decode.jpg" data-background-opacity="0.7">
+                    <p><span class="vocab-word">decode</span></p>
+                    <p><em>/diːˈkoʊd/</em></p>
+                    <p><em>A hacker can <span class="vocab-word">decode</span> a simple password in just ten minutes.</em></p>
+                </section>
+
+                <section class="vocab-slide" data-background-image="assets/commons_symbols.jpg" data-background-opacity="0.7">
+                    <p><span class="vocab-word">symbols</span></p>
+                    <p><em>/ˈsɪmbəlz/</em></p>
+                    <p><em>A strong password has a mix of letters, numbers, and <span class="vocab-word">symbols</span> like @ or #.</em></p>
+                </section>
+
+                <section class="vocab-slide" data-background-image="assets/commons_curiosity.jpg" data-background-opacity="0.7">
+                    <p><span class="vocab-word">curiosity</span></p>
+                    <p><em>/ˌkjʊriˈɑːsəti/</em></p>
+                    <p><em>Out of <span class="vocab-word">curiosity</span>, some people click on links in strange emails.</em></p>
+                </section>
+
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Finding information</h2>
+                    <p>You're going to read a web page about identity theft.</p>
+                    <p>Let's find some key facts together.</p>
+                    <p>Then we'll listen to check your answers.</p>
+                </section>
+
+                <section data-timer="300">
+                    <h2>Read the Web Page</h2>
+                    <ul>
+                        <li>Open OFD2 page 10. Read the "Identity Alert" web page.</li>
+                        <li>Choose the correct number in Exercise 1.</li>
+                    </ul>
+                    <aside class="notes">Stage 3 · Phase A · 5 min · S · Materials: OFD2 p10</aside>
+                </section>
+
+                <section data-timer="120">
+                    <h2>Predict the Answers</h2>
+                    <ul>
+                        <li>Read the questions in Exercise 3 on page 11.</li>
+                        <li>Which ones can you already predict from the web page?</li>
+                        <li>What information will you need to listen for?</li>
+                    </ul>
+                    <aside class="notes">Stage 3 · Phase B · 2 min · Ss-Ss · Materials: OFD2 p11</aside>
+                </section>
+
+                <section data-audio-src="assets/ODF2_SB_1.02.mp3">
+                    <h2>Listen and Check</h2>
+                    <ul>
+                        <li>Listen to the podcast about protecting your identity online.</li>
+                        <li>Check your answers to Exercise 1.</li>
+                        <li>Answer the questions in Exercise 3.</li>
+                    </ul>
+                    <aside class="notes">Stage 3 · Phase C · 8 min · S</aside>
+                </section>
+
+                <section data-background="#1e7e34">
+                    <h2>Exercise 1 — Answers</h2>
+                    <p class="aim-label">Choose the correct numbers</p>
+                    <table class="answer-table">
+                        <thead><tr><th>Question</th><th>Answer</th></tr></thead>
+                        <tbody>
+                            <tr><td>1. Teens who worry about privacy</td><td class="fragment answer-correct">✓ <strong>76%</strong></td></tr>
+                            <tr><td>2. People who shared passwords</td><td class="fragment answer-correct">✓ <strong>23%</strong></td></tr>
+                            <tr><td>3. Teens who post their school name</td><td class="fragment answer-correct">✓ <strong>48%</strong></td></tr>
+                            <tr><td>4. Unsecured Wi-Fi hotspots</td><td class="fragment answer-correct">✓ <strong>89%</strong></td></tr>
+                            <tr><td>5. People who click phishing links</td><td class="fragment answer-correct">✓ <strong>10%</strong></td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section data-background="#1e7e34">
+                    <h2>Exercise 3 — Answers</h2>
+                    <p class="aim-label">Listening comprehension</p>
+                    <table class="answer-table wrap">
+                        <thead><tr><th>Question</th><th>Answer</th><th>Why?</th></tr></thead>
+                        <tbody>
+                            <tr><td>1. How do young people feel about identity theft?</td><td class="fragment answer-correct">✓ They worry about it</td><td class="fragment">"76% of teenagers actually worry"</td></tr>
+                            <tr><td>2. How many examples of "careless sharing"?</td><td class="fragment answer-correct">✓ Three examples</td><td class="fragment">Passwords, full names, school names</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section data-background="#1e7e34">
+                    <h2>Exercise 3 — Answers</h2>
+                    <p class="aim-label">Listening comprehension</p>
+                    <table class="answer-table wrap">
+                        <thead><tr><th>Question</th><th>Answer</th><th>Why?</th></tr></thead>
+                        <tbody>
+                            <tr><td>3. What makes a good password?</td><td class="fragment answer-correct">✓ 8+ characters, mixed</td><td class="fragment">"at least eight characters... mix of letters, numbers, symbols"</td></tr>
+                            <tr><td>4. What kind of app does the expert recommend?</td><td class="fragment answer-correct">✓ A password manager</td><td class="fragment">"apps that remember and manage your passwords"</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section data-background="#1e7e34">
+                    <h2>Exercise 3 — Answers</h2>
+                    <p class="aim-label">Listening comprehension</p>
+                    <table class="answer-table wrap">
+                        <thead><tr><th>Question</th><th>Answer</th><th>Why?</th></tr></thead>
+                        <tbody>
+                            <tr><td>5. How can hackers affect Wi-Fi in cafes?</td><td class="fragment answer-correct">✓ They create fake hotspots</td><td class="fragment">"create a hotspot with the name of the cafe"</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Asking questions</h2>
+                    <p>Now let's ask each other about our online habits.</p>
+                </section>
+
+                <section data-background="#1a1a2e">
+                    <h2>How to Ask — Example</h2>
+                    <p><em>"Do you share your <strong>passwords</strong> with your friends?"</em></p>
+                    <p style="margin-top:0.5em;"><strong>Your partner answers:</strong> Yes / No</p>
+                    <p><strong>Then ask:</strong> "Why? / Why not?"</p>
+                    <p style="margin-top:0.8em;color:#ffdd00;">
+                        Try to use: <span class="vocab-word">privacy</span> · <span class="vocab-word">hacker</span> · <span class="vocab-word">hotspot</span> · PIN · install
+                    </p>
+                    <aside class="notes">Stage 4 · Part 1 · 2 min · T-Ss</aside>
+                </section>
+
+                <section data-timer="240">
+                    <h2>Ask Your Partner</h2>
+                    <ul>
+                        <li>Ask your partner the questions from Exercise 4.</li>
+                        <li>Use the highlighted words in your questions.</li>
+                        <li>Find out: is your partner safe online?</li>
+                    </ul>
+                    <aside class="notes">Stage 4 · Part 2 · 4 min · Ss-Ss</aside>
+                </section>
+
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Giving a talk</h2>
+                    <p>Now you're going to share your own ideas.</p>
+                    <p>Let's learn how to structure your talk first.</p>
+                    <p style="margin-top:0.8em;font-size:0.95em;color:#ffdd00;">
+                        <strong>Your talk:</strong> What is identity theft?<br />
+                        Why is it a problem? Give an example.
+                    </p>
+                </section>
+
+                <section class="pedagogical structure-talk" data-background="#1a6b5a" data-background-transition="none" style="top:0;">
+                    <i class="fa-solid fa-comments slide-icon pedagogical-icon"></i>
+                    <h2>Structure Your Talk</h2>
+                    <p class="structure-step"><u><strong>Thesis:</strong> Say your main idea</u></p>
+                    <p class="structure-step"><u><strong>Reasons:</strong> Give 1-2 reasons</u></p>
+                    <p class="structure-step"><u><strong>Example:</strong> Share an example you know</u></p>
+                </section>
+
+                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top:0;">
+                    <h2>Use These Words</h2>
+                    <p><u><strong>First...</strong> say your main idea</u></p>
+                    <p style="margin-top:0.5em;"><u><strong>Also...</strong> give your reasons</u></p>
+                    <p style="margin-top:0.5em;"><u><strong>For example...</strong> share something you know</u></p>
+                    <p class="transition-words">"Identity theft is a big problem. First... Also... For example..."</p>
+                </section>
+
+                <section data-timer="120">
+                    <h2>Prepare Your Talk</h2>
+                    <ul>
+                        <li>What is identity theft?</li>
+                        <li>Why is it a problem?</li>
+                        <li>Give an example you know.</li>
+                    </ul>
+                    <p><em>Use: First... &nbsp; Also... &nbsp; For example...</em></p>
+                    <aside class="notes">Stage 5 · 2 min prep · S</aside>
+                </section>
+
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Let's Review</h2>
+                    <p>Let's think about what we learned today.</p>
+                </section>
+
+                <section data-timer="60">
+                    <h2>Share with a Partner</h2>
+                    <ul>
+                        <li>One new word you learned today.</li>
+                        <li>One thing you can do to stay safe online.</li>
+                    </ul>
+                    <aside class="notes">Stage 6 · 1 min · Ss-Ss</aside>
+                </section>
+
+                <section>
+                    <i class="fa-solid fa-flag-checkered slide-icon" style="color:rgba(255,255,255,0.85);"></i>
+                    <h2>What you can do now</h2>
+                    <ul>
+                        <li>✓ I can find key facts from a listening about online safety</li>
+                        <li>✓ I can use new words to talk about identity theft</li>
+                        <li>✓ I can give a short talk with a clear structure</li>
+                    </ul>
+                </section>
+
+                <section data-background="#2c3e50">
+                    <h2>Thank you</h2>
+                    <p><em>Protecting Online Identity</em> | B1</p>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="timer-plugin.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/audio-slideshow/plugin.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                audio: {
+                    prefix: 'assets/',
+                    suffix: '.mp3',
+                    advance: -1,
+                    autoplay: false,
+                    defaultAudios: false,
+                    defaultDuration: 0,
+                    playerOpacity: 1.0,
+                    playerStyle: 'position: fixed; bottom: 30px; left: 25%; width: 50%; height:75px; z-index: 33;',
+                    startAtFragment: false,
+                },
+                plugins: [TimerPlugin, RevealHighlight, RevealMath.KaTeX, RevealNotes, RevealSearch, RevealZoom, RevealAudioSlideshow],
+            });
+        </script>
+    </body>
+</html>

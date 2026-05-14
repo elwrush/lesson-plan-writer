@@ -1,24 +1,44 @@
 ---
-description: Auto-detect all slideshows in output/ and deploy each to its own subfolder on gh-pages. Updates the landing page card grid, commits, and pushes.
+description: Deploy a single slideshow from output/ to its subfolder on gh-pages. Updates the landing page card grid, commits, and pushes.
 ---
 # Command: Git Pages
 
 ## Usage
-`/git-pages`
+`/git-pages [subfolder]`
 
-No arguments needed. The command scans `output/` for all subdirectories containing `slides/index.html` and deploys every one.
+If `subfolder` is provided, only that slideshow is deployed. If omitted, you will be prompted for one.
+
+Examples:
+```
+/git-pages M2_Lesson01_Listening
+/git-pages M3_Lesson01_Listening
+```
 
 ## What it does
-1. Scans `output/` for all subdirectories with `slides/index.html`
+1. Scans `output/` for the requested slideshow
 2. Warns if none found and stops
 3. Runs `/lint`
-4. Detects remote owner/repo from `git remote get-url origin`
-5. Copies each slideshow to a temp directory (preserves source files)
-6. Fetches or creates the gh-pages branch
-7. Copies each slideshow into its own subfolder
-8. Generates/updates root `index.html` (card grid landing page for ALL presentations)
-9. Commits, pushes, returns to `main`
-10. Prints the landing page URL
+4. Copies the slideshow to a temp staging directory
+5. Creates/updates a git worktree for the gh-pages branch in a **separate** temp directory
+6. Copies the slideshow into its own subfolder inside the worktree
+7. Regenerates the root `index.html` (card grid listing ALL presentations on gh-pages)
+8. Commits and pushes from the worktree
+9. Removes the worktree — `main` is never switched away from
+10. Prints the URL
+
+## Safety
+**This command NEVER switches branches in the main working tree.** All gh-pages operations happen inside a `git worktree` — a separate directory that acts as an independent checkout. If anything fails, the main project directory is completely untouched. No stashing, no `git clean`, no `Remove-Item` on project files.
+
+All worktree git commands use `git -C $worktreeDir` explicitly. No `Push-Location` / `Pop-Location` is used — those do not survive across separate command executions.
+
+## Regression Guard
+A red-green safety test at `tests/test_git_pages_safety.py` (12 tests) scans this command file for forbidden patterns. It FAILS if any of these are re-introduced:
+- `git checkout gh-pages` — direct branch switch in the working tree
+- `git rm -rf .` — destroys tracked files
+- `git clean -fd` — destroys untracked files globally
+- Missing `git worktree add` or `git -C $worktreeDir` — worktree isolation not in use
+
+Run: `python -m pytest tests/test_git_pages_safety.py -v`
 
 ## Prerequisites
 - `gh` CLI installed and authenticated (`gh auth status`)
@@ -27,23 +47,26 @@ No arguments needed. The command scans `output/` for all subdirectories containi
 
 ## Workflow
 
-### Step 0: Auto-detect all slideshows in output/
+### Step 0: Detect the target slideshow
 ```powershell
-$presentations = @()
-Get-ChildItem -Path "output" -Directory | ForEach-Object {
-    $slidesHtml = Join-Path $_.FullName "slides\index.html"
-    if (Test-Path $slidesHtml) {
-        $presentations += @{ subfolder = $_.Name }
-    }
+$targetSubfolder = $args[0]
+if (-not $targetSubfolder) {
+    $targetSubfolder = Read-Host "Enter the subfolder to deploy (e.g. M2_Lesson01_Listening)"
 }
 
-if ($presentations.Count -eq 0) {
-    Write-Error "No slideshows found — no output/*/slides/index.html exists"
+$slidesHtml = "output/$targetSubfolder/slides/index.html"
+if (-not (Test-Path $slidesHtml)) {
+    Write-Error "No slideshow found at output/$targetSubfolder/slides/index.html"
+    Write-Host "Available slideshows:"
+    Get-ChildItem "output" -Directory | ForEach-Object {
+        $testPath = Join-Path $_.FullName "slides\index.html"
+        if (Test-Path $testPath) { Write-Host "  - $($_.Name)" }
+    }
     exit 1
 }
 
-Write-Host "Detected $($presentations.Count) slideshow(s):"
-$presentations | ForEach-Object { Write-Host "  - $($_.subfolder)" }
+$presentations = @(@{ subfolder = $targetSubfolder })
+Write-Host "Deploying: $targetSubfolder"
 ```
 
 ### Step 1: Check prerequisites
@@ -71,71 +94,88 @@ if ($remoteUrl -match "github\.com[:\/](.+)/(.+)\.git") {
 python -m ruff check --fix . ; python -m ruff format .
 ```
 
-### Step 4: Save current branch and copy ALL slideshows to temp
+### Step 4: Copy slideshows to a staging temp directory
 ```powershell
-$originalBranch = git rev-parse --abbrev-ref HEAD
-$tmp = "$env:TEMP\gh-pages-deploy"
-if (Test-Path $tmp) { Remove-Item -Recurse -Force $tmp }
-New-Item -ItemType Directory -Force -Path $tmp | Out-Null
+$staging = "$env:TEMP\gh-pages-staging"
+if (Test-Path $staging) { Remove-Item -Recurse -Force -Path $staging }
+New-Item -ItemType Directory -Force -Path $staging | Out-Null
 
 foreach ($p in $presentations) {
     $src = "output/$($p.subfolder)/slides"
-    $dst = Join-Path $tmp $p.subfolder
+    $dst = Join-Path $staging $p.subfolder
     New-Item -ItemType Directory -Force -Path $dst | Out-Null
     Copy-Item -Recurse -Force "$src\*" $dst
-    Write-Host "  Copied $($p.subfolder) to temp"
+    Write-Host "  Copied $($p.subfolder) to staging"
 }
 ```
 
-### Step 5a: Fetch gh-pages and check if it exists
+### Step 5: Create/update the gh-pages worktree
 ```powershell
+$worktreeDir = "$env:TEMP\gh-pages-worktree"
+
+# Remove any leftover worktree from a previous run
+git worktree remove $worktreeDir 2>$null
+if (Test-Path $worktreeDir) { Remove-Item -Recurse -Force -Path $worktreeDir }
+
+# Fetch the remote gh-pages branch
 git fetch origin gh-pages 2>$null
 $ghPagesExists = $LASTEXITCODE -eq 0
-```
-
-### Step 5b: Switch to gh-pages branch
-```powershell
-# Safety: Stash any uncommitted changes before switching branches
-$hadStashed = $false
-if (-not (git diff --quiet HEAD 2>$null)) {
-    git stash push -m "auto-stash before gh-pages deploy" 2>$null
-    $hadStashed = $true
-}
 
 if ($ghPagesExists) {
-    git checkout gh-pages
+    Write-Host "Adding worktree for existing gh-pages branch..."
+    git worktree add $worktreeDir gh-pages 2>$null
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "Failed to create worktree. Exiting — no project files touched."
+        exit 1
+    }
 } else {
-    # First deploy — create orphan branch
-    # SAFETY: git rm -rf . + git clean -fd will DESTROY untracked files
-    # in subdirectories (inputs/, output/, etc.) with no recovery.
-    # Use targeted Remove-Item instead:
-    Write-Host "Creating gh-pages branch..."
-    git checkout --orphan gh-pages
-    git rm -rf . 2>$null
-    # Remove files in project root only — does NOT reach into
-    # nested untracked directories like inputs/ or output/
-    Get-ChildItem -Path "." -File | Remove-Item -Force -ErrorAction SilentlyContinue
-    Get-ChildItem -Path "." -Directory | Remove-Item -Recurse -Force -ErrorAction SilentlyContinue
+    # First deploy: push empty commit to gh-pages from isolated temp repo
+    # NEVER touches the main working tree — no checkout, no git rm, no clean
+    Write-Host "Creating gh-pages branch for first deploy..."
+    $bootstrapDir = "$env:TEMP\gh-pages-bootstrap"
+    if (Test-Path $bootstrapDir) { Remove-Item -Recurse -Force $bootstrapDir }
+    New-Item -ItemType Directory -Force -Path $bootstrapDir | Out-Null
+    Push-Location $bootstrapDir
+    git init
+    git remote add origin $remoteUrl
+    New-Item -ItemType File -Name ".gitkeep" -Value "" | Out-Null
+    git add -A
+    git commit -m "Initial empty gh-pages"
+    git push origin HEAD:gh-pages
+    Pop-Location
+    Remove-Item -Recurse -Force $bootstrapDir
+
+    # Now add the worktree
+    git worktree add $worktreeDir gh-pages
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "Failed to create worktree after first deploy. Exiting."
+        exit 1
+    }
 }
+
+Write-Host "Worktree ready at $worktreeDir"
 ```
 
-### Step 6: Copy ALL slideshows into their subfolders
+### Step 6: Copy all slideshows into the worktree
 ```powershell
-Get-ChildItem -Path $tmp -Directory | ForEach-Object {
+Get-ChildItem -Path $staging -Directory | ForEach-Object {
     $subfolder = $_.Name
-    New-Item -ItemType Directory -Force -Path $subfolder | Out-Null
-    Copy-Item -Recurse -Force "$($_.FullName)\*" "$subfolder/"
-    Write-Host "  Deployed $subfolder to gh-pages"
+    $destDir = Join-Path $worktreeDir $subfolder
+    New-Item -ItemType Directory -Force -Path $destDir | Out-Null
+    Copy-Item -Recurse -Force "$($_.FullName)\*" "$destDir/"
+    Write-Host "  Deployed $subfolder"
 }
 ```
 
 ### Step 7: Generate/update root landing page (card grid)
 ```powershell
-# Find all subdirectories containing index.html
+# All path/file operations target $worktreeDir explicitly.
+# All git commands use git -C $worktreeDir.
+# No Push-Location — it doesn't survive across separate command executions.
 $allPresentations = @()
-git ls-tree --name-only HEAD | Where-Object { $_ -ne "index.html" } | ForEach-Object {
+git -C $worktreeDir ls-tree --name-only HEAD | Where-Object { $_ -ne "index.html" } | ForEach-Object {
     $dir = $_
-    $htmlPath = "$dir/index.html"
+    $htmlPath = Join-Path $worktreeDir "$dir/index.html"
     $title = "Presentation"
     if (Test-Path $htmlPath) {
         $content = Get-Content $htmlPath -Raw
@@ -231,38 +271,39 @@ $cardsHtml    </div>
 </html>
 "@
 
-Set-Content -Path "index.html" -Value $landingPage -NoNewline
+Set-Content -Path (Join-Path $worktreeDir "index.html") -Value $landingPage -NoNewline
 ```
 
-### Step 8: Commit and push
+### Step 8: Commit and push from worktree
 ```powershell
 $date = Get-Date -Format "ddMMyy"
-$count = $presentations.Count
-git add -A
-git commit -m "Deploy $count slideshow(s) ($date)"
-git push origin gh-pages
+git -C $worktreeDir add -A
+git -C $worktreeDir commit -m "Deploy $($presentations[0].subfolder) ($date)"
+git -C $worktreeDir push origin gh-pages
 ```
 
-### Step 9: Return to original branch
+### Step 9: Clean up worktree and return to main
 ```powershell
-git checkout $originalBranch
+git worktree remove $worktreeDir
+Write-Host "Worktree removed. Still on main."
 ```
 
-### Step 10: Print URLs
+### Step 10: Print URL
 ```powershell
+$subfolder = $presentations[0].subfolder
 Write-Host ""
-Write-Host "Deployed $count slideshow(s):"
-foreach ($p in $presentations) {
-    Write-Host "  https://$owner.github.io/$repo/$($p.subfolder)/"
-}
+Write-Host "Deployed: $subfolder"
+Write-Host "  https://$owner.github.io/$repo/$subfolder/"
 Write-Host ""
 Write-Host "Landing page: https://$owner.github.io/$repo/"
 ```
 
 ## Edge cases
-- **First deploy**: creates orphan gh-pages branch automatically
-- **No slides found**: aborts with clear error before any git operations
+- **No argument**: prompts interactively for the subfolder name
+- **Not found**: lists available slideshows and exits
+- **First deploy**: pushes an empty commit from an isolated `git init` in %TEMP% — never touches the working tree
 - **gh not authenticated**: aborts with instruction to run `gh auth login`
-- **Push fails**: stays on gh-pages branch for debugging; error is printed
+- **Worktree add fails**: exits with error; main directory untouched; stale worktree cleaned up
+- **Push fails**: worktree is left on disk for manual recovery; error is printed
 - **Landing page**: regenerated each time, listing ALL presentations on gh-pages
 - **Existing subfolders on gh-pages**: preserved — only updated if source was copied
