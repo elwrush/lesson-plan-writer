@@ -117,6 +117,7 @@ When the user asks to modify an already-built slideshow (e.g., "change slide 7" 
 - Verify transition slides use `data-background="#c0392b"`
 - Verify pedagogical strategy slides use `data-background="#1a6b5a"` and `class="pedagogical"`
 - Verify listening task slides that need audio have `data-audio-src="assets/filename.mp3"`
+- **Verify no `<section>` has both `data-timer` AND `data-audio-src`** — never place a timer pill on a slide that plays audio or video
 
 ### Step 6: Publish and write URL to lesson plan JSON
 
@@ -355,6 +356,7 @@ All patterns live in `templates/base-slides-template.html` as HTML comments. **C
 - Brief student-facing instructions (max 3 bullet points)
 - Full procedure, timing, and materials in `<aside class="notes">`
 - **Listening task slides** that play an audio track should also add `data-audio-src="assets/filename.mp3"` on the `<section>` element
+- **Never combine `data-timer` and `data-audio-src` on the same `<section>`** — timer pills conflict with audio playback. Use one or the other, not both.
 
 ### 8. Pedagogical Strategy Slide (non-auto-animate)
 ```html
@@ -490,7 +492,7 @@ When asked to edit a slide at a reveal.js URL:
 10. **Logo**: `assets/logo.png`, transparent RGBA PNG, max-height 100px, centered
 11. **Text highlighting**: white text, dark text-shadow, pedagogical sections use white-on-teal
 12. **Vocabulary words**: yellow boldface (`#ffdd00`) via `<span class="vocab-word">` — in both the word heading AND context sentence
-
+13. **Timer pill vs audio**: Never add `data-timer` to a slide that also has `data-audio-src`. Slides with audio playback should not have a timer pill — the two controls conflict visually and functionally.
 ## Authorial Voice & Audience
 
 This skill generates slides for **Mathayom 2-3 Thai students (CEFR B1)**. All student-facing text on screen MUST follow these rules:

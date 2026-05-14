@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Understanding Podcasts</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                padding: 4px 12px;
+                border-radius: 4px;
+                font-size: 0.4em;
+                vertical-align: middle;
+                margin-left: 10px;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+            .reveal .aim-label {
+                font-size: 0.7em;
+                color: #888;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            .reveal .material-ref {
+                font-size: 0.65em;
+                color: #888;
+                font-style: italic;
+                margin-top: 0.5em;
+            }
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            }
+            .reveal .slide-icon {
+                font-size: 2.5em;
+                margin-bottom: 0.3em;
+                display: block;
+                text-align: center;
+            }
+            .reveal .slide-icon.transition-icon { color: rgba(255,255,255,0.85); }
+            .reveal .slide-icon.pedagogical-icon { color: rgba(255,255,255,0.9); }
+            .reveal .slide-icon.objective-icon { color: rgba(255,221,0,0.85); }
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal p,
+            .reveal li,
+            .reveal h1, .reveal h2, .reveal h3,
+            .reveal h4, .reveal h5, .reveal h6 {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+            .reveal .fragment.answer-correct.visible {
+                background: rgba(0, 120, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-incorrect.visible {
+                background: rgba(120, 0, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal table.answer-table th {
+                background: rgba(0, 0, 0, 0.2);
+                font-weight: bold;
+            }
+            .reveal .fragment.strike {
+                text-decoration: line-through;
+                opacity: 0.6;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+                <!-- 0 — Title -->
+                <section data-background-image="assets/title-bg.jpg" data-background-opacity="0.7">
+                    <img src="assets/logo.png" class="title-logo" alt="Logo" />
+                    <h1>Understanding Podcasts <span class="cefr-badge B2">B2</span></h1>
+                    <p><em>How do YouTubers influence teenagers?</em></p>
+                </section>
+
+                <!-- 1 — Objective -->
+                <section>
+                    <i class="fa-solid fa-seedling slide-icon objective-icon"></i>
+                    <h2>Here's what you'll be able to do</h2>
+                    <ul>
+                        <li>Get the main idea of a podcast about YouTubers</li>
+                        <li>Listen for key facts and pick the right answer</li>
+                        <li>Plan your own short podcast with a partner</li>
+                    </ul>
+                </section>
+
+                <!-- 2 — Lead-in: Mr Beast -->
+                <section data-background-image="assets/mrbeast_2022_bg.jpg" data-background-opacity="0.7">
+                    <i class="fa-solid fa-eye slide-icon"></i>
+                    <h2>Let's get Started</h2>
+                    <h3>Look at the numbers. Who is this person?</h3>
+                    <p><strong>340 million subscribers · $54 million/year · #1 on YouTube</strong></p>
+                    <aside class="notes">
+                        Display the Mr Beast stat sheet. Give students 20 seconds.
+                        Ask: Who is this? (Mr Beast / Jimmy Donaldson)
+                        In pairs: Who are the most popular YouTubers for your age? Why?
+                        Then: Are they a positive influence? Why or why not?
+                        Take 3-4 responses. Don't confirm or deny.
+                        Preview: Today we'll hear a podcast about how YouTubers influence teenagers.
+                    </aside>
+                </section>
+
+                <!-- 3 — Transition: Quiz -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Are you a positive influence?</h2>
+                    <p>Let's start with a quick quiz about how you influence people.</p>
+                    <p>Open your book to page 10.</p>
+                </section>
+
+                <!-- 4 — Task: Quiz (Tasks 1+2) -->
+                <section data-timer="300">
+                    <h2>Quiz Time</h2>
+                    <ul>
+                        <li>Do the quiz on page 10 by yourself.</li>
+                        <li>Compare your answers with a partner.</li>
+                        <li>Do you agree with the key?</li>
+                    </ul>
+                    <p class="material-ref">OFD 3, p. 10 — Tasks 1 &amp; 2</p>
+                    <aside class="notes">
+                        Stage 2 · 5 min · S, Ss-Ss, T-Ss
+                        Goal: To get learners thinking about positive influence
+                        Quick show of hands: mostly As, Bs, Cs? Read key descriptions.
+                    </aside>
+                </section>
+
+                <!-- 5 — Transition: Vocabulary -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Important Words</h2>
+                    <p>Before we listen, let's look at some key words you'll hear.</p>
+                </section>
+
+                <!-- 6 — Vocab 1: persuade (header) -->
+                <section class="vocab-slide" data-background-image="assets/pixabay_office_8767041.jpg" data-background-opacity="0.7">
+                    <h2>Important Words</h2>
+                    <p><span class="vocab-word">persuade</span></p>
+                    <p><em>/pəˈsweɪd/</em></p>
+                    <p><em>The YouTuber tried to <span class="vocab-word">persuade</span> his followers to buy the new phone.</em></p>
+                </section>
+
+                <!-- 7 — Vocab 2: specific -->
+                <section class="vocab-slide" data-background-image="assets/pixabay_boy_6008608.jpg" data-background-opacity="0.7">
+                    <p><span class="vocab-word">specific</span></p>
+                    <p><em>/spəˈsɪfɪk/</em></p>
+                    <p><em>She asked for a <span class="vocab-word">specific</span> product — the red sneakers, not just any shoes.</em></p>
+                </section>
+
+                <!-- 8 — Vocab 3: session -->
+                <section class="vocab-slide" data-background-image="assets/commons_qa_session.jpg" data-background-opacity="0.7">
+                    <p><span class="vocab-word">session</span></p>
+                    <p><em>/ˈseʃn/</em></p>
+                    <p><em>They have a Q&amp;A <span class="vocab-word">session</span> every week where fans can ask anything.</em></p>
+                </section>
+
+                <!-- 9 — Vocab 4: talent -->
+                <section class="vocab-slide" data-background-image="assets/commons_comedy_show.jpg" data-background-opacity="0.7">
+                    <p><span class="vocab-word">talent</span></p>
+                    <p><em>/ˈtælənt/</em></p>
+                    <p><em>He has a special <span class="vocab-word">talent</span> for making people laugh.</em></p>
+                </section>
+
+                <!-- 10 — Vocab 5: community -->
+                <section class="vocab-slide" data-background-image="assets/commons_youtuber_community.jpg" data-background-opacity="0.7">
+                    <p><span class="vocab-word">community</span></p>
+                    <p><em>/kəˈmjuːnəti/</em></p>
+                    <p><em>The YouTuber built a big <span class="vocab-word">community</span> of loyal fans who comment every day.</em></p>
+                </section>
+
+                <!-- 11 — Transition: Listening for Gist -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>What's the main idea?</h2>
+                    <p>You're going to hear a podcast about YouTubers.</p>
+                    <p>Listen and tick the ideas that are mentioned.</p>
+                </section>
+
+                <!-- 12 — Task: Task 3 (listening for gist) -->
+                <section data-audio-src="assets/ODF3_SB_1.02.mp3">
+                    <h2>Listen and Tick</h2>
+                    <ul>
+                        <li>Read the six ideas on page 10 (Task 3).</li>
+                        <li>Listen to the podcast (1.02).</li>
+                        <li>Tick the ideas you hear.</li>
+                    </ul>
+                    <p class="material-ref">OFD 3, p. 10 — Task 3</p>
+                    <aside class="notes">
+                        Stage 4 · 7 min · Ss-Ss, T-Ss
+                        Goal: To get the overall picture of the podcast
+                        First: In pairs, discuss how YouTubers influence people.
+                        Then play audio 1.02 once. Ss tick ideas.
+                        Pair check, then whole-class feedback.
+                    </aside>
+                </section>
+
+                <!-- 13 — Answer: Task 3 -->
+                <section data-background="#1e7e34">
+                    <h2>Task 3 — Answers</h2>
+                    <p class="aim-label" style="color: #ffdd00;">Which ideas were mentioned?</p>
+                    <table class="answer-table">
+                        <thead><tr><th>Statement</th><th>Answer</th></tr></thead>
+                        <tbody>
+                            <tr><td>1. They give their followers advice.</td><td class="fragment answer-correct">✓ Mentioned</td></tr>
+                            <tr><td>2. They offer them free products.</td><td class="fragment answer-incorrect">✗ Not mentioned</td></tr>
+                            <tr><td>3. They share personal information.</td><td class="fragment answer-correct">✓ Mentioned</td></tr>
+                            <tr><td>4. They are good listeners.</td><td class="fragment answer-correct">✓ Mentioned</td></tr>
+                            <tr><td>5. They have a lot of expert knowledge.</td><td class="fragment answer-incorrect">✗ Not mentioned</td></tr>
+                            <tr><td>6. They influence people in a positive way.</td><td class="fragment answer-incorrect">✗ Not mentioned</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- 14 — Transition: Listening Strategy -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Finding details</h2>
+                    <p>Now let's learn a strategy for multiple-choice questions.</p>
+                    <p>Then you'll listen again and choose the best answers.</p>
+                </section>
+
+                <!-- 15 — Strategy Step 1: Read the question -->
+                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+                    <span style="font-size: 2.5em; color: rgba(255,255,255,0.9);"><i class="fa-solid fa-chess"></i></span>
+                    <div style="overflow: hidden;">
+                        <h2>Multiple Choice Strategy</h2>
+                        <p style="color:#ffdd00;"><em>"Who do teenagers listen to most for advice, according to the presenter?"</em></p>
+                        <p><u><strong>Step 1:</strong> Read the question carefully</u></p>
+                        <p>What is this question asking? Who? About what?</p>
+                        <p>It wants to know who teenagers go to <strong>most</strong> for <strong>advice</strong>.</p>
+                    </div>
+                </section>
+
+                <!-- 16 — Strategy Step 2: Underline key words -->
+                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+                    <div style="overflow: hidden;">
+                        <p><u><strong>Step 2:</strong> Underline key words</u></p>
+                        <p style="color:#ffdd00;"><em>"<span style="border-bottom: 2px solid white;">Who</span> do <span style="border-bottom: 2px solid white;">teenagers</span> <span style="border-bottom: 2px solid white;">listen to</span> <span style="border-bottom: 2px solid white;">most</span> for <span style="border-bottom: 2px solid white;">advice</span>?"</em></p>
+                        <p>These words tell you exactly what to listen for.</p>
+                    </div>
+                </section>
+
+                <!-- 17 — Strategy Step 3: Read options, then listen -->
+                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+                    <div style="overflow: hidden;">
+                        <p><u><strong>Step 3:</strong> Read the options before you listen</u></p>
+                        <ul>
+                            <li><strong>a)</strong> pop stars</li>
+                            <li><strong>b)</strong> their parents</li>
+                            <li><strong>c)</strong> YouTubers</li>
+                        </ul>
+                        <p>Think: What do I already know? Which one is most likely?</p>
+                        <p>Now listen for the answer.</p>
+                    </div>
+                </section>
+
+                <!-- 18 — Strategy Step 4: Confirm answer -->
+                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+                    <div style="overflow: hidden;">
+                        <p><u><strong>Step 4:</strong> Confirm your answer</u></p>
+                        <p style="color:#ffdd00;"><em>"Who do teenagers listen to most for advice?"</em></p>
+                        <p>The presenter says: <em>"In fact, the people we listen to most are YouTubers!"</em></p>
+                        <p><strong>The answer is c — YouTubers. ✓</strong></p>
+                    </div>
+                </section>
+
+                <!-- 19 — Task: Tasks 4+5 (listen for detail) -->
+                <section data-audio-src="assets/ODF3_SB_1.02.mp3">
+                    <h2>Listen and Choose</h2>
+                    <ul>
+                        <li>Read questions 1-5 on page 11 (Task 4). Underline key words.</li>
+                        <li>Read the options a-c for each question.</li>
+                        <li>Listen to the podcast again (1.02) and choose the best answer (Task 5).</li>
+                    </ul>
+                    <p class="material-ref">OFD 3, p. 11 — Tasks 4 &amp; 5</p>
+                    <aside class="notes">
+                        Stage 5 · 12 min · S, Ss-Ss, T-Ss
+                        Goal: To pick out specific information using the MC strategy
+                        After listening, Ss compare in pairs.
+                        Whole-class feedback: Why c for Q1? What did the presenter say?
+                        Answers: 1c, 2a, 3b, 4c, 5b
+                    </aside>
+                </section>
+
+                <!-- 20 — Answer: Task 5 (1-3) -->
+                <section data-background="#1e7e34">
+                    <h2>Task 5 — Answers (1-3)</h2>
+                    <p class="aim-label">Multiple Choice</p>
+                    <table class="answer-table">
+                        <thead><tr><th>Q</th><th>Answer</th><th>Why?</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td>1. Who do teenagers listen to most?</td>
+                                <td class="fragment answer-correct">✓ <strong>c) YouTubers</strong></td>
+                                <td class="fragment">"the people we listen to most are YouTubers"</td>
+                            </tr>
+                            <tr>
+                                <td>2. How many followers to earn money?</td>
+                                <td class="fragment answer-correct">✓ <strong>a) 500,000</strong></td>
+                                <td class="fragment">"more than 500,000 followers, they can earn money"</td>
+                            </tr>
+                            <tr>
+                                <td>3. How do YouTubers make money?</td>
+                                <td class="fragment answer-correct">✓ <strong>b) ads on their channel</strong></td>
+                                <td class="fragment">"they can earn money from ads on their YouTube channel"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- 21 — Answer: Task 5 (4-5) -->
+                <section data-background="#1e7e34">
+                    <h2>Task 5 — Answers (4-5)</h2>
+                    <p class="aim-label">Multiple Choice</p>
+                    <table class="answer-table">
+                        <thead><tr><th>Q</th><th>Answer</th><th>Why?</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td>4. How are YouTubers similar to followers?</td>
+                                <td class="fragment answer-correct">✓ <strong>c) similar life experiences</strong></td>
+                                <td class="fragment">"the same life experiences, the same interests"</td>
+                            </tr>
+                            <tr>
+                                <td>5. What do they do when they talk to followers?</td>
+                                <td class="fragment answer-correct">✓ <strong>b) film in a personal space</strong></td>
+                                <td class="fragment">"usually filmed in a personal space, like a bedroom"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- 22 — Transition: Plan a Podcast -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-comments slide-icon transition-icon"></i>
+                    <h2>Let's create!</h2>
+                    <p>Now it's your turn. Plan your own short podcast.</p>
+                    <p>You'll present it next lesson.</p>
+                </section>
+
+                <!-- 23 — Task: Plan a Podcast -->
+                <section data-timer="600">
+                    <h2>Plan a Podcast</h2>
+                    <ul>
+                        <li>Work with a partner. Plan a 2-minute podcast about influencing friends or family.</li>
+                        <li>Choose your topic and audience.</li>
+                        <li>Decide what advice or arguments you'll give.</li>
+                    </ul>
+                    <p><em>Key phrases: <strong>Have you considered…? You might not realize this, but…</strong></em></p>
+                    <aside class="notes">
+                        Stage 6 · 10 min · Ss-Ss, T-Ss
+                        Goal: To apply ideas from the listening in a creative task
+                        Topic ideas: persuade a friend to try a hobby, convince a parent to let you stay out later, etc.
+                        Planning sheet: (1) topic (2) audience (3) advice/arguments (4) key phrases
+                        Last minute: share topic with another pair for peer feedback.
+                        Next lesson: present/record the podcast.
+                    </aside>
+                </section>
+
+                <!-- 24 — Transition: Review -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Let's Review</h2>
+                    <p>Think about what you learned today.</p>
+                </section>
+
+                <!-- 25 — Summary -->
+                <section>
+                    <i class="fa-solid fa-flag-checkered slide-icon"></i>
+                    <h2>What you can do now</h2>
+                    <ul>
+                        <li>✓ I can get the main idea of a podcast</li>
+                        <li>✓ I can use a strategy to answer multiple-choice questions</li>
+                        <li>✓ I can plan my own podcast with a partner</li>
+                    </ul>
+                    <aside class="notes">
+                        Elicit: What did you learn about how YouTubers influence people?
+                        What listening strategy did we practise?
+                        Next lesson: present your 2-minute podcast.
+                        Think about your script at home!
+                    </aside>
+                </section>
+
+                <!-- 26 — End -->
+                <section data-background="#2c3e50">
+                    <i class="fa-solid fa-star slide-icon"></i>
+                    <h2>Thank you</h2>
+                    <p><em>Understanding Podcasts</em> | B2</p>
+                </section>
+
+            </div>
+        </div>
+
+        <script src="timer-plugin.js"></script>
+
+        <!-- Audio slideshow plugin (CDN) -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/audio-slideshow/plugin.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                audio: {
+                    prefix: 'assets/',
+                    suffix: '.mp3',
+                    advance: -1,
+                    autoplay: false,
+                    defaultAudios: false,
+                    defaultDuration: 0,
+                    playerOpacity: 1.0,
+                    playerStyle: 'position: fixed; bottom: 30px; left: 25%; width: 50%; height:75px; z-index: 33;',
+                    startAtFragment: false,
+                },
+                plugins: [
+                    TimerPlugin,
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                    RevealAudioSlideshow,
+                ],
+            });
+        </script>
+    </body>
+</html>

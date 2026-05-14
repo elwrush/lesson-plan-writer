@@ -555,6 +555,7 @@ Task instruction slides display a floating timer pill at the bottom center of th
 - **Behavior**: Counts down from prescribed time, chimes at 10s (yellow) and 0s (red)
 - **No auto-start**: Teacher must click ⏵
 - Requires timer-plugin.js and timer-plugin.css in the slides directory
+- **Do NOT use on slides with audio/video**: Never add `data-timer` to a `<section>` that also has `data-audio-src`. The timer pill and audio player controls conflict. Use one or the other.
 
 ### Audio Slideshow
 
