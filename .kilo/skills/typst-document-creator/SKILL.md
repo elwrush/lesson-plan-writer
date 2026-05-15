@@ -17,17 +17,22 @@ Create Typst documents from scratch or by transforming existing lesson materials
 - `typst compile` for PDF generation
 - `typstyle` (optional) for formatting
 - `python` with `difflib` for integrity checks
-- `knowledge-base/typst-packed.json` (repomix output) — **MANDATORY syntax authority. Every function call, argument, set rule, and show rule MUST be verified against this file before writing. Never guess or rely on training data.**
+- Remote Typst source code on GitHub (via `gh search code` / `gh api`) — **primary syntax authority.** Every function call, argument, set rule, and show rule must be confirmed against this before writing. The packed repo at `knowledge-base/typst-packed.json` is a stale fallback snapshot. **Never guess or rely on training data — Typst evolves fast.**
 
 ## Workflow
 
 ### STRICT RULE: NO HALLUCINATED SYNTAX
-Every piece of Typst code you write — every function name, parameter, set rule, show rule, content block, and hash usage — MUST be verified against `knowledge-base/typst-packed.json` before being written to file. If the packed repo does not contain the function or syntax you need, consult the `typst-author` skill's bundled docs at `.kilo/skills/typst-author/docs/`. **Never write a single line of Typst code that you have not confirmed against one of these two authoritative sources.** Training data is forbidden as a syntax reference.
+**Training data is forbidden as a Typst syntax reference — it is always stale and inaccurate.** For every function call, parameter name, set rule, and show rule, consult sources in this priority:
+
+1. **Remote Typst source code on GitHub** (`github.com/typst/typst`) via `gh search code` or `gh api` — the only authoritative, up-to-date source.
+2. **Local `typst-author` skill bundled docs** (`.kilo/skills/typst-author/docs/`) — a snapshot that may be stale. Cross-reference against the remote repo when possible.
+3. **Local packed repo** (`knowledge-base/typst-packed.json`) — a repomix snapshot that predates this session. Stale-est source. Use only when offline.
+4. **If none of the above contain the function you need, do not use it** — find an alternative syntax you CAN confirm.
 
 ### Step 0: Load Prerequisites
 1. Load `typst-author` skill: `skill typst-author`
 2. Verify `typst compile` is available; warn if not, but continue (syntax-only mode)
-3. **MANDATORY**: Verify `knowledge-base/typst-packed.json` exists. If missing, report error and halt — cannot proceed without syntax authority.
+3. **Primary authority**: Remote Typst GitHub repo via `gh search code` / `gh api`. The local packed repo at `knowledge-base/typst-packed.json` is a stale snapshot — do NOT treat it as mandatory. If the packed repo is missing, proceed using the remote repo; it is not a blocker.
 
 ### Step 1: Source Consultation
 Ask user:
@@ -50,38 +55,34 @@ Ask user:
 
 ### Step 4: Generate Typst Code
 
-**ALL CODE IS AI-GENERATED. NEVER GUESS SYNTAX.** The packed repo is the only syntax reference. For every function call you write, you must first run a concrete query against it.
+**ALL CODE IS AI-GENERATED. NEVER GUESS SYNTAX.** The remote Typst GitHub repo is the primary syntax reference. The local packed repo (`knowledge-base/typst-packed.json`) is a snapshot that may be stale. For every function call you write, you must first run a concrete query against one of these sources — prefer the remote repo.
 
 1. Determine subfolder name: `{date-prefix}-{topic}` (e.g., `May-13-2026-mathayom-handbook`)
 2. Create output directory: `typst/code/{subfolder}/`
 3. **MANDATORY — concrete syntax verification protocol**. For **every** Typst function you write (`image`, `grid`, `table`, `text`, `set page`, `block`, `align`, `figure`, `circle`, `line`, `highlight`, etc.), you **must**:
 
-   a. **Search the packed repo** using PowerShell. Examples:
+   a. **Search the remote Typst GitHub repo** — primary authority:
    ```powershell
-   # Load once
+   # Search for function definition across the repo
+   gh search code "pub fn image" --repo typst/typst --limit 5
+
+   # Get a specific source file
+   gh api repos/typst/typst/contents/crates/typst-library/src/visualize/image/mod.rs
+
+   # Search test files for usage examples
+   gh search code "#image(" --repo typst/typst --limit 10
+   ```
+   If GitHub CLI is unavailable, fall back to the local packed repo:
+   ```powershell
    $json = Get-Content "knowledge-base/typst-packed.json" -Raw | ConvertFrom-Json
-   $files = $json.files.PSObject.Properties
-
-   # Find the file that defines a function (e.g., image, grid, table)
-   $files | Where-Object { $_.Name -match "crates/typst-library" -and $_.Name -match "image" } | Select-Object Name
-   # → crates/typst-library/src/visualize/image/mod.rs
-
-   # Read the function's struct definition to verify parameter names
-   $content = $json.files.'crates/typst-library/src/visualize/image/mod.rs'
-   # Look for #[elem] and #[required] / #[parse] annotations for each parameter
-
-   # For a set rule like #set text(font: ...)
-   $files | Where-Object { $_.Name -match "crates/typst-library/src/text" -and $_.Name -match "mod.rs" } | Select-Object Name
-
-   # For grid/table functions:
-   $files | Where-Object { $_.Name -match "crates/typst-library/src/layout/grid" } | Select-Object Name
+   $json.files.'crates/typst-library/src/visualize/image/mod.rs'
    ```
 
    b. **Extract and confirm the parameter signature**. Look for `#[elem]` annotation followed by `pub struct` with field comments — these define the Typst function's parameters.
 
-   c. **Only after confirming the exact function name, parameter names, and types** from the packed repo may you write that function call in the `.typ` file.
+   c. **Only after confirming the exact function name, parameter names, and types** may you write that function call in the `.typ` file.
 
-   d. **If the packed repo query returns no match** for a function you want to use, consult `.kilo/skills/typst-author/docs/reference/` for that function. If neither source has it, **do not use that function** — use an alternative you can confirm.
+   d. **If neither the remote repo nor the packed repo contain the function you need**, consult `.kilo/skills/typst-author/docs/reference/` as a third fallback. If still no match, **do not use that function** — use an alternative you can confirm.
 
    e. **Repeat for every single function call** — there are no shortcuts.
 
@@ -92,7 +93,7 @@ Ask user:
    - Document content
    - If transforming existing materials: embed content `#include` or inline text
 
-**Structural template reference (syntax within must still be verified against packed repo):**
+**Structural template reference (syntax within must still be verified against remote GitHub repo or local docs):**
 ```typst
 #import "../../../templates/mathayom-header.typ": mathayom-header
 

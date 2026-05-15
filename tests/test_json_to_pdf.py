@@ -176,8 +176,8 @@ class TestConvertJsonToPdf:
         assert success is False
 
     @patch("json_to_pdf.subprocess.run")
-    def test_quarto_not_installed_fails(self, mock_run, tmp_path):
-        """TC-05 style: Missing Quarto should fail."""
+    def test_typst_not_installed_fails(self, mock_run, tmp_path):
+        """Typst CLI not found should fail."""
         mock_run.side_effect = FileNotFoundError()
 
         json_file = tmp_path / "test-lesson.json"
@@ -187,8 +187,8 @@ class TestConvertJsonToPdf:
         assert success is False
 
     @patch("json_to_pdf.subprocess.run")
-    def test_quarto_render_failure_fails(self, mock_run, tmp_path):
-        """TC-08 style: Quarto render failure should fail."""
+    def test_typst_render_failure_fails(self, mock_run, tmp_path):
+        """Typst render failure should fail."""
         mock_result = MagicMock()
         mock_result.returncode = 1
         mock_result.stderr = "Render error"

@@ -6,7 +6,7 @@ description: Interactively gathers teacher requirements and generates a lesson p
 # Skill: Write Lesson Plan
 
 ## Purpose
-Interactively gather teacher requirements and generate a structured lesson plan in JSON format for later PDF generation via Quarto.
+Interactively gather teacher requirements and generate a structured lesson plan in JSON format for later PDF generation via Typst CLI.
 
 ## Workflow
 
@@ -187,12 +187,12 @@ Available templates:
 - **In the procedure text, all exercise numbers must be precisely identified** (e.g., "Exercise A1" not "A Vocabulary preview", "While you watch Q1-Q3" not "While you watch", "Exercise C2" not "C matching"). Use the exact numbering from the source material.
 - **Rule: When the user types a custom answer in the question tool, accept it literally. Do not remap to a predefined option.**
 - **Language quality: Write with temperature 0.7. Use natural, idiomatic English. Vary sentence structure. Avoid robotic patterns.**
-- **Answer key formatting: The answer key file must use proper markdown headers and paragraph breaks throughout. The OCR transcription section (if present) must have headers and paragraphs matching the original document structure — never leave it as a single run-on block of text.**
-- **CRITICAL — Append only: When adding an answer key to an existing markdown file, ALWAYS append to the end of the file. NEVER overwrite or replace the file content. The original document text is the source of truth for all content verification. If the file needs reformatting, edit selectively — do not rewrite the entire file.**
+- **Answer key formatting: The answer key file must use proper Typst markup syntax (not markdown) — use `= Heading` for headings, `*bold*` for bold, `- ` for bullet lists. The OCR transcription section (if present) must have headings and paragraphs matching the original document structure — never leave it as a single run-on block of text. The existing `scripts/migrate_answer_keys.py` can convert old `.md` answer keys to `.typ`.**
+- **CRITICAL — Append only: When adding an answer key to an existing .typ file, ALWAYS append to the end of the file. NEVER overwrite or replace the file content. The original document text is the source of truth for all content verification. If the file needs reformatting, edit selectively — do not rewrite the entire file.**
 - **Answer key file content depends on lesson type:**
   - **Reading lessons**: Answer key only + transcript of any YouTube videos used in the lesson.
   - **Listening lessons**: Full transcript of the audio/video + answer key.
-  - The `answer_key` field in the JSON must point to a file that contains ONLY the answer key content (and video transcript if applicable), NOT the full source document. Create a separate `answer_key.md` file for the answer key content if the source document also contains the full lesson text.
+  - The `answer_key` field in the JSON must point to a file that contains ONLY the answer key content (and video transcript if applicable), NOT the full source document. Create a separate `answer_key.typ` file for the answer key content if the source document also contains the full lesson text. Use Typst markup syntax (`= Heading`, `*bold*`, `- ` lists).
 
 ## Writing Style
 

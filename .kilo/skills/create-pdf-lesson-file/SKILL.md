@@ -1,6 +1,6 @@
 ---
 name: create-pdf-lesson-file
-description: Converts a lesson plan JSON file to a formatted PDF using Typst CLI and Jinja2 templating.
+description: Converts a lesson plan JSON file to a formatted PDF using Typst CLI. Data is rendered into .typ markup by build_typ_content() in Python (no Jinja2), then compiled to PDF with typst compile.
 ---
 
 # Skill: Create PDF Lesson File
@@ -26,9 +26,9 @@ Convert lesson plan JSON files to professionally formatted PDFs using Typst CLI 
 - Humanize robotic stage aims (e.g., "To reading for gist" → "To get the general idea of the text")
 - Strip minute indicators from procedure text (e.g., "3 min.", "2 min.")
 
-### Step 3: Render Template
-- Use Jinja2 to fill `templates/lesson-plan-template.typ` with processed data
-- Template produces:
+### Step 3: Build .typ Content
+- Call `build_typ_content(data)` in `scripts/json_to_pdf.py` to generate .typ markup as a Python string (f-strings, no Jinja2)
+- The generated .typ content produces:
   - Page 1 header with Cambridge and ACT logos, title "Lesson Plan"
   - Lesson Information: Topic line, then table (Teacher, Date, Class, Duration, CEFR, Shape, Materials, Slideshow URL)
   - Lesson Aim box with left border
@@ -46,8 +46,8 @@ Convert lesson plan JSON files to professionally formatted PDFs using Typst CLI 
 - Report any errors with details
 
 ## File Locations
-- **Template:** `C:\PROJECTS\LESSON PLAN WRITER 3\templates\lesson-plan-template.typ`
-- **Script:** `C:\PROJECTS\LESSON PLAN WRITER 3\scripts\json_to_pdf.py`
+- **Script:** `C:\PROJECTS\LESSON PLAN WRITER 3\scripts\json_to_pdf.py` (contains `build_typ_content()` which generates .typ markup inline)
+- **Reference template:** `C:\PROJECTS\LESSON PLAN WRITER 3\templates\lesson-plan-template.typ` (kept for reference, not used by pipeline)
 - **Logos:** `C:\PROJECTS\LESSON PLAN WRITER 3\templates\Image_20260324_141022.png` (ACT), `1135082720.png` (Cambridge)
 - **Roboto fonts:** `%APPDATA%\TinyTeX\texmf-dist\fonts\opentype\google\roboto\`
 - **Output:** `C:\PROJECTS\LESSON PLAN WRITER 3\PDF\{subfolder}\{mmddyy}-{topic}-lesson-plan.pdf`
@@ -59,7 +59,6 @@ python scripts/json_to_pdf.py <json_file_path> [--output-dir <dir>]
 
 ## Dependencies
 - Python 3.x
-- Jinja2 (`pip install jinja2`)
 - Typst CLI (v0.13+)
 - Roboto OTF fonts (in TinyTeX or system)
 - pytest (`pip install pytest`) for running tests
@@ -82,12 +81,19 @@ python -m pytest tests/test_json_to_pdf.py -v
 
 ## Typst Syntax — Avoid Hallucination
 
-When modifying the template or debugging Typst compile errors:
+**Typst evolves fast. Agent training data almost always predates the current release. Never guess or rely on training data for Typst syntax.**
 
-1. **Load the `typst-author` skill** for accurate syntax references and examples
-2. **Search local docs** (`.kilocode/skills/typst-author/docs/`) before writing any Typst code
-3. **Follow read-edit-compile-check**: make a change, run `python scripts/json_to_pdf.py ...`, read errors, fix
-4. **Never guess Typst syntax** — models hallucinate heavily on Typst
+When modifying `build_typ_content()` in `scripts/json_to_pdf.py` or debugging Typst compile errors, consult these sources in order:
+
+1. **Remote Typst source code on GitHub** via `gh search code` or `gh api` — this is the only authoritative, up-to-date source:
+   ```powershell
+   gh search code "pub fn table" --repo typst/typst --limit 5
+   gh api repos/typst/typst/contents/crates/typst-library/src/foundations/eval.rs
+   ```
+2. **Local `typst-author` skill docs** (`.kilo/skills/typst-author/docs/`) — bundled snapshot, useful offline but may be stale. Cross-reference against the remote repo.
+3. **Local packed repo** (`knowledge-base/typst-packed.json`) — a repomix snapshot that predates this session. It is the **stale-est** source. Use only when offline.
+4. **Never guess or rely on training data.** Every function call, parameter name, set rule, and show rule must be confirmed against one of the sources above.
+5. **Follow read-edit-compile-check**: make a change, run `python scripts/json_to_pdf.py ...`, read errors, fix.
 
 Key pitfalls:
 - `#set par(leading: Xem)` is **additional** spacing, not a line-height multiplier

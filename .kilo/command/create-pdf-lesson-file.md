@@ -1,5 +1,5 @@
 ---
-description: Converts a lesson plan JSON file to a formatted PDF using Typst CLI and Jinja2 templating. Loads the create-pdf-lesson-file skill and runs json_to_pdf.py.
+description: Converts a lesson plan JSON file to a formatted PDF using Typst CLI. Loads the create-pdf-lesson-file skill and runs json_to_pdf.py.
 ---
 
 # Command: Create PDF Lesson File
@@ -13,13 +13,13 @@ Accepts a lesson plan JSON path (relative or absolute) and generates a PDF in `P
 1. Loads the `create-pdf-lesson-file` skill
 2. Validates the JSON file exists and meets the required schema
 3. Processes content: dates, stage aims, answer keys, transcripts
-4. Renders via Jinja2 + Typst CLI with logo header and Roboto font
+4. Generates .typ markup via Python `build_typ_content()`, then compiles with `typst compile` using logo header and Roboto font
 5. Outputs PDF to `PDF/{input_subfolder}/{mmddyy}-{topic}-lesson-plan.pdf`
 
 ## Prerequisites
 - Typst CLI installed (`typst compile` — NOT Quarto-embedded version)
 - Roboto OTF fonts in TinyTeX or system fonts
-- Python packages: `jinja2`
+- Python 3.x (standard library — no extra packages required)
 - Logos at `templates/Image_20260324_141022.png` and `templates/1135082720.png`
 
 ## Workflow
