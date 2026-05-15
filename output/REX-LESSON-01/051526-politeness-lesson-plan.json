@@ -1,69 +1,69 @@
 {
-  "teacher": "Ed Rush",
-  "duration": "46 minutes",
-  "date": "051526",
-  "topic": "Politeness",
-  "objective": "By the end of the lesson, learners will have practised and developed the sub-skills of reading for gist and detail in the context of politeness across cultures.",
-  "materials": "- Skilful Level 2, Chapter 1, pp. 8-12\n- YouTube video: https://www.youtube.com/watch?v=mLIv1WH5u4Q",
-  "lesson_plan": {
-    "shape": "E",
-    "shape_name": "Receptive Skills (Traditional)",
-    "cefr_level": "B1",
-    "class": "M2-5A",
-    "stages": [
-      {
-        "stage_number": 1,
-        "stage": "Lead-in",
-        "stage_aim": "To get learners thinking about how everyday behaviours can be seen as polite or rude, and introduce the lesson topic.",
-        "procedure": "- Display the phubbing image. Ask: \"What's happening in this picture? Is this polite or rude?\" Elicit responses. 2 min.\n- Pair discussion: \"Is it rude to look at your phone when you are with other people?\" Share ideas. 2 min.\n- Broaden: \"What other behaviours are polite in one culture but might be considered rude in another?\" Draw out examples — tipping, eye contact, left hand. Bridge to lesson topic. 2 min.\n- Introduce objectives: today we will study a reading about politeness and watch a video on table manners. 2 min.",
-        "time": 8,
-        "interaction": "T-Ss, Ss-Ss"
-      },
-      {
-        "stage_number": 2,
-        "stage": "Vocabulary and pre-reading",
-        "stage_aim": "To pre-teach key topic vocabulary and activate learners' existing opinions on polite behaviours through a rating task.",
-        "procedure": "- Exercise A1 (Vocabulary preview): Learners match 8 topic words (behaviour, consider, judge, manners, rude, smiling, social media, tip) to sentences. 5 min.\n- Check answers with three clickthrough answer slides (3+3+2).\n- Exercise B (Before you read — survey): Learners rate 4 behaviours from 1 (fine) to 10 (very rude): speaking on phone on public transport, interrupting, using left hand to greet, sending emails during a meeting. Compare ratings with a partner. 4 min.",
-        "time": 9,
-        "interaction": "S, Ss-Ss, T-Ss"
-      },
-      {
-        "stage_number": 3,
-        "stage": "Video listening",
-        "stage_aim": "To develop listening for specific information through a short video on table manners across cultures.",
-        "procedure": "- Transition into video: announce we will watch a clip about table manners training for international business workers.\n- Play the video \"Table Manners\" (YouTube: mLIv1WH5u4Q).\n- While you watch: Learners read 3 MCQ questions, watch video, circle answers. 3 min.\n- Check answers as a class using clickthrough answer slides.\n- Brief discussion: Would you take this course? Why or why not?",
-        "time": 8,
-        "interaction": "S, T-Ss"
-      },
-      {
-        "stage_number": 4,
-        "stage": "Reading for gist",
-        "stage_aim": "To practise identifying topic sentences and matching main ideas to paragraphs in a reading text about politeness.",
-        "procedure": "- Transition into reading: announce we will read a text about politeness across generations, cultures, and technology.\n- Pedagogical slide: Explain topic sentences with an example from paragraph 3 of the text (\"From tipping, to smiling...\"). Show how the rest of the paragraph supports the topic sentence.\n- Exercise C1 (Global reading — topic sentences): Learners underline the topic sentence in paragraphs 2-4 of the text. 0.5 min.\n- Exercise C2 (Global reading — matching): Learners match three main ideas (A: People use different phrases, B: Technology changed norms, C: Politeness varies across cultures) to paragraphs 2-4. 5 min.\n- Check C2 answers as a class using clickthrough answer slide.",
-        "time": 7,
-        "interaction": "S, Ss-Ss, T-Ss"
-      },
-      {
-        "stage_number": 5,
-        "stage": "Reading for detail",
-        "stage_aim": "To practise scanning for specific information by completing a gap-fill summary based on the reading text.",
-        "procedure": "- Transition: announce we will read more carefully to find exact words.\n- Exercise D (Close reading): Learners reread the text and complete a 7-blank summary paragraph individually. Emphasise scanning — the exact words are in the text. 6 min.\n- Check answers as a class using clickthrough answer slide with justifications.",
-        "time": 6,
-        "interaction": "S, Ss-Ss, T-Ss"
-      },
-      {
-        "stage_number": 6,
-        "stage": "Post-reading discussion and wrap-up",
-        "stage_aim": "To give learners the opportunity to discuss their own views on politeness and consolidate key takeaways from the lesson.",
-        "procedure": "- Transition into discussion phase.\n- Exercise E (Critical thinking): In small groups, discuss: \"What behaviour do you find rude?\", \"Would others find your behaviour rude?\", \"Are younger people less polite?\" Refer back to the reading. 5 min.\n- Return to opening question: \"Is it rude to look at your phone when you are with other people? After today's lesson, has your answer changed?\" Invite 2-3 learners to share. 3 min.",
-        "time": 8,
-        "interaction": "Ss-Ss, T-Ss"
-      }
-    ]
-  },
-  "transcript": "none",
-  "answer_key": "C:\\PROJECTS\\LESSON-PLAN-WRITER-3\\inputs\\REX-LESSON-01\\answer_key.md",
-  "slideshow_url": "",
-  "cefr_level": "B1",
-  "class": "M2-5A"
+    "teacher":  "Ed Rush",
+    "duration":  "46 minutes",
+    "date":  "051526",
+    "topic":  "Politeness",
+    "objective":  "By the end of the lesson, learners will have practised and developed the sub-skills of reading for gist and detail in the context of politeness across cultures.",
+    "materials":  "- Skilful Level 2, Chapter 1, pp. 8-12\n- YouTube video: https://www.youtube.com/watch?v=mLIv1WH5u4Q",
+    "lesson_plan":  {
+                        "shape":  "E",
+                        "shape_name":  "Receptive Skills (Traditional)",
+                        "cefr_level":  "B1",
+                        "class":  "M2-5A",
+                        "stages":  [
+                                       {
+                                           "stage_number":  1,
+                                           "stage":  "Lead-in",
+                                           "stage_aim":  "To get learners thinking about how everyday behaviours can be seen as polite or rude, and introduce the lesson topic.",
+                                           "procedure":  "- Display the phubbing image. Ask: \"What\u0027s happening in this picture? Is this polite or rude?\" Elicit responses. 2 min.\n- Pair discussion: \"Is it rude to look at your phone when you are with other people?\" Share ideas. 2 min.\n- Broaden: \"What other behaviours are polite in one culture but might be considered rude in another?\" Draw out examples — tipping, eye contact, left hand. Bridge to lesson topic. 2 min.\n- Introduce objectives: today we will study a reading about politeness and watch a video on table manners. 2 min.",
+                                           "time":  8,
+                                           "interaction":  "T-Ss, Ss-Ss"
+                                       },
+                                       {
+                                           "stage_number":  2,
+                                           "stage":  "Vocabulary and pre-reading",
+                                           "stage_aim":  "To pre-teach key topic vocabulary and activate learners\u0027 existing opinions on polite behaviours through a rating task.",
+                                           "procedure":  "- Exercise A1 (Vocabulary preview): Learners match 8 topic words (behaviour, consider, judge, manners, rude, smiling, social media, tip) to sentences. 5 min.\n- Check answers with three clickthrough answer slides (3+3+2).\n- Exercise B (Before you read — survey): Learners rate 4 behaviours from 1 (fine) to 10 (very rude): speaking on phone on public transport, interrupting, using left hand to greet, sending emails during a meeting. Compare ratings with a partner. 4 min.",
+                                           "time":  9,
+                                           "interaction":  "S, Ss-Ss, T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  3,
+                                           "stage":  "Video listening",
+                                           "stage_aim":  "To develop listening for specific information through a short video on table manners across cultures.",
+                                           "procedure":  "- Transition into video: announce we will watch a clip about table manners training for international business workers.\n- Play the video \"Table Manners\" (YouTube: mLIv1WH5u4Q).\n- While you watch: Learners read 3 MCQ questions, watch video, circle answers. 3 min.\n- Check answers as a class using clickthrough answer slides.\n- Brief discussion: Would you take this course? Why or why not?",
+                                           "time":  8,
+                                           "interaction":  "S, T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  4,
+                                           "stage":  "Reading for gist",
+                                           "stage_aim":  "To practise identifying topic sentences and matching main ideas to paragraphs in a reading text about politeness.",
+                                           "procedure":  "- Transition into reading: announce we will read a text about politeness across generations, cultures, and technology.\n- Pedagogical slide: Explain topic sentences with an example from paragraph 3 of the text (\"From tipping, to smiling...\"). Show how the rest of the paragraph supports the topic sentence.\n- Exercise C1 (Global reading — topic sentences): Learners underline the topic sentence in paragraphs 2-4 of the text. 0.5 min.\n- Exercise C2 (Global reading — matching): Learners match three main ideas (A: People use different phrases, B: Technology changed norms, C: Politeness varies across cultures) to paragraphs 2-4. 5 min.\n- Check C2 answers as a class using clickthrough answer slide.",
+                                           "time":  7,
+                                           "interaction":  "S, Ss-Ss, T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  5,
+                                           "stage":  "Reading for detail",
+                                           "stage_aim":  "To practise scanning for specific information by completing a gap-fill summary based on the reading text.",
+                                           "procedure":  "- Transition: announce we will read more carefully to find exact words.\n- Exercise D (Close reading): Learners reread the text and complete a 7-blank summary paragraph individually. Emphasise scanning — the exact words are in the text. 6 min.\n- Check answers as a class using clickthrough answer slide with justifications.",
+                                           "time":  6,
+                                           "interaction":  "S, Ss-Ss, T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  6,
+                                           "stage":  "Post-reading discussion and wrap-up",
+                                           "stage_aim":  "To give learners the opportunity to discuss their own views on politeness and consolidate key takeaways from the lesson.",
+                                           "procedure":  "- Transition into discussion phase.\n- Exercise E (Critical thinking): In small groups, discuss: \"What behaviour do you find rude?\", \"Would others find your behaviour rude?\", \"Are younger people less polite?\" Refer back to the reading. 5 min.\n- Return to opening question: \"Is it rude to look at your phone when you are with other people? After today\u0027s lesson, has your answer changed?\" Invite 2-3 learners to share. 3 min.",
+                                           "time":  8,
+                                           "interaction":  "Ss-Ss, T-Ss"
+                                       }
+                                   ]
+                    },
+    "transcript":  "none",
+    "answer_key":  "C:\\PROJECTS\\LESSON-PLAN-WRITER-3\\inputs\\REX-LESSON-01\\answer_key.md",
+    "cefr_level":  "B1",
+    "class":  "M2-5A",
+    "slideshow_url":  "https://elwrush.github.io/lesson-plan-writer/REX-LESSON-01/"
 }

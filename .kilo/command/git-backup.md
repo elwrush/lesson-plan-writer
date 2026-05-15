@@ -84,13 +84,10 @@ Write-Host $message
 Write-Host "`n$message"
 $choice = Read-Host "`nCommit with this message? (Y/n)"
 if ($choice -eq '' -or $choice -eq 'y' -or $choice -eq 'Y') {
-    # Split subject (line 1) from body (rest)
-    $msgParts = $message -split "`n", 2
-    if ($msgParts.Count -eq 2) {
-        git commit -m $msgParts[0] -m $msgParts[1]
-    } else {
-        git commit -m $message
-    }
+    $msg = $message -split "`n", 2
+    $body = if ($msg.Count -eq 2) { $msg[1] } else { "" }
+    Set-Content -Path "$env:TEMP\commit_msg.txt" -Value "$msg[0]`n`n$body"
+    git commit -F "$env:TEMP\commit_msg.txt"
 } else {
     $custom = Read-Host "Enter custom commit message"
     if ($custom -eq '') { Write-Error "Empty message — aborting"; exit 1 }

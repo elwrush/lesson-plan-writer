@@ -316,6 +316,17 @@ if ($lessonPlanJson) {
 }
 ```
 
+### Step 10b: Republish PDF with updated slideshow URL
+If the lesson plan JSON was updated in step 10a, regenerate the PDF so the Slideshow URL cell reflects the deployment URL.
+```powershell
+if ($lessonPlanJson -and $jsonContent.slideshow_url -eq $url) {
+    $pdfScript = "scripts/json_to_pdf.py"
+    if (Test-Path $pdfScript) {
+        python $pdfScript $lessonPlanJson.FullName
+    }
+}
+```
+
 ## Edge cases
 - **No argument**: prompts interactively for the subfolder name
 - **Not found**: lists available slideshows and exits
