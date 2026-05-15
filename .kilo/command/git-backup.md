@@ -1,5 +1,5 @@
 ---
-description: Stage all changes, show a diff summary, auto-generate a commit message, commit to main, and push to origin. Runs lint first.
+description: Stage all changes, show a diff summary, auto-generate a verbose multiline commit message (categorised by skills/commands/scripts/lessons), commit to main, and push to origin. Runs lint first.
 ---
 # Command: Git Backup
 
@@ -38,62 +38,59 @@ Write-Host "`n--- STAGED CHANGES ---"
 $stagedStat
 ```
 
-### Step 5: Auto-generate commit message from file list
+### Step 5: Auto-generate verbose commit message
+
+Build a structured multiline commit message with a subject line and body sections. The message summarises what changed and why, not just which files.
+
 ```powershell
-# Get staged files categorized
-$added = @()
-$modified = @()
-$deleted = @()
+# --- Categorise files by type ---
+$skills = @(); $commands = @(); $scripts = @(); $lessons = @(); $plans = @(); $other = @()
 
 git diff --cached --name-status | ForEach-Object {
-    $parts = $_ -split "`t"
-    $status = $parts[0]
-    $file = $parts[1]
-    if ($file) {
-        switch ($status) {
-            "A" { $added += $file }
-            "M" { $modified += $file }
-            "D" { $deleted += $file }
-        }
-    }
+    $status, $file = $_ -split "`t"
+    $label = if ($status -eq 'A') { 'Add' } elseif ($status -eq 'D') { 'Remove' } else { 'Update' }
+    if ($file -match '^\.kilo/skills/')    { $skills += "  $label $file" }
+    elseif ($file -match '^\.kilo/command/') { $commands += "  $label $file" }
+    elseif ($file -match '^scripts/')       { $scripts += "  $label $file" }
+    elseif ($file -match '^\.kilo/plans/')  { $plans += "  $label $file" }
+    elseif ($file -match '^(inputs|output|PDF)/') { $lessons += "  $label $file" }
+    else                                    { $other += "  $label $file" }
 }
 
-$allFiles = @($added) + @($modified)
-$count = $allFiles.Count
+# --- Build subject line ---
+$total = @($skills) + @($commands) + @($scripts) + @($plans) + @($lessons) + @($other)
+$count = $total.Count
+$subject = if    ($count -eq 0) { "No changes" }
+           elseif ($count -eq 1) { $total[0] }
+           else                  { "Update ($count files)" }
 
-if ($count -eq 0) {
-    if ($deleted.Count -eq 1) {
-        $message = "Remove $($deleted[0])"
-    } elseif ($deleted.Count -le 4) {
-        $message = "Remove $($deleted -join ', ')"
-    } else {
-        $message = "Remove multiple: $($deleted[0]) and $($deleted.Count - 1) more files"
-    }
-} elseif ($count -eq 1) {
-    if ($added.Count -gt 0 -and $modified.Count -eq 0) {
-        $message = "Add $($allFiles[0])"
-    } else {
-        $message = "Update $($allFiles[0])"
-    }
-} elseif ($count -le 4) {
-    if ($added.Count -eq $count) {
-        $message = "Add $($allFiles -join ', ')"
-    } else {
-        $message = "Update $($allFiles -join ', ')"
-    }
-} else {
-    $message = "Update multiple: $($allFiles[0]) and $($count - 1) more files"
-}
+# --- Build message body ---
+$body = @()
+if ($skills.Count -gt 0)    { $body += "`nSkills:"; $body += $skills }
+if ($commands.Count -gt 0)  { $body += "`nCommands:"; $body += $commands }
+if ($scripts.Count -gt 0)   { $body += "`nScripts:"; $body += $scripts }
+if ($lessons.Count -gt 0)   { $body += "`nLesson content:"; $body += $lessons }
+if ($plans.Count -gt 0)     { $body += "`nPlans:"; $body += $plans }
+if ($other.Count -gt 0)     { $body += "`nOther:"; $body += $other }
 
-Write-Host "`n--- AUTO-GENERATED COMMIT MESSAGE ---"
+$message = "$subject`n$($body -join "`n")"
+
+Write-Host "`n--- COMMIT MESSAGE ---"
 Write-Host $message
 ```
 
 ### Step 6: Confirm
 ```powershell
+Write-Host "`n$message"
 $choice = Read-Host "`nCommit with this message? (Y/n)"
 if ($choice -eq '' -or $choice -eq 'y' -or $choice -eq 'Y') {
-    git commit -m $message
+    # Split subject (line 1) from body (rest)
+    $msgParts = $message -split "`n", 2
+    if ($msgParts.Count -eq 2) {
+        git commit -m $msgParts[0] -m $msgParts[1]
+    } else {
+        git commit -m $message
+    }
 } else {
     $custom = Read-Host "Enter custom commit message"
     if ($custom -eq '') { Write-Error "Empty message — aborting"; exit 1 }

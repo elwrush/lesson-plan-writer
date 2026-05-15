@@ -44,7 +44,7 @@ All slide `<section>` elements go between `<div class="slides">` and `</div>` in
 ```powershell
 cp "templates/timer-plugin.js" "output/{subfolder}/slides/timer-plugin.js"
 cp "templates/timer-plugin.css" "output/{subfolder}/slides/timer-plugin.css"
-cp "templates/Image_20260324_141022.png" "output/{subfolder}/slides/assets/logo.png"
+cp "templates/ACT.png" "output/{subfolder}/slides/assets/logo.png"
 ```
 
 ### Step 3: Background images
@@ -297,15 +297,13 @@ All patterns live in `templates/base-slides-template.html` as HTML comments. **C
 ### 5. Transition Slide (red background)
 ```html
 <section data-background="#c0392b">
+    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
     <h2>Finding details</h2>
-    <p>We're now going to read the story in more detail.</p>
-    <p>Let's start with some True/False questions.</p>
-    <p>They may look easy, but they can have some surprises!</p>
 </section>
 ```
 - Red background `#c0392b`
-- Directive + foreshadow + engagement hook
-- NOT reflective ("What did you learn?")
+- **Heading only** — no subheader text or descriptive paragraphs. The teacher's spoken introduction bridges the gap. All `<p>` elements removed.
+- Icon: `fa-forward` (or `fa-comments` for discussion transitions)
 
 ### 6. Auto-Animate Strategy Block
 ```html
@@ -532,12 +530,13 @@ When asked to edit a slide at a reveal.js URL:
 5. **Stage names: student-friendly language** — "Lead-in" → "Let's get Started", "Reading for gist" → "What's the main idea?", "Reading for detail" → "Finding details", "Reading for inference" → "Making conclusions", "Post-reading" → "Let's Discuss", "Wrap-up" → "Let's Review"
 6. **Vocabulary slides** — generated AFTER lead-in stage. One word per slide with dark navy background. "Important Words" title on first slide only. Yellow bold (#ffdd00) via `<span class="vocab-word">`.
 7. **Answer slides** — use `<table class="answer-table">` with green background `#1e7e34`. Statements visible on entry; answers use `class="fragment answer-correct"` or `class="fragment answer-incorrect"` for clickthrough reveal. **Do NOT use `highlight-green`/`highlight-red`** (reveal.js keeps them at `opacity: 1`; they never hide).
-8. **Transitions: directive + foreshadow + engagement** — "We're now going to read...", not "What did you learn?"
+8. **Transition slides: heading only (no subheader text).** The red background + icon + heading is sufficient — the teacher's spoken introduction bridges the gap. Remove all `<p>` elements from transition slides.
 9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#1a6b5a` (pedagogical/strategy), green `#1e7e34` (answer tables), dark `#2c3e50` (end)
 10. **Logo**: `assets/logo.png`, transparent RGBA PNG, max-height 100px, centered
 11. **Text highlighting**: white text, dark text-shadow, pedagogical sections use white-on-teal
 12. **Vocabulary words**: yellow boldface (`#ffdd00`) via `<span class="vocab-word">` — in both the word heading AND context sentence
 13. **Timer pill vs audio**: Never add `data-timer` to a slide that also has `data-audio-src`. Slides with audio playback should not have a timer pill — the two controls conflict visually and functionally.
+14. **Proper HTML lists for letters/numbers**: Never use manual lettering or numbering in `<p>` tags (e.g., `<p><strong>A</strong> Option text</p>`). Use semantically correct HTML lists instead: `<ol type="A">` for lettered options, `<ol>` for numbered items, `<ul>` for bullet points. Each item gets its own `<li>` element. This ensures proper alignment and accessibility.
 ## Authorial Voice & Audience
 
 This skill generates slides for **Mathayom 2-3 Thai students (CEFR B1)**. All student-facing text on screen MUST follow these rules:
@@ -907,8 +906,8 @@ See: `C:\Users\elwru\.kilo\skills\repomix-codebase-search\SKILL.md`
 | `scripts/json_to_markdown.py` | **DEPRECATED** — markdown generator (not for new work) |
 | `scripts/pixabay_download.py` | Pixabay image downloader (first-gen only) |
 | `scripts/locate_slide.py` | Map reveal.js URL index to HTML section |
-| `templates/Image_20260324_141022.png` | Institution logo (ACT) — copy to `assets/logo.png` |
-| `templates/Image_20260324_141022.png` | Institution logo (ACT) — copy to `assets/logo.png` |
+| `templates/ACT.png` | Institution logo (ACT) — copy to `assets/logo.png` |
+| `templates/ACT.png` | Institution logo (ACT) — copy to `assets/logo.png` |
 
 ## Dependencies
 - Python 3.x + Pillow

@@ -298,6 +298,24 @@ Write-Host ""
 Write-Host "Landing page: https://$owner.github.io/$repo/"
 ```
 
+### Step 10a: Write URL to lesson plan JSON
+```powershell
+$lessonPlanJson = Get-ChildItem -Path "output/$subfolder" -Filter "*-lesson-plan.json" | Select-Object -First 1
+if ($lessonPlanJson) {
+    $jsonContent = Get-Content $lessonPlanJson.FullName -Raw | ConvertFrom-Json
+    $url = "https://$owner.github.io/$repo/$subfolder/"
+    if ($jsonContent.slideshow_url -ne $url) {
+        $jsonContent | Add-Member -MemberType NoteProperty -Name "slideshow_url" -Value $url -Force
+        $jsonContent | ConvertTo-Json -Depth 10 | Set-Content $lessonPlanJson.FullName
+        Write-Host "  Wrote URL to $($lessonPlanJson.Name)"
+    } else {
+        Write-Host "  URL already up to date in $($lessonPlanJson.Name)"
+    }
+} else {
+    Write-Warning "  No lesson plan JSON found in output/$subfolder/"
+}
+```
+
 ## Edge cases
 - **No argument**: prompts interactively for the subfolder name
 - **Not found**: lists available slideshows and exits

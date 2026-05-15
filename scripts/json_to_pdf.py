@@ -123,6 +123,12 @@ def escape_typst_string(text):
 
 def md_to_typst(text):
     """Convert markdown content to Typst markup."""
+    # Strip backslash escapes from markdown (e.g., \## → ##, \* → *)
+    text = re.sub(r"\\([#*_\[\]])", r"\1", text)
+    # Decode HTML entities (&#x20; → space, etc.)
+    text = (
+        text.replace("&#x20;", " ").replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">")
+    )
     lines = text.split("\n")
     result = []
     in_bullet = False
@@ -163,7 +169,10 @@ def md_to_typst(text):
             line = re.sub(r"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)", r"_\1_", line)
             result.append(line)
 
-    return "\n".join(result)
+    text = "\n".join(result)
+    # Escape $ signs for Typst (prevents math-mode interpretation)
+    text = text.replace("$", "\\$")
+    return text
 
 
 def format_date(date_str):

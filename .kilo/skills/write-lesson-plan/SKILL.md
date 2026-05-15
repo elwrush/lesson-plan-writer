@@ -44,10 +44,10 @@ Display the shapes in your response text, then call `question` with options A–
 After the user answers, read the corresponding shape template from `knowledge-base/lesson plan shapes/json/shape-{letter}.json`. Report back: "Loaded Shape {letter} — {shape name}."
 
 ### Step 3: Teacher name (chat)
-Write: "What's the teacher name?" in your response text. Wait for the user's chat reply.
+Default: "Ed Rush". Confirm with the teacher: "Teacher name: Ed Rush — is that still correct?" If they say no, ask for the new name.
 
 ### Step 4: Lesson length (chat)
-Write: "Lesson length in minutes?" in your response text. Wait for the user's chat reply.
+Default: 46 minutes. Confirm with the teacher: "Lesson length: 46 minutes — is that still correct?" If they say no, ask for the new duration.
 
 ### Step 5: CEFR level (question tool with options)
 Call `question` with options: A1, A2, B1, B2, C1, C2. Each with appropriate description.
@@ -181,10 +181,18 @@ Available templates:
 - Scan markdown files for answer patterns ("Answer:", "**Answer:**", "Answers:") to auto-detect answer keys
 - Scan for transcript patterns ("Transcript", "Audio transcript") to auto-detect transcripts
 - Only ask the user about answers/transcripts if they are NOT found in the input folder
-- The `materials` field must use a concise reference format (e.g., "OFD 3, Workbook, pp 4-5"), NOT a descriptive summary of file contents
+- The `materials` field must use a concise reference format with each separate item as a bullet point, using Typst list syntax (e.g., "- Coursebook, Unit 3, pp 10-12\n- Worksheet: gap-fill task"). Use `- ` prefix with `\n` between items in the JSON string. NOT a descriptive summary of file contents.
+- **CRITICAL: Only include items explicitly stated by the user in materials.** Do NOT add derived/ancillary assets (e.g., logo files, background images, downloaded photos, slide assets). These are implementation details, not lesson materials.
 - If the materials reference is not found in the input folder files, ask the user for it
+- **In the procedure text, all exercise numbers must be precisely identified** (e.g., "Exercise A1" not "A Vocabulary preview", "While you watch Q1-Q3" not "While you watch", "Exercise C2" not "C matching"). Use the exact numbering from the source material.
 - **Rule: When the user types a custom answer in the question tool, accept it literally. Do not remap to a predefined option.**
 - **Language quality: Write with temperature 0.7. Use natural, idiomatic English. Vary sentence structure. Avoid robotic patterns.**
+- **Answer key formatting: The answer key file must use proper markdown headers and paragraph breaks throughout. The OCR transcription section (if present) must have headers and paragraphs matching the original document structure — never leave it as a single run-on block of text.**
+- **CRITICAL — Append only: When adding an answer key to an existing markdown file, ALWAYS append to the end of the file. NEVER overwrite or replace the file content. The original document text is the source of truth for all content verification. If the file needs reformatting, edit selectively — do not rewrite the entire file.**
+- **Answer key file content depends on lesson type:**
+  - **Reading lessons**: Answer key only + transcript of any YouTube videos used in the lesson.
+  - **Listening lessons**: Full transcript of the audio/video + answer key.
+  - The `answer_key` field in the JSON must point to a file that contains ONLY the answer key content (and video transcript if applicable), NOT the full source document. Create a separate `answer_key.md` file for the answer key content if the source document also contains the full lesson text.
 
 ## Writing Style
 
