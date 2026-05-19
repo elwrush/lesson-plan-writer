@@ -407,6 +407,114 @@ def render_template(data):
     return build_typ_content(data)
 
 
+def fix_mojibake_chars(text):
+    """Replace known mojibake character sequences with correct Unicode.
+
+    When UTF-8 bytes (especially E2 80 9X sequences for dashes and quotes)
+    are misinterpreted as Latin-1/Windows-1252 and then re-encoded as UTF-8,
+    the result is valid Unicode but wrong characters like 'â€™' instead of "'".
+    This function detects and replaces those patterns.
+    """
+    # Map of mojibake sequences → intended Unicode character
+    # The sequence is: â (U+00E2) + € (U+20AC) + third byte read as Latin-1
+    _mojibake_map = {
+        # â€™ → ' (right single quote, U+2019)
+        "\u00e2\u20ac\u2122": "\u2019",
+        # â€œ → " (left double quote, U+201C)
+        "\u00e2\u20ac\u0153": "\u201c",
+        # â€" → " (right double quote, U+201D)
+        "\u00e2\u20ac\u201d": "\u201d",
+        # â€â€œ → – (en dash, U+2013) — double corruption pattern
+        "\u00e2\u20ac\u00e2\u20ac\u0153": "\u2013",
+        # â€â€" → – (en dash, U+2013)
+        "\u00e2\u20ac\u00e2\u20ac\u201d": "\u2013",
+        # â€š → ‚ (single low-9 quote, U+201A)
+        "\u00e2\u20ac\u0161": "\u201a",
+        # horizontal ellipsis … (U+2026)
+        "\u00e2\u20ac\u00a6": "\u2026",
+    }
+    for old, new in _mojibake_map.items():
+        if old in text:
+            text = text.replace(old, new)
+    return text
+
+
+def read_json_with_encoding_fix(path):
+    """Read JSON file, auto-fixing mojibake (UTF-8 read as Latin-1/Windows-1252).
+
+    In PowerShell on Windows, saving JSON files with Set-Content or piping
+    through redirection can corrupt UTF-8 multi-byte sequences (em dashes,
+    curly quotes, IPA characters) into Latin-1 mojibake. This function
+    detects and reconstructs the original UTF-8 automatically.
+    """
+    raw = path.read_bytes()
+    seen_utf8_bom = raw[:3] == b"\xef\xbb\xbf"
+
+    # Strategy 1: try direct UTF-8 decode, then fix any mojibake
+    try:
+        text = raw.decode("utf-8")
+        fixed = fix_mojibake_chars(text)
+        if fixed != text:
+            json.loads(fixed)
+            print(f"  Note: Fixed mojibake characters in {path.name}")
+            return fixed, True
+        json.loads(text)
+        return text, True
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        pass
+
+    # Strategy 2: try UTF-8 with BOM stripped
+    if seen_utf8_bom:
+        try:
+            text = raw.decode("utf-8-sig")
+            fixed = fix_mojibake_chars(text)
+            if fixed != text:
+                json.loads(fixed)
+                print(f"  Note: Fixed mojibake characters in {path.name}")
+                return fixed, True
+            json.loads(text)
+            return text, True
+        except (UnicodeDecodeError, json.JSONDecodeError):
+            pass
+
+    # Strategy 3: reconstruct corrupted byte-level UTF-8
+    # The raw bytes are valid UTF-8 but were stored as Latin-1 (cp1252).
+    # Decode as Latin-1 to get the original bytes back, then decode those as UTF-8.
+    try:
+        latin_text = raw.decode("latin-1")
+        utf8_bytes = latin_text.encode("latin-1")
+        text = utf8_bytes.decode("utf-8")
+        fixed = fix_mojibake_chars(text)
+        final = fixed if fixed != text else text
+        json.loads(final)
+        print(f"  Note: Reconstructed byte-level mojibake in {path.name}")
+        return final, True
+    except Exception:
+        pass
+
+    # Strategy 4: replace orphaned Latin-1 control bytes
+    try:
+        text = raw.decode("latin-1")
+        orphan_map = {
+            "\x93": "\u2013",
+            "\x94": "\u2014",
+            "\x99": "\u2019",
+            "\x9c": "\u201c",
+            "\x9d": "\u201d",
+        }
+        for byte_val, unicode_char in orphan_map.items():
+            text = text.replace(byte_val, unicode_char)
+        text = re.sub(r"[\x80-\x9f]", "", text)
+        json.loads(text)
+        print(f"  Note: Reconstructed orphaned bytes in {path.name}")
+        return text, True
+    except Exception:
+        pass
+
+    # Final: try reading with UTF-8 and raise the original error
+    return raw.decode("utf-8"), False
+
+
 def convert_json_to_pdf(json_path, output_dir=None):
     """Main conversion function: JSON -> PDF via Typst CLI."""
     json_path = Path(json_path)
@@ -415,10 +523,14 @@ def convert_json_to_pdf(json_path, output_dir=None):
         print(f"Error: JSON file not found: {json_path}")
         return False
 
-    # Read and parse JSON
+    # Read JSON with auto-fix for mojibake (PowerShell encoding corruption)
+    json_text, ok = read_json_with_encoding_fix(json_path)
+    if not ok:
+        print(f"Error: Cannot decode {json_path} as UTF-8 or reconstruct corrupted encoding")
+        return False
+
     try:
-        with open(json_path, encoding="utf-8") as f:
-            data = json.load(f)
+        data = json.loads(json_text)
     except json.JSONDecodeError as e:
         print(f"Error: Invalid JSON in {json_path}: {e}")
         return False

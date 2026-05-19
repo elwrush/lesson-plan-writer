@@ -1,77 +1,77 @@
 {
-  "teacher": "Ed Rush",
-  "duration": "46 minutes",
-  "date": "051826",
-  "topic": "Delivering a podcast",
-  "objective": "By the end of the lesson, learners will have delivered a short podcast-style talk on their chosen topic, using functional phrases for opening, persuading, structuring, and closing arguments within a 60â€â€œ90 second time limit.",
-  "materials": "- Follow-on from previous lesson: OFD 3, Unit 1, pp. 10-11 (Understanding Podcasts)",
-  "lesson_plan": {
-    "shape": "F",
-    "shape_name": "Productive Skills (Traditional)",
+    "teacher": "Ed Rush",
+    "duration": "46 minutes",
+    "date": "051826",
+    "topic": "Delivering a podcast",
+    "objective": "By the end of the lesson, learners will have delivered a short podcast-style talk on their chosen topic, using functional phrases for opening, persuading, structuring, and closing arguments within a 60–90 second time limit.",
+    "materials": "- Follow-on from previous lesson: OFD 3, Unit 1, pp. 10-11 (Understanding Podcasts)",
+    "lesson_plan": {
+        "shape": "F",
+        "shape_name": "Productive Skills (Traditional)",
+        "cefr_level": "B2",
+        "class": "M3",
+        "stages": [
+            {
+                "stage_number": 1,
+                "stage": "Lead-in",
+                "stage_aim": "To help learners settle back into their podcast project by recalling last session's planning work and clarifying the baseline recording goal",
+                "procedure": "- As Ss enter, direct them to sit next to their podcast partner and pull out their planning sheet.\n- Quick recall: 'What podcast topic did you plan? You have 30 seconds to remind your partner.' Then take 2 rapid-fire answers from pairs.\n- Announce the goal: 'Today you’re going to record your podcast — 60 to 90 seconds. One take only. No retakes. This is your baseline recording.'\n- Frame the purpose: 'This is a snapshot of where you are right now. In a few months, you’ll listen back and see how much you’ve improved.'",
+                "time": 3,
+                "interaction": "T-Ss"
+            },
+            {
+                "stage_number": 2,
+                "stage": "Role assignment and useful language",
+                "stage_aim": "To present the three role formats clearly and equip learners with a toolkit of functional phrases for their podcast scripts",
+                "procedure": "- Display the three role combinations (A, B, and C) as a table on the board or slide:\n  • A (Co-hosts) — S1 opens + Argument 1; S2 delivers Argument 2 + closing. Equal split.\n  • B (Host + Guest) — S1 (Host) opens, introduces the guest, asks 2 questions; S2 (Guest) answers with examples and advice.\n  • C (Debate Duo) — S1 argues FOR; S2 argues AGAINST and closes.\n- Walk through each in 20 seconds per option. Emphasise: both partners speak 30–45 seconds regardless.\n- Directive: '30 seconds to decide. If you can’t decide, I assign A. Go.' Count down. Thumbs-up check.\n- Transition to phrases: 'Here are phrases to make your podcast sound natural.' Display:\n  • Openings (all): 'Welcome to my podcastâ€¦', 'Today I’m going to talk aboutâ€¦', 'I’m joined today byâ€¦'\n  • Persuading (A, B): 'Have you ever thought aboutâ€¦?', 'You might not realise this, butâ€¦', 'Here’s something to considerâ€¦'\n  • Structuring (all): 'First of allâ€¦', 'Another point isâ€¦', 'On the other handâ€¦', 'So, to sum upâ€¦'\n- Choral drilling: all-class repeat (1 round), then rows (1 round). Focus on conversational rhythm, not robot reading.\n- 'Annotate your planning sheet — circle the phrases for your combination.'",
+                "time": 5,
+                "interaction": "T-Ss, S"
+            },
+            {
+                "stage_number": 3,
+                "stage": "Controlled practice — Mini-monologue drill",
+                "stage_aim": "To give learners a low-stakes opportunity to try out the target phrases in short timed turns before writing their scripts",
+                "procedure": "- 'Exercise A — Mini-monologue drill. Stay with your assigned partner.'\n- Round 1 (2 min): Student 1 delivers a 30-second mini-monologue on any topic using at least 2 target phrases. Student 2 counts the phrases silently.\n- Round 2 (2 min): Switch. Student 2 delivers a 30-second mini-monologue on a different topic. Student 1 counts.\n- Quick feedback (1 min): Teacher highlights 1 strong example and corrects 1 common error — e.g., flat intonation. Model the difference between reading aloud and conversational podcast delivery.",
+                "time": 5,
+                "interaction": "Ss-Ss, T-Ss"
+            },
+            {
+                "stage_number": 4,
+                "stage": "Script preparation",
+                "stage_aim": "To guide learners in writing a timed script that fits both their chosen role combination and the 60–90 second limit",
+                "procedure": "- Start an 8-minute countdown timer on the board — keep it visible.\n- 'Use your planning sheet. Write a script that matches your combination.'\n- Role-specific instructions:\n  • A: S1 writes opening + Argument 1. S2 writes Argument 2 + closing.\n  • B: S1 (Host) writes opening, guest intro, 2 questions. S2 (Guest) writes answers with examples and advice.\n  • C: S1 writes argument FOR. S2 writes argument AGAINST + closing.\n- Display checklist:\n  ? Clear opening\n  ? At least 2 arguments or advice points\n  ? At least 3 target phrases from Stage 2\n  ? A short closing\n  ? 60–90 seconds when spoken aloud\n- Circulate fast. Check each pair's role distribution. Call time at 4 min and 1 min. Push for natural spoken language — discourage written-sounding sentences.",
+                "time": 8,
+                "interaction": "Ss-Ss, S"
+            },
+            {
+                "stage_number": 5,
+                "stage": "Rehearsal",
+                "stage_aim": "To let learners practise their delivery aloud and fine-tune the timing and naturalness of their script before recording",
+                "procedure": "- 'Three minutes to rehearse. Time yourselves.'\n- Round 1 (2 min): Ss practise with scripts. Partner gives feedback: 'Too fast? Too slow? Can you hear the target phrases?' Partner raises hand at 60 seconds to check timing.\n- Round 2 (1 min): Ss practise again aiming for limited script use — look up, sound conversational.\n- Teacher moves between pairs giving rapid-fire coaching: 'Louder opening.' 'You’re at 50 seconds — need more.' 'That phrase sounded natural — keep it.'",
+                "time": 3,
+                "interaction": "Ss-Ss, T-Ss"
+            },
+            {
+                "stage_number": 6,
+                "stage": "Podcast recording — Baseline",
+                "stage_aim": "To capture a clean baseline recording of each pair’s podcast as a starting point for tracking speaking progress across the academic year",
+                "procedure": "- Set up a recording device (phone or laptop) at the front. 'One take only. No restarts. This is your baseline.'\n- 'When I call your pair name, come to the front, deliver your podcast, sit down. Everyone else — absolutely silent.'\n- Call pairs in sequence. Each pair delivers their 60–90 second podcast. Teacher records without offering feedback, corrections, or gestures during the recording.\n- Between recordings, call the next pair immediately — no dead air, no commentary on the previous performance.\n- With the longer recording window, stagger efficiently: call up the next pair while the previous pair is sitting down. Aim for ~90 seconds per pair (60–90s podcast + 10–20s transition). For a class of 10–12 pairs, this fits comfortably in the 20-minute block with time to spare.\n- If all pairs finish early, use any remaining time for a second take for pairs who feel their first was unrepresentative (still baseline — no coaching). If not all pairs get through, the remaining pairs record at the start of the next lesson.",
+                "time": 20,
+                "interaction": "Ss-Ss, S"
+            },
+            {
+                "stage_number": 7,
+                "stage": "Wrap-up",
+                "stage_aim": "To encourage learners to reflect on the recording experience and to reinforce the value of this baseline as a reference point for future progress",
+                "procedure": "- Display two reflection prompts on the board: 'What was the hardest part? What went better than you expected?'\n- 'Discuss with your partner for 60 seconds. No whole-class feedback — this is a private reflection for yourselves.'\n- After 60 seconds, deliver the closing statement: 'That recording is your starting point. In a few months, you’ll listen back and see how far you’ve come. Well done today — good pace, good focus.'\n- Dismiss.",
+                "time": 2,
+                "interaction": "Ss-Ss, T-Ss"
+            }
+        ]
+    },
+    "transcript": "none",
+    "answer_key": "none",
     "cefr_level": "B2",
     "class": "M3",
-    "stages": [
-      {
-        "stage_number": 1,
-        "stage": "Lead-in",
-        "stage_aim": "To help learners settle back into their podcast project by recalling last session's planning work and clarifying the baseline recording goal",
-        "procedure": "- As Ss enter, direct them to sit next to their podcast partner and pull out their planning sheet.\n- Quick recall: 'What podcast topic did you plan? You have 30 seconds to remind your partner.' Then take 2 rapid-fire answers from pairs.\n- Announce the goal: 'Today youâ€™re going to record your podcast — 60 to 90 seconds. One take only. No retakes. This is your baseline recording.'\n- Frame the purpose: 'This is a snapshot of where you are right now. In a few months, youâ€™ll listen back and see how much youâ€™ve improved.'",
-        "time": 3,
-        "interaction": "T-Ss"
-      },
-      {
-        "stage_number": 2,
-        "stage": "Role assignment and useful language",
-        "stage_aim": "To present the three role formats clearly and equip learners with a toolkit of functional phrases for their podcast scripts",
-        "procedure": "- Display the three role combinations (A, B, and C) as a table on the board or slide:\n  • A (Co-hosts) — S1 opens + Argument 1; S2 delivers Argument 2 + closing. Equal split.\n  • B (Host + Guest) — S1 (Host) opens, introduces the guest, asks 2 questions; S2 (Guest) answers with examples and advice.\n  • C (Debate Duo) — S1 argues FOR; S2 argues AGAINST and closes.\n- Walk through each in 20 seconds per option. Emphasise: both partners speak 30â€â€œ45 seconds regardless.\n- Directive: '30 seconds to decide. If you canâ€™t decide, I assign A. Go.' Count down. Thumbs-up check.\n- Transition to phrases: 'Here are phrases to make your podcast sound natural.' Display:\n  • Openings (all): 'Welcome to my podcastâ€¦', 'Today Iâ€™m going to talk aboutâ€¦', 'Iâ€™m joined today byâ€¦'\n  • Persuading (A, B): 'Have you ever thought aboutâ€¦?', 'You might not realise this, butâ€¦', 'Hereâ€™s something to considerâ€¦'\n  • Structuring (all): 'First of allâ€¦', 'Another point isâ€¦', 'On the other handâ€¦', 'So, to sum upâ€¦'\n- Choral drilling: all-class repeat (1 round), then rows (1 round). Focus on conversational rhythm, not robot reading.\n- 'Annotate your planning sheet — circle the phrases for your combination.'",
-        "time": 5,
-        "interaction": "T-Ss, S"
-      },
-      {
-        "stage_number": 3,
-        "stage": "Controlled practice — Mini-monologue drill",
-        "stage_aim": "To give learners a low-stakes opportunity to try out the target phrases in short timed turns before writing their scripts",
-        "procedure": "- 'Exercise A — Mini-monologue drill. Stay with your assigned partner.'\n- Round 1 (2 min): Student 1 delivers a 30-second mini-monologue on any topic using at least 2 target phrases. Student 2 counts the phrases silently.\n- Round 2 (2 min): Switch. Student 2 delivers a 30-second mini-monologue on a different topic. Student 1 counts.\n- Quick feedback (1 min): Teacher highlights 1 strong example and corrects 1 common error — e.g., flat intonation. Model the difference between reading aloud and conversational podcast delivery.",
-        "time": 5,
-        "interaction": "Ss-Ss, T-Ss"
-      },
-      {
-        "stage_number": 4,
-        "stage": "Script preparation",
-        "stage_aim": "To guide learners in writing a timed script that fits both their chosen role combination and the 60â€â€œ90 second limit",
-        "procedure": "- Start an 8-minute countdown timer on the board — keep it visible.\n- 'Use your planning sheet. Write a script that matches your combination.'\n- Role-specific instructions:\n  • A: S1 writes opening + Argument 1. S2 writes Argument 2 + closing.\n  • B: S1 (Host) writes opening, guest intro, 2 questions. S2 (Guest) writes answers with examples and advice.\n  • C: S1 writes argument FOR. S2 writes argument AGAINST + closing.\n- Display checklist:\n  ? Clear opening\n  ? At least 2 arguments or advice points\n  ? At least 3 target phrases from Stage 2\n  ? A short closing\n  ? 60â€â€œ90 seconds when spoken aloud\n- Circulate fast. Check each pair's role distribution. Call time at 4 min and 1 min. Push for natural spoken language — discourage written-sounding sentences.",
-        "time": 8,
-        "interaction": "Ss-Ss, S"
-      },
-      {
-        "stage_number": 5,
-        "stage": "Rehearsal",
-        "stage_aim": "To let learners practise their delivery aloud and fine-tune the timing and naturalness of their script before recording",
-        "procedure": "- 'Three minutes to rehearse. Time yourselves.'\n- Round 1 (2 min): Ss practise with scripts. Partner gives feedback: 'Too fast? Too slow? Can you hear the target phrases?' Partner raises hand at 60 seconds to check timing.\n- Round 2 (1 min): Ss practise again aiming for limited script use — look up, sound conversational.\n- Teacher moves between pairs giving rapid-fire coaching: 'Louder opening.' 'Youâ€™re at 50 seconds — need more.' 'That phrase sounded natural — keep it.'",
-        "time": 3,
-        "interaction": "Ss-Ss, T-Ss"
-      },
-      {
-        "stage_number": 6,
-        "stage": "Podcast recording — Baseline",
-        "stage_aim": "To capture a clean baseline recording of each pairâ€™s podcast as a starting point for tracking speaking progress across the academic year",
-        "procedure": "- Set up a recording device (phone or laptop) at the front. 'One take only. No restarts. This is your baseline.'\n- 'When I call your pair name, come to the front, deliver your podcast, sit down. Everyone else — absolutely silent.'\n- Call pairs in sequence. Each pair delivers their 60â€â€œ90 second podcast. Teacher records without offering feedback, corrections, or gestures during the recording.\n- Between recordings, call the next pair immediately — no dead air, no commentary on the previous performance.\n- With the longer recording window, stagger efficiently: call up the next pair while the previous pair is sitting down. Aim for ~90 seconds per pair (60â€â€œ90s podcast + 10â€â€œ20s transition). For a class of 10â€â€œ12 pairs, this fits comfortably in the 20-minute block with time to spare.\n- If all pairs finish early, use any remaining time for a second take for pairs who feel their first was unrepresentative (still baseline — no coaching). If not all pairs get through, the remaining pairs record at the start of the next lesson.",
-        "time": 20,
-        "interaction": "Ss-Ss, S"
-      },
-      {
-        "stage_number": 7,
-        "stage": "Wrap-up",
-        "stage_aim": "To encourage learners to reflect on the recording experience and to reinforce the value of this baseline as a reference point for future progress",
-        "procedure": "- Display two reflection prompts on the board: 'What was the hardest part? What went better than you expected?'\n- 'Discuss with your partner for 60 seconds. No whole-class feedback — this is a private reflection for yourselves.'\n- After 60 seconds, deliver the closing statement: 'That recording is your starting point. In a few months, youâ€™ll listen back and see how far youâ€™ve come. Well done today — good pace, good focus.'\n- Dismiss.",
-        "time": 2,
-        "interaction": "Ss-Ss, T-Ss"
-      }
-    ]
-  },
-  "transcript": "none",
-  "answer_key": "none",
-  "cefr_level": "B2",
-  "class": "M3",
-  "slideshow_url": "https://elwrush.github.io/lesson-plan-writer/M3_Lesson02_Speaking/"
+    "slideshow_url": "https://elwrush.github.io/lesson-plan-writer/M3_Lesson02_Speaking/"
 }

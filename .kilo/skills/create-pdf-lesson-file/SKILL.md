@@ -13,6 +13,7 @@ Convert lesson plan JSON files to professionally formatted PDFs using Typst CLI 
 ### Step 1: Validate Input
 - Check that the JSON file exists
 - Parse and validate against required schema:
+- **Auto-fix for mojibake**: `json_to_pdf.py` auto-detects and reconstructs UTF-8 characters corrupted by PowerShell encoding (em dashes, curly quotes, IPA symbols). The fix uses Latin-1 round-trip decoding. No manual intervention needed.
   - `teacher`, `duration`, `date`, `topic`, `materials`
   - `lesson_plan.shape`, `lesson_plan.shape_name`, `lesson_plan.cefr_level`, `lesson_plan.class`, `lesson_plan.stages`
   - Each stage must have: `stage_number`, `stage`, `stage_aim`, `procedure`, `time`, `interaction`
