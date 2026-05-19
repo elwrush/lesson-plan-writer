@@ -30,7 +30,7 @@
     align: (left + horizon, center + horizon, right + horizon),
     image("../../templates/ACT.png", height: 1.2cm),
     text(size: 16pt, weight: "bold")[Mathayom Program],
-    image("../../templates/1135082720.png", height: 1.6cm),
+    image("../../templates/cambridge.png", height: 1.6cm),
   )
 )
 #v(24pt)

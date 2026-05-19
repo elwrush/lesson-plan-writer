@@ -48,7 +48,7 @@ Convert lesson plan JSON files to professionally formatted PDFs using Typst CLI 
 ## File Locations
 - **Script:** `C:\PROJECTS\LESSON PLAN WRITER 3\scripts\json_to_pdf.py` (contains `build_typ_content()` which generates .typ markup inline)
 - **Reference template:** `C:\PROJECTS\LESSON PLAN WRITER 3\templates\lesson-plan-template.typ` (kept for reference, not used by pipeline)
-- **Logos:** `C:\PROJECTS\LESSON PLAN WRITER 3\templates\Image_20260324_141022.png` (ACT), `1135082720.png` (Cambridge)
+- **Logos:** `C:\PROJECTS\LESSON PLAN WRITER 3\templates\Image_20260324_141022.png` (ACT), `cambridge.png` (Cambridge)
 - **Roboto fonts:** `%APPDATA%\TinyTeX\texmf-dist\fonts\opentype\google\roboto\`
 - **Output:** `C:\PROJECTS\LESSON PLAN WRITER 3\PDF\{subfolder}\{mmddyy}-{topic}-lesson-plan.pdf`
 

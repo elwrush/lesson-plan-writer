@@ -4,21 +4,22 @@
 #set par(leading: 0.55em)
 
 #show: doc => {
-  set page(
-    header: context {
-      if counter(page).get().first() == 1 {
-        block(
-          stroke: (bottom: 0.5pt + black),
-          inset: (bottom: 6pt, top: 12pt),
-          grid(
-            columns: (1fr, 1fr, 1fr),
-            align: (left + horizon, center + horizon, right + horizon),
-            image("Image_20260324_141022.png", height: 1.35cm),
-            align(center, text(size: 14pt, weight: "bold")[Lesson Plan]),
-            image("1135082720.png", height: 1.8cm),
-          ),
-        )
-      }
+  set page(margin: (x: 0.75in, top: 0.75in, bottom: 0.75in))
+  doc
+}
+
+#block(
+  stroke: (bottom: 0.5pt + black),
+  inset: (bottom: 6pt, top: 12pt),
+  grid(
+    columns: (1fr, 1fr, 1fr),
+    align: (left + horizon, center + horizon, right + horizon),
+    image("Image_20260324_141022.png", height: 1.35cm),
+    align(center, text(size: 14pt, weight: "bold")[Lesson Plan]),
+    image("cambridge.png", height: 1.8cm),
+  ),
+)
+#v(0.3em)
     },
     margin: (x: 0.75in, top: 1.25in, bottom: 0.75in),
   )

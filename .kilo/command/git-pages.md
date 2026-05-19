@@ -176,14 +176,11 @@ $allPresentations = @()
 git -C $worktreeDir ls-tree --name-only HEAD | Where-Object { $_ -ne "index.html" } | ForEach-Object {
     $dir = $_
     $htmlPath = Join-Path $worktreeDir "$dir/index.html"
-    $title = "Presentation"
-    if (Test-Path $htmlPath) {
+    if ((Test-Path $htmlPath) -and (Select-String -Path $htmlPath -Pattern '<div class="slides">' -Quiet)) {
         $content = Get-Content $htmlPath -Raw
-        if ($content -match '<title>(.*?)</title>') {
-            $title = $matches[1]
-        }
+        $title = if ($content -match '<title>(.*?)</title>') { $matches[1] } else { "Presentation" }
+        $allPresentations += @{ dir = $dir; title = $title }
     }
-    $allPresentations += @{ dir = $dir; title = $title }
 }
 
 # Generate landing page HTML
@@ -303,7 +300,7 @@ Write-Host "Landing page: https://$owner.github.io/$repo/"
 $lessonPlanJson = Get-ChildItem -Path "output/$subfolder" -Filter "*-lesson-plan.json" | Select-Object -First 1
 if ($lessonPlanJson) {
     $jsonContent = Get-Content $lessonPlanJson.FullName -Raw | ConvertFrom-Json
-    $url = "https://$owner.github.io/$repo/$subfolder/"
+    $url = "https://$owner.github.io/$repo/$([System.Uri]::EscapeUriString("$subfolder/"))"
     if ($jsonContent.slideshow_url -ne $url) {
         $jsonContent | Add-Member -MemberType NoteProperty -Name "slideshow_url" -Value $url -Force
         $jsonContent | ConvertTo-Json -Depth 10 | Set-Content $lessonPlanJson.FullName

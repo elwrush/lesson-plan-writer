@@ -1,0 +1,69 @@
+{
+    "teacher": "Ed Rush",
+    "duration": "46 minutes",
+    "date": "051926",
+    "topic": "Pronunciation symbols",
+    "objective": "By the end of the lesson, learners will be better able to read and write IPA phonemic symbols for English consonants and vowels, distinguishing voiced and unvoiced pairs, in the context of decoding and transcribing English sentences.",
+    "materials": "- Headway Pre-Intermediate Pronunciation, p. 55 — Sound Symbol Chart & Transcription Exercise\n- Tape15.mp3 — audio recording for self-checking",
+    "lesson_plan": {
+        "shape": "D",
+        "shape_name": "Situational Presentation (PPP)",
+        "cefr_level": "B1 and B2",
+        "class": "M2/M3",
+        "stages": [
+            {
+                "stage_number": 1,
+                "stage": "Lead-in — Why do we need a special alphabet?",
+                "stage_aim": "To spark curiosity about the gap between Thai spelling and English pronunciation using a humorous video, setting up the need for a phonemic alphabet",
+                "procedure": "- Play the YouTube video 'Pronouncing English Words in a Thai Accent'. Pause at each mispronounced word.\n- For each pause, ask Ss: 'How do you say this word in Thai? How is it different in English?' Write the Thai and English side by side.\n- Elicit the problem: 'The Thai alphabet doesn\\'t always match English sounds. How can we know how to say an English word correctly?'\n- Write 'water' on the board. Contrast Thai with IPA transcription /wɔːtə(r)/. Frame the IPA transcript as a 'special alphabet'.\n- State the lesson goal: learn the phonemic script so you can read the pronunciation of any English word.",
+                "time": 8,
+                "interaction": "T-Ss"
+            },
+            {
+                "stage_number": 2,
+                "stage": "Presentation — The IPA chart and voiced/unvoiced consonants",
+                "stage_aim": "To introduce the IPA chart, connect familiar Thai sounds to their symbols, and draw attention to voiced/unvoiced consonant pairs and sounds with no Thai equivalent",
+                "procedure": "- Display the IPA Sound Symbol Chart from the materials. Work through it section by section.\n- Start with consonants Ss already know from Thai (p, b, t, d, k, m, n, ŋ, l, r, w, j). Point to each symbol, say the sound, Ss repeat chorally.\n- Move to the voiceless/voiced pairs: p/b, t/d, k/g, f/v, s/z, θ/ð, ʃ/ʒ, tʃ/dʒ. For each pair: 'Put your hand on your throat. /p/ — no vibration. /b/ — vibration. This is unvoiced vs voiced.'\n- Highlight symbols with NO Thai equivalent: /θ/, /ð/, /ʃ/, /ʒ/, /v/, /z/. Drill each chorally and individually.\n- Move to vowels. Introduce the schwa /ə/ — the most common vowel in English.\n- Demonstrate primary stress /ˈ/ with 'water' /ˈwɔːtə(r)/.\n- End with a quick sound-symbol drill: teacher says a sound, Ss point to the symbol.",
+                "time": 10,
+                "interaction": "T-Ss"
+            },
+            {
+                "stage_number": 3,
+                "stage": "Controlled practice — Decoding IPA sentences with teacher guidance",
+                "stage_aim": "To model how to decode IPA transcriptions step by step, then guide learners through reading and identifying phonemic symbols in familiar sentences",
+                "procedure": "- Display Sentence 1 IPA transcription. Read it aloud slowly, pointing to each symbol.\n- Reveal the English sentence. Ask Ss to identify: 'Where is the schwa? Where is the stress mark?'\n- Move to Sentences 2–5 one at a time. Display the IPA, give Ss 30 seconds to decode silently, then elicit the English sentence.\n- Correct pronunciation errors and discuss tricky symbols. Focus on /dʒ/, /kæt/ ('cat' with /æ/), schwa in 'asleep', /ð/ in 'the', and /ð/ vs /θ/.\n- Throughout, insist on full-sentence responses.",
+                "time": 10,
+                "interaction": "T-Ss, S"
+            },
+            {
+                "stage_number": 4,
+                "stage": "Freer practice — Pair decoding and audio self-check",
+                "stage_aim": "To let learners practise decoding IPA independently in pairs and self-correct against the audio recording",
+                "procedure": "- Put Ss in pairs. Assign Sentences 6–8. Each pair must write the English sentence for their assigned IPA.\n- After 3 minutes, pairs practise reading their IPA aloud to each other. The listening partner checks pronunciation.\n- Play Tape15.mp3 — 'T15 — Listen and check your answers.' Ss self-correct as they listen.\n- Check each sentence as a class. For Sentence 6, note the corrected IPA /ˈwelθi/ (wealthy), /jʌŋ/ (young), /ˈtʊərɪst/ (tourist).\n- For Sentence 8, discuss /ɡærɑːʒ/ — the /ʒ/ sound has no Thai equivalent.",
+                "time": 8,
+                "interaction": "Ss-Ss, S"
+            },
+            {
+                "stage_number": 5,
+                "stage": "Production — Create and dictate IPA transcriptions",
+                "stage_aim": "To give learners the opportunity to produce their own IPA transcriptions and use them communicatively in a peer dictation activity",
+                "procedure": "- Each S writes 2 new sentences about themselves or a classmate. Keep sentences simple.\n- Ss transcribe their sentences into IPA using the chart. Remind them to use stress marks and check for schwa /ə/.\n- Circulate and help Ss with tricky symbols.\n- Peer dictation: Partner A reads IPA aloud, Partner B writes the English. Swap roles.\n- Each pair checks: did Partner B's English match what Partner A intended?\n- Take 2–3 pairs to share with the class.",
+                "time": 8,
+                "interaction": "S, Ss-Ss"
+            },
+            {
+                "stage_number": 6,
+                "stage": "Wrap-up — Sound quiz and lesson summary",
+                "stage_aim": "To consolidate the key learning points — which IPA symbols were new, how the phonemic alphabet solves the Thai-English pronunciation gap, and what voiced/unvoiced means",
+                "procedure": "- Quick-fire quiz: Teacher holds up IPA symbols one at a time. Ss call out the sound. Include: /θ/, /ð/, /ʃ/, /ʒ/, /ŋ/, /ə/, /æ/, /ʌ/.\n- Elicit from Ss: 'Which three sounds were hardest today? Which symbol will you use the most?'\n- Summarise: The IPA is a universal alphabet for sounds. Some symbols match Thai; some are new. The voiced/unvoiced distinction and stress marks help with correct pronunciation.\n- Close with a reminder to look up IPA when learning new English words.",
+                "time": 2,
+                "interaction": "T-Ss"
+            }
+        ]
+    },
+    "transcript": "none",
+    "answer_key": "output/Both skills_Pronunciation-symbols/answer_key.typ",
+    "cefr_level": "B1 and B2",
+    "class": "M2/M3",
+    "slideshow_url": "https://elwrush.github.io/lesson-plan-writer/Both%20skills_Pronunciation-symbols/"
+}

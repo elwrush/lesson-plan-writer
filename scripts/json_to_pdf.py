@@ -265,34 +265,28 @@ def build_typ_content(data):
     """Build .typ file content from lesson plan data. No Jinja2."""
     lines = []
 
-    # Header + page setup
+    # Page setup (no header — logo band is page-1 content only)
     lines.append('#set text(font: "Roboto", size: 10pt)')
     lines.append("#set par(leading: 0.55em)")
     lines.append("")
     lines.append("#show: it => {")
-    lines.append("  set page(")
-    lines.append("    header: context {")
-    lines.append("      if counter(page).get().first() == 1 {")
-    lines.append("        block(")
-    lines.append("          stroke: (bottom: 0.5pt + black),")
-    lines.append("          inset: (bottom: 6pt, top: 12pt),")
-    lines.append("          grid(")
-    lines.append("            columns: (1fr, 1fr, 1fr),")
-    lines.append("            align: (left + horizon, center + horizon, right + horizon),")
-    lines.append('            image("Image_20260324_141022.png", height: 1.35cm),')
-    lines.append('            align(center, text(size: 14pt, weight: "bold")[Lesson Plan]),')
-    lines.append('            image("1135082720.png", height: 1.8cm),')
-    lines.append("          ),")
-    lines.append("        )")
-    lines.append("      }")
-    lines.append("    },")
-    lines.append("    margin: (x: 0.75in, top: 1.25in, bottom: 0.75in),")
-    lines.append("  )")
+    lines.append("  set page(margin: (x: 0.75in, top: 0.75in, bottom: 0.75in))")
     lines.append("  it")
     lines.append("}")
     lines.append("")
-
-    # Lesson Information
+    lines.append("#block(")
+    lines.append("  stroke: (bottom: 0.5pt + black),")
+    lines.append("  inset: (bottom: 6pt, top: 12pt),")
+    lines.append("  grid(")
+    lines.append("    columns: (1fr, 1fr, 1fr),")
+    lines.append("    align: (left + horizon, center + horizon, right + horizon),")
+    lines.append('    image("Image_20260324_141022.png", height: 1.35cm),')
+    lines.append('    align(center, text(size: 14pt, weight: "bold")[Lesson Plan]),')
+    lines.append('    image("cambridge.png", height: 1.8cm),')
+    lines.append("  ),")
+    lines.append(")")
+    lines.append("#v(0.3em)")
+    lines.append("")
     lines.append("= Lesson Information")
     lines.append("")
     topic = data.get("topic", "")
@@ -465,7 +459,7 @@ def convert_json_to_pdf(json_path, output_dir=None):
         return False
 
     # Copy logo images to temp directory so Typst can find them
-    logo_files = ["Image_20260324_141022.png", "1135082720.png"]
+    logo_files = ["Image_20260324_141022.png", "cambridge.png"]
     copied_files = []
     for logo in logo_files:
         src = TEMPLATES_DIR / logo

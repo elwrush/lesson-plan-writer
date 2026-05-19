@@ -20,7 +20,7 @@ Accepts a lesson plan JSON path (relative or absolute) and generates a PDF in `P
 - Typst CLI installed (`typst compile` — NOT Quarto-embedded version)
 - Roboto OTF fonts in TinyTeX or system fonts
 - Python 3.x (standard library — no extra packages required)
-- Logos at `templates/Image_20260324_141022.png` and `templates/1135082720.png`
+- Logos at `templates/Image_20260324_141022.png` and `templates/cambridge.png`
 
 ## Workflow
 

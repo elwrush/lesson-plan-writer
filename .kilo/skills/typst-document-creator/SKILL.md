@@ -43,7 +43,7 @@ Ask user:
 ### Step 2: Header Selection
 Ask user:
 - **Header style**: "Official school header" or "Custom/None"?
-  - **Official**: Use `templates/mathayom-header.typ` — left ear ACT.png, right ear 1135082720.png, centered "Mathayom Program", rule line below
+  - **Official**: Use `templates/mathayom-header.typ` — left ear ACT.png, right ear cambridge.png, centered "Mathayom Program", rule line below
   - **Custom/None**: Ask for details, or skip header
 
 ### Step 3: Print Format

@@ -1,7 +1,7 @@
 #let mathayom-header(
   title: "Mathayom Program",
   logo-left: "ACT.png",
-  logo-right: "1135082720.png",
+  logo-right: "cambridge.png",
   left-height: 1.2cm,
   right-height: 1.6cm,
   rule: true,

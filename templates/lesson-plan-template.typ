@@ -2,29 +2,25 @@
 #set par(leading: 0.55em)
 
 #let logo-left = "Image_20260324_141022.png"
-#let logo-right = "1135082720.png"
+#let logo-right = "cambridge.png"
 
 #show: it => {
-  set page(
-    header: context {
-      if counter(page).get().first() == 1 {
-        block(
-          stroke: (bottom: 0.5pt + black),
-          inset: (bottom: 6pt, top: 12pt),
-          grid(
-            columns: (1fr, 1fr, 1fr),
-            align: (left + horizon, center + horizon, right + horizon),
-            image(logo-left, height: 1.35cm),
-            align(center, text(size: 14pt, weight: "bold")[Lesson Plan]),
-            image(logo-right, height: 1.8cm),
-          ),
-        )
-      }
-    },
-    margin: (x: 0.75in, top: 1.25in, bottom: 0.75in),
-  )
+  set page(margin: (x: 0.75in, top: 0.75in, bottom: 0.75in))
   it
 }
+
+#block(
+  stroke: (bottom: 0.5pt + black),
+  inset: (bottom: 6pt, top: 12pt),
+  grid(
+    columns: (1fr, 1fr, 1fr),
+    align: (left + horizon, center + horizon, right + horizon),
+    image(logo-left, height: 1.35cm),
+    align(center, text(size: 14pt, weight: "bold")[Lesson Plan]),
+    image(logo-right, height: 1.8cm),
+  ),
+)
+#v(0.3em)
 
 = Lesson Information
 

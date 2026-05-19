@@ -1,7 +1,7 @@
 # Skill: Insert PDF to Template
 
 ## Purpose
-Insert selected pages from a source PDF into a template PDF with a narrow school header appearing only on page 1. Remaining inserted pages fill the entire page.
+Insert selected pages from a source PDF into a new document with school logos + label at the top of page 1 only. Remaining inserted pages fill the entire page (no repeated elements).
 
 ## Workflow
 
@@ -43,7 +43,7 @@ Inform user of the output PDF path.
 
 Uses `fitz.paper_rect("a4")` for precise A4 dimensions (595.276 x 841.890 pt). The `show_pdf_page` call renders source content as vector, preserving full resolution — print output will use the device's native DPI. No pixel-based resampling occurs.
 
-**Layout**: The first inserted source page is placed on page 1 below the header band. Remaining inserted pages fill full pages (no header).
+**Layout**: The first inserted source page is placed on page 1 below the school logos and label. These logos/label elements appear on page 1 only — they are NOT a repeated header. Remaining inserted pages fill full pages with no top elements.
 
 Write the script at `C:\Users\elwru\AppData\Local\Temp\kilo\insert_pdf_to_template.py` with this content:
 
@@ -52,7 +52,7 @@ import fitz
 import sys, os
 
 LOGO_LEFT = r"C:\PROJECTS\LESSON-PLAN-WRITER-3\templates\ACT.png"
-LOGO_RIGHT = r"C:\PROJECTS\LESSON-PLAN-WRITER-3\templates\1135082720.png"
+LOGO_RIGHT = r"C:\PROJECTS\LESSON-PLAN-WRITER-3\templates\cambridge.png"
 HEADER_TEXT = "Mathayom Program"
 
 A4 = fitz.paper_rect("a4")
@@ -65,10 +65,9 @@ LOGO_W = 60
 #   right_w = 44 * (800/371) = 95pt
 RIGHT_W = 95
 
-def create_header_page(doc, first_src_page=None):
+def create_page1(doc, first_src_page):
+    """Create page 1: logos + text band at top, source content fills below."""
     page = doc.new_page(width=PW, height=PH)
-    page.draw_rect(fitz.Rect(0, 0, PW, PH), color=None, fill=(1, 1, 1))
-    page.draw_rect(fitz.Rect(0, 0, PW, HEADER_HEIGHT), color=None, fill=(1, 1, 1))
 
     # Left ear (ACT logo) — portrait, fills 44pt height naturally
     if os.path.exists(LOGO_LEFT):
@@ -86,32 +85,27 @@ def create_header_page(doc, first_src_page=None):
         except Exception:
             pass
 
-    if os.path.exists(LOGO_RIGHT):
-        try:
-            logo_r = fitz.Rect(PW - 90, 8, PW - 15, HEADER_HEIGHT - 8)
-            page.insert_image(logo_r, filename=LOGO_RIGHT, keep_proportion=True)
-        except Exception:
-            pass
-
+    # Centered text
     tw = fitz.get_text_length(HEADER_TEXT, fontname="helv", fontsize=13)
     x_center = (PW - tw) / 2
     page.insert_text(
-        fitz.Point(x_center, HEADER_HEIGHT / 2 + 5),
+        fitz.Point(x_center, 8 + 44 / 2 + 5),
         HEADER_TEXT,
         fontname="helv",
         fontsize=13,
         color=(0, 0, 0),
     )
 
-    # Full-width horizontal line under the header
-    page.draw_line(fitz.Point(0, HEADER_HEIGHT), fitz.Point(PW, HEADER_HEIGHT),
+    # Separator line below the logos/text band (logos end at y=52; add 6pt padding)
+    line_y = 58
+    page.draw_line(fitz.Point(0, line_y), fitz.Point(PW, line_y),
                    color=(0, 0, 0), width=0.5)
 
-    if first_src_page is not None:
-        doc_src, src_idx = first_src_page
-        body_rect = fitz.Rect(0, HEADER_HEIGHT, PW, PH)
-        page.show_pdf_page(body_rect, doc_src, src_idx)
+    # Insert source page content below the separator line
+    body_rect = fitz.Rect(0, line_y, PW, PH)
+    page.show_pdf_page(body_rect, first_src_page[0], first_src_page[1])
     return page
+
 
 def parse_pages(pages_str, max_page):
     parts = [p.strip() for p in pages_str.split(",")]
@@ -127,6 +121,7 @@ def parse_pages(pages_str, max_page):
             raise ValueError(f"Page {p} not in range [1, {max_page}]")
     return pages
 
+
 def main():
     source_pdf = sys.argv[1]
     pages_str = sys.argv[2]
@@ -141,7 +136,7 @@ def main():
 
     doc_out = fitz.open()
     first = pages[0]
-    create_header_page(doc_out, first_src_page=(doc_src, first - 1))
+    create_page1(doc_out, first_src_page=(doc_src, first - 1))
     for p in pages[1:]:
         page_out = doc_out.new_page(width=PW, height=PH)
         page_out.show_pdf_page(page_out.rect, doc_src, p - 1)
@@ -150,6 +145,7 @@ def main():
     doc_out.close()
     doc_src.close()
     print(f"Created {output_pdf} ({len(pages)} pages inserted)")
+
 
 if __name__ == "__main__":
     main()

@@ -39,6 +39,8 @@ All slide `<section>` elements go between `<div class="slides">` and `</div>` in
 
 **Note:** The base template already includes the [audio-slideshow](https://github.com/rajgoel/reveal.js-plugins/tree/master/audio-slideshow) plugin (CDN-loaded) and the `TimerPlugin` in `Reveal.initialize()`. To add audio to a slide, use `data-audio-src="assets/file.mp3"` on the `<section>` element. Audio files go in `slides/assets/`. The plugin is configured with `advance: -1` (no auto-advance) — teacher controls playback via hover controls or `A` key. See the `audio:` config block in `Reveal.initialize()` for details.
 
+**Known limitation — audio on multiple slides**: The audio-slideshow plugin does NOT reliably play the same audio file on more than one slide. If two or more slides need the same audio, copy the file to a distinct filename for each slide (e.g., `podcast_listen1.mp3` and `podcast_listen2.mp3`). Each `data-audio-src` value must be unique across the presentation.
+
 ### Step 2: Copy supporting files (timer plugin, logo)
 
 ```powershell
@@ -444,6 +446,7 @@ Use the same `answer-table` pattern with green background and fragment reveals:
 - **Answer column uses `class="fragment answer-correct"` or `class="fragment answer-incorrect"`** — revealed one row at a time
 - `answer-correct` = green background on reveal, `answer-incorrect` = red background on reveal
 - **Do NOT use `highlight-green`/`highlight-red`** — reveal.js built-in classes force `opacity: 1`, preventing fragment hiding
+- **Color contrast on green slides**: On `#1e7e34` answer slides, use only white (`#fff`) or yellow (`#ffdd00`) for text. Blue (`#4fc3f7`), gray, and other muted tones do not have enough contrast against the green background.
 - For 3-column tables with explanations, add a `Why?` column (see Answer Table Patterns below)
 
 ### 10. Answer Slide (Multiple Choice / Matching)
@@ -462,6 +465,7 @@ Use the same `answer-table` pattern with green background and fragment reveals:
 ```
 - **Questions/options visible at slide entry** — students see all choices
 - **Answer and Why columns are fragments** — revealed one row at a time via clickthrough
+- **Answers must be yellow, not white**: Answers should be highly contrastive to questions. Use class `answer-yellow` (yellow `#ffdd00`) on answer reveal text (e.g., `class="fragment english-reveal answer-yellow"`). Questions/options stay white; revealed answers turn yellow to visually separate them.
 
 ### 11. Summary Slide
 ```html

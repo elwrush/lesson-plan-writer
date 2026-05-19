@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Pronunciation Symbols — Ed Rush</title>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            /* =============================================
+               LESSON PLAN WRITER 3 — BASE SLIDE STYLES
+               ============================================= */
+
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                padding: 4px 12px;
+                border-radius: 4px;
+                font-size: 0.4em;
+                vertical-align: middle;
+                margin-left: 10px;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+
+            .reveal .aim-label {
+                font-size: 0.7em;
+                color: #888;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            .reveal .material-ref {
+                font-size: 0.65em;
+                color: #888;
+                font-style: italic;
+                margin-top: 0.5em;
+            }
+            .reveal .source-cite {
+                font-size: 0.7em;
+                color: #666;
+                font-style: italic;
+                margin-top: 0.3em;
+            }
+            .reveal .image-caption {
+                font-size: 0.55em;
+                color: #888;
+                text-align: center;
+                margin-top: 0.2em;
+            }
+
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            }
+
+            .reveal .slide-icon {
+                font-size: 2.5em;
+                margin-bottom: 0.3em;
+                display: block;
+                text-align: center;
+            }
+            .reveal .slide-icon.transition-icon { color: rgba(255,255,255,0.85); }
+            .reveal .slide-icon.pedagogical-icon { color: rgba(255,255,255,0.9); }
+            .reveal .slide-icon.objective-icon { color: rgba(255,221,0,0.85); }
+
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal section.pedagogical .strategy-tip {
+                font-size: 0.85em;
+                font-style: italic;
+                color: rgba(255,255,255,0.85);
+                margin-bottom: 0.5em;
+            }
+            .reveal section.pedagogical .evidence {
+                font-size: 0.8em;
+                background: rgba(0,0,0,0.3);
+                padding: 0.4em 0.6em;
+                border-radius: 4px;
+                border-left: 3px solid rgba(255,255,255,0.4);
+            }
+
+            .reveal p,
+            .reveal li,
+            .reveal h1, .reveal h2, .reveal h3,
+            .reveal h4, .reveal h5, .reveal h6 {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+
+            .reveal .fragment.highlight-green {
+                background: rgba(0, 100, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.highlight-red {
+                background: rgba(100, 0, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-correct.visible {
+                background: rgba(0, 120, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-incorrect.visible {
+                background: rgba(120, 0, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal table.answer-table th {
+                background: rgba(0, 0, 0, 0.2);
+                font-weight: bold;
+            }
+            .reveal .fragment.strike {
+                text-decoration: line-through;
+                opacity: 0.6;
+            }
+
+            .reveal .iframe-container {
+                position: relative;
+                width: 90%;
+                padding-bottom: 50.625%;
+                height: 0;
+                overflow: hidden;
+                margin: 0 auto 0.5em;
+            }
+            .reveal .iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            .reveal .structure-talk h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal .structure-talk p,
+            .reveal .structure-talk li  { color: #fff; }
+            .reveal .structure-talk .structure-step {
+                font-size: 1.1em;
+                margin-bottom: 0.6em;
+            }
+            .reveal .structure-talk .transition-words {
+                font-size: 0.9em;
+                color: #ffdd00;
+                font-style: italic;
+                margin-top: 0.8em;
+                padding: 0.4em 0.6em;
+                background: rgba(0,0,0,0.2);
+                border-radius: 4px;
+            }
+
+            .reveal .ipa-big {
+                font-size: 1.4em;
+                font-family: 'Roboto', 'Segoe UI', sans-serif;
+                letter-spacing: 0.05em;
+                color: #fff;
+            }
+            .reveal .ipa-sentence {
+                font-size: 1.05em;
+                font-family: 'Roboto', 'Segoe UI', sans-serif;
+                line-height: 1.6;
+                color: #fff;
+                letter-spacing: 0.03em;
+            }
+            .reveal .english-reveal {
+                font-size: 1.3em;
+                margin-top: 1em;
+                color: #fff;
+            }
+            .reveal .answer-yellow {
+                color: #ffdd00;
+            }
+            .reveal .fact-box {
+                background: rgba(0,0,0,0.3);
+                border-radius: 4px;
+                padding: 0.5em 0.8em;
+                margin: 0.5em 0;
+            }
+            .reveal .highlight-thai {
+                color: #ffdd00;
+                font-weight: bold;
+            }
+            .reveal .no-thai-symbol {
+                font-size: 1.5em;
+                font-family: 'Roboto', 'Segoe UI', sans-serif;
+                display: inline-block;
+                min-width: 100px;
+                text-align: center;
+                color: #fff;
+                background: rgba(0,0,0,0.25);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+                margin: 0.2em;
+            }
+            .reveal .no-thai-word {
+                font-size: 0.9em;
+                color: #b3e5fc;
+                margin: 0.2em 0 0.6em 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+                <!-- ─── SLIDE 0: Title ─────────────────────────────────── -->
+                <section data-background="#1a1a2e" data-background-image="assets/pixabay_2681508_1.jpg" data-background-opacity="0.7">
+                    <img src="assets/logo.png" class="title-logo" alt="Logo" />
+                    <h1>Pronunciation Symbols <span class="cefr-badge B1">B1</span> <span class="cefr-badge B2">B2</span></h1>
+                    <p><em>Let's hear the different sounds</em></p>
+                </section>
+
+                <!-- ─── SLIDE 1: Objective ─────────────────────────────── -->
+                <section>
+                    <i class="fa-solid fa-seedling slide-icon objective-icon"></i>
+                    <h2>Here's what you'll be able to do</h2>
+                    <ul>
+                        <li>Read the phonemic alphabet for English sounds</li>
+                        <li>Tell the difference between voiced and unvoiced sounds</li>
+                        <li>Write short sentences using phonemic symbols</li>
+                    </ul>
+                    <aside class="notes">
+                        Today we're learning a new alphabet — not A-B-C, but the phonemic alphabet.
+                        This helps you say any English word correctly.
+                        Ask: Has anyone seen these funny symbols before? In a dictionary?
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 2: Lead-in — YouTube Video ──────────────── -->
+                <section data-background="#1a1a2e">
+                    <h2>TINGLISH!</h2>
+                    <p style="margin-top: -0.3em; margin-bottom: 0.5em; font-size: 0.85em;">Let's hear the different sounds</p>
+                    <iframe
+                        width="700" height="400"
+                        src="https://www.youtube.com/embed/ocvj99dC67E"
+                        allowfullscreen
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        style="border: none; display: block; margin: 0 auto;">
+                    </iframe>
+                    <p style="margin-top: 0.3em;"><em>How is English pronunciation different from Thai?</em></p>
+                    <aside class="notes">
+                        Play the video. Pause at each mispronounced word.
+                        For each: How do you say this in Thai? How is it different in English?
+                        Write Thai and English versions side by side on the board.
+                        Elicit: The Thai alphabet doesn't always match English sounds.
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 3: Lead-in — Water Example ──────────────── -->
+                <section data-background="#1a1a2e">
+                    <h2>Why do we need this alphabet?</h2>
+                    <p>English word: <strong>water</strong></p>
+                    <p>Thai pronunciation: <em>"wa-dter"</em></p>
+                    <p class="ipa-big" style="margin-top: 0.8em;">/ˈwɔːtə(r)/</p>
+                    <p style="margin-top: 0.8em;"><em>The phonemic script shows every sound — no guessing!</em></p>
+                    <aside class="notes">
+                        Write 'water' on the board. Ask Ss how they say it in Thai.
+                        Show the IPA: /ˈwɔːtə(r)/. Point out:
+                        — stress mark ˈ on first syllable
+                        — schwa /ə/ in the second syllable
+                        — /r/ at the end (some dialects drop it)
+                        Frame: This alphabet removes all the guesswork.
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 4: Transition — IPA Chart ──────────────── -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>The IPA Chart</h2>
+                </section>
+
+                <!-- ─── SLIDE 5: Presentation — Voiced/Unvoiced Pairs 1-5 ─── -->
+                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+                    <h2>Voiced &amp; Unvoiced Consonants</h2>
+                    <p style="font-size: 0.85em; font-style: italic; color: #b3e5fc;">Put your hand on your throat. /p/ — no vibration. /b/ — vibration.</p>
+                    <table class="answer-table" style="width: 70%; margin: 0 auto;">
+                        <thead>
+                            <tr><th style="width: 30%;">Unvoiced</th><th style="width: 30%;">Voiced</th><th style="width: 40%;">Pairs</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>/p/</code></td><td><code>/b/</code></td><td>pat — bat</td></tr>
+                            <tr><td><code>/t/</code></td><td><code>/d/</code></td><td>tip — dip</td></tr>
+                            <tr><td><code>/k/</code></td><td><code>/g/</code></td><td>cat — go</td></tr>
+                            <tr><td><code>/f/</code></td><td><code>/v/</code></td><td>fan — van</td></tr>
+                            <tr><td><code>/s/</code></td><td><code>/z/</code></td><td>sip — zip</td></tr>
+                        </tbody>
+                    </table>
+                    <aside class="notes">
+                        Work through pairs 1-5. For each: demonstrate voiced/unvoiced with throat hand test.
+                        Ss repeat chorally and individually.
+                        Ask: Which of these exist in Thai? (/p/, /b/, /t/, /d/, /k/, /g/, /f/, /s/ exist; /v/, /z/ don't)
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 6: Presentation — Voiced/Unvoiced Pairs 6-8 ─── -->
+                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+                    <h2>More Pairs</h2>
+                    <table class="answer-table" style="width: 70%; margin: 0 auto;">
+                        <thead>
+                            <tr><th style="width: 30%;">Unvoiced</th><th style="width: 30%;">Voiced</th><th style="width: 40%;">Pairs</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><code>/θ/</code></td><td><code>/ð/</code></td><td>think — this</td></tr>
+                            <tr><td><code>/ʃ/</code></td><td><code>/ʒ/</code></td><td>shoe — measure</td></tr>
+                            <tr><td><code>/tʃ/</code></td><td><code>/dʒ/</code></td><td>chicken — judge</td></tr>
+                        </tbody>
+                    </table>
+                    <p style="font-size: 0.85em; font-style: italic; color: #b3e5fc; margin-top: 0.5em;"><strong>/θ/, /ð/, /ʃ/, /ʒ/</strong> have no Thai equivalent. <strong>/tʃ/</strong> and <strong>/dʒ/</strong> do.</p>
+                    <aside class="notes">
+                        θ/ð/ʃ/ʒ don't exist in Thai at all.
+                        tʃ (cho-chang) and dʒ (jo-jan) DO exist in Thai.
+                        Spend extra time on /θ/ and /ð/ — hardest for Thai learners.
+                        Show tongue position: between teeth for θ/ð, behind ridge for ʃ/ʒ.
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 7: Presentation — No Thai Equivalent ─────── -->
+                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+                    <h2>No Thai Equivalent</h2>
+                    <p style="font-size: 0.85em; font-style: italic; color: #b3e5fc;">These sounds don't exist in Thai — they need more practice!</p>
+                    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5em 1em; margin-top: 0.5em;">
+                        <div style="text-align: center;">
+                            <p class="no-thai-symbol"><code>/θ/</code></p>
+                            <p class="no-thai-word">think</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <p class="no-thai-symbol"><code>/ð/</code></p>
+                            <p class="no-thai-word">this</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <p class="no-thai-symbol"><code>/ʃ/</code></p>
+                            <p class="no-thai-word">shoe</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <p class="no-thai-symbol"><code>/ʒ/</code></p>
+                            <p class="no-thai-word">measure</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <p class="no-thai-symbol"><code>/v/</code></p>
+                            <p class="no-thai-word">van</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <p class="no-thai-symbol"><code>/z/</code></p>
+                            <p class="no-thai-word">zoo</p>
+                        </div>
+                    </div>
+                    <aside class="notes">
+                        Drill each symbol: say the sound, Ss repeat chorally, then individually.
+                        Spend extra time on /θ/ and /ð/ — these are the hardest for Thai learners.
+                        Show tongue position: between teeth for θ/ð, behind ridge for ʃ/ʒ.
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 8: Presentation — Vowels + Schwa + Stress ─── -->
+                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+                    <h2>Vowels &amp; Stress</h2>
+                    <p style="font-size: 0.85em; font-style: italic; color: #b3e5fc;">Short vs long vowels — the length can change the word!</p>
+                     <p class="ipa-sentence" style="font-size: 0.95em; text-align: center;">
+                        /ɪ/ sit · /iː/ seat &nbsp;|&nbsp; /ʊ/ pull · /uː/ pool &nbsp;|&nbsp; /e/ bed · /æ/ cat
+                    </p>
+                    <div class="fact-box" style="margin-top: 0.8em;">
+                        <p style="color: #ffdd00; font-weight: bold; font-size: 1em;">Schwa /ə/ — the lazy sound</p>
+                        <p style="font-size: 0.85em;">It's in every unstressed syllable. E.g. water → /ˈwɔːtə(r)/</p>
+                    </div>
+                    <div class="fact-box">
+                        <p style="color: #ffdd00; font-weight: bold; font-size: 1em;">Stress mark ˈ</p>
+                        <p style="font-size: 0.85em;">Tells you which syllable is louder: /<strong>ˈ</strong>wɔːtə(r)/</p>
+                    </div>
+                    <aside class="notes">
+                        Move through vowel pairs. Contrast the Thai tone system with English vowel length.
+                        Demonstrate schwa: say 'water' naturally — the second vowel is barely there.
+                        Show stress: say WATER vs waTER — which sounds right? The mark tells you.
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 9: Transition — Let's Practise ────────────── -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Let's Practise</h2>
+                </section>
+
+                <!-- ─── SLIDE 10: Model Sentence 1 ────────────────────── -->
+                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+                    <h2>Model — Sentence 1</h2>
+                    <p style="font-size: 1.2em; color: #fff; margin-bottom: 0.3em;">Tom likes writing poetry.</p>
+                    <p class="ipa-sentence">/tɒm laɪks 'raɪtɪŋ 'pəʊətri/</p>
+                    <div style="margin-top: 0.8em; font-size: 0.8em; text-align: left; display: inline-block;">
+                        <p style="color: #ffdd00;">Schwa: <code>/pəʊətri/</code> — two schwas in one word!</p>
+                        <p style="color: #ffdd00;">Stress: <code>'raɪtɪŋ</code> — first syllable is louder</p>
+                        <p style="color: #ffdd00;">Same as Thai: <code>/t/, /ɒ/, /m/, /l/, /k/, /s/</code></p>
+                    </div>
+                    <aside class="notes">
+                        Read the IPA aloud slowly, pointing to each symbol.
+                        Tom — t-ɒ-m. Likes — l-aɪ-k-s. Writing — r-aɪ-t-ɪ-ŋ. Poetry — p-əʊ-ə-t-r-i.
+                        Ask: Where is the schwa? Where is the stress mark?
+                        Which symbols are the same in Thai? Which are different?
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 11: Sentence 2 ──────────────────────────── -->
+                <section>
+                    <h2>Sentence 2</h2>
+                    <p class="ipa-big">/dʒeɪnz ɡɒt ə 'frendli braʊn pet kæt/</p>
+                    <p class="fragment english-reveal answer-yellow">Jane's got a friendly brown pet cat.</p>
+                    <aside class="notes">
+                        Give Ss 30 seconds to decode silently.
+                        Elicit the English sentence from a student.
+                        Focus: /dʒ/ and /kæt/ — 'cat' with /æ/, not Thai แคท.
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 12: Sentence 3 ──────────────────────────── -->
+                <section>
+                    <h2>Sentence 3</h2>
+                    <p class="ipa-big">/suː wɒz fɑːst əˈsliːp wen ðə ˈbɜːɡləz keɪm/</p>
+                    <p class="fragment english-reveal answer-yellow">Sue was fast asleep when the burglars came.</p>
+                    <aside class="notes">
+                        Give Ss 30 seconds to decode silently.
+                        Elicit from a student.
+                        Highlight: schwa in 'asleep' /əˈsliːp/ and /ð/ in 'the' /ðə/.
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 13: Sentence 4 ──────────────────────────── -->
+                <section>
+                    <h2>Sentence 4</h2>
+                    <p class="ipa-big">/dʒəʊ bɔːt ə ˈbɒtəl əv hʌŋˈɡeəriən waɪn lɑːst naɪt/</p>
+                    <p class="fragment english-reveal answer-yellow">Joe bought a bottle of Hungarian wine last night.</p>
+                    <aside class="notes">
+                        Give Ss 30 seconds to decode silently.
+                        Elicit from a student.
+                        Focus: /hʌŋˈɡeəriən/ — three syllables, stress on /ɡeə/.
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 14: Sentence 5 ──────────────────────────── -->
+                <section>
+                    <h2>Sentence 5</h2>
+                    <p class="ipa-big">/lɪz wɒnts tə biː rɪtʃ ənd ˈfeɪməs wʌn deɪ/</p>
+                    <p class="fragment english-reveal answer-yellow">Liz wants to be rich and famous one day.</p>
+                    <aside class="notes">
+                        Give Ss 30 seconds to decode silently.
+                        Elicit from a student.
+                        Note: schwa in 'famous' /ˈfeɪməs/ and /wʌn/ for 'one'.
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 15: Task — Pair Work ─────────────────────── -->
+                <section data-timer="480">
+                    <i class="fa-solid fa-pencil slide-icon"></i>
+                    <h2>Decode With a Partner</h2>
+                    <ul>
+                        <li>Work with a partner.</li>
+                        <li>Decode sentences 6, 7, and 8.</li>
+                        <li>Write the English sentence for each one.</li>
+                        <li>Then practise reading the IPA aloud to your partner.</li>
+                    </ul>
+                    <aside class="notes">
+                        Stage 4 — Freer Practice (8 min).
+                        Pair work: Ss decode sentences 6-8.
+                        After 3 min, pairs read IPA aloud to each other.
+                        Then play Tape15.mp3 for self-check.
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 16: Audio Check ──────────────────────────── -->
+                <section data-background="#1e7e34" data-audio-src="assets/Tape15.mp3">
+                    <h2>Listen and Check</h2>
+                    <p>Track 15 — Listen and check your answers.</p>
+                    <aside class="notes">
+                        Play the audio. Ss self-correct their written English.
+                        For sentence 6: note corrected IPA — /ˈwelθi/ (wealthy),
+                        /jʌŋ/ (young), /ˈtʊərɪst/ (tourist).
+                        Discuss sentence 8: /ɡærɑːʒ/ — /ʒ/ has no Thai equivalent.
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 17: Answers 6–8 ─────────────────────────── -->
+                <section data-background="#1e7e34">
+                    <h2>Sentences 6 – 8: Answers</h2>
+                    <table class="answer-table">
+                        <thead><tr><th style="width: 50%;">IPA</th><th style="width: 50%;">English</th></tr></thead>
+                        <tbody>
+                            <tr>
+                                <td class="ipa-sentence" style="font-size: 0.7em; color: #fff;">/pɔːlz ə ˈwelθi jʌŋ ˈtʊərɪst/</td>
+                                <td class="fragment answer-correct">Paul's a wealthy young tourist.</td>
+                            </tr>
+                            <tr>
+                                <td class="ipa-sentence" style="font-size: 0.7em; color: #fff;">/tɒm ənd lɪz ə ɡʊd ət ˈspænɪʃ/</td>
+                                <td class="fragment answer-correct">Tom and Liz are good at Spanish.</td>
+                            </tr>
+                            <tr>
+                                <td class="ipa-sentence" style="font-size: 0.7em; color: #fff;">/dʒəʊ wɜːks ɪn ə ˈnɔɪzi ˈɡærɑːʒ/</td>
+                                <td class="fragment answer-correct">Joe works in a noisy garage.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <aside class="notes">
+                        Click to reveal each answer one by one.
+                        Draw attention to the /ʒ/ in garage — no Thai equivalent.
+                        Remind Ss of the corrected sentence 6 IPA.
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 18: Transition — Your Turn ──────────────── -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Your Turn</h2>
+                </section>
+
+                <!-- ─── SLIDE 19: Task — Production ────────────────────── -->
+                <section data-timer="480">
+                    <i class="fa-solid fa-pencil slide-icon"></i>
+                    <h2>Write Your Own</h2>
+                    <ul>
+                        <li>Write 2 sentences about yourself or a friend.</li>
+                        <li>Use the IPA chart to write the phonemic script.</li>
+                        <li>Mark the stress on each word.</li>
+                        <li>Read your IPA to a partner — they write the English.</li>
+                    </ul>
+                    <aside class="notes">
+                        Stage 5 — Production (8 min).
+                        Ss write 2 sentences, then transcribe into IPA.
+                        Circulate and help with tricky symbols.
+                        Peer dictation: Partner A reads IPA, B writes English. Swap.
+                        Take 2-3 pairs to share with the class.
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 20: Transition — Let's Review ────────────── -->
+                <section data-background="#c0392b">
+                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
+                    <h2>Let's Review</h2>
+                </section>
+
+                <!-- ─── SLIDE 21: Summary ─────────────────────────────── -->
+                <section>
+                    <i class="fa-solid fa-flag-checkered slide-icon" style="color: #2a76dd;"></i>
+                    <h2>What you can do now</h2>
+                    <ul>
+                        <li>✓ I can read phonemic symbols for English sounds</li>
+                        <li>✓ I can hear the difference between voiced and unvoiced sounds</li>
+                        <li>✓ I can write sentences using the phonemic alphabet</li>
+                    </ul>
+                    <aside class="notes">
+                        Quick-fire quiz: hold up IPA symbols — Ss call out the sound.
+                        Include: /θ/, /ð/, /ʃ/, /ʒ/, /ŋ/, /ə/, /æ/, /ʌ/.
+                        Elicit: Which three sounds were hardest today?
+                        Summarise: IPA is a universal alphabet for sounds.
+                        Some match Thai, some are new. The stress mark tells you which syllable to say louder.
+                    </aside>
+                </section>
+
+                <!-- ─── SLIDE 22: End ──────────────────────────────────── -->
+                <section data-background="#2c3e50">
+                    <h2>Thank you</h2>
+                    <p><em>Pronunciation Symbols</em> <span class="cefr-badge B1">B1</span> <span class="cefr-badge B2">B2</span></p>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- Timer plugin (local) -->
+        <script src="timer-plugin.js"></script>
+
+        <!-- Audio slideshow plugin (CDN) -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/audio-slideshow/plugin.js"></script>
+
+        <!-- reveal.js 5.1.0 via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                audio: {
+                    prefix: 'assets/',
+                    suffix: '.mp3',
+                    advance: -1,
+                    autoplay: false,
+                    defaultAudios: false,
+                    defaultDuration: 0,
+                    playerOpacity: 1.0,
+                    playerStyle: 'position: fixed; bottom: 30px; left: 25%; width: 50%; height:75px; z-index: 33;',
+                    startAtFragment: false,
+                },
+                plugins: [
+                    TimerPlugin,
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                    RevealAudioSlideshow,
+                ],
+            });
+        </script>
+    </body>
+</html>
