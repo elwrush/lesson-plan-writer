@@ -95,7 +95,7 @@ For each changed file, check the file type and evaluate ALL applicable rules bel
 1. **Language quality transforms active**: `humanize_stage_aim` removes banned template fills. Banned: "To lead-in to...", "To reading for gist", "To post-reading speaking task".
 2. **Date formatting**: `format_date()` converts `DDMMYY` → "D Month, YYYY" (e.g. `050726` → `7 May, 2026`).
 3. **Minute indicators stripped**: `strip_minute_indicators()` removes `"3 min."` etc from procedure text.
-4. **Answer key**: markdown → Typst transclusion via `migrate_answer_keys.py`. `#` → `=`, `**bold**` → `*bold*`, `---` → `#line`.
+4. **Answer key**: `.typ` files read directly — no markdown conversion.
 5. **Windows paths**: `\` converted to `/` for Typst.
 6. **No deprecated `json_to_markdown.py`** usage for new presentations.
 7. **No new `data-markdown`** usage — markdown pipeline abandoned.

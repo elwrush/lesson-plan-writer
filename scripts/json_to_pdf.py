@@ -116,51 +116,6 @@ def escape_typst_string(text):
     return text.replace("\\", "\\\\").replace('"', '\\"')
 
 
-def md_to_typst(text):
-    """Convert markdown content to Typst markup."""
-    text = re.sub(r"\\([#*_\[\]])", r"\1", text)
-    text = (
-        text.replace("&#x20;", " ").replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">")
-    )
-    lines = text.split("\n")
-    result = []
-    in_bullet = False
-
-    for line in lines:
-        stripped = line.strip()
-
-        if stripped.startswith("#### "):
-            result.append("==== " + stripped[5:])
-        elif stripped.startswith("### "):
-            result.append("=== " + stripped[4:])
-        elif stripped.startswith("## "):
-            result.append("== " + stripped[3:])
-        elif stripped.startswith("# "):
-            result.append("= " + stripped[2:])
-        elif stripped == "---" or stripped == "***" or stripped == "___":
-            in_bullet = False
-            if result:
-                result.append("")
-            result.append("#line(length: 100%)")
-        elif re.match(r"^[-*]\s+", stripped):
-            content = re.sub(r"^[-*]\s+", "", stripped)
-            content = re.sub(r"\*\*(.+?)\*\*", r"*\1*", content)
-            content = re.sub(r"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)", r"_\1_", content)
-            if not in_bullet and result and result[-1] != "":
-                result.append("")
-            result.append(f"- {content}")
-            in_bullet = True
-        else:
-            in_bullet = False
-            line = re.sub(r"\*\*(.+?)\*\*", r"*\1*", stripped)
-            line = re.sub(r"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)", r"_\1_", line)
-            result.append(line)
-
-    text = "\n".join(result)
-    text = text.replace("$", "\\$")
-    return text
-
-
 def format_date(date_str):
     """Convert MMDDYY to 'D Month, YYYY' format."""
     date_str = date_str.strip()
@@ -365,14 +320,13 @@ def build_typ_content(data):
     lines.append("}")
     lines.append("")
 
-    # Transcript
+    # Transcript (only .typ files accepted — markdown intermediary is forbidden)
     transcript = data.get("transcript", "")
     if transcript and transcript != "none":
         transcript_path = Path(transcript)
-        if transcript_path.exists() and transcript_path.suffix in (".md", ".txt"):
+        if transcript_path.exists() and transcript_path.suffix == ".typ":
             try:
                 transcript_content = transcript_path.read_text(encoding="utf-8")
-                transcript_content = md_to_typst(transcript_content)
                 lines.append("#pagebreak()")
                 lines.append("")
                 lines.append("= Transcript")
@@ -381,16 +335,13 @@ def build_typ_content(data):
             except Exception:
                 pass
 
-    # Answer Key
+    # Answer Key (only .typ files accepted — markdown intermediary is forbidden)
     answer_key = data.get("answer_key", "")
     if answer_key and answer_key != "none":
         answer_key_path = Path(answer_key)
-        if answer_key_path.exists():
+        if answer_key_path.exists() and answer_key_path.suffix == ".typ":
             try:
-                if answer_key_path.suffix == ".md":
-                    ak_content = md_to_typst(answer_key_path.read_text(encoding="utf-8"))
-                else:
-                    ak_content = answer_key_path.read_text(encoding="utf-8")
+                ak_content = answer_key_path.read_text(encoding="utf-8")
                 lines.append("#pagebreak()")
                 lines.append("")
                 lines.append("= Answer Key")

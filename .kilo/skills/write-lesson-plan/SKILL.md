@@ -67,9 +67,13 @@ Write: "What's the input subfolder name? (under inputs/)" in your response text.
 After receiving the name:
 1. Check if the folder exists under `inputs\`. If not, create it.
 2. List all files in the folder using `read` or `glob`.
-3. Read files to check for a materials reference (book name, unit, page numbers).
-4. Check for answer keys ("Answer", "Answers:", "**Answer:**" patterns, or files with "answer"/"key" in name).
-5. Check for transcripts ("Transcript", "Audio transcript" patterns, or files with "transcript" in name).
+3. If any `.pdf` files exist, extract text using Python's `pypdf` library:
+   ```python
+   python -c "import pypdf; reader = pypdf.PdfReader(r'INPUT_PATH'); [print(f'=== PAGE {i+1} ===\n{p.extract_text()}\n') for i,p in enumerate(reader.pages)]"
+   ```
+4. Read text files to check for a materials reference (book name, unit, page numbers).
+5. Check for answer keys — scan `.typ` files for answer patterns ("Answer:", "*Answer*:", "Answers:"), or files with "answer"/"key" in name.
+6. Check for transcripts — scan `.typ` files for "Transcript", "Audio transcript" patterns, or files with "transcript" in name.
 
 ### Step 10: Resolve remaining items (chat only)
 All asked directly in chat. Only ask if the item was not auto-detected in Step 9:
@@ -153,7 +157,31 @@ Use the shape's `main_aim_format` template combined with:
 - Topic provided by user
 - CEFR level
 
-### Step 13: Confirm Output
+### Step 14: Three-Way Verification (MANDATORY — do not skip)
+
+Before confirming the output, run this verification checklist. Any failure means the JSON must be corrected before reporting.
+
+**Check 1 — Lesson Plan ↔ Source PDF:** For every exercise referenced in both the `stage` name and the `procedure` text:
+- Read the exercise header directly from the source PDF
+- Confirm the name and page number match exactly (e.g., PDF says "PRACTICE 2 — Recognizing Sentences" — the lesson plan must say the same, not "Practice 2B")
+- Confirm the page number maps correctly (PDF p.3 = textbook p.12 in a standard scan)
+
+**Check 2 — Lesson Plan ↔ Answer Key:** For every exercise referenced in the lesson plan:
+- The answer key must contain an answer for that exercise
+- The answer key must NOT contain answers for exercises that are NOT in the lesson plan (orphans)
+- If orphans exist, remove them from the answer key
+
+**Check 3 — Answer Key ↔ Source PDF:** For every exercise in the answer key:
+- Spot-check 2–3 answers per exercise against the source PDF to confirm they are correct
+- Confirm the answer key uses the same exercise numbering as the source PDF
+
+**Check 4 — Stage name + Procedure consistency:** Verify that the `stage` field and `procedure` field in every lesson stage use identical exercise naming. A mismatch means one of them is wrong.
+
+**Check 5 — Total time:** Sum all `time` fields and confirm they equal the stated `duration`. A mismatch means time allocations need adjusting.
+
+Pass all five checks before proceeding.
+
+### Step 15: Confirm Output
 Inform the user where the lesson plan has been saved.
 
 ## Template Files Location
@@ -178,16 +206,21 @@ Available templates:
 - `slideshow_url` is an optional field; populated by `lesson-plan-to-reveal` after deployment
 - The `lesson plan` section uses the selected shape's template structure
 - **CRITICAL: Always read the input folder contents BEFORE asking about materials, answer keys, or transcripts**
-- Scan markdown files for answer patterns ("Answer:", "**Answer:**", "Answers:") to auto-detect answer keys
-- Scan for transcript patterns ("Transcript", "Audio transcript") to auto-detect transcripts
+- Scan `.typ` files for answer patterns ("Answer:", "*Answer*:", "Answers:") to auto-detect answer keys
+- Scan `.typ` files for transcript patterns ("Transcript", "Audio transcript") to auto-detect transcripts
+- If `.pdf` files are present, extract their text using Python's `pypdf` library before scanning for patterns
 - Only ask the user about answers/transcripts if they are NOT found in the input folder
 - The `materials` field must use a concise reference format with each separate item as a bullet point, using Typst list syntax (e.g., "- Coursebook, Unit 3, pp 10-12\n- Worksheet: gap-fill task"). Use `- ` prefix with `\n` between items in the JSON string. NOT a descriptive summary of file contents.
 - **CRITICAL: Only include items explicitly stated by the user in materials.** Do NOT add derived/ancillary assets (e.g., logo files, background images, downloaded photos, slide assets). These are implementation details, not lesson materials.
 - If the materials reference is not found in the input folder files, ask the user for it
-- **In the procedure text, all exercise numbers must be precisely identified** (e.g., "Exercise A1" not "A Vocabulary preview", "While you watch Q1-Q3" not "While you watch", "Exercise C2" not "C matching"). Use the exact numbering from the source material.
+- **CRITICAL: Exercise names must be verified against the source PDF header, not inferred from memory or cross-file consistency.** Open the source PDF page and read the exercise header verbatim. The source PDF is the sole authority — an exercise name that is internally consistent across your files (lesson plan ↔ answer key) is still WRONG if it differs from the PDF. Common traps: using "Practice 2B" when the PDF says "PRACTICE 2 — Recognizing Sentences" with Part B as a sub-section; omitting the exercise subtitle.
+- **In the procedure text, both the `stage` field (name) AND the `procedure` field must use the exact exercise numbering.** An error in the stage name is invisible if only the procedure text is verified. Check both.
+- **Keep procedure text concise — do NOT reproduce full exercise instructions from the source material.** Reference the exercise number and a brief label only (e.g., "Students complete Practice 2B (Recognizing Sentences) in pairs"). The teacher has the textbook; they don't need the full exercise text copied into the lesson plan.
 - **Rule: When the user types a custom answer in the question tool, accept it literally. Do not remap to a predefined option.**
 - **Language quality: Write with temperature 0.7. Use natural, idiomatic English. Vary sentence structure. Avoid robotic patterns.**
-- **Answer key formatting: The answer key file must use proper Typst markup syntax (not markdown) — use `= Heading` for headings, `*bold*` for bold, `- ` for bullet lists. The OCR transcription section (if present) must have headings and paragraphs matching the original document structure — never leave it as a single run-on block of text. The existing `scripts/migrate_answer_keys.py` can convert old `.md` answer keys to `.typ`.**
+- **CRITICAL: Answer keys MUST use Typst markup syntax (.typ extension) — NEVER markdown (.md).** Even if the user explicitly asks for markdown, correct them and write Typst instead. Use `= Heading` for headings, `*bold*` for bold, `- ` for bullet lists, and `#table(...)` for tables. The pipeline reads `.typ` files raw (no conversion) and does NOT accept `.md` files — the markdown intermediary (`md_to_typst()`) was removed from `json_to_pdf.py` in May 2026. Any `.md` answer key will be silently ignored.
+- **Before writing any `.typ` file, read the Typst Pitfalls documentation first** at `.kilo/skills/create-pdf-lesson-file/SKILL.md` (section: **Typst Pitfalls — Compile Errors and Fixes**). This covers the five most common compile errors: bold at word boundaries, `#` escaping, raw block syntax, and table formatting. Do not guess Typst syntax from training data.**
+- **CRITICAL — Create the lesson plan stages FIRST, then create the answer key for ONLY the exercises those stages reference.** Never create an answer key covering all PDF exercises before finalising which exercises the lesson uses. An answer key with unreferenced exercises creates a false audit trail — the orphan exercise looks "covered" but is never taught.
 - **CRITICAL — Append only: When adding an answer key to an existing .typ file, ALWAYS append to the end of the file. NEVER overwrite or replace the file content. The original document text is the source of truth for all content verification. If the file needs reformatting, edit selectively — do not rewrite the entire file.**
 - **Answer key file content depends on lesson type:**
   - **Reading lessons**: Answer key only + transcript of any YouTube videos used in the lesson.

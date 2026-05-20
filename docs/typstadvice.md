@@ -469,18 +469,9 @@ This makes it easy to extract into a reusable module later.
 
 The `.typ` file is built directly in Python using `build_typ_content()` in `scripts/json_to_pdf.py`. Data is embedded inline using f-strings, avoiding any runtime evaluation or template engine. This is simpler, faster, and eliminates the Jinja2 dependency entirely.
 
-### 8.2 Markdown to Typst conversion (md_to_typst)
+### 8.2 Markdown intermediary removed
 
-The `md_to_typst()` function handles these conversions for legacy answer key files:
-
-| Markdown | Typst |
-|----------|-------|
-| `# Heading` | `= Heading` |
-| `### Heading` | `=== Heading` |
-| `**bold**` | `*bold*` |
-| `*italic*` | `_italic_` |
-| `- bullet` | `- bullet` |
-| `---` | `#line(length: 100%)` |
+The `md_to_typst()` function and `migrate_answer_keys.py` were removed in May 2026. Answer keys and transcripts must be written directly in `.typ` format. The pipeline no longer accepts `.md` files for answer keys or transcripts.
 
 ---
 
@@ -502,7 +493,7 @@ python scripts/test_typst_output.py `
 - **Every critical string** that must appear (header title, headings, key content)
 - **No placeholder text** (`--forbid-text "TODO"`, `--forbid-text "lorem"`)
 - **Expected page count** — page breaks must be correct
-- **Answer key and transcript** — if they exist, their content must be valid Typst markup (converted from .md by `migrate_answer_keys.py`)
+- **Answer key and transcript** — if they exist, their content must be valid `.typ` markup (not markdown — the markdown intermediary was removed in May 2026)
 
 ### 9.2 Iteration loop
 
@@ -524,7 +515,7 @@ do {
 | `--expect-text "Hello"` fails | Text is inside a `#show` transform | Check show rule returns content unchanged |
 | `--forbid-text "TODO"` fails | Placeholder left in template | Replace with static content or empty |
 | `--expect-page-count` fails | Wrong number of `#pagebreak()` | Count required page breaks from data |
-| Text appears garbled | Markdown conversion missed a `$` or `\` | Add escaping in `md_to_typst()` |
+| Text appears garbled | Unescaped `$` or `\` in Typst content | Escape with `\$` or `\\` |
 
 ---
 

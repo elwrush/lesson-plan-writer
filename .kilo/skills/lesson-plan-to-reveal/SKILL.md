@@ -16,10 +16,13 @@ Convert a lesson plan JSON into a reveal.js slideshow for ESL classroom delivery
 ## When to Use This Skill
 
 Use `lesson-plan-to-reveal` when converting a lesson plan JSON to slides. The skill:
-1. Copies the institution logo into `output/{subfolder}/slides/assets/`
-2. Copies `templates/base-slides-template.html` to `output/{subfolder}/slides/index.html`
-3. Builds slides one by one as raw HTML `<section>` elements, inserting them between `<div class="slides">` and `</div>`
-4. Reports the output path
+1. **Parses the lesson plan JSON** — reads `lesson_plan.stages[]` to enumerate every stage and map each to slide types
+2. **Reads source materials** — extracts exercise content from the source PDF and answer content from the answer key `.typ` file
+3. Copies the institution logo into `output/{subfolder}/slides/assets/`
+4. Copies `templates/base-slides-template.html` to `output/{subfolder}/slides/index.html`
+5. Builds slides one by one as raw HTML `<section>` elements, inserting them between `<div class="slides">` and `</div>`
+6. **Verifies every stage has at least one corresponding slide** — flags any stage that would be skipped
+7. Reports the output path
 
 ## Workflow
 
@@ -65,23 +68,93 @@ Background color reference:
 
 Pixabay background images (`data-background-image`, `data-background-opacity`) are NEVER used in generated output. All backgrounds use `data-background="<color>"`.
 
-### Step 4: Build slides
+### Step 4A: Parse the lesson plan — enumerate stages and map to slides
 
-There are two distinct workflows depending on the situation:
+**CRITICAL: The lesson plan JSON is the primary authority for slide content.** Read `lesson_plan.stages[]` from the JSON. Every stage MUST produce at least one slide. Do NOT use the generic "Slide ordering convention" below — that was an old artifact and caused missing stages. Derive slide order from stage order.
 
-#### A. New build (first generation from JSON)
+For each stage in `lesson_plan.stages[]`:
+1. Read the stage name, aim, procedure, time, and interaction from the JSON.
+2. Determine which slide type(s) this stage maps to, using the Stage-to-Slide Mapping table below.
+3. For any exercise referenced in the procedure (e.g., "Practice 2B"), **read the source PDF** to get the actual exercise content that students will see on screen.
+4. For any answer key referenced in the JSON, **read the answer key file** (.typ) and extract answer content for answer slides.
+5. Create the appropriate `<section>` elements.
 
-**Always write the entire `index.html` in a single Write tool call.** Do NOT copy the template and then incrementally replace sections with Edit tool calls — this is slow, fragile, and causes timeouts.
+**Stage-to-Slide Mapping** (use this to determine how many slides each stage needs):
 
-Instead:
-1. Read `templates/base-slides-template.html` once to get the `<head>`, `<style>`, `<body>`, and `<script>` boilerplate.
-2. Compose all `<section>` elements in memory.
-3. Write the complete file in one `Write` call to `output/{subfolder}/slides/index.html`.
-4. Then verify the output (Step 5).
+| Stage type (from name/purpose) | Slide(s) to create | Content source |
+|---|---|---|
+| Lead-in (discussion, error analysis) | 1 discussion slide + optional additional slides (e.g., auto-animate for assessment criteria) | Stage procedure + user's context |
+| Diagnostic / Test (Test 1, Test 2) | 1 task slide with the diagnostic items on screen (items derived from materials / PDF) | Source PDF exercises + stage procedure |
+| Teach / Clarifying | 1 slide per concept taught (e.g., sentence definition = 1 slide, command sentences = 1 slide, capitalization rules = 1 slide) | Source PDF content (definitions, rules, examples from the textbook) |
+| Controlled Practice / Practice X | 1 task slide (student-facing instructions + timer) + 1+ answer slides (fragment reveals with answers) | Source PDF exercise content + answer key file |
+| Freer Practice / Practice X | 1 task slide + 1+ answer slides | Source PDF exercise content + answer key file |
+| Wrap-up | 1 summary slide | Stage procedure + learning objectives from JSON |
+| Vocabulary (if pre-teach stage exists) | 1 slide per word (max 5) | Stage 11 pre-teach vocabulary selection |
 
-The boilerplate (lines 1-136 and lines 358-390 of the template) is always the same. Only the `<section>` elements inside `<div class="slides">` change per lesson.
+**Slide order**: Follow stage_number order from the JSON. Insert Title (slide 0) and Objective (slide 1) BEFORE stage 1. Insert End slide AFTER the last stage.
 
-#### B. Editing an existing slideshow
+**Speaker notes**: Every task slide and content slide must include `<aside class="notes">` containing:
+- Stage aim from the JSON (`stage_aim`)
+- Timing (`time` field in minutes)
+- Interaction pattern (`interaction` field)
+- The full procedure text (student-facing instructions on screen, teacher procedure in notes)
+- Do NOT put procedure text on screen — only student-facing task instructions
+
+**Materials**: For any exercise referenced in the procedure by name (e.g., "Practice 2B", "Practice 7"), read the source PDF file from the `inputs/` folder to get the exercise text. Build screen content from the PDF, not from your own paraphrasing. The exercise must look exactly as it does in the textbook (same items, same numbering).
+
+**Answers**: For any exercise that has an answer in the answer key, read the answer key `.typ` file and build answer table slides. Use `class="fragment answer-correct"` for correct answers, `class="fragment answer-incorrect"` for incorrect answers.
+
+### Step 4B: Build slides (new build)
+
+Write slide sections to a temp file, then splice them into the template. **Do NOT attempt to write the entire `index.html` in a single Write tool call** — at 600+ lines with Unicode content, the Write tool may reject or mangle the file. Do NOT copy the template and then incrementally replace sections with Edit tool calls — this is slow, fragile, and causes timeouts.
+
+Instead, use the **splice approach**:
+
+1. **Compose all `<section>` elements** in a temp file at `C:\Users\elwru\AppData\Local\Temp\kilo\slides_sections.html` using the Write tool.
+2. **Copy the template** to the output directory via PowerShell:
+   ```powershell
+   cp "templates/base-slides-template.html" "output/{subfolder}/slides/index.html"
+   ```
+3. **Run a Python splice script** that finds the `<div class="slides">` boundary in the template and inserts the sections, then updates the `<title>`:
+   ```python
+   import re
+   template_path = r"output/{subfolder}/slides/index.html"
+   sections_path = r"C:\Users\elwru\AppData\Local\Temp\kilo\slides_sections.html"
+   
+   with open(template_path, "r", encoding="utf-8") as f:
+       template = f.read()
+   with open(sections_path, "r", encoding="utf-8") as f:
+       sections = f.read()
+   
+   # Find the slides div boundary
+   start_marker = '<div class="slides">'
+   start_idx = template.find(start_marker)
+   
+   # Find the closing </div> that ends the slides div
+   # Template structure: <div class="slides"> ... (comments/patterns) ... </div> (closes slides) </div> (closes reveal) <script> tags
+   # Search after the last HTML comment end
+   search_from = start_idx + len(start_marker)
+   last_comment = template.rfind("-->", search_from, start_idx + 2000)
+   end_idx = template.find("</div>", max(search_from, last_comment + 3))
+   
+   result = template[:start_idx + len(start_marker)] + "\n\n" + sections + "\n" + template[end_idx:]
+   result = result.replace("<!-- TOPIC -->", lesson_title)
+   
+   with open(template_path, "w", encoding="utf-8") as f:
+       f.write(result)
+   ```
+4. **Update the `<title>`** by replacing `<!-- TOPIC -->` with the lesson topic.
+5. Then verify the output (Step 5).
+
+**Why this works:**
+- The Write tool call writes to the allowed `C:\Users\elwru\AppData\Local\Temp\kilo\` directory (no permission issues)
+- Python handles UTF-8 cleanly (no BOM, no PowerShell encoding corruption)
+- The splice is deterministic — finds `<div class="slides">` and the first `</div>` after the last HTML comment
+- No size limit concerns — sections and template are written separately
+
+The boilerplate (everything before `<div class="slides">` and everything after the closing `</div>` of the slides div) is always the same. Only the `<section>` elements inside `<!-- SLIDE N -->` comments change per lesson.
+
+#### C. Editing an existing slideshow
 
 When the user asks to modify an already-built slideshow (e.g., "change slide 7" or "add a new slide after the vocabulary"):
 1. Read the current `index.html`.
@@ -90,22 +163,20 @@ When the user asks to modify an already-built slideshow (e.g., "change slide 7" 
 
 **Rule**: Every slide is a raw `<section>` element inside `<div class="slides">`.
 
-**Slide ordering convention**:
-1. Title (with logo)
-2. Objective (3 outcomes, all visible)
-3. Lead-in (open question)
-4. Vocabulary (one slide per word, AFTER lead-in)
-5. Transition (red background, directive + foreshadow)
-6. Strategy block (auto-animate or pedagogical, if applicable)
-7. Task instruction (with timer)
-8. Answer slides (fragment reveals)
-9. (Repeat 5-8 for each reading stage)
-10. Transition → Post-reading discussion
-11. Transition → Wrap-up
-12. Summary ("What you can do now")
-13. End slide
-
 ### Step 5: Verify output
+
+**Verification approach:** Write a Python verification script to `C:\Users\elwru\AppData\Local\Temp\kilo\` that uses `in` operator checks against the file content. For any check that involves Unicode characters (em dashes `—`, en dashes `–`, smart quotes, special punctuation), use `repr()` or `.encode().hex()` comparison to avoid false failures from visually identical but codepoint-different characters.
+
+If a check fails, do NOT trust what the terminal displays (Unicode renders inconsistently). Instead:
+```python
+idx = content.find(check_words[0])  # search for first word
+if idx >= 0:
+    print(repr(content[idx:idx+80]))  # show exact bytes
+    print(content[idx:idx+80].encode("utf-8").hex())  # show hex
+```
+
+**Checklist:**
+- **CRITICAL — Stage coverage check**: Count the number of `<section>` slides created (excluding Title + End). Verify this matches the number of `lesson_plan.stages[]` items. Each stage must have ≥ 1 corresponding `<section>` slide. If a stage has no slides, flag it immediately.
 - Check `index.html` exists in the slides directory
 - Check `timer-plugin.js` and `timer-plugin.css` exist in the slides directory
 - Verify title slide contains `<img src="assets/logo.png" class="title-logo" />`
@@ -862,6 +933,76 @@ Per `knowledge-base\revealjs-packed.json` (line 127-134):
 .reveal .fragment.strike.visible { text-decoration: line-through; }
 ```
 **Do NOT override this CSS** in the `<style>` block. Text is always visible; strikethrough appears on click only. Any custom `.reveal .fragment.strike` CSS in the page will break this behavior.
+
+## Common Pitfalls — Lessons from Build Sessions
+
+### Unicode: em dashes, en dashes, hyphens
+
+These three characters are **different Unicode codepoints** but look identical on screen:
+
+| Character | Codepoint | Name | Python escape |
+|-----------|-----------|------|---------------|
+| `—` | U+2014 | Em dash | `\u2014` |
+| `–` | U+2013 | En dash | `\u2013` |
+| `-` | U+002D | Hyphen | (keyboard minus) |
+
+**Rule:** Use em dash (`—`, U+2014) consistently throughout all slides — never mix with en dash. In Python verification scripts, define `ED = "\u2014"` once and reuse.
+
+**If a `string in content` check fails unexpectedly:** The console shows `�` for these characters. Dump hex bytes near the target:
+
+```python
+idx = content.find("first_word_of_target")
+if idx >= 0:
+    print(content[idx:idx+60].encode("utf-8").hex())
+    print(repr(content[idx:idx+60]))
+```
+
+Compare hex sequences to find codepoint mismatches.
+
+### Temp file workflow (proven pattern)
+
+This is the ONLY reliable approach given the tooling constraints:
+
+1. **Write slide sections** to `C:\Users\elwru\AppData\Local\Temp\kilo\slides_sections.html` via the Write tool (this path has no permission restrictions)
+2. **Copy template** to output dir via PowerShell `cp`
+3. **Write splice script** to `C:\Users\elwru\AppData\Local\Temp\kilo\splice_slides.py` — uses template boundary detection (see Step 4B for the pattern)
+4. **Run splice script** via `python ...\splice_slides.py`
+5. **Write verification script** to `C:\Users\elwru\AppData\Local\Temp\kilo\verify_slides.py` — uses `in` + `repr()` for Unicode-safe checking (see Step 5)
+6. **Clean up** temp files only after verification passes
+
+**Do NOT:**
+- Write large files (>300 lines) directly via the Write tool to `output/` — may hit permission blocks
+- Use PowerShell `>`, `Out-File`, or `Set-Content` for files with Unicode characters — they add BOM or corrupt codepoints
+- Use `\u2014` in PowerShell strings — PowerShell's quoting will break the escape
+
+### Auto-animate vs Fragments — when to use which
+
+**Use auto-animate** when the slide shows a **transformation** — content that changes, combines, or builds structurally across slides. Students need to see the process, not just the result:
+
+- Verb tense changing (walk → walked → had walked)
+- Sentence structure assembly (adding subject, then verb, then object across slides)
+- Scoring rubric reveals where criteria highlight/unhighlight across slides
+- Any "before and after" where elements morph (lowercase → capitals, singular → plural)
+- Grammatical transformations (active → passive, direct → reported speech)
+
+Auto-animate requirements:
+- All sibling `<section>` elements consecutive in `<div class="slides">` — no other slides between them
+- Matching `data-auto-animate-id` on all sections in the block
+- `data-id` attributes on elements that persist between slides (content that changes color, size, or opacity)
+- `autoAnimateUnmatched: true` in `Reveal.initialize()` for elements that appear/disappear between slides — already in the template
+
+**Use `class="fragment"`** when the slide just **reveals content** that was already there but hidden — no morphing, no transformation:
+
+- Answer reveals (✓/✗ appearing, correct answers)
+- Instruction steps appearing one by one
+- Lists showing incrementally (definition lists, vocabulary)
+- Examples appearing after a rule is stated
+- Strategy steps revealed one at a time on a pedagogical slide
+- Any content that simply appears (opacity 0 → 1) without changing
+
+**Key test:** If the element changes form between slides (text changes, borders appear, case changes), use auto-animate. If the element just appears/disappears, use fragments.
+
+**Bad candidates for auto-animate:** Answer reveal slides, definition lists, example reveals, task instructions — all of these should use fragments instead.
 
 ## reveal.js Codebase
 

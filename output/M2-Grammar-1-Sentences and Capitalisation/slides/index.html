@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Sentences and Capitalization, Part 1</title>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            /* =============================================
+               LESSON PLAN WRITER 3 — BASE SLIDE STYLES
+               Authoritative stylesheet for all presentations.
+               ============================================= */
+
+            /* --- CEFR Badges --- */
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                padding: 4px 12px;
+                border-radius: 4px;
+                font-size: 0.4em;
+                vertical-align: middle;
+                margin-left: 10px;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+
+            /* --- Title logo --- */
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+
+            /* --- Labels & captions --- */
+            .reveal .aim-label {
+                font-size: 0.7em;
+                color: #ddd;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            .reveal .material-ref {
+                font-size: 0.65em;
+                color: #888;
+                font-style: italic;
+                margin-top: 0.5em;
+            }
+            .reveal .source-cite {
+                font-size: 0.7em;
+                color: #666;
+                font-style: italic;
+                margin-top: 0.3em;
+            }
+            .reveal .image-caption {
+                font-size: 0.55em;
+                color: #888;
+                text-align: center;
+                margin-top: 0.2em;
+            }
+
+            /* --- Vocabulary slides --- */
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            }
+
+            /* --- Slide type icons (Font Awesome, teal/red/orange) --- */
+            .reveal .slide-icon {
+                font-size: 1.6em;
+                margin-bottom: 0.2em;
+                display: block;
+                text-align: center;
+            }
+            .reveal .slide-icon.transition-icon { color: rgba(255,255,255,0.85); }
+            .reveal .slide-icon.pedagogical-icon { color: rgba(255,255,255,0.9); }
+            .reveal .slide-icon.objective-icon { color: rgba(255,221,0,0.85); }
+
+            /* --- Pedagogical strategy slides (teal background) --- */
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal section.pedagogical .strategy-tip {
+                font-size: 0.85em;
+                font-style: italic;
+                color: rgba(255,255,255,0.85);
+                margin-bottom: 0.5em;
+            }
+            .reveal section.pedagogical .evidence {
+                font-size: 0.8em;
+                background: rgba(0,0,0,0.3);
+                padding: 0.4em 0.6em;
+                border-radius: 4px;
+                border-left: 3px solid rgba(255,255,255,0.4);
+            }
+
+            /* --- Global text shadow for readability --- */
+            .reveal p,
+            .reveal li,
+            .reveal h1, .reveal h2, .reveal h3,
+            .reveal h4, .reveal h5, .reveal h6 {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+
+            /* --- Fragment styles --- */
+            .reveal .fragment.highlight-green {
+                background: rgba(0, 100, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.highlight-red {
+                background: rgba(100, 0, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-correct.visible {
+                background: rgba(0, 120, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-incorrect.visible {
+                background: rgba(120, 0, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal table.answer-table th {
+                background: rgba(0, 0, 0, 0.2);
+                font-weight: bold;
+            }
+            .reveal .fragment.strike {
+                text-decoration: line-through;
+                opacity: 0.6;
+            }
+
+            /* --- YouTube iframe container (16:9 responsive) --- */
+            .reveal .iframe-container {
+                position: relative;
+                width: 90%;
+                padding-bottom: 50.625%;
+                height: 0;
+                overflow: hidden;
+                margin: 0 auto 0.5em;
+            }
+            .reveal .iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* --- Diagnostic talk structure slides (pedagogical, teal) --- */
+            .reveal .structure-talk h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal .structure-talk p,
+            .reveal .structure-talk li  { color: #fff; }
+            .reveal .structure-talk .structure-step {
+                font-size: 1.1em;
+                margin-bottom: 0.6em;
+            }
+            .reveal .structure-talk .transition-words {
+                font-size: 0.9em;
+                color: #ffdd00;
+                font-style: italic;
+                margin-top: 0.8em;
+                padding: 0.4em 0.6em;
+                background: rgba(0,0,0,0.2);
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+
+<!-- SLIDE 0: Title --><section data-background-image="assets/pixabay_1853262_1.jpg" data-background-opacity="0.5">    <img src="assets/logo.png" class="title-logo" alt="Logo" />    <h1>Sentences and Capitalization <span class="cefr-badge B1">B1</span></h1>    <p><em>Write complete sentences and use capitals the right way — and raise your PET writing score</em></p></section>
+
+<!-- SLIDE 1: Objective --><section>    <i class="fa-solid fa-seedling slide-icon objective-icon"></i>    <h2>Here's what you'll be able to do</h2>    <ul>        <li>Tell if a group of words is a real sentence or not</li>        <li>Use six rules to put capital letters in the right places</li>        <li>Check your own writing for better sentences and capitals</li>    </ul>    <p><em>These skills will help you get a higher score on the PET writing test!</em></p>
+</section>
+
+<!-- SLIDE 2: Lead-in — Discussion --><section data-background="#1a1a2e">    <i class="fa-solid fa-eye slide-icon"></i>    <h2>Let's get Started</h2>    <h3>What's your biggest grammar problem when you write in English?</h3>    <p><em>Think for 20 seconds. Then tell your partner.</em></p>    <aside class="notes">        Stage 1 · 6 min · T-Ss, Ss-Ss        Pairs discuss. 2 min. Elicit ideas — guide toward punctuation, grammar, capital letters.        Then explain: "I've analyzed your recent writing. Two patterns keep appearing — sentences that aren't complete, and missing capital letters. These are the errors costing you marks."
+    </aside>
+</section>
+
+<!-- SLIDE 3: Diagnosis reveal -->
+<section data-background="#1a1a2e">
+    <h2>Here's what I found in your writing</h2>
+    <p style="margin-bottom: 1em;"><em>Two problems keep appearing again and again...</em></p>
+    <div style="display: flex; gap: 2em; justify-content: center; margin-top: 0.5em;">
+        <div style="background: rgba(180, 40, 40, 0.3); border-left: 4px solid #e74c3c; padding: 0.8em 1.2em; border-radius: 4px; flex: 1; max-width: 400px; text-align: left;">
+            <p style="color: #e74c3c; font-weight: bold; font-size: 1.2em;">Problem #1</p>
+            <p><strong>Incomplete sentences</strong></p>
+            <p style="font-size: 0.85em; color: #ccc;"><em>"Because it was raining."</em> — What happened?</p>
+        </div>
+        <div style="background: rgba(180, 40, 40, 0.3); border-left: 4px solid #e74c3c; padding: 0.8em 1.2em; border-radius: 4px; flex: 1; max-width: 400px; text-align: left;">
+            <p style="color: #e74c3c; font-weight: bold; font-size: 1.2em;">Problem #2</p>
+            <p><strong>Missing capital letters</strong></p>
+            <p style="font-size: 0.85em; color: #ccc;"><em>"my friend john lives in paris."</em> — All wrong!</p>
+        </div>
+    </div>
+    <p style="margin-top: 1.5em; color: #ffdd00;"><strong>These errors cost you marks in the PET Writing test.</strong></p>
+    <aside class="notes">
+        Stage 1 · 6 min · T-Ss
+        Elicit ideas first. Then reveal: show the two concrete problems from analyzing their writing.
+        Connect to PET: Organization band (sentence completion) and Language band (capitalization).
+    </aside>
+</section>
+
+<!-- SLIDE 4: PET Scale (auto-animate part 1) --><section data-background="#1a1a2e" data-auto-animate data-auto-animate-id="pet-scale">    <h2>Why does this matter?</h2>    <p>The PET Writing test checks your work in <strong>four ways</strong>:</p>    <table style="font-size: 0.85em; margin: 0 auto; border-collapse: collapse;">        <thead>            <tr>                <th style="padding: 0.5em 1em; border-bottom: 1px solid #555;" data-id="content-col">Content</th>                <th style="padding: 0.5em 1em; border-bottom: 1px solid #555;" data-id="comm-col">Communicative Achievement</th>                <th style="padding: 0.5em 1em; border-bottom: 1px solid #555;" data-id="org-col">Organization</th>
+                <th style="padding: 0.5em 1em; border-bottom: 1px solid #555;" data-id="lang-col">Language</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 0.5em 1em; opacity: 0.6;" data-id="content-cell">Did you talk about the right things?</td>
+                <td style="padding: 0.5em 1em; opacity: 0.6;" data-id="comm-cell">Did you use the right style?</td>
+                <td style="padding: 0.5em 1em; opacity: 0.6;" data-id="org-cell">Are your sentences <strong>complete</strong>?</td>
+                <td style="padding: 0.5em 1em; opacity: 0.6;" data-id="lang-cell">Are your <strong>capitals</strong> right?</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- SLIDE 5: PET Scale (auto-animate part 2) --><section data-background="#1a1a2e" data-auto-animate data-auto-animate-id="pet-scale">    <h2>Why does this matter?</h2>    <p>The PET Writing test checks your work in <strong>four ways</strong>:</p>    <table style="font-size: 0.85em; margin: 0 auto; border-collapse: collapse;">        <thead>            <tr>                <th style="padding: 0.5em 1em; border-bottom: 1px solid #555; opacity: 0.3;" data-id="content-col">Content</th>                <th style="padding: 0.5em 1em; border-bottom: 1px solid #555; opacity: 0.3;" data-id="comm-col">Communicative Achievement</th>                <th style="padding: 0.5em 1em; border-bottom: 2px solid #ffdd00; color: #ffdd00; font-size: 1.15em;" data-id="org-col">Organization</th>
+                <th style="padding: 0.5em 1em; border-bottom: 2px solid #ffdd00; color: #ffdd00; font-size: 1.15em;" data-id="lang-col">Language</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 0.5em 1em; opacity: 0.15;" data-id="content-cell">Did you talk about the right things?</td>
+                <td style="padding: 0.5em 1em; opacity: 0.15;" data-id="comm-cell">Did you use the right style?</td>
+                <td style="padding: 0.5em 1em; color: #ffdd00; font-size: 1.1em;" data-id="org-cell">Are your sentences <strong>complete</strong>?</td>
+                <td style="padding: 0.5em 1em; color: #ffdd00; font-size: 1.1em;" data-id="lang-cell">Are your <strong>capitals</strong> right?</td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="color: #ffdd00; margin-top: 1em;"><em>If your sentences aren't complete and capitals are missing,<br/>you can't score above <strong>Band 2</strong> in Organization or Language.</em></p>
+    <aside class="notes">
+        Stage 1 · 6 min · T-Ss, Ss-Ss
+        Explain: "I've analyzed your writing. Two patterns — sentences that aren't complete, and missing capital letters. These are the errors costing you marks."
+        Display PET Writing scale. Use auto-animate to zoom in on Organization and Language bands.
+    </aside>
+</section>
+
+<!-- SLIDE 6: Test 1 — Sentence Diagnostic (1–3) --><section data-background="#1a1a2e">    <i class="fa-solid fa-pencil slide-icon"></i>    <h2>Test yourself — Is it a sentence?</h2>    <p><em>Look at each group of words. Is it a real sentence?</em></p>    <p><em>Do NOT show your answers yet!</em></p>    <table style="font-size: 0.9em; margin: 0 auto; text-align: left;">        <tr>            <td style="padding: 0.3em 1em;">1. He is a student.</td>            <td style="padding: 0.3em 1em;"><span class="fragment" style="color: #4caf50;">✓</span></td>
+        </tr>
+        <tr>
+            <td style="padding: 0.3em 1em;">2. Doesn't like coffee.</td>
+            <td style="padding: 0.3em 1em;"><span class="fragment" style="color: #e74c3c;">✗</span></td>
+        </tr>
+        <tr>
+            <td style="padding: 0.3em 1em;">3. The man bought a new car.</td>
+            <td style="padding: 0.3em 1em;"><span class="fragment" style="color: #4caf50;">✓</span></td>
+        </tr>
+    </table>
+    <aside class="notes">
+        Stage 2 · 5 min · S, Ss-Ss, T-Ss
+        Aim: To gauge how accurately learners can distinguish complete sentences from fragments before any teaching input
+        3 min individual. 2 min pair check — do NOT give answers yet.
+        Teacher surveys results to identify most confused items.
+    </aside>
+</section>
+
+<!-- SLIDE 7: Test 1 — Sentence Diagnostic (4–6) --><section data-background="#1a1a2e">    <p style="margin-bottom: 0.5em;"><em>Continue — mark each one ✓ or ✗</em></p>    <table style="font-size: 0.9em; margin: 0 auto; text-align: left;">        <tr>            <td style="padding: 0.3em 1em;">4. The children very happy.</td>            <td style="padding: 0.3em 1em;"><span class="fragment" style="color: #e74c3c;">✗</span></td>        </tr>        <tr>            <td style="padding: 0.3em 1em;">5. Stand up!</td>
+            <td style="padding: 0.3em 1em;"><span class="fragment" style="color: #4caf50;">✓</span></td>
+        </tr>
+        <tr>
+            <td style="padding: 0.3em 1em;">6. Because it's raining.</td>
+            <td style="padding: 0.3em 1em;"><span class="fragment" style="color: #e74c3c;">✗</span></td>
+        </tr>
+    </table>
+</section>
+
+<!-- SLIDE 8: Test 1 — Sentence Diagnostic (7–8) --><section data-background="#1a1a2e">    <p style="margin-bottom: 0.5em;"><em>Last two — mark each one ✓ or ✗</em></p>    <table style="font-size: 0.9em; margin: 0 auto; text-align: left;">        <tr>            <td style="padding: 0.3em 1em;">7. I want to start my own business.</td>            <td style="padding: 0.3em 1em;"><span class="fragment" style="color: #4caf50;">✓</span></td>        </tr>        <tr>            <td style="padding: 0.3em 1em;">8. Don't worry about the test.</td>
+            <td style="padding: 0.3em 1em;"><span class="fragment" style="color: #4caf50;">✓</span></td>
+        </tr>
+    </table>
+</section>
+
+<!-- SLIDE 9: Test 2 — Capitalization Diagnostic (entry, no capitals) --><section data-background="#1a1a2e" data-auto-animate data-auto-animate-id="cap-diagnostic">    <i class="fa-solid fa-pencil slide-icon"></i>    <h2>Test yourself — Where do the capitals go?</h2>    <p><em>Read this paragraph. Underline the letters that should be capitals.</em></p>    <div style="text-align: left; font-size: 1em; line-height: 1.6; max-width: 850px; margin: 0.5em auto; padding: 0.5em 1em; border-left: 3px solid #ffdd00;">        <p data-id="para"><span data-id="w1">my</span> friend <span data-id="w2">john</span> visited <span data-id="w3">paris</span> last summer. <span data-id="w4">he</span> saw the <span data-id="w5">eiffel</span> tower and the <span data-id="w6">louvre</span> museum. <span data-id="w7">i</span> think <span data-id="w8">french</span> people are very friendly. <span data-id="w9">john</span> speaks <span data-id="w10">french</span> and <span data-id="w11">english</span> fluently. <span data-id="w12">we</span> plan to visit <span data-id="w13">tokyo</span> next year.</p>    </div>    <aside class="notes">        Stage 3 · 5 min · S, Ss-Ss, T-Ss
+        Aim: To assess which capitalization rules learners already apply correctly and which need explicit instruction
+        3 min individual. 2 min pair check — do NOT give answers yet.
+        Errors test all 6 rules: R1 (My, He, We), R2 (i), R3 (john x2), R4 (french x2, english), R6 (paris, eiffel, louvre, tokyo).
+        Teacher notes which rules students missed most.
+    </aside>
+</section>
+
+<!-- SLIDE 10: Test 2 — Capitalization Diagnostic (reveal, capitals animated in) --><section data-background="#1a1a2e" data-auto-animate data-auto-animate-id="cap-diagnostic">    <i class="fa-solid fa-pencil slide-icon"></i>    <h2>Test yourself — Where do the capitals go?</h2>    <p><em>Here are the capitals that were missing:</em></p>    <div style="text-align: left; font-size: 1em; line-height: 1.6; max-width: 850px; margin: 0.5em auto; padding: 0.5em 1em; border-left: 3px solid #ffdd00;">        <p data-id="para"><span data-id="w1" style="color: #ffdd00; font-weight: bold;">My</span> friend <span data-id="w2" style="color: #ffdd00; font-weight: bold;">John</span> visited <span data-id="w3" style="color: #ffdd00; font-weight: bold;">Paris</span> last summer. <span data-id="w4" style="color: #ffdd00; font-weight: bold;">He</span> saw the <span data-id="w5" style="color: #ffdd00; font-weight: bold;">Eiffel</span> tower and the <span data-id="w6" style="color: #ffdd00; font-weight: bold;">Louvre</span> museum. <span data-id="w7" style="color: #ffdd00; font-weight: bold;">I</span> think <span data-id="w8" style="color: #ffdd00; font-weight: bold;">French</span> people are very friendly. <span data-id="w9" style="color: #ffdd00; font-weight: bold;">John</span> speaks <span data-id="w10" style="color: #ffdd00; font-weight: bold;">French</span> and <span data-id="w11" style="color: #ffdd00; font-weight: bold;">English</span> fluently. <span data-id="w12" style="color: #ffdd00; font-weight: bold;">We</span> plan to visit <span data-id="w13" style="color: #ffdd00; font-weight: bold;">Tokyo</span> next year.</p>    </div>    <aside class="notes">        Stage 3 · 5 min · S, Ss-Ss, T-Ss
+        After pair check, advance to reveal capitals. Discuss rules that confused most students.
+        Note: "i" → "I" (R2), "french" → "French" (R4), place names (R6), first word of sentence (R1).
+    </aside>
+</section>
+
+<!-- SLIDE 11: Transition → Let's learn the rules --><section data-background="#c0392b">    <i class="fa-solid fa-forward slide-icon transition-icon"></i>    <h2>From Testing to Learning</h2>    <p>You've seen where the problems are.</p>    <p>Now let's learn the rules — what makes a real sentence?</p>    <aside class="notes">        Stage 4 · 10 min · T-Ss        Transition from diagnostic to teaching phase.        Signal shift: "You've tested yourselves. Now I'm going to show you exactly how to fix these problems."
+    </aside>
+</section>
+
+<!-- SLIDE 12: Teach — What is a sentence? --><section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">    <span style="font-size: 1.5em; color: rgba(255,255,255,0.9);"><i class="fa-solid fa-list-check slide-icon pedagogical-icon"></i></span>    <h2>What is a sentence?</h2>    <p style="font-size: 1.1em; margin-top: 0.8em;">A sentence must have:</p>    <table style="font-size: 0.85em; margin: 0.3em auto; border-collapse: collapse; width: 95%;">        <tr class="fragment">            <td style="text-align: right; padding: 0.2em 0.5em; border: none; width: 27%;">a <strong style="color:#ffdd00;">subject</strong></td>            <td style="padding: 0.2em 0.5em; border: none; width: 30%;"><em>who or what does the action</em></td>
+            <td style="padding: 0.2em 0.5em; border: none; color: #ff8888; font-size: 0.9em;">"Is very hot today." — No subject! <span style="color:#ff4444;">✗</span></td>
+        </tr>
+        <tr class="fragment">
+            <td style="text-align: right; padding: 0.2em 0.5em; border: none;">a <strong style="color:#ffdd00;">verb</strong></td>
+            <td style="padding: 0.2em 0.5em; border: none;"><em>the action or state</em></td>
+            <td style="padding: 0.2em 0.5em; border: none; color: #ff8888; font-size: 0.9em;">"The children hungry." — No verb! <span style="color:#ff4444;">✗</span></td>
+        </tr>
+        <tr class="fragment">
+            <td style="text-align: right; padding: 0.2em 0.5em; border: none;">a <strong style="color:#ffdd00;">complete thought</strong></td>
+            <td style="padding: 0.2em 0.5em; border: none;"><em>the idea is finished</em></td>
+            <td style="padding: 0.2em 0.5em; border: none; color: #ff8888; font-size: 0.9em;">"Because it's raining." — Not a complete thought! <span style="color:#ff4444;">✗</span></td>
+        </tr>
+        <tr class="fragment">
+            <td colspan="3" style="padding: 0.3em 0.5em; border: none; color: #ffdd00; text-align: center;">✓ "He speaks three languages fluently." — Subject + verb + complete thought = <strong>SENTENCE!</strong></td>
+        </tr>
+    </table>
+    <aside class="notes">
+        Stage 4 · 10 min · T-Ss
+        Aim: To clarify the sentence definition, targeting only the areas the diagnostics exposed as weak
+        Use 2-3 examples from Test 1 to illustrate each criterion.
+    </aside>
+</section>
+
+<!-- SLIDE 13: Teach — Command Sentences --><section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">    <span style="font-size: 1.5em; color: rgba(255,255,255,0.9);"><i class="fa-solid fa-person-walking slide-icon pedagogical-icon"></i></span>    <h2>One Exception — Commands</h2>    <p style="margin-top: 0.8em;">The subject is always <strong style="color:#ffdd00;">you</strong> (understood).</p>    <p style="margin-top: 0.6em; font-size: 0.95em;"><strong>Commands:</strong> <em>Be quiet.</em> &nbsp; <em>Wait for me!</em> &nbsp; <em>Speak slowly.</em></p>    <p style="font-size: 0.95em;"><strong>Negative:</strong> <em>Don't eat so much!</em> &nbsp; <em>Don't worry.</em></p>    <aside class="notes">        Stage 4 · 10 min total · T-Ss        Introduce command sentences as the exception (subject 'you' is understood).
+    </aside>
+</section>
+
+<!-- SLIDE 14: Quick check — Commands --><section data-background="#1a1a2e">    <i class="fa-solid fa-pencil slide-icon"></i>    <h2>Quick check</h2>    <p><em>Open your book to Practice 2A (p. 12).</em></p>    <p style="color: #ffdd00; font-size: 1em;"><strong>Which two are command sentences?</strong></p>    <table style="font-size: 1.2em; margin: 0.5em auto; text-align: left; border-collapse: collapse;">
+        <tr><td style="padding: 0.3em 1em;">1. He is a student.</td><td class="fragment" style="padding: 0.3em 1em;">✗</td></tr>
+        <tr><td style="padding: 0.3em 1em;">6. Hurry!</td><td class="fragment" style="padding: 0.3em 1em;">✓</td></tr>
+        <tr><td style="padding: 0.3em 1em;">10. Don't be late.</td><td class="fragment" style="padding: 0.3em 1em;">✓</td></tr>
+    </table>
+    <aside class="notes">
+        Stage 4 · 10 min total · T-Ss
+        Ss complete Practice 2A (Commands, p. 12) — #6 (Hurry!) and #10 (Don't be late) are commands.
+        Underline verbs: Hurry, Don't be.
+    </aside>
+</section>
+
+<!-- SLIDE 15: Transition → Capital letters --><section data-background="#c0392b">    <i class="fa-solid fa-forward slide-icon transition-icon"></i>    <h2>From Commands to Capitals</h2>    <p>Now let's look at the six rules for capital letters.</p>    <aside class="notes">
+        Stage 4 · 10 min · T-Ss
+        Transition from commands to capitalization rules.
+        Signal shift: "Next — the other big problem from your writing. Let's learn the six rules."
+    </aside>
+</section>
+
+<!-- SLIDE 16: Teach — Capitalization Rules 1-3 --><section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">    <span style="font-size: 1.5em; color: rgba(255,255,255,0.9);"><i class="fa-solid fa-font slide-icon pedagogical-icon"></i></span>    <h2>Capital Letters — Six Rules (1–3)</h2>    <table style="font-size: 0.85em; margin: 0.5em auto; text-align: left; border-collapse: collapse;">        <tr>            <td style="padding: 0.5em 1em; color: #ffdd00; vertical-align: top;"><strong>R1</strong></td>            <td style="padding: 0.5em 0.5em;"><strong>First word in a sentence</strong></td>            <td style="padding: 0.5em 1em;"><em>My neighbor is a mechanic.</em></td>        </tr>
+        <tr>
+            <td style="padding: 0.5em 1em; color: #ffdd00; vertical-align: top;"><strong>R2</strong></td>
+            <td style="padding: 0.5em 0.5em;"><strong>The pronoun I</strong></td>
+            <td style="padding: 0.5em 1em;"><em>My friends and I often study together.</em></td>
+        </tr>
+        <tr>
+            <td style="padding: 0.5em 1em; color: #ffdd00; vertical-align: top;"><strong>R3</strong></td>
+            <td style="padding: 0.5em 0.5em;"><strong>Names of people and their titles</strong></td>
+            <td style="padding: 0.5em 1em;"><em>President Putin / Professor Jones</em><br/><span style="color:#aaa;">BUT: a president / a professor</span></td>
+        </tr>
+    </table>
+    </section>
+
+<!-- SLIDE 17: Teach — Capitalization Rules 4-6 --><section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">    <span style="font-size: 1.5em; color: rgba(255,255,255,0.9);"><i class="fa-solid fa-font slide-icon pedagogical-icon"></i></span>    <h2>Capital Letters — Six Rules (4–6)</h2>    <table style="font-size: 0.85em; margin: 0.5em auto; text-align: left; border-collapse: collapse;">        <tr>            <td style="padding: 0.5em 1em; color: #ffdd00; vertical-align: top;"><strong>R4</strong></td>            <td style="padding: 0.5em 0.5em;"><strong>Nationalities, languages, religions, ethnic groups</strong></td>            <td style="padding: 0.5em 1em;"><em>Swedish, English, Muslim, Asian</em></td>        </tr>
+        <tr>
+            <td style="padding: 0.5em 1em; color: #ffdd00; vertical-align: top;"><strong>R5</strong></td>
+            <td style="padding: 0.5em 0.5em;"><strong>School courses with numbers</strong></td>
+            <td style="padding: 0.5em 1em;"><em>History 101 / Physics 352</em><br/><span style="color:#aaa;">BUT: history / math / physics</span></td>
+        </tr>
+        <tr>
+            <td style="padding: 0.5em 1em; color: #ffdd00; vertical-align: top;"><strong>R6</strong></td>
+            <td style="padding: 0.5em 0.5em;"><strong>Specific places on a map</strong></td>
+            <td style="padding: 0.5em 1em;"><em>South America, Lake Titicaca, New York City</em></td>
+        </tr>
+    </table>
+    <aside class="notes">
+        Stage 4 · 10 min · T-Ss
+        Display the six rules on screen one at a time. For each rule, reference the correct answer from Test 2 as an example.
+        Spend extra time on rules students missed most in the diagnostic. Quick oral check: "What do we capitalize?"
+    </aside>
+</section>
+
+<!-- SLIDE 18: Practice 2B — Task Instruction -->
+<section data-background="#1a1a2e" data-timer="600">
+    <i class="fa-solid fa-pencil slide-icon"></i>
+    <h2>Practice 2B — Recognizing Sentences</h2>
+    <p><em>Open your book to Practice 2B (p. 12).</em></p>
+    <ul>
+        <li>Work in pairs through all 13 items.</li>
+        <li>Mark each one <strong>S</strong> (sentence) or <strong>NS</strong> (not a sentence).</li>
+        <li>For each NS item, write the reason — no subject? no verb? incomplete thought?</li>
+    </ul>
+    <aside class="notes">
+        Stage 5 · 10 min · Ss-Ss, T-Ss
+        Demo item 1 together. 8 min pair work. Then whole-class feedback.
+        For each NS item, nominate a different pair to explain why.
+    </aside>
+</section>
+
+<!-- SLIDE 19: Practice 2B — Answers (1–3) --><section data-background="#1e7e34">    <h2>Practice 2B — Answers (1–3)</h2>    <p class="aim-label">Recognizing Sentences</p>    <table class="answer-table">        <thead><tr><th>#</th><th>Word Group</th><th>Answer</th><th>Reason</th></tr></thead>        <tbody>            <tr>                <td>1</td><td>Is very hot today.</td>                <td class="fragment answer-incorrect">NS</td>
+                <td class="fragment">No subject</td>
+            </tr>
+            <tr>
+                <td>2</td><td>It is very hot today.</td>
+                <td class="fragment answer-correct">S</td>
+                <td class="fragment">—</td>
+            </tr>
+            <tr>
+                <td>3</td><td>My new classmate from Brazil.</td>
+                <td class="fragment answer-incorrect">NS</td>
+                <td class="fragment">No verb</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- SLIDE 20: Practice 2B — Answers (4–6) --><section data-background="#1e7e34">    <h2>Practice 2B — Answers (4–6)</h2>    <p class="aim-label">Recognizing Sentences</p>    <table class="answer-table">        <thead><tr><th>#</th><th>Word Group</th><th>Answer</th><th>Reason</th></tr></thead>        <tbody>            <tr>                <td>4</td><td>He speaks three languages fluently.</td>                <td class="fragment answer-correct">S</td>
+                <td class="fragment">—</td>
+            </tr>
+            <tr>
+                <td>5</td><td>Is very handsome.</td>
+                <td class="fragment answer-incorrect">NS</td>
+                <td class="fragment">No subject</td>
+            </tr>
+            <tr>
+                <td>6</td><td>He wants to start his own business.</td>
+                <td class="fragment answer-correct">S</td>
+                <td class="fragment">—</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- SLIDE 21: Practice 2B — Answers (7–9) --><section data-background="#1e7e34">    <h2>Practice 2B — Answers (7–9)</h2>    <p class="aim-label">Recognizing Sentences</p>    <table class="answer-table">        <thead><tr><th>#</th><th>Word Group</th><th>Answer</th><th>Reason</th></tr></thead>        <tbody>            <tr>                <td>7</td><td>He isn't married.</td>
+                <td class="fragment answer-correct">S</td>
+                <td class="fragment">—</td>
+            </tr>
+            <tr>
+                <td>8</td><td>Enjoys many sports, especially baseball.</td>
+                <td class="fragment answer-incorrect">NS</td>
+                <td class="fragment">No subject</td>
+            </tr>
+            <tr>
+                <td>9</td><td>Don't sleep in class.</td>
+                <td class="fragment answer-correct">S</td>
+                <td class="fragment">Command sentence (subject <em>you</em> understood)</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- SLIDE 22: Practice 2B — Answers (10–12) --><section data-background="#1e7e34">    <h2>Practice 2B — Answers (10–12)</h2>    <p class="aim-label">Recognizing Sentences</p>    <table class="answer-table">        <thead><tr><th>#</th><th>Word Group</th><th>Answer</th><th>Reason</th></tr></thead>        <tbody>            <tr>                <td>10</td><td>The children hungry.</td>                <td class="fragment answer-incorrect">NS</td>                <td class="fragment">No verb</td>            </tr>            <tr>                <td>11</td><td>They didn't like.</td>                <td class="fragment answer-incorrect">NS</td>                <td class="fragment">Incomplete thought — <em>like</em> requires an object</td>            </tr>            <tr>                <td>12</td><td>They don't want.</td>                <td class="fragment answer-incorrect">NS</td>                <td class="fragment">Incomplete thought — <em>want</em> requires an object</td>            </tr>        </tbody>    </table></section>
+
+<!-- SLIDE 23: Practice 2B — Answers (13) --><section data-background="#1e7e34">    <h2>Practice 2B — Answers (13)</h2>    <p class="aim-label">Recognizing Sentences</p>    <table class="answer-table">        <thead><tr><th>#</th><th>Word Group</th><th>Answer</th><th>Reason</th></tr></thead>        <tbody>            <tr>                <td>13</td><td>Go to bed!</td>                <td class="fragment answer-correct">S</td>                <td class="fragment">Command sentence (subject <em>you</em> understood)</td>            </tr>        </tbody>    </table></section>
+
+<!-- SLIDE 24: Did you know? --><section data-background-image="assets/commons_mandela.jpg" style="top: 0;">    <div style="position: absolute; bottom: 30px; left: 5%; width: 90%; background: rgba(0,0,0,0.65); border-radius: 8px; padding: 1em 1em 0.6em 1em; text-align: left;">
+        <h2 style="margin: 0 0 0.3em 0;">Did you know?</h2>
+        <p style="margin: 0.2em 0; font-size: 0.85em;"><strong>27 years in prison</strong> — Mandela fought against racial discrimination.</p>
+        <p style="margin: 0.2em 0; font-size: 0.85em;"><strong>First black president</strong> of South Africa (1994) &amp; Nobel Peace Prize winner.</p>
+        <p style="margin: 0.2em 0; font-size: 0.85em; color: #ffdd00;">The paragraph you'll edit is written <strong>as if Mandela is speaking</strong> about his own life.</p>
+    </div>
+    <p style="position: absolute; bottom: 5px; right: 10px; font-size: 0.5em; color: #888;">Photo: Kingkongphoto (CC BY-SA 2.0)</p>
+    <aside class="notes">
+        Stage 6 · 2 min · T-Ss
+        Introduce Mandela briefly. Set context: "This paragraph is written from Mandela's point of view, as if he's telling his own story."
+    </aside>
+</section>
+
+<!-- SLIDE 25: Practice 7 — Task Instruction --><section data-background="#1a1a2e" data-timer="420">    <i class="fa-solid fa-pencil slide-icon"></i>    <h2>Practice 7 — Editing for Capitalization</h2>    <p><em>Open your book to p. 18.</em></p>    <ul>        <li>Read the Nelson Mandela paragraph.</li>        <li>Change all the small letters that should be capitals.</li>        <li>Think about <strong>all six rules</strong> — first word, I, names, nationalities, languages, places.</li>        <li>There are 18 sentences to check.</li>
+    </ul>
+    <aside class="notes">
+        Stage 6 · 7 min · S, Ss-Ss, T-Ss
+        Aim: To give learners extended practice applying all six capitalization rules to an authentic paragraph
+        5 min individual work. Pair check, then whole-class feedback.
+        Display corrected paragraph on screen (next slide).
+    </aside>
+</section>
+
+<!-- SLIDE 26: Practice 7 — Corrected (1–3) --><section data-background="#1e7e34">
+    <h2>Practice 7 — Corrected (1–3)</h2>
+    <p class="aim-label">Nelson Mandela</p>
+    <div style="text-align: left; font-size: 0.82em; line-height: 1.65; max-width: 750px; margin: 0.5em auto;">
+        <p class="fragment">1. <strong style="color:#ffdd00;">M</strong>y name is <strong style="color:#ffdd00;">N</strong>elson <strong style="color:#ffdd00;">M</strong>andela, and <strong style="color:#ffdd00;">I</strong> have had an unusual life.</p>
+        <p class="fragment">2. <strong style="color:#ffdd00;">I</strong> have been both a prisoner and a president in my country.</p>
+        <p class="fragment">3. <strong style="color:#ffdd00;">I</strong> was born in 1918 in a small village in <strong style="color:#ffdd00;">S</strong>outh <strong style="color:#ffdd00;">A</strong>frica.</p>
+    </div>
+</section>
+
+<!-- SLIDE 27: Practice 7 — Corrected (4–6) --><section data-background="#1e7e34">
+    <h2>Practice 7 — Corrected (4–6)</h2>
+    <p class="aim-label">Nelson Mandela</p>
+    <div style="text-align: left; font-size: 0.82em; line-height: 1.65; max-width: 750px; margin: 0.5em auto;">
+        <p class="fragment">4. <strong style="color:#ffdd00;">M</strong>y father, <strong style="color:#ffdd00;">H</strong>enry <strong style="color:#ffdd00;">M</strong>andela, was the chief of our tribe.</p>
+        <p class="fragment">5. <strong style="color:#ffdd00;">A</strong>s a child, <strong style="color:#ffdd00;">I</strong> took care of the family's cattle and goats.</p>
+        <p class="fragment">6. <strong style="color:#ffdd00;">W</strong>hen <strong style="color:#ffdd00;">I</strong> grew up, <strong style="color:#ffdd00;">I</strong> decided to become a lawyer.</p>
+    </div>
+</section>
+
+<!-- SLIDE 28: Practice 7 — Corrected (7–9) --><section data-background="#1e7e34">
+    <h2>Practice 7 — Corrected (7–9)</h2>
+    <p class="aim-label">Nelson Mandela</p>
+    <div style="text-align: left; font-size: 0.82em; line-height: 1.65; max-width: 750px; margin: 0.5em auto;">
+        <p class="fragment">7. <strong style="color:#ffdd00;">T</strong>his seemed to be a good way to help my people.</p>
+        <p class="fragment">8. <strong style="color:#ffdd00;">A</strong>fter <strong style="color:#ffdd00;">I</strong> became a lawyer, <strong style="color:#ffdd00;">I</strong> became the leader of a group of young <strong style="color:#ffdd00;">A</strong>fricans who wanted to change the system of discrimination in our country.</p>
+        <p class="fragment">9. <strong style="color:#ffdd00;">B</strong>ecause of my political activities, <strong style="color:#ffdd00;">I</strong> went to prison for twenty-seven years.</p>
+    </div>
+</section>
+
+<!-- SLIDE 29: Practice 7 — Corrected (10–12) --><section data-background="#1e7e34">
+    <h2>Practice 7 — Corrected (10–12)</h2>
+    <p class="aim-label">Nelson Mandela</p>
+    <div style="text-align: left; font-size: 0.82em; line-height: 1.65; max-width: 750px; margin: 0.5em auto;">
+        <p class="fragment">10. <strong style="color:#ffdd00;">T</strong>he prison was on a cold, windy island in the <strong style="color:#ffdd00;">A</strong>tlantic <strong style="color:#ffdd00;">O</strong>cean.</p>
+        <p class="fragment">11. <strong style="color:#ffdd00;">H</strong>owever, the world didn't forget about me.</p>
+        <p class="fragment">12. <strong style="color:#ffdd00;">I</strong> received important visitors, awards, and university degrees from all over the world.</p>
+    </div>
+</section>
+
+<!-- SLIDE 30: Practice 7 — Corrected (13–15) --><section data-background="#1e7e34">
+    <h2>Practice 7 — Corrected (13–15)</h2>
+    <p class="aim-label">Nelson Mandela</p>
+    <div style="text-align: left; font-size: 0.82em; line-height: 1.65; max-width: 750px; margin: 0.5em auto;">
+        <p class="fragment">13. <strong style="color:#ffdd00;">I</strong> also learned <strong style="color:#ffdd00;">A</strong>frikaans, which is the language of white <strong style="color:#ffdd00;">S</strong>outh <strong style="color:#ffdd00;">A</strong>fricans.</p>
+        <p class="fragment">14. <strong style="color:#ffdd00;">O</strong>f course, <strong style="color:#ffdd00;">I</strong> also speak <strong style="color:#ffdd00;">E</strong>nglish and <strong style="color:#ffdd00;">X</strong>hosa, which is the language of my tribe.</p>
+        <p class="fragment">15. <strong style="color:#ffdd00;">I</strong>n 1990, <strong style="color:#ffdd00;">I</strong> was set free.</p>
+    </div>
+</section>
+
+<!-- SLIDE 31: Practice 7 — Corrected (16–18) --><section data-background="#1e7e34">
+    <h2>Practice 7 — Corrected (16–18)</h2>
+    <p class="aim-label">Nelson Mandela</p>
+    <div style="text-align: left; font-size: 0.82em; line-height: 1.65; max-width: 750px; margin: 0.5em auto;">
+        <p class="fragment">16. <strong style="color:#ffdd00;">I</strong> became the president of <strong style="color:#ffdd00;">S</strong>outh <strong style="color:#ffdd00;">A</strong>frica in 1994.</p>
+        <p class="fragment">17. <strong style="color:#ffdd00;">D</strong>uring my time in office, <strong style="color:#ffdd00;">I</strong> tried to bring peace, democracy, and prosperity to all of my country's people.</p>
+        <p class="fragment">18. <strong style="color:#ffdd00;">N</strong>ow <strong style="color:#ffdd00;">I</strong> am retired.</p>
+    </div>
+</section>
+
+<!-- SLIDE 32: Summary / Wrap-up -->
+<section>
+    <i class="fa-solid fa-flag-checkered slide-icon"></i>
+    <h2>What you can do now</h2>
+    <ul>
+        <li>✓ I can tell if a group of words is a real sentence</li>
+        <li>✓ I can use six rules to put capitals in the right places</li>
+        <li>✓ I can check my writing for better sentences and capitals</li>
+    </ul>
+    <p style="margin-top: 1em;"><em>Look at the PET scale again — which bands can you reach now?</em></p>
+    <p style="margin-top: 0.5em; color: #ffdd00;">Next lesson: What's inside a sentence? Subjects, verbs, and objects!</p>
+    <aside class="notes">
+        Stage 7 · 3 min · T-Ss
+        Quick-fire quiz: "What three things must a complete sentence have?" "Name four things that need a capital letter."
+        Return to PET scale. Preview Part 2.
+    </aside>
+</section>
+
+<!-- SLIDE 33: End --><section data-background="#2c3e50">    <i class="fa-solid fa-star slide-icon"></i>    <h2>Thank you</h2>    <p><em>Sentences and Capitalization</em> | B1</p></section>
+</div>        </div>
+        <!-- Timer plugin (local) -->
+        <script src="timer-plugin.js"></script>
+
+        <!-- Audio slideshow plugin (CDN) -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/audio-slideshow/plugin.js"></script>
+
+        <!-- reveal.js 5.1.0 via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                audio: {
+                    prefix: 'assets/',
+                    suffix: '.mp3',
+                    advance: -1,
+                    autoplay: false,
+                    defaultAudios: false,
+                    defaultDuration: 0,
+                    playerOpacity: 1.0,
+                    playerStyle: 'position: fixed; bottom: 30px; left: 25%; width: 50%; height:75px; z-index: 33;',
+                    startAtFragment: false,
+                },
+                plugins: [
+                    TimerPlugin,
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                    RevealAudioSlideshow,
+                ],
+            });
+        </script>
+    </body>
+</html>

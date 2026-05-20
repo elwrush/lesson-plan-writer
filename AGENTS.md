@@ -6,6 +6,13 @@
 - **Shell:** PowerShell
 - **Python:** 3.x
 
+## Golden Rule: Pattern-first, not guess-first
+
+Before writing any HTML, CSS, Typst, slide markup, or configuration, **read the template or an existing file that already does what you need**. The correct pattern is always in the codebase already — guessing or generating from training data wastes time and causes errors. Specifically:
+- Slide attributes: check `templates/base-slides-template.html` for the exact attribute pattern
+- Typst syntax: check `.kilo/skills/create-pdf-lesson-file/SKILL.md` (Typst Pitfalls section)
+- Slide structure: check the most recently built `output/*/slides/index.html`
+
 ## Two pipelines
 
 ### PDF (2-stage)
@@ -75,7 +82,7 @@ A lint command is defined at `.kilo/command/lint.md` — invoke via Kilo CLI.
 - `lesson_plan` keys: `shape`, `shape_name`, `cefr_level`, `class`, `stages[]`
 - Each stage: `stage_number`, `stage`, `stage_aim`, `procedure`, `time`, `interaction`
 - Optional top-level: `transcript`, `answer_key`, `cefr_level`, `class`, `objective`
-- `answer_key` value: `"none"`, or a file path to `.typ` markup (converted automatically from `.md` on first run via `scripts/migrate_answer_keys.py`)
+- `answer_key` value: `"none"`, or a file path to `.typ` markup (`.md` files are NOT accepted — the markdown intermediary was removed)
 - **`lesson_plan` and `answer_key` use underscore** (not hyphen). The test fixture has a bug — uses `answer-key` — ignore it; production JSON always uses `answer_key`.
 - Shape templates (A–G) at `knowledge-base/lesson plan shapes/json/shape-{letter}.json`
 
@@ -88,12 +95,24 @@ A lint command is defined at `.kilo/command/lint.md` — invoke via Kilo CLI.
 - Logo band is rendered as page-1 content (a `#block` + `#grid`), not as a page header. Margins are uniform at 0.75in.
 - Line spacing: `#set par(leading: 0.55em)` — leading is **additional** space, not a multiplier
 
+## Typst Error Reference
+
+When Typst compilation fails, the most common causes are documented in the `create-pdf-lesson-file` skill at: `.kilo/skills/create-pdf-lesson-file/SKILL.md` (section: **Typst Pitfalls — Compile Errors and Fixes**).
+
+Five known error patterns covered:
+1. **Bold only at word boundaries** — `*M*y` fails; use `#strong[M]y`
+2. **`#` inside content blocks** — `[*#*]` fails; use `[*\#*]`
+3. **Raw blocks are markup, not function arguments** — `#raw(```)``` invalid; use `` ``` `` directly
+4. **`#raw()` takes a string** — no backtick syntax inside function calls
+5. **No markdown pipe tables** — use `#table(columns: N, ...)` instead
+
+**Before modifying any `.typ` file or `json_to_pdf.py`, read the Categorised Typst Pitfalls section in that skill first.** Do not guess Typst syntax from training data.
+
 ## Content transforms (in json_to_pdf.py build_typ_content)
 
 - Date: `050726` → `7 May, 2026`
 - Stage aims: robotic templates humanized (e.g. "To reading for gist" → "To understand the general idea of the text")
 - Procedure: minute indicators stripped (`3 min.` → ``)
-- Answer key markdown → Typst markup (`#`→`=`, `**bold**`→`*bold*`, bullet lists, `---`→`#line`)
 - Windows paths: `\` → `/` for Typst
 
 ## Language quality

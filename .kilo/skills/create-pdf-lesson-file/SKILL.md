@@ -20,9 +20,8 @@ Convert lesson plan JSON files to professionally formatted PDFs using Typst CLI 
 - Halt on first validation error with descriptive message
 
 ### Step 2: Process Content
-- If `answer_key` is a file path to a `.md` file, read its contents
-- If `transcript` is a file path to a `.md` or `.txt` file, read its contents
-- Convert markdown content to Typst markup (headings, bold, italic, bullet lists)
+- If `answer_key` is a file path, it must point to a `.typ` file (read raw — no conversion). `.md` files are NOT accepted — the markdown intermediary has been removed from the pipeline.
+- If `transcript` is a file path, it must point to a `.typ` file. `.md`/`.txt` files are NOT accepted.
 - Format date from `DDMMYY` or `YYMMDD` to `D Month, YYYY`
 - Humanize robotic stage aims (e.g., "To reading for gist" → "To get the general idea of the text")
 - Strip minute indicators from procedure text (e.g., "3 min.", "2 min.")
@@ -101,3 +100,70 @@ Key pitfalls:
 - `#set text(font: "Roboto")` requires `--font-path` pointing to actual OTF files
 - `context { if counter(page).get().first() == 1 { ... } }` for conditional page-1 headers
 - `table.cell(colspan: N)` merges N columns, consuming only one cell position in the row
+
+## Answer Key File Format — CRITICAL
+
+**Answer key files MUST use `.typ` extension. The pipeline does NOT accept `.md` files.** The `md_to_typst()` markdown intermediary was removed from `json_to_pdf.py` in May 2026. Any `.md` answer key will be silently ignored — the PDF will contain no answer key section.
+
+The `write-lesson-plan` skill enforces this — even if the user asks for `.md`, the agent must write `.typ` instead.
+
+## Typst Pitfalls — Compile Errors and Fixes
+
+### 1. Bold only works at word boundaries
+
+`*bold*` syntax is Typst markup for strong emphasis, but it **only works when the enclosed text is surrounded by word boundaries** (spaces, punctuation, or line start/end). It does NOT work for bolding part of a word.
+
+| Intended | Typst syntax | Result |
+|----------|-------------|--------|
+| Bold letter M in "My" | `*M*y` | ❌ Compile error: "unclosed delimiter" |
+| Bold letter M in "My" | `#strong[M]y` | ✅ Renders bold M + "y" |
+
+**Error pattern:** `*M*y`, `*N*elson`, `*I*n` — any `*X*y` where X is a single letter followed immediately by another letter.
+
+**Fix:** Use `#strong[letter]word_rest` for mid-word bold. For whole words at word boundaries, `*bold*` works fine (e.g., `*I*` at word boundaries works, `*bold*` text works).
+
+### 2. `#` character inside content blocks must be escaped
+
+In Typst, `#` starts a code expression. Inside a content block `[...]`, `#` is still interpreted as starting code. To include a literal `#` inside a content block, escape it with `\#`.
+
+| Intended | Typst syntax | Result |
+|----------|-------------|--------|
+| Bold # symbol in table header | `[*#*]` | ❌ Compile error: "expected expression" |
+| Bold # symbol in table header | `[*\#*]` | ✅ Renders bold # |
+
+**Error pattern:** Any `[*#*]`, `[#]`, or other `[...]` content blocks containing a bare `#`.
+
+**Fix:** In answer key `.typ` files inside `#table(...)` calls, write `[*\#*]` instead of `[*#*]`.
+
+### 3. Raw blocks (` ``` `) are markup, not function arguments
+
+Triple backtick raw blocks exist ONLY in Typst **markup mode**. They cannot be used as arguments inside a function call.
+
+| Intended | Typst syntax | Result |
+|----------|-------------|--------|
+| Raw block inside function | `#raw(lang: "none", ```...```)` | ❌ Compile error: "expected string, found content" |
+| Raw block in markup | `` ```text ... ``` `` | ✅ Works |
+
+**Error pattern:** `#raw(... , ``` ... ```)` — backticks inside function call arguments.
+
+**Fix:** Use triple backticks directly in markup mode (no `#raw()` wrapper). Or pass a string to `#raw()`: `#raw("text")`.
+
+### 4. `#raw()` takes a string, not content
+
+When using `#raw()` as a function (e.g., inside a code block), it expects a **string** argument, not a content block. In markup mode, backticks create a raw block directly — no `#raw()` needed.
+
+| Correct usage | Context |
+|---------------|---------|
+| `` ```text ... ``` `` | Markup mode (within content block or bare text) |
+| `#raw("...")` | Code mode (inside function arguments, show rules) |
+
+### 5. No markdown pipe tables — use Typst `#table()`
+
+Markdown pipe table syntax (`| Header | Header |`) is NOT valid Typst. All tables in `.typ` files must use Typst's `#table()` function directly:
+```typst
+#table(
+  columns: 3,
+  table.header[*Header 1*][*Header 2*][*Header 3*],
+  [Cell 1], [Cell 2], [Cell 3],
+)
+```
