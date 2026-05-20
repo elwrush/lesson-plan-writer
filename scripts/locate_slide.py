@@ -95,6 +95,8 @@ def parse_html_sections(html_path):
 
     Counts <section> elements directly inside <div class="slides">.
     Returns list of dicts, index 0 = first slide.
+    Supports stable id-based lookup: if a section has an id attribute, it's
+    included in the output dict as 'id', and can be used as a key in locate_slide_by_id().
     """
     content = html_path.read_text(encoding="utf-8")
     lines = content.split("\n")
@@ -157,14 +159,23 @@ def parse_html_sections(html_path):
 
                 section_name = heading or f"slide_{len(sections)}"
 
-                sections.append(
-                    {
-                        "slide_index": len(sections),
-                        "section": section_name,
-                        "heading": heading,
-                        "lines": {"start": section_start + 1, "end": i + 1},
-                    }
-                )
+                # Extract id attribute from the <section> tag
+                section_id = None
+                first_line = lines[section_start].strip()
+                id_match = re.search(r'id="([^"]+)"', first_line)
+                if id_match:
+                    section_id = id_match.group(1)
+
+                section_entry = {
+                    "slide_index": len(sections),
+                    "section": section_name,
+                    "heading": heading,
+                    "lines": {"start": section_start + 1, "end": i + 1},
+                }
+                if section_id:
+                    section_entry["id"] = section_id
+
+                sections.append(section_entry)
                 in_section = False
 
     return sections
@@ -303,7 +314,31 @@ def locate_slide_html(index, html_path):
         "heading": info["heading"],
         "lines": info["lines"],
         "content": content,
+        "id": info.get("id"),
     }
+
+
+def locate_slide_by_id(slide_id, html_path):
+    """Locate a slide by its id attribute in HTML.
+
+    This is the preferred method — stable IDs don't shift when
+    slides are inserted or deleted (unlike numerical indices).
+    """
+    sections = parse_html_sections(html_path)
+    for info in sections:
+        if info.get("id") == slide_id:
+            content = get_html_section_content(
+                html_path, info["lines"]["start"], info["lines"]["end"]
+            )
+            return {
+                "slide_index": info["slide_index"],
+                "section": info["section"],
+                "heading": info["heading"],
+                "lines": info["lines"],
+                "content": content,
+                "id": slide_id,
+            }
+    return None
 
 
 # ── Main ───────────────────────────────────────────────────────────────
@@ -316,6 +351,7 @@ def main():
     parser.add_argument(
         "input", nargs="?", help="URL (file://path/index.html#/N) or slide index (N)"
     )
+    parser.add_argument("--id", help="Locate by stable id attribute instead of index (preferred)")
     parser.add_argument("--slides-dir", help="Path to slides directory")
     parser.add_argument("--html", help="Path to index.html file")
     parser.add_argument("--md", help="Path to markdown file (legacy)")
@@ -363,6 +399,35 @@ def main():
             return 1
     else:
         print("Error: Invalid input", file=sys.stderr)
+        return 1
+
+    if slide_index is None and args.id:
+        # ID-based lookup (preferred — stable across insert/delete)
+        slide_id = args.id
+        html_path = (
+            Path(args.html)
+            if args.html
+            else find_index_html_in_slides_dir(args.slides_dir)
+            if args.slides_dir
+            else None
+        )
+        if not html_path or not html_path.exists():
+            print("Error: Need --html or --slides-dir for ID-based lookup", file=sys.stderr)
+            return 1
+        result = locate_slide_by_id(slide_id, html_path)
+        if result:
+            if args.text:
+                print(f"Slide {result['slide_index']}")
+                print(f"ID: {result['id']}")
+                print(f"Section: {result['section']}")
+                print(f"Heading: {result['heading']}")
+                print(f"Lines: {result['lines']['start']}-{result['lines']['end']}")
+                print()
+                print(result["content"])
+            else:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            return 0
+        print(f"Error: Slide with id '{args.id}' not found", file=sys.stderr)
         return 1
 
     if slide_index is None:

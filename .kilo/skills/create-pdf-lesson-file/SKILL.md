@@ -167,3 +167,17 @@ Markdown pipe table syntax (`| Header | Header |`) is NOT valid Typst. All table
   [Cell 1], [Cell 2], [Cell 3],
 )
 ```
+
+### 6. Unicode escapes require curly braces (`\u{NNNN}`, not `\uNNNN`)
+
+Typst uses `\u{NNNN}` syntax for Unicode escape sequences — with **curly braces** around the hex value. Without braces, the escape is NOT recognized and the literal text `uNNNN` appears in the output.
+
+| Intended character | Correct Typst | Wrong (renders as text) |
+|---|---|---|
+| Em dash `—` (U+2014) | `\u{2014}` or paste `—` directly | `\u2014` → shows `u2014` |
+| Ellipsis `…` (U+2026) | `\u{2026}` or paste `…` directly | `\u2026` → shows `u2026` |
+| Smiley `😀` (U+1F600) | `\u{1f600}` or paste `😀` directly | `\u1f600` → compile error |
+
+**Root cause:** The `\uNNNN` syntax (without braces) comes from Python, JavaScript, and Markdown. When answer keys are converted from `.md` to `.typ`, these escapes are copied verbatim and do NOT work in Typst.
+
+**Best practice:** Paste the actual Unicode character directly (em dash `—`, ellipsis `…`, etc.) instead of using escape sequences. This avoids the issue entirely and is more readable. Typst has first-class Unicode support — all UTF-8 characters work in content mode without escaping.

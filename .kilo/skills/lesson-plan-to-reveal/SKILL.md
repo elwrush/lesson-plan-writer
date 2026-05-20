@@ -86,8 +86,8 @@ For each stage in `lesson_plan.stages[]`:
 | Lead-in (discussion, error analysis) | 1 discussion slide + optional additional slides (e.g., auto-animate for assessment criteria) | Stage procedure + user's context |
 | Diagnostic / Test (Test 1, Test 2) | 1 task slide with the diagnostic items on screen (items derived from materials / PDF) | Source PDF exercises + stage procedure |
 | Teach / Clarifying | 1 slide per concept taught (e.g., sentence definition = 1 slide, command sentences = 1 slide, capitalization rules = 1 slide) | Source PDF content (definitions, rules, examples from the textbook) |
-| Controlled Practice / Practice X | 1 task slide (student-facing instructions + timer) + 1+ answer slides (fragment reveals with answers) | Source PDF exercise content + answer key file |
-| Freer Practice / Practice X | 1 task slide + 1+ answer slides | Source PDF exercise content + answer key file |
+| Controlled Practice / Practice X | 1 task slide (student-facing instructions + timer) + 1+ answer slides (max 3 items per slide, split across multiple slides if needed) | Source PDF exercise content + answer key file |
+| Freer Practice / Practice X | 1 task slide + 1+ answer slides (max 3 items per slide, split across multiple slides if needed) | Source PDF exercise content + answer key file |
 | Wrap-up | 1 summary slide | Stage procedure + learning objectives from JSON |
 | Vocabulary (if pre-teach stage exists) | 1 slide per word (max 5) | Stage 11 pre-teach vocabulary selection |
 
@@ -182,6 +182,7 @@ if idx >= 0:
 - Verify title slide contains `<img src="assets/logo.png" class="title-logo" />`
 - Verify `TimerPlugin` is in the `plugins` array of `Reveal.initialize()`
 - Verify `answer-correct` / `answer-incorrect` are used for answer fragments (NOT `highlight-green`/`highlight-red`)
+- **CRITICAL — Max 3 items per answer slide**: For every `<table class="answer-table">`, count the `<tr>` elements in `<tbody>`. If any table has more than 3 answer rows, flag it — must be split across multiple slides.
 - Verify fragment usage: only on answer reveal slides and strategy demonstrations, not on expository content
 - Verify procedure text is in `<aside class="notes">`, not on screen
 - Verify vocabulary words use `<span class="vocab-word">word</span>`
@@ -286,7 +287,7 @@ Every slide type gets a **function-icon** that signals its role (not its topic).
 
 **Example — Strategy block header:**
 ```html
-<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
     <i class="fa-solid fa-list-check slide-icon pedagogical-icon"></i>
     <h2>True/False Strategy</h2>
     ...
@@ -461,7 +462,7 @@ YouTube requires a valid `HTTP Referer` header for embedded players. Without it,
 For teaching students how to structure a short talk (thesis → reasons → example):
 
 ```html
-<section class="pedagogical structure-talk" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+<section class="pedagogical structure-talk" data-background="#1a6b5a" data-background-transition="none">
     <h2>Structure Your Talk</h2>
     <p class="structure-step"><u><strong>Thesis:</strong> Say your main idea</u></p>
     <p class="structure-step"><u><strong>Reasons:</strong> Give 1-2 reasons</u></p>
@@ -517,7 +518,8 @@ Use the same `answer-table` pattern with green background and fragment reveals:
 - **Answer column uses `class="fragment answer-correct"` or `class="fragment answer-incorrect"`** — revealed one row at a time
 - `answer-correct` = green background on reveal, `answer-incorrect` = red background on reveal
 - **Do NOT use `highlight-green`/`highlight-red`** — reveal.js built-in classes force `opacity: 1`, preventing fragment hiding
-- **Color contrast on green slides**: On `#1e7e34` answer slides, use only white (`#fff`) or yellow (`#ffdd00`) for text. Blue (`#4fc3f7`), gray, and other muted tones do not have enough contrast against the green background.
+- **CRITICAL — Color contrast on green slides**: On `#1e7e34` answer slides, **only two colors are allowed** for text: **white `#fff`** or **yellow `#ffdd00`**. Any other color — blue (`#4fc3f7`), gray (`#999`, `#ccc`, `#888`), light gray, silver, muted tones — is **FORBIDDEN**. They are invisible against the green background at projection distance. If you see any text on a green answer slide that is not white or yellow, it is a bug that must be fixed. Use `<span style="color: #fff;">` explicitly for any element whose color is not obvious from context.
+- **Max 3 items per answer slide**: If an exercise has more than 3 items, split across multiple answer slides. Each slide shows at most 3 table rows. Example: 10 items → 4 slides (1-3, 4-6, 7-9, 10).
 - For 3-column tables with explanations, add a `Why?` column (see Answer Table Patterns below)
 
 ### 10. Answer Slide (Multiple Choice / Matching)
@@ -594,7 +596,17 @@ When asked to edit a slide at a reveal.js URL:
 2. The script outputs JSON with slide index, heading text, and line numbers
 3. **Edit `index.html` directly** using the line numbers from the output — no intermediate markdown file
 4. **No regeneration needed** — the HTML is already complete. Just reload the browser.
-5. **When adding a new slide**, insert a new `<section>` element at the correct position in `<div class="slides">`. Shift all subsequent slide indices by +1.
+5. **When adding a new slide**, insert a new `<section>` element at the correct position in `<div class="slides">`.
+
+**Stable slide IDs (preferred):** Every `<section>` should have a stable `id` attribute to prevent index confusion when slides are added or removed:
+```html
+<section id="slide-lead-in" data-background="#1a1a2e">
+```
+To locate a slide by its stable ID:
+```bash
+python scripts/locate_slide.py --id slide-objective --html path/to/slides/index.html
+```
+Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-objective`, `slide-lead-in`, `slide-test1-1-3`, `slide-p7-corrected-1-3`, `slide-summary`).
 
 ## Key Design Rules
 
@@ -604,7 +616,7 @@ When asked to edit a slide at a reveal.js URL:
 4. **Task slides: brief student instructions** — extract task description from procedure, skip teacher-only instructions. Max 3 task lines on screen.
 5. **Stage names: student-friendly language** — "Lead-in" → "Let's get Started", "Reading for gist" → "What's the main idea?", "Reading for detail" → "Finding details", "Reading for inference" → "Making conclusions", "Post-reading" → "Let's Discuss", "Wrap-up" → "Let's Review"
 6. **Vocabulary slides** — generated AFTER lead-in stage. One word per slide with dark navy background. "Important Words" title on first slide only. Yellow bold (#ffdd00) via `<span class="vocab-word">`.
-7. **Answer slides** — use `<table class="answer-table">` with green background `#1e7e34`. Statements visible on entry; answers use `class="fragment answer-correct"` or `class="fragment answer-incorrect"` for clickthrough reveal. **Do NOT use `highlight-green`/`highlight-red`** (reveal.js keeps them at `opacity: 1`; they never hide).
+7. **Answer slides** — use `<table class="answer-table">` with green background `#1e7e34`. Statements visible on entry; answers use `class="fragment answer-correct"` or `class="fragment answer-incorrect"` for clickthrough reveal. **Do NOT use `highlight-green`/`highlight-red`** (reveal.js keeps them at `opacity: 1`; they never hide). **CRITICAL: Max 3 items per answer slide.** If an exercise has more than 3 items, split across multiple answer slides (e.g., items 1-3, items 4-6, items 7-10). Never exceed 3 table rows per answer slide. **CRITICAL — Green slide text: only white `#fff` or yellow `#ffdd00` allowed.** Gray, blue, or any muted color is invisible at projection distance. Never use any other color on `#1e7e34` slides.
 8. **Transition slides: heading only (no subheader text).** The red background + icon + heading is sufficient — the teacher's spoken introduction bridges the gap. Remove all `<p>` elements from transition slides.
 9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#1a6b5a` (pedagogical/strategy), green `#1e7e34` (answer tables), dark `#2c3e50` (end)
 10. **Logo**: `assets/logo.png`, transparent RGBA PNG, max-height 100px, centered
@@ -679,7 +691,7 @@ Use auto-animate only when the strategy block is a quick demonstration, not expl
 **Rules for simple (non-auto-animate) pedagogical slides:**
 - Each step = one `<section>` with `class="pedagogical"` and `data-background="#1a6b5a"`
 - All sections: `data-background-transition="none"` (prevents flash of color on entry)
-- Inline `style="top: 0;"` on each section to prevent vertical centering issues
+- CSS handles top alignment via `.reveal .slides > section.pedagogical` — no inline style needed (reveal.js strips inline `top` during layout)
 - Step label underlined: `<u><strong>Step N:</strong> ...</u>`
 - Rule (if applicable) embedded in Step 2, not a separate slide
 - Real quotes from the article on Step 4, in italics
@@ -731,7 +743,7 @@ Example: A True/False statement about the "generation gap" article runs through 
 - **Rule embedded at Step 2** — not a separate slide. Include it: "If you answer Yes to all → TRUE. If you answer No to even one → FALSE."
 - **No auto-animate** — use `data-background-transition="none"` on all pedagogical sections. Teacher controls pacing.
 - **Teal background** — `data-background="#1a6b5a"` + `class="pedagogical"` on all strategy slides.
-- **Top alignment** — CSS: `align-self: flex-start; margin-top: 0; padding-top: 30px` on `.reveal .slides > section.pedagogical`. Do NOT use negative margins (they clip content off-screen). Add `style="top: 0;"` inline on each section if needed.
+- **Top alignment** — CSS: `align-self: flex-start; margin-top: 0; padding-top: 30px` on `.reveal .slides > section.pedagogical`. Do NOT use negative margins (they clip content off-screen). Do NOT use inline `style="top: 0;"` — reveal.js strips it during every layout cycle.
 
 ### Vertical Alignment Fix
 
@@ -750,7 +762,7 @@ Using `margin-top: -2.5%` pushes content off-screen top. A small positive `paddi
 ### Vertical Alignment for Pedagogical Slides
 
 ```html
-<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
     <h2>True/False Strategy</h2>
     ...
 </section>
@@ -760,7 +772,7 @@ Using `margin-top: -2.5%` pushes content off-screen top. A small positive `paddi
 
 ```html
 <!-- Slide 1: Header + Step 1 + yellow question + tip -->
-<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
     <h2>True/False Strategy</h2>
     <p style="color:#ffdd00;"><em>"The author wrote the text to explore the generation gap and problems it can cause, and to suggest a possible solution."</em></p>
     <p><u><strong>Step 1:</strong> Read the statement carefully</u></p>
@@ -768,7 +780,7 @@ Using `margin-top: -2.5%` pushes content off-screen top. A small positive `paddi
 </section>
 
 <!-- Slide 2: Step 2 + sub-questions + rule -->
-<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
     <p><u><strong>Step 2:</strong> Work out what the question is asking you</u></p>
     <ul>
         <li>Did the author write about the generation gap? <em>(Yes/No)</em></li>
@@ -779,13 +791,13 @@ Using `margin-top: -2.5%` pushes content off-screen top. A small positive `paddi
 </section>
 
 <!-- Slide 3: Step 3 + paragraph names -->
-<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
     <p><u><strong>Step 3:</strong> Find the evidence</u></p>
     <p>Keywords like "author" and "solution" are found in <strong>paragraphs A and F</strong>. Now we can answer each question from Step 2.</p>
 </section>
 
 <!-- Slide 4: Step 4 + yellow question + real quotes + answer -->
-<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
     <p><u><strong>Step 4:</strong> Answer the question</u></p>
     <p style="color:#ffdd00;"><em>"The author wrote the text to explore the generation gap..."</em></p>
     <p>You can see that the author:</p>
@@ -802,7 +814,7 @@ Using `margin-top: -2.5%` pushes content off-screen top. A small positive `paddi
 
 ```html
 <!-- Step 1: Header + demo question + options -->
-<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
     <span style="font-size: 2.5em; color: rgba(255,255,255,0.9);"><i class="fa-solid fa-chess"></i></span>
     <div style="overflow: hidden;">
     <h2>Multiple Choice Strategy</h2>
@@ -875,6 +887,10 @@ Using `margin-top: -2.5%` pushes content off-screen top. A small positive `paddi
 ### Answer Table Patterns (V1)
 
 All answer slides use `answer-table` class with green background `#1e7e34`. The answer column and optionally the explanation column use fragments for clickthrough reveal.
+
+**CRITICAL — Green slide text color: only white `#fff` or yellow `#ffdd00`.** Gray, blue, silver, or any muted color is invisible against `#1e7e34` at projection distance. Every text element on a green answer slide **must** be white or yellow — no exceptions. If a `<td>`, `<p>`, or `<span>` on a green slide uses any other color class, it is a bug.
+
+**HARD RULE: Max 3 rows per answer table.** If an exercise has N > 3 items, create ⌈N/3⌉ answer slides. Items 1-3 on the first slide, 4-6 on the second, 7-9 on the third, etc. This ensures on-screen text is readable at projection distance. Never make an exception — even short items must stay within 3 per slide.
 
 **2-column table (True/False, simple answers):**
 
@@ -1006,40 +1022,36 @@ Auto-animate requirements:
 
 ## reveal.js Codebase
 
-When making changes to reveal.js code (e.g., custom themes, configuration, or plugin modifications), **always consult the stored reveal.js codebase first**. Do not attempt to write reveal.js API code from memory.
+When making changes to reveal.js code (e.g., custom themes, configuration, or plugin modifications), **always query the live GitHub repository first**. Do not rely on static snapshots — the live codebase is the source of truth.
 
-The packed reveal.js codebase is stored at: `knowledge-base\revealjs-packed.json`
+### Query Live reveal.js via Git
 
-```bash
-# Load and query the packed JSON
-$json = Get-Content "knowledge-base\revealjs-packed.json" | ConvertFrom-Json
-
-# List all files
-$json.files.PSObject.Properties.Name | Sort-Object
-
-# Get specific file content
-$json.files.'js/reveal.js'
-$json.files.'css/reveal.scss'
-$json.files.'css/theme/white.scss'
-
-# Search for specific code
-$json.files.PSObject.Properties | Where-Object { $_.Value -match "transition" }
-
-# View the auto-animate example (canonical pattern reference)
-$json.files.'examples/auto-animate.html'
-```
-
-### Update reveal.js Pack
-
-To update the stored codebase when reveal.js releases a new version:
+Use `gh` (GitHub CLI) to fetch individual files from the live repository. This is faster than cloning and always returns the current version.
 
 ```bash
-repomix --remote https://github.com/hakimel/reveal.js --style json --output knowledge-base\revealjs-packed.json --top-files-len 15
+# Get a specific file from the latest version
+gh api repos/hakimel/reveal.js/contents/css/reveal.scss --jq '.content' | base64 -d
+
+# Get the compiled CSS
+gh api repos/hakimel/reveal.js/contents/dist/reveal.css --jq '.content' | base64 -d
+
+# Get the main JS source
+gh api repos/hakimel/reveal.js/contents/js/reveal.js --jq '.content' | base64 -d | head -200
+
+# List the top-level directory structure
+gh api repos/hakimel/reveal.js/contents/ --jq '.[].name'
+
+# Search the codebase for a specific pattern (uses GitHub code search)
+gh search code "data-auto-animate" --repo hakimel/reveal.js --limit 10
+
+# Get a file from a specific tag/version
+gh api repos/hakimel/reveal.js/contents/css/reveal.scss?ref=5.1.0 --jq '.content' | base64 -d
 ```
 
-### Global Repomix Skill
-
-See: `C:\Users\elwru\.kilo\skills\repomix-codebase-search\SKILL.md`
+To see how a specific feature works (e.g., `autoAnimateUnmatched`), search the JS source:
+```bash
+gh api repos/hakimel/reveal.js/contents/js/reveal.js --jq '.content' | base64 -d | Select-String -Pattern "autoAnimateUnmatched" -Context 0,5
+```
 
 ## Files
 

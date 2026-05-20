@@ -383,43 +383,65 @@ When the user asks to edit a slide at a reveal.js URL (e.g., `index.html#/7`):
 4. No regeneration needed — just reload the browser
 5. **When adding a new slide**, insert a new `<section>` element at the correct position in `<div class="slides">`. All subsequent slide indices shift by +1.
 
-This prevents the agent from editing the wrong slide due to index confusion.
+### Stable slide IDs — preferred method
+
+**To avoid index confusion**, every `<section>` should have a stable `id` attribute (e.g., `id="slide-title"`, `id="slide-lead-in"`). Unlike numerical indices, IDs don't shift when slides are added or removed.
+
+To locate a slide by its stable ID:
+```bash
+python scripts/locate_slide.py --id slide-objective --html path/to/slides/index.html
+```
+
+The script returns the line numbers and content for that slide regardless of its position in the sequence.
+
+**Naming convention:** Use kebab-case prefixes matching the lesson stage:
+- `slide-title`, `slide-objective`
+- `slide-lead-in`, `slide-diagnosis-reveal`
+- `slide-pet-scale-1`, `slide-pet-scale-2`
+- `slide-test1-{range}` (e.g., `slide-test1-1-3`)
+- `slide-test2-entry`, `slide-test2-reveal`
+- `slide-transition-{target}` (e.g., `slide-transition-learn`)
+- `slide-teach-{topic}` (e.g., `slide-teach-sentence-def`, `slide-teach-commands`)
+- `slide-quick-check`
+- `slide-transition-{topic}` (e.g., `slide-transition-capitals`)
+- `slide-cap-rules-1-3`, `slide-cap-rules-4-6`
+- `slide-did-you-know`
+- `slide-p2b-task`, `slide-p2b-answers-{range}`
+- `slide-p7-task`, `slide-p7-corrected-{range}`
+- `slide-summary`, `slide-end`
 
 ## reveal.js Codebase
 
-When making changes to reveal.js code (e.g., custom themes, configuration, or plugin modifications), **always use the global repomix skill to query the stored reveal.js codebase first**.
+When making changes to reveal.js code (e.g., custom themes, configuration, or plugin modifications), **always query the live GitHub repository first**. Do not rely on static snapshots — the live codebase is the source of truth.
 
-### Query Stored reveal.js
+### Query Live reveal.js via Git
 
-The packed reveal.js codebase is stored at: `knowledge-base\revealjs-packed.json`
-
-```bash
-# Load and query the packed JSON
-$json = Get-Content "knowledge-base\revealjs-packed.json" | ConvertFrom-Json
-
-# List all files
-$json.files.PSObject.Properties.Name | Sort-Object
-
-# Get specific file content
-$json.files.'js/reveal.js'
-$json.files.'css/reveal.scss'
-$json.files.'css/theme/white.scss'
-
-# Search for specific code
-$json.files.PSObject.Properties | Where-Object { $_.Value -match "transition" }
-```
-
-### Update reveal.js Pack
-
-To update the stored codebase when reveal.js releases a new version:
+Use `gh` (GitHub CLI) to fetch individual files from the live repository. This is faster than cloning and always returns the current version.
 
 ```bash
-repomix --remote https://github.com/hakimel/reveal.js --style json --output knowledge-base\revealjs-packed.json --top-files-len 15
+# Get a specific file from the latest version
+gh api repos/hakimel/reveal.js/contents/css/reveal.scss --jq '.content' | base64 -d
+
+# Get the compiled CSS
+gh api repos/hakimel/reveal.js/contents/dist/reveal.css --jq '.content' | base64 -d
+
+# Get the main JS source
+gh api repos/hakimel/reveal.js/contents/js/reveal.js --jq '.content' | base64 -d | head -200
+
+# List the top-level directory structure
+gh api repos/hakimel/reveal.js/contents/ --jq '.[].name'
+
+# Search the codebase for a specific pattern (uses GitHub code search)
+gh search code "data-auto-animate" --repo hakimel/reveal.js --limit 10
+
+# Get a file from a specific tag/version
+gh api repos/hakimel/reveal.js/contents/css/reveal.scss?ref=5.1.0 --jq '.content' | base64 -d
 ```
 
-### Global Repomix Skill
-
-See: `C:\Users\elwru\.kilo\skills\repomix-codebase-search\SKILL.md`
+To see how a specific feature works (e.g., `autoAnimateUnmatched`), search the JS source:
+```bash
+gh api repos/hakimel/reveal.js/contents/js/reveal.js --jq '.content' | base64 -d | Select-String -Pattern "autoAnimateUnmatched" -Context 0,5
+```
 
 ## Known CSS Conflicts with reveal.js
 

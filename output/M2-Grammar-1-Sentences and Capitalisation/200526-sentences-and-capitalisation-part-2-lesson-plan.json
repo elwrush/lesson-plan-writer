@@ -1,0 +1,60 @@
+{
+  "teacher": "Ed Rush",
+  "duration": "46 minutes",
+  "date": "200526",
+  "topic": "Sentences and Capitalisation, Part 2",
+  "objective": "By the end of the lesson, learners will have had further practice identifying subjects, verbs, and objects and will be better able to write complete, correctly punctuated sentences.",
+  "materials": "- Coursebook: First Steps in Academic Writing, pp 13-17",
+  "lesson_plan": {
+    "shape": "B",
+    "shape_name": "Language Practice",
+    "cefr_level": "B1",
+    "class": "M2-4A",
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage": "Lead-in — Review and SVO Introduction",
+        "stage_aim": "To activate learners’ recall of the sentence definition from Part 1 and introduce the concepts of subject, verb, and object",
+        "procedure": "- Quick quiz: \"What three things must a complete sentence have?\" Elicit answers. \"What was the one exception?\" (command sentences). 2 min.\n- Display a model sentence on screen: \"My roommate lost his keys.\" Ask: \"Who lost the keys?\" (subject -- my roommate). \"What did he do?\" (verb -- lost). \"What did he lose?\" (object -- his keys). 2 min.\n- Explain: today we practice finding subjects, verbs, and objects so we can write better sentences. 1 min.",
+        "time": 5,
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 2,
+        "stage": "Controlled Practice — Practice 3: Subjects, Verbs, and Objects",
+        "stage_aim": "To give learners structured practice identifying subjects, verbs, and objects using a consistent annotation system",
+        "procedure": "- Ss open books to Practice 3 (p. 14). Display instructions on screen: underline S with one line, V with two lines, circle O. Work individually. 5 min.\n- Demo item 1 together. Remind Ss: linking verbs (be, become, look, feel, seem, smell, sound, taste) do NOT have objects.\n- Pair check. 3 min.\n- Whole-class feedback: display answers on screen. Address any disagreements, especially items with linking verbs (1, 5, 6). Discuss items 7, 9 (no object). 4 min.",
+        "time": 12,
+        "interaction": "S, Ss-Ss, T-Ss"
+      },
+      {
+        "stage_number": 3,
+        "stage": "Semi-Controlled Practice — Practice 4: Editing for Subjects and Verbs",
+        "stage_aim": "To give learners guided practice identifying and completing sentences that are missing subjects or verbs",
+        "procedure": "- Ss turn to Practice 4 -- Larry's Bad Habit (p. 15). Work individually: read the paragraph and add the missing subjects or verbs. 5 min.\n- Remind Ss: Look for word groups that feel incomplete. Ask \"Who?\" or \"What action?\" to find what's missing.\n- Pair check -- compare answers. Some sentences have more than one possible answer. 3 min.\n- Display the paragraph on screen. Elicit corrections from different pairs. Discuss alternative answers (e.g., sentence 3: \"He\" vs \"Larry\"). 4 min.",
+        "time": 12,
+        "interaction": "S, Ss-Ss, T-Ss"
+      },
+      {
+        "stage_number": 4,
+        "stage": "Freer Practice — Practice 5: Identifying and Punctuating Sentences",
+        "stage_aim": "To give learners extended practice applying both sentence-boundary recognition and capitalization rules to an unpunctuated paragraph",
+        "procedure": "- Ss turn to Practice 5 -- My Neighbors (p. 15). Work individually: read the paragraph, find where 14 sentences begin and end, add periods and capital letters. 6 min.\n- Remind Ss: use the capitalization rules from Part 1 (first word, pronoun I, names, nationalities, places).\n- Pair check. 4 min.\n- Display the corrected paragraph on screen as a continuous text with capitals in yellow and sentence boundaries marked. Discuss any tricky spots (e.g., \"Anju is a wonderful cook\" -- already capitalized, no change needed; \"a young couple\" vs \"The husband\"). 4 min.",
+        "time": 14,
+        "interaction": "S, Ss-Ss, T-Ss"
+      },
+      {
+        "stage_number": 5,
+        "stage": "Wrap-up",
+        "stage_aim": "To consolidate SVO concepts and connect progress back to the PET writing criteria from Part 1",
+        "procedure": "- Quick-fire review: \"What does S stand for? V? O?\" \"What kind of verbs don't have objects?\" (linking verbs). 1 min.\n- Return to the PET Writing scale: \"Now you can write complete sentences, use capitals correctly, AND identify subjects, verbs, and objects. Which Organization and Language bands are you reaching now?\" 1 min.\n- Preview next topic: \"Next time -- describing your classmate!\" 1 min.",
+        "time": 3,
+        "interaction": "T-Ss"
+      }
+    ]
+  },
+  "transcript": "none",
+  "answer_key": "inputs/M2-Grammar-1-Sentences and Capitalisation/answer-key-part2.typ",
+  "cefr_level": "B1",
+  "class": "M2-4A"
+}
