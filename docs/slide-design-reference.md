@@ -21,21 +21,21 @@ The base template is at `templates/base-slides-template.html` — copy it to `ou
 
 1. **Expository content on screen at once** — task instructions, vocabulary, objectives, discussion questions: ALL visible when the slide appears. Do not use fragments for expository material.
 2. **Procedure text NEVER on screen** — teacher instructions, timing, interaction patterns go in `<aside class="notes">`
-3. **Fragments reserved for answer reveal** — the teacher reveals answers one at a time after students have worked. This is the primary use of fragments.
-4. **Auto-animate for strategy demonstrations** — use for showing step-by-step strategies (True/False, Multiple Choice) across consecutive slides. Not for general slide transitions.
+3. **Fragments reserved for answer reveal** — the teacher reveals answers one at a time after students have worked. This is the primary use of fragments. Use `data-fragment-index` to control reveal order.
+4. **Auto-animate for grammar relationships, not answer reveals** — use consecutive `<section data-auto-animate>` elements with matching `data-auto-animate-id` to show how parts of a sentence relate (strikethrough a prepositional phrase to reveal the real subject, animate stress patterns in a word). Do NOT use auto-animate for answer reveals — use fragments instead. See the skill's decision framework for when to use auto-animate vs simple sibling slides vs fragments.
 5. **Pedagogical slides** — strategy/teaching content uses teal background (`data-background="#1a6b5a"`, `class="pedagogical"`) with white text
-6. **Visual-first** — every lead-in and pre-reading slide uses a Pixabay background image
+6. **Visual-first** — lead-in slides use Pixabay image (or solid `#1a1a2e` for grammar/L1 error analysis)
 7. **Prediction before task** — students guess before doing, confirm with answer reveal
-8. **Answer slides = answer + why + source** (all 3 parts)
-9. **Vocabulary pre-teach** — slides AFTER lead-in stage, one word per slide on Pixabay background
-10. **Section transitions** between stages — brief, one discussion question, red background (`#c0392b`)
+8. **Answer slides = answer + why + source** (all 3 parts); grammar answer tables use # / Original / Correction or multi-column S/V/O
+9. **Vocabulary pre-teach** — slides AFTER lead-in stage, one word per slide on dark background
+10. **Section transitions** between stages — heading only, red background (`#c0392b`), no descriptive paragraphs
 11. **Text highlighting** — all slides use text-shadow for readability; pedagogical slides use white-on-teal; vocabulary words use yellow boldface (`#ffdd00`)
 
 ---
 
-## B1 Audience Constraints
+## Audience Constraints (CEFR-Adaptive)
 
-This section applies when generating slides for **Mathayom 2-3 Thai students (CEFR B1)**. These constraints ensure student-facing text is immediately comprehensible.
+The default targets **Mathayom Thai students (CEFR B1)**. See the `Authorial Voice & Audience` section in the skill for B2+ relaxations. These constraints ensure student-facing text is immediately comprehensible.
 
 ### Vocabulary Ceiling
 No words above CEFR B1 on screen without inline definition:
@@ -121,8 +121,9 @@ These are the ONLY allowed patterns. Agents must not invent alternatives. All sl
 <section>                    ← standalone slide
 <section data-background="#c0392b">   ← slide with attributes
 <section data-auto-animate data-auto-animate-id="same-id">  ← auto-animate pair
-<section data-background-image="assets/image.jpg" data-background-opacity="0.7">  ← image background
+<section data-background-image="assets/image.jpg" data-background-opacity="1.0">  ← image background
 <section data-timer="300">   ← timer pill (seconds)
+<section data-mark="1,3-5|/pattern/">  ← Mark.js text highlighting (steps separated by |)
 ```
 
 ### Fragments (classes on elements)
@@ -158,10 +159,10 @@ These are the ONLY allowed patterns. Agents must not invent alternatives. All sl
 
 ### 1. Title Slide
 ```html
-<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
+<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="1.0">
     <img src="assets/logo.png" class="title-logo" alt="Logo" />
-    <h1>{{ topic }} <span class="cefr-badge {{ cefr_level }}">{{ cefr_level }}</span></h1>
-    <p><em>{{ strap_subheader }}</em></p>
+    <h1 class="text-shield">{{ topic }} <span class="cefr-badge {{ cefr_level }}">{{ cefr_level }}</span></h1>
+    <p class="text-shield"><em>{{ strap_subheader }}</em></p>
 </section>
 ```
 
@@ -191,18 +192,18 @@ The script automatically converts formal stage names to friendly student-facing 
 - "Wrap-up and reflection" → "Let's Review"
 ```html
 <!-- First word (with header) -->
-<section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="0.7">
-    <h2>Important Words</h2>
-    <p><span class="vocab-word">{{ word }}</span></p>
-    <p><em>{{ phonemic }}</em></p>
-    <p><em>There's such a <span class="vocab-word">{{ word }}</span> between them; they never agree on anything.</em></p>
+<section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="1.0">
+    <h2 class="text-shield">Important Words</h2>
+    <p class="text-shield"><span class="vocab-word">{{ word }}</span></p>
+    <p class="text-shield"><em>{{ phonemic }}</em></p>
+    <p class="text-shield"><em>There's such a <span class="vocab-word">{{ word }}</span> between them; they never agree on anything.</em></p>
 </section>
 
 <!-- Subsequent words (no header) -->
-<section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="0.7">
-    <p><span class="vocab-word">{{ word }}</span></p>
-    <p><em>{{ phonemic }}</em></p>
-    <p><em>There's such a <span class="vocab-word">{{ word }}</span> between them; they never agree on anything.</em></p>
+<section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="1.0">
+    <p class="text-shield"><span class="vocab-word">{{ word }}</span></p>
+    <p class="text-shield"><em>{{ phonemic }}</em></p>
+    <p class="text-shield"><em>There's such a <span class="vocab-word">{{ word }}</span> between them; they never agree on anything.</em></p>
     <aside class="notes">
         Drill: teacher says → class repeats (×3).
         Show image as visual anchor for meaning.
@@ -220,9 +221,9 @@ Rules:
 
 ### 4. Lead-In Image Slide
 ```html
-<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
-    <h2>Let's get Started</h2>
-    <h3>{{ open_question }}</h3>
+<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="1.0">
+    <h2 class="text-shield">Let's get Started</h2>
+    <h3 class="text-shield">{{ open_question }}</h3>
     <aside class="notes">
         {{ teacher_activation_script }}
         Display image for 20 seconds silently.
@@ -236,9 +237,9 @@ One open question only. Image as background. Speaker notes: activation script.
 
 ### 5. Pre-Reading Prediction
 ```html
-<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
-    <h2>Before you read: {{ article_title }}</h2>
-    <ul>
+<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="1.0">
+    <h2 class="text-shield">Before you read: {{ article_title }}</h2>
+    <ul class="text-shield">
         <li>What problem does the writer describe?</li>
         <li>What solution do they suggest?</li>
     </ul>
@@ -308,15 +309,13 @@ Rules:
 ```html
 <section data-background="#c0392b">
     <h2>{{ next_stage_name }}</h2>
-    <p>{{ discussion_question }}</p>
-    <aside class="notes">
-        Transition: "Now we're moving from {{ prev_stage }} to {{ next_stage }}."
-        Ask the discussion question. 1-2 min.
-    </aside>
 </section>
 ```
 
-Red/orange background. One discussion question to warm up for the next stage.
+- Red background `#c0392b`
+- **Heading only, no descriptive paragraphs.** The teacher's spoken introduction bridges the gap. Brief foreshadowing text (1 sentence max) is acceptable only when the transition type isn't obvious from context.
+- Speaker notes: NOT required (teacher directs the transition verbally)
+- No timer, no fragments
 
 ### 10. Post-Reading Discussion Slide
 ```html
@@ -401,6 +400,165 @@ All questions visible at once. No fragments for discussion.
 
 ---
 
+### 15. Grammar Rule Explanation Slide (Pedagogical)
+```html
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+    <h2>Subject-Verb Agreement: Rules 1–3</h2>
+    <p><u><strong>Rule 1:</strong> Ignore prepositional phrases</u></p>
+    <p><em>"The color of her eyes changes."</em> → Subject is <strong>color</strong>, not <em>eyes</em>.</p>
+    <p><u><strong>Rule 2:</strong> There + be → subject follows</u></p>
+    <p><em>"There are several kinds."</em> → <strong>kinds</strong> is the subject.</p>
+    <p><u><strong>Rule 3:</strong> Each, one, neither, either → always singular</u></p>
+    <p><em>"Each of the students has a book."</em></p>
+</section>
+```
+- Teal background `#1a6b5a`, class `pedagogical`
+- Group 2-3 related rules per slide
+- Each rule: underlined label + example in quotation marks + brief explanation
+- Key grammar words highlighted with `<span style="color:#ffdd00;">word</span>` inline
+
+### 16. Diagnostic Test Slide
+```html
+<section data-background="#1a1a2e">
+    <h2>Diagnostic Test</h2>
+    <p><em>Each sentence has ONE error. Find and fix it.</em></p>
+    <ol style="font-size: 0.8em; text-align: left;">
+        <li>George Lucas have changed the film industry.</li>
+        <li>There is two main characters in Star Wars.</li>
+        <li>Each of the movies have a different director.</li>
+    </ol>
+    <aside class="notes">
+        Stage 2 · 8 min · S
+        Students work individually. Monitor and note difficulty areas. Do NOT give answers yet.
+    </aside>
+</section>
+```
+- Dark `#1a1a2e` background, pencil icon
+- All test items visible on entry (no fragments)
+- Speaker notes: monitoring instructions, do-not-reveal-yet reminder
+- No timer (teacher controls pace)
+
+### 17. Error-Correction Answer Table (Grammar)
+```html
+<section data-background="#1e7e34">
+    <h2>Practice 3A — Answers (1-3)</h2>
+    <table class="answer-table" style="font-size:0.875em;">
+        <thead><tr><th style="width:8%;">#</th><th style="width:42%;">Sentence</th><th style="width:15%;">Answer</th><th style="width:35%;">Why?</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>One of my classmates ___ from my country.</td>
+                <td class="fragment answer-correct" data-fragment-index="1"><strong style="color:#ffdd00;">is</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="1" style="font-size:0.9em;">"One" is always singular</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Some of the teachers ___ my language.</td>
+                <td class="fragment answer-correct" data-fragment-index="2"><strong style="color:#ffdd00;">speak</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="2" style="font-size:0.9em;">"teachers" is countable plural</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Each of the gifts ___ carefully wrapped.</td>
+                <td class="fragment answer-correct" data-fragment-index="3"><strong style="color:#ffdd00;">was</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="3" style="font-size:0.9em;">"Each" is always singular</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+```
+- Green `#1e7e34` background, `answer-table` class
+- **Max 3 items per slide** with a Why column (4 columns: # / Sentence / Answer / Why?)
+- Answer and Why cells use `class="fragment answer-correct"` with matching `data-fragment-index` for per-row reveal
+- Table font: `0.875em` for readability; Why column: `0.9em`
+- No instructional text like "Click to reveal" — answer reveal behavior is obvious
+- When items have no Why explanation (e.g., fill-in-the-blank), a 3-column table (# / Sentence / Answer) is acceptable
+
+### 18. Multi-Column Grammar Answer Table
+```html
+<section data-background="#1e7e34">
+    <h2>Practice 3 — Answers (1–5)</h2>
+    <p class="aim-label">Subjects, Verbs, and Objects</p>
+    <table class="answer-table">
+        <thead><tr><th>#</th><th>Sentence</th><th>S</th><th>V</th><th>O</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>My brother is in school.</td><td class="fragment answer-correct">My brother</td><td class="fragment answer-correct">is</td><td class="fragment">(none)</td></tr>
+        </tbody>
+    </table>
+</section>
+```
+- Up to 6 columns for grammar annotation (S/V/O, tense, etc.)
+- All answer cells use fragment reveal for clickthrough
+- Items with no answer in a column use bare `<td class="fragment">(none)</td>`
+
+### 19. Code/Text Passage with Line Highlights
+```html
+<section data-background="#1a1a2e">
+    <h2>Find the Main Idea</h2>
+    <pre style="font-size: 0.7em;"><code data-trim data-line-numbers="1-5|8-10|12-15">
+        Line 1 of your text passage here.
+        Line 2 of your text passage here.
+        Line 3 of your text passage here.
+        ...
+    </code></pre>
+    <p class="fragment" style="color:#ffdd00;"><strong>Main idea:</strong> The key point.</p>
+    <aside class="notes">
+        Step 1: Students read silently. Step 2: Elicit main idea.
+        Step 3: Reveal supporting details via fragments.
+    </aside>
+</section>
+```
+- `data-line-numbers="1-5|8-10|12-15"` — pipe-separated steps, each step highlights different lines
+- The highlight plugin is pre-loaded in the base template
+- Use for: skimming/scanning lessons, reading comprehension, text analysis
+
+### 20. Vertical Slides (Nested)
+```html
+<section>
+    <section>
+        <h2>Main Content</h2>
+        <p>This is the primary slide.</p>
+    </section>
+    <section>
+        <h2>Optional Extension</h2>
+        <p>Accessed via down arrow. Skipped via right arrow.</p>
+        <aside class="notes">Backup for fast finishers.</aside>
+    </section>
+</section>
+```
+- Nested `<section>` inside a horizontal slide
+- Use for: backup content, optional drill-down, extension activities
+- Navigation: down arrow enters the stack, right arrow skips past it
+
+### 21. Text Shield for Image Backgrounds
+```html
+<section data-background-image="assets/photo.jpg" data-background-opacity="1.0">
+    <h2 class="text-shield">Title with dark semi-transparent background</h2>
+    <p class="text-shield">Readable body text on any image.</p>
+    <p><span class="fragment text-shield-light">Light gray highlight on click.</span></p>
+</section>
+```
+- `text-shield`: dark semi-transparent background for white text on full-opacity images
+- `text-shield-light`: light gray semi-transparent background for dark text
+- `fragment text-shield-light`: text visible at entry, light gray background highlight on click
+- Both use `display: inline-block` + `max-width: 90%` — background stays tight to text, no full-width bars, no `::after` artifacts
+- Both disable text-shadow (shield replaces it)
+- See the skill for full rules
+
+### 22. Text Highlighting with `data-mark` (Mark.js Plugin)
+```html
+<!-- Mark lines 1 and 3-5 on entry -->
+<p data-mark="1,3-5">Highlighted text passage here.</p>
+
+<!-- 3-step reveal: nothing, then "creative", then line 5 -->
+<blockquote data-mark="|/creative/|5">Text passage here.</blockquote>
+```
+- Works on ANY element, not just `<pre><code>` — no monospace font hack
+- Line numbers and regex patterns supported
+- Steps separated by `|`
+- The plugin and Mark.js are loaded in the base template — just add `data-mark`
+- See the skill for full syntax rules
+
 ## Auto-Animate for Strategy Demonstrations
 
 Use `data-auto-animate` on consecutive sibling `<section>` elements to build up strategies step by step. **Auto-animate is the primary reason markdown was abandoned** — consecutive `<section data-auto-animate>` elements must be direct siblings in `<div class="slides">`, not nested inside `<section data-markdown>`.
@@ -462,35 +620,34 @@ Use `data-auto-animate` on consecutive sibling `<section>` elements to build up 
 </section>
 ```
 
-**When to use auto-animate (stacked slides):**
-- True/False strategy — building up 4-5 steps incrementally
-- Paragraph matching strategy — showing each paragraph match one at a time
-- Step-by-step grammar analysis
+**Decision framework (from the skill):**
+1. **Is the effect purely visual between slides?** (border appearing, colour change, word replacement) → **Auto-animate**
+2. **Is the teacher revealing content step by step within a single slide?** → **Fragments**
+3. **Is each step a discrete teaching moment that needs its own slide?** → **Sibling slides** (one per step, no auto-animate)
+4. **Does the content need progressive highlighting within a text block?** → **Code + line numbers**
+5. **Is the goal to enlarge or preview media?** → **Lightbox**
+6. **Is the content optional / a backup?** → **Vertical slides**
+7. **Does the slide need a dramatic entrance?** → **Per-slide transition**
 
-**When to use fragments (single slide):**
-- Multiple choice strategy — eliminate wrong answers in sequence
-- Answer reveal — one slide per exercise with fragment-per-answer
-
-**When NOT to use auto-animate:**
-- General slide transitions (use regular slide changes)
-- Vocabulary lists (all visible at once)
-- Answer reveals (use fragments)
-- Expository content (all visible at once)
+See the skill's full reveal.js Feature Lookup Table for the complete list of available features mapped to pedagogical contexts.
 
 ---
 
 ## Max Text Limits
 
 | Slide type | Max total words on screen |
-|---|---|
+|---|---|---|
 | Title | 20 |
 | Objective | 30 (3 × 10-word outcomes) |
 | Vocabulary | 40 (4-5 words × ~8 words each) |
 | Lead-in image | 10 (1 question) |
+| Lead-in error analysis | 60 (6 sentences × 10 words) |
 | Pre-reading prediction | 6 (2 prompts × 3 words) |
+| Diagnostic test | 100 (8 items × 12 words) |
 | Task instruction | 20 |
+| Grammar rule explanation | 80 per slide (2-3 rules) |
 | Answer explanation | 40 per question |
-| Section transition | 10 (1 question) |
+| Section transition | 5 (heading only) |
 | Post-reading discussion | 20 (2-3 questions) |
 | Summary | 15 (3 × 5-word outcomes) |
 | End | 5 |
@@ -560,10 +717,13 @@ Phonemic script: Use IPA. Example sentences must imply meaning without defining.
 
 ### Title Slide Background
 
-The title slide uses a Pixabay background image with a dark overlay for readability:
+The title slide uses a Pixabay background image at full opacity with text-shield for readability:
 
 ```html
-<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
+<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="1.0">
+    <h1 class="text-shield">Topic Title <span class="cefr-badge B2">B2</span></h1>
+    <p class="text-shield"><em>Strap subheader</em></p>
+</section>
 ```
 
 - Images are downloaded from Pixabay API, resized to max 1920px width, compressed as JPEG (quality=80)
@@ -580,7 +740,7 @@ Attribution in speaker notes: `Image by {author} from Pixabay`
 
 1. **Template**: Copy `templates/base-slides-template.html` → `output/{subfolder}/slides/index.html`
 2. **Slides**: Add raw HTML `<section>` elements inside `<div class="slides">`
-3. **Images**: Copy logo to `slides/assets/logo.png`, download Pixabay backgrounds to `slides/assets/`
+3. **Supporting files**: Copy `timer-plugin.js`, `timer-plugin.css`, `mark-plugin.js`, and logo to the slides directory
 4. **Edit**: Edit `index.html` directly — no generation step needed
 5. **Open**: Double-click `index.html` in any browser (no server needed)
 

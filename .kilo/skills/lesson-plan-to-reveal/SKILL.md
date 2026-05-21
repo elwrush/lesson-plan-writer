@@ -52,21 +52,41 @@ cp "templates/timer-plugin.css" "output/{subfolder}/slides/timer-plugin.css"
 cp "templates/ACT.png" "output/{subfolder}/slides/assets/logo.png"
 ```
 
-### Step 3: Background images
+### Step 3: Backgrounds
 
-**Do NOT download Pixabay images.** The user adds custom screenshot backgrounds manually after the slides are produced. All slide backgrounds use solid theme colors only.
+**All background images must use `data-background-opacity="1.0"` (100% opacity). Never dim background images — the image should be fully vibrant.**
 
-Background color reference:
-| Slide type | Background |
+**Every element on a slide with a background image MUST use a text-shield class** (`text-shield` or `text-shield-light`) to ensure text remains legible against any image area. Text-shield classes add a semi-transparent background behind the text (see the Text Shield pattern section for details).
+
+**Do NOT auto-download Pixabay or any other images.** If the teacher provides a background image URL or file path, you may use it. Never fetch images independently.
+
+Default background color reference (solid colors — no shielding needed):
+| Slide type | Default background |
 |---|---|
 | Title, lead-in, general content | `#1a1a2e` (dark navy/black) |
 | Transition (forward to next stage) | `#c0392b` (red) |
-| Pedagogical/strategy blocks | `#1a6b5a` (teal) |
+| Pedagogical/strategy blocks, grammar rules | `#1a6b5a` (teal) |
 | Answer tables | `#1e7e34` (green) |
 | Summary | white (default) |
 | End | `#2c3e50` (dark blue-gray) |
 
-Pixabay background images (`data-background-image`, `data-background-opacity`) are NEVER used in generated output. All backgrounds use `data-background="<color>"`.
+Background types available in reveal.js:
+- **Solid color**: `data-background="#1a1a2e"` — default for most slides; no text-shield needed
+- **Gradient**: `data-background-gradient="linear-gradient(to bottom, #283b95, #17b2c3)"` — use for phase transitions or emphasis; no text-shield needed
+- **Image**: `data-background-image="assets/filename.jpg" data-background-opacity="1.0"` — ONLY when teacher provides the file; ALL text on the slide MUST use `text-shield` or `text-shield-light`
+- **Video**: `data-background-video="assets/clip.mp4" data-background-video-muted` — for lesson hooks, only with teacher-provided files; ALL text MUST use `text-shield`
+- **Iframe**: `data-background-iframe="https://..." data-background-interactive` — for live web content as backdrop; text may need `text-shield` depending on the iframe content
+
+**Rule summary:**
+| Background type | `data-background-opacity` | Text-shield required? |
+|---|---|---|
+| Solid color | not applicable | No |
+| Gradient | not applicable | No |
+| **Image** | **`1.0`** | **Yes — ALL text on image slides must use `text-shield` or `text-shield-light`** |
+| Video | `1.0` (implied) | Yes |
+| Iframe | not applicable | Case-by-case |
+
+See the [Reveal.js Backgrounds documentation](https://revealjs.com/backgrounds/) for full details on all available options and attributes.
 
 ### Step 4A: Parse the lesson plan — enumerate stages and map to slides
 
@@ -76,29 +96,44 @@ For each stage in `lesson_plan.stages[]`:
 1. Read the stage name, aim, procedure, time, and interaction from the JSON.
 2. Determine which slide type(s) this stage maps to, using the Stage-to-Slide Mapping table below.
 3. For any exercise referenced in the procedure (e.g., "Practice 2B"), **read the source PDF** to get the actual exercise content that students will see on screen.
-4. For any answer key referenced in the JSON, **read the answer key file** (.typ) and extract answer content for answer slides.
-5. Create the appropriate `<section>` elements.
+4. For any answer key referenced in the JSON, **read the answer key file** (.typ) manually and re-express its content as HTML table rows. Do NOT attempt to parse Typst markup programmatically — `#table(...)` calls and `*bold*` syntax are not reliably machine-readable. Read the file, understand the answers, then hand-build the HTML.
+5. For any bespoke (teacher-written) exercise that has no PDF source, **source content from the lesson plan JSON's procedure text** or from the user's specified item list. Do NOT assume all exercise content lives in a PDF.
+6. Create the appropriate `<section>` elements.
 
 **Stage-to-Slide Mapping** (use this to determine how many slides each stage needs):
 
 | Stage type (from name/purpose) | Slide(s) to create | Content source |
 |---|---|---|
-| Lead-in (discussion, error analysis) | 1 discussion slide + optional additional slides (e.g., auto-animate for assessment criteria) | Stage procedure + user's context |
-| Diagnostic / Test (Test 1, Test 2) | 1 task slide with the diagnostic items on screen (items derived from materials / PDF) | Source PDF exercises + stage procedure |
-| Teach / Clarifying | 1 slide per concept taught (e.g., sentence definition = 1 slide, command sentences = 1 slide, capitalization rules = 1 slide) | Source PDF content (definitions, rules, examples from the textbook) |
-| Controlled Practice / Practice X | 1 task slide (student-facing instructions + timer) + 1+ answer slides (max 3 items per slide, split across multiple slides if needed) | Source PDF exercise content + answer key file |
-| Freer Practice / Practice X | 1 task slide + 1+ answer slides (max 3 items per slide, split across multiple slides if needed) | Source PDF exercise content + answer key file |
+| Lead-in — discussion / prediction | 1 slide with open question, dark `#1a1a2e` background | Stage procedure + user's context |
+| Lead-in — error analysis with auto-animate | 2-3 auto-animate slides: error sentences (transparent borders) → corrected sentences (visible borders) | Bespoke error sentences from lesson plan |
+| Diagnostic test (Test 1 in TTT) | 1 slide with all test items on screen, dark `#1a1a2e` background | Lesson plan JSON procedure text (bespoke items) |
+| Teach / Clarifying | 1-2 slides per concept taught (not per sub-rule); group related rules together | Source PDF definitions + examples + rule statements |
+| Controlled Practice / Practice X | 1 task slide (student-facing instructions + timer) + 1+ answer slides (see answer table sizing rules below) | Source PDF exercise content + answer key file |
+| Freer Practice / Practice X | 1 task slide + 1+ answer slides (see answer table sizing rules below) | Source PDF exercise content + answer key file |
 | Wrap-up | 1 summary slide | Stage procedure + learning objectives from JSON |
 | Vocabulary (if pre-teach stage exists) | 1 slide per word (max 5) | Stage 11 pre-teach vocabulary selection |
 
 **Slide order**: Follow stage_number order from the JSON. Insert Title (slide 0) and Objective (slide 1) BEFORE stage 1. Insert End slide AFTER the last stage.
 
-**Speaker notes**: Every task slide and content slide must include `<aside class="notes">` containing:
+**Speaker notes**: All slides EXCEPT transition slides and end slides must include `<aside class="notes">` containing:
 - Stage aim from the JSON (`stage_aim`)
 - Timing (`time` field in minutes)
 - Interaction pattern (`interaction` field)
-- The full procedure text (student-facing instructions on screen, teacher procedure in notes)
+- The full procedure text from the JSON
 - Do NOT put procedure text on screen — only student-facing task instructions
+
+| Slide type | Notes required? | Content |
+|---|---|---|
+| Title | Yes | Lesson overview, teacher cues |
+| Objective | Yes | Elicitation script, connection to prior learning |
+| Lead-in | Yes | Activation script, timing, expected responses |
+| Diagnostic test | Yes | Stage aim, timing, monitoring instructions |
+| Teach / Clarifying | Yes | Key points to elicit, board plan cues |
+| Task instruction | Yes | Full procedure, timing, interaction pattern |
+| Answer table | Yes | Discussion prompts, expected student reactions |
+| Transition | No | (Teacher's spoken introduction bridges the gap) |
+| Summary | Yes | Elicitation script, connection to objective |
+| End | No | — |
 
 **Materials**: For any exercise referenced in the procedure by name (e.g., "Practice 2B", "Practice 7"), read the source PDF file from the `inputs/` folder to get the exercise text. Build screen content from the PDF, not from your own paraphrasing. The exercise must look exactly as it does in the textbook (same items, same numbering).
 
@@ -165,7 +200,21 @@ When the user asks to modify an already-built slideshow (e.g., "change slide 7" 
 
 ### Step 5: Verify output
 
-**Verification approach:** Write a Python verification script to `C:\Users\elwru\AppData\Local\Temp\kilo\` that uses `in` operator checks against the file content. For any check that involves Unicode characters (em dashes `—`, en dashes `–`, smart quotes, special punctuation), use `repr()` or `.encode().hex()` comparison to avoid false failures from visually identical but codepoint-different characters.
+**Prefer revealjs-validator over bespoke scripts.** The project includes `revealjs-validator` (npm dev dependency) which checks 66 rules derived from the official Reveal.js docs. Run it in project mode for cross-file validation:
+
+```bash
+npx revealjs-validator --project "output/{subfolder}/slides/"
+```
+
+This catches broken auto-animate pairs, invalid fragment classes, missing assets, CSS misuse, and more. **However, the validator only checks static HTML structure — it CANNOT detect runtime errors that cause a blank page.** A presentation can pass all 66 rules and still show a blank screen due to a JavaScript error during `Reveal.initialize()`.
+
+**CRITICAL — Browser test every build:** After the validator passes, open the slides in a browser and check the JavaScript console (`F12` → Console tab):
+- Verify the page shows content (not blank/white)
+- Verify NO red errors appear in the console
+- Common runtime errors: undefined plugin references, CDN failures, plugin `init()` crashes
+- If the page is blank, remove recently added plugins from the `plugins` array first, then debug
+
+For the specific checks the validator doesn't cover (e.g., lesson plan stage coverage, answer table sizing, speaking notes on every slide), write a focused Python verification script to `C:\Users\elwru\AppData\Local\Temp\kilo\` that uses `in` operator checks.
 
 If a check fails, do NOT trust what the terminal displays (Unicode renders inconsistently). Instead:
 ```python
@@ -182,12 +231,14 @@ if idx >= 0:
 - Verify title slide contains `<img src="assets/logo.png" class="title-logo" />`
 - Verify `TimerPlugin` is in the `plugins` array of `Reveal.initialize()`
 - Verify `answer-correct` / `answer-incorrect` are used for answer fragments (NOT `highlight-green`/`highlight-red`)
-- **CRITICAL — Max 3 items per answer slide**: For every `<table class="answer-table">`, count the `<tr>` elements in `<tbody>`. If any table has more than 3 answer rows, flag it — must be split across multiple slides.
+- **Answer table sizing**: For every `<table class="answer-table">`, count the `<tr>` elements in `<tbody>`. Max 3 items per slide when a Why column is present (4-column tables). Max 5 for simple 3-column tables. Flag any table that exceeds the appropriate limit.
+- Verify no instructional text like "Click to reveal" appears on slides — answer reveal behavior is self-evident.
 - Verify fragment usage: only on answer reveal slides and strategy demonstrations, not on expository content
 - Verify procedure text is in `<aside class="notes">`, not on screen
 - Verify vocabulary words use `<span class="vocab-word">word</span>`
 - Verify title slide has strap subheader (not date/teacher/materials)
 - Verify `autoAnimateUnmatched: true` is in `Reveal.initialize()`
+- Verify every slide with `data-auto-animate` also has `data-auto-animate-id` — without it, `null === null` causes all auto-animate slides to animate into each other.
 - Verify transition slides use `data-background="#c0392b"`
 - Verify pedagogical strategy slides use `data-background="#1a6b5a"` and `class="pedagogical"`
 - Verify listening task slides that need audio have `data-audio-src="assets/filename.mp3"`
@@ -235,66 +286,6 @@ Fragment classes:
 - `fragment grow` — emphasize single vocabulary word
 - `fragment` (bare) — generic reveal
 
-## Slide Icons — Font Awesome 6
-
-Every slide type gets a **function-icon** that signals its role (not its topic). Icons are centered at the top, above the heading, using Font Awesome 6 via CDN. The CDN is already in `templates/base-slides-template.html`.
-
-**Icon CSS** (in template):
-```css
-.slide-icon {
-    font-size: 2.5em;
-    margin-bottom: 0.3em;
-    display: block;
-    text-align: center;
-}
-.transition-icon  { color: rgba(255,255,255,0.85); }  /* #c0392b slides */
-.pedagogical-icon { color: rgba(255,255,255,0.9);  }  /* #1a6b5a slides */
-.objective-icon   { color: rgba(255,221,0,0.85);    }  /* white slides    */
-```
-
-**Icon mapping** — one icon on the first slide of each block, before the `<h2>`:
-
-| Slide / Block | Icon | CSS class | Background |
-|---|---|---|---|
-| Objective | `fa-seedling` | `objective-icon` | white |
-| Lead-in | `fa-eye` | inherit | `#1a1a2e` |
-| Vocabulary (first word) | `fa-spell-check` | inherit | `#1a1a2e` |
-| Transition | `fa-forward` | `transition-icon` | `#c0392b` |
-| Strategy block header | `fa-list-check` | `pedagogical-icon` | `#1a6b5a` |
-| Strategy step slides | `fa-chess` | `pedagogical-icon` | `#1a6b5a` |
-| Task instruction | `fa-pencil` | inherit | white |
-| Discussion | `fa-comments` | `transition-icon` | `#c0392b` |
-| Summary | `fa-flag-checkered` | inherit | white |
-| End | `fa-star` | inherit | `#2c3e50` |
-
-**Example — Objective slide:**
-```html
-<section>
-    <i class="fa-solid fa-seedling slide-icon objective-icon"></i>
-    <h2>Here's what you'll be able to do</h2>
-    ...
-</section>
-```
-
-**Example — Transition slide:**
-```html
-<section data-background="#c0392b">
-    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
-    <h2>Finding details</h2>
-    ...
-</section>
-```
-
-**Example — Strategy block header:**
-```html
-<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
-    <i class="fa-solid fa-list-check slide-icon pedagogical-icon"></i>
-    <h2>True/False Strategy</h2>
-    ...
-</section>
-```
-
-Only the **first slide** of a strategy block gets the icon. Steps 2–4 do not repeat it — the teacher and students see the icon once as the block begins.
 
 ## Slide Type Templates (Raw HTML)
 
@@ -371,13 +362,11 @@ All patterns live in `templates/base-slides-template.html` as HTML comments. **C
 ### 5. Transition Slide (red background)
 ```html
 <section data-background="#c0392b">
-    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
     <h2>Finding details</h2>
 </section>
 ```
 - Red background `#c0392b`
 - **Heading only** — no subheader text or descriptive paragraphs. The teacher's spoken introduction bridges the gap. All `<p>` elements removed.
-- Icon: `fa-forward` (or `fa-comments` for discussion transitions)
 
 ### 6. Auto-Animate Strategy Block
 ```html
@@ -519,8 +508,10 @@ Use the same `answer-table` pattern with green background and fragment reveals:
 - `answer-correct` = green background on reveal, `answer-incorrect` = red background on reveal
 - **Do NOT use `highlight-green`/`highlight-red`** — reveal.js built-in classes force `opacity: 1`, preventing fragment hiding
 - **CRITICAL — Color contrast on green slides**: On `#1e7e34` answer slides, **only two colors are allowed** for text: **white `#fff`** or **yellow `#ffdd00`**. Any other color — blue (`#4fc3f7`), gray (`#999`, `#ccc`, `#888`), light gray, silver, muted tones — is **FORBIDDEN**. They are invisible against the green background at projection distance. If you see any text on a green answer slide that is not white or yellow, it is a bug that must be fixed. Use `<span style="color: #fff;">` explicitly for any element whose color is not obvious from context.
-- **Max 3 items per answer slide**: If an exercise has more than 3 items, split across multiple answer slides. Each slide shows at most 3 table rows. Example: 10 items → 4 slides (1-3, 4-6, 7-9, 10).
-- For 3-column tables with explanations, add a `Why?` column (see Answer Table Patterns below)
+- **Answer table sizing**: Max **3 items per slide** when a Why column is present (4-column tables: # / Sentence / Answer / Why?). For simple 3-column tables without Why column, up to 5 items per slide. Examples: 11 grammar items → 4 slides of 3+3+3+2; 6 errors → 2 slides of 3+3.
+  - Do NOT include instructional text like "Click to reveal" — the reveal behavior is self-evident.
+  - Use `data-fragment-index` matching on Answer and Why cells for per-row reveal (both columns reveal on the same click).
+  - Table font: `0.875em` for 4-column tables, with Why column at `0.9em`.
 
 ### 10. Answer Slide (Multiple Choice / Matching)
 
@@ -538,7 +529,7 @@ Use the same `answer-table` pattern with green background and fragment reveals:
 ```
 - **Questions/options visible at slide entry** — students see all choices
 - **Answer and Why columns are fragments** — revealed one row at a time via clickthrough
-- **Answers must be yellow, not white**: Answers should be highly contrastive to questions. Use class `answer-yellow` (yellow `#ffdd00`) on answer reveal text (e.g., `class="fragment english-reveal answer-yellow"`). Questions/options stay white; revealed answers turn yellow to visually separate them.
+- **Answers must be yellow, not white**: Answers should be highly contrastive to questions. Use class `answer-yellow` (yellow `#ffdd00`) on answer reveal text (e.g., `class="fragment answer-yellow"`). Questions/options stay white; revealed answers turn yellow to visually separate them.
 
 ### 11. Summary Slide
 ```html
@@ -616,7 +607,7 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
 4. **Task slides: brief student instructions** — extract task description from procedure, skip teacher-only instructions. Max 3 task lines on screen.
 5. **Stage names: student-friendly language** — "Lead-in" → "Let's get Started", "Reading for gist" → "What's the main idea?", "Reading for detail" → "Finding details", "Reading for inference" → "Making conclusions", "Post-reading" → "Let's Discuss", "Wrap-up" → "Let's Review"
 6. **Vocabulary slides** — generated AFTER lead-in stage. One word per slide with dark navy background. "Important Words" title on first slide only. Yellow bold (#ffdd00) via `<span class="vocab-word">`.
-7. **Answer slides** — use `<table class="answer-table">` with green background `#1e7e34`. Statements visible on entry; answers use `class="fragment answer-correct"` or `class="fragment answer-incorrect"` for clickthrough reveal. **Do NOT use `highlight-green`/`highlight-red`** (reveal.js keeps them at `opacity: 1`; they never hide). **CRITICAL: Max 3 items per answer slide.** If an exercise has more than 3 items, split across multiple answer slides (e.g., items 1-3, items 4-6, items 7-10). Never exceed 3 table rows per answer slide. **CRITICAL — Green slide text: only white `#fff` or yellow `#ffdd00` allowed.** Gray, blue, or any muted color is invisible at projection distance. Never use any other color on `#1e7e34` slides.
+7. **Answer slides** — use `<table class="answer-table">` with green background `#1e7e34`. Statements visible on entry; answers use `class="fragment answer-correct"` or `class="fragment answer-incorrect"` for clickthrough reveal. **Do NOT use `highlight-green`/`highlight-red`** (reveal.js keeps them at `opacity: 1`; they never hide). **CRITICAL — Green slide text: only white `#fff` or yellow `#ffdd00` allowed.** Gray, blue, or any muted color is invisible at projection distance. Never use any other color on `#1e7e34` slides.
 8. **Transition slides: heading only (no subheader text).** The red background + icon + heading is sufficient — the teacher's spoken introduction bridges the gap. Remove all `<p>` elements from transition slides.
 9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#1a6b5a` (pedagogical/strategy), green `#1e7e34` (answer tables), dark `#2c3e50` (end)
 10. **Logo**: `assets/logo.png`, transparent RGBA PNG, max-height 100px, centered
@@ -626,9 +617,11 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
 14. **Proper HTML lists for letters/numbers**: Never use manual lettering or numbering in `<p>` tags (e.g., `<p><strong>A</strong> Option text</p>`). Use semantically correct HTML lists instead: `<ol type="A">` for lettered options, `<ol>` for numbered items, `<ul>` for bullet points. Each item gets its own `<li>` element. This ensures proper alignment and accessibility.
 ## Authorial Voice & Audience
 
-This skill generates slides for **Mathayom 2-3 Thai students (CEFR B1)**. All student-facing text on screen MUST follow these rules:
+This skill generates slides for **Thai secondary students (CEFR A2–B2)**. The default voice targets **B1** (Mathayom 2-3). All student-facing text on screen MUST follow these rules, with level-appropriate relaxations noted.
 
-### 1. Person Rule
+### Baseline (Applies to all CEFR levels)
+
+#### 1. Person Rule
 All on-screen student-facing text MUST use **direct "you" imperatives**, never third person:
 
 | Wrong | Correct |
@@ -639,7 +632,17 @@ All on-screen student-facing text MUST use **direct "you" imperatives**, never t
 
 **`<aside class="notes">` remains unrestricted** — teacher procedure can use full professional vocabulary.
 
-### 2. B1 Vocabulary Ceiling
+#### 2. Person Rule
+- Collective framing: "We can see...", "Our class can think about..."
+- Positive, concrete questions — avoid abstract philosophical prompts
+- Group participation questions, not individual introspection
+
+#### 3. No Automatic Image Downloads
+When regenerating slides, **do not auto-download images**. Start with solid theme colors. Use gradients, images, or videos only when the teacher provides assets or when they serve a clear pedagogical purpose. Never fetch images independently.
+
+### B1 Default (Mathayom 2-3)
+
+#### Vocabulary Ceiling
 No words above CEFR B1 on screen without inline definition:
 - "identify" → use "find"
 - "predict" → use "guess"
@@ -649,70 +652,110 @@ No words above CEFR B1 on screen without inline definition:
 - "analyze" → use "look at carefully"
 - "infer" → use "understand what the writer means"
 
-### 3. Sentence Complexity
+#### Sentence Complexity
 - Max 15 words per sentence on screen
 - No semicolons — break into two sentences
 - One clause preferred, two max
 - No passive voice on screen
 
-### 4. Thai L1 Considerations
-- Collective framing: "We can see...", "Our class can think about..."
-- Positive, concrete questions — avoid abstract philosophical prompts
-- Group participation questions, not individual introspection
-
-### 5. Summary: "I Can" Statements
+#### Summary: "I Can" Statements
 | Wrong | Correct |
 |-------|---------|
 | "Identify the main purpose" | "I can find the main idea" |
 | "Find key facts" | "I can find important facts" |
 | "Express opinions" | "I can share my ideas" |
 
-### 6. Transition Slides: Directive + Foreshadow + Engagement
-| Old (reflective) | New (directive + foreshadow + engage) |
-|-------------------|---------------------------------------|
-| "What's the idea?" | "WHAT'S THE MAIN IDEA? Look at the main reading. What do you think the text is about?" |
-| "What did you learn?" | "We're now going to read in more detail. Let's start with True/False questions. They may look easy, but they can have some surprises!" |
+### B2 Adaptation (for higher-level classes)
 
-### 7. No Automatic Image Downloads
-When regenerating slides, **do not download images**. All backgrounds use solid theme colors only.
+When the lesson targets B2 learners, relax the B1 rules as follows:
 
-## Auto-Animate vs. Simple Slides for Strategy Blocks
+- **Vocabulary ceiling**: academic words (identify, evaluate, analyze) may appear but must be defined or exemplified on screen
+- **Sentence complexity**: max 20 words per sentence; semicolons OK for contrast
+- **Summary**: may use slightly more specific outcomes (e.g., "I can use correct subject-verb agreement when a prepositional phrase separates subject and verb")
+- **All other rules remain** (person rule, no auto-download, collective framing)
 
-**For step-by-step strategy teaching (SBI), prefer simple slides without auto-animate.**
+## reveal.js Animation & Interactive Features
 
-Use separate `<section>` elements with `data-background-transition="none"` — one step per slide. Teacher advances manually, pausing at each decision point. This is more effective than auto-animate for pedagogical slides because:
+This section maps reveal.js features to pedagogical contexts. Use it as a lookup table when designing slides — choose the right tool for the job.
 
-1. Each step is a discrete teaching moment
-2. Teacher controls pacing, not the animation
-3. No content disappears mid-step (avoids negative-margin clipping issues)
+### Auto-Animate vs. Fragments vs. Sibling Slides
 
-Use auto-animate only when the strategy block is a quick demonstration, not explicit instruction.
+**When to use each approach:**
 
-**Rules for simple (non-auto-animate) pedagogical slides:**
+| Use auto-animate for | Use simple sibling slides for | Use fragments (single slide) for |
+|---|---|---|
+| Error-correction reveals (transparent → visible borders) | Step-by-step strategy demonstrations (1 slide per step) | Answer reveals (T/F, MC, grammar) |
+| Quick grammar transformations (word-by-word) | Explicit SBI instruction where teacher pauses at each step | Eliminating wrong MC options (`strike`) |
+| Keyword underline reveals (border color change) | Grammar rule explanations (1-2 slides for all rules) | Multi-step strategy on a single slide |
+| Any animation effect that requires matching `data-id` elements between slides | | |
+
+**Decision framework:**
+1. **Will each step of your content be a discrete teaching moment?** (Teacher will pause, ask questions, check understanding at each step) → Use **simple sibling slides** (one slide per step, `data-background-transition="none"`). Each step is a separate `<section>` without `data-auto-animate`.
+2. **Is the effect purely visual (borders appearing, colors changing, words replacing)?** (The content doesn't change, only its visual treatment) → Use **auto-animate** across 2 consecutive `<section>` elements with matching `data-id` attributes.
+3. **Does the teacher just need to click through existing content?** (Revealing answers, eliminating options, showing steps already on screen) → Use **fragments** on a single `<section>`.
+
+**Rules for simple sibling slides (non-auto-animate, pedagogical):**
 - Each step = one `<section>` with `class="pedagogical"` and `data-background="#1a6b5a"`
 - All sections: `data-background-transition="none"` (prevents flash of color on entry)
 - CSS handles top alignment via `.reveal .slides > section.pedagogical` — no inline style needed (reveal.js strips inline `top` during layout)
 - Step label underlined: `<u><strong>Step N:</strong> ...</u>`
 - Rule (if applicable) embedded in Step 2, not a separate slide
-- Real quotes from the article on Step 4, in italics
-- Original question in yellow (`#ffdd00`) on first and last slides
-
-**Why markdown was abandoned**: reveal.js auto-animate requires consecutive sibling `<section data-auto-animate>` elements in `<div class="slides">`. The markdown plugin wraps all content in a single `<section data-markdown>`, making auto-animate impossible.
 
 **Rules for auto-animate blocks:**
 1. All sections in one block must be **consecutive siblings** — no other sections between them
-2. `data-auto-animate-id` must match across all sections in the block
-3. Each section adds content to what was shown in the previous section
+2. **CRITICAL — `data-auto-animate-id` is REQUIRED** on every slide with `data-auto-animate`. The reveal.js `shouldAutoAnimateBetween()` function compares `data-auto-animate-id` between slides. **Without it, `null === null` evaluates to `true`, causing ALL slides with `data-auto-animate` to animate into each other — even unrelated slides from different rule blocks.** Use a unique id per block (e.g., `"rule-1"`, `"rule-2"`, `"tf-strategy"`).
+3. Each section adds content to what was shown in the previous section, OR changes styling of existing elements (border color, font-weight)
 4. `autoAnimateUnmatched: true` in `Reveal.initialize()` handles elements that appear/disappear between slides
-5. All sections share `class="pedagogical"` and `data-background="#1a6b5a"` for visual consistency
-6. The final section may use `fragment highlight-green` for answer reveal
-7. Use for: strategy demonstrations (True/False, Multiple Choice), step-by-step language analysis, grammar transformations
+5. All sections share `class="pedagogical"` and `data-background="#1a6b5a"` for visual consistency (if on teal background)
 
-**When NOT to use auto-animate:**
-- Answer reveal slides (use fragments instead)
-- General slide transitions (use regular slide changes)
-- Vocabulary lists (all visible at once)
-- Expository content (no animation)
+**Why markdown was abandoned**: reveal.js auto-animate requires consecutive sibling `<section data-auto-animate>` elements in `<div class="slides">`. The markdown plugin wraps all content in a single `<section data-markdown>`, making auto-animate impossible.
+
+### reveal.js Feature Lookup Table
+
+Use this table when deciding which reveal.js feature fits a pedagogical need. Each feature links to the official documentation for implementation details.
+
+| Feature | Syntax | Pedagogical use case | Example context |
+|---|---|---|---|
+| **Fragment (default fade-in)** | `class="fragment"` | Revealing content step by step under teacher control | Answer rows on green answer slides, one at a time |
+| **Fragment (strike)** | `class="fragment strike"` | Eliminating wrong options visually | Multiple choice — striking out incorrect answers |
+| **Fragment (answer-correct)** | `class="fragment answer-correct"` | Revealing correct answer with green background (custom CSS) | T/F answer tables, grammar fill-in-the-blank |
+| **Fragment (answer-incorrect)** | `class="fragment answer-incorrect"` | Revealing wrong answer with red background (custom CSS) | Error correction, wrong answer flagging |
+| **Fragment (highlight-current-red/green/blue)** | `class="fragment highlight-current-red"` | Temporarily highlighting then returning to original | Vocabulary word in context, grammar element in a sentence |
+| **Fragment (custom)** | Custom CSS + `class="fragment custom blur"` | Any visual effect — blur→focus, scale, color shift | Progressive focus on sentence parts (S → V → O) |
+| **Fragment (fade-in-then-out)** | `class="fragment fade-in-then-out"` | Showing a temporary hint or scaffold that disappears | Scaffolding for weaker students during pair work |
+| **Fragment (nested)** | Nested `<span class="fragment">` | Multi-step effect on the same text | Fade in ➝ highlight red ➝ strike through |
+| **Fragment (grow/shrink)** | `class="fragment grow"` | Emphasising a single word on click | Key vocabulary word, grammar term |
+| **Auto-animate** | `data-auto-animate` on 2+ consecutive `<section>` elements | Any visual transition between slides: border changes, position shifts, content building | Error→correction reveal, keyword underline, strategy step builds |
+| **Auto-animate + code** | `data-auto-animate` + `<pre data-id="code">` + `data-line-numbers` | Building up code/text with syntax highlighting progression | Skimming/scanning lessons — highlight key sentences across slides |
+| **Mark.js text highlighting** | `data-mark="1,3-5\|/pattern/"` on any element (uses Mark.js) | Highlighting arbitrary text (not code) with yellow `<mark>` background. Supports line numbers and regex. | Reading passages — call out key sentences, vocabulary in context. No monospace hack needed. |
+| **Code blocks + line numbers** | `<pre><code data-line-numbers="1\|3-5\|7">` | Highlighting specific lines in a text passage, step by step | Reading comprehension — reveal main idea first, then details |
+| **Per-slide transitions** | `data-transition="zoom"` or `data-transition="convex"` | Dramatic emphasis at a key moment | Transition into answer reveal, lesson climax, phase change |
+| **Separate in/out transitions** | `data-transition="slide-in fade-out"` | Different transition entering vs leaving a slide | Moving from Teach to Practice phase |
+| **Background gradient** | `data-background-gradient="linear-gradient(...)"` | Visual variety — phase transitions, mood shifts | Signalling a new lesson section |
+| **Background video** | `data-background-video="assets/clip.mp4"` | Full-screen video hook (teacher-provided file only) | Lesson introduction (movie trailer, news clip) |
+| **Background image** | `data-background-image="assets/file.jpg" data-background-opacity="1.0"` | Visual context for a topic (teacher-provided file only). ALL text MUST use `text-shield` or `text-shield-light`. | Lead-in discussion, topic introduction |
+| **Background iframe** | `data-background-iframe="https://..."` | Live web content as slide backdrop | Google Forms poll, live dictionary, news site |
+| **Auto-slide (timed advance)** | `data-autoslide="5000"` on a `<section>` | Self-advancing slides for timed reading | Speed-reading passages, timed grammar drills |
+| **Lightbox (image)** | `data-preview-image` on `<img>` | Click-to-enlarge for detailed viewing | Textbook page close-ups, diagram details |
+| **Lightbox (video)** | `data-preview-video` on any element | Click-to-play video overlay | Student example videos, extension media |
+| **Lightbox (link)** | `data-preview-link` on `<a>` | Click-to-preview external link | Previewing a reference website |
+| **Vertical slides** | Nested `<section>` inside a horizontal `<section>` | Backup/optional content, sub-steps, lesson extensions | Extra practice for fast finishers, grammatical sub-rules, optional extension activities |
+| **Layout: r-fit-text** | `class="r-fit-text"` on heading | Auto-sizing text to fill the slide | Single powerful word, key concept, grammar rule summary |
+| **Layout: r-stack** | `class="r-stack"` on container | Stacking elements on top of each other | Before/after comparisons, image overlays |
+| **Layout: r-stretch** | `class="r-stretch"` on an element | Filling remaining vertical space | Maximising a screenshot or image within a slide |
+| **Layout: r-frame** | `class="r-frame"` on element | Adding a border/frame, hover effect on links | Highlighting an image as clickable |
+| **Text shield (dark)** | `class="text-shield"` on heading/p | Semi-transparent dark background behind text for readability on image backgrounds | Title or body text on `data-background-opacity="1.0"` slides |
+| **Text shield (light)** | `class="text-shield-light"` on heading/p | Semi-transparent light gray background for dark-colored text on dark image areas | Dark text on full-opacity dark image backgrounds |
+| **Text shield (fragment)** | `class="fragment text-shield-light"` | Text already visible; light gray background highlight appears on click (call-out effect) | Revealing a key point on an image-background slide |
+
+**Decision flow:**
+1. **Is the effect purely visual between slides?** (border appearing, colour change, word replacement) → **Auto-animate**
+2. **Is the teacher revealing content step by step within a single slide?** → **Fragments**
+3. **Is each step a discrete teaching moment that needs its own slide?** → **Sibling slides** (one per step, no auto-animate)
+4. **Does the content need progressive highlighting within a text block?** → **Code + line numbers**
+5. **Is the goal to enlarge or preview media?** → **Lightbox**
+6. **Is the content optional / a backup?** → **Vertical slides**
+7. **Does the slide need a dramatic entrance?** → **Per-slide transition**
 
 ## Pedagogical Strategy Slides — Design Principles
 
@@ -815,7 +858,7 @@ Using `margin-top: -2.5%` pushes content off-screen top. A small positive `paddi
 ```html
 <!-- Step 1: Header + demo question + options -->
 <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
-    <span style="font-size: 2.5em; color: rgba(255,255,255,0.9);"><i class="fa-solid fa-chess"></i></span>
+
     <div style="overflow: hidden;">
     <h2>Multiple Choice Strategy</h2>
     <p>Now let's learn how to answer MC questions with an example.</p>
@@ -890,7 +933,88 @@ All answer slides use `answer-table` class with green background `#1e7e34`. The 
 
 **CRITICAL — Green slide text color: only white `#fff` or yellow `#ffdd00`.** Gray, blue, silver, or any muted color is invisible against `#1e7e34` at projection distance. Every text element on a green answer slide **must** be white or yellow — no exceptions. If a `<td>`, `<p>`, or `<span>` on a green slide uses any other color class, it is a bug.
 
-**HARD RULE: Max 3 rows per answer table.** If an exercise has N > 3 items, create ⌈N/3⌉ answer slides. Items 1-3 on the first slide, 4-6 on the second, 7-9 on the third, etc. This ensures on-screen text is readable at projection distance. Never make an exception — even short items must stay within 3 per slide.
+**Grammar answer tables** (single-answer-per-row, e.g., fill-in-the-blank or choose-the-verb):
+
+```html
+<section data-background="#1e7e34">
+    <h2>Practice 3A — Answers (1–6)</h2>
+    <table class="answer-table">
+        <thead><tr><th>#</th><th>Sentence</th><th>Answer</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>One of my classmates ___ from my country.</td><td class="fragment answer-correct"><strong style="color:#ffdd00;">is</strong></td></tr>
+            <tr><td>2</td><td>Some of the teachers ___ my language.</td><td class="fragment answer-correct"><strong style="color:#ffdd00;">speak</strong></td></tr>
+            <!-- ... up to 6 rows for short items ... -->
+        </tbody>
+    </table>
+</section>
+```
+
+**Multi-column grammar answer tables** (for subject/verb/object or multiple fields):
+
+```html
+<section data-background="#1e7e34">
+    <h2>Practice 3 — Answers (1–5)</h2>
+    <p class="aim-label">Subjects, Verbs, and Objects</p>
+    <table class="answer-table">
+        <thead><tr><th>#</th><th>Sentence</th><th>S</th><th>V</th><th>O</th></tr></thead>
+        <tbody>
+            <tr><td>1</td><td>My brother is in school.</td><td class="fragment answer-correct">My brother</td><td class="fragment answer-correct">is</td><td class="fragment">(none)</td></tr>
+            <!-- ... all columns are fragments for simultaneous reveal per row ... -->
+        </tbody>
+    </table>
+</section>
+```
+
+**Error-correction answer tables** (showing original error → correction):
+
+```html
+<section data-background="#1e7e34">
+    <h2>Practice 4 — Answers (1–7)</h2>
+    <p class="aim-label">Find and fix the errors</p>
+    <table class="answer-table">
+        <thead><tr><th>#</th><th>Original</th><th>Correction</th></tr></thead>
+        <tbody>
+            <tr><td>2</td><td>He ___ never on time.</td><td class="fragment answer-correct"><strong style="color:#ffdd00;">is</strong></td></tr>
+            <tr><td>3</td><td>___ arrives ten minutes late.</td><td class="fragment answer-correct"><strong style="color:#ffdd00;">He</strong> (or Larry)</td></tr>
+            <!-- ... correction column uses fragments for reveal ... -->
+        </tbody>
+    </table>
+</section>
+```
+
+**Diagnostic test slide** (bespoke items, dark background, no timer):
+
+```html
+<section data-background="#1a1a2e">
+    <h2>Diagnostic Test — Subject-Verb Agreement</h2>
+    <p><em>Each sentence has ONE error. Find and fix it.</em></p>
+    <ol style="font-size: 0.8em; text-align: left;">
+        <li>George Lucas have changed the film industry.</li>
+        <li>There is two main characters in Star Wars.</li>
+        <li>Each of the movies have a different director.</li>
+        <!-- ... 8 items, all visible on entry ... -->
+    </ol>
+    <aside class="notes">
+        Stage 2 · 8 min · S
+        Aim: To diagnose S-V agreement errors.
+        Monitor and note which items cause most difficulty. Do NOT give answers yet.
+    </aside>
+</section>
+```
+
+**Grammar rule explanation slides** (teal background, pedagogical class, paired rules):
+
+```html
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+    <h2>Subject-Verb Agreement: Rules 1–3</h2>
+    <p><u><strong>Rule 1:</strong> Ignore prepositional phrases</u></p>
+    <p><em>"The color <span style="color:#ffdd00;">of her eyes</span> changes."</em> → Subject is <strong>color</strong>, not <em>eyes</em>.</p>
+    <p><u><strong>Rule 2:</strong> There + be → subject follows</u></p>
+    <p><em>"There <span style="color:#ffdd00;">are</span> several kinds."</em> → <strong>kinds</strong> is the subject.</p>
+    <p><u><strong>Rule 3:</strong> Each, one, neither, either → always singular</u></p>
+    <p><em>"Each of the students <span style="color:#ffdd00;">has</span> a book."</em></p>
+</section>
+```
 
 **2-column table (True/False, simple answers):**
 
@@ -949,6 +1073,214 @@ Per `knowledge-base\revealjs-packed.json` (line 127-134):
 .reveal .fragment.strike.visible { text-decoration: line-through; }
 ```
 **Do NOT override this CSS** in the `<style>` block. Text is always visible; strikethrough appears on click only. Any custom `.reveal .fragment.strike` CSS in the page will break this behavior.
+
+### Code Blocks for Reading Passage Highlights
+
+Use reveal.js code highlighting (`data-line-numbers`) to progressively reveal specific lines in a text passage. This is ideal for **skimming and scanning lessons** — the teacher can highlight the main idea first, then key details, then vocabulary in context.
+
+**Pattern — step-by-step text passage reveal with auto-animate:**
+
+```html
+<section data-auto-animate>
+  <pre data-id="reading" style="font-size: 0.7em;"><code data-trim data-line-numbers="1-5|6,8,10|12-15">
+    Filmmaker George Lucas has changed the film industry in many ways.
+    He has written, directed, and produced some of the best-loved movies of our time.
+    He has also made major contributions to modern film technology.
+    At first, Lucas did not plan to become a filmmaker.
+    His first dream was to become a race car driver.
+
+    After a bad accident, however, he decided to go to college.
+    In college, Lucas studied movie-making and made a number of student films.
+
+    Lucas's third feature film, Star Wars, changed everything.
+
+    A seemingly simple story of good versus evil, Star Wars became a huge international hit.
+    The movie used new technologies that revolutionized the film industry.
+
+    To sum up, George Lucas's love of storytelling and his technological innovations
+    have transformed movie-making forever.
+  </code></pre>
+</section>
+<section data-auto-animate>
+  <pre data-id="reading" style="font-size: 0.7em;"><code data-trim data-line-numbers="1-5|6,8,10|12-15">
+    Filmmaker George Lucas has changed the film industry in many ways.
+    He has written, directed, and produced some of the best-loved movies of our time.
+    He has also made major contributions to modern film technology.
+    At first, Lucas did not plan to become a filmmaker.
+    His first dream was to become a race car driver.
+
+    After a bad accident, however, he decided to go to college.
+    In college, Lucas studied movie-making and made a number of student films.
+
+    Lucas's third feature film, Star Wars, changed everything.
+
+    A seemingly simple story of good versus evil, Star Wars became a huge international hit.
+    The movie used new technologies that revolutionized the film industry.
+
+    To sum up, George Lucas's love of storytelling and his technological innovations
+    have transformed movie-making forever.
+  </code></pre>
+</section>
+```
+
+- `data-line-numbers="1-5|6,8,10|12-15"` creates 3 clickthrough steps: first highlights lines 1-5, then lines 6/8/10, then lines 12-15
+- The `|` character separates highlight steps — each press of the right arrow advances to the next step
+- `data-auto-animate` on both `<section>` elements makes the transition between slides smooth
+- `data-trim` removes surrounding whitespace
+- The `<pre>` must have a matching `data-id` across both slides for auto-animate to work
+- Adjust `font-size` (0.7em–0.85em) based on passage length
+
+**Pattern — single-slide text passage with fragments (no auto-animate):**
+
+```html
+<section data-background="#1a1a2e">
+  <h2>Find the Main Idea</h2>
+  <pre style="font-size: 0.75em;"><code data-trim data-line-numbers="1-15">
+    Filmmaker George Lucas has changed the film industry...
+    ...
+    have transformed movie-making forever.
+  </code></pre>
+  <p class="fragment" style="color:#ffdd00;"><strong>Main idea:</strong> George Lucas transformed filmmaking through innovation.</p>
+  <p class="fragment" style="color:#aaa;"><strong>Supporting detail 1:</strong> He created Star Wars.</p>
+  <p class="fragment" style="color:#aaa;"><strong>Supporting detail 2:</strong> He developed new film technology.</p>
+  <aside class="notes">
+    Stage 2 · 8 min · Ss-Ss
+    Aim: To identify the main idea of the text
+    Step 1: Students read silently. Step 2: Elicit main idea. Step 3: Reveal details.
+  </aside>
+</section>
+```
+
+**Key rules for code/text passages:**
+- Use `<pre><code data-trim data-line-numbers="...">` for wrapping text
+- The `data-line-numbers` attribute accepts comma-separated lines, ranges (1-5), and step separators (`|`)
+- Line numbers are 1-based (first line of text = 1)
+- For auto-animate across slides: add `data-id` to the `<pre>` element, matching on both slides
+- The highlight plugin is already loaded in the base template — no additional setup needed
+- See [reveal.js code documentation](https://revealjs.com/code/) for full details
+
+### Text Shield for Full-Opacity Image Backgrounds
+
+**MANDATORY RULE: Every element on a slide with `data-background-image` MUST use `text-shield` or `text-shield-light`.** No text on an image-background slide is exempt — headings, body text, labels, and footers all need shielding. Solid-color and gradient backgrounds do not need shielding.
+
+The `text-shield` classes add a semi-transparent background behind the text, ensuring readability at full image vibrancy (`data-background-opacity="1.0"`).
+
+```html
+<section data-background-image="assets/george-lucas.jpg" data-background-opacity="1.0">
+    <h2 class="text-shield">George Lucas: A Filmmaker Who Changed Cinema</h2>
+    <p class="text-shield">Dark background shield for white text — readable on any image area.</p>
+    <p><span class="text-shield-light" style="color:#222;">Light background shield for dark text.</span></p>
+    <p><span class="fragment text-shield-light">Text always visible; light gray highlight appears on click.</span></p>
+    <aside class="notes">
+        text-shield = dark (rgba(0,0,0,0.55)) for white text
+        text-shield-light = light (rgba(200,200,200,0.65)) for dark text
+        Fragment variant: text visible, background highlights on click.
+    </aside>
+</section>
+```
+
+**Rules:**
+- `class="text-shield"` — dark semi-transparent background for white text. Use on dark theme slides.
+- `class="text-shield-light"` — light gray semi-transparent background for dark-colored text. Use on light theme slides.
+- `class="fragment text-shield-light"` — text visible at slide entry; light gray background highlight appears on click. Use for call-out effects without hiding text.
+- **Subtitle-style shielding**: These classes use `display: inline-block` + `max-width: 90%`. The background box stays tight to the text (inline-block shrinks to content width). Long text wraps at 90% of the slide width, preventing full-width bars. Elements stack naturally with standard block-level spacing — no `::after` artifacts.
+- Both classes apply `text-shadow: none` — the background shield replaces the need for text shadow.
+- Always pair with `data-background-image` and `data-background-opacity="1.0"` on the `<section>`.
+- **All text-bearing elements** on the slide (headings, paragraphs, list items, labels, footers) must use one of the two text-shield classes. No unshielded text on an image background.
+
+### Text Highlighting with `data-mark` (Mark.js Plugin)
+
+The mark plugin uses [Mark.js](https://markjs.io) to highlight arbitrary text with a yellow background `<mark>` element. Unlike `data-line-numbers` (which requires `<pre><code>` blocks and forces monospace), `data-mark` works on **any HTML element** — paragraphs, blockquotes, lists, headings.
+
+**IMPORTANT:** The mark plugin is NOT included in the base template by default. Any plugin added to `Reveal.initialize({ plugins: [...] })` runs at startup — if its `init()` function crashes, the ENTIRE presentation shows a blank page with no error message. The mark plugin was removed from the base template after a runtime compatibility issue. To use it, follow the Plugin Safety Protocol below.
+
+**Setup (if needed):**
+1. Download `templates/mark-plugin.js` (exists as reference)
+2. Load Mark.js from CDN: `<script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/mark.min.js"></script>`
+3. Load the plugin: `<script src="mark-plugin.js"></script>`
+4. Add `RevealMark` to the `plugins` array in `Reveal.initialize()`
+5. **Test in browser** — open the page, check console for errors. If blank, remove the plugin immediately.
+
+```html
+<!-- Mark individual lines: line 1, then lines 3-5 -->
+<p data-mark="1|3-5">Line 1 visible and marked from start.
+Line 2 never marked.
+Lines 3, 4, and 5 marked on click.</p>
+
+<!-- Mark regex pattern: nothing, then "creative", then line 5 -->
+<blockquote data-mark="|/creative/|5">
+    Filmmaker George Lucas has changed the film industry in many ways.
+    He has written, directed, and produced some of the best-loved movies.
+    A seemingly simple story of good versus evil, Star Wars became a hit.
+    The movie used new technologies that revolutionized the industry.
+    To sum up, George Lucas has transformed movie-making forever.
+</blockquote>
+
+<!-- Mark different patterns step by step -->
+<div data-mark="|/changed/|/technology/">
+    <p>George Lucas has changed the film industry.</p>
+    <p>He developed new film technology.</p>
+</div>
+```
+
+**Key rules:**
+- `data-mark="1,3-5"` — mark lines 1, 3, 4, 5 on slide entry (no fragments)
+- `data-mark="|/creative/|5"` — 3 steps: nothing → highlight "creative" → highlight line 5. The `|` separates steps
+- Steps can mix line numbers and regex patterns: `data-mark="1-3|/main idea/|5"`
+- Regex patterns are delimited by any non-pipe, non-digit character: `/pattern/`, `#pattern#`, `"pattern"`
+- The plugin creates `<mark data-markjs="true">` elements with default yellow styling
+- The base template already loads `mark.js` (CDN) and `mark-plugin.js` (local) — no extra setup needed
+- See [reveal-mark-plugin](https://github.com/stlab/reveal-mark-plugin) for full syntax
+
+### revealjs-validator (Post-Build Validation)
+
+The project includes `revealjs-validator` as a dev dependency. Run it after building slides to catch common Reveal.js errors (broken auto-animate pairs, invalid fragment classes, CSS misuse, missing assets, etc.):
+
+```bash
+# Validate all slides in a presentation
+npx revealjs-validator --project "output/{subfolder}/slides/"
+
+# Validate with auto-fix
+npx revealjs-validator --fix --project "output/{subfolder}/slides/"
+
+# List all 66 rules
+npx revealjs-validator --list-rules
+```
+
+The validator checks 66 rules derived from the official Reveal.js documentation. Key rules relevant to this skill:
+- `auto-animate-pairs` — consecutive `data-auto-animate` slides must match
+- `valid-fragment-classes` — fragment effects need the base `fragment` class
+- `cross-assets-exist` — image and audio files referenced in slides must exist
+- `notes-inside-section` — `<aside class="notes">` must be direct child of `<section>`
+- `vertical-slides-nesting` — vertical slides must be exactly one level deep
+- `code-line-numbers-structure` — `data-line-numbers` must be on `<code>` inside `<pre>`
+- `no-css-background-on-section` — use `data-background-*` attributes, not inline CSS
+- `cross-css-classes-used` — CSS classes in HTML not defined in any stylesheet
+
+See [revealjs-validator](https://github.com/maciejdzierzek/revealjs-validator) for full documentation.
+
+### Plugin Safety Protocol
+
+**Adding ANY plugin to the base template's `plugins` array is a safety-critical operation.** If a plugin's `init()` function throws an error, reveal.js cannot initialize and the entire presentation shows a blank page — with NO visible error message. The revealjs-validator cannot detect this.
+
+Follow this protocol whenever adding, updating, or enabling a plugin:
+
+1. **Add to the `plugins` array LAST** — build and test without the new plugin first. Confirm the presentation works.
+2. **Add one plugin at a time** — never add multiple untested plugins simultaneously. If the page breaks, you won't know which one caused it.
+3. **Test in browser** — open the slides, press `F12` → **Console tab**. Verify:
+   - The page shows content (not blank/white)
+   - There are ZERO red error messages in the console
+   - The presentation navigates correctly (next/prev slides, fragments work)
+4. **Check init-time dependencies** — if the plugin depends on an external JS library (e.g., mark.js, jQuery), verify that library is loaded and functional BEFORE the plugin script runs. CDN failures, CSP restrictions, or ad blockers can silently block library loading, causing the plugin's `init()` to crash.
+5. **Isolate on failure** — if the page is blank, immediately remove ALL recently added plugins from the `plugins` array. Re-add them one at a time, testing after each addition.
+6. **Document in this file** — after a plugin passes testing, update this SKILL.md with setup instructions, dependency requirements, and any known caveats.
+
+**Why plugins crash at init (common causes):**
+- Plugin references a global variable that's undefined (e.g., `window.Mark`, `window.jQuery`)
+- Plugin uses an ES module `import` but is loaded via `<script>` tag (module is undefined)
+- Plugin is incompatible with the installed reveal.js version
+- CDN for a plugin dependency fails due to network/CORS/ad-blocker — the plugin script itself might load fine, but its dependency doesn't
+- Plugin calls a reveal.js API method that was renamed or removed in the current version
 
 ## Common Pitfalls — Lessons from Build Sessions
 

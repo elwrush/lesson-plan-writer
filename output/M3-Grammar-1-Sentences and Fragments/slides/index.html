@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Sentence Types 1 — Subject-Verb Agreement</title>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            /* =============================================
+               LESSON PLAN WRITER 3 — BASE SLIDE STYLES
+               Authoritative stylesheet for all presentations.
+               ============================================= */
+
+            /* --- CEFR Badges --- */
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                padding: 4px 12px;
+                border-radius: 4px;
+                font-size: 0.4em;
+                vertical-align: middle;
+                margin-left: 10px;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+
+            /* --- Title logo --- */
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+
+            /* --- Labels & captions --- */
+            .reveal .aim-label {
+                font-size: 0.7em;
+                color: #888;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            .reveal .material-ref {
+                font-size: 0.65em;
+                color: #888;
+                font-style: italic;
+                margin-top: 0.5em;
+            }
+            .reveal .source-cite {
+                font-size: 0.7em;
+                color: #666;
+                font-style: italic;
+                margin-top: 0.3em;
+            }
+            .reveal .image-caption {
+                font-size: 0.55em;
+                color: #888;
+                text-align: center;
+                margin-top: 0.2em;
+            }
+
+            /* --- Vocabulary slides --- */
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            }
+
+            /* --- Pedagogical strategy slides (teal background) --- */
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal section.pedagogical .strategy-tip {
+                font-size: 0.85em;
+                font-style: italic;
+                color: rgba(255,255,255,0.85);
+                margin-bottom: 0.5em;
+            }
+            .reveal section.pedagogical .evidence {
+                font-size: 0.8em;
+                background: rgba(0,0,0,0.3);
+                padding: 0.4em 0.6em;
+                border-radius: 4px;
+                border-left: 3px solid rgba(255,255,255,0.4);
+            }
+
+            /* --- Global text shadow for readability --- */
+            .reveal p,
+            .reveal li,
+            .reveal h1, .reveal h2, .reveal h3,
+            .reveal h4, .reveal h5, .reveal h6 {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+
+            /* --- Text shield for full-opacity image backgrounds --- */
+            /* Uses display:inline-block + max-width for subtitle-style shielding.
+               inline-block keeps the background tight to the text.
+               max-width prevents full-width bars on very long text.
+               Elements stack naturally (block-level spacing) without ::after artifacts. */
+            .reveal .text-shield {
+                background: rgba(0, 0, 0, 0.55);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                line-height: 1.6;
+            }
+            .reveal .text-shield-light {
+                background: rgba(200, 200, 200, 0.65);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                color: #222;
+                line-height: 1.6;
+            }
+            /* Fragment variant: text already visible, background highlight on click */
+            .reveal .fragment.text-shield-light { opacity: 1; visibility: inherit; }
+            .reveal .fragment.text-shield-light.visible { background: rgba(200, 200, 200, 0.65); padding: 0.15em 0.6em; border-radius: 4px; }
+
+            /* --- Fragment styles --- */
+            /* --- Yellow text for answers on green answer tables --- */
+            .reveal .fragment.answer-yellow.visible { color: #ffdd00; font-weight: bold; }
+
+            .reveal .fragment.highlight-green {
+                background: rgba(0, 100, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.highlight-red {
+                background: rgba(100, 0, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-correct.visible {
+                background: rgba(0, 120, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-incorrect.visible {
+                background: rgba(120, 0, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal table.answer-table th {
+                background: rgba(0, 0, 0, 0.2);
+                font-weight: bold;
+            }
+            .reveal .fragment.strike {
+                text-decoration: line-through;
+                opacity: 0.6;
+            }
+
+            /* --- YouTube iframe container (16:9 responsive) --- */
+            .reveal .iframe-container {
+                position: relative;
+                width: 90%;
+                padding-bottom: 50.625%;
+                height: 0;
+                overflow: hidden;
+                margin: 0 auto 0.5em;
+            }
+            .reveal .iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* --- Diagnostic talk structure slides (pedagogical, teal) --- */
+            .reveal .structure-talk h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal .structure-talk p,
+            .reveal .structure-talk li  { color: #fff; }
+            .reveal .structure-talk .structure-step {
+                font-size: 1.1em;
+                margin-bottom: 0.6em;
+            }
+            .reveal .structure-talk .transition-words {
+                font-size: 0.9em;
+                color: #ffdd00;
+                font-style: italic;
+                margin-top: 0.8em;
+                padding: 0.4em 0.6em;
+                background: rgba(0,0,0,0.2);
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+<!-- Slide 0: Title -->
+<section data-background-image="assets/pixabay_414198_1.jpg" data-background-opacity="0.6">
+    <img src="assets/logo.png" class="title-logo" alt="Logo" />
+    <h1 class="text-shield">Sentence Types 1 <span class="cefr-badge B2">B2</span></h1>
+    <p class="text-shield"><em>Use correct subject-verb agreement to make your writing clearer and more accurate.</em></p>
+    <aside class="notes">Lesson 1 of 2 (Shape C: Test-Teach-Test). Topic: Simple Sentences & Subject-Verb Agreement from Introduction to Academic Writing, Chapter 1, pp10-13.</aside>
+</section>
+
+<!-- Slide 1: Objective -->
+<section>
+
+    <h2>Here's what you'll be able to do</h2>
+    <ul>
+        <li>Find the subject and verb in any sentence</li>
+        <li>Use correct subject-verb agreement even in tricky sentences</li>
+        <li>Fix common S-V agreement mistakes in your own writing</li>
+    </ul>
+    <aside class="notes">Stage 1.5. Elicit: "Why is this important? What happens when the subject and verb don't agree?" Connect to academic writing.</aside>
+</section>
+
+<!-- Slide 2: Lead-in (George Lucas splash) -->
+<section data-background-image="assets/commons_george_lucas.jpg" data-background-opacity="1.0">
+
+    <h2 class="text-shield">Let's get Started</h2>
+    <h3 class="text-shield">What do you know about George Lucas?</h3>
+    <aside class="notes">Stage 1 - Lead-in (8 min, Ss-Ss). Display image of George Lucas. Elicit what Ss know: films (Star Wars, Indiana Jones), characters, technology, influence. Build a word cloud on the board. Then transition: "Now look at these sentences about George Lucas. Something is wrong with each one."</aside>
+</section>
+
+<!-- Slide 3: Lead-in corrections table -->
+<section data-background="#1a1a2e">
+    <h2>What's wrong with these sentences?</h2>
+    <table class="answer-table" style="font-size: 1.0em;">
+        <thead><tr><th style="width:75%;">Sentence</th><th style="width:25%;">Correction</th></tr></thead>
+        <tbody>
+            <tr><td>George Lucas <em>make</em> movies about space.</td><td class="fragment answer-yellow" style="font-weight:bold;"><em>makes</em></td></tr>
+            <tr><td>The fans of Star Wars <em>is</em> very loyal.</td><td class="fragment answer-yellow" style="font-weight:bold;"><em>are</em></td></tr>
+            <tr><td>There <em>is</em> six Star Wars films in the original series.</td><td class="fragment answer-yellow" style="font-weight:bold;"><em>are</em></td></tr>
+            <tr><td>Each of the films <em>have</em> a unique story.</td><td class="fragment answer-yellow" style="font-weight:bold;"><em>has</em></td></tr>
+            <tr><td>Many Thai students <em>loves</em> Star Wars.</td><td class="fragment answer-yellow" style="font-weight:bold;"><em>love</em></td></tr>
+            <tr><td>A lot of the special effects <em>is</em> computer-made.</td><td class="fragment answer-yellow" style="font-weight:bold;"><em>are</em></td></tr>
+        </tbody>
+    </table>
+    <aside class="notes">Reveal corrections one by one. Elicit why each word changed. Don't explain rules yet — just build awareness.</aside>
+</section>
+
+<!-- Slide 4: Diagnostic Test (items 1-3) -->
+<section data-background="#1a1a2e">
+
+    <h2>Diagnostic Test</h2>
+    <p><em>Each sentence has ONE error.</em></p>
+    <table class="answer-table" style="font-size:0.875em;">
+        <thead><tr><th style="width:50%;">Sentence</th><th style="width:15%;">Answer</th><th style="width:35%;">Why?</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>George Lucas <em>have</em> changed the film industry.</td>
+                <td class="fragment answer-yellow" data-fragment-index="1" style="font-weight:bold;">has</td>
+                <td class="fragment answer-yellow" data-fragment-index="1" style="font-size:0.9em;">"George Lucas" is singular</td>
+            </tr>
+            <tr>
+                <td>There <em>is</em> two main characters in Star Wars.</td>
+                <td class="fragment answer-yellow" data-fragment-index="2" style="font-weight:bold;">are</td>
+                <td class="fragment answer-yellow" data-fragment-index="2" style="font-size:0.9em;">Subject is "characters" (plural)</td>
+            </tr>
+            <tr>
+                <td>Each of the Star Wars movies <em>have</em> a different director.</td>
+                <td class="fragment answer-yellow" data-fragment-index="3" style="font-weight:bold;">has</td>
+                <td class="fragment answer-yellow" data-fragment-index="3" style="font-size:0.9em;">"Each" is always singular</td>
+            </tr>
+        </tbody>
+    </table>
+    <aside class="notes">Stage 2 - Diagnostic items 1-3. Reveal row by row. Ask which rule applies before clicking.</aside>
+</section>
+
+<!-- Slide 5: Diagnostic Test (items 4-6) -->
+<section data-background="#1a1a2e">
+
+    <h2>Diagnostic Test (cont.)</h2>
+    <table class="answer-table" style="font-size:0.875em;">
+        <thead><tr><th style="width:50%;">Sentence</th><th style="width:15%;">Answer</th><th style="width:35%;">Why?</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>Many people in Thailand <em>likes</em> Star Wars.</td>
+                <td class="fragment answer-yellow" data-fragment-index="1" style="font-weight:bold;">like</td>
+                <td class="fragment answer-yellow" data-fragment-index="1" style="font-size:0.9em;">"Many" is always plural</td>
+            </tr>
+            <tr>
+                <td>The special effects in the first film <em>was</em> amazing.</td>
+                <td class="fragment answer-yellow" data-fragment-index="2" style="font-weight:bold;">were</td>
+                <td class="fragment answer-yellow" data-fragment-index="2" style="font-size:0.9em;">Subject is "effects" (plural)</td>
+            </tr>
+            <tr>
+                <td>A lot of young filmmakers <em>admires</em> George Lucas.</td>
+                <td class="fragment answer-yellow" data-fragment-index="3" style="font-weight:bold;">admire</td>
+                <td class="fragment answer-yellow" data-fragment-index="3" style="font-size:0.9em;">"a lot of" + plural noun = plural</td>
+            </tr>
+        </tbody>
+    </table>
+    <aside class="notes">Diagnostic items 4-6. Reveal row by row.</aside>
+</section>
+
+<!-- Slide 6: Diagnostic Test (items 7-8) -->
+<section data-background="#1a1a2e">
+
+    <h2>Diagnostic Test (cont.)</h2>
+    <table class="answer-table" style="font-size:0.875em;">
+        <thead><tr><th style="width:50%;">Sentence</th><th style="width:15%;">Answer</th><th style="width:35%;">Why?</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>One of George Lucas's best films <em>were</em> American Graffiti.</td>
+                <td class="fragment answer-yellow" data-fragment-index="1" style="font-weight:bold;">was</td>
+                <td class="fragment answer-yellow" data-fragment-index="1" style="font-size:0.9em;">"One" is always singular</td>
+            </tr>
+            <tr>
+                <td>The characters and the story <em>appeals</em> to all ages.</td>
+                <td class="fragment answer-yellow" data-fragment-index="2" style="font-weight:bold;">appeal</td>
+                <td class="fragment answer-yellow" data-fragment-index="2" style="font-size:0.9em;">Compound subject = plural</td>
+            </tr>
+        </tbody>
+    </table>
+    <aside class="notes">Diagnostic items 7-8. Reveal row by row.</aside>
+</section>
+
+<!-- Slide 7: Transition — Let's Learn the Rules -->
+<section data-background="#c0392b">
+
+    <h2>Let's Learn the Rules</h2>
+</section>
+
+<!-- Slide 8: Rule 1 (entry — auto-animate) -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="rule-1">
+
+    <h2>Subject-Verb Agreement: Rule 1</h2>
+    <p><u><strong>Rule 1:</strong> Ignore prepositional phrases</u></p>
+    <p data-id="r1-sentence"><em>"The color <span data-id="r1-trap" style="color:#ffdd00;">of her eyes</span> <span data-id="r1-verb">changes</span>."</em></p>
+    <aside class="notes">Stage 3 - Teach Clarifying (12 min, T-Ss). For each rule: return to diagnostic test items that show the problem, then display marker sentence. Elicit the rule from students before confirming.</aside>
+</section>
+
+<!-- Slide 9: Rule 1 (reveal — strikethrough trap, highlight verb) -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="rule-1">
+
+    <h2>Subject-Verb Agreement: Rule 1</h2>
+    <p><u><strong>Rule 1:</strong> Ignore prepositional phrases</u></p>
+    <p data-id="r1-sentence"><em>"The color <span data-id="r1-trap" style="text-decoration: line-through; color: rgba(255,255,255,0.35);">of her eyes</span> <span data-id="r1-verb" style="color:#ffdd00; font-weight:bold;">changes</span>."</em></p>
+    <p>The subject is <strong>color</strong> → <strong>changes</strong> (singular). The noun inside the prepositional phrase (<em>eyes</em>) does NOT control the verb.</p>
+</section>
+
+<!-- Slide 10: Rule 2 (entry — auto-animate) -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="rule-2">
+
+    <h2>Subject-Verb Agreement: Rule 2</h2>
+    <p><u><strong>Rule 2:</strong> There + be — the subject follows</u></p>
+    <p data-id="r2-sentence"><em><span data-id="r2-dummy">There</span> <span data-id="r2-verb">are</span> several <span data-id="r2-subject">kinds</span> of flowers.</em></p>
+</section>
+
+<!-- Slide 11: Rule 2 (reveal — strikethrough There, highlight subject) -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="rule-2">
+
+    <h2>Subject-Verb Agreement: Rule 2</h2>
+    <p><u><strong>Rule 2:</strong> There + be — the subject follows</u></p>
+    <p data-id="r2-sentence"><em><span data-id="r2-dummy" style="text-decoration: line-through; color: rgba(255,255,255,0.35);">There</span> <span data-id="r2-verb">are</span> several <span data-id="r2-subject" style="color:#ffdd00; font-weight:bold;">kinds</span> of flowers.</em></p>
+    <p>Look ahead! <strong>kinds</strong> is the real subject → <strong>are</strong> (plural). <em>There</em> is never the subject.</p>
+</section>
+
+<!-- Slide 12: Rule 3 (entry — auto-animate) -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="rule-3">
+
+    <h2>Subject-Verb Agreement: Rule 3</h2>
+    <p><u><strong>Rule 3:</strong> Each, one, neither, either are always singular</u></p>
+    <p data-id="r3-sentence"><em>Each <span data-id="r3-trap" style="color:#ffdd00;">of the films</span> <span data-id="r3-verb">has</span> a unique story.</em></p>
+</section>
+
+<!-- Slide 13: Rule 3 (reveal — strikethrough trap, highlight verb) -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="rule-3">
+
+    <h2>Subject-Verb Agreement: Rule 3</h2>
+    <p><u><strong>Rule 3:</strong> Each, one, neither, either are always singular</u></p>
+    <p data-id="r3-sentence"><em>Each <span data-id="r3-trap" style="text-decoration: line-through; color: rgba(255,255,255,0.35);">of the films</span> <span data-id="r3-verb" style="color:#ffdd00; font-weight:bold;">has</span> a unique story.</em></p>
+    <p><strong>Each</strong> is always singular → <strong>has</strong>. The noun after <em>of</em> (<em>films</em>) does NOT control the verb.</p>
+</section>
+
+<!-- Slide 14: Rule 4 (entry — auto-animate) -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="rule-4">
+
+    <h2>Subject-Verb Agreement: Rule 4</h2>
+    <p><u><strong>Rule 4:</strong> Both, several, many are always plural</u></p>
+    <p data-id="r4-sentence"><em>Many Thai <span data-id="r4-subj">students</span> <span data-id="r4-verb">love</span> Star Wars.</em></p>
+</section>
+
+<!-- Slide 15: Rule 4 (reveal — highlight S-V pair) -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="rule-4">
+
+    <h2>Subject-Verb Agreement: Rule 4</h2>
+    <p><u><strong>Rule 4:</strong> Both, several, many are always plural</u></p>
+    <p data-id="r4-sentence"><em>Many Thai <span data-id="r4-subj" style="color:#ffdd00; font-weight:bold;">students</span> <span data-id="r4-verb" style="color:#ffdd00; font-weight:bold;">love</span> Star Wars.</em></p>
+    <p><strong>Many, both, several</strong> always take a plural noun → plural verb. Don't let the determiner trick you — check the noun that follows it.</p>
+</section>
+
+<!-- Slide 16: Rule 5 (entry — auto-animate) -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="rule-5">
+
+    <h2>Subject-Verb Agreement: Rule 5</h2>
+    <p><u><strong>Rule 5:</strong> Some, all, most, a lot, none — check the noun</u></p>
+    <p data-id="r5-ex1"><em>A lot of <span data-id="r5-noun1">the special effects</span> <span data-id="r5-verb1">are</span> computer-made.</em></p>
+    <p data-id="r5-ex2"><em>A lot of <span data-id="r5-noun2">my time</span> <span data-id="r5-verb2">is</span> spent in the library.</em></p>
+</section>
+
+<!-- Slide 17: Rule 5 (reveal — highlight noun + verb, label types) -->
+<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="rule-5">
+
+    <h2>Subject-Verb Agreement: Rule 5</h2>
+    <p><u><strong>Rule 5:</strong> Some, all, most, a lot, none — check the noun</u></p>
+    <p data-id="r5-ex1"><em>A lot of <span data-id="r5-noun1" style="color:#ffdd00; font-weight:bold;">the special effects</span> <span data-id="r5-verb1" style="color:#ffdd00; font-weight:bold;">are</span> computer-made.</em> <span style="font-size:0.8em; color:rgba(255,255,255,0.7);">(countable plural)</span></p>
+    <p data-id="r5-ex2"><em>A lot of <span data-id="r5-noun2" style="color:#ffdd00; font-weight:bold;">my time</span> <span data-id="r5-verb2" style="color:#ffdd00; font-weight:bold;">is</span> spent in the library.</em> <span style="font-size:0.8em; color:rgba(255,255,255,0.7);">(uncountable singular)</span></p>
+    <p>Check the noun after <em>of</em>. If it's countable plural → use <strong>are/were</strong>. If it's uncountable singular → use <strong>is/was</strong>.</p>
+</section>
+
+<!-- Slide 18: Transition — Your Turn to Practice -->
+<section data-background="#c0392b">
+
+    <h2>Your Turn to Practice</h2>
+</section>
+
+<!-- Slide 19: Task — Practice 3 Instructions + Timer (12 min = 720 sec) -->
+<section data-timer="720">
+
+    <h2>Practice 3: Subject-Verb Agreement</h2>
+    <ul>
+        <li><strong>Part A (p13):</strong> Choose the correct verb form (items 1-11).</li>
+        <li><strong>Part B (p14):</strong> Find and correct 6 errors in the paragraph.</li>
+    </ul>
+    <p><em>You have 12 minutes. Compare with a partner after each part.</em></p>
+    <aside class="notes">Stage 4 - Test 2 Practice 3 (12 min, Ss-Ss). Part A: 7 min controlled practice. Pair check. Part B: 5 min freer practice. Pairs compare. Then whole-class feedback using answer slides.</aside>
+</section>
+
+<!-- Slide 20: Answer 3A items 1-3 -->
+<section data-background="#1e7e34">
+    <h2>Practice 3A — Answers (1-3)</h2>
+    <table class="answer-table" style="font-size:0.875em;">
+        <thead><tr><th style="width:8%;">#</th><th style="width:42%;">Sentence</th><th style="width:15%;">Answer</th><th style="width:35%;">Why?</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>One of my classmates ___ from my country.</td>
+                <td class="fragment answer-correct" data-fragment-index="1"><strong style="color:#ffdd00;">is</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="1" style="font-size:0.9em;">"One" is always singular (Rule 3)</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Some of the teachers ___ my language.</td>
+                <td class="fragment answer-correct" data-fragment-index="2"><strong style="color:#ffdd00;">speak</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="2" style="font-size:0.9em;">"teachers" is countable plural (Rule 5)</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Each of the gifts ___ carefully wrapped.</td>
+                <td class="fragment answer-correct" data-fragment-index="3"><strong style="color:#ffdd00;">was</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="3" style="font-size:0.9em;">"Each" is always singular (Rule 3)</td>
+            </tr>
+        </tbody>
+    </table>
+    <aside class="notes">Reveal row by row. Ask which rule applies before clicking.</aside>
+</section>
+
+<!-- Slide 21: Answer 3A items 4-6 -->
+<section data-background="#1e7e34">
+    <h2>Practice 3A — Answers (4-6)</h2>
+    <table class="answer-table" style="font-size:0.875em;">
+        <thead><tr><th style="width:8%;">#</th><th style="width:42%;">Sentence</th><th style="width:15%;">Answer</th><th style="width:35%;">Why?</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>4</td>
+                <td>One of the words on the test ___ misspelled.</td>
+                <td class="fragment answer-correct" data-fragment-index="1"><strong style="color:#ffdd00;">was</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="1" style="font-size:0.9em;">"One" is singular (Rules 1, 3)</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>A lot of my classes ___ canceled last week.</td>
+                <td class="fragment answer-correct" data-fragment-index="2"><strong style="color:#ffdd00;">were</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="2" style="font-size:0.9em;">"classes" is countable plural (Rule 5)</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>A lot of my time ___ spent in the library.</td>
+                <td class="fragment answer-correct" data-fragment-index="3"><strong style="color:#ffdd00;">is</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="3" style="font-size:0.9em;">"time" is uncountable singular (Rule 5)</td>
+            </tr>
+        </tbody>
+    </table>
+    <aside class="notes">Reveal row by row. Items 4-5 use "One" and "a lot of" — good review of Rules 3 and 5.</aside>
+</section>
+
+<!-- Slide 22: Answer 3A items 7-9 -->
+<section data-background="#1e7e34">
+    <h2>Practice 3A — Answers (7-9)</h2>
+    <table class="answer-table" style="font-size:0.875em;">
+        <thead><tr><th style="width:8%;">#</th><th style="width:42%;">Sentence</th><th style="width:15%;">Answer</th><th style="width:35%;">Why?</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>7</td>
+                <td>Most of the people ___ to college.</td>
+                <td class="fragment answer-correct" data-fragment-index="1"><strong style="color:#ffdd00;">want to go</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="1" style="font-size:0.9em;">"people" is plural (Rule 5)</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>___ anyone know the correct time?</td>
+                <td class="fragment answer-correct" data-fragment-index="2"><strong style="color:#ffdd00;">Does</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="2" style="font-size:0.9em;">"anyone" is always singular</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>There ___ several kinds of flowers.</td>
+                <td class="fragment answer-correct" data-fragment-index="3"><strong style="color:#ffdd00;">are</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="3" style="font-size:0.9em;">Subject "kinds" (plural), look ahead (Rule 2)</td>
+            </tr>
+        </tbody>
+    </table>
+    <aside class="notes">Reveal row by row. Item 9 is a good Rule 2 example.</aside>
+</section>
+
+<!-- Slide 23: Answer 3A items 10-11 -->
+<section data-background="#1e7e34">
+    <h2>Practice 3A — Answers (10-11)</h2>
+    <table class="answer-table" style="font-size:0.875em;">
+        <thead><tr><th style="width:8%;">#</th><th style="width:42%;">Sentence</th><th style="width:15%;">Answer</th><th style="width:35%;">Why?</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>10</td>
+                <td>There ___ any electricity last night.</td>
+                <td class="fragment answer-correct" data-fragment-index="1"><strong style="color:#ffdd00;">wasn't</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="1" style="font-size:0.9em;">Subject "electricity" (uncountable singular) (Rule 2)</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>The noise from the firecrackers ___ loud.</td>
+                <td class="fragment answer-correct" data-fragment-index="2"><strong style="color:#ffdd00;">was</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="2" style="font-size:0.9em;">Subject "noise", ignore "from the firecrackers" (Rule 1)</td>
+            </tr>
+        </tbody>
+    </table>
+    <aside class="notes">Reveal row by row. Item 10: Rule 2 (there + be). Item 11: Rule 1 (prepositional phrase trap).</aside>
+</section>
+
+<!-- Slide 24: Answer 3B items 1-3 -->
+<section data-background="#1e7e34">
+    <h2>Practice 3B — Answers (1-3)</h2>
+    <p class="aim-label" style="color:rgba(255,255,255,0.8);">Six errors from <em>Young Golf Stars</em></p>
+    <table class="answer-table" style="font-size:0.875em;">
+        <thead><tr><th style="width:8%;">Line</th><th style="width:42%;">Original</th><th style="width:15%;">Correction</th><th style="width:35%;">Why?</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>2</td>
+                <td>Young people ... <em>is</em> taking up the game</td>
+                <td class="fragment answer-correct" data-fragment-index="1"><strong style="color:#ffdd00;">are</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="1" style="font-size:0.9em;">"people" is plural</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>some of them <em>is</em> taking it over</td>
+                <td class="fragment answer-correct" data-fragment-index="2"><strong style="color:#ffdd00;">are</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="2" style="font-size:0.9em;">"them" is plural (Rule 5)</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>One of the young stars <em>are</em> Sergio Garcia</td>
+                <td class="fragment answer-correct" data-fragment-index="3"><strong style="color:#ffdd00;">is</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="3" style="font-size:0.9em;">"One" is singular (Rule 3)</td>
+            </tr>
+        </tbody>
+    </table>
+    <aside class="notes">Reveal one error at a time. Ask "what rule does this break?" before clicking.</aside>
+</section>
+
+<!-- Slide 25: Answer 3B items 4-6 -->
+<section data-background="#1e7e34">
+    <h2>Practice 3B — Answers (4-6)</h2>
+    <p class="aim-label" style="color:rgba(255,255,255,0.8);">Six errors from <em>Young Golf Stars</em></p>
+    <table class="answer-table" style="font-size:0.875em;">
+        <thead><tr><th style="width:8%;">Line</th><th style="width:42%;">Original</th><th style="width:15%;">Correction</th><th style="width:35%;">Why?</th></tr></thead>
+        <tbody>
+            <tr>
+                <td>8</td>
+                <td>both <em>has</em> ethnic backgrounds</td>
+                <td class="fragment answer-correct" data-fragment-index="1"><strong style="color:#ffdd00;">have</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="1" style="font-size:0.9em;">"both" is always plural (Rule 4)</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Each ... <em>have</em> shocked the world</td>
+                <td class="fragment answer-correct" data-fragment-index="2"><strong style="color:#ffdd00;">has</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="2" style="font-size:0.9em;">"Each" is always singular (Rule 3)</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>all three ... <em>has</em> great futures</td>
+                <td class="fragment answer-correct" data-fragment-index="3"><strong style="color:#ffdd00;">have</strong></td>
+                <td class="fragment answer-correct" data-fragment-index="3" style="font-size:0.9em;">"all three" is plural (Rule 4)</td>
+            </tr>
+        </tbody>
+    </table>
+    <aside class="notes">Reveal one error at a time. Items 8 and 14 are Rule 4 examples; item 11 is Rule 3.</aside>
+</section>
+
+<!-- Slide 26: Summary -->
+<section>
+
+    <h2>What you can do now</h2>
+    <ul>
+        <li>✓ I can find the subject and verb in a sentence</li>
+        <li>✓ I can use correct S-V agreement, even with tricky subjects</li>
+        <li>✓ I can identify and fix S-V agreement errors</li>
+    </ul>
+    <aside class="notes">Stage 5 - Wrap-up (6 min, T-Ss). Quick-fire oral drill: "Each of the students..." → "has". "Many of my friends..." → "like". Then students write 2 original sentences about a film using different agreement rules. Volunteers share on board. Recap 5 rules.</aside>
+</section>
+
+<!-- Slide 27: End -->
+<section data-background="#2c3e50">
+    <h2>Thank you</h2>
+    <p><em>Sentence Types 1</em> | B2</p>
+</section>
+
+</div>
+        </div>
+
+        <!-- Timer plugin (local) -->
+        <script src="timer-plugin.js"></script>
+
+        <!-- Audio slideshow plugin (CDN) -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/audio-slideshow/plugin.js"></script>
+
+        <!-- reveal.js 5.1.0 via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                audio: {
+                    prefix: 'assets/',
+                    suffix: '.mp3',
+                    advance: -1,
+                    autoplay: false,
+                    defaultAudios: false,
+                    defaultDuration: 0,
+                    playerOpacity: 1.0,
+                    playerStyle: 'position: fixed; bottom: 30px; left: 25%; width: 50%; height:75px; z-index: 33;',
+                    startAtFragment: false,
+                },
+                plugins: [
+                    TimerPlugin,
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                    RevealAudioSlideshow,
+                ],
+            });
+        </script>
+    </body>
+</html>

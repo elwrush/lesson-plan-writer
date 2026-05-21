@@ -76,17 +76,6 @@
                 text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
             }
 
-            /* --- Slide type icons (Font Awesome, teal/red/orange) --- */
-            .reveal .slide-icon {
-                font-size: 2.5em;
-                margin-bottom: 0.3em;
-                display: block;
-                text-align: center;
-            }
-            .reveal .slide-icon.transition-icon { color: rgba(255,255,255,0.85); }
-            .reveal .slide-icon.pedagogical-icon { color: rgba(255,255,255,0.9); }
-            .reveal .slide-icon.objective-icon { color: rgba(255,221,0,0.85); }
-
             /* --- Pedagogical strategy slides (teal background) --- */
             .reveal section.pedagogical h2 {
                 color: #fff;
@@ -118,7 +107,39 @@
                 text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             }
 
+            /* --- Text shield for full-opacity image backgrounds --- */
+            /* Uses display:inline-block + max-width for subtitle-style shielding.
+               inline-block keeps the background tight to the text.
+               max-width prevents full-width bars on very long text.
+               Elements stack naturally (block-level spacing) without ::after artifacts. */
+            .reveal .text-shield {
+                background: rgba(0, 0, 0, 0.55);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                line-height: 1.6;
+            }
+            .reveal .text-shield-light {
+                background: rgba(200, 200, 200, 0.65);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                color: #222;
+                line-height: 1.6;
+            }
+            /* Fragment variant: text already visible, background highlight on click */
+            .reveal .fragment.text-shield-light { opacity: 1; visibility: inherit; }
+            .reveal .fragment.text-shield-light.visible { background: rgba(200, 200, 200, 0.65); padding: 0.15em 0.6em; border-radius: 4px; }
+
             /* --- Fragment styles --- */
+            /* --- Yellow text for answers on green answer tables --- */
+            .reveal .answer-yellow { color: #ffdd00; }
+            .reveal .fragment.answer-yellow.visible { color: #ffdd00; }
+
             .reveal .fragment.highlight-green {
                 background: rgba(0, 100, 0, 0.4);
                 padding: 0.3em 0.5em;
@@ -200,17 +221,16 @@
 
                 <!-- ─── PATTERN: Title Slide ──────────────────────────────── -->
                 <!--
-                <section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
+                <section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="1.0">
                     <img src="assets/logo.png" class="title-logo" alt="Logo" />
-                    <h1>Topic Title <span class="cefr-badge B1">B1</span></h1>
-                    <p><em>Strap subheader — derived from lesson objective</em></p>
+                    <h1 class="text-shield">Topic Title <span class="cefr-badge B1">B1</span></h1>
+                    <p class="text-shield"><em>Strap subheader — derived from lesson objective</em></p>
                 </section>
                 -->
 
                 <!-- ─── PATTERN: Objective Slide ──────────────────────────── -->
                 <!--
                 <section>
-                    <i class="fa-solid fa-seedling slide-icon objective-icon"></i>
                     <h2>Here's what you'll be able to do</h2>
                     <ul>
                         <li>Understand what the article is mainly about</li>
@@ -223,9 +243,9 @@
 
                 <!-- ─── PATTERN: Lead-in Slide (Pixabay background) ───────── -->
                 <!--
-                <section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
-                    <h2>Let's get Started</h2>
-                    <h3>What do you see? What do you think the lesson is about?</h3>
+                <section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="1.0">
+                    <h2 class="text-shield">Let's get Started</h2>
+                    <h3 class="text-shield">What do you see? What do you think the lesson is about?</h3>
                     <aside class="notes">
                         Display the photo. Give students 20 seconds to look silently.
                         Then ask the question. Elicit 3-4 responses.
@@ -236,27 +256,35 @@
 
                 <!-- ─── PATTERN: Vocabulary Slide (HEADER — first word only) ─ -->
                 <!--
-                <section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="0.7">
-                    <h2>Important Words</h2>
-                    <p><span class="vocab-word">generation gap</span></p>
-                    <p><em>/ˌdʒenəˈreɪʃn ɡæp/</em></p>
-                    <p><em>There is a big <span class="vocab-word">generation gap</span> between old people and young people.</em></p>
+                <section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="1.0">
+                    <h2 class="text-shield">Important Words</h2>
+                    <p class="text-shield"><span class="vocab-word">generation gap</span></p>
+                    <p class="text-shield"><em>/ˌdʒenəˈreɪʃn ɡæp/</em></p>
+                    <p class="text-shield"><em>There is a big <span class="vocab-word">generation gap</span> between old people and young people.</em></p>
                 </section>
                 -->
 
                 <!-- ─── PATTERN: Vocabulary Slide (NO HEADER — subsequent words) ─ -->
                 <!--
-                <section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="0.7">
-                    <p><span class="vocab-word">frustration</span></p>
-                    <p><em>/frʌˈstreɪʃn/</em></p>
-                    <p><em>I felt <span class="vocab-word">frustration</span> when my phone died during an important call.</em></p>
+                <section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="1.0">
+                    <p class="text-shield"><span class="vocab-word">frustration</span></p>
+                    <p class="text-shield"><em>/frʌˈstreɪʃn/</em></p>
+                    <p class="text-shield"><em>I felt <span class="vocab-word">frustration</span> when my phone died during an important call.</em></p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Vocabulary Slide (NO HEADER — subsequent words) ─ -->
+                <!--
+                <section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="1.0">
+                    <p class="text-shield"><span class="vocab-word">frustration</span></p>
+                    <p class="text-shield"><em>/frʌˈstreɪʃn/</em></p>
+                    <p class="text-shield"><em>I felt <span class="vocab-word">frustration</span> when my phone died during an important call.</em></p>
                 </section>
                 -->
 
                 <!-- ─── PATTERN: Transition Slide (red background) ────────── -->
                 <!--
                 <section data-background="#c0392b">
-                    <i class="fa-solid fa-forward slide-icon transition-icon"></i>
                     <h2>Finding details</h2>
                     <p>We're now going to read the story in more detail.</p>
                     <p>Let's start with some True/False questions.</p>
@@ -267,7 +295,6 @@
                 <!-- ─── PATTERN: Auto-Animate Strategy Block ──────────────── -->
                 <!--
                 <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
-                    <i class="fa-solid fa-list-check slide-icon pedagogical-icon"></i>
                     <h2>True/False Strategy</h2>
                     <p><strong>Step 1:</strong> Read the statement carefully</p>
                     <p><em>Statement text goes here.</em></p>
@@ -330,7 +357,6 @@
                 <!-- ─── PATTERN: Pedagogical Strategy Slide (non-auto-animate) ─ -->
                 <!--
                 <section class="pedagogical" data-background="#1a6b5a">
-                    <i class="fa-solid fa-list-check slide-icon pedagogical-icon"></i>
                     <h2>Multiple Choice Strategy</h2>
                     <p><strong>Step 1: Read all options first</strong> <span class="fragment"> — look at all three choices</span></p>
                     <ul class="fragment">
@@ -443,9 +469,102 @@
                 </section>
                 -->
 
+                <!-- ─── PATTERN: Grammar Diagnostic Test Slide ──────────────── -->
+                <!--
+                <section data-background="#1a1a2e">
+                    <h2>Diagnostic Test</h2>
+                    <p><em>Each sentence has ONE error. Find and fix it.</em></p>
+                    <ol style="font-size: 0.8em; text-align: left;">
+                        <li>Sentence with error 1.</li>
+                        <li>Sentence with error 2.</li>
+                        ...
+                    </ol>
+                    <aside class="notes">
+                        Timing and procedure here.
+                    </aside>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Grammar Rules Slide ────────────────────────── -->
+                <!--
+                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+                    <h2>Rule Title (Rules 1–3)</h2>
+                    <p><u><strong>Rule 1:</strong> Description</u></p>
+                    <p><em>"Example sentence."</em> Explanation.</p>
+                    <p><u><strong>Rule 2:</strong> Description</u></p>
+                    <p><em>"Example sentence."</em> Explanation.</p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Error-Correction Answer Table ───────────────── -->
+                <!--
+                <section data-background="#1e7e34">
+                    <h2>Practice N — Answers (1–X)</h2>
+                    <table class="answer-table">
+                        <thead><tr><th>#</th><th>Original</th><th>Correction</th></tr></thead>
+                        <tbody>
+                            <tr><td>1</td><td>Original text.</td><td class="fragment answer-correct"><strong style="color:#ffdd00;">Correction</strong></td></tr>
+                            ...
+                        </tbody>
+                    </table>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Vertical Slides (nested) ──────────────── -->
+                <!--
+                <section>
+                    <section>
+                        <h2>Main Slide Title</h2>
+                        <p>Core content here.</p>
+                    </section>
+                    <section>
+                        <h2>Optional Drill-Down</h2>
+                        <p>Extra detail — accessible via down arrow. Skip via right arrow.</p>
+                        <aside class="notes">Backup content for fast finishers or extension.</aside>
+                    </section>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Code/Text Passage with Line Highlights ──── -->
+                <!--
+                <section data-background="#1a1a2e">
+                    <h2>Find the Main Idea</h2>
+                    <pre style="font-size: 0.7em;"><code data-trim data-line-numbers="1-5|8-10|12-15">
+                        Line 1 of your text passage.
+                        Line 2 of your text passage.
+                        ...
+                    </code></pre>
+                    <p class="fragment" style="color:#ffdd00;"><strong>Main idea:</strong> The key point.</p>
+                    <aside class="notes">
+                        Students read silently. Elicit main idea. Reveal fragments.
+                    </aside>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Text Shield for Image Backgrounds ────────── -->
+                <!--
+                <section data-background-image="assets/photo.jpg" data-background-opacity="1.0">
+                    <h2 class="text-shield">Title visible on any image</h2>
+                    <p class="text-shield">Body text with dark semi-transparent background.</p>
+                    <p><span class="fragment text-shield-light">Key point — already visible, gray highlight on click.</span></p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Text Highlighting with data-mark ────────── -->
+                <!--
+                <p data-mark="1,3-5">Highlight lines 1, 3, 4, 5 of this paragraph.</p>
+                <p data-mark="|/creative/|5">Step 1: nothing. Step 2: highlight "creative". Step 3: highlight line 5.</p>
+                <aside class="notes">
+                    Uses reveal-mark-plugin + Mark.js. Steps separated by |.
+                    Install: load the plugin + Mark.js before reveal.js init.
+                    See reveal-mark-plugin docs on GitHub.
+                </aside>
+                -->
+
             </div>
         </div>
 
+        <!-- Mark.js (CDN) + mark plugin (local) -->
         <!-- Timer plugin (local) -->
         <script src="timer-plugin.js"></script>
 
@@ -480,6 +599,13 @@
                     startAtFragment: false,
                 },
                 plugins: [
+                    // WARNING: Every plugin here is loaded and initialized by reveal.js
+                    // at startup. If any plugin's init() function throws an error, the
+                    // entire presentation will show a BLANK PAGE. Always test new plugins
+                    // in a browser and check the console before committing to the template.
+                    // Third-party plugins that depend on external CDN libraries (like
+                    // mark.js) require special care — see SKILL.md for the plugin
+                    // testing protocol.
                     TimerPlugin,
                     RevealHighlight,
                     RevealMath.KaTeX,

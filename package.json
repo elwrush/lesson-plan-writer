@@ -1,0 +1,10 @@
+{
+  "name": "lesson-plan-writer-3",
+  "private": true,
+  "scripts": {
+    "validate-slides": "revealjs-validator --project"
+  },
+  "devDependencies": {
+    "revealjs-validator": "^0.16.1"
+  }
+}

@@ -5,6 +5,7 @@
 - **OS:** Windows AMD64 (win32 sys.platform)
 - **Shell:** PowerShell
 - **Python:** 3.x
+- **PowerShell quoting trap:** Inline `python -c "..."` with complex quoting (regex, nested quotes, f-strings with backslashes) ALWAYS hits PowerShell escaping issues. **Never use inline `python -c` for complex code.** Instead: write the Python script to `C:\Users\elwru\AppData\Local\Temp\kilo\*.py` via the Write tool, then execute via `python "C:\Users\elwru\AppData\Local\Temp\kilo\*.py"`. This avoids all quoting problems.
 
 ## Golden Rule: Pattern-first, not guess-first
 
@@ -39,8 +40,10 @@ python scripts/json_to_pdf.py output/<subfolder>/<file>.json
 
 # Slides — copy base template + hand-build sections
 cp "templates/base-slides-template.html" "output/<subfolder>/slides/index.html"
-# Then add raw HTML <section> elements between <div class="slides"> and </div>
-# Open output/<subfolder>/slides/index.html directly in browser (no server needed)
+
+# Slide validation (runs 66 reveal.js rule checks)
+npx revealjs-validator --project "output/<subfolder>/slides/"
+# Then open index.html in browser + check console (F12) for errors
 
 # Pixabay image download (for slide backgrounds)
 python scripts/pixabay_download.py --query "topic" --type image --count 3
@@ -58,7 +61,15 @@ python scripts/locate_slide.py 7 --slides-dir path/to/slides/
 
 ## Linting & Quality
 
-ruff is installed globally via pip. **Pre-commit hook is permanently uninstalled** (caused git lock contention). Use the `/lint` command instead — it runs ruff on demand with no background processes.
+ruff is installed globally via pip. **Pre-commit hook is permanently uninstalled** (caused git lock contention). Use the `/lint` command instead — it runs encoding checks, then ruff on demand with no background processes.
+
+**Windows UTF-8 trap:** Python on Windows defaults to cp1252 for file I/O and console output. Always use `encoding="utf-8"` when opening project files (`open(path, "r", encoding="utf-8")`). For scripts that print Unicode to the console, add:
+```python
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+```
+The `check_encoding.py` script (run as part of `/lint`) scans all text files for encoding issues and fixes cp1252→UTF-8.
+
+To avoid cp1252 issues in interactive Python sessions, set `$env:PYTHONUTF8=1` in PowerShell before running Python commands that handle project files. This makes Python default to UTF-8 for all file I/O on Windows.
 
 ```bash
 # Lint + fix (all files) — replaces pre-commit hook
@@ -134,46 +145,46 @@ Acceptable: "To activate interest in...", "To get the general idea of the text",
 SLIDESHOW FLOW — index2.html
 ────────────────────────────────────────────
  0  Title (Pixabay background, CEFR badge)
- 1  Objective (fa-seedling, 4 bullets)
- 2  Lead-in (Pixabay bg, fa-eye, discussion Q)
- 3  Vocab 1 (generation gap) — h2 + icon on first only
+ 1  Objective (4 bullets)
+ 2  Lead-in (Pixabay bg, discussion Q)
+ 3  Vocab 1 (generation gap) — h2 on first only
  4  Vocab 2 (frustration)
  5  Vocab 3 (redefine)
  6  Vocab 4 (workplace)
- 7  Transition → What's the main idea? (red bg, fa-forward)
- 8  Transition → Finding details (red bg, fa-forward)
- ─────── T/F Strategy Block (4 steps) ───────
- 9  T/F Header + Step 1 + tip text (fa-list-check icon-left)
-10  T/F Step 2 (sub-questions + rule)
-11  T/F Step 3 (evidence + keywords)
-12  T/F Step 4 (answer with paragraph quotes)
-13  Exercise 2 Timer (60s, fa-pencil)
-14  Exercise 2 Answers (answer-table, tick/cross, Why column)
- ─────── Paragraph Matching Block (4 steps) ───────
-15  Transition → Matching ideas (red bg, fa-forward)
-16  Para Matching Header + Step 1 (fa-list-check icon-left)
-17  Para Matching Step 2 (keywords list)
-18  Para Matching Step 3 (scan paragraphs)
-19  Para Matching Step 4 (confirm match + answer)
-20  Exercise 3 Timer (180s, fa-pencil)
-21  Exercise 3 Answers (1–2) (answer-table, Why column)
-22  Exercise 3 Answers (3–4)
-23  Exercise 3 Answers (5–6)
- ─────── Multiple Choice Strategy Block (5 steps) ───────
-24  Transition → Making conclusions (red bg, fa-forward)
-25  MC Header + Step 1 (fa-chess icon-left, demo Q + options)
-26  MC Step 2a (auto-animate entry, transparent borders)
-27  MC Step 2b (auto-animate reveal, white borders)
-28  MC Step 3 (scan + photo/headline tip)
-29  MC Step 4 (fragment strike table, a/b eliminated)
-30  MC Step 5 (answer-table wrap, answer + citations)
-31  Exercise 4 Timer (240s, fa-pencil)
-32  Exercise 4 Answer (answer-table wrap, tick/cross, Why)
- ─────── Discussion — Review — Summary ───────
-33  Transition → Let's Discuss (red bg, fa-comments)
-34  Task → Let's Discuss (420s, fa-pencil, 3 Qs)
-35  Transition → Let's Review (red bg, fa-forward)
-36  Summary (fa-flag-checkered, ✓ bullets)
+  7  Transition → What's the main idea? (red bg)
+  8  Transition → Finding details (red bg)
+  ─────── T/F Strategy Block (4 steps) ───────
+  9  T/F Header + Step 1 + tip text
+ 10  T/F Step 2 (sub-questions + rule)
+ 11  T/F Step 3 (evidence + keywords)
+ 12  T/F Step 4 (answer with paragraph quotes)
+ 13  Exercise 2 Timer (60s)
+ 14  Exercise 2 Answers (answer-table, tick/cross, Why column)
+  ─────── Paragraph Matching Block (4 steps) ───────
+ 15  Transition → Matching ideas (red bg)
+ 16  Para Matching Header + Step 1
+ 17  Para Matching Step 2 (keywords list)
+ 18  Para Matching Step 3 (scan paragraphs)
+ 19  Para Matching Step 4 (confirm match + answer)
+ 20  Exercise 3 Timer (180s)
+ 21  Exercise 3 Answers (1–2) (answer-table, Why column)
+ 22  Exercise 3 Answers (3–4)
+ 23  Exercise 3 Answers (5–6)
+  ─────── Multiple Choice Strategy Block (5 steps) ───────
+ 24  Transition → Making conclusions (red bg)
+ 25  MC Header + Step 1 (demo Q + options)
+ 26  MC Step 2a (auto-animate entry, transparent borders)
+ 27  MC Step 2b (auto-animate reveal, white borders)
+ 28  MC Step 3 (scan + photo/headline tip)
+ 29  MC Step 4 (fragment strike table, a/b eliminated)
+ 30  MC Step 5 (answer-table wrap, answer + citations)
+ 31  Exercise 4 Timer (240s)
+ 32  Exercise 4 Answer (answer-table wrap, tick/cross, Why)
+  ─────── Discussion — Review — Summary ───────
+ 33  Transition → Let's Discuss (red bg)
+ 34  Task → Let's Discuss (420s, 3 Qs)
+ 35  Transition → Let's Review (red bg)
+ 36  Summary (✓ bullets)
 ────────────────────────────────────────────
 ```
 
@@ -181,7 +192,6 @@ SLIDESHOW FLOW — index2.html
 
 - **One step per slide** — enforced across all three pedagogy blocks
 - **Step label format**: `<p><u><strong>Step N:</strong> description</u></p>`
-- **Header icon placement**: inline `<span style="font-size: 2.5em;">` left of `<h2>` inside `overflow: hidden` div — NOT centered block
 - **Auto-animate**: only between adjacent slides with matching `data-id` on elements; previous slide must NOT have `data-auto-animate`
 - **Fragment strike**: `class="fragment strike"` on td/p elements. Built-in CSS provides `opacity: 1` (always visible) and `text-decoration: line-through` only when `.visible` class is added on click
 - **Answer tables**: `<table class="answer-table">` with 3 columns (Statement/Answer/Why?). Add `wrap` class for tables with long text. Right column uses `white-space: normal`
@@ -274,40 +284,9 @@ Reveal.js `.slides` is a flex container that defaults to vertically centering it
 
 Do not use `margin-top: -X%` — it pushes content off-screen. A small positive `padding-top` on the section or its CSS parent is more reliable.
 
-## Slide Icons — Font Awesome 6
+## Slide Icons
 
-All slides use Font Awesome 6 icons via CDN. **Icons are placed inline to the left of the heading**, not centered block (unlike transition/answer slides).
-
-**Placement pattern (pedagogy headers):**
-```html
-<span style="font-size: 2.5em; color: rgba(255,255,255,0.9);"><i class="fa-solid fa-list-check"></i></span>
-<div style="overflow: hidden;">
-    <h2>True/False Strategy</h2>
-</div>
-```
-
-**Placement pattern (transition/objective/answer slides):**
-```html
-<i class="fa-solid fa-forward slide-icon transition-icon"></i>
-<h2>Finding details</h2>
-```
-
-**Icon mapping** — one icon on the first slide of each block:
-
-| Slide / Block | Icon | Class | Background |
-|---|---|---|---|
-| Objective: "Here's what you'll be able to do" | `fa-seedling` | `objective-icon` | white |
-| Lead-in: "Let's get Started" | `fa-eye` | inherit | Pixabay image |
-| Vocabulary: "Important Words" | `fa-spell-check` | inherit | Pixabay image |
-| Transition (forward to next stage) | `fa-forward` | `transition-icon` | `#c0392b` |
-| True/False Strategy block header | `fa-list-check` | `pedagogical-icon` | `#1a6b5a` |
-| Paragraph Matching Strategy block | `fa-list-check` | `pedagogical-icon` | `#1a6b5a` |
-| Multiple Choice Strategy block | `fa-chess` | `pedagogical-icon` | `#1a6b5a` |
-| Task instruction | `fa-pencil` | inherit | white |
-| Discussion ("Let's Discuss") | `fa-comments` | `transition-icon` | `#c0392b` |
-| Summary ("What you can do now") | `fa-flag-checkered` | inherit | white |
-
-**Key rule**: The icon describes the *function* of the slide, not the topic. A transition moves forward; a discussion invites talking; a strategy teaches a step-by-step method.
+Icons are no longer used on slides — they were removed to save screen real estate. All `<i class="fa-solid fa-... slide-icon ...">` elements and their associated CSS (`.slide-icon`, `.transition-icon`, `.pedagogical-icon`, `.objective-icon`) have been removed from all slide templates and the base template. The Font Awesome CDN link may remain in the base template for backwards compatibility but is not actively used. Do not add icons to any slide.
 
 ## Dependencies
 

@@ -1,0 +1,61 @@
+{
+  "teacher": "Ed Rush",
+  "duration": "46 minutes",
+  "date": "210526",
+  "topic": "Sentence Types 1",
+  "objective": "By the end of the lesson, learners will be better able to use correct subject-verb agreement in simple sentences in the context of discussing filmmakers and cinema.",
+  "materials": "- Introduction to Academic Writing (3rd ed.), Chapter 1: Paragraph Format, pp10-13",
+  "lesson_plan": {
+    "shape": "C",
+    "shape_name": "Test-Teach-Test",
+    "cefr_level": "B2",
+    "class": "M3",
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage": "Lead-in",
+        "stage_aim": "To activate learners' interest in George Lucas and cinema, and to raise awareness of typical Thai L1 subject-verb agreement errors",
+        "procedure": "- Display a splash image of George Lucas on the IWB. Elicit what students know about him and his films. Build a word cloud on the board.\n- Present 6 sentences about George Lucas containing typical Thai L1 subject-verb agreement errors. Students work in pairs to discuss what is wrong.\n- Auto-animate the corrections to reveal the correct forms. Elicit why each correction was needed, but do not explain the rules yet.",
+        "time": 8,
+        "interaction": "Ss-Ss"
+      },
+      {
+        "stage_number": 2,
+        "stage": "Test 1 - Diagnostic",
+        "stage_aim": "To diagnose learners' ability to identify and correct subject-verb agreement errors across five key trouble spots before explicit teaching",
+        "procedure": "- Distribute a bespoke 8-sentence error-correction handout. All sentences are about George Lucas and cinema.\n- Students work individually to find and correct one subject-verb agreement error in each sentence.\n- Monitor closely and note which error types cause the most difficulty. Do not reveal answers yet.",
+        "time": 8,
+        "interaction": "S"
+      },
+      {
+        "stage_number": 3,
+        "stage": "Teach - Clarifying",
+        "stage_aim": "To draw out the five key rules of subject-verb agreement through guided analysis of model sentences from the George Lucas text, targeting only the problem areas observed in the diagnostic test",
+        "procedure": "- Return to the diagnostic test items. Use show of hands to gauge which items students found hardest.\n- Display the George Lucas model text from p10 on the IWB. Extract marker sentences that illustrate each tricky rule (e.g., \"One new technology was a special computer-assisted camera crane\").\n- Elicit the generalisation for each rule before confirming:\n  1. Ignore prepositional phrases between subject and verb.\n  2. In 'There + be' sentences, the subject follows be — look ahead.\n  3. Each, one, neither, either are always singular.\n  4. Both, several, many are always plural.\n  5. Some, all, most, a lot, none can be either — check the noun in the prepositional phrase.\n- Board the five rules with textbook examples (pp12-13). Students copy into notebooks.",
+        "time": 12,
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 4,
+        "stage": "Test 2 - Practice 3",
+        "stage_aim": "To apply the five subject-verb agreement rules in controlled and freer practice contexts from the textbook",
+        "procedure": "- Part A: Students complete Practice 3 Part A (items 1–11, p13) individually, choosing the correct verb form. Pair check. Whole-class feedback on the IWB.\n- Part B: Students find and correct the six subject-verb agreement errors in the 'Young Golf Stars' paragraph (Practice 3 Part B, p14). Pairs compare. Reveal answers using the answer key on the IWB.",
+        "time": 12,
+        "interaction": "Ss-Ss"
+      },
+      {
+        "stage_number": 5,
+        "stage": "Wrap-up",
+        "stage_aim": "To consolidate the five agreement rules and confirm that learners can produce accurate sentences independently",
+        "procedure": "- Quick-fire oral drill: teacher says a subject phrase, students respond chorally with the correct verb form (e.g., 'Each of the students' \u2192 'has').\n- Students write two original sentences about a favourite film or filmmaker, each using a different agreement rule. Volunteers share on the board.\n- Recap the five rules from the board. Answer any remaining questions.",
+        "time": 6,
+        "interaction": "T-Ss"
+      }
+    ]
+  },
+  "transcript": "none",
+  "answer_key": "answer_key.typ",
+  "slideshow_url": "",
+  "cefr_level": "B2",
+  "class": "M3"
+}

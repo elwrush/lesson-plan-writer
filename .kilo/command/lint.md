@@ -8,8 +8,9 @@ Invoke this command to run ruff linting and formatting on the project.
 
 ## What it does
 
-1. **Check + fix** — `python -m ruff check --fix .` — finds lint violations and auto-fixes them
-2. **Format** — `python -m ruff format .` — formats all Python files per ruff's style
+1. **Encoding check** — `python scripts/check_encoding.py` — verifies all text files are valid UTF-8. Run with `--fix` to auto-convert cp1252-encoded files
+2. **Check + fix** — `python -m ruff check --fix .` — finds lint violations and auto-fixes them
+3. **Format** — `python -m ruff format .` — formats all Python files per ruff's style
 
 ## When to use
 
@@ -18,15 +19,17 @@ Run this before committing changes (replaces the pre-commit hook that was previo
 ## Commands
 
 ```powershell
-python -m ruff check --fix .
+# Check encoding first
+python scripts/check_encoding.py ; if ($?) { python -m ruff check --fix . }
+
+# Format (separate step, safe to always run)
 python -m ruff format .
 ```
 
-Or run both in sequence:
+Or run all three in sequence:
 
 ```powershell
-python -m ruff check --fix . ; python -m ruff format .
-```
+python scripts/check_encoding.py ; if ($?) { python -m ruff check --fix . ; python -m ruff format . }
 
 ## Also available
 
