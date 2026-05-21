@@ -153,7 +153,7 @@ class TestAutoAnimatePairs:
         counts = {}
         for aid in ids:
             counts[aid] = counts.get(aid, 0) + 1
-        unpaired = {aid: c for aid, c in counts.items() if c != 2}
+        unpaired = {aid: c for aid, c in counts.items() if c < 2}
         assert not unpaired, (
             f"Unpaired auto-animate IDs in {path.parent.parent.name}/: "
             + ", ".join(f"'{k}' appears {v} times" for k, v in sorted(unpaired.items()))

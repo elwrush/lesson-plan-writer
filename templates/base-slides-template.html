@@ -23,6 +23,25 @@
                 font-weight: bold;
                 padding: 4px 12px;
                 border-radius: 4px;
+
+            .reveal .a-badge {
+                display: inline-block;
+                padding: 0.1em 0.5em;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 0.85em;
+                min-width: 1.8em;
+                text-align: center;
+            }
+            .reveal .a-badge.a-cor {
+                background: rgba(76, 175, 80, 0.4);
+                color: #fff;
+            }
+            .reveal .a-badge.a-inc {
+                background: rgba(244, 67, 54, 0.4);
+                color: #fff;
+            }
+
                 font-size: 0.4em;
                 vertical-align: middle;
                 margin-left: 10px;
@@ -34,11 +53,49 @@
             .cefr-badge.C1 { background: #9c27b0; }
             .cefr-badge.C2 { background: #f44336; }
 
-            /* --- Title logo --- */
-            .reveal .title-logo {
-                display: block;
-                max-height: 100px;
-                margin: 0 auto 1em;
+
+            /* --- Answer flex layout (replaces answer-table) --- */
+            .reveal .answer-list {
+                width: 100%;
+                font-size: 0.85em;
+            }
+            .reveal .a-row {
+                display: flex;
+                align-items: baseline;
+                padding: 0.4em 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                gap: 0.5em;
+            }
+            .reveal .a-row:last-child { border-bottom: none; }
+            .reveal .a-num {
+                flex: 0 0 1.5em;
+                text-align: right;
+                color: rgba(255,255,255,0.5);
+                font-size: 0.85em;
+            }
+            .reveal .a-q {
+                flex: 0 1 auto;
+                min-width: 0;
+                margin-right: 1em;
+            }
+            .reveal .a-ans {
+                flex: 0 0 auto;
+                min-width: 180px;
+                text-align: left;
+                padding: 0.1em 0.3em;
+                border-radius: 4px;
+            }
+            .reveal .a-ans.a-cor {
+                color: #fff;
+            }
+            .reveal .a-ans.a-cor.visible {
+                background: rgba(76, 175, 80, 0.3);
+            }
+            .reveal .a-ans.a-inc {
+                color: #fff;
+            }
+            .reveal .a-ans.a-inc.visible {
+                background: rgba(244, 67, 54, 0.3);
             }
 
             /* --- Labels & captions --- */
@@ -222,7 +279,6 @@
                 <!-- ─── PATTERN: Title Slide ──────────────────────────────── -->
                 <!--
                 <section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="1.0">
-                    <img src="assets/logo.png" class="title-logo" alt="Logo" />
                     <h1 class="text-shield">Topic Title <span class="cefr-badge B1">B1</span></h1>
                     <p class="text-shield"><em>Strap subheader — derived from lesson objective</em></p>
                 </section>
@@ -368,7 +424,7 @@
                     <p class="fragment strike">a) Reason for elimination. <strong>Eliminate.</strong></p>
                     <p class="fragment strike">b) Reason for elimination. <strong>Eliminate.</strong></p>
                     <p class="fragment"><strong>Step 3: Confirm the answer</strong></p>
-                    <p class="fragment highlight-green">c) Correct answer explanation. ✓ <strong>c is correct!</strong></p>
+                    <p class="fragment highlight-green">c) Correct answer explanation. <i class="fa-solid fa-check"></i> <strong>c is correct!</strong></p>
                 </section>
                 -->
 
@@ -380,9 +436,9 @@
                     <table class="answer-table">
                         <thead><tr><th>Statement</th><th>Answer</th></tr></thead>
                         <tbody>
-                            <tr><td>Statement text.</td><td class="fragment answer-correct">✓ <strong>True</strong></td></tr>
-                            <tr><td>Another statement.</td><td class="fragment answer-incorrect">✗ <strong>False</strong></td></tr>
-                            <tr><td>Corrected statement.</td><td class="fragment answer-correct">✓ <em>Explanation</em></td></tr>
+                            <tr><td>Statement text.</td><td class="fragment answer-correct"><i class="fa-solid fa-check"></i> <strong>True</strong></td></tr>
+                            <tr><td>Another statement.</td><td class="fragment answer-incorrect"><i class="fa-solid fa-times"></i> <strong>False</strong></td></tr>
+                            <tr><td>Corrected statement.</td><td class="fragment answer-correct"><i class="fa-solid fa-check"></i> <em>Explanation</em></td></tr>
                         </tbody>
                     </table>
                 </section>
@@ -396,7 +452,7 @@
                     <table class="answer-table">
                         <thead><tr><th>Question</th><th>Answer</th><th>Why?</th></tr></thead>
                         <tbody>
-                            <tr><td>Question text</td><td class="fragment answer-correct">✓ <strong>c</strong></td><td class="fragment">citation</td></tr>
+                            <tr><td>Question text</td><td class="fragment answer-correct"><i class="fa-solid fa-check"></i> <strong>c</strong></td><td class="fragment">citation</td></tr>
                         </tbody>
                     </table>
                 </section>
@@ -410,8 +466,8 @@
                     <table class="answer-table">
                         <thead><tr><th>Paragraph</th><th>Match</th></tr></thead>
                         <tbody>
-                            <tr><td>Paragraph description</td><td class="fragment answer-correct">✓ <strong>B</strong></td></tr>
-                            <tr><td>Another description</td><td class="fragment answer-correct">✓ <strong>C</strong></td></tr>
+                            <tr><td>Paragraph description</td><td class="fragment answer-correct"><i class="fa-solid fa-check"></i> <strong>B</strong></td></tr>
+                            <tr><td>Another description</td><td class="fragment answer-correct"><i class="fa-solid fa-check"></i> <strong>C</strong></td></tr>
                         </tbody>
                     </table>
                 </section>
@@ -422,9 +478,9 @@
                 <section>
                     <h2>What you can do now</h2>
                     <ul>
-                        <li>✓ I can find the main idea</li>
-                        <li>✓ I can find important facts</li>
-                        <li>✓ I can share my ideas</li>
+                        <li><i class="fa-solid fa-check"></i> I can find the main idea</li>
+                        <li><i class="fa-solid fa-check"></i> I can find important facts</li>
+                        <li><i class="fa-solid fa-check"></i> I can share my ideas</li>
                     </ul>
                     <aside class="notes">
                         Elicit from students: What did you learn today?
