@@ -16,13 +16,12 @@ Answers are bolded in the text (lines 149-163): rude, social media, behavior, ma
 - Paragraph 4 → _B_ (Technology has changed what is thought of as polite — cell phones, emails in meetings)
 
 === D Close reading
-The gap-fill answers with supporting citations from the reading text:
+The gap-fill answers with supporting citations from the reading text (6 blanks numbered 1–6):
 
-- _geography_ — Para 2: "vary by geographic location"
 - _1. "You're welcome"_ — Para 2: "Older people are more likely to say 'You're welcome'"
 - _2. "No problem"_ — Para 2: "younger people are more likely to say 'No problem'"
 - _3. tipping_ — Para 3: "in Japan tipping is not expected in any situation"
-- _left hand_ — Para 3: "the left hand is considered unclean and shouldn't be used to eat, greet, or exchange money"
-- _having your phone_ — Para 4: "even just having your phone at the dinner table is thought to be impolite"
+- _4. left hand_ — Para 3: "the left hand is considered unclean and shouldn't be used to eat, greet, or exchange money"
+- _5. having your phone_ — Para 4: "even just having your phone at the dinner table is thought to be impolite"
 - _6. older people_ — Para 4: "older people are much more likely to have a negative reaction and find this rude"
 

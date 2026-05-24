@@ -1,0 +1,60 @@
+﻿{
+    "teacher": "Ed Rush",
+    "duration": "46 minutes",
+    "date": "220526",
+    "topic": "Sentence Types 2 \u2014 Fragments",
+    "objective": "By the end of the lesson, learners will be better able to identify and correct sentence fragments (missing subjects and missing verbs) in the context of describing friendships and personal relationships.",
+    "materials": "- Introduction to Academic Writing (3rd ed.), Chapter 1: Paragraph Format, pp14-15",
+    "lesson_plan": {
+        "shape": "C",
+        "shape_name": "Test-Teach-Test",
+        "cefr_level": "B2",
+        "class": "M3",
+        "stages": [
+            {
+                "stage_number": 1,
+                "stage": "Lead-in",
+                "stage_aim": "To activate interest in describing friendships and raise awareness that some English sentences feel incomplete.",
+                "procedure": "- Display an image of two friends on the IWB. Elicit discussion: \"Who is your best friend? What makes a good friend?\" Collect 3-4 responses. 3 min.\n- Present 3 fragment sentences about friendship on the IWB: Is very kind and generous. / My friend always there for me. / Usually meet at the weekend. Ask pairs: \"What is wrong with these sentences? Can you fix them?\" Elicit ideas but do not teach the rules yet. 3 min.\n- Bridge to the lesson: \"Today we will learn why these are wrong and how to fix them. In English, every sentence must have two things \u2014 let's find out what they are.\" 2 min.",
+                "time": 8,
+                "interaction": "T-Ss, Ss-Ss"
+            },
+            {
+                "stage_number": 2,
+                "stage": "Test 1 \u2014 Diagnostic",
+                "stage_aim": "To diagnose how well learners can distinguish complete sentences from fragments and correct fragments by supplying missing subjects or verbs.",
+                "procedure": "- Display a bespoke 6-item diagnostic quiz on the IWB. Learners see 6 sentences about friendship on screen. Three items are complete sentences; three are fragments (two missing the subject, one missing the verb).\n- Students work individually in their notebooks: mark each item \u2713 (complete sentence) or \u2717 (fragment), then correct each fragment by adding a subject or a verb.\n- Monitor closely. Note which error type (missing subject vs missing verb) causes more difficulty. Do not reveal answers yet.",
+                "time": 8,
+                "interaction": "S"
+            },
+            {
+                "stage_number": 3,
+                "stage": "Teach \u2014 Clarifying",
+                "stage_aim": "To draw out the rule that every English sentence must have a subject and a verb, and to teach two fix strategies for correcting fragments.",
+                "procedure": "- Return to the diagnostic test. Use show of hands to check which items the class found hardest. Elicit corrections for the fragment items on the IWB.\n- Ask: \"What must every English sentence have?\" Draw out the answer: a subject and a verb.\n- Present the two fragment types with examples from the test:\n  1. Missing subject \u2014 e.g., Is very kind and generous. \u2192 Fix: add a subject. She is very kind and generous.\n  2. Missing verb \u2014 e.g., My friend always there for me. \u2192 Fix: add a verb. My friend is always there for me.\n- Board the rule with both examples. Students copy into notebooks.\n- Briefly note the exception: commands (e.g., Stop!) have an implied subject (you) and are not fragments.",
+                "time": 12,
+                "interaction": "T-Ss"
+            },
+            {
+                "stage_number": 4,
+                "stage": "Test 2 \u2014 Controlled and Editing Practice",
+                "stage_aim": "To apply fragment identification and correction strategies in controlled sentence-level exercises and extended paragraph-level editing, using textbook Practice 4.",
+                "procedure": "- Part A: Textbook Practice 4, Part A, pp14\u201315 \u2014 \u201cStep 1 Read each sentence and decide if it is a complete sentence or a fragment. Mark the fragments with an X to show that it is incorrect. Step 2 Decide what is wrong with each fragment. Is the verb missing? Is the subject missing? Step 3 Correct each fragment by adding a subject or a verb.\u201d Students complete the 7 items individually. Pair check. Whole-class feedback using the answer key on the IWB. 7 min.\n- Part B: Textbook Practice 4, Part B \u2014 Editing Practice, p15 \u2014 \u201cFind and underline five fragments in the following paragraph. Then correct each one.\u201d Students find and correct the 5 fragments in the My Best Friend paragraph. Pairs compare corrections. Reveal answers using the answer key on the IWB. 7 min.",
+                "time": 12,
+                "interaction": "S, Ss-Ss, T-Ss"
+            },
+            {
+                "stage_number": 5,
+                "stage": "Wrap-up",
+                "stage_aim": "To consolidate the fragment correction rule and confirm that learners can produce complete sentences independently.",
+                "procedure": "- Quick oral drill: teacher says a fragment aloud (e.g., Always listens to me.), students chorally supply the missing element (She always listens to me.). Repeat with 3\u20134 fragments mixing missing-subject and missing-verb types. 2 min.\n- Learners write 2 complete sentences about their own best friend. Partners swap and check each other\u2019s sentences for fragments. 3 min.\n- Recap: \u201cWhat must every English sentence have?\u201d \u2192 a subject and a verb. Answer any remaining questions. 1 min.",
+                "time": 6,
+                "interaction": "T-Ss, Ss-Ss"
+            }
+        ]
+    },
+    "transcript": "none",
+    "answer_key": "answer_key.typ",
+    "cefr_level": "B2",
+    "class": "M3"
+}

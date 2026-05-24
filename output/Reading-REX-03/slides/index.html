@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Social Media and Society</title>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            /* =============================================
+               LESSON PLAN WRITER 3 — BASE SLIDE STYLES
+               Authoritative stylesheet for all presentations.
+               ============================================= */
+
+            /* --- CEFR Badges --- */
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                padding: 4px 12px;
+                border-radius: 4px;
+
+            .reveal .a-badge {
+                display: inline-block;
+                padding: 0.1em 0.5em;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 0.85em;
+                min-width: 1.8em;
+                text-align: center;
+            }
+            .reveal .a-badge.a-cor {
+                background: rgba(76, 175, 80, 0.4);
+                color: #fff;
+            }
+            .reveal .a-badge.a-inc {
+                background: rgba(244, 67, 54, 0.4);
+                color: #fff;
+            }
+
+                font-size: 0.4em;
+                vertical-align: middle;
+                margin-left: 10px;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+
+
+            /* --- Answer flex layout (replaces answer-table) --- */
+            .reveal .answer-list {
+                width: 100%;
+                font-size: 0.85em;
+            }
+            .reveal .a-row {
+                display: flex;
+                align-items: baseline;
+                padding: 0.4em 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                gap: 0.5em;
+            }
+            .reveal .a-row:last-child { border-bottom: none; }
+            .reveal .a-num {
+                flex: 0 0 1.5em;
+                text-align: right;
+                color: rgba(255,255,255,0.5);
+                font-size: 0.85em;
+            }
+            .reveal .a-q {
+                flex: 0 1 auto;
+                min-width: 0;
+                margin-right: 1em;
+            }
+            .reveal .a-ans {
+                flex: 0 0 auto;
+                min-width: 180px;
+                text-align: left;
+                padding: 0.1em 0.3em;
+                border-radius: 4px;
+            }
+            .reveal .a-ans.a-cor {
+                color: #fff;
+            }
+            .reveal .a-ans.a-cor.visible {
+                background: rgba(76, 175, 80, 0.3);
+            }
+            .reveal .a-ans.a-inc {
+                color: #fff;
+            }
+            .reveal .a-ans.a-inc.visible {
+                background: rgba(244, 67, 54, 0.3);
+            }
+
+            /* --- Labels & captions --- */
+            .reveal .aim-label {
+                font-size: 0.7em;
+                color: #888;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            .reveal .material-ref {
+                font-size: 0.65em;
+                color: #888;
+                font-style: italic;
+                margin-top: 0.5em;
+            }
+            .reveal .source-cite {
+                font-size: 0.7em;
+                color: #666;
+                font-style: italic;
+                margin-top: 0.3em;
+            }
+            .reveal .image-caption {
+                font-size: 0.55em;
+                color: #888;
+                text-align: center;
+                margin-top: 0.2em;
+            }
+
+            /* --- Vocabulary slides --- */
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            }
+
+            /* --- Pedagogical strategy slides (teal background) --- */
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal section.pedagogical .strategy-tip {
+                font-size: 0.85em;
+                font-style: italic;
+                color: rgba(255,255,255,0.85);
+                margin-bottom: 0.5em;
+            }
+            .reveal section.pedagogical .evidence {
+                font-size: 0.8em;
+                background: rgba(0,0,0,0.3);
+                padding: 0.4em 0.6em;
+                border-radius: 4px;
+                border-left: 3px solid rgba(255,255,255,0.4);
+            }
+
+            /* --- Global text shadow for readability --- */
+            .reveal p,
+            .reveal li,
+            .reveal h1, .reveal h2, .reveal h3,
+            .reveal h4, .reveal h5, .reveal h6 {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+
+            /* --- Text shield for full-opacity image backgrounds --- */
+            /* Uses display:inline-block + max-width for subtitle-style shielding.
+               inline-block keeps the background tight to the text.
+               max-width prevents full-width bars on very long text.
+               Elements stack naturally (block-level spacing) without ::after artifacts. */
+            .reveal .text-shield {
+                background: rgba(0, 0, 0, 0.55);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                line-height: 1.6;
+            }
+            .reveal .text-shield-light {
+                background: rgba(200, 200, 200, 0.65);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                color: #222;
+                line-height: 1.6;
+            }
+            /* Fragment variant: text already visible, background highlight on click */
+            .reveal .fragment.text-shield-light { opacity: 1; visibility: inherit; }
+            .reveal .fragment.text-shield-light.visible { background: rgba(200, 200, 200, 0.65); padding: 0.15em 0.6em; border-radius: 4px; }
+
+            /* --- Fragment styles --- */
+            /* --- Yellow text for answers on green answer tables --- */
+            .reveal .answer-yellow { color: #ffdd00; }
+            .reveal .fragment.answer-yellow.visible { color: #ffdd00; }
+
+            .reveal .fragment.highlight-green {
+                background: rgba(0, 100, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.highlight-red {
+                background: rgba(100, 0, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-correct.visible {
+                background: rgba(0, 120, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-incorrect.visible {
+                background: rgba(120, 0, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal table.answer-table th {
+                background: rgba(0, 0, 0, 0.2);
+                font-weight: bold;
+            }
+            .reveal .fragment.strike {
+                text-decoration: line-through;
+                opacity: 0.6;
+            }
+
+            /* --- YouTube iframe container (16:9 responsive) --- */
+            .reveal .iframe-container {
+                position: relative;
+                width: 90%;
+                padding-bottom: 50.625%;
+                height: 0;
+                overflow: hidden;
+                margin: 0 auto 0.5em;
+            }
+            .reveal .iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* --- Diagnostic talk structure slides (pedagogical, teal) --- */
+            .reveal .structure-talk h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal .structure-talk p,
+            .reveal .structure-talk li  { color: #fff; }
+            .reveal .structure-talk .structure-step {
+                font-size: 1.1em;
+                margin-bottom: 0.6em;
+            }
+            .reveal .structure-talk .transition-words {
+                font-size: 0.9em;
+                color: #ffdd00;
+                font-style: italic;
+                margin-top: 0.8em;
+                padding: 0.4em 0.6em;
+                background: rgba(0,0,0,0.2);
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+<!-- 0: Title -->
+<!-- PEDAGOGICAL INTENT: Student sees the lesson topic, B1 level badge, and a strap subheader for orientation -->
+<!-- WHY THIS FEATURE: Static — the student needs to know what the lesson is about before any activity begins -->
+<!-- COGNITIVE PRINCIPLE: Pre-training — orienting the learner to the lesson content before instruction -->
+<section id="slide-title">
+    <div class="r-stack" style="height: 100%;">
+        <img src="assets/pixabay_998990_1.jpg" alt="Social media"
+             style="width: 100%; height: 100%; object-fit: cover; opacity: 0.75;
+                    position: absolute; top: 0; left: 0;" />
+        <div style="position: relative; z-index: 1; text-align: center; padding: 2em;">
+            <h1>Social Media and Society <span class="cefr-badge B1">B1</span></h1>
+            <p style="font-size: 0.85em; margin-top: 0.5em;"><em>Read about how social media is changing the way we live</em></p>
+        </div>
+    </div>
+    <aside class="notes">
+        Lesson: Social Media and Society. B1 Reading. Shape E (Receptive Skills).
+        46 minutes. 7 stages: Lead-in, Vocabulary, Predicting, Gist, Detail, Discussion, Wrap-up.
+        Materials: Skillful 2, Unit 1, pp 14-17.
+    </aside>
+</section>
+
+<!-- 1: Objective -->
+<!-- PEDAGOGICAL INTENT: Student sees three "I can" outcomes, all visible on entry, as a roadmap for the lesson -->
+<!-- WHY THIS FEATURE: Static — outcomes are reference points for the learner, not content to be revealed -->
+<!-- COGNITIVE PRINCIPLE: Pre-training — advance organisers improve retention by activating relevant schema -->
+<section id="slide-objective">
+    <h2>Here's what you'll be able to do</h2>
+    <ul>
+        <li>I can get the main idea of an article</li>
+        <li>I can find important facts in a text</li>
+        <li>I can share my ideas about what I read</li>
+    </ul>
+    <p><em>These are the same skills you need for your reading test!</em></p>
+    <aside class="notes">
+        Lesson objective. B1 reading sub-skills mapped to three outcomes. Connect to PET reading test framework. Elicit prior experience with social media topics.
+    </aside>
+</section>
+
+<!-- 2: Lead-in — Stage 1 -->
+<!-- PEDAGOGICAL INTENT: Student sees one open question about social media to activate prior knowledge and generate interest -->
+<!-- WHY THIS FEATURE: Static — one discussion question visible immediately for pair work; fragments would hide the prompt -->
+<!-- COGNITIVE PRINCIPLE: Personalisation — conversational prompt activates relevant real-world schema -->
+<section id="slide-lead-in" data-background="#1a1a2e">
+    <h2>Let's get Started</h2>
+    <h3>Is social media mostly good or mostly bad for our lives?</h3>
+    <aside class="notes">
+        Stage 1 — Lead-in. 4 min. T-Ss, Ss-Ss.
+        Write "Social media: positive or negative?" on the board. In pairs, students discuss how often they use social media and what they use it for. Elicit a few ideas and write key responses on the board. Introduce the lesson objective.
+    </aside>
+</section>
+
+<!-- 3: Transition — Vocabulary -->
+<!-- PEDAGOGICAL INTENT: Student sees a red slide with a heading that signals a shift from discussion to vocabulary work -->
+<!-- WHY THIS FEATURE: Static — red background provides a clear visual reset and phase change signal -->
+<!-- COGNITIVE PRINCIPLE: Coherence — the red screen removes all prior content, reducing extraneous cognitive load -->
+<section id="slide-transition-vocab" data-background="#c0392b">
+    <h2>First, Some Words</h2>
+</section>
+
+<!-- 4: Vocabulary Task — Stage 2 -->
+<!-- PEDAGOGICAL INTENT: Student sees task instructions and a timer for self-paced vocabulary work in the textbook -->
+<!-- WHY THIS FEATURE: Static + data-timer — instructions remain visible throughout; timer helps pace the activity -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — vocabulary tasks are chunked into matching (Ex 1) and choosing (Ex 2) -->
+<section id="slide-vocab-task" data-timer="420">
+    <h2>Vocabulary Preview (p.14)</h2>
+    <ul>
+        <li>Match the eight words to their definitions. (Ex 1)</li>
+        <li>Choose the correct word for each question. (Ex 2)</li>
+        <li>Check your answers with a partner.</li>
+    </ul>
+    <aside class="notes">
+        Stage 2 — Vocabulary Preview. 7 min. S, Ss-Ss.
+        Students complete the matching task (A Vocabulary preview, Ex 1, p.14). 3 min. Check answers as a class using the answer slides. Students then complete word choice (Ex 2) individually. 2 min. Peer check, then class feedback. 2 min.
+    </aside>
+</section>
+
+<style>
+    .reveal .answer-list { width: 100%; font-size: 0.85em; }
+    .reveal .a-row { display: flex; align-items: baseline; padding: 0.4em 0; border-bottom: 1px solid rgba(255,255,255,0.1); gap: 0.5em; }
+    .reveal .a-row:last-child { border-bottom: none; }
+    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: rgba(255,255,255,0.5); font-size: 0.85em; }
+    .reveal .a-q { flex: 0 0 auto; min-width: 0; margin-right: 0.5em; }
+    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; }
+    .reveal .a-ans.a-cor { color: #fff; }
+    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+    .reveal .a-ans.a-inc { color: #fff; }
+    .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
+    /* Override template's gray #888 aim-label — invisible on green #1e7e34 */
+    .reveal .aim-label { color: rgba(255,255,255,0.7); }
+</style>
+
+<!-- 5: Vocab Ex 1 Answers (1-4) -->
+<!-- PEDAGOGICAL INTENT: Student sees each word-definition pair slide in one at a time for focused checking -->
+<!-- WHY THIS FEATURE: Fragment fade-up on a-ans spans — teacher controls reveal pace per item; segments attention -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — one word revealed per click prevents cognitive overload -->
+<section id="slide-vocab-ans-1-4" data-background="#1e7e34">
+    <h2>Ex 1 — Vocabulary Matching</h2>
+    <p class="aim-label">A Vocabulary preview, p.14</p>
+    <div class="answer-list">
+        <div class="a-row"><span class="a-num">1</span><span class="a-q">anxious</span><span class="fragment fade-up a-ans a-cor">d — worried because you think something bad might happen</span></div>
+        <div class="a-row"><span class="a-num">2</span><span class="a-q">cruel</span><span class="fragment fade-up a-ans a-cor">a — extremely unkind, or causing someone to be unhappy or upset</span></div>
+        <div class="a-row"><span class="a-num">3</span><span class="a-q">get attention</span><span class="fragment fade-up a-ans a-cor">c — to get someone's interest or to make someone notice something</span></div>
+        <div class="a-row"><span class="a-num">4</span><span class="a-q">hurt</span><span class="fragment fade-up a-ans a-cor">f — to cause someone pain or injury</span></div>
+    </div>
+    <aside class="notes">Check answers one by one. Elicit reasons. Clarify any confusion.</aside>
+</section>
+
+<!-- 6: Vocab Ex 1 Answers (5-8) -->
+<!-- PEDAGOGICAL INTENT: Student sees remaining word-definition pairs slide in -->
+<!-- WHY THIS FEATURE: Fragment fade-up — same pattern as slide 5 for consistency -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — continuation of item-by-item checking -->
+<section id="slide-vocab-ans-5-8" data-background="#1e7e34">
+    <h2>Ex 1 — Vocabulary Matching</h2>
+    <p class="aim-label">A Vocabulary preview, p.14</p>
+    <div class="answer-list">
+        <div class="a-row"><span class="a-num">5</span><span class="a-q">opinion</span><span class="fragment fade-up a-ans a-cor">h — the attitude that you have towards something</span></div>
+        <div class="a-row"><span class="a-num">6</span><span class="a-q">page</span><span class="fragment fade-up a-ans a-cor">b — the writing or pictures on a computer screen</span></div>
+        <div class="a-row"><span class="a-num">7</span><span class="a-q">post</span><span class="fragment fade-up a-ans a-cor">g — to put writing or images online for others to see</span></div>
+        <div class="a-row"><span class="a-num">8</span><span class="a-q">site</span><span class="fragment fade-up a-ans a-cor">e — a place on the Internet with information about a subject</span></div>
+    </div>
+    <aside class="notes">Continue checking. Note that "post" and "site" appear frequently in the reading.</aside>
+</section>
+
+<!-- 7: Vocab Ex 2 Answers (1-4) -->
+<!-- PEDAGOGICAL INTENT: Student sees correct word choices revealed per question -->
+<!-- WHY THIS FEATURE: Fragment fade-up — each answer slides in on click; teacher controls pace -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — answers checked one at a time -->
+<section id="slide-vocab-ex2-1-4" data-background="#1e7e34">
+    <h2>Ex 2 — Word Choice</h2>
+    <p class="aim-label">A Vocabulary preview, p.14</p>
+    <div class="answer-list">
+        <div class="a-row"><span class="a-num">1</span><span class="a-q">Which social media ___ are most popular?</span><span class="fragment fade-up a-ans a-cor"><strong>sites</strong></span></div>
+        <div class="a-row"><span class="a-num">2</span><span class="a-q">How many times a day do you ___ something online?</span><span class="fragment fade-up a-ans a-cor"><strong>post</strong></span></div>
+        <div class="a-row"><span class="a-num">3</span><span class="a-q">Do you click on advertising on different web ___?</span><span class="fragment fade-up a-ans a-cor"><strong>pages</strong></span></div>
+        <div class="a-row"><span class="a-num">4</span><span class="a-q">Do you worry your comments might ___ someone's feelings?</span><span class="fragment fade-up a-ans a-cor"><strong>hurt</strong></span></div>
+    </div>
+    <aside class="notes">Check answers. Ask why the other option was wrong for each question.</aside>
+</section>
+
+<!-- 8: Vocab Ex 2 Answers (5-8) -->
+<!-- PEDAGOGICAL INTENT: Student sees remaining word choices revealed -->
+<!-- WHY THIS FEATURE: Fragment fade-up — consistent pattern across both answer slides -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — continuation of item-by-item checking -->
+<section id="slide-vocab-ex2-5-8" data-background="#1e7e34">
+    <h2>Ex 2 — Word Choice</h2>
+    <p class="aim-label">A Vocabulary preview, p.14</p>
+    <div class="answer-list">
+        <div class="a-row"><span class="a-num">5</span><span class="a-q">Do you care about other people's ___?</span><span class="fragment fade-up a-ans a-cor"><strong>opinions</strong></span></div>
+        <div class="a-row"><span class="a-num">6</span><span class="a-q">What do you do when someone writes something ___?</span><span class="fragment fade-up a-ans a-cor"><strong>cruel</strong></span></div>
+        <div class="a-row"><span class="a-num">7</span><span class="a-q">Do you feel ___ when people don't reply?</span><span class="fragment fade-up a-ans a-cor"><strong>anxious</strong></span></div>
+        <div class="a-row"><span class="a-num">8</span><span class="a-q">Do you like getting a lot of ___?</span><span class="fragment fade-up a-ans a-cor"><strong>attention</strong></span></div>
+    </div>
+    <aside class="notes">Final vocabulary check. Bridge: "Now you know the key words — let's see them in the article."</aside>
+</section>
+
+<!-- 9: Transition — Predicting -->
+<!-- PEDAGOGICAL INTENT: Student sees a red slide signalling a shift from vocabulary to prediction before reading -->
+<!-- WHY THIS FEATURE: Static — red background provides a clear visual reset and phase change signal -->
+<!-- COGNITIVE PRINCIPLE: Coherence — clearing working memory before the next cognitive task -->
+<section id="slide-transition-predict" data-background="#c0392b">
+    <h2>What do you think?</h2>
+</section>
+
+<!-- 10a: Predicting — entry (auto-animate A) — Stage 3 -->
+<!-- PEDAGOGICAL INTENT: Student sees the article's first sentence in neutral style. Key words are underlined with transparent border — invisible but space-reserved. -->
+<!-- WHY THIS FEATURE: Auto-animate entry — transparent borders on key words prepare for colour transformation on next slide. Fragments cannot animate CSS properties; they only reveal/hide. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — highlighting key topic areas draws attention to what the article will cover -->
+<section id="slide-predict-entry" data-auto-animate data-auto-animate-id="predict" data-background="#1a1a2e">
+    <h2>Before You Read (p.14)</h2>
+    <p>Read the first sentence. What topics will the article cover?</p>
+    <p data-id="sentence" style="font-size:0.85em;font-style:italic;background:rgba(255,255,255,0.1);padding:0.5em;border-radius:4px;">
+        "Social media is changing how we <span data-id="w1" style="border-bottom: 2px solid transparent;">communicate</span>, how we do <span data-id="w2" style="border-bottom: 2px solid transparent;">business</span>, and how we live in <span data-id="w3" style="border-bottom: 2px solid transparent;">society</span>."
+    </p>
+    <aside class="notes">Stage 3 — Predicting. 3 min. Ss-Ss. Students read first sentence. Discuss predictions in pairs. Share 3-4 with class. Click to reveal highlighted words.</aside>
+</section>
+
+<!-- 10b: Predicting — reveal (auto-animate B) -->
+<!-- PEDAGOGICAL INTENT: Student watches key topic words transform — yellow underlines appear on "communicate", "business", "society" -->
+<!-- WHY THIS FEATURE: Auto-animate transforms border transparent→yellow. Fragments cannot animate CSS properties. data-id matching ensures only these spans transition. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — highlighting these three topics directs prediction generation -->
+<section id="slide-predict-reveal" data-auto-animate data-auto-animate-id="predict" data-background="#1a1a2e">
+    <h2>Before You Read (p.14)</h2>
+    <p>Read the first sentence. What topics will the article cover?</p>
+    <p data-id="sentence" style="font-size:0.85em;font-style:italic;background:rgba(255,255,255,0.1);padding:0.5em;border-radius:4px;">
+        "Social media is changing how we <span data-id="w1" style="border-bottom: 3px solid #ffdd00;">communicate</span>, how we do <span data-id="w2" style="border-bottom: 3px solid #ffdd00;">business</span>, and how we live in <span data-id="w3" style="border-bottom: 3px solid #ffdd00;">society</span>."
+    </p>
+    <aside class="notes">Highlighted words = article's three topic areas. Ask: "Which topic do you think the article will talk about most?"</aside>
+</section>
+
+<!-- 11: Transition — Gist Reading -->
+<!-- PEDAGOGICAL INTENT: Student sees a red slide signalling a shift from prediction to reading for the main idea -->
+<!-- WHY THIS FEATURE: Static — red background clears prediction content and refocuses attention -->
+<!-- COGNITIVE PRINCIPLE: Coherence — removing prediction content from working memory before the reading task -->
+<section id="slide-transition-gist" data-background="#c0392b">
+    <h2>What's the main idea?</h2>
+</section>
+
+<!-- 12: Reading for Gist Task — Stage 4 -->
+<!-- PEDAGOGICAL INTENT: Student sees three sub-tasks for global reading with a timer for self-pacing -->
+<!-- WHY THIS FEATURE: Static + data-timer — instructions stay visible; timer provides pace structure -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — three sub-tasks chunked into one stage -->
+<section id="slide-gist-task" data-timer="600">
+    <h2>Global Reading (p.17)</h2>
+    <ul>
+        <li>Read the text quickly. Check your predictions.</li>
+        <li>Find phrases that show an argument (<em>some people believe, however</em>).</li>
+        <li>Match each argument A-F to the correct paragraph.</li>
+    </ul>
+    <aside class="notes">Stage 4 — Reading for Gist. 10 min. S, Ss-Ss. Students read to check predictions (C Ex 1, p.17). Highlight argument signposts (Ex 2). Match arguments A-F (Ex 3). Class feedback.</aside>
+</section>
+
+<!-- 13a: C Ex 3 — auto-animate entry (unsorted) -->
+<!-- PEDAGOGICAL INTENT: Student sees letters A-F on the left and Para 1-8 in order on the right. Nothing matches yet — the student must mentally connect each letter to a paragraph. -->
+<!-- WHY THIS FEATURE: Auto-animate entry — the paragraph items are in numerical order. On the next slide, they rearrange to match their correct positions. -->
+<!-- COGNITIVE PRINCIPLE: Pre-training — seeing all options before matching activates schema -->
+<section id="slide-c-ex3-entry" data-auto-animate data-auto-animate-id="c-ex3" data-background="#1a1a2e">
+    <h2>Ex 3 — Match Arguments</h2>
+    <div style="display: grid; grid-template-columns: auto 1fr; gap: 0.3em 2em; text-align: left; font-size: 1em; max-width: 500px; margin: 0 auto;">
+        <div>
+            <p style="margin: 0.2em 0;"><strong>A</strong></p>
+            <p style="margin: 0.2em 0;"><strong>B</strong></p>
+            <p style="margin: 0.2em 0;"><strong>C</strong></p>
+            <p style="margin: 0.2em 0;"><strong>D</strong></p>
+            <p style="margin: 0.2em 0;"><strong>E</strong></p>
+            <p style="margin: 0.2em 0;"><strong>F</strong></p>
+        </div>
+        <div data-id="paras">
+            <p data-id="p1" style="margin: 0.2em 0;">Para 1</p>
+            <p data-id="p2" style="margin: 0.2em 0;">Para 2</p>
+            <p data-id="p3" style="margin: 0.2em 0;">Para 3</p>
+            <p data-id="p4" style="margin: 0.2em 0;">Para 4</p>
+            <p data-id="p5" style="margin: 0.2em 0;">Para 5</p>
+            <p data-id="p6" style="margin: 0.2em 0;">Para 6</p>
+            <p data-id="p7" style="margin: 0.2em 0;">Para 7</p>
+            <p data-id="p8" style="margin: 0.2em 0;">Para 8</p>
+        </div>
+    </div>
+</section>
+
+<!-- 13b: C Ex 3 — auto-animate reveal (sorted to correct positions) -->
+<!-- PEDAGOGICAL INTENT: Student watches the paragraph items rearrange — Para 4 slides to the top (next to A), Para 2 slides up (next to B), etc. The unmatched Para 1 and Para 8 sink to the bottom. -->
+<!-- WHY THIS FEATURE: Auto-animate animates the position changes of each data-id matched element within the right column. Each paragraph item slides to its new position. Fragments only reveal/hide; auto-animate moves elements. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the rearrangement visually connects each letter to its matching paragraph -->
+<section id="slide-c-ex3-reveal" data-auto-animate data-auto-animate-id="c-ex3" data-background="#1a1a2e">
+    <h2>Ex 3 — Match Arguments</h2>
+    <p style="color: #4caf50; font-size: 0.7em;">Correct matches</p>
+    <div style="display: grid; grid-template-columns: auto 1fr; gap: 0.3em 2em; text-align: left; font-size: 1em; max-width: 500px; margin: 0 auto;">
+        <div>
+            <p style="margin: 0.2em 0;"><strong>A</strong></p>
+            <p style="margin: 0.2em 0;"><strong>B</strong></p>
+            <p style="margin: 0.2em 0;"><strong>C</strong></p>
+            <p style="margin: 0.2em 0;"><strong>D</strong></p>
+            <p style="margin: 0.2em 0;"><strong>E</strong></p>
+            <p style="margin: 0.2em 0;"><strong>F</strong></p>
+        </div>
+        <div data-id="paras">
+            <p data-id="p4" style="margin: 0.2em 0; color: #4caf50;">Para 4</p>
+            <p data-id="p2" style="margin: 0.2em 0; color: #4caf50;">Para 2</p>
+            <p data-id="p3" style="margin: 0.2em 0; color: #4caf50;">Para 3</p>
+            <p data-id="p5" style="margin: 0.2em 0; color: #4caf50;">Para 5</p>
+            <p data-id="p7" style="margin: 0.2em 0; color: #4caf50;">Para 7</p>
+            <p data-id="p6" style="margin: 0.2em 0; color: #4caf50;">Para 6</p>
+            <p data-id="p1" style="margin: 0.2em 0; opacity: 0.4;">Para 1</p>
+            <p data-id="p8" style="margin: 0.2em 0; opacity: 0.4;">Para 8</p>
+        </div>
+    </div>
+</section>
+
+<!-- 16: Transition — Detail Reading -->
+<!-- PEDAGOGICAL INTENT: Student sees a red slide signalling a shift from global understanding to detailed comprehension -->
+<!-- WHY THIS FEATURE: Static — red background provides a clear phase transition -->
+<!-- COGNITIVE PRINCIPLE: Coherence — clearing working memory before switching to detailed reading -->
+<section id="slide-transition-detail" data-background="#c0392b">
+    <h2>Finding details</h2>
+</section>
+
+<!-- 15: Reading for Detail Task — Stage 5 -->
+<!-- PEDAGOGICAL INTENT: Student sees Y/N/NG task instructions with a timer -->
+<!-- WHY THIS FEATURE: Static + data-timer — instructions remain visible; timer paces the 8-item task -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — 8 statements split across two answer slides -->
+<section id="slide-detail-task" data-timer="720">
+    <h2>Close Reading (p.17)</h2>
+    <ul>
+        <li>Read the article again carefully.</li>
+        <li>Write <strong>Y</strong> (Yes), <strong>N</strong> (No), or <strong>NG</strong> (Not Given) for each statement.</li>
+        <li>Find the evidence in the text for your answers.</li>
+    </ul>
+    <aside class="notes">Stage 5 — Reading for Detail. 12 min. S, Ss-Ss. Complete Y/N/NG exercise (D Close reading, p.17). Compare in pairs. Class feedback with text evidence.</aside>
+</section>
+
+<!-- 16: D Answers — Y/N/NG (1-4) -->
+<!-- PEDAGOGICAL INTENT: Student sees each Y/N/NG answer slide in one at a time. Teacher reveals after students have found the evidence. -->
+<!-- WHY THIS FEATURE: Fragment fade-up on a-ans spans — teacher controls pace; checks understanding at each step -->
+<!-- COGNITIVE PRINCIPLE: Segmenting + Interactivity — per-item reveal with discussion at each step -->
+<section id="slide-detail-ans-1-4" data-background="#1e7e34">
+    <h2>Close Reading — Answers</h2>
+    <p class="aim-label">D Close reading, p.17 — Y/N/NG</p>
+    <div class="answer-list">
+        <div class="a-row"><span class="a-num">1.</span><span class="a-q">Social media is one of the main changes in modern society.</span><span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> <strong>Y</strong></span></div>
+        <div class="a-row"><span class="a-num">2.</span><span class="a-q">Hikikomori is just a Japanese problem.</span><span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> <strong>N</strong></span></div>
+        <div class="a-row"><span class="a-num">3.</span><span class="a-q">Teenagers are not addicted to social media.</span><span class="fragment fade-up a-ans"><strong>NG</strong></span></div>
+        <div class="a-row"><span class="a-num">4.</span><span class="a-q">Celebrity profiles show stars' real lives.</span><span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> <strong>N</strong></span></div>
+    </div>
+    <aside class="notes">Check one at a time. Ask: "Which paragraph has the evidence?" Read relevant sentences aloud.</aside>
+</section>
+
+<!-- 17: D Answers — Y/N/NG (5-8) -->
+<!-- PEDAGOGICAL INTENT: Student sees remaining Y/N/NG answers slide in -->
+<!-- WHY THIS FEATURE: Fragment fade-up — same pattern as slide 17 for consistency -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — continuation of per-item checking -->
+<section id="slide-detail-ans-5-8" data-background="#1e7e34">
+    <h2>Close Reading — Answers</h2>
+    <p class="aim-label">D Close reading, p.17 — Y/N/NG</p>
+    <div class="answer-list">
+        <div class="a-row"><span class="a-num">5.</span><span class="a-q">People post photos to get attention.</span><span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> <strong>Y</strong></span></div>
+        <div class="a-row"><span class="a-num">6.</span><span class="a-q">Social media does not affect other parts of our life.</span><span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> <strong>N</strong></span></div>
+        <div class="a-row"><span class="a-num">7.</span><span class="a-q">Social media has caused people to lose their jobs.</span><span class="fragment fade-up a-ans"><strong>NG</strong></span></div>
+        <div class="a-row"><span class="a-num">8.</span><span class="a-q">Technology has made us less able to wait.</span><span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> <strong>Y</strong></span></div>
+    </div>
+    <aside class="notes">NG means "the text doesn't say anything about this." For Q8, point to para 7.</aside>
+</section>
+
+<!-- 18: Transition — Discussion -->
+<!-- PEDAGOGICAL INTENT: Student sees a red slide signalling a shift from reading to discussion and reflection -->
+<!-- WHY THIS FEATURE: Static — red background clears reading content and signals a new interaction mode -->
+<!-- COGNITIVE PRINCIPLE: Coherence — removing text content before transitioning to speaking -->
+<section id="slide-transition-discuss" data-background="#c0392b">
+    <h2>Let's Discuss</h2>
+</section>
+
+<!-- 19: Post-reading Discussion — Stage 6 -->
+<!-- PEDAGOGICAL INTENT: Student sees two discussion prompts with a timer for group discussion -->
+<!-- WHY THIS FEATURE: Static + data-timer — prompts stay visible; timer keeps groups on pace -->
+<!-- COGNITIVE PRINCIPLE: Personalisation — concrete agree/disagree prompts accessible for B1 learners -->
+<section id="slide-discuss-task" data-timer="420">
+    <h2>Critical Thinking (p.17)</h2>
+    <p>Do you agree or disagree? Give your reasons.</p>
+    <ul>
+        <li>"Social media makes people feel anxious and depressed."</li>
+        <li>"Social media makes people want everything now."</li>
+    </ul>
+    <aside class="notes">Stage 6 — Discussion. 7 min. Ss-Ss. Groups discuss the two statements from E Critical thinking (p.17). Each group shares one key point. Encourage using article ideas.</aside>
+</section>
+
+<!-- 21: Summary — Stage 7 -->
+<!-- PEDAGOGICAL INTENT: Student sees "I can" checkmarks consolidating what was learned, matching slide 1 objectives -->
+<!-- WHY THIS FEATURE: Static — all outcomes visible for reflection; no reveal needed -->
+<!-- COGNITIVE PRINCIPLE: Pre-training (closing the loop) — returning to advance organiser reinforces learning -->
+<section id="slide-summary">
+    <h2>What you can do now</h2>
+    <ul>
+        <li><i class="fa-solid fa-check"></i> I can get the main idea of an article</li>
+        <li><i class="fa-solid fa-check"></i> I can find important facts in a text</li>
+        <li><i class="fa-solid fa-check"></i> I can share my ideas about what I read</li>
+    </ul>
+    <aside class="notes">Stage 7 — Wrap-up. 3 min. T-Ss. Ask: "What was the most interesting argument?" and "Does the author think social media is more positive or negative?"</aside>
+</section>
+
+<!-- 22: End -->
+<!-- PEDAGOGICAL INTENT: Student thanks and closes the lesson -->
+<!-- WHY THIS FEATURE: Static — simple closing slide signals session end -->
+<!-- COGNITIVE PRINCIPLE: none — procedural closing -->
+<section id="slide-end" data-background="#2c3e50">
+    <h2>Thank you</h2>
+    <p><em>Social Media and Society</em> | B1</p>
+</section>
+
+</div>
+        </div>
+
+        <!-- Mark.js (CDN) + mark plugin (local) -->
+        <!-- Timer plugin (local) -->
+        <script src="timer-plugin.js"></script>
+
+        <!-- Audio slideshow plugin (CDN) -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/audio-slideshow/plugin.js"></script>
+
+        <!-- reveal.js 5.1.0 via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                audio: {
+                    prefix: 'assets/',
+                    suffix: '.mp3',
+                    advance: -1,
+                    autoplay: false,
+                    defaultAudios: false,
+                    defaultDuration: 0,
+                    playerOpacity: 1.0,
+                    playerStyle: 'position: fixed; bottom: 30px; left: 25%; width: 50%; height:75px; z-index: 33;',
+                    startAtFragment: false,
+                },
+                plugins: [
+                    // WARNING: Every plugin here is loaded and initialized by reveal.js
+                    // at startup. If any plugin's init() function throws an error, the
+                    // entire presentation will show a BLANK PAGE. Always test new plugins
+                    // in a browser and check the console before committing to the template.
+                    // Third-party plugins that depend on external CDN libraries (like
+                    // mark.js) require special care — see SKILL.md for the plugin
+                    // testing protocol.
+                    TimerPlugin,
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                    RevealAudioSlideshow,
+                ],
+            });
+        </script>
+    </body>
+</html>

@@ -216,8 +216,13 @@ def render_typst(typ_path, output_path):
         return False
 
 
-def build_typ_content(data):
-    """Build .typ file content from lesson plan data. No Jinja2."""
+def build_typ_content(data, json_path=None):
+    """Build .typ file content from lesson plan data. No Jinja2.
+
+    If json_path is provided, relative paths in answer_key/transcript
+    fields are resolved against json_path.parent instead of the CWD.
+    """
+    base_dir = Path(json_path).parent if json_path else Path.cwd()
     lines = []
 
     # Page setup (no header — logo band is page-1 content only)
@@ -324,6 +329,8 @@ def build_typ_content(data):
     transcript = data.get("transcript", "")
     if transcript and transcript != "none":
         transcript_path = Path(transcript)
+        if not transcript_path.is_absolute():
+            transcript_path = (base_dir / transcript).resolve()
         if transcript_path.exists() and transcript_path.suffix == ".typ":
             try:
                 transcript_content = transcript_path.read_text(encoding="utf-8")
@@ -339,6 +346,8 @@ def build_typ_content(data):
     answer_key = data.get("answer_key", "")
     if answer_key and answer_key != "none":
         answer_key_path = Path(answer_key)
+        if not answer_key_path.is_absolute():
+            answer_key_path = (base_dir / answer_key).resolve()
         if answer_key_path.exists() and answer_key_path.suffix == ".typ":
             try:
                 ak_content = answer_key_path.read_text(encoding="utf-8")
@@ -506,7 +515,7 @@ def convert_json_to_pdf(json_path, output_dir=None):
 
     # Build .typ content
     try:
-        typ_content = build_typ_content(data)
+        typ_content = build_typ_content(data, json_path)
     except Exception as e:
         print(f"Error building Typst content: {e}")
         return False

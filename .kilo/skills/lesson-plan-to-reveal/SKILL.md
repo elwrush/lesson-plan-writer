@@ -13,6 +13,19 @@ Convert a lesson plan JSON into a reveal.js slideshow for ESL classroom delivery
 
 **Slide design authority**: `docs/slide-design-reference.md` defines all slide types, fragment policies, text limits, vocabulary rules, and auto-animate patterns.
 
+## ⚠ CRITICAL — No Outside Reference
+
+**Design new slides using ONLY these three sources, in this order of priority:**
+1. **This skill document** — the authoritative rules and patterns below
+2. **`templates/base-slides-template.html`** — the boilerplate, CSS, and Reveal.initialize() config
+3. **`docs/slide-design-reference.md`** — slide type definitions, fragment policy, text limits, backgrounds
+
+**NEVER read, copy, or consult any existing slideshow in `output/*/slides/` as a design reference.** Every existing slideshow was built by a different process, may use legacy patterns (e.g., `<table class="answer-table">`, `answer-correct`/`answer-incorrect`, broken CSS, missing ids), and is NOT a valid reference for new presentations.
+
+**If the user points to an existing slideshow as an example, do NOT replicate its HTML patterns.** Instead, tell the user the slideshow is legacy and may contain broken patterns. Design the new slides using only this skill document's patterns and the base template.
+
+**If you are tempted to run `read` on any file under `output/*/slides/` for design guidance, stop and read this skill instead.** The patterns you need are documented here.
+
 ## When to Use This Skill
 
 Use `lesson-plan-to-reveal` when converting a lesson plan JSON to slides. The skill:
@@ -54,6 +67,29 @@ cp "templates/ACT.png" "output/{subfolder}/slides/assets/logo.png"
 ```
 
 **Note:** The logo is available in `assets/logo.png` for potential use but is NOT displayed on the title slide. Title slides now use `r-stack` layout with a Pixabay image. See Step 3 for layout patterns.
+
+### ⚠ Step 2b: Inline style block for answer-list CSS (FIX BROKEN TEMPLATE)
+
+The base template has a CSS syntax error in `.cefr-badge` (missing closing `}`) that can break `.answer-list` and `.a-row` rules. Add this `<style>` block inside the slides, immediately after the vocab task slide or before the first answer slide:
+
+```html
+<style>
+    .reveal .answer-list { width: 100%; font-size: 0.85em; }
+    .reveal .a-row { display: flex; align-items: baseline; padding: 0.4em 0; border-bottom: 1px solid rgba(255,255,255,0.1); gap: 0.5em; }
+    .reveal .a-row:last-child { border-bottom: none; }
+    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: rgba(255,255,255,0.5); font-size: 0.85em; }
+    .reveal .a-q { flex: 0 0 auto; min-width: 0; margin-right: 0.5em; }
+    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; }
+    .reveal .a-ans.a-cor { color: #fff; }
+    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+    .reveal .a-ans.a-inc { color: #fff; }
+    .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
+    /* Override template's gray #888 aim-label — invisible on green #1e7e34 */
+    .reveal .aim-label { color: rgba(255,255,255,0.7); }
+</style>
+```
+
+**Do NOT skip this.** Without it, the answer-list flex layout may not render correctly due to the template CSS bug.
 
 ### Step 3: Layout and Backgrounds
 
@@ -138,6 +174,8 @@ For each stage in `lesson_plan.stages[]`:
 
 **Slide order**: Follow stage_number order from the JSON. Insert Title (slide 0) and Objective (slide 1) BEFORE stage 1. Insert End slide AFTER the last stage.
 
+**CRITICAL — Stable id attributes**: Every `<section>` MUST have a unique `id` attribute following the `slide-{kebab-name}` convention (e.g., `id="slide-title"`, `id="slide-lead-in"`, `id="slide-vocab-task"`, `id="slide-predict-entry"`). This prevents index confusion when slides are added or removed later. Locate by `id` via `scripts/locate_slide.py --id slide-name --html path/to/index.html`.
+
 **Speaker notes**: All slides EXCEPT transition slides and end slides must include `<aside class="notes">` containing:
 - Stage aim from the JSON (`stage_aim`)
 - Timing (`time` field in minutes)
@@ -160,7 +198,35 @@ For each stage in `lesson_plan.stages[]`:
 
 **Materials**: For any exercise referenced in the procedure by name (e.g., "Practice 2B", "Practice 7"), read the source PDF file from the `inputs/` folder to get the exercise text. Build screen content from the PDF, not from your own paraphrasing. The exercise must look exactly as it does in the textbook (same items, same numbering).
 
-**Answers**: For any exercise that has an answer in the answer key, read the answer key `.typ` file and build answer table slides. Use `class="fragment answer-correct"` for correct answers, `class="fragment answer-incorrect"` for incorrect answers.
+**Answers**: For any exercise that has an answer in the answer key, read the answer key `.typ` file and build answer slides using the **flex answer-list layout**, NOT `<table class="answer-table">`. Use `<div class="answer-list">` with flex rows:
+
+```
+<div class="answer-list">
+    <div class="a-row">
+        <span class="a-num">1.</span>
+        <span class="a-q">Statement text</span>
+        <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> Answer</span>
+    </div>
+</div>
+```
+
+- `a-cor` for correct answers (green background on reveal via CSS `.a-cor.visible`)
+- `a-inc` for incorrect answers (red background on reveal via CSS `.a-inc.visible`)
+- `fragment fade-up` animates each answer sliding up while fading in
+- `fa-check` / `fa-times` for check/cross icons (never raw Unicode U+2713/U+2717)
+
+**CRITICAL — CSS values for left-alignment.** These exact CSS values are required for the layout to read left-to-right naturally. Do NOT guess or change them:
+
+```
+.a-num { flex: 0 0 1.5em; text-align: left; }       ← MUST be left (not right)
+.a-q   { flex: 0 0 auto; min-width: 0; }             ← MUST take only needed width
+.a-ans { flex: 1 1 auto; min-width: 0; }             ← MUST fill remaining space, NOT min-width:160px
+```
+
+If `.a-num` is `text-align: right`, the number floats right and breaks the visual flow. If `.a-q` is `flex: 1 1 auto`, it fills all space and pins the answer to the far right. If `.a-ans` is `flex: 0 0 auto; min-width: 160px`, the answer hangs on the right with large gaps.
+
+
+**CRITICAL — Add the inline style block from Step 2b before any answer slide.** Without it, the flex layout breaks on green backgrounds because the template's CSS is corrupted by a missing `}` in `.cefr-badge`.
 
 ### Step 4B: Build slides (new build)
 
@@ -181,32 +247,7 @@ The `FEATURE CHECK` and `COGNITIVE PRINCIPLE` lines are mandatory. They force yo
 
 If you keep choosing the same 2-3 features, or cannot name a cognitive principle for a teaching slide, reconsider the design.
 
-**Underused features to consider:**
-
-| Feature | What it does | Pedagogical sweet spot |
-|---|---|---|
-| `data-line-numbers` on `<code>` | Highlights specific lines progressively, step by step | Grammar rule parts lighting up one at a time |
-| `data-mark` on any element | Yellow `<mark>` highlights via Mark.js (no monospace hack) | Key words in a reading passage |
-| `data-transition="zoom"` | Dramatic slide entrance | Phase changes, answer reveals, big moments |
-| `data-background-gradient` | Gradient backgrounds | Visual variety without images |
-| Vertical slides (nested `<section>`) | Sub-steps, optional content, fast-finisher extensions | Grammatical sub-rules, extra practice |
-| `data-audio-src` | Audio playback on slide entry | Listening tasks — plugin already loaded |
-| `data-autoslide` | Self-advancing timed advance | Speed-reading passages, timed grammar drills |
-| Lightbox (`data-preview-image`, `data-preview-video`) | Click-to-enlarge media | Textbook page close-ups, diagram details |
-| `class="r-fit-text"` | Auto-sizing text to fill slide | Single powerful word, key concept, grammar rule summary |
-| **Auto-animate: list matching** | `<li>` items match by content; new items slide in, removed items slide out | Building grammar rules one step at a time; vocabulary add/remove |
-| **Auto-animate: code blocks** | `<pre data-id="code"><code data-line-numbers>` — progressively build code/text across slides | Reading passages — show full text, highlight topic sentences per slide |
-| **Auto-animate: per-element settings** | `data-auto-animate-duration`, `data-auto-animate-easing` on individual elements | Make key word transform slower than surrounding content to draw attention |
-| **Custom CSS fragments** | `.fragment.blur { filter: blur(5px); }` — unlimited effects | Blur all words, focus one at a time with `current-fragment` |
-| **Nested fragments** | Sequential effects on same element (fade in → highlight → fade out) | Multi-step reveal of a single sentence: show → emphasize → remove |
-| **Directional fragments** | `fade-up`, `fade-down`, `fade-left`, `fade-right` | Draw student eye to specific location on slide |
-| **`highlight-current-*`** | Temporary color change, reverts on next click | Word emphasis without permanent color change — safe alternative to `highlight-*` |
-| **`fade-in-then-out` / `current-visible`** | Appears on click, disappears on next click | Temporary scaffolding — show hint, then it vanishes |
-| **`r-stack`** | Centers and layers elements on top of each other | Text over image without background-image/text-shield hack |
-| **`r-stretch`** | Resizes element to fill remaining vertical space | Image fills slide between title and caption |
-| **`r-frame`** | Subtle border, hover effect on links | Highlighting images as interactive/clickable |
-
-If you cannot pick a specific feature from this list AND justify why the others don't fit, you have not thought enough about the slide's design. Reconsider.
+**For the full feature lookup table with pedagogical sweet spots, see `docs/pedagogical-design-dictionary.md`.** If you cannot pick a specific feature from that list AND justify why the others don't fit, you have not thought enough about the slide's design. Reconsider.
 
 If you cannot write all three comments, you do not understand what the student needs to learn from this slide. Reconsider the design until you can.
 
@@ -220,40 +261,40 @@ Instead, use the **splice approach**:
    cp "templates/base-slides-template.html" "output/{subfolder}/slides/index.html"
    ```
 3. **Run a Python splice script** that finds the `<div class="slides">` boundary in the template and inserts the sections, then updates the `<title>`:
-   ```python
-   import re
-   template_path = r"output/{subfolder}/slides/index.html"
-   sections_path = r"C:\Users\elwru\AppData\Local\Temp\kilo\slides_sections.html"
-   
-   with open(template_path, "r", encoding="utf-8") as f:
-       template = f.read()
-   with open(sections_path, "r", encoding="utf-8") as f:
-       sections = f.read()
-   
-   # Find the slides div boundary
-   start_marker = '<div class="slides">'
-   start_idx = template.find(start_marker)
-   
-   # Find the closing </div> that ends the slides div
-   # Template structure: <div class="slides"> ... (comments/patterns) ... </div> (closes slides) </div> (closes reveal) <script> tags
-   # Search after the last HTML comment end
-   search_from = start_idx + len(start_marker)
-   last_comment = template.rfind("-->", search_from, start_idx + 2000)
-   end_idx = template.find("</div>", max(search_from, last_comment + 3))
-   
-   result = template[:start_idx + len(start_marker)] + "\n\n" + sections + "\n" + template[end_idx:]
-   result = result.replace("<!-- TOPIC -->", lesson_title)
-   
-   with open(template_path, "w", encoding="utf-8") as f:
-       f.write(result)
-   ```
+    ```python
+    import re
+    template_path = r"output/{subfolder}/slides/index.html"
+    sections_path = r"C:\Users\elwru\AppData\Local\Temp\kilo\slides_sections.html"
+    
+    with open(template_path, "r", encoding="utf-8") as f:
+        template = f.read()
+    with open(sections_path, "r", encoding="utf-8") as f:
+        sections = f.read()
+    
+    # Find the slides div boundary RELIABLY using the <!-- Mark.js anchor.
+    # DO NOT use template.find("</div>") — the sections themselves contain
+    # </div> inside answer-list flex rows, which causes silent truncation.
+    start_marker = '<div class="slides">'
+    start_idx = template.find(start_marker)
+    
+    # Anchor on <!-- Mark.js (unique in template) then rfind backwards
+    mark_js = template.find('<!-- Mark.js')
+    first_div = template.rfind('</div>', 0, mark_js)    # closes reveal div
+    second_div = template.rfind('</div>', 0, first_div)  # closes slides div
+    
+    result = template[:start_idx + len(start_marker)] + "\n\n" + sections + "\n" + template[second_div:]
+    result = result.replace("<!-- TOPIC -->", lesson_title)
+    
+    with open(template_path, "w", encoding="utf-8") as f:
+        f.write(result)
+    ```
 4. **Update the `<title>`** by replacing `<!-- TOPIC -->` with the lesson topic.
 5. Then verify the output (Step 5).
 
 **Why this works:**
 - The Write tool call writes to the allowed `C:\Users\elwru\AppData\Local\Temp\kilo\` directory (no permission issues)
 - Python handles UTF-8 cleanly (no BOM, no PowerShell encoding corruption)
-- The splice is deterministic — finds `<div class="slides">` and the first `</div>` after the last HTML comment
+- The splice is deterministic — finds `<div class="slides">` then anchors on `<!-- Mark.js` to locate the correct closing `</div>`. Never uses `template.find("</div>")` directly — the sections themselves contain `</div>` in answer-list flex rows (`<div class="a-row">...</div>`), and naive `</div>` search causes silent truncation to ~6 slides.
 - No size limit concerns — sections and template are written separately
 
 The boilerplate (everything before `<div class="slides">` and everything after the closing `</div>` of the slides div) is always the same. Only the `<section>` elements inside `<!-- SLIDE N -->` comments change per lesson.
@@ -295,12 +336,23 @@ if idx >= 0:
 
 **Checklist:**
 - **CRITICAL — Stage coverage check**: Count the number of `<section>` slides created (excluding Title + End). Verify this matches the number of `lesson_plan.stages[]` items. Each stage must have ≥ 1 corresponding `<section>` slide. If a stage has no slides, flag it immediately.
+- **CRITICAL — Section count integrity**: Use `<!-- Mark.js` anchor to extract the slides region, NOT `re.search(r'<div class="slides">(.*?)</div>')` (which stops at the first `</div>` inside answer-list rows). Use this pattern:
+  ```python
+  start = content.find('<div class="slides">')
+  mark_js = content.find('<!-- Mark.js')
+  first_div = content.rfind('</div>', 0, mark_js)
+  second_div = content.rfind('</div>', 0, first_div)
+  slides_content = content[start:second_div]
+  ```
+  Then count sections via `slides_content.count('</section>')` or `len(re.findall(r'<section[\s>]', slides_content))`. If the count is wrong, the splice script's boundary detection failed — check that it uses `<!-- Mark.js` anchor, not `template.find("</div>")`.
 - Check `index.html` exists in the slides directory
 - Check `timer-plugin.js` and `timer-plugin.css` exist in the slides directory
-- Verify title slide contains `<img src="assets/logo.png" class="title-logo" />`
+- Check every `<section>` has a stable `id` attribute (`id="slide-..."`) — extract via `re.findall(r'id="(slide-[^"]*)"', slides_content)` and confirm count matches section count.
 - Verify `TimerPlugin` is in the `plugins` array of `Reveal.initialize()`
-- Verify `answer-correct` / `answer-incorrect` are used for answer fragments (NOT `highlight-green`/`highlight-red`)
-- **Answer table sizing**: For every `<table class="answer-table">`, count the `<tr>` elements in `<tbody>`. Max 3 items per slide when a Why column is present (4-column tables). Max 5 for simple 3-column tables. Flag any table that exceeds the appropriate limit.
+- Verify answer slides use `a-cor`/`a-inc` (NOT `answer-correct`/`answer-incorrect`, NOT `highlight-green`/`highlight-red`)
+- Verify answer slides use `fragment fade-up` (not bare `fragment`) on answer spans
+- Verify answer slides use `<div class="answer-list">` flex layout, not `<table class="answer-table">`
+- **Answer list sizing**: Count item rows per answer-list. Max 5 items per answer slide. Flag any slide with >5.
 - Verify no instructional text like "Click to reveal" appears on slides — answer reveal behavior is self-evident.
 - Verify fragment usage: only on answer reveal slides and strategy demonstrations, not on expository content
 - Verify procedure text is in `<aside class="notes">`, not on screen
@@ -339,9 +391,9 @@ Write-Host "Slideshow URL written to $jsonPath : $url"
 ## Fragment Policy
 
 | Use fragments for | DO NOT use fragments for |
-|---|---|
-| Revealing answers (`answer-correct`) | Task instructions |
-| Highlighting wrong answers (`answer-incorrect`) | Vocabulary lists |
+|---|---|---|
+| Revealing answers (`a-cor`) | Task instructions |
+| Highlighting wrong answers (`a-inc`) | Vocabulary lists |
 | Strategy step reveals (on pedagogical slides) | Objectives/outcomes |
 | Eliminating wrong MC options (`strike`) | Discussion questions |
 | Key vocabulary emphasis (`grow`) | Lead-in images and prompts |
@@ -354,8 +406,8 @@ Fragment classes — available but constrained:
 | Class | Behavior | When to use |
 |---|---|---|
 | `fragment` (bare) | Hidden until click, fades in | Generic answer reveal |
-| `fragment answer-correct` | Hidden until click, green background on reveal | Correct answer rows |
-| `fragment answer-incorrect` | Hidden until click, red background on reveal | Incorrect answer rows |
+| `fragment fade-up a-ans a-cor` | Hidden until click, slides up + green background on reveal | Correct answer rows (preferred over answer-correct) |
+| `fragment fade-up a-ans a-inc` | Hidden until click, slides up + red background on reveal | Incorrect answer rows (preferred over answer-incorrect) |
 | `fragment strike` | Always visible, strikethrough on click | Eliminating wrong MC options |
 | `fragment grow` | Scales up on click | Emphasizing a single vocabulary word |
 | `fragment shrink` | Scales down on click | De-emphasizing a distractor |
@@ -395,33 +447,8 @@ Replace `visible` with `current-fragment` to blur all EXCEPT the current step:
 Before building any slide, you MUST answer these three questions for every student-facing element:
 
 1. **What must the student *see* happen?** The student needs to witness a visual transformation — a word changing color, an answer appearing, a wrong option being eliminated. Slides are not documents; they are moments of revealed understanding.
-2. **Which reveal.js feature achieves that?** Consult the **reveal.js Feature Lookup Table** in `docs/slide-design-reference.md` (also documented in AGENTS.md). The table maps every reveal.js feature to a specific pedagogical use case. Do not guess from training data.
-3. **Which cognitive principle does this serve?** Every design choice must be justified against established multimedia learning theory (Mayer, Sweller). If you cannot name the principle, the design may be cosmetic rather than pedagogical.
-
-### Cognitive Principles Reference — Mayer’s 12 Principles of Multimedia Learning
-
-reveal.js features are not just visual effects — they are direct implementations of empirically validated learning principles. Use this table to select the right feature for the right cognitive reason:
-
-| Cognitive Principle | What it says | reveal.js implementation |
-|---|---|---|
-| **Segmenting** | Break complex content into learner-paced segments | Fragments (any variant) — teacher controls reveal pace |
-| **Signaling** | Highlight essential material to guide attention | Auto-animate (color/underline transform), data-line-numbers, data-mark, highlight-current-* |
-| **Temporal Contiguity** | Present corresponding elements simultaneously | Auto-animate (matching data-id transitions happen together) |
-| **Spatial Contiguity** | Place corresponding text and images near each other | r-stack (text layered over image, not separated) |
-| **Modality** | Use narration + visuals rather than text + visuals | Audio-slideshow plugin (data-audio-src on sections) |
-| **Redundancy** | Avoid duplicating text and narration | Fragments reveal step by step, never all at once |
-| **Coherence** | Remove extraneous words, sounds, and pictures | Static orientation slides, transition slides (cognitive reset) |
-| **Personalization** | Use conversational style rather than formal | Direct "you" imperatives in B1 authorial voice rules |
-| **Multimedia** | Use words AND pictures rather than words alone | r-stack with image + text overlay |
-| **Pre-training** | Provide prerequisite knowledge first | Diagnostic test slides before teach slides (TTT structure) |
-| **Worked Example** | Guide through solved problems step by step | Auto-animate code blocks with data-line-numbers |
-| **Interactivity** | Allow learners to control the pace | Fragment click-through, teacher-paced reveals |
-
-**Sources:** Mayer, R.E. (2005). Cognitive Theory of Multimedia Learning. Cambridge University Press. Torgersen & Boe (2021), Frontiers in Psychology. Tugtekin & Odabasi (2022), Education and Information Tech.
-
-### Decision Framework
-
-```
+2. **Which reveal.js feature achieves that?** Consult the **Decision Framework** and **Feature Lookup Table** in `docs/pedagogical-design-dictionary.md`. The table maps every reveal.js feature to a specific pedagogical use case. Do not guess from training data.
+3. **Which cognitive principle does this serve?** Every design choice must be justified against established multimedia learning theory (Mayer, Sweller). See `docs/pedagogical-design-dictionary.md` for the complete Mayer's 12 Principles reference table and Decision Framework. If you cannot name the principle, the design may be cosmetic rather than pedagogical.
 What must the student see happen?
 │
 ├─ A word/part changes appearance (color, border, strikethrough)?
@@ -443,6 +470,15 @@ What must the student see happen?
 ├─ A wrong option gets visually eliminated?
 │   → FRAGMENT STRIKE (class="fragment strike")
 │   Example: Multiple choice — strike out eliminated answers
+│
+├─ Items on one side need to reposition to show correct matching?
+│   → AUTO-ANIMATE (matching data-id on sibling elements within a shared container)
+│   Example: Letters A–F on the left, paragraph numbers on the right. The right-side
+│   elements have data-id="p1"…"p8". On the reveal slide they reorder to match the
+│   correct letter → paragraph pairing. Auto-animate animates each item sliding to
+│   its new position. The transformation IS the answer — no fragments needed.
+│   Design rule: do NOT add instructional text ("Click to check", "Click to reveal").
+│   The visual rearrangement is self-evident. Unmatched items dim and sink to the bottom.
 │
 └─ A word needs temporary emphasis (grow, color)?
     → FRAGMENT GROW or FRAGMENT HIGHLIGHT-CURRENT-*
@@ -469,13 +505,10 @@ If you cannot write all three, you do not understand what the student needs to l
 
 ### Common Anti-Patterns (DO NOT DO)
 
-| Anti-pattern | Why it fails (cognitive basis) | Correct approach |
-|---|---|---|
-| Static text stating "X is the subject" | Tells instead of shows. Violates Signaling — no visual cue for essential material. | Auto-animate: word becomes yellow/underlined. Student watches the subject *emerge*. |
-| All content on one crowded slide | Cognitive overload. Violates Segmenting — too much info at once. | One concept per slide. Build up with auto-animate or sibling slides. |
-| Fragments on expository content | Unnecessary clicks create extraneous load (Sweller). No segmenting benefit. | Simple sibling slides or auto-animate for actual transformations. |
-| `highlight-green`/`highlight-red` | Forces `opacity: 1` — violates Coherence. Content visible from start, no signaling benefit. | Use `answer-correct`/`answer-incorrect` custom classes. |
-| Putting the answer in the slide title | Violates Worked Example / Interactivity — student reads answer before attempting task. | Answer appears on a separate slide after the task slide. |
+See `docs/pedagogical-design-dictionary.md` for the full anti-patterns table. Key ones to avoid:
+- `highlight-green`/`highlight-red` — use `a-cor`/`a-inc` with `fragment fade-up` instead
+- Putting the answer in the slide title — use a separate answer slide after the task slide
+- Instructional text like "Click to check" on auto-animate reveals — the visual transformation IS the answer, no instruction needed
 
 ## Slide Type Templates
 
@@ -506,7 +539,7 @@ Quick reference of slide types and their pedagogical intent:
 | Summary | default | "I can..." checkmarks | Static — consolidation |
 | End | `#2c3e50` | Topic + CEFR | Static — exit |
 
-**CRITICAL — Answer table sizing**: Max 3 items per slide when a Why column is present (4-column tables: # / Sentence / Answer / Why?). For simple 3-column tables without Why column, up to 5 items per slide. Use `data-fragment-index` matching on Answer and Why cells for per-row reveal (both columns reveal on the same click). Place fraction classes on `<span>` inside `<td>`, never on `<td>` itself.
+**CRITICAL — Answer list sizing**: Max 5 items per answer-list slide. If an exercise has more than 5 items, split across multiple answer-list slides. Use `data-fragment-index` for per-row reveal coordination if needed. Fragment classes go on `<span class="a-ans">`, never on the `<div class="a-row">` itself.
 
 ## Slide Indexing System
 
@@ -556,7 +589,19 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
 4. **Task slides: brief student instructions** — extract task description from procedure, skip teacher-only instructions. Max 3 task lines on screen.
 5. **Stage names: student-friendly language** — "Lead-in" → "Let's get Started", "Reading for gist" → "What's the main idea?", "Reading for detail" → "Finding details", "Reading for inference" → "Making conclusions", "Post-reading" → "Let's Discuss", "Wrap-up" → "Let's Review"
 6. **Vocabulary slides** — generated AFTER lead-in stage. One word per slide with dark navy background. "Important Words" title on first slide only. Yellow bold (#ffdd00) via `<span class="vocab-word">`.
-7. **Answer slides** — use `<table class="answer-table">` with green background `#1e7e34`. Statements visible on entry; answers use `class="fragment answer-correct"` or `class="fragment answer-incorrect"` for clickthrough reveal. **Do NOT use `highlight-green`/`highlight-red`** (reveal.js keeps them at `opacity: 1`; they never hide). **CRITICAL — Green slide text: only white `#fff` or yellow `#ffdd00` allowed.** Gray, blue, or any muted color is invisible at projection distance. Never use any other color on `#1e7e34` slides.
+7. **Answer slides** — use `<div class="answer-list">` flex layout (NOT `<table class="answer-table">`). Green background `#1e7e34`. Statements visible on entry. Structure each row as:
+    ```html
+    <div class="a-row">
+        <span class="a-num">#</span>
+        <span class="a-q">Statement text</span>
+        <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> Answer</span>
+    </div>
+    ```
+    - `a-cor` for correct answers, `a-inc` for incorrect (not `answer-correct`/`answer-incorrect`)
+    - `fragment fade-up` for animated reveal (not bare `fragment`)
+    - Font Awesome `fa-check`/`fa-times` for icons (never raw Unicode U+2713/U+2717)
+    - **Do NOT use `highlight-green`/`highlight-red`** (reveal.js keeps them at `opacity: 1`; they never hide)
+    - **CRITICAL — Green slide text: only white `#fff` or yellow `#ffdd00` allowed.** Gray, blue, or any muted color is invisible at projection distance. Never use any other color on `#1e7e34` slides.
 8. **Transition slides: heading only (no subheader text).** The red background + icon + heading is sufficient — the teacher's spoken introduction bridges the gap. Remove all `<p>` elements from transition slides.
 9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#1a6b5a` (pedagogical/strategy), green `#1e7e34` (answer tables), dark `#2c3e50` (end)
 10. **Title slide visuals**: Use `r-stack` layout with a themed Pixabay image. No logo on title slides. See Step 3 for layout patterns.
@@ -626,9 +671,9 @@ When the lesson targets B2 learners, relax the B1 rules as follows:
 
 ## reveal.js Feature Lookup
 
-See the authoritative Feature Lookup Table in `docs/slide-design-reference.md` and `AGENTS.md`. The table maps every reveal.js feature (auto-animate, fragments, code+line-numbers, mark.js, etc.) to specific pedagogical use cases, with decision flows.
+See the complete Decision Framework, Feature Lookup Table, Mayer's 12 Principles, and Common Anti-Patterns in `docs/pedagogical-design-dictionary.md`.
 
-**Key decision rule**: Auto-animate for *transformations* (color changes, border reveals, word replacement). Fragments for *reveals* (answers appearing, options being eliminated). Sibling slides for *discrete teaching moments* (each step is its own slide where the teacher pauses).
+**Key decision rule**: Auto-animate for transformations — color changes, border reveals, word replacement, and element repositioning (items reordering within a container to show correct matching). Fragments for reveals — answers appearing, options being eliminated. Sibling slides for discrete teaching moments — each step is its own slide where the teacher pauses.
 
 ## Pedagogical Strategy Slides
 
@@ -663,11 +708,37 @@ The ONLY reliable approach given Windows tooling constraints:
 
 **Do NOT:** Write large files (>300 lines) directly via Write tool to `output/` — may hit permission blocks. Use PowerShell `>`, `Out-File`, or `Set-Content` for files with Unicode — they add BOM or corrupt codepoints.
 
+### Answer-list CSS alignment traps
+
+The answer-list flex layout has three CSS properties that, if set incorrectly, break left-alignment. All three must be set correctly in the inline `<style>` block (Step 2b):
+
+| Element | Correct value | Wrong value | What breaks |
+|---------|--------------|-------------|-------------|
+| `.a-num` | `text-align: left` | `text-align: right` | Number pushes away from text |
+| `.a-q` | `flex: 0 0 auto` | `flex: 1 1 auto` | Question fills all space, answer pinned to far right |
+| `.a-ans` | `flex: 1 1 auto; min-width: 0` | `flex: 0 0 auto; min-width: 160px` | Answer pinned to far right with fixed width |
+
+**Rule of thumb:** The answer-list should read left-to-right naturally, like a sentence: `[1] [anxious →] [d — worried because...]`. If any column looks separated or floating on the right, check these three CSS values.
+
+**Also verify the inline `<style>` block is present** — if the template CSS bug (missing `}` in `.cefr-badge`) broke the cascade, the flex rules may not apply at all, causing the browser to fall back to default inline layout (which looks broken). Step 2b is mandatory, not optional.
+
+### Gray text on green `#1e7e34` answer slides
+
+The base template defines `.reveal .aim-label { color: #888; }`. Gray `#888` text is **invisible at projection distance** on `#1e7e34` green backgrounds. The skill rule allows only white `#fff` or yellow `#ffdd00` on green slides.
+
+The inline `<style>` block from Step 2b MUST include this override:
+```css
+.reveal .aim-label { color: rgba(255,255,255,0.7); }
+```
+
+Without it, every `class="aim-label"` on an answer slide renders as unreadable gray text. This applies to ALL text on green slides — not just `.aim-label`. If you add any other text elements (paragraphs, spans, etc.) on a `#1e7e34` slide, they must also use white or yellow. Gray, blue, or muted colors fail at projector brightness.
+
 ## Files
 
 | File | Purpose |
 |---|---|
 | `docs/slide-design-reference.md` | Slide design rules (authoritative) — consult before building |
+| `docs/pedagogical-design-dictionary.md` | Decision Framework, Feature Lookup Table, Mayer's 12 Principles, Anti-Patterns |
 | `templates/base-slides-template.html` | Base template for ALL new presentations |
 | `scripts/locate_slide.py` | Map reveal.js URL index to HTML section |
 | `scripts/pixabay_download.py` | Pixabay image downloader |

@@ -107,6 +107,28 @@ Key pitfalls:
 
 The `write-lesson-plan` skill enforces this — even if the user asks for `.md`, the agent must write `.typ` instead.
 
+### Answer Key Path Resolution
+
+**Always use an absolute file path for the `answer_key` field in the lesson plan JSON** (e.g., `"answer_key": "C:\\PROJECTS\\LESSON-PLAN-WRITER-3\\inputs\\{subfolder}\\answer_key.typ"`). Relative paths like `"answer_key": "answer_key.typ"` are resolved from the project root directory, NOT from the JSON file's directory, and will silently fail — the PDF will contain no answer key section.
+
+If relative paths are used, `json_to_pdf.py` now resolves them against the JSON file's parent directory (as of May 2026 fix), but for clarity and predictability, absolute paths are preferred.
+
+### Answer Key Typst Syntax — Common Errors
+
+Answer key `.typ` files contain `#table()` calls with column headers and data rows. The most common compile-error causes are:
+
+1. **`#` inside bold markup** — `[*#*]` is INVALID because `#` starts a code expression inside any content block `[...]`. Always write `[*\#*]` instead. This applies to all `table.header[*#*]` calls.
+
+2. **Missing curly braces in Unicode escapes** — the Typst `\\u{XXXX}` syntax (with curly braces) differs from Python/JavaScript `\\uXXXX`. Better yet, paste the actual Unicode character directly (em dash `—`, check `✓`, cross `✗`).
+
+3. **Bold spanning word boundaries** — `*M*y` fails because Typst bold syntax requires word boundaries. Use `#strong[M]y` for mid-word bold.
+
+**Checklist before writing any answer key `.typ` file:**
+- [ ] All `[*#*]` in table headers changed to `[*\#*]`
+- [ ] No markdown pipe tables (`| header |`) — use `#table()` only
+- [ ] Unicode characters pasted directly, not as escape sequences
+- [ ] Cross-check all three Typst Pitfall rules (#2 `#` escape, #1 mid-word bold, #6 Unicode escapes) in the section below
+
 ## Typst Pitfalls — Compile Errors and Fixes
 
 ### 1. Bold only works at word boundaries

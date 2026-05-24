@@ -1,0 +1,77 @@
+{
+  "teacher": "Ed Rush",
+  "duration": "46 minutes",
+  "date": "052426",
+  "topic": "Social media and society",
+  "objective": "By the end of the lesson, learners will have practiced and developed the sub-skills of reading for gist and specific information in the context of an article about social media and society.",
+  "materials": "- Skillful 2, Unit 1, pp 14-17",
+  "lesson_plan": {
+    "shape": "E",
+    "shape_name": "Receptive Skills (Traditional)",
+    "cefr_level": "B1",
+    "class": "M2-5A",
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage": "Lead-in",
+        "stage_aim": "To activate learners' interest in the theme of social media and its role in everyday life",
+        "procedure": "Write \"Social media: positive or negative?\" on the board. In pairs, students discuss how often they use social media and what they use it for. Elicit a few ideas and write key responses on the board. Introduce the lesson objective.",
+        "time": 4,
+        "interaction": "T-Ss, Ss-Ss"
+      },
+      {
+        "stage_number": 2,
+        "stage": "Vocabulary Preview",
+        "stage_aim": "To introduce and practise key vocabulary for discussing social media and online behaviour",
+        "procedure": "Students complete the vocabulary matching task (A Vocabulary preview, Ex 1, p.14), matching eight words and phrases (anxious, cruel, get attention, hurt, opinion, page, post, site) to their definitions. Check answers as a class. Students then complete A, Ex 2 (word choice) individually. Peer check, then class feedback.",
+        "time": 7,
+        "interaction": "S, Ss-Ss"
+      },
+      {
+        "stage_number": 3,
+        "stage": "Before Reading — Predicting",
+        "stage_aim": "To activate top-down processing and generate interest in the text content",
+        "procedure": "Students read the first sentence of the article (B Before you read, p.14) and predict the topics the text might cover. Discuss predictions in pairs, then share a few with the class.",
+        "time": 3,
+        "interaction": "Ss-Ss"
+      },
+      {
+        "stage_number": 4,
+        "stage": "Reading for Gist",
+        "stage_aim": "To get the general idea of the article and identify how arguments are signposted and mapped to paragraphs",
+        "procedure": "Students read the text quickly to check their predictions (C Global reading, Ex 1, p.17). They then re-read and highlight phrases that signal an argument or opinion (C, Ex 2), such as \"some people believe\" and \"many people argue.\" Finally, students match each argument A\u2013F to the correct paragraph (C, Ex 3). Quick class feedback.",
+        "time": 10,
+        "interaction": "S, Ss-Ss"
+      },
+      {
+        "stage_number": 5,
+        "stage": "Reading for Detail",
+        "stage_aim": "To identify specific information and distinguish between stated, contradicted, and unstated ideas",
+        "procedure": "Students read the article again more carefully. Working individually, they complete the Y/N/NG exercise (D Close reading, p.17), deciding whether each of the eight statements agrees with the text (Y), disagrees (N), or is not given (NG). Students compare answers in pairs, then class feedback with justification from the text.",
+        "time": 12,
+        "interaction": "S, Ss-Ss"
+      },
+      {
+        "stage_number": 6,
+        "stage": "Post-reading Discussion",
+        "stage_aim": "To express and justify personal opinions on ideas from the reading",
+        "procedure": "In groups of three, students discuss whether they agree or disagree with the two statements from E Critical thinking (p.17): \"Social media makes people feel anxious and depressed\" and \"Social media makes people want everything now.\" Each group shares one key point with the class.",
+        "time": 7,
+        "interaction": "Ss-Ss"
+      },
+      {
+        "stage_number": 7,
+        "stage": "Wrap-up",
+        "stage_aim": "To consolidate key takeaways from the reading and reflect on the lesson",
+        "procedure": "Ask the class: \"What was the most interesting argument from the article?\" and \"Does the author think social media is more positive or more negative?\" Elicit 3-4 responses. Briefly highlight useful vocabulary from the lesson.",
+        "time": 3,
+        "interaction": "T-Ss"
+      }
+    ]
+  },
+  "transcript": "none",
+  "answer_key": "C:\\PROJECTS\\LESSON-PLAN-WRITER-3\\output\\Reading-REX-03\\answer_key.typ",
+  "slideshow_url": "",
+  "cefr_level": "B1",
+  "class": "M2-5A"
+}
