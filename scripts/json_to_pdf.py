@@ -359,6 +359,22 @@ def build_typ_content(data, json_path=None):
             except Exception:
                 pass
 
+    # Notes section (pedagogical notes, book background, etc.)
+    notes = data.get("notes", "")
+    if notes:
+        lines.append("#pagebreak()")
+        lines.append("")
+        lines.append("= Notes")
+        lines.append("")
+        # Convert newlines in notes to Typst line breaks
+        for para in notes.split("\n"):
+            para = para.strip()
+            if para:
+                lines.append(f"#block(width: 100%)[{para}]")
+                lines.append("")
+                lines.append("#v(0.3em)")
+                lines.append("")
+
     return "\n".join(lines)
 
 
