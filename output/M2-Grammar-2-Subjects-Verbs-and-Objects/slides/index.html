@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Subjects, Verbs, and Objects</title>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            /* =============================================
+               LESSON PLAN WRITER 3 — BASE SLIDE STYLES
+               Authoritative stylesheet for all presentations.
+               ============================================= */
+
+            /* --- CEFR Badges --- */
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                padding: 4px 12px;
+                border-radius: 4px;
+
+            .reveal .a-badge {
+                display: inline-block;
+                padding: 0.1em 0.5em;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 0.85em;
+                min-width: 1.8em;
+                text-align: center;
+            }
+            .reveal .a-badge.a-cor {
+                background: rgba(76, 175, 80, 0.4);
+                color: #fff;
+            }
+            .reveal .a-badge.a-inc {
+                background: rgba(244, 67, 54, 0.4);
+                color: #fff;
+            }
+
+                font-size: 0.4em;
+                vertical-align: middle;
+                margin-left: 10px;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+
+
+            /* --- Answer flex layout (replaces answer-table) --- */
+            .reveal .answer-list {
+                width: 100%;
+                font-size: 0.85em;
+            }
+            .reveal .a-row {
+                display: flex;
+                align-items: baseline;
+                padding: 0.4em 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                gap: 0.5em;
+            }
+            .reveal .a-row:last-child { border-bottom: none; }
+            .reveal .a-num {
+                flex: 0 0 1.5em;
+                text-align: right;
+                color: rgba(255,255,255,0.5);
+                font-size: 0.85em;
+            }
+            .reveal .a-q {
+                flex: 0 1 auto;
+                min-width: 0;
+                margin-right: 1em;
+            }
+            .reveal .a-ans {
+                flex: 0 0 auto;
+                min-width: 180px;
+                text-align: left;
+                padding: 0.1em 0.3em;
+                border-radius: 4px;
+            }
+            .reveal .a-ans.a-cor {
+                color: #fff;
+            }
+            .reveal .a-ans.a-cor.visible {
+                background: rgba(76, 175, 80, 0.3);
+            }
+            .reveal .a-ans.a-inc {
+                color: #fff;
+            }
+            .reveal .a-ans.a-inc.visible {
+                background: rgba(244, 67, 54, 0.3);
+            }
+
+            /* --- Labels & captions --- */
+            .reveal .aim-label {
+                font-size: 0.7em;
+                color: #888;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            .reveal .material-ref {
+                font-size: 0.65em;
+                color: #888;
+                font-style: italic;
+                margin-top: 0.5em;
+            }
+            .reveal .source-cite {
+                font-size: 0.7em;
+                color: #666;
+                font-style: italic;
+                margin-top: 0.3em;
+            }
+            .reveal .image-caption {
+                font-size: 0.55em;
+                color: #888;
+                text-align: center;
+                margin-top: 0.2em;
+            }
+
+            /* --- Vocabulary slides --- */
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            }
+
+            /* --- Pedagogical strategy slides (teal background) --- */
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal section.pedagogical .strategy-tip {
+                font-size: 0.85em;
+                font-style: italic;
+                color: rgba(255,255,255,0.85);
+                margin-bottom: 0.5em;
+            }
+            .reveal section.pedagogical .evidence {
+                font-size: 0.8em;
+                background: rgba(0,0,0,0.3);
+                padding: 0.4em 0.6em;
+                border-radius: 4px;
+                border-left: 3px solid rgba(255,255,255,0.4);
+            }
+
+            /* --- Global text shadow for readability --- */
+            .reveal p,
+            .reveal li,
+            .reveal h1, .reveal h2, .reveal h3,
+            .reveal h4, .reveal h5, .reveal h6 {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+
+            /* --- Text shield for full-opacity image backgrounds --- */
+            /* Uses display:inline-block + max-width for subtitle-style shielding.
+               inline-block keeps the background tight to the text.
+               max-width prevents full-width bars on very long text.
+               Elements stack naturally (block-level spacing) without ::after artifacts. */
+            .reveal .text-shield {
+                background: rgba(0, 0, 0, 0.55);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                line-height: 1.6;
+            }
+            .reveal .text-shield-light {
+                background: rgba(200, 200, 200, 0.65);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                color: #222;
+                line-height: 1.6;
+            }
+            /* Fragment variant: text already visible, background highlight on click */
+            .reveal .fragment.text-shield-light { opacity: 1; visibility: inherit; }
+            .reveal .fragment.text-shield-light.visible { background: rgba(200, 200, 200, 0.65); padding: 0.15em 0.6em; border-radius: 4px; }
+
+            /* --- Fragment styles --- */
+            /* --- Yellow text for answers on green answer tables --- */
+            .reveal .answer-yellow { color: #ffdd00; }
+            .reveal .fragment.answer-yellow.visible { color: #ffdd00; }
+
+            .reveal .fragment.highlight-green {
+                background: rgba(0, 100, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.highlight-red {
+                background: rgba(100, 0, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-correct.visible {
+                background: rgba(0, 120, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-incorrect.visible {
+                background: rgba(120, 0, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal table.answer-table th {
+                background: rgba(0, 0, 0, 0.2);
+                font-weight: bold;
+            }
+            .reveal .fragment.strike {
+                text-decoration: line-through;
+                opacity: 0.6;
+            }
+
+            /* --- YouTube iframe container (16:9 responsive) --- */
+            .reveal .iframe-container {
+                position: relative;
+                width: 90%;
+                padding-bottom: 50.625%;
+                height: 0;
+                overflow: hidden;
+                margin: 0 auto 0.5em;
+            }
+            .reveal .iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* --- Diagnostic talk structure slides (pedagogical, teal) --- */
+            .reveal .structure-talk h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal .structure-talk p,
+            .reveal .structure-talk li  { color: #fff; }
+            .reveal .structure-talk .structure-step {
+                font-size: 1.1em;
+                margin-bottom: 0.6em;
+            }
+            .reveal .structure-talk .transition-words {
+                font-size: 0.9em;
+                color: #ffdd00;
+                font-style: italic;
+                margin-top: 0.8em;
+                padding: 0.4em 0.6em;
+                background: rgba(0,0,0,0.2);
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+<!-- ================================================================ -->
+<!-- SLIDE 0: Title                                                  -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees the lesson title at the top with a photograph of children below it — two distinct visual zones, no overlap. -->
+<!-- WHY THIS FEATURE: r-stretch on the <img> makes it fill remaining space below the title text. The dark background unifies the slide. Unlike r-stack (which uses CSS grid to force overlap), this is a natural top-to-bottom flow. -->
+<!-- COGNITIVE PRINCIPLE: Spatial Contiguity + Multimedia — related text and image appear on the same slide without overlapping, so learners can process both without split attention. -->
+<section id="slide-title" data-background="#1a1a2e">
+    <img src="assets/logo.png" style="height: 78px; margin-bottom: 0.3em;" />
+    <h1 style="font-size: 1.6em;">Subjects, Verbs, and Objects <span class="cefr-badge B1" style="font-size: 0.5em;">B1</span></h1>
+    <p style="font-size: 0.7em; margin-bottom: 0.3em;"><em>What's inside a sentence</em></p>
+    <img class="r-stretch" src="assets/pixabay_1420830_1.jpg" style="object-fit: contain; border-radius: 6px;" />
+    <aside class="notes">
+        Lesson: Subjects, Verbs, and Objects (46 min)
+        This is M2 Grammar 2 — the second grammar lesson for M2. The previous grammar lesson (Grammar 1) covered what a sentence is and capitalization rules.
+        This lesson goes deeper: subjects, verbs, objects — what's inside a sentence.
+        Today's practice: Practices 3, 4, and 5 from the coursebook (pp 13-17).
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 1: Objective                                              -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees three clear, simple outcomes they will achieve by the end of the lesson. -->
+<!-- WHY THIS FEATURE: Static list — full visibility from the start. No fragments needed; students should see all outcomes at once for advance organizers. -->
+<!-- COGNITIVE PRINCIPLE: Pre-training + Segmenting — stating outcomes upfront helps learners organize their mental model of the lesson. -->
+<section id="slide-objective">
+    <h2>What you'll be able to do</h2>
+    <ul>
+        <li>I can find subjects, verbs, and objects in sentences</li>
+        <li>I can fix sentences that are missing subjects or verbs</li>
+        <li>I can find where sentences begin and end</li>
+    </ul>
+    <p><em>These skills help you write better sentences for your PET writing test!</em></p>
+    <aside class="notes">
+        Elicit what was covered in the previous grammar lesson. Ask: "What three things must a sentence have?"
+        (subject + verb + complete thought). "What was the exception?" (command sentences).
+        Connect: "Today we look deeper — what's a subject? What's a verb? What's an object?"
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 2: Transition — Let's Review                              -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Red background signals a shift from objective-setting to active review. The teacher's spoken introduction bridges the gap. -->
+<!-- WHY THIS FEATURE: Static red background — transition slides signal a phase change. No fragments, no animation; the teacher speaks. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the red background is a visual signal that the lesson is moving to a new phase (review → new content). -->
+<section id="slide-transition-review" data-background="#c0392b">
+    <h2>There's more inside a sentence</h2>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 3a: Lead-in — SVO Review (entry, plain sentence)          -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees a plain sentence. No annotations visible yet. The next click triggers auto-animate: labels, underlines, and a box appear around each sentence part, transforming the plain text into an annotated grammar demonstration. -->
+<!-- WHY THIS FEATURE: Auto-animate transitions the sentence from plain (transparent borders, invisible superscripts) to annotated (colored underlines, box, visible S/V/O labels). This is a pure CSS-property animation between two adjacent sections with matching data-id attributes. Fragments cannot produce this effect — they only reveal/hide, not transform. -->
+<!-- COGNITIVE PRINCIPLE: Signaling + Temporal Contiguity — the annotations appear simultaneously as the teacher names each part, connecting the label to the word at the exact moment of instruction. -->
+<section id="slide-lead-in-entry" data-auto-animate data-auto-animate-id="svo-lead-in" data-background="#1a1a2e">
+    <h2 data-id="title">What's inside a sentence?</h2>
+    <p style="font-size: 1.3em; margin-top: 1em;">
+        <span data-id="subject" style="border-bottom: 2px solid transparent;">
+            <sup style="color: transparent; font-size: 0.5em;">S </sup>My roommate
+        </span>
+        <span data-id="verb" style="border-bottom: 2px solid transparent;">
+            <sup style="color: transparent; font-size: 0.5em;">V </sup>lost
+        </span>
+        <span data-id="object" style="border: 2px solid transparent;">
+            <sup style="color: transparent; font-size: 0.5em;">O </sup>his keys
+        </span>
+    </p>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 3b: Lead-in — SVO Review (annotated)                      -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student now sees the fully annotated sentence — subject underlined in blue with S label, verb double-underlined in orange with V label, object boxed in green with O label. The transformation from the plain slide just completed via auto-animate. -->
+<!-- WHY THIS FEATURE: Auto-animate target slide — all annotations visible. The labels, underlines, and box appeared smoothly from the plain state. Subsequent fragments consolidate the sentence definition. -->
+<!-- COGNITIVE PRINCIPLE: Signaling + Spatial Contiguity — each annotation touches its word directly, reducing split attention. Fragments on the definition question use Segmenting (step-by-step reveal). -->
+<section id="slide-lead-in-annotated" data-auto-animate data-auto-animate-id="svo-lead-in" data-background="#1a1a2e">
+    <h2 data-id="title">What's inside a sentence?</h2>
+    <p style="font-size: 1.3em; margin-top: 1em;">
+        <span data-id="subject" style="border-bottom: 3px solid #4fc3f7;">
+            <sup style="color: #4fc3f7; font-size: 0.5em;">S </sup>My roommate
+        </span>
+        <span data-id="verb" style="border-bottom: 3px solid #ff8a65; box-shadow: 0 5px 0 0 #ff8a65;">
+            <sup style="color: #ff8a65; font-size: 0.5em;">V </sup>lost
+        </span>
+        <span data-id="object" style="border: 2px solid #aed581; padding: 0 4px; border-radius: 4px;">
+            <sup style="color: #aed581; font-size: 0.5em;">O </sup>his keys
+        </span>
+    </p>
+    <p style="font-size: 0.85em; margin-top: 0.3em; color: #ccc;">
+        <span style="color: #4fc3f7;"><strong>Subject</strong></span>
+        &nbsp;&middot;&nbsp;
+        <span style="color: #ff8a65;"><strong>Verb</strong></span>
+        &nbsp;&middot;&nbsp;
+        <span style="color: #aed581;"><strong>Object</strong></span>
+    </p>
+    <p style="font-size: 0.85em; margin-top: 1.2em; color: #ccc;">
+        <em>Who?</em> — my roommate &nbsp;&nbsp; <em>Action?</em> — lost &nbsp;&nbsp; <em>What?</em> — his keys
+    </p>
+    <p style="font-size: 0.8em; margin-top: 0.8em;">
+        <span class="fragment" data-fragment-index="1">What three things must every sentence have?</span>
+        <span class="fragment" data-fragment-index="2" style="color: #ffdd00;"> Subject + Verb + Complete Thought </span>
+    </p>
+    <aside class="notes">
+        Stage 1 &middot; Lead-in &middot; 5 min &middot; T-Ss
+        Aim: To activate recall of the sentence definition from the previous grammar lesson and introduce S/V/O.
+        Procedure:
+        - Quick quiz: "What three things must a complete sentence have?" Elicit answers.
+        - Display model sentence "My roommate lost his keys."
+        - Point to each underlined part: subject (who?), verb (action?), object (what?).
+        - Explain: linking verbs (be, become, look, feel, seem, smell, sound, taste) do NOT have objects.
+        - Preview: today we practice finding S/V/O so we can write better sentences.
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 4: Practice 3 — Task                                      -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees clear task instructions AND the timer. The instructions name the annotation system (one line, two lines, circle). -->
+<!-- WHY THIS FEATURE: Static — no animation needed. Full visibility of instructions and timer reduces cognitive load during task execution. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — separating the task instruction from the answer gives students time to process the task without distraction. -->
+<section id="slide-p3-task" data-background="#1a1a2e" data-timer="300">
+    <h2>Find Subjects, Verbs, and Objects</h2>
+    <p>Open your book to <strong>Practice 3</strong> on page 14.</p>
+    <ul>
+        <li>Underline the <strong style="color: #4fc3f7;">subject</strong> with <u>one line</u></li>
+        <li>Underline the <strong style="color: #ff8a65;">verb</strong> with <u>two lines</u></li>
+        <li>Circle the <strong style="color: #aed581;">object</strong></li>
+    </ul>
+    <p style="font-size: 0.8em; margin-top: 0.8em;">Write <strong>S</strong>, <strong>V</strong>, or <strong>O</strong> above each word.</p>
+    <p style="font-size: 0.75em; margin-top: 0.4em; color: #999;">Remember: linking verbs (be, become, look, feel, seem, smell, sound, taste) have <strong>no object</strong>.</p>
+    <p class="material-ref">First Steps in Academic Writing, Practice 3 (p. 14)</p>
+    <aside class="notes">
+        Stage 2 &middot; Controlled Practice &middot; 12 min &middot; S, Ss-Ss, T-Ss
+        Aim: To give learners structured practice identifying subjects, verbs, and objects.
+        Procedure:
+        - Demo item 1 together first.
+        - Ss work individually (5 min).
+        - Pair check (3 min).
+        - Whole-class feedback: display answers. Discuss items with linking verbs (1, 5).
+        - Items 7 (no object) and 9 (compound subject).
+    </aside>
+</section>
+
+<style>
+    .reveal .answer-list { width: 100%; font-size: 0.85em; }
+    .reveal .a-row { display: flex; align-items: baseline; padding: 0.4em 0; border-bottom: 1px solid rgba(255,255,255,0.1); gap: 0.5em; }
+    .reveal .a-row:last-child { border-bottom: none; }
+    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: rgba(255,255,255,0.5); font-size: 0.85em; }
+    .reveal .a-q { flex: 0 0 auto; min-width: 0; margin-right: 0.5em; }
+    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; }
+    .reveal .a-ans.a-cor { color: #fff; }
+    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+    .reveal .a-ans.a-inc { color: #fff; }
+    .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
+    .reveal .aim-label { color: rgba(255,255,255,0.7); }
+    /* S/V/O custom fragment decorations — custom prevents opacity:0, only border/color animates */
+    .reveal .fragment.custom.svo-s { border-bottom: 2px solid transparent; }
+    .reveal .fragment.custom.svo-s.visible { border-bottom: 2px solid #4fc3f7; }
+    .reveal .fragment.custom.svo-s sup { opacity: 0; transition: opacity 0.2s ease, color 0.2s ease; }
+    .reveal .fragment.custom.svo-s.visible sup { opacity: 1; color: #4fc3f7; }
+    .reveal .fragment.custom.svo-v { border-bottom: 2px solid transparent; }
+    .reveal .fragment.custom.svo-v.visible { border-bottom: 2px solid #ff8a65; box-shadow: 0 5px 0 0 #ff8a65; }
+    .reveal .fragment.custom.svo-v sup { opacity: 0; transition: opacity 0.2s ease, color 0.2s ease; }
+    .reveal .fragment.custom.svo-v.visible sup { opacity: 1; color: #ff8a65; }
+    .reveal .fragment.custom.svo-o { border: 1.5px solid transparent; padding: 0 3px; border-radius: 3px; }
+    .reveal .fragment.custom.svo-o.visible { border: 1.5px solid #aed581; }
+    .reveal .fragment.custom.svo-o sup { opacity: 0; transition: opacity 0.2s ease, color 0.2s ease; }
+    .reveal .fragment.custom.svo-o.visible sup { opacity: 1; color: #aed581; }
+</style>
+
+<!-- ================================================================ -->
+<!-- SLIDE 5: Practice 3 — Answers 1-3                               -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student enters the slide seeing plain unadorned sentences. On each click, one sentence gains its S/V/O decorations (blue underline + S, orange underline + V, green box + O) plus a confirmation note. -->
+<!-- WHY THIS FEATURE: Custom fragments (`fragment custom svo-*`) prevent the default opacity:0 hiding — the word text stays fully visible. Only the border/label color changes on click via `.visible` CSS rules. data-fragment-index groups each sentence's decorations so they reveal together. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — each sentence reveals its annotation one at a time, letting the teacher pause at each item. Signaling — the colored decorations draw attention to each grammatical role. -->
+<section id="slide-p3-answers-1-3" data-background="#1e7e34">
+    <h2>Practice 3 — Answers (1–3)</h2>
+    <p class="aim-label">Subjects, Verbs, and Objects</p>
+    <div style="font-size: 0.95em; line-height: 2.5; text-align: left; width: 100%;">
+        <p><strong>1.</strong> <span class="fragment custom svo-s" data-fragment-index="1"><sup style="font-size:0.65em;">S </sup>My youngest brother</span> <span class="fragment custom svo-v" data-fragment-index="1"><sup style="font-size:0.65em;">V </sup>is</span> in high school. <span class="fragment fade-up" style="color:#fff;font-size:0.85em;" data-fragment-index="1"><i class="fa-solid fa-check"></i> Linking verb — no object</span></p>
+        <p><strong>2.</strong> <span class="fragment custom svo-s" data-fragment-index="2"><sup style="font-size:0.65em;">S </sup>He</span> <span class="fragment custom svo-v" data-fragment-index="2"><sup style="font-size:0.65em;">V </sup>watches</span> <span class="fragment custom svo-o" data-fragment-index="2"><sup style="font-size:0.65em;">O </sup>TV</span> and <span class="fragment custom svo-v" data-fragment-index="2"><sup style="font-size:0.65em;">V </sup>does</span> <span class="fragment custom svo-o" data-fragment-index="2"><sup style="font-size:0.65em;">O </sup>homework</span>. <span class="fragment fade-up" style="color:#fff;font-size:0.85em;" data-fragment-index="2"><i class="fa-solid fa-check"></i> Two verbs, two objects</span></p>
+        <p><strong>3.</strong> <span class="fragment custom svo-s" data-fragment-index="3"><sup style="font-size:0.65em;">S </sup>He</span> <span class="fragment custom svo-v" data-fragment-index="3"><sup style="font-size:0.65em;">V </sup>works</span> at a shopping mall. <span class="fragment fade-up" style="color:#fff;font-size:0.85em;" data-fragment-index="3"><i class="fa-solid fa-check"></i> Prepositional phrase — no object</span></p>
+    </div>
+    <aside class="notes">
+        Item 1: linking verb "is" — no object.
+        Item 2: two verbs, two objects (watches TV, does homework).
+        Item 3: "at a shopping mall" is a prepositional phrase, not an object.
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 6: Practice 3 — Answers 4-6                               -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees items 4-6 unadorned. On each click, one sentence gains annotations — revealing two clauses (item 4), linking verb (item 5), action verb with object (item 6). -->
+<!-- WHY THIS FEATURE: Same custom fragment pattern — text stays visible, decorations animate in via CSS on .visible. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — one sentence per click. Signaling — colored decorations distinguish roles. -->
+<section id="slide-p3-answers-4-6" data-background="#1e7e34">
+    <h2>Practice 3 — Answers (4–6)</h2>
+    <p class="aim-label">Subjects, Verbs, and Objects</p>
+    <div style="font-size: 0.95em; line-height: 2.5; text-align: left; width: 100%;">
+        <p><strong>4.</strong> <span class="fragment custom svo-s" data-fragment-index="1"><sup style="font-size:0.65em;">S </sup>He</span> <span class="fragment custom svo-v" data-fragment-index="1"><sup style="font-size:0.65em;">V </sup>likes</span> <span class="fragment custom svo-o" data-fragment-index="1"><sup style="font-size:0.65em;">O </sup>his job</span> but <span class="fragment custom svo-v" data-fragment-index="1"><sup style="font-size:0.65em;">V </sup>doesn't like</span> <span class="fragment custom svo-o" data-fragment-index="1"><sup style="font-size:0.65em;">O </sup>his boss</span>. <span class="fragment fade-up" style="color:#fff;font-size:0.85em;" data-fragment-index="1"><i class="fa-solid fa-check"></i> Two clauses — two objects</span></p>
+        <p><strong>5.</strong> <span class="fragment custom svo-s" data-fragment-index="2"><sup style="font-size:0.65em;">S </sup>His job</span> <span class="fragment custom svo-v" data-fragment-index="2"><sup style="font-size:0.65em;">V </sup>is</span> easy and <span class="fragment custom svo-v" data-fragment-index="2"><sup style="font-size:0.65em;">V </sup>pays</span> well. <span class="fragment fade-up" style="color:#fff;font-size:0.85em;" data-fragment-index="2"><i class="fa-solid fa-check"></i> Linking verb "is" + "pays" — no object</span></p>
+        <p><strong>6.</strong> This semester, <span class="fragment custom svo-s" data-fragment-index="3"><sup style="font-size:0.65em;">S </sup>he</span> <span class="fragment custom svo-v" data-fragment-index="3"><sup style="font-size:0.65em;">V </sup>is taking</span> <span class="fragment custom svo-o" data-fragment-index="3"><sup style="font-size:0.65em;">O </sup>extra classes</span>. <span class="fragment fade-up" style="color:#fff;font-size:0.85em;" data-fragment-index="3"><i class="fa-solid fa-check"></i> Action verb — has object</span></p>
+    </div>
+    <aside class="notes">
+        Item 5: "is" is linking verb, "pays" has no object here.
+        Item 6: "is taking" is an action verb (present continuous), NOT a linking verb. Has object "extra classes".
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 7: Practice 3 — Answers 7-9                               -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees items 7-9 unadorned. On click, phrasal verb (item 7), shared object (item 8), compound subject (item 9) appear. -->
+<!-- WHY THIS FEATURE: Same custom fragment pattern. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — one per click. -->
+<section id="slide-p3-answers-7-9" data-background="#1e7e34">
+    <h2>Practice 3 — Answers (7–9)</h2>
+    <p class="aim-label">Subjects, Verbs, and Objects</p>
+    <div style="font-size: 0.95em; line-height: 2.5; text-align: left; width: 100%;">
+        <p><strong>7.</strong> <span class="fragment custom svo-s" data-fragment-index="1"><sup style="font-size:0.65em;">S </sup>He</span> <span class="fragment custom svo-v" data-fragment-index="1"><sup style="font-size:0.65em;">V </sup>will go</span> to college next year. <span class="fragment fade-up" style="color:#fff;font-size:0.85em;" data-fragment-index="1"><i class="fa-solid fa-check"></i> Phrasal verb — no object</span></p>
+        <p><strong>8.</strong> <span class="fragment custom svo-s" data-fragment-index="2"><sup style="font-size:0.65em;">S </sup>He</span> <span class="fragment custom svo-v" data-fragment-index="2"><sup style="font-size:0.65em;">V </sup>speaks</span> and <span class="fragment custom svo-v" data-fragment-index="2"><sup style="font-size:0.65em;">V </sup>understands</span> <span class="fragment custom svo-o" data-fragment-index="2"><sup style="font-size:0.65em;">O </sup>English</span> very well. <span class="fragment fade-up" style="color:#fff;font-size:0.85em;" data-fragment-index="2"><i class="fa-solid fa-check"></i> Two verbs share one object</span></p>
+        <p><strong>9.</strong> On weekends, <span class="fragment custom svo-s" data-fragment-index="3"><sup style="font-size:0.65em;">S </sup>he and his friends</span> <span class="fragment custom svo-v" data-fragment-index="3"><sup style="font-size:0.65em;">V </sup>play</span> <span class="fragment custom svo-o" data-fragment-index="3"><sup style="font-size:0.65em;">O </sup>soccer</span>. <span class="fragment fade-up" style="color:#fff;font-size:0.85em;" data-fragment-index="3"><i class="fa-solid fa-check"></i> Compound subject</span></p>
+    </div>
+    <aside class="notes">
+        Item 7: "go to" is a phrasal verb — no object.
+        Item 8: two verbs share one object (speaks English, understands English).
+        Item 9: compound subject "he and his friends".
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 8: Practice 3 — Answer 10                                 -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees item 10 unadorned. One click reveals S/V/O decorations. Clean end to the set. -->
+<!-- WHY THIS FEATURE: Same custom fragment pattern. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — single item, single click. -->
+<section id="slide-p3-answers-10" data-background="#1e7e34">
+    <h2>Practice 3 — Answer (10)</h2>
+    <p class="aim-label">Subjects, Verbs, and Objects</p>
+    <div style="font-size: 0.95em; line-height: 2.5; text-align: left; width: 100%;">
+        <p><strong>10.</strong> <span class="fragment custom svo-s" data-fragment-index="1"><sup style="font-size:0.65em;">S </sup>He</span> <span class="fragment custom svo-v" data-fragment-index="1"><sup style="font-size:0.65em;">V </sup>doesn't have</span> <span class="fragment custom svo-o" data-fragment-index="1"><sup style="font-size:0.65em;">O </sup>a girlfriend</span> yet. <span class="fragment fade-up" style="color:#fff;font-size:0.85em;" data-fragment-index="1"><i class="fa-solid fa-check"></i> Subject · Verb · Object</span></p>
+    </div>
+    <aside class="notes">
+        Item 10: straightforward — subject "He", verb "doesn't have", object "a girlfriend".
+        Ask: "Any questions about Practice 3 before we move on?"
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 9: Practice 4 — Task                                      -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees the full "Larry's Bad Habit" paragraph on screen while the teacher reads it aloud. The task instruction is clear: add missing subjects or verbs. -->
+<!-- WHY THIS FEATURE: Static — the paragraph is displayed in full so students can read along while the teacher explains. The timer is set for 5 minutes. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — a dedicated task slide for Practice 4 separates instruction from the answer reveal, giving students time to work. -->
+<section id="slide-p4-task" data-background="#1a1a2e" data-timer="300">
+    <h2>Find the Missing Word</h2>
+    <p>Open your book to <strong>Practice 4</strong> on page 15.</p>
+    <p style="font-size: 0.7em; text-align: left; margin-top: 0.5em;">
+        Read the paragraph. Some sentences are missing a subject or a verb.<br>
+        Add the missing words. There may be more than one possible answer.
+    </p>
+    <div style="font-size: 0.65em; text-align: left; background: rgba(0,0,0,0.3); padding: 0.8em; border-radius: 6px; margin-top: 0.5em; line-height: 1.5;">
+        <p><strong>Larry's Bad Habit</strong></p>
+        <p>1My friend Larry has a bad habit. 2He never on time to anything. 3Arrives ten minutes late everywhere. 4Larry always an excuse. 5"I missed the bus." 6"My alarm clock didn't ring." 7"My watch stopped." 8"My mother telephoned me just as I was leaving." 9He uses each excuse at least twice a week. 10I know them all. 11Whenever Larry rushes in — ten minutes late, of course — and starts to say, "Sorry I'm late, but I..." or "Sorry I'm late, but my..." or "Sorry I'm late, but my mother...", I can finish the sentence for him. 12Larry's bad habit not a problem for me any longer. 13If the movie at 7:00, I tell Larry it starts at 6:45. 14Then he early!</p>
+    </div>
+    <p class="material-ref">First Steps in Academic Writing, Practice 4 (p. 15)</p>
+    <aside class="notes">
+        Stage 3 &middot; Semi-Controlled Practice &middot; 12 min &middot; S, Ss-Ss, T-Ss
+        Aim: To give guided practice identifying and completing sentences missing subjects or verbs.
+        Procedure:
+        - Ss work individually: read the paragraph, add missing subjects or verbs (5 min).
+        - Remind Ss: look for word groups that feel incomplete. Ask "Who?" or "What action?"
+        - Pair check (3 min).
+        - Display corrected paragraph. Discuss alternative answers (e.g., sentence 3: "He" vs "Larry").
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 10: Practice 4 — Answers 1-3                              -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees the first 3 items. Item 1 is correct; items 2-3 have missing words. -->
+<!-- WHY THIS FEATURE: Fragment fade-up on a-ans — consistent pattern. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — fade-up draws eye to the correction while the original sentence remains in view. -->
+<section id="slide-p4-answers-1-3" data-background="#1e7e34">
+    <h2>Practice 4 — Answers (1–3)</h2>
+    <p class="aim-label">Larry's Bad Habit</p>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">1.</span>
+            <span class="a-q">My friend Larry has a bad habit.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> Correct</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">2.</span>
+            <span class="a-q">He ___ never on time to anything.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> He <strong>is</strong> never on time — <em>missing verb</em></span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">3.</span>
+            <span class="a-q">___ arrives ten minutes late everywhere.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> <strong>He</strong> arrives — <em>missing subject</em></span>
+        </div>
+    </div>
+    <aside class="notes">
+        Item 1: correct as written.
+        Item 2: missing verb "is" (linking verb).
+        Item 3: missing subject "He". Could also accept "Larry".
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 11: Practice 4 — Answers 4-6                              -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees items 4-6. Item 4 has a missing verb; items 5-6 are correct (dialogue quotes). -->
+<!-- WHY THIS FEATURE: Fragment fade-up — consistent pattern. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the check marks confirm students' judgments. -->
+<section id="slide-p4-answers-4-6" data-background="#1e7e34">
+    <h2>Practice 4 — Answers (4–6)</h2>
+    <p class="aim-label">Larry's Bad Habit</p>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">4.</span>
+            <span class="a-q">Larry ___ always an excuse.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> Larry <strong>has</strong> always an excuse — <em>missing verb</em></span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">5.</span>
+            <span class="a-q">"I missed the bus."</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> Correct</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">6.</span>
+            <span class="a-q">"My alarm clock didn't ring."</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> Correct</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Item 4: missing verb "has". Could also accept "gives" or "makes".
+        Items 5-6: correct — Larry's excuses are complete sentences.
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 12: Practice 4 — Answers 7-9                              -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees items 7-9, all correct. These are more of Larry's excuses, reinforcing that dialogue quotes are usually complete sentences. -->
+<!-- WHY THIS FEATURE: Fragment fade-up — consistent pattern. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — consistent reveal. -->
+<section id="slide-p4-answers-7-9" data-background="#1e7e34">
+    <h2>Practice 4 — Answers (7–9)</h2>
+    <p class="aim-label">Larry's Bad Habit</p>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">7.</span>
+            <span class="a-q">"My watch stopped."</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> Correct</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">8.</span>
+            <span class="a-q">"My mother telephoned me just as I was leaving."</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> Correct</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">9.</span>
+            <span class="a-q">He uses each excuse at least twice a week.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> Correct</span>
+        </div>
+    </div>
+    <aside class="notes">
+        All three are correct. Point out that the direct quotes (items 5-8) are all complete sentences — each has a subject + verb + complete thought.
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 13: Practice 4 — Answers 10-12                            -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees items 10-12. Item 10 is correct; items 11-12 are correct/long sentence; item 12 has a missing verb. -->
+<!-- WHY THIS FEATURE: Fragment fade-up — consistent pattern. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the pattern of "Correct" followed by a correction keeps students engaged. -->
+<section id="slide-p4-answers-10-12" data-background="#1e7e34">
+    <h2>Practice 4 — Answers (10–12)</h2>
+    <p class="aim-label">Larry's Bad Habit</p>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">10.</span>
+            <span class="a-q">I know them all.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> Correct</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">11.</span>
+            <span class="a-q">Whenever Larry rushes in... I can finish the sentence.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> Correct</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">12.</span>
+            <span class="a-q">Larry's bad habit ___ not a problem for me any longer.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> habit <strong>is</strong> not a problem — <em>missing verb</em></span>
+        </div>
+    </div>
+    <aside class="notes">
+        Items 10-11: correct.
+        Item 12: missing verb "is". Could also accept "has become".
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 14: Practice 4 — Answers 13-14                            -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees the final 2 items, both missing the linking verb "is". This repetition reinforces the pattern. -->
+<!-- WHY THIS FEATURE: Fragment fade-up — consistent pattern. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — repetition of the same correction pattern solidifies learning. -->
+<section id="slide-p4-answers-13-14" data-background="#1e7e34">
+    <h2>Practice 4 — Answers (13–14)</h2>
+    <p class="aim-label">Larry's Bad Habit</p>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">13.</span>
+            <span class="a-q">If the movie ___ at 7:00, I tell Larry it starts at 6:45.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> movie <strong>is</strong> at 7:00 — <em>missing verb</em></span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">14.</span>
+            <span class="a-q">Then he ___ early!</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> he <strong>is</strong> early — <em>missing verb</em></span>
+        </div>
+    </div>
+    <aside class="notes">
+        Items 13-14: both missing the linking verb "is".
+        Ask: "What kind of verb were all three missing items (12, 13, 14)?" (linking verb "is").
+        Notice the pattern: linking verbs are often dropped in informal speech.
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 15: Practice 5 — Task                                     -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees the "My Neighbors" paragraph without punctuation. The task: find sentence boundaries and add periods + capitals. -->
+<!-- WHY THIS FEATURE: Static — the unpunctuated paragraph is displayed for students to study. The timer is set for 6 minutes. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — a dedicated task slide separates the active practice stage from the answer reveal. -->
+<section id="slide-p5-task" data-background="#1a1a2e" data-timer="360">
+    <h2>Punctuate It!</h2>
+    <p>Open your book to <strong>Practice 5</strong> on page 15.</p>
+    <p style="font-size: 0.75em; margin-top: 0.3em;">
+        There are <strong>14 sentences</strong>. Add a period at the end of each sentence<br>
+        and change the first letter of each new sentence to a capital.
+    </p>
+    <p style="font-size: 0.7em; margin-top: 0.3em; color: #ffdd00;">
+        Use the capitalization rules from the previous grammar lesson.
+    </p>
+    <div style="font-size: 0.65em; text-align: left; background: rgba(0,0,0,0.3); padding: 0.8em; border-radius: 6px; margin-top: 0.5em; line-height: 1.5;">
+        <p><strong>My Neighbors</strong></p>
+        <p>a young couple from India lives next door to me the husband's name is Ajay the wife's name is Anjuli everyone calls her Anju they have a young son and are expecting their second child in a few weeks they hope to have a girl this time both Ajay and Anju have good jobs he is an executive in a computer company she is a computer programmer and works in our local hospital Anju is a wonderful cook she cooks mostly Indian food they sometimes invite neighbors on weekends for a potluck meal we all bring something to share it is fun to live next door to Ajay and Anju</p>
+    </div>
+    <p class="material-ref">First Steps in Academic Writing, Practice 5 (p. 15)</p>
+    <aside class="notes">
+        Stage 4 &middot; Freer Practice &middot; 14 min &middot; S, Ss-Ss, T-Ss
+        Aim: To give learners extended practice applying both sentence-boundary recognition and capitalization rules.
+        Procedure:
+        - Ss work individually: read the paragraph, find where 14 sentences begin and end (6 min).
+        - Remind Ss: use the 6 capitalization rules from the previous grammar lesson (first word, pronoun I, names, nationalities, places).
+        - Pair check (4 min).
+        - Display corrected paragraph as continuous text with capitals highlighted.
+        - Discuss tricky spots: "Anju" already capitalized, "a young couple" vs "The husband" etc.
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 16: Practice 5 — Answers 1-3                              -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees each corrected sentence appear. Capital letters that were added are shown in yellow for visual contrast. -->
+<!-- WHY THIS FEATURE: Fragment fade-up on a-ans — the correction (added capital) reveals on click. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — yellow highlighting on added capitals draws attention to the correction point. -->
+<section id="slide-p5-answers-1-3" data-background="#1e7e34">
+    <h2>Practice 5 — Answers (1–3)</h2>
+    <p class="aim-label">My Neighbors</p>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">1.</span>
+            <span class="a-q"><strong style="color:#ffdd00;">A</strong> young couple from India lives next door to me.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> R1</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">2.</span>
+            <span class="a-q"><strong style="color:#ffdd00;">T</strong>he husband's name is Ajay.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> R1</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">3.</span>
+            <span class="a-q"><strong style="color:#ffdd00;">T</strong>he wife's name is Anjuli.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> R1</span>
+        </div>
+    </div>
+    <p style="font-size: 0.65em; margin-top: 0.8em; color: rgba(255,255,255,0.7);">R1 = capitalize first word of each sentence</p>
+    <aside class="notes">
+        All 3 needed R1. Note: "India" already capitalized (R4 — place name).
+        "Ajay" and "Anjuli" already capitalized (R3 — people's names).
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 17: Practice 5 — Answers 4-6                              -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees items 4-6 with added capitals. -->
+<!-- WHY THIS FEATURE: Fragment fade-up — consistent pattern. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — consistent reveal. -->
+<section id="slide-p5-answers-4-6" data-background="#1e7e34">
+    <h2>Practice 5 — Answers (4–6)</h2>
+    <p class="aim-label">My Neighbors</p>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">4.</span>
+            <span class="a-q"><strong style="color:#ffdd00;">E</strong>veryone calls her Anju.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> R1</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">5.</span>
+            <span class="a-q"><strong style="color:#ffdd00;">T</strong>hey have a young son and are expecting their second child.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> R1</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">6.</span>
+            <span class="a-q"><strong style="color:#ffdd00;">T</strong>hey hope to have a girl this time.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> R1</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Items 4-6: all needed R1. "Anju" is a name (R3) — correctly capitalized in the original.
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 18: Practice 5 — Answers 7-9                              -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees items 7-9. Item 9 "She" needs a capital; "Anju" was already capitalized. -->
+<!-- WHY THIS FEATURE: Fragment fade-up — consistent pattern. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — consistent reveal. -->
+<section id="slide-p5-answers-7-9" data-background="#1e7e34">
+    <h2>Practice 5 — Answers (7–9)</h2>
+    <p class="aim-label">My Neighbors</p>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">7.</span>
+            <span class="a-q"><strong style="color:#ffdd00;">B</strong>oth Ajay and Anju have good jobs.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> R1</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">8.</span>
+            <span class="a-q"><strong style="color:#ffdd00;">H</strong>e is an executive in a computer company.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> R1</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">9.</span>
+            <span class="a-q"><strong style="color:#ffdd00;">S</strong>he is a computer programmer and works in our local hospital.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> R1</span>
+        </div>
+    </div>
+    <aside class="notes">
+        All 3 needed R1. "Ajay" and "Anju" are names (R3) — already capitalized.
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 19: Practice 5 — Answers 10-12                            -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees items 10-12. Item 10 "Anju" was already capitalized — the one exception. Items 11-12 need R1. -->
+<!-- WHY THIS FEATURE: Fragment fade-up — consistent pattern. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — item 10 with no yellow highlight visually reinforces it was already correct. -->
+<section id="slide-p5-answers-10-12" data-background="#1e7e34">
+    <h2>Practice 5 — Answers (10–12)</h2>
+    <p class="aim-label">My Neighbors</p>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">10.</span>
+            <span class="a-q">Anju is a wonderful cook.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> Already correct — name (R3)</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">11.</span>
+            <span class="a-q"><strong style="color:#ffdd00;">S</strong>he cooks mostly Indian food.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> R1</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">12.</span>
+            <span class="a-q"><strong style="color:#ffdd00;">T</strong>hey sometimes invite neighbors on weekends for a potluck meal.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> R1</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Item 10: "Anju" was already capitalized — no change needed because it's a name (R3).
+        This is the only sentence in the paragraph that didn't need a capital added.
+        Items 11-12: both needed R1.
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 20: Practice 5 — Answers 13-14                            -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees the final 2 corrected sentences. Both needed R1 (first word capitalized). -->
+<!-- WHY THIS FEATURE: Fragment fade-up — consistent pattern. -->
+<!-- COGNITIVE PRINCIPLE: Coherence — ending with a clean final pair signals the exercise is complete. -->
+<section id="slide-p5-answers-13-14" data-background="#1e7e34">
+    <h2>Practice 5 — Answers (13–14)</h2>
+    <p class="aim-label">My Neighbors</p>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">13.</span>
+            <span class="a-q"><strong style="color:#ffdd00;">W</strong>e all bring something to share.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> R1</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">14.</span>
+            <span class="a-q"><strong style="color:#ffdd00;">I</strong>t is fun to live next door to Ajay and Anju.</span>
+            <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> R1</span>
+        </div>
+    </div>
+    <p style="font-size: 0.65em; margin-top: 0.8em; color: rgba(255,255,255,0.7);">R1 = capitalize first word &middot; 13 of 14 sentences needed R1 &middot; Sentence 10 was already correct</p>
+    <aside class="notes">
+        Items 13-14: both needed R1.
+        Summary: 13 of 14 sentences needed a capital added (R1). Only sentence 10 ("Anju is a wonderful cook") was already correct.
+        Ask: "Which rule did most of these corrections use?" (R1 — first word of a sentence).
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 21: Summary                                               -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Student sees three "I can" checkmarks that consolidate the lesson's learning outcomes. -->
+<!-- WHY THIS FEATURE: Static — all outcomes visible at once. No animation needed for consolidation. -->
+<!-- COGNITIVE PRINCIPLE: Coherence — removing extraneous content and presenting only the core outcomes supports retention. -->
+<section id="slide-summary">
+    <h2>What you can do now</h2>
+    <ul>
+        <li><i class="fa-solid fa-check" style="color:#4caf50;"></i> I can find subjects, verbs, and objects in sentences</li>
+        <li><i class="fa-solid fa-check" style="color:#4caf50;"></i> I can fix sentences that are missing subjects or verbs</li>
+        <li><i class="fa-solid fa-check" style="color:#4caf50;"></i> I can find where sentences begin and end</li>
+    </ul>
+    <p style="margin-top: 1em;"><em>These skills help you write clearer sentences for your PET writing test!</em></p>
+    <aside class="notes">
+        Stage 5 &middot; Wrap-up &middot; 3 min &middot; T-Ss
+        Aim: To consolidate SVO concepts and connect progress back to the PET writing criteria.
+        Procedure:
+        - Quick-fire review: "What does S stand for? V? O?" "What kind of verbs don't have objects?" (linking verbs)
+        - Return to the PET Writing scale: "Now you can write complete sentences, use capitals, AND identify S/V/O. Which Organization and Language bands are you reaching now?"
+        - Preview next topic: "Next time — describing your classmate!"
+    </aside>
+</section>
+
+<!-- ================================================================ -->
+<!-- SLIDE 22: End                                                   -->
+<!-- ================================================================ -->
+<!-- PEDAGOGICAL INTENT: Exit slide — signals lesson end. No annotation needed for exit. -->
+<!-- WHY THIS FEATURE: Static — exit slide. No animation needed. -->
+<!-- COGNITIVE PRINCIPLE: None — this is an exit signal. -->
+<section id="slide-end" data-background="#2c3e50">
+    <h2>Thank you</h2>
+    <p><em>Subjects, Verbs, and Objects</em> | B1</p>
+</section>
+
+</div>
+        </div>
+
+        <!-- Mark.js (CDN) + mark plugin (local) -->
+        <!-- Timer plugin (local) -->
+        <script src="timer-plugin.js"></script>
+
+        <!-- Audio slideshow plugin (CDN) -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/audio-slideshow/plugin.js"></script>
+
+        <!-- reveal.js 5.1.0 via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                audio: {
+                    prefix: 'assets/',
+                    suffix: '.mp3',
+                    advance: -1,
+                    autoplay: false,
+                    defaultAudios: false,
+                    defaultDuration: 0,
+                    playerOpacity: 1.0,
+                    playerStyle: 'position: fixed; bottom: 30px; left: 25%; width: 50%; height:75px; z-index: 33;',
+                    startAtFragment: false,
+                },
+                plugins: [
+                    // WARNING: Every plugin here is loaded and initialized by reveal.js
+                    // at startup. If any plugin's init() function throws an error, the
+                    // entire presentation will show a BLANK PAGE. Always test new plugins
+                    // in a browser and check the console before committing to the template.
+                    // Third-party plugins that depend on external CDN libraries (like
+                    // mark.js) require special care — see SKILL.md for the plugin
+                    // testing protocol.
+                    TimerPlugin,
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                    RevealAudioSlideshow,
+                ],
+            });
+        </script>
+    </body>
+</html>

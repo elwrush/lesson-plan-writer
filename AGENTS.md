@@ -197,7 +197,12 @@ SLIDESHOW FLOW — index2.html
 - **Answer tables**: `<table class="answer-table">` with 3 columns (Statement/Answer/Why?). Add `wrap` class for tables with long text. Right column uses `white-space: normal`
 - **Table tick/cross**: middle column with `data-fragment-index` matching explanation cell for simultaneous reveal
 - **Lightbulb removed** from all answer slides (saves screen real estate)
+- **Green answer slide text contrast**: All text on `#1e7e34` answer slides MUST use only white (`#fff`) or yellow (`#ffdd00`). No gray, blue, or muted colors — they are invisible at projection distance. The template's `.aim-label` uses gray `#888` by default and must be overridden with `color: rgba(255,255,255,0.7)` on green slides.
 - **Pedagogical background**: `data-background="#1a6b5a"` + `class="pedagogical"` + `data-background-transition="none"`
+- **Max 3 items per answer slide** — whether using answer-list flex layout or inline annotations. Split exercises with >3 items across multiple slides.
+- **Inline S/V/O annotations** — for grammar identification exercises (subjects, verbs, objects), decorate words directly on the sentence rather than using a separate answer column. Use `class="fragment custom svo-s"`, `svo-v`, `svo-o` on `<span>` elements with CSS controlling border/color changes on `.visible`. Superscript labels (`<sup>S</sup>`, `<sup>V</sup>`, `<sup>O</sup>`) use `opacity: 0` → `opacity: 1` with CSS transitions. Use `data-fragment-index` to group each sentence's decorations and confirmation note for per-click reveal.
+- **Custom fragments** — use `class="fragment custom"` when you need an element to stay fully visible but change specific CSS properties (border, color, opacity) on click. The `custom` keyword prevents reveal.js from applying default `opacity: 0; visibility: hidden`. All styling is controlled via CSS rules on `.fragment.custom.*` (default state) and `.fragment.custom.*.visible` (revealed state). Common use: annotations that animate in without hiding the underlying text.
+- **Title slide layout** — ACT logo centered at top with `height: 78px`, lesson title below at reduced font size so it fits on one line, strap subheader, then `r-stretch` Pixabay image filling remaining space. B1 badge in title area. No `data-background-image` — use natural document flow.
 
 ## Pedagogical Strategy Slides — Design Principles
 
@@ -269,6 +274,51 @@ Requirements:
 - Slide 2 uses `white` border color - auto-animate animates the color transition during slide advance
 - The previous slide (e.g. Step 1) should NOT have `data-auto-animate` — this prevents unwanted animation between unrelated slides
 - Use `data-background-transition="none"` to keep background from animating (teacher controls pacing)
+
+### Auto-Animate for S/V/O Annotation Demonstration
+
+For grammar lead-in slides where you want to demonstrate subjects (S), verbs (V), and objects (O) on a single sentence, use the same two-slide auto-animate pattern but with THREE simultaneous annotations:
+
+- **Subject**: `border-bottom: 2px solid #4fc3f7` (blue single underline) + `<sup style="opacity:0">S </sup>` → `opacity:1; color:#4fc3f7`
+- **Verb**: `border-bottom: 2px solid #ff8a65` (orange) + `box-shadow: 0 5px 0 0 #ff8a65` (visual double underline) + `<sup>V </sup>`
+- **Object**: `border: 2px solid #aed581` (green box) + `<sup>O </sup>`
+
+Pattern:
+
+```html
+<!-- Slide 1 (entry): plain sentence, transparent annotations -->
+<section data-auto-animate data-auto-animate-id="svo-demo" data-background="#1a1a2e">
+    <h2 data-id="title">What's inside a sentence?</h2>
+    <p>
+        <span data-id="subject" style="border-bottom: 2px solid transparent;">
+            <sup style="opacity:0;">S </sup>My roommate
+        </span>
+        <span data-id="verb" style="border-bottom: 2px solid transparent;">
+            <sup style="opacity:0;">V </sup>lost
+        </span>
+        <span data-id="object" style="border: 2px solid transparent;">
+            <sup style="opacity:0;">O </sup>his keys
+        </span>
+    </p>
+</section>
+<!-- Slide 2 (annotated): decorations appear via auto-animate CSS transition -->
+<section data-auto-animate data-auto-animate-id="svo-demo" data-background="#1a1a2e">
+    <h2 data-id="title">What's inside a sentence?</h2>
+    <p>
+        <span data-id="subject" style="border-bottom: 2px solid #4fc3f7;">
+            <sup style="color:#4fc3f7;">S </sup>My roommate
+        </span>
+        <span data-id="verb" style="border-bottom: 2px solid #ff8a65; box-shadow: 0 5px 0 0 #ff8a65;">
+            <sup style="color:#ff8a65;">V </sup>lost
+        </span>
+        <span data-id="object" style="border: 2px solid #aed581; padding: 0 4px; border-radius: 4px;">
+            <sup style="color:#aed581;">O </sup>his keys
+        </span>
+    </p>
+</section>
+```
+
+This is used for the **lead-in demonstration only** (one sentence). For multi-item practice exercises, use the inline S/V/O annotation with custom fragments (see Key Design Rules) instead — auto-animate would require 2 slides per item, which is impractical.
 
 ### Vertical Alignment Fix
 

@@ -26,7 +26,7 @@ The base template is at `templates/base-slides-template.html` — copy it to `ou
 5. **Pedagogical slides** — strategy/teaching content uses teal background (`data-background="#1a6b5a"`, `class="pedagogical"`) with white text
 6. **Visual-first** — lead-in slides use Pixabay image (or solid `#1a1a2e` for grammar/L1 error analysis)
 7. **Prediction before task** — students guess before doing, confirm with answer reveal
-8. **Answer slides = answer + why + source** (all 3 parts); grammar answer tables use # / Original / Correction or multi-column S/V/O
+8. **Answer slides = answer + why + source** (all 3 parts); **max 3 items per answer slide** — split exercises with >3 items across multiple slides. For grammar S/V/O exercises, use inline annotations (custom fragments) on the sentence itself instead of a separate answer column.
 9. **Vocabulary pre-teach** — slides AFTER lead-in stage, one word per slide on dark background
 10. **Section transitions** between stages — heading only, red background (`#c0392b`), no descriptive paragraphs
 11. **Text highlighting** — all slides use text-shadow for readability; pedagogical slides use white-on-teal; vocabulary words use yellow boldface (`#ffdd00`)
@@ -109,6 +109,9 @@ Fragment styles allowed:
 | `grow` | Emphasize key vocabulary word (single word only) |
 | `highlight-blue` | Grammar point / part of speech labeling |
 | `fade-in` | Smooth reveal of one image element |
+| `custom` | Change specific CSS properties on click (border, color, opacity) without hiding underlying text. Define `.fragment.custom.*` (default) and `.fragment.custom.*.visible` (revealed) CSS rules. |
+
+**Important:** `fragment custom` prevents reveal.js from applying `opacity: 0; visibility: hidden`, so the element text stays fully visible at all times. Only the CSS properties you define in your `.visible` rules change on click. This is the correct approach whenever you need to transform an element's appearance (e.g., adding an underline, changing border color) without concealing its content.
 
 ---
 
@@ -159,14 +162,19 @@ These are the ONLY allowed patterns. Agents must not invent alternatives. All sl
 
 ### 1. Title Slide
 ```html
-<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="1.0">
-    <img src="assets/logo.png" class="title-logo" alt="Logo" />
-    <h1 class="text-shield">{{ topic }} <span class="cefr-badge {{ cefr_level }}">{{ cefr_level }}</span></h1>
-    <p class="text-shield"><em>{{ strap_subheader }}</em></p>
+<section data-background="#1a1a2e">
+    <img src="assets/logo.png" style="height: 78px; margin-bottom: 0.3em;" />
+    <h1 style="font-size: 1.6em;">{{ topic }} <span class="cefr-badge {{ cefr_level }}">{{ cefr_level }}</span></h1>
+    <p><em>{{ strap_subheader }}</em></p>
+    <img class="r-stretch" src="assets/pixabay_XXXXXXX_1.jpg" style="object-fit: contain; border-radius: 6px;" />
 </section>
 ```
 
-CEFR badge colors: A1=green, A2=light green, B1=blue, B2=dark blue, C1=purple, C2=red
+- Logo centered at top, `height: 78px`, full opacity
+- Title font reduced (`1.6em`) to fit on one line with CEFR badge
+- Pixabay photo via `r-stretch` fills remaining space below text — no overlap
+- No `data-background-image` — the `<img>` is a normal element in document flow
+- CEFR badge colors: A1=green, A2=light green, B1=blue, B2=dark blue, C1=purple, C2=red
 
 ### 2. Objective Slide (all visible at once)
 ```html
@@ -287,6 +295,7 @@ Brief task: 1-3 short bullet points. Full procedure in speaker notes. Material r
 
 Rules:
 - Green background `#1e7e34` for all answer slides
+- **Max 3 items per answer slide** — split exercises with >3 items across multiple slides
 - Statements visible at slide entry; answer column is a fragment revealed on click
 - Use `answer-correct` (green background on reveal) or `answer-incorrect` (red background on reveal)
 - **Do NOT use `highlight-green`/`highlight-red`** — reveal.js built-in classes force `opacity: 1`, preventing fragment hiding
@@ -474,7 +483,69 @@ All questions visible at once. No fragments for discussion.
 - No instructional text like "Click to reveal" — answer reveal behavior is obvious
 - When items have no Why explanation (e.g., fill-in-the-blank), a 3-column table (# / Sentence / Answer) is acceptable
 
-### 18. Multi-Column Grammar Answer Table
+### 18. Inline Annotated Grammar Answer (S/V/O) — Gold Standard
+
+For grammar exercises where students identify subjects, verbs, and objects, **annotate the sentence inline** rather than using a separate answer column. This keeps the annotation visually connected to the words, avoiding split attention.
+
+**How it works:**
+- Each sentence enters as **plain unadorned text**
+- On click, `fragment custom` CSS classes animate in: colored underlines, boxes, and superscript labels appear
+- `data-fragment-index` groups one sentence's decorations to reveal together per click
+- The confirmation note (`fragment fade-up`) slides in simultaneously
+
+**CSS (add to inline `<style>` block before answer slides):**
+```css
+.reveal .fragment.custom.svo-s { border-bottom: 2px solid transparent; }
+.reveal .fragment.custom.svo-s.visible { border-bottom: 2px solid #4fc3f7; }
+.reveal .fragment.custom.svo-s sup { opacity: 0; transition: opacity 0.2s ease, color 0.2s ease; }
+.reveal .fragment.custom.svo-s.visible sup { opacity: 1; color: #4fc3f7; }
+
+.reveal .fragment.custom.svo-v { border-bottom: 2px solid transparent; }
+.reveal .fragment.custom.svo-v.visible { border-bottom: 2px solid #ff8a65; box-shadow: 0 5px 0 0 #ff8a65; }
+.reveal .fragment.custom.svo-v sup { opacity: 0; transition: opacity 0.2s ease, color 0.2s ease; }
+.reveal .fragment.custom.svo-v.visible sup { opacity: 1; color: #ff8a65; }
+
+.reveal .fragment.custom.svo-o { border: 1.5px solid transparent; padding: 0 3px; border-radius: 3px; }
+.reveal .fragment.custom.svo-o.visible { border: 1.5px solid #aed581; }
+.reveal .fragment.custom.svo-o sup { opacity: 0; transition: opacity 0.2s ease, color 0.2s ease; }
+.reveal .fragment.custom.svo-o.visible sup { opacity: 1; color: #aed581; }
+```
+
+**HTML pattern (max 3 sentences per slide):**
+```html
+<section data-background="#1e7e34">
+    <h2>Practice 3 — Answers (1–3)</h2>
+    <p class="aim-label">Subjects, Verbs, and Objects</p>
+    <div style="font-size: 0.95em; line-height: 2.5; text-align: left; width: 100%;">
+        <p><strong>1.</strong>
+            <span class="fragment custom svo-s" data-fragment-index="1"><sup style="font-size:0.65em;">S </sup>My brother</span>
+            <span class="fragment custom svo-v" data-fragment-index="1"><sup style="font-size:0.65em;">V </sup>is</span> in school.
+            <span class="fragment fade-up" style="color:#fff;" data-fragment-index="1"><i class="fa-solid fa-check"></i> Linking verb — no object</span>
+        </p>
+        <p><strong>2.</strong>
+            <span class="fragment custom svo-s" data-fragment-index="2"><sup style="font-size:0.65em;">S </sup>He</span>
+            <span class="fragment custom svo-v" data-fragment-index="2"><sup style="font-size:0.65em;">V </sup>likes</span>
+            <span class="fragment custom svo-o" data-fragment-index="2"><sup style="font-size:0.65em;">O </sup>his job</span>.
+            <span class="fragment fade-up" style="color:#fff;" data-fragment-index="2"><i class="fa-solid fa-check"></i> Action verb — has object</span>
+        </p>
+        <p><strong>3.</strong>
+            <span class="fragment custom svo-s" data-fragment-index="3"><sup style="font-size:0.65em;">S </sup>She</span>
+            <span class="fragment custom svo-v" data-fragment-index="3"><sup style="font-size:0.65em;">V </sup>works</span> at a mall.
+            <span class="fragment fade-up" style="color:#fff;" data-fragment-index="3"><i class="fa-solid fa-check"></i> Prepositional phrase — no object</span>
+        </p>
+    </div>
+</section>
+```
+
+Rules:
+- **Max 3 items per slide** — if the exercise has more items, split across multiple slides
+- Each sentence's decorations share a single `data-fragment-index` so they reveal together
+- Superscript labels use `opacity: 0` → `opacity: 1` via CSS transitions (NOT `color: transparent`, which causes anti-aliasing artifacts)
+- Transparent borders + padding are applied from the start to prevent layout shift when the color appears
+- Confirmation notes use `fragment fade-up` (not `fragment custom`) so they actually slide in from hidden
+- Green `#1e7e34` background with white (`#fff`) or yellow (`#ffdd00`) text only — no gray or muted colors
+
+**Deprecated alternative — Multi-Column Grammar Table:**
 ```html
 <section data-background="#1e7e34">
     <h2>Practice 3 — Answers (1–5)</h2>
@@ -489,7 +560,7 @@ All questions visible at once. No fragments for discussion.
 ```
 - Up to 6 columns for grammar annotation (S/V/O, tense, etc.)
 - All answer cells use fragment reveal for clickthrough
-- Items with no answer in a column use bare `<td class="fragment">(none)</td>`
+- Use only when inline annotation is not feasible (e.g., very long sentences, or analysis that doesn't map to specific words)
 
 ### 19. Code/Text Passage with Line Highlights
 ```html
