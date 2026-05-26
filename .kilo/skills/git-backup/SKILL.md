@@ -57,3 +57,7 @@ git rev-list --count origin/main..HEAD
 - **Nothing to commit**: stop before staging
 - **Push fails**: error is printed; local commit is preserved
 - **Custom message rejected**: empty message aborts the operation
+- **Filename too long for git**: If `git add -A` fails with "Filename too long" or "unable to index file", identify the offending file and either:
+  - Rename it to a shorter path, or
+  - Add a gitignore entry for the file type/pattern, then re-run `git add -A`
+  - The most common cause is large `.epub` files from archives with very long metadata filenames — these should be gitignored globally via `*.epub`

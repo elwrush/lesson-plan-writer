@@ -13,7 +13,7 @@ Options:
     --outdir <dir>         Output directory (default: PDF/<subfolder>/)
     --font <name>          Serif font name (default: RobotoSerif)
     --font-size <pt>       Body font size in pt (default: 11)
-    --leading <em>         Line leading in em (default: 0.3)
+    --leading <em>       Line leading in em (default: 0.65)
     --margin-inside <mm>   Inner margin in mm (default: 16)
     --margin-outside <mm>  Outer margin in mm (default: 11)
     --margin-top <mm>      Top margin in mm (default: 14)
@@ -236,19 +236,36 @@ def inject_glosses(text: str, gloss_entries: list) -> str:
 # ─── Typst document builder ──────────────────────────────────────────────
 
 
+def strip_leading_heading(text: str) -> str:
+    """Strip the first line if it looks like a chapter/heading line
+    (e.g. 'Chapter 1', 'CHAPTER 2', 'Chapter 1: The Beginning').
+    The title page already communicates the chapter — no need to repeat it in body text.
+    """
+    lines = text.split("\n", 1)
+    if len(lines) > 0:
+        first = lines[0].strip()
+        if re.match(
+            r"^(Chapter|CHAPTER|Ch\.|CH\.)\s*(\d+|[IVXLCDM]+|[A-Z])([:\s].*)?$",
+            first,
+        ):
+            return lines[1].strip() if len(lines) > 1 else ""
+    return text
+
+
 def build_typ_document(
     body_text: str,
     title: str = "",
     author: str = "",
     font: str = "RobotoSerif",
     font_size: int = 11,
-    leading: float = 0.3,
+    leading: float = 0.65,
     margin_inside: int = 16,
     margin_outside: int = 11,
     margin_top: int = 14,
     margin_bottom: int = 14,
 ) -> str:
     """Generate a complete A5 booklet Typst document."""
+    body_text = strip_leading_heading(body_text)
     title_block = ""
     if title:
         title_block = f"""
@@ -284,9 +301,7 @@ def build_typ_document(
   gap: 0.15em,
 )
 
-{title_block}= Chapter 1
-
-#set par(first-line-indent: 1.5em)
+{title_block}#set par(first-line-indent: 1.5em)
 
 {body_text}
 """
@@ -321,7 +336,12 @@ def main():
     parser.add_argument("--outdir", help="Output directory (default: PDF/<subfolder>)")
     parser.add_argument("--font", default="RobotoSerif", help="Serif font name")
     parser.add_argument("--font-size", type=int, default=11, help="Body font size in pt")
-    parser.add_argument("--leading", type=float, default=0.3, help="Line leading in em")
+    parser.add_argument(
+        "--leading",
+        type=float,
+        default=0.65,
+        help="Line leading in em (Typst default: 0.65; increase for more line spacing)",
+    )
     parser.add_argument("--margin-inside", type=int, default=16, help="Inner margin mm")
     parser.add_argument("--margin-outside", type=int, default=11, help="Outer margin mm")
     parser.add_argument("--margin-top", type=int, default=14, help="Top margin mm")

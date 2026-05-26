@@ -730,10 +730,98 @@
     <h2>Let's Review</h2>
 </section>
 
-<!-- PEDAGOGICAL INTENT: Student sees three "I can" checkmarks — fully visible from entry so they can reflect on their learning and consolidate. -->
-<!-- WHY THIS FEATURE: Static — consolidation. Fragments would hide the outcomes during reflection, violating Coherence. -->
-<!-- FEATURE CHECK: static — consolidation -->
-<!-- COGNITIVE PRINCIPLE: Coherence + Personalization — succinct "I can" statements in the student's own voice close the learning loop. -->
+<!-- PEDAGOGICAL INTENT: Student answers 3 MCQs testing fragment rules. Each answer is a clickthrough fragment, so the teacher can pace discussion per question. -->
+<!-- WHY THIS FEATURE: Fragments (fade-up) -- per-question answer reveal. All options stay visible; the correct answer slides in after each click. -->
+<!-- FEATURE CHECK: fragments -- answer reveal via fade-up with data-fragment-index -->
+<!-- COGNITIVE PRINCIPLE: Retrieval Practice + Segmenting -- students recall rules before seeing the answer; each question is discussed one at a time. -->
+<section id="slide-review-1-3">
+    <h2>Quick Review Check</h2>
+    <p style="font-size:0.65em; margin-bottom:0.2em;">Test your understanding of the rules.</p>
+    <div style="font-size:0.6em; text-align:left; margin:0 auto; max-width:92%;">
+        <div style="margin-bottom:0.6em;">
+            <p style="color:#ffdd00; margin-bottom:0.1em;"><strong>1.</strong> What must every complete English sentence have?</p>
+            <div style="margin-left:1.5em; line-height:1.5;">
+                <span>A. An adjective and a noun</span><br>
+                <span>B. A subject and a verb</span><br>
+                <span>C. A noun and a preposition</span><br>
+                <span>D. A verb and an object</span>
+            </div>
+            <p class="fragment fade-up" data-fragment-index="1" style="color:#4caf50; font-weight:bold; margin:0.1em 0 0 1.5em; font-size:1.1em;">
+                <i class="fa-solid fa-check"></i> B &mdash; every sentence needs a subject <em>and</em> a verb.
+            </p>
+        </div>
+        <div style="margin-bottom:0.6em;">
+            <p style="color:#ffdd00; margin-bottom:0.1em;"><strong>2.</strong> &ldquo;My friend always there for me.&rdquo; &mdash; What type of fragment is this?</p>
+            <div style="margin-left:1.5em; line-height:1.5;">
+                <span>A. Missing subject</span><br>
+                <span>B. Missing verb</span><br>
+                <span>C. Missing both subject and verb</span><br>
+                <span>D. Not a fragment &mdash; it&rsquo;s complete</span>
+            </div>
+            <p class="fragment fade-up" data-fragment-index="2" style="color:#4caf50; font-weight:bold; margin:0.1em 0 0 1.5em; font-size:1.1em;">
+                <i class="fa-solid fa-check"></i> B &mdash; missing verb. Add &ldquo;is&rdquo;: &ldquo;My friend <em>is</em> always there for me.&rdquo;
+            </p>
+        </div>
+        <div>
+            <p style="color:#ffdd00; margin-bottom:0.1em;"><strong>3.</strong> How should you fix &ldquo;Is very hot today&rdquo;?</p>
+            <div style="margin-left:1.5em; line-height:1.5;">
+                <span>A. Is very hot today in summer.</span><br>
+                <span>B. Very hot today it is.</span><br>
+                <span>C. It is very hot today.</span><br>
+                <span>D. Today very hot is.</span>
+            </div>
+            <p class="fragment fade-up" data-fragment-index="3" style="color:#4caf50; font-weight:bold; margin:0.1em 0 0 1.5em; font-size:1.1em;">
+                <i class="fa-solid fa-check"></i> C &mdash; add subject &ldquo;It&rdquo;: &ldquo;It is very hot today.&rdquo;
+            </p>
+        </div>
+    </div>
+    <aside class="notes">
+        Quick Review Check (3 min). Reveal answers one at a time. Ask students to justify their reasoning before clicking. Q1 &mdash; rule recall; Q2 &mdash; identify missing verb; Q3 &mdash; apply fix with subject.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Final 2 review questions testing the exception rule and complete-sentence identification. -->
+<!-- WHY THIS FEATURE: Fragments (fade-up) -- per-question answer reveal. -->
+<!-- FEATURE CHECK: fragments -- answer reveal via fade-up with data-fragment-index -->
+<!-- COGNITIVE PRINCIPLE: Retrieval Practice -- students recall the exception rule and apply complete-sentence criteria. -->
+<section id="slide-review-4-5">
+    <h2>Quick Review Check &mdash; Continued</h2>
+    <p style="font-size:0.65em; margin-bottom:0.2em;">Two more questions to check your understanding.</p>
+    <div style="font-size:0.6em; text-align:left; margin:0 auto; max-width:92%;">
+        <div style="margin-bottom:0.8em;">
+            <p style="color:#ffdd00; margin-bottom:0.1em;"><strong>4.</strong> Why is &ldquo;Stop!&rdquo; NOT a fragment?</p>
+            <div style="margin-left:1.5em; line-height:1.5;">
+                <span>A. It has only one word.</span><br>
+                <span>B. The subject &ldquo;you&rdquo; is implied.</span><br>
+                <span>C. Commands are not sentences.</span><br>
+                <span>D. It has no verb.</span>
+            </div>
+            <p class="fragment fade-up" data-fragment-index="1" style="color:#4caf50; font-weight:bold; margin:0.1em 0 0 1.5em; font-size:1.1em;">
+                <i class="fa-solid fa-check"></i> B &mdash; commands have an implied subject &ldquo;you,&rdquo; so they are complete sentences.
+            </p>
+        </div>
+        <div>
+            <p style="color:#ffdd00; margin-bottom:0.1em;"><strong>5.</strong> &ldquo;We play football every weekend.&rdquo; &mdash; Is this sentence...</p>
+            <div style="margin-left:1.5em; line-height:1.5;">
+                <span>A. A fragment &mdash; missing subject</span><br>
+                <span>B. A fragment &mdash; missing verb</span><br>
+                <span>C. A complete sentence</span><br>
+                <span>D. A fragment &mdash; missing both</span>
+            </div>
+            <p class="fragment fade-up" data-fragment-index="2" style="color:#4caf50; font-weight:bold; margin:0.1em 0 0 1.5em; font-size:1.1em;">
+                <i class="fa-solid fa-check"></i> C &mdash; &ldquo;We&rdquo; (subject) + &ldquo;play&rdquo; (verb) = complete sentence.
+            </p>
+        </div>
+    </div>
+    <aside class="notes">
+        Quick Review Check continued. Q4 tests the command exception; Q5 tests ability to identify a complete sentence. Elicit reasoning before revealing each answer. 2 min.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees three "I can" checkmarks -- full visibility from entry so they can reflect on their learning and consolidate. -->
+<!-- WHY THIS FEATURE: Static -- consolidation. Fragments would hide the outcomes during reflection, violating Coherence. -->
+<!-- FEATURE CHECK: static -- consolidation -->
+<!-- COGNITIVE PRINCIPLE: Coherence + Personalization -- succinct "I can" statements in the student's own voice close the learning loop. -->
 <section id="slide-summary">
     <h2>What you can do now</h2>
     <ul>

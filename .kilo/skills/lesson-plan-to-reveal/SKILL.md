@@ -66,7 +66,7 @@ cp "templates/timer-plugin.css" "output/{subfolder}/slides/timer-plugin.css"
 cp "templates/ACT.png" "output/{subfolder}/slides/assets/logo.png"
 ```
 
-**Note:** The logo is available in `assets/logo.png` for potential use but is NOT displayed on the title slide. Title slides now use `r-stack` layout with a Pixabay image. See Step 3 for layout patterns.
+**Note:** The logo is available in `assets/logo.png` and IS displayed on the title slide (centered at top, height: 78px). See Step 3 for title slide layout patterns.
 
 ### ⚠ Step 2b: Inline style block for answer-list CSS (FIX BROKEN TEMPLATE)
 
@@ -125,11 +125,11 @@ Default background color reference (solid colors — no shielding needed):
 | Transition (forward to next stage) | `#c0392b` (red) |
 | Pedagogical/strategy blocks, grammar rules | `#1a6b5a` (teal) |
 | Answer tables | `#1e7e34` (green) |
-| Summary | white (default) |
+| Summary | white (default) — **WARNING: white background + black theme = invisible white text.** Use `#1a1a2e` for summary slides unless text color is explicitly overridden. |
 | End | `#2c3e50` (dark blue-gray) |
 
 Background types available in reveal.js:
-- **Solid color**: `data-background="#1a1a2e"` — default for most slides; no text-shield needed
+- **Solid color**: `data-background-color="#1a1a2e"` — default for most slides; no text-shield needed. Use `data-background-color`, NOT `data-background` (the bare `data-background` attribute is not recognized by reveal.js 5.x).
 - **Gradient**: `data-background-gradient="linear-gradient(to bottom, #283b95, #17b2c3)"` — use for phase transitions or emphasis; no text-shield needed
 - **Image**: `data-background-image="assets/filename.jpg" data-background-opacity="1.0"` — ONLY when teacher provides the file; ALL text on the slide MUST use `text-shield` or `text-shield-light`
 - **Video**: `data-background-video="assets/clip.mp4" data-background-video-muted` — for lesson hooks, only with teacher-provided files; ALL text MUST use `text-shield`
@@ -197,6 +197,8 @@ For each stage in `lesson_plan.stages[]`:
 | End | No | — |
 
 **Materials**: For any exercise referenced in the procedure by name (e.g., "Practice 2B", "Practice 7"), read the source PDF file from the `inputs/` folder to get the exercise text. Build screen content from the PDF, not from your own paraphrasing. The exercise must look exactly as it does in the textbook (same items, same numbering).
+
+**Materials — reference rule**: The `materials` field in the lesson plan JSON must only reference **videos** (YouTube, etc.) and **printed material** (books, PDFs, handouts). Never reference supplied images (Pixabay, Wikimedia, user-provided photos, character composites, etc.) — those are slide assets managed separately and are not materials the teacher needs to prepare.
 
 **Answers**: For any exercise that has an answer in the answer key, read the answer key `.typ` file and build answer slides using the **flex answer-list layout**, NOT `<table class="answer-table">`. Use `<div class="answer-list">` with flex rows:
 
@@ -360,12 +362,13 @@ if idx >= 0:
 - Verify title slide has strap subheader (not date/teacher/materials)
 - Verify `autoAnimateUnmatched: true` is in `Reveal.initialize()`
 - Verify every slide with `data-auto-animate` also has `data-auto-animate-id` — without it, `null === null` causes all auto-animate slides to animate into each other.
-- Verify transition slides use `data-background="#c0392b"`
-- Verify pedagogical strategy slides use `data-background="#1a6b5a"` and `class="pedagogical"`
+- Verify transition slides use `data-background-color="#c0392b"` (use `data-background-color` for solid colors, NOT `data-background` — `data-background` is not recognized by reveal.js 5.x)
+- Verify pedagogical strategy slides use `data-background-color="#1a6b5a"` and `class="pedagogical"`
 - Verify listening task slides that need audio have `data-audio-src="assets/filename.mp3"`
 - **Verify no `<section>` has both `data-timer` AND `data-audio-src`** — never place a timer pill on a slide that plays audio or video
 - **Verify no raw Unicode check/cross characters**: Scan for U+2713 (✓) and U+2717 (✗) in the output HTML. If found, replace with `<i class="fa-solid fa-check">` and `<i class="fa-solid fa-times">` respectively. Font Awesome renders reliably; Unicode glyphs do not.
 - **PEDAGOGICAL INTENT CHECK**: Run `python scripts/check_pedagogical_intent.py --project "output/{subfolder}/slides/"` — verifies every non-exempt slide has mandatory `<!-- PEDAGOGICAL INTENT: -->` and `<!-- WHY THIS FEATURE: -->` annotations. If missing, the slide was built without intentional design and must be fixed.
+- **Regression check on slide moves**: When moving a slide from one position to another, insert the slide at the new location FIRST, then remove it from the old location. Removing first and forgetting to re-insert causes silent slide loss. After any move, verify total section count matches expected count.
 
 ### Step 6: Publish and write URL to lesson plan JSON
 
@@ -604,9 +607,9 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
     - **CRITICAL — Green slide text: only white `#fff` or yellow `#ffdd00` allowed.** Gray, blue, or any muted color is invisible at projection distance. Never use any other color on `#1e7e34` slides.
 8. **Transition slides: heading only (no subheader text).** The red background + icon + heading is sufficient — the teacher's spoken introduction bridges the gap. Remove all `<p>` elements from transition slides.
 9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#1a6b5a` (pedagogical/strategy), green `#1e7e34` (answer tables), dark `#2c3e50` (end)
-10. **Title slide visuals**: Use `r-stack` layout with a themed Pixabay image. No logo on title slides. See Step 3 for layout patterns.
+10. **Title slide visuals**: Logo centered at top (`height: 78px`), title with CEFR badge below, strap subheader, then `r-stretch` image filling remaining space. Use `data-background-color="#1a1a2e"` as base. No `data-background-image` — the image is an `<img>` element in normal document flow.
 11. **Text highlighting**: white text, dark text-shadow, pedagogical sections use white-on-teal
-12. **Vocabulary words**: yellow boldface (`#ffdd00`) via `<span class="vocab-word">` — in both the word heading AND context sentence
+12. **Vocabulary words**: yellow boldface (`#ffdd00`) via `<span class="vocab-word">` — in both the word heading AND context sentence. **Context sentences must IMPLY meaning, not define.** Test: can a B1 student infer the meaning without a dictionary? If the sentence would still make sense with a blank in place of the target word, the context is insufficient. Good: "The greasers slick their hair back and wear leather jackets — they're the tough kids from the poor side of town." Bad: "Ponyboy is a greaser who lives on the East Side."
 13. **Timer pill vs audio**: Never add `data-timer` to a slide that also has `data-audio-src`. Slides with audio playback should not have a timer pill — the two controls conflict visually and functionally.
 14. **Proper HTML lists for letters/numbers**: Never use manual lettering or numbering in `<p>` tags (e.g., `<p><strong>A</strong> Option text</p>`). Use semantically correct HTML lists instead: `<ol type="A">` for lettered options, `<ol>` for numbered items, `<ul>` for bullet points. Each item gets its own `<li>` element. This ensures proper alignment and accessibility.
 15. **Check/cross symbols: Font Awesome only, never Unicode**: Check marks (✓) and cross marks (✗) must use Font Awesome icons `<i class="fa-solid fa-check">` and `<i class="fa-solid fa-times">` — never raw Unicode characters U+2713 and U+2717. These Unicode characters do not render reliably across all browser/system font combinations. Font Awesome is loaded in the base template via CDN and renders consistently in every browser. Use `style="color:#4caf50;"` on check marks and `style="color:#ff5252;"` on cross marks for dark/teal/white backgrounds. On green `#1e7e34` answer slides, use `style="color:#fff;"` for both (only white or yellow allowed on green backgrounds per rule 7).
