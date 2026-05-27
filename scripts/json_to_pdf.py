@@ -375,6 +375,19 @@ def build_typ_content(data, json_path=None):
                 lines.append("#v(0.3em)")
                 lines.append("")
 
+    # Reflection questions section
+    ref_qs = data.get("reflection_questions", [])
+    if ref_qs:
+        lines.append("#pagebreak()")
+        lines.append("")
+        lines.append("= Reflection Questions")
+        lines.append("")
+        for q in ref_qs:
+            lines.append(f"- {q}")
+            lines.append("")
+            lines.append("#v(0.2em)")
+            lines.append("")
+
     return "\n".join(lines)
 
 

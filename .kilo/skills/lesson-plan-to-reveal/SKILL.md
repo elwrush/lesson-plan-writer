@@ -13,18 +13,34 @@ Convert a lesson plan JSON into a reveal.js slideshow for ESL classroom delivery
 
 **Slide design authority**: `docs/slide-design-reference.md` defines all slide types, fragment policies, text limits, vocabulary rules, and auto-animate patterns.
 
-## ⚠ CRITICAL — No Outside Reference
+## ⚠ CRITICAL — Tier-1 Reference Hierarchy
 
-**Design new slides using ONLY these three sources, in this order of priority:**
-1. **This skill document** — the authoritative rules and patterns below
-2. **`templates/base-slides-template.html`** — the boilerplate, CSS, and Reveal.initialize() config
-3. **`docs/slide-design-reference.md`** — slide type definitions, fragment policy, text limits, backgrounds
+**The lesson plan JSON is the SOLE AUTHORITY for WHAT to teach. Everything else is HOW to present it.**
+
+Design slides using this **four-tier priority hierarchy**. Each tier overrides everything below it:
+
+1. **👑 Tier 1 — The lesson plan JSON** (`output/{subfolder}/{mmddyy}-{topic}-lesson-plan.json`)
+   - `lesson_plan.stages[]` defines EXACTLY what slides to build, in what order, with what timing
+   - Every `stage_number` MUST produce ≥ 1 slide
+   - No slide may introduce content not referenced in the lesson plan
+   - The procedure text, stage names, and exercise references in the JSON determine what goes on screen
+   - If the JSON says Exercise 1-3, the slides cover Exercise 1-3 — never add Exercise 4
+
+2. **📘 Tier 2 — This skill document** — the authoritative rules and patterns below
+   - Defines HOW to build each slide type (layout, background color, fragment policy, notes format)
+   - Use the Stage-to-Slide Mapping table to determine which slide types each stage produces
+
+3. **📄 Tier 3 — `templates/base-slides-template.html`** — the boilerplate, CSS, Reveal.initialize() config
+   - Copy this verbatim; never edit the `<head>`, `<style>`, or `<script>` config unless adding a plugin
+
+4. **📖 Tier 4 — `docs/slide-design-reference.md`** — slide type definitions, fragment policy, text limits, backgrounds
+   - Consult for fine-grained design rules when Tier 2 is ambiguous
 
 **NEVER read, copy, or consult any existing slideshow in `output/*/slides/` as a design reference.** Every existing slideshow was built by a different process, may use legacy patterns (e.g., `<table class="answer-table">`, `answer-correct`/`answer-incorrect`, broken CSS, missing ids), and is NOT a valid reference for new presentations.
 
-**If the user points to an existing slideshow as an example, do NOT replicate its HTML patterns.** Instead, tell the user the slideshow is legacy and may contain broken patterns. Design the new slides using only this skill document's patterns and the base template.
+**If the user points to an existing slideshow as an example, do NOT replicate its HTML patterns.** Instead, tell the user the slideshow is legacy and may contain broken patterns. Design the new slides using only the four-tier hierarchy above.
 
-**If you are tempted to run `read` on any file under `output/*/slides/` for design guidance, stop and read this skill instead.** The patterns you need are documented here.
+**If you are tempted to run `read` on any file under `output/*/slides/` for design guidance, stop and read the lesson plan JSON instead.** The lesson plan is the source of truth for what should be on screen.
 
 ## When to Use This Skill
 
@@ -85,7 +101,7 @@ The base template has a CSS syntax error in `.cefr-badge` (missing closing `}`) 
     .reveal .a-ans.a-inc { color: #fff; }
     .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
     /* Override template's gray #888 aim-label — invisible on green #1e7e34 */
-    .reveal .aim-label { color: rgba(255,255,255,0.7); }
+    .reveal .aim-label { color: #fff; }
 </style>
 ```
 
@@ -149,28 +165,57 @@ See the [Reveal.js Backgrounds documentation](https://revealjs.com/backgrounds/)
 
 ### Step 4A: Parse the lesson plan — enumerate stages and map to slides
 
-**CRITICAL: The lesson plan JSON is the primary authority for slide content.** Read `lesson_plan.stages[]` from the JSON. Every stage MUST produce at least one slide. Do NOT use the generic "Slide ordering convention" below — that was an old artifact and caused missing stages. Derive slide order from stage order.
+**CRITICAL — TIER-1 SOURCE: The lesson plan JSON is the sole determinant of slide content, slide count, and slide order.** Read ONLY `lesson_plan.stages[]` from the JSON to determine what slides to build. NEVER derive slide content from any other source (not from memory, not from the answer key, not from source PDFs that aren't referenced in the JSON).
+
+**Rule of thumb:** If a piece of content is NOT mentioned in `lesson_plan.stages[].procedure` or `lesson_plan.stages[].stage`, it does NOT belong in the slides. The JSON is the contract — slides that depart from it are wrong.
+
+Enforcement rules:
+- Every `lesson_plan.stages[].stage_number` MUST produce at least one `<section>` slide
+- Slide order MUST follow `stage_number` ascending (1, 2, 3, ...) — never reorder
+- Do NOT use the old "Slide ordering convention" below — that was an artifact that caused missing stages
 
 For each stage in `lesson_plan.stages[]`:
 1. Read the stage name, aim, procedure, time, and interaction from the JSON.
 2. Determine which slide type(s) this stage maps to, using the Stage-to-Slide Mapping table below.
-3. For any exercise referenced in the procedure (e.g., "Practice 2B"), **read the source PDF** to get the actual exercise content that students will see on screen.
+3. For any exercise referenced in the procedure (e.g., "Practice 2B"), **read the source PDF** to understand what the exercise asks — but do NOT print the exercise text on screen. Students have the workbook. The task slide should show only the exercise number and a brief student-facing instruction.
 4. For any answer key referenced in the JSON, **read the answer key file** (.typ) manually and re-express its content as HTML table rows. Do NOT attempt to parse Typst markup programmatically — `#table(...)` calls and `*bold*` syntax are not reliably machine-readable. Read the file, understand the answers, then hand-build the HTML.
 5. For any bespoke (teacher-written) exercise that has no PDF source, **source content from the lesson plan JSON's procedure text** or from the user's specified item list. Do NOT assume all exercise content lives in a PDF.
 6. Create the appropriate `<section>` elements.
 
-**Stage-to-Slide Mapping** (use this to determine how many slides each stage needs):
+**Stage-to-Slide Mapping** (use this to determine how many slides each stage needs)
+
+**Content source rule:** Every column in the row below that says "Stage procedure" or "Lesson plan JSON" is **tier-1** and takes priority. Source PDFs and answer key files are **tier-2** — only consult them AFTER verifying the lesson plan references that exercise. If the lesson plan says "Practice 2B" but the PDF contains "Practice 2A", the lesson plan's exercise numbering is authoritative; update accordingly.
+
+### Four-Slide Exercise Block Pattern
+
+Every distinct exercise type MUST follow this four-slide sequence. This is the canonical pattern for all listening, reading, and language exercises:
+
+| Step | Slide type | Background | Content | Audio/Timer |
+|------|-----------|------------|---------|-------------|
+| 1 | **Transition** | `#c0392b` (red) | Heading only — signals phase change to students | Neither |
+| 2 | **Pedagogical** | `#1a6b5a` (teal), `class="pedagogical"` | Strategy instruction for the skill (e.g., how to listen for gist). May use auto-animate for keyword underline reveals. Differentiation challenge (`🏁 Want a challenge?`) shown here. | **No audio** — audio goes on the task slide |
+| 3 | **Task** | `#1a1a2e` (dark) | Exercise number + brief student-facing instruction. **Do NOT print full exercise text** — students have the workbook. | `data-audio-src` for listening exercises; `data-timer` for written exercises. **Never both** on the same slide. |
+| 4 | **Answers** | `#1e7e34` (green) | answer-list flex layout with max **3 items** per slide. Each row: number, question snippet, answer (fragment fade-up), **WHY line in yellow** (`#ffdd00`) on the line below. | Neither |
+
+**Key rules:**
+- Audio always goes on the **task slide**, never the pedagogical slide
+- The pedagogical slide explains the *strategy*; the task slide tells students *what to do*
+- Exercise content is in the workbook — the task slide shows only the exercise number and a one-line instruction
+- WHY lines for listening comprehension answers use **direct transcript quotes**, not paraphrases
+- WHY lines for language exercises use grammatical rule explanations
+- Differentiation challenge text must be **student-facing** ("Want a challenge?…"), not teacher-facing ("Stronger Ss…")
+- The checkered flag icon (`🏁` in HTML as `<i class="fa-solid fa-flag-checkered">`) marks challenge options
 
 | Stage type (from name/purpose) | Slide(s) to create | Content source |
 |---|---|---|
-| Lead-in — discussion / prediction | 1 slide with open question, dark `#1a1a2e` background | Stage procedure + user's context |
-| Lead-in — error analysis with auto-animate | 2-3 auto-animate slides: error sentences (transparent borders) → corrected sentences (visible borders) | Bespoke error sentences from lesson plan |
-| Diagnostic test (Test 1 in TTT) | 1 slide with all test items on screen, dark `#1a1a2e` background | Lesson plan JSON procedure text (bespoke items) |
-| Teach / Clarifying | 1-2 slides per concept taught (not per sub-rule); group related rules together | Source PDF definitions + examples + rule statements |
-| Controlled Practice / Practice X | 1 task slide (student-facing instructions + timer) + 1+ answer slides (see answer table sizing rules below) | Source PDF exercise content + answer key file |
-| Freer Practice / Practice X | 1 task slide + 1+ answer slides (see answer table sizing rules below) | Source PDF exercise content + answer key file |
+| Lead-in — discussion / prediction | 1 slide with open question, dark `#1a1a2e` background | Stage procedure + user's context (from JSON) |
+| Lead-in — error analysis with auto-animate | 2-3 auto-animate slides: error sentences (transparent borders) → corrected sentences (visible borders) | Bespoke error sentences written in lesson plan JSON procedure text |
+| Diagnostic test (Test 1 in TTT) | 1 slide with all test items on screen, dark `#1a1a2e` background | Lesson plan JSON procedure text (bespoke items) — NOT source PDF |
+| Teach / Clarifying | 1-2 slides per concept taught (not per sub-rule); group related rules together | Stage procedure from JSON first; source PDF only for example sentences mentioned in that procedure |
+| Controlled Practice / Practice X | 1 task slide (student-facing instructions + timer) + 1+ answer slides (see answer table sizing rules below) | EXERCISE: JSON procedure text (e.g., "Ss complete Practice 2B"). ANSWERS: answer key `.typ` file |
+| Freer Practice / Practice X | 1 task slide + 1+ answer slides (see answer table sizing rules below) | EXERCISE: JSON procedure text. ANSWERS: answer key `.typ` file |
 | Wrap-up | 1 summary slide | Stage procedure + learning objectives from JSON |
-| Vocabulary (if pre-teach stage exists) | 1 slide per word (max 5) | Stage 11 pre-teach vocabulary selection |
+| Vocabulary (if pre-teach stage exists) | 1 slide per word (max 5) | Stage 11 pre-teach vocabulary selection (from the write-lesson-plan workflow) |
 
 **Slide order**: Follow stage_number order from the JSON. Insert Title (slide 0) and Objective (slide 1) BEFORE stage 1. Insert End slide AFTER the last stage.
 
@@ -354,7 +399,7 @@ if idx >= 0:
 - Verify answer slides use `a-cor`/`a-inc` (NOT `answer-correct`/`answer-incorrect`, NOT `highlight-green`/`highlight-red`)
 - Verify answer slides use `fragment fade-up` (not bare `fragment`) on answer spans
 - Verify answer slides use `<div class="answer-list">` flex layout, not `<table class="answer-table">`
-- **Answer list sizing**: Count item rows per answer-list. Max 5 items per answer slide. Flag any slide with >5.
+- **Answer list sizing**: Count item rows per answer-list. Max 3 items per answer slide. Flag any slide with >3. Split exercises with >3 items across multiple slides (e.g., `slide-ex2-answers-1-3`, `slide-ex2-answers-4-5`).
 - Verify no instructional text like "Click to reveal" appears on slides — answer reveal behavior is self-evident.
 - Verify fragment usage: only on answer reveal slides and strategy demonstrations, not on expository content
 - Verify procedure text is in `<aside class="notes">`, not on screen
@@ -542,7 +587,7 @@ Quick reference of slide types and their pedagogical intent:
 | Summary | default | "I can..." checkmarks | Static — consolidation |
 | End | `#2c3e50` | Topic + CEFR | Static — exit |
 
-**CRITICAL — Answer list sizing**: Max 5 items per answer-list slide. If an exercise has more than 5 items, split across multiple answer-list slides. Use `data-fragment-index` for per-row reveal coordination if needed. Fragment classes go on `<span class="a-ans">`, never on the `<div class="a-row">` itself.
+**CRITICAL — Answer list sizing**: Max 3 items per answer-list slide. If an exercise has more than 3 items, split across multiple answer-list slides (e.g., `slide-ex2-answers-1-3`, `slide-ex2-answers-4-5`). Use `data-fragment-index` for per-row reveal coordination if needed.
 
 ## Slide Indexing System
 
@@ -586,6 +631,14 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
 
 ## Key Design Rules
 
+**CRITICAL RULE 0 — NO GRAY TEXT.** Any text on any slide that the student must read MUST use solid white `#fff` or solid yellow `#ffdd00`. Gray `#888`, `#666`, `rgba(255,255,255,0.5)` (50% white), `rgba(255,255,255,0.7)` (70% white), and any other muted/low-opacity colors are **strictly banned on all backgrounds** — dark navy `#1a1a2e`, teal `#1a6b5a`, green `#1e7e34`, red `#c0392b`, and dark blue-gray `#2c3e50` alike. At classroom projection distance, these render as invisible gray smudges.
+
+**Enforcement rules:**
+- Every visible text element must have `color: #fff` or `color: #ffdd00` — either explicit or inherited from a parent
+- `rgba(255,255,255, 0.85)` is the MAXIMUM dimming for any text element, and only for decorative/secondary metadata (source citations, material references) — NEVER for task instructions, answer text, strategy steps, labels, or student-facing content
+- The base template's `.aim-label { color: #888; }` and `.source-cite { color: #666; }` are **traps** — override them in the inline `<style>` block (Step 2b) to `#fff`
+- This rule applies universally — green slides are NOT the only affected case. Every background color in this project is dark enough that gray text is unreadable.
+
 1. **Student-facing content on screen only** — task instructions, questions, vocabulary, answers. Teacher procedure text goes in `<aside class="notes">`. "Ss" is never used on screen.
 2. **Objective slide uses accessible language** — avoid complex words like "identify", "distinguish", "inference". Use simple phrases. Tie outcomes to PET reading test.
 3. **Title slide: topic + CEFR badge + strap subheader** — NO date, teacher name, duration, or materials.
@@ -604,7 +657,7 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
     - `fragment fade-up` for animated reveal (not bare `fragment`)
     - Font Awesome `fa-check`/`fa-times` for icons (never raw Unicode U+2713/U+2717)
     - **Do NOT use `highlight-green`/`highlight-red`** (reveal.js keeps them at `opacity: 1`; they never hide)
-    - **CRITICAL — Green slide text: only white `#fff` or yellow `#ffdd00` allowed.** Gray, blue, or any muted color is invisible at projection distance. Never use any other color on `#1e7e34` slides.
+    - **CRITICAL — No gray text.** Per Rule 0, ALL text on green slides must be white `#fff` or yellow `#ffdd00` — including `.a-num`, `.a-q`, `.aim-label`, and any other element. Gray, blue, or muted colors are invisible at projection distance on `#1e7e34`.
 8. **Transition slides: heading only (no subheader text).** The red background + icon + heading is sufficient — the teacher's spoken introduction bridges the gap. Remove all `<p>` elements from transition slides.
 9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#1a6b5a` (pedagogical/strategy), green `#1e7e34` (answer tables), dark `#2c3e50` (end)
 10. **Title slide visuals**: Logo centered at top (`height: 78px`), title with CEFR badge below, strap subheader, then `r-stretch` image filling remaining space. Use `data-background-color="#1a1a2e"` as base. No `data-background-image` — the image is an `<img>` element in normal document flow.
@@ -725,16 +778,27 @@ The answer-list flex layout has three CSS properties that, if set incorrectly, b
 
 **Also verify the inline `<style>` block is present** — if the template CSS bug (missing `}` in `.cefr-badge`) broke the cascade, the flex rules may not apply at all, causing the browser to fall back to default inline layout (which looks broken). Step 2b is mandatory, not optional.
 
-### Gray text on green `#1e7e34` answer slides
+### Gray text on any background — universal ban
 
-The base template defines `.reveal .aim-label { color: #888; }`. Gray `#888` text is **invisible at projection distance** on `#1e7e34` green backgrounds. The skill rule allows only white `#fff` or yellow `#ffdd00` on green slides.
+Per **Rule 0 (No Gray Text)**, gray/muted/low-opacity text is banned on ALL slide backgrounds, not just green. This section documents the specific traps in the base template:
 
-The inline `<style>` block from Step 2b MUST include this override:
+**Template traps:**
+- `.reveal .aim-label { color: #888; }` — gray label, invisible on `#1a1a2e`, `#1a6b5a`, `#1e7e34`, `#c0392b`, and `#2c3e50`
+- `.reveal .source-cite { color: #666; }` — darker gray, still invisible at projection distance
+- `.reveal .material-ref { color: #888; }` — invisible gray
+- `.reveal .a-num { color: rgba(255,255,255,0.5); }` — 50% white = gray
+- `.reveal .image-caption { color: #888; }` — invisible gray
+
+**Fix in Step 2b inline `<style>` block:**
 ```css
-.reveal .aim-label { color: rgba(255,255,255,0.7); }
+.reveal .aim-label { color: #fff; }
+.reveal .source-cite { color: rgba(255,255,255,0.85); }
+.reveal .material-ref { color: rgba(255,255,255,0.85); }
+.reveal .a-num { color: #fff; }
+.reveal .image-caption { color: rgba(255,255,255,0.85); }
 ```
 
-Without it, every `class="aim-label"` on an answer slide renders as unreadable gray text. This applies to ALL text on green slides — not just `.aim-label`. If you add any other text elements (paragraphs, spans, etc.) on a `#1e7e34` slide, they must also use white or yellow. Gray, blue, or muted colors fail at projector brightness.
+**Test before commit:** Open the slides in a browser at full-screen projection brightness. If you can't read any text element clearly from 3 meters away, it's too gray. Fix it to `#fff`.
 
 ## Files
 

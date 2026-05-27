@@ -1,0 +1,61 @@
+{
+  "teacher": "Ed Rush",
+  "duration": "46 minutes",
+  "date": "052526",
+  "topic": "Introducing Every Day (Reading Circle)",
+  "objective": "By the end of the lesson, learners will have practised and developed the sub-skills of reading for gist and detailed comprehension in the context of an introduction to Every Day by David Levithan.",
+  "materials": "- Every Day by David Levithan (Chapter 1)\n- YouTube trailer: Every Day - Official Trailer (2018) — https://youtu.be/dRvKm__GrqU\n- Chapter 1 handout (includes reflection questions)",
+  "slideshow_url": "https://elwrush.github.io/lesson-plan-writer/READING_01_M3/",
+  "lesson_plan": {
+    "shape": "E",
+    "shape_name": "Receptive Skills (Traditional)",
+    "cefr_level": "B2",
+    "class": "M3-4A",
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage": "Lead-in — Trailer + Identity Discussion",
+        "stage_aim": "To activate learners' interest in the novel and build anticipation.",
+        "procedure": "- Show the Every Day trailer (~2 min).\n- Elicit initial reactions: 'What do you think this story is about?'\n- Pair discussion: 'What would it be like to wake up in a different body every day?'\n- Brief class feedback (2 min).\n- Bridge to the novel: 'Every Day is about a person named A who wakes up in a different body each morning. Today we will read Chapter 1 together.'",
+        "time": "8 min.",
+        "interaction": "T-Ss, Pair work"
+      },
+      {
+        "stage_number": 2,
+        "stage": "Author Spotlight — David Levithan",
+        "stage_aim": "To give learners context about the author and the novel's significance.",
+        "procedure": "- Present David Levithan facts: born 1972, editor at Scholastic, wrote Every Day in his spare time, published 2012, adapted into a film in 2018.\n- Key fact: Every Day has been translated into over 30 languages and won multiple YA awards.\n- Show composite cast image from the film adaptation.\n- Pre-teach selected vocabulary: inhabit, drifter, ephemeral, profound, transparent (brief board presentation with context from the chapter).",
+        "time": "5 min.",
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 3,
+        "stage": "Setting the Purpose — Why Read Aloud?",
+        "stage_aim": "To establish the rationale for the reading circle format.",
+        "procedure": "- Elicit: 'Why do we read out loud together in a reading circle?'\n- Highlight benefits: improves fluency, builds vocabulary through context, creates a shared experience, helps hear the natural rhythm of English.\n- Explain the lesson format: 20 min guided read-aloud, followed by private reading with reflection questions.",
+        "time": "3 min.",
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 4,
+        "stage": "Guided Read-Aloud — Chapter 1",
+        "stage_aim": "To guide learners through the opening of the novel and develop reading fluency.",
+        "procedure": "- Teacher and students take turns reading paragraphs aloud — each student reads 1-2 paragraphs then passes.\n- Pause after the first page: 'What is unusual about the narrator?' (A wakes up in a different body each day)\n- Pause after the beach scene (around 'I take her hand'): 'Why is A breaking the rules? What does Rhiannon represent for A?'\n- As A's voice emerges, note key character traits: self-aware, lonely, curious, compassionate.\n- Draw attention to the central question: Can A ever truly connect with someone?",
+        "time": "20 min.",
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 5,
+        "stage": "Independent Reading + Personal Reflection",
+        "stage_aim": "To give learners time to absorb the text individually and respond personally.",
+        "procedure": "- Students re-read the chapter silently or continue from where the read-aloud stopped.\n- Hand out reflection questions.\n- Students write answers for themselves — this is not assessed, just a way to think about the text.\n- If time permits, invite 1-2 students to share one thing they wrote with the class.",
+        "time": "10 min.",
+        "interaction": "S"
+      }
+    ]
+  },
+  "reflection_questions": [
+    "1. A says being a drifter is \"lonely\" but also \"remarkably freeing.\" Which parts of A's life sound hard? Which parts sound good?",
+    "2. A decides to break the rules to spend the day with Rhiannon. Do you think it was worth it? What would you have done?"
+  ]
+}

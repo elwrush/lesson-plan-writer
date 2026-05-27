@@ -19,17 +19,20 @@ The base template is at `templates/base-slides-template.html` — copy it to `ou
 
 ## Core Principles
 
-1. **Expository content on screen at once** — task instructions, vocabulary, objectives, discussion questions: ALL visible when the slide appears. Do not use fragments for expository material.
+1. **Exercise content NOT on screen** — students have the workbook. Task slides show only the exercise number and a brief instruction. Do NOT reproduce exercise text (MC options, gap-fill sentences, checklists) on screen.
 2. **Procedure text NEVER on screen** — teacher instructions, timing, interaction patterns go in `<aside class="notes">`
 3. **Fragments reserved for answer reveal** — the teacher reveals answers one at a time after students have worked. This is the primary use of fragments. Use `data-fragment-index` to control reveal order.
-4. **Auto-animate for grammar relationships, not answer reveals** — use consecutive `<section data-auto-animate>` elements with matching `data-auto-animate-id` to show how parts of a sentence relate (strikethrough a prepositional phrase to reveal the real subject, animate stress patterns in a word). Do NOT use auto-animate for answer reveals — use fragments instead. See the skill's decision framework for when to use auto-animate vs simple sibling slides vs fragments.
-5. **Pedagogical slides** — strategy/teaching content uses teal background (`data-background="#1a6b5a"`, `class="pedagogical"`) with white text
-6. **Visual-first** — lead-in slides use Pixabay image (or solid `#1a1a2e` for grammar/L1 error analysis)
-7. **Prediction before task** — students guess before doing, confirm with answer reveal
-8. **Answer slides = answer + why + source** (all 3 parts); **max 3 items per answer slide** — split exercises with >3 items across multiple slides. For grammar S/V/O exercises, use inline annotations (custom fragments) on the sentence itself instead of a separate answer column.
-9. **Vocabulary pre-teach** — slides AFTER lead-in stage, one word per slide on dark background
-10. **Section transitions** between stages — heading only, red background (`#c0392b`), no descriptive paragraphs
-11. **Text highlighting** — all slides use text-shadow for readability; pedagogical slides use white-on-teal; vocabulary words use yellow boldface (`#ffdd00`)
+4. **Auto-animate for keyword emphasis, not answer reveals** — use consecutive `<section data-auto-animate>` elements with matching `data-auto-animate-id` to animate underline highlights on key terms. Do NOT use auto-animate for answer reveals — use fragments instead.
+5. **No gray text on any background** — all text must be solid white `#fff` or yellow `#ffdd00`. Gray `#888`, `#666`, and low-opacity white (`rgba(255,255,255,0.5)`) are banned. At projection distance, these render invisible.
+6. **Four-slide block per exercise type** — every distinct exercise follows: Transition (red) → Pedagogical (teal) → Task (dark) → Answers (green).
+7. **Audio on task slides, not pedagogical slides** — the audio player sits on the task slide with the exercise number. Pedagogical slides focus on strategy instruction with no playback controls.
+8. **WHY line on every answer** — each answer row has a yellow WHY line (transcript quote for listening, grammar rule for language exercises) that appears simultaneously with the answer.
+9. **Student-facing differentiation text** — challenge options read "Want a challenge?…", not "Stronger Ss…". Marked with checkered flag icon `fa-flag-checkered`.
+10. **Prediction before task** — students guess before doing, confirm with answer reveal
+11. **Answer slides: max 3 items** — split exercises with >3 items across multiple slides (e.g., `-1-3`, `-4-5`). Each row uses answer-list flex layout with a-cor/a-inc and WHY.
+12. **Vocabulary pre-teach** — slides AFTER lead-in stage, one word per slide on dark background
+13. **Section transitions** between stages — heading only, red background (`#c0392b`), no descriptive paragraphs
+14. **Text highlighting** — all slides use text-shadow for readability; pedagogical slides use white-on-teal; vocabulary words use yellow boldface (`#ffdd00`)
 
 ---
 
@@ -162,18 +165,20 @@ These are the ONLY allowed patterns. Agents must not invent alternatives. All sl
 
 ### 1. Title Slide
 ```html
-<section data-background="#1a1a2e">
-    <img src="assets/logo.png" style="height: 78px; margin-bottom: 0.3em;" />
-    <h1 style="font-size: 1.6em;">{{ topic }} <span class="cefr-badge {{ cefr_level }}">{{ cefr_level }}</span></h1>
+<section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
+    <img src="assets/logo.png" class="title-logo" alt="Logo" />
+    <h1>{{ topic }} <span class="cefr-badge {{ cefr_level }}">{{ cefr_level }}</span></h1>
     <p><em>{{ strap_subheader }}</em></p>
-    <img class="r-stretch" src="assets/pixabay_XXXXXXX_1.jpg" style="object-fit: contain; border-radius: 6px;" />
 </section>
 ```
 
-- Logo centered at top, `height: 78px`, full opacity
-- Title font reduced (`1.6em`) to fit on one line with CEFR badge
-- Pixabay photo via `r-stretch` fills remaining space below text — no overlap
-- No `data-background-image` — the `<img>` is a normal element in document flow
+- Logo centered at top with `class="title-logo"` — CSS: `display:block; max-height:100px; margin:0 auto 1em;`
+- `data-background-image` with `data-background-opacity="0.7"` — full-bleed background, dimmed so text reads without a text-shield
+- Title in standard size with CEFR badge, strap subheader below
+- **No logo in title area**: add `<link rel="stylesheet" href="timer-plugin.css" />` in `<head>` and add the `.title-logo` CSS rule to the `<style>` block:
+```css
+.reveal .title-logo { display: block; max-height: 100px; margin: 0 auto 1em; }
+```
 - CEFR badge colors: A1=green, A2=light green, B1=blue, B2=dark blue, C1=purple, C2=red
 
 ### 2. Objective Slide (all visible at once)
@@ -243,7 +248,56 @@ Rules:
 
 One open question only. Image as background. Speaker notes: activation script.
 
-### 5. Pre-Reading Prediction
+### 5. Four-Slide Exercise Block (canonical pattern)
+
+Every distinct exercise type follows this four-slide sequence. This is the **only** pattern for listening, reading, and language exercises.
+
+| Step | Slide type | Background | Content | Audio/Timer |
+|------|-----------|------------|---------|-------------|
+| 1 | **Transition** | `#c0392b` (red) | Heading only — "Listen for Main Ideas", "Finding Details", "Useful Phrases" | Neither |
+| 2 | **Pedagogical** | `#1a6b5a` (teal) `class="pedagogical"` | Strategy instruction. Auto-animate for keyword underline reveals. 🏁 challenge text here. | **No audio** |
+| 3 | **Task** | `#1a1a2e` (dark) | Exercise number + brief instruction only. **No exercise text** — students have workbook. | `data-audio-src` OR `data-timer` (never both) |
+| 4 | **Answers** | `#1e7e34` (green) | answer-list flex, max 3 items, each with answer + WHY line in yellow | Neither |
+
+```html
+<!-- Transition -->
+<section id="slide-transition-{name}" data-background="#c0392b">
+    <h2>Student-friendly heading</h2>
+</section>
+
+<!-- Pedagogical (strategy) -->
+<section id="slide-strategy-{name}" class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+    <h2>Strategy Title</h2>
+    <ul>
+        <li>Step 1: ...</li>
+        <li>Step 2: ...</li>
+    </ul>
+    <p style="color:#ffdd00;"><i class="fa-solid fa-flag-checkered" style="color:#ffdd00;"></i> Want a challenge? ...</p>
+    <aside class="notes">Teacher notes here.</aside>
+</section>
+
+<!-- Task -->
+<section id="slide-ex{n}-task" data-background="#1a1a2e" data-audio-src="assets/listen{n}.mp3">
+    <h2>Exercise {n}</h2>
+    <p>Open your workbook to page X. Listen and complete the task.</p>
+    <aside class="notes">Teacher notes with differentiation.</aside>
+</section>
+
+<!-- Answers (max 3 items per slide) -->
+<section id="slide-ex{n}-answers-1-3" data-background="#1e7e34">
+    <h2>Exercise {n} — Answers (1–3)</h2>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">1.</span>
+            <span class="a-q">Question snippet</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check"></i> Answer</span>
+            <span class="fragment fade-up" data-fragment-index="1" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: Transcript quote or grammar rule.</span>
+        </div>
+    </div>
+</section>
+```
+
+### 6. Task Instruction Slide
 ```html
 <section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="1.0">
     <h2 class="text-shield">Before you read: {{ article_title }}</h2>
@@ -261,58 +315,118 @@ One open question only. Image as background. Speaker notes: activation script.
 
 ### 6. Task Instruction Slide
 ```html
-<section data-timer="{{ seconds }}">
-    <h2>{{ stage_name }}</h2>
-    <ul>
-        <li>{{ brief_task_instruction_1 }}</li>
-        <li>{{ brief_task_instruction_2 }}</li>
-    </ul>
+<section id="slide-ex{n}-task" data-background="#1a1a2e" data-audio-src="assets/listen{n}.mp3">
+    <h2>Exercise {{ number }}</h2>
+    <p>{{ brief_student_instruction }}</p>
     <aside class="notes">
         Stage {{ number }} · {{ time }} min · {{ interaction }}
         Goal: {{ stage_aim }}
-        Materials: {{ material_reference }}
+        Differentiation notes here.
     </aside>
 </section>
 ```
 
-Brief task: 1-3 short bullet points. Full procedure in speaker notes. Material reference in italic gray.
+Rules:
+- Exercise number only on screen — **no exercise text**. Students have the workbook.
+- Brief instruction: 1 sentence max (e.g., "Open your workbook to page 9. Listen and choose the correct answers.")
+- Audio (`data-audio-src`) OR timer (`data-timer`) — **never both** on the same slide
+- Full procedure in speaker notes with differentiation guidance
+- The audio file must be a unique filename per slide (copy to `listen1.mp3`, `listen2.mp3`, etc.) — the audio-slideshow plugin does not reliably play the same file on multiple slides
 
-### 7. Answer Slide — True/False
+### 7. Answer Slide (answer-list flex layout)
+
+Replace the old `table.answer-table` with the answer-list flex layout. This is the **only** answer slide pattern.
+
 ```html
-<section data-background="#1e7e34">
-    <h2>Exercise {{ number }}</h2>
-    <p class="aim-label">True/False</p>
-    <table class="answer-table">
-        <thead><tr><th>Statement</th><th>Answer</th></tr></thead>
-        <tbody>
-            <tr><td>{{ statement_text }}</td><td class="fragment answer-correct">✓ <strong>{{ correct_answer }}</strong></td></tr>
-            <tr><td>{{ another_statement }}</td><td class="fragment answer-incorrect">✗ <strong>False</strong></td></tr>
-            <tr><td>{{ corrected_statement }}</td><td class="fragment answer-correct">✓ <em>Explanation</em></td></tr>
-        </tbody>
-    </table>
+<section id="slide-ex{n}-answers-{range}" data-background="#1e7e34">
+    <h2>Exercise {{ number }} — Answers (1–3)</h2>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">1.</span>
+            <span class="a-q">{{ question_snippet }}</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check" style="color:#fff;"></i> {{ answer }}</span>
+            <span class="fragment fade-up" data-fragment-index="1" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: {{ explanation }}</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">2.</span>
+            <span class="a-q">{{ question_snippet }}</span>
+            <span class="fragment fade-up a-ans a-inc" data-fragment-index="2"><i class="fa-solid fa-times" style="color:#fff;"></i> {{ answer }}</span>
+            <span class="fragment fade-up" data-fragment-index="2" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: {{ explanation }}</span>
+        </div>
+    </div>
+    <aside class="notes">{{ teacher_feedback_notes }}</aside>
 </section>
 ```
 
 Rules:
 - Green background `#1e7e34` for all answer slides
-- **Max 3 items per answer slide** — split exercises with >3 items across multiple slides
-- Statements visible at slide entry; answer column is a fragment revealed on click
-- Use `answer-correct` (green background on reveal) or `answer-incorrect` (red background on reveal)
-- **Do NOT use `highlight-green`/`highlight-red`** — reveal.js built-in classes force `opacity: 1`, preventing fragment hiding
+- **Max 3 items per slide** — split exercises with >3 items (e.g., `slide-ex2-answers-1-3`, `slide-ex2-answers-4-5`)
+- `a-cor` for correct answers (green background on reveal), `a-inc` for incorrect answers (red background on reveal)
+- **Do NOT use** `answer-correct`/`answer-incorrect`, `highlight-green`/`highlight-red`, or `table.answer-table` — these are legacy
+- `fragment fade-up` for animated reveal (not bare `fragment`)
+- Font Awesome `fa-check`/`fa-times` for icons — **never raw Unicode U+2713/U+2717**
+- Each row has answer + WHY appearing together (matching `data-fragment-index`)
+- WHY is **yellow** (`#ffdd00`), flush left (`text-align:left`), near-standard font size (`0.95em`)
+- **WHY content**: listening comprehension = direct transcript quote; language exercises = grammatical rule
+- All text must be solid `#fff` (white) or `#ffdd00` (yellow) — **no gray, no muted colors**
+- `.aim-label` (if used) must be overridden to `#fff` via inline `<style>` block
 
-### 8. Answer Slide — Multiple Choice
+### 8. Pedagogical Strategy Slide
+
+Used for explicit strategy instruction before a task. Goes between the Transition and Task slides in the four-slide block.
+
 ```html
-<section data-background="#1e7e34">
-    <h2>Exercise {{ number }}</h2>
-    <p class="aim-label">Multiple Choice</p>
-    <table class="answer-table">
-        <thead><tr><th>Question</th><th>Answer</th><th>Why?</th></tr></thead>
-        <tbody>
-            <tr><td>{{ question_text }}</td><td class="fragment answer-correct">✓ <strong>{{ correct_answer }}</strong></td><td class="fragment">{{ explanation }}</td></tr>
-        </tbody>
-    </table>
+<section id="slide-strategy-{name}" class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+    <h2>{{ strategy_heading }}</h2>
+    <ul>
+        <li>{{ step_1 }}</li>
+        <li>{{ step_2 }}</li>
+    </ul>
+    <p style="color:#ffdd00;"><i class="fa-solid fa-flag-checkered" style="color:#ffdd00;"></i> Want a challenge? {{ challenge_text }}</p>
+    <aside class="notes">{{ teacher_notes }}</aside>
 </section>
 ```
+
+**Auto-animate variant** (for keyword underline reveals):
+```html
+<!-- Entry: transparent keyword borders -->
+<section data-auto-animate data-auto-animate-id="{name}" id="slide-strategy-{name}-entry" class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+    <h2 data-id="title">{{ strategy_heading }}</h2>
+    <p data-id="ex1" style="color:#ffdd00; font-size:0.85em;">
+        Listen for <span data-id="w1" style="border-bottom: 2px solid transparent;">key terms</span> in the text.
+    </p>
+</section>
+<!-- Reveal: keywords gain coloured borders via auto-animate -->
+<section data-auto-animate data-auto-animate-id="{name}" id="slide-strategy-{name}-reveal" class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+    <h2 data-id="title">{{ strategy_heading }}</h2>
+    <p data-id="ex1" style="color:#ffdd00; font-size:0.85em;">
+        Listen for <span data-id="w1" style="border-bottom: 2px solid #4fc3f7;">key terms</span> in the text.
+    </p>
+    <p style="margin-top:1em; color:#ffdd00;"><i class="fa-solid fa-flag-checkered" style="color:#ffdd00;"></i> Want a challenge? {{ challenge_text }}</p>
+    <aside class="notes">{{ teacher_notes }}</aside>
+</section>
+```
+
+**Structure talk variant** (for speaking tasks):
+```html
+<section id="slide-strategy-talk" class="pedagogical structure-talk" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+    <h2>Structure Your Talk</h2>
+    <p class="structure-step"><u><strong>Thesis:</strong> Say your main idea</u></p>
+    <p class="structure-step"><u><strong>Reasons:</strong> Give 1-2 reasons</u></p>
+    <p class="structure-step"><u><strong>Example:</strong> Share an example</u></p>
+    <p class="transition-words">First... &nbsp; Also... &nbsp; For example...</p>
+    <p style="margin-top:1em; color:#ffdd00;"><i class="fa-solid fa-flag-checkered" style="color:#ffdd00;"></i> Want your group to go further? Add a conclusion.</p>
+</section>
+```
+
+Rules:
+- Teal background `#1a6b5a`, `class="pedagogical"`, `data-background-transition="none"`
+- Challenge/differentiation text is **student-facing** ("Want a challenge?…", "Want to go further?…") — never teacher-facing
+- Checkered flag icon marks challenge options
+- Auto-animate requires both sections to have `data-auto-animate` with matching `data-auto-animate-id`
+- Keyword spans need matching `data-id` on both entry and reveal slides
+- Entry uses `transparent` border; reveal uses coloured border (blue `#4fc3f7`, orange `#ff8a65`)
+- No audio on pedagogical slides — audio goes on the task slide
 
 ### 9. Section Transition Slide
 ```html

@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Online Safety and Cyber Security</title>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            /* =============================================
+               LESSON PLAN WRITER 3 — BASE SLIDE STYLES
+               Authoritative stylesheet for all presentations.
+               ============================================= */
+
+            /* --- CEFR Badges --- */
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                padding: 4px 12px;
+                border-radius: 4px;
+            }
+
+            /* --- Title logo --- */
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+
+            .reveal .a-badge {
+                display: inline-block;
+                padding: 0.1em 0.5em;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 0.85em;
+                min-width: 1.8em;
+                text-align: center;
+            }
+            .reveal .a-badge.a-cor {
+                background: rgba(76, 175, 80, 0.4);
+                color: #fff;
+            }
+            .reveal .a-badge.a-inc {
+                background: rgba(244, 67, 54, 0.4);
+                color: #fff;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+
+            /* --- Title logo --- */
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+            .reveal .answer-list {
+                width: 100%;
+                font-size: 0.85em;
+            }
+            .reveal .a-row {
+                display: flex;
+                align-items: baseline;
+                padding: 0.4em 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                gap: 0.5em;
+            }
+            .reveal .a-row:last-child { border-bottom: none; }
+            .reveal .a-num {
+                flex: 0 0 1.5em;
+                text-align: right;
+                color: rgba(255,255,255,0.5);
+                font-size: 0.85em;
+            }
+            .reveal .a-q {
+                flex: 0 1 auto;
+                min-width: 0;
+                margin-right: 1em;
+            }
+            .reveal .a-ans {
+                flex: 0 0 auto;
+                min-width: 180px;
+                text-align: left;
+                padding: 0.1em 0.3em;
+                border-radius: 4px;
+            }
+            .reveal .a-ans.a-cor {
+                color: #fff;
+            }
+            .reveal .a-ans.a-cor.visible {
+                background: rgba(76, 175, 80, 0.3);
+            }
+            .reveal .a-ans.a-inc {
+                color: #fff;
+            }
+            .reveal .a-ans.a-inc.visible {
+                background: rgba(244, 67, 54, 0.3);
+            }
+
+            /* --- Labels & captions --- */
+            .reveal .aim-label {
+                font-size: 0.7em;
+                color: #888;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            .reveal .material-ref {
+                font-size: 0.65em;
+                color: #888;
+                font-style: italic;
+                margin-top: 0.5em;
+            }
+            .reveal .source-cite {
+                font-size: 0.7em;
+                color: #666;
+                font-style: italic;
+                margin-top: 0.3em;
+            }
+            .reveal .image-caption {
+                font-size: 0.55em;
+                color: #888;
+                text-align: center;
+                margin-top: 0.2em;
+            }
+
+            /* --- Vocabulary slides --- */
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            }
+
+            /* --- Pedagogical strategy slides (teal background) --- */
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal section.pedagogical .strategy-tip {
+                font-size: 0.85em;
+                font-style: italic;
+                color: rgba(255,255,255,0.85);
+                margin-bottom: 0.5em;
+            }
+            .reveal section.pedagogical .evidence {
+                font-size: 0.8em;
+                background: rgba(0,0,0,0.3);
+                padding: 0.4em 0.6em;
+                border-radius: 4px;
+                border-left: 3px solid rgba(255,255,255,0.4);
+            }
+
+            /* --- Global text shadow for readability --- */
+            .reveal p,
+            .reveal li,
+            .reveal h1, .reveal h2, .reveal h3,
+            .reveal h4, .reveal h5, .reveal h6 {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+
+            /* --- Text shield for full-opacity image backgrounds --- */
+            /* Uses display:inline-block + max-width for subtitle-style shielding.
+               inline-block keeps the background tight to the text.
+               max-width prevents full-width bars on very long text.
+               Elements stack naturally (block-level spacing) without ::after artifacts. */
+            .reveal .text-shield {
+                background: rgba(0, 0, 0, 0.55);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                line-height: 1.6;
+            }
+            .reveal .text-shield-light {
+                background: rgba(200, 200, 200, 0.65);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                color: #222;
+                line-height: 1.6;
+            }
+            /* Fragment variant: text already visible, background highlight on click */
+            .reveal .fragment.text-shield-light { opacity: 1; visibility: inherit; }
+            .reveal .fragment.text-shield-light.visible { background: rgba(200, 200, 200, 0.65); padding: 0.15em 0.6em; border-radius: 4px; }
+
+            /* --- Fragment styles --- */
+            /* --- Yellow text for answers on green answer tables --- */
+            .reveal .answer-yellow { color: #ffdd00; }
+            .reveal .fragment.answer-yellow.visible { color: #ffdd00; }
+
+            .reveal .fragment.highlight-green {
+                background: rgba(0, 100, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.highlight-red {
+                background: rgba(100, 0, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-correct.visible {
+                background: rgba(0, 120, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-incorrect.visible {
+                background: rgba(120, 0, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal table.answer-table th {
+                background: rgba(0, 0, 0, 0.2);
+                font-weight: bold;
+            }
+            .reveal .fragment.strike {
+                text-decoration: line-through;
+                opacity: 0.6;
+            }
+
+            /* --- YouTube iframe container (16:9 responsive) --- */
+            .reveal .iframe-container {
+                position: relative;
+                width: 90%;
+                padding-bottom: 50.625%;
+                height: 0;
+                overflow: hidden;
+                margin: 0 auto 0.5em;
+            }
+            .reveal .iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* --- Diagnostic talk structure slides (pedagogical, teal) --- */
+            .reveal .structure-talk h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal .structure-talk p,
+            .reveal .structure-talk li  { color: #fff; }
+            .reveal .structure-talk .structure-step {
+                font-size: 1.1em;
+                margin-bottom: 0.6em;
+            }
+            .reveal .structure-talk .transition-words {
+                font-size: 0.9em;
+                color: #ffdd00;
+                font-style: italic;
+                margin-top: 0.8em;
+                padding: 0.4em 0.6em;
+                background: rgba(0,0,0,0.2);
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+<!-- PEDAGOGICAL INTENT: Students see the lesson topic and CEFR level with a themed cybersecurity image filling the lower portion of the slide. -->
+<!-- WHY THIS FEATURE: Static — orientation. r-stretch places the image below the text without overlap, maintaining readability without a text-shield. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the visual establishes the topic domain before any content appears. -->
+<section id="slide-title" data-background-image="assets/pixabay_4521076_1.jpg" data-background-opacity="0.7">
+    <img src="assets/logo.png" class="title-logo" alt="Logo" />
+    <h1>Online Safety and Cyber Security <span class="cefr-badge B1">B1</span></h1>
+    <p><em>Listening for gist and detail in a conversation about online safety</em></p>
+    <aside class="notes">
+        Lesson: Online Safety and Cyber Security · B1 · 46 min · M2-4A
+        Teacher: Ed Rush
+        Shape E — Receptive Skills (Listening)
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see three clear, simple outcomes that frame what they will achieve by the end of the lesson. -->
+<!-- WHY THIS FEATURE: Static — orientation. All outcomes visible at once so students can reference them throughout the lesson. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — previewing outcomes helps learners organise their mental model of the lesson. -->
+<section id="slide-objective">
+    <h2>Here's what you'll be able to do</h2>
+    <ul>
+        <li>Understand the main idea of a conversation about online safety</li>
+        <li>Find the most important facts about staying safe online</li>
+        <li>Share your ideas and give advice about online safety</li>
+    </ul>
+    <p><em>These are the same skills you need for everyday English!</em></p>
+    <aside class="notes">
+        Lesson objective. Elicit prior knowledge: "What do you already know about online safety?"
+        Connect outcomes to the listening task.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see a prompt question that activates their existing knowledge about online safety before listening. -->
+<!-- WHY THIS FEATURE: Static — activation. A single open question on screen focuses discussion without distraction. -->
+<!-- COGNITIVE PRINCIPLE: Pre-training — activating prior knowledge prepares learners to process the listening text more efficiently. -->
+<section id="slide-lead-in" data-background="#1a1a2e">
+    <h2>Let's Get Started</h2>
+    <p>What do you know about staying safe online?<br />Share one tip with your partner.</p>
+    <aside class="notes">
+        Stage 1 · 5 min · T-Ss, Ss-Ss
+        Aim: To activate learners' interest in the theme of online safety and set the context for the listening task
+        Write "International Safer Internet Day" on the board. Elicit what Ss know about it.
+        In pairs, Ss share one online safety tip they already follow. Brief whole-class feedback to pool ideas.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see a red transition slide signalling the shift from lead-in to focused listening. Heading only — teacher's voice bridges the gap. -->
+<!-- WHY THIS FEATURE: Static — rest. Red background signals a phase change; no text beyond the heading. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — colour change announces a new phase, helping students reorient. -->
+<section id="slide-transition-gist" data-background="#c0392b">
+    <h2>Listen for the Main Ideas</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see a brief strategy for approaching a gist listening task. -->
+<!-- WHY THIS FEATURE: Static — pedagogical. Teal background signals explicit strategy instruction. No audio — the task slide handles playback. -->
+<!-- COGNITIVE PRINCIPLE: Pre-training — giving students a listening strategy before the task improves comprehension outcomes. -->
+<section id="slide-strategy-gist" class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+    <h2>Listening for Main Ideas</h2>
+    <p style="font-size: 0.85em;">When you listen for the main idea, ask yourself:</p>
+    <ul style="font-size: 0.8em;">
+        <li>Who is talking, and what about?</li>
+        <li>What is the conversation mostly about?</li>
+        <li>Don't worry about every word — listen for the big picture.</li>
+    </ul>
+    <p style="margin-top: 1em; color: #ffdd00;">
+        <i class="fa-solid fa-flag-checkered" style="color: #ffdd00;"></i> Want a challenge? Listen first without looking at the questions. Take notes, then try to answer from your notes.
+    </p>
+    <aside class="notes">
+        Stage 2 · 7 min · S, Ss-Ss
+        Aim: To get the general idea of Mariam's conversation with her father about her Safer Internet Day activities
+        Elicit the strategies from Ss before revealing them.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the exercise number and play the audio to complete the task in their workbook. -->
+<!-- WHY THIS FEATURE: Static + data-audio-src. Audio player lets the teacher play 1.01; exercise content is in the workbook, not on screen. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — separating the strategy instruction from the task execution reduces cognitive load. -->
+<section id="slide-ex1-task" data-background="#1a1a2e" data-audio-src="assets/listen1.mp3">
+    <h2>Exercise 1</h2>
+    <p>Open your workbook to page 9. Listen and choose the correct answers.</p>
+    <aside class="notes">
+        Play audio 1.01. Ss complete Exercise 1 (multiple choice) in their workbook. Ss compare answers in pairs, then class feedback.
+        Answers: 1a, 2b, 3a
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see their MC answers confirmed one by one as green highlights appear on click, showing correct choices. -->
+<!-- WHY THIS FEATURE: Fragment fade-up on a-ans spans reveals each answer on click. Green background on .a-cor.visible signals correctness. -->
+<!-- COGNITIVE PRINCIPLE: Feedback — immediate confirmation of correct answers reinforces learning. -->
+<section id="slide-ex1-answers" data-background="#1e7e34">
+    <h2>Exercise 1 — Answers</h2>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">1.</span>
+            <span class="a-q">What are they talking about?</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check" style="color:#fff;"></i> a — a day of online safety activities</span>
+            <span class="fragment fade-up" data-fragment-index="1" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "We didn't have our usual classes because it was International Safer Internet Day."</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">2.</span>
+            <span class="a-q">Mariam's father</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2"><i class="fa-solid fa-check" style="color:#fff;"></i> b — is interested in learning more</span>
+            <span class="fragment fade-up" data-fragment-index="2" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: Dad says: "I could learn from that. What did you do?"</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">3.</span>
+            <span class="a-q">Mariam thinks cyber security is</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="3"><i class="fa-solid fa-check" style="color:#fff;"></i> a — very interesting</span>
+            <span class="fragment fade-up" data-fragment-index="3" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "I need to keep practicing if I want to be an expert in cyber security one day."</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Feedback for Exercise 1. Elicit why each answer is correct before revealing.
+        1a — "She had a full day of online safety activities" (not just one game or talk)
+        2b — Dad says "I could learn from that" and "I need to look at my settings"
+        3a — Mariam says "I'm really into it" and wants to be an expert in cyber security
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see a red transition signalling the shift from gist to detail listening. -->
+<!-- WHY THIS FEATURE: Static — rest. Red background announces a new phase; teacher's voice bridges the gap. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — colour change reorients students to a different cognitive task. -->
+<section id="slide-transition-detail" data-background="#c0392b">
+    <h2>Finding Details</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see two strategy steps for detail listening. On click, key terms animate from transparent to coloured underlines, visually highlighting what to focus on. -->
+<!-- WHY THIS FEATURE: Auto-animate between sibling sections transforms border colours on key terms — fragments would hide the text, auto-animate preserves readability while adding emphasis. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the animated underlines draw attention to the specific concepts students should listen for. -->
+<section data-auto-animate data-auto-animate-id="detail-strat" id="slide-strategy-detail-entry" class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+    <h2 data-id="title">Finding Details</h2>
+    <p><u><strong>Step 1:</strong> Focus on specific information</u></p>
+    <p data-id="ex1" style="color:#ffdd00; font-size:0.85em;">Listen for <span data-id="w1" style="border-bottom: 2px solid transparent;">facts, numbers, and key words</span> that answer the questions.</p>
+    <p style="margin-top:0.6em;"><u><strong>Step 2:</strong> Listen for what each person says</u></p>
+    <p data-id="ex2" style="color:#ffdd00; font-size:0.85em;">What does Mariam <span data-id="w2" style="border-bottom: 2px solid transparent;">learn or discover</span>? What does her father <span data-id="w3" style="border-bottom: 2px solid transparent;">not know</span>?</p>
+</section>
+
+<section data-auto-animate data-auto-animate-id="detail-strat" id="slide-strategy-detail-reveal" class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+    <h2 data-id="title">Finding Details</h2>
+    <p><u><strong>Step 1:</strong> Focus on specific information</u></p>
+    <p data-id="ex1" style="color:#ffdd00; font-size:0.85em;">Listen for <span data-id="w1" style="border-bottom: 2px solid #4fc3f7;">facts, numbers, and key words</span> that answer the questions.</p>
+    <p style="margin-top:0.6em;"><u><strong>Step 2:</strong> Listen for what each person says</u></p>
+    <p data-id="ex2" style="color:#ffdd00; font-size:0.85em;">What does Mariam <span data-id="w2" style="border-bottom: 2px solid #ff8a65;">learn or discover</span>? What does her father <span data-id="w3" style="border-bottom: 2px solid #ff8a65;">not know</span>?</p>
+    <p style="margin-top:1em; color:#ffdd00;"><i class="fa-solid fa-flag-checkered" style="color:#ffdd00;"></i> Want a challenge? Listen first without looking — try to remember what Mariam learned, then check with the list.</p>
+    <aside class="notes">
+        Stage 3 · 10 min · S, Ss-Ss
+        Aim: To identify specific information about online safety practices Mariam learned during the day
+        Elicit the strategies before revealing. Point out the underlined key terms as they animate in.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the exercise numbers and play the audio to complete the tasks in their workbook. -->
+<!-- WHY THIS FEATURE: Static + data-audio-src. Audio player lets the teacher play 1.01; exercise content is in the workbook, not on screen. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — separating strategy instruction from task execution reduces cognitive load. -->
+<section id="slide-ex2-task" data-background="#1a1a2e" data-audio-src="assets/listen2.mp3">
+    <h2>Exercises 2 and 3</h2>
+    <p>Open your workbook to page 9. Listen again. Complete Exercises 2 and 3.</p>
+    <aside class="notes">
+        Differentiation:
+        - Stronger: Attempt Exercise 2 from memory after first listen, then verify on second listen.
+        - Core: See the full list and tick while listening.
+        - Support: Focus on Exercise 3 gap-fill first (scaffolded), then revisit Exercise 2.
+        Play audio 1.01 again. Ss complete Exercise 2 (check what Mariam learned) and Exercise 3 (gap-fill).
+        Pairs compare before class feedback.
+        Exercise 2 answer: items 2, 3 and 4
+        Exercise 3 answers: 1 privacy, 2 hotspots, 3 passwords, 4 update / PINs, 5 hackers
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see which items Mariam learned about, with the correct selection confirmed on click. -->
+<!-- WHY THIS FEATURE: Fragment fade-up on a-ans spans reveals the answer. Green background signals correctness. -->
+<!-- COGNITIVE PRINCIPLE: Feedback — confirming comprehension answers reinforces understanding. -->
+<!-- PEDAGOGICAL INTENT: Students see which items Mariam learned about (1-3), with answers and WHY confirmed per click. -->
+<!-- WHY THIS FEATURE: Fragment fade-up reveals each row sequentially. WHY appears simultaneously with the answer via matching data-fragment-index. -->
+<!-- COGNITIVE PRINCIPLE: Feedback + Segmentation — confirming in chunks of 3 prevents overload. -->
+<section id="slide-ex2-answers-1-3" data-background="#1e7e34">
+    <h2>Exercise 2 — What Mariam Learned (1–3)</h2>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">1.</span>
+            <span class="a-q">Change privacy settings</span>
+            <span class="fragment fade-up a-ans a-inc" data-fragment-index="1"><i class="fa-solid fa-times" style="color:#fff;"></i> Not today</span>
+            <span class="fragment fade-up" data-fragment-index="1" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "I manage my privacy settings carefully so only my friends can see things."</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">2.</span>
+            <span class="a-q">Talk to friends about privacy settings</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2"><i class="fa-solid fa-check" style="color:#fff;"></i> Yes</span>
+            <span class="fragment fade-up" data-fragment-index="2" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "I need to talk to my friends about this!"</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">3.</span>
+            <span class="a-q">Check Wi-Fi hotspot names</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="3"><i class="fa-solid fa-check" style="color:#fff;"></i> Yes</span>
+            <span class="fragment fade-up" data-fragment-index="3" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "Hackers can set up a fake hotspot with a similar name to the one in the cafe."</span>
+        </div>
+    </div>
+    <aside class="notes">Exercise 2 items 1-3. Items 4-5 on next slide.</aside>
+</section>
+
+<section id="slide-ex2-answers-4-5" data-background="#1e7e34">
+    <h2>Exercise 2 — What Mariam Learned (4–5)</h2>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">4.</span>
+            <span class="a-q">Update all her passwords</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check" style="color:#fff;"></i> Yes</span>
+            <span class="fragment fade-up" data-fragment-index="1" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "I've never updated those passwords... or PINs."</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">5.</span>
+            <span class="a-q">Make passwords much longer</span>
+            <span class="fragment fade-up a-ans a-inc" data-fragment-index="2"><i class="fa-solid fa-times" style="color:#fff;"></i> Already strong</span>
+            <span class="fragment fade-up" data-fragment-index="2" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "All my passwords are strong because they're long."</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Exercise 2 feedback. Mariam learned: talk to friends about privacy (2), check Wi-Fi hotspot names (3), update passwords (4). Already had strong passwords (5) and manages settings (1).
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the correct words for each gap-fill sentence confirmed one at a time. -->
+<!-- WHY THIS FEATURE: Fragment fade-up reveals each answer in sequence. Green background on reveal signals correctness. -->
+<!-- COGNITIVE PRINCIPLE: Feedback — confirming vocabulary-in-context answers helps learners link form to meaning. -->
+<!-- PEDAGOGICAL INTENT: Students see the correct words for gap-fill items 1-3 confirmed with WHY quotes. -->
+<!-- WHY THIS FEATURE: Fragment fade-up reveals each answer with matching WHY. Chunked to 3 per slide per design rule. -->
+<!-- COGNITIVE PRINCIPLE: Feedback + Segmentation — confirming vocabulary in context, 3 items per slide. -->
+<section id="slide-ex3-answers-1-3" data-background="#1e7e34">
+    <h2>Exercise 3 — Complete the Sentences (1–3)</h2>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">1.</span>
+            <span class="a-q">Quiz about social media ___</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check" style="color:#fff;"></i> privacy</span>
+            <span class="fragment fade-up" data-fragment-index="1" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: Mariam did well in the quiz about social media privacy.</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">2.</span>
+            <span class="a-q">Uses ___ in public places</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2"><i class="fa-solid fa-check" style="color:#fff;"></i> hotspots</span>
+            <span class="fragment fade-up" data-fragment-index="2" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: Her father uses free hotspots in cafes and public places.</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">3.</span>
+            <span class="a-q">Mariam has strong ___ on social media</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="3"><i class="fa-solid fa-check" style="color:#fff;"></i> passwords</span>
+            <span class="fragment fade-up" data-fragment-index="3" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: She uses long passwords with letters, symbols and numbers.</span>
+        </div>
+    </div>
+    <aside class="notes">Exercise 3 items 1-3. Items 4-5 on next slide.</aside>
+</section>
+
+<section id="slide-ex3-answers-4-5" data-background="#1e7e34">
+    <h2>Exercise 3 — Complete the Sentences (4–5)</h2>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">4.</span>
+            <span class="a-q">Needs to ___ his ___ now</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check" style="color:#fff;"></i> update / PINs</span>
+            <span class="fragment fade-up" data-fragment-index="1" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: Her father hasn't changed his PINs in years.</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">5.</span>
+            <span class="a-q">Keep systems safe from ___</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2"><i class="fa-solid fa-check" style="color:#fff;"></i> hackers</span>
+            <span class="fragment fade-up" data-fragment-index="2" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: Cyber security protects big organisations from hackers.</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Exercise 3 feedback. 4: update his PINs. 5: keep systems safe from hackers.
+    </aside>
+</section>
+
+<style>
+    .reveal .answer-list { width: 100%; font-size: 0.85em; }
+    .reveal .a-row { display: flex; align-items: baseline; padding: 0.4em 0; border-bottom: 1px solid rgba(255,255,255,0.1); gap: 0.5em; flex-wrap: wrap; }
+    .reveal .a-row:last-child { border-bottom: none; }
+    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.85em; }
+    .reveal .a-q { flex: 0 0 auto; min-width: 0; margin-right: 0.5em; color: #fff; }
+    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #fff; }
+    .reveal .a-ans.a-cor { color: #fff; }
+    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+    .reveal .a-ans.a-inc { color: #fff; }
+    .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
+    .reveal .aim-label { color: #fff; }
+    .reveal .material-ref { color: rgba(255,255,255,0.85); }
+    .reveal .source-cite { color: rgba(255,255,255,0.85); }
+</style>
+
+<!-- PEDAGOGICAL INTENT: Students see a red transition signalling the shift from listening comprehension to language focus. -->
+<!-- WHY THIS FEATURE: Static — rest. Red background announces a new exercise type. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — colour change reorients students to a different cognitive task. -->
+<section id="slide-transition-phrases" data-background="#c0392b">
+    <h2>Useful Phrases</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the key collocation patterns for giving advice. On click, the grammatical keywords animate to highlighted underlines. -->
+<!-- WHY THIS FEATURE: Auto-animate transforms transparent underline to coloured underline on key grammar words, drawing attention to the pattern without hiding text. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — highlighting the structural pattern helps learners notice the grammar rule. -->
+<section data-auto-animate data-auto-animate-id="phrase-strat" id="slide-strategy-phrases-entry" class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+    <h2 data-id="title">Useful Phrases for Advice</h2>
+    <p style="font-size:0.85em;">These phrases help you give advice about online safety:</p>
+    <ul style="font-size:0.8em;">
+        <li><span data-id="p1" style="border-bottom:2px solid transparent;">be</span> + adjective <em>(be careful)</em></li>
+        <li><span data-id="p2" style="border-bottom:2px solid transparent;">make sure</span> + that clause <em>(make sure that the website is safe)</em></li>
+        <li><span data-id="p3" style="border-bottom:2px solid transparent;">be sure to</span> + infinitive <em>(be sure to look)</em></li>
+        <li><span data-id="p4" style="border-bottom:2px solid transparent;">keep an eye</span> + open/out for <em>(keep an eye open for offers)</em></li>
+        <li><span data-id="p5" style="border-bottom:2px solid transparent;">take care</span> + to-infinitive <em>(take care to use trusted stores)</em></li>
+    </ul>
+</section>
+
+<section data-auto-animate data-auto-animate-id="phrase-strat" id="slide-strategy-phrases-reveal" class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+    <h2 data-id="title">Useful Phrases for Advice</h2>
+    <p style="font-size:0.85em;">These phrases help you give advice about online safety:</p>
+    <ul style="font-size:0.8em;">
+        <li><span data-id="p1" style="border-bottom:2px solid #4fc3f7;">be</span> + adjective <em>(be careful)</em></li>
+        <li><span data-id="p2" style="border-bottom:2px solid #4fc3f7;">make sure</span> + that clause <em>(make sure that the website is safe)</em></li>
+        <li><span data-id="p3" style="border-bottom:2px solid #4fc3f7;">be sure to</span> + infinitive <em>(be sure to look)</em></li>
+        <li><span data-id="p4" style="border-bottom:2px solid #ff8a65;">keep an eye</span> + open/out for <em>(keep an eye open for offers)</em></li>
+        <li><span data-id="p5" style="border-bottom:2px solid #ff8a65;">take care</span> + to-infinitive <em>(take care to use trusted stores)</em></li>
+    </ul>
+    <p style="margin-top:1em; color:#ffdd00;"><i class="fa-solid fa-flag-checkered" style="color:#ffdd00;"></i> Want to go further? Write one original sentence for each phrase.</p>
+    <aside class="notes">
+        Stage 4 · 8 min · Ss-Ss
+        Aim: To notice and practise useful collocations for giving advice about online safety
+        Elicit the patterns. Note that be/be sure/make sure use different grammar structures after them.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the instructions for completing the collocation and gap-fill exercises on their own. -->
+<!-- WHY THIS FEATURE: Static + data-timer. Timer pill shows remaining time; no audio on this slide (avoids audio/timer conflict). -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — a separate practice phase after listening allows focused attention on language form. -->
+<section id="slide-ex4-task" data-background="#1a1a2e" data-timer="480">
+    <h2>Useful Phrases</h2>
+    <ol style="font-size: 0.85em; text-align: left;">
+        <li>Choose the correct words to complete the advice. (Exercise 4)</li>
+        <li>Complete the talk with the correct phrases. (Exercise 5)</li>
+    </ol>
+    <p style="margin-top: 0.5em;">Work on your own, then check with a partner.</p>
+    <p style="color: #ffdd00;"><i class="fa-solid fa-flag-checkered" style="color: #ffdd00;"></i> Want to go further? Write one original sentence for each phrase.</p>
+    <aside class="notes">
+        Stage 4 · 8 min · Ss-Ss
+        Aim: To notice and practise useful collocations for giving advice about online safety
+        Differentiation:
+        - Stronger: Complete the exercises + write one original sentence per target phrase.
+        - Core: Complete Exercises 4 and 5 as written.
+        - Support: Phrase bank on the board with the target collocations for reference.
+        Ss complete Exercise 4 (choose correct words) individually, then Exercise 5 (complete a talk with target phrases).
+        Pairs check answers. Elicit key phrases onto the board.
+        Timer: 8 min (480s)
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the correct collocations confirmed one at a time, reinforcing the target phrases. -->
+<!-- WHY THIS FEATURE: Fragment fade-up reveals each answer sequentially. Green background on reveal signals correctness. -->
+<!-- COGNITIVE PRINCIPLE: Feedback — seeing the correct collocation strengthens form-meaning mapping. -->
+<!-- PEDAGOGICAL INTENT: Students see correct collocations 1-3 with grammatical WHY. -->
+<!-- WHY THIS FEATURE: Fragment fade-up reveals each answer + WHY. Chunked to 3 per slide. -->
+<!-- COGNITIVE PRINCIPLE: Feedback — seeing the correct collocation strengthens form-meaning mapping. -->
+<section id="slide-ex4-answers-1-3" data-background="#1e7e34">
+    <h2>Exercise 4 — Correct Words (1–3)</h2>
+    <div class="answer-list" style="width: 90%;">
+        <div class="a-row">
+            <span class="a-num">1.</span>
+            <span class="a-q">Always ___ careful</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check" style="color:#fff;"></i> be</span>
+            <span class="fragment fade-up" data-fragment-index="1" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "be" + adjective (careful).</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">2.</span>
+            <span class="a-q">___ sure that you never shop...</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2"><i class="fa-solid fa-check" style="color:#fff;"></i> Make</span>
+            <span class="fragment fade-up" data-fragment-index="2" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "Make sure" is a fixed collocation + that clause.</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">3.</span>
+            <span class="a-q">Be sure ___ a different password</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="3"><i class="fa-solid fa-check" style="color:#fff;"></i> to create</span>
+            <span class="fragment fade-up" data-fragment-index="3" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "be sure" + to-infinitive.</span>
+        </div>
+    </div>
+    <aside class="notes">Exercise 4 items 1-3. Items 4-5 on next slide.</aside>
+</section>
+
+<section id="slide-ex4-answers-4-5" data-background="#1e7e34">
+    <h2>Exercise 4 — Correct Words (4–5)</h2>
+    <div class="answer-list" style="width: 90%;">
+        <div class="a-row">
+            <span class="a-num">4.</span>
+            <span class="a-q">Keep an ___ for offers</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check" style="color:#fff;"></i> eye</span>
+            <span class="fragment fade-up" data-fragment-index="1" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "keep an eye open/out for" is a fixed phrase.</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">5.</span>
+            <span class="a-q">Be ___ not to click on unknown links</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2"><i class="fa-solid fa-check" style="color:#fff;"></i> careful</span>
+            <span class="fragment fade-up" data-fragment-index="2" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "be" + adjective (careful).</span>
+        </div>
+    </div>
+    <aside class="notes">Exercise 4 feedback. 4: eye (fixed phrase). 5: careful (be + adjective).</aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the completed talk with target phrases in the correct positions. -->
+<!-- WHY THIS FEATURE: Fragment fade-up reveals each gap answer sequentially. Green background signals correctness. -->
+<!-- COGNITIVE PRINCIPLE: Feedback — seeing the correct phrase in context reinforces usage patterns. -->
+<!-- PEDAGOGICAL INTENT: Students see the correct phrases 1-3 for completing the talk. -->
+<!-- WHY THIS FEATURE: Fragment fade-up reveals each phrase + WHY. Chunked to 3 per slide. -->
+<!-- COGNITIVE PRINCIPLE: Feedback + Segmentation — confirming in chunks prevents overload. -->
+<section id="slide-ex5-answers-1-3" data-background="#1e7e34">
+    <h2>Exercise 5 — Complete the Talk (1–3)</h2>
+    <div class="answer-list" style="width: 90%;">
+        <div class="a-row">
+            <span class="a-num">1.</span>
+            <span class="a-q">___ the website is safe first</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check" style="color:#fff;"></i> make sure that</span>
+            <span class="fragment fade-up" data-fragment-index="1" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: Followed by a clause (the website is safe).</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">2.</span>
+            <span class="a-q">___ look at the website address</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2"><i class="fa-solid fa-check" style="color:#fff;"></i> Be sure to</span>
+            <span class="fragment fade-up" data-fragment-index="2" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "Be sure to" + infinitive (look).</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">3.</span>
+            <span class="a-q">___ open for the padlock symbol</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="3"><i class="fa-solid fa-check" style="color:#fff;"></i> Keep an eye</span>
+            <span class="fragment fade-up" data-fragment-index="3" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "Keep an eye open for" is a fixed phrase.</span>
+        </div>
+    </div>
+    <aside class="notes">Exercise 5 items 1-3. Items 4-5 on next slide.</aside>
+</section>
+
+<section id="slide-ex5-answers-4-5" data-background="#1e7e34">
+    <h2>Exercise 5 — Complete the Talk (4–5)</h2>
+    <div class="answer-list" style="width: 90%;">
+        <div class="a-row">
+            <span class="a-num">4.</span>
+            <span class="a-q">Always ___ to use trusted online stores</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check" style="color:#fff;"></i> take care</span>
+            <span class="fragment fade-up" data-fragment-index="1" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "take care" + to-infinitive.</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">5.</span>
+            <span class="a-q">It's always good to be ___</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2"><i class="fa-solid fa-check" style="color:#fff;"></i> careful</span>
+            <span class="fragment fade-up" data-fragment-index="2" style="width:100%; color:#ffdd00; font-size:0.95em; text-align:left;">WHY: "be" + adjective (careful).</span>
+        </div>
+    </div>
+    <aside class="notes">Exercise 5 feedback. 4: take care + to-infinitive. 5: careful (be + adjective).</aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see a red transition slide signalling the shift from language focus to productive speaking. -->
+<!-- WHY THIS FEATURE: Static — rest. Red background signals a phase change; heading-only keeps attention on the teacher's spoken instructions. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the colour change and heading announce a new phase, helping students reorient. -->
+<section id="slide-transition-talk" data-background="#c0392b">
+    <h2>Let's Talk</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see a clear structure for organising their group talk — thesis, reasons, example, and transition words. -->
+<!-- WHY THIS FEATURE: Static — pedagogical. Teal background signals explicit strategy instruction. The structure-talk class provides dedicated CSS. -->
+<!-- COGNITIVE PRINCIPLE: Segmentation + Pre-training — giving students a structural template before they begin reduces cognitive load during production. -->
+<section id="slide-strategy-talk" class="pedagogical structure-talk" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+    <h2>Structure Your Talk</h2>
+    <p class="structure-step"><u><strong>Thesis:</strong> Say your main idea about the topic</u></p>
+    <p class="structure-step"><u><strong>Reasons:</strong> Give 1-2 reasons or tips</u></p>
+    <p class="structure-step"><u><strong>Example:</strong> Share an example the class will understand</u></p>
+    <p class="transition-words">First... &nbsp; Also... &nbsp; For example...</p>
+    <p style="margin-top:1em; color:#ffdd00;"><i class="fa-solid fa-flag-checkered" style="color:#ffdd00;"></i> Want your group to go further? Add a strong conclusion that summarises your main point.</p>
+    <aside class="notes">
+        Stage 5-6 · 16 min total · Ss-Ss
+        Aim: To deliver a short talk on online safety and practise emphasising important points
+        Elicit the structure before revealing. Point out the transition words.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see their assigned group topics and the preparation instructions. Timer gives a clear time boundary for the task. -->
+<!-- WHY THIS FEATURE: Static + data-timer. Timer pill provides visible countdown; list format clearly shows the five topic options. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — breaking the speaking task into a dedicated preparation phase allows focused rehearsal before performance. -->
+<section id="slide-group-prep" data-background="#1a1a2e" data-timer="480">
+    <h2>Prepare Your Talk</h2>
+    <p>In your group, prepare a short talk about online safety.</p>
+    <p style="font-size: 0.8em;">Each group has a different topic:</p>
+    <ol style="font-size: 0.85em; text-align: left;">
+        <li>Social media privacy</li>
+        <li>Safe Wi-Fi hotspots</li>
+        <li>Password safety</li>
+        <li>Avoiding phishing and scams</li>
+        <li>General safe browsing</li>
+    </ol>
+    <p style="font-size: 0.85em;">Use phrases from Exercises 4 and 5 in your talk.</p>
+    <p style="color: #ffdd00;"><i class="fa-solid fa-flag-checkered" style="color: #ffdd00;"></i> Want your group to go further? Structure your talk with a main point, reasons, and an example.</p>
+    <aside class="notes">
+        Stage 5 · 8 min · Ss-Ss
+        Aim: To prepare a short group talk on an aspect of online safety using target advice phrases
+        Differentiation:
+        - Stronger groups: Structure talk with thesis, reasons, and example (no template given).
+        - Core groups: Use sentence starters from Exercises 4-5 as a framework.
+        - Support groups: Receive a partially completed talk to rehearse and deliver.
+        Divide into 5 groups of 4. Assign each group one topic.
+        Groups prepare a 1-2 minute talk using phrases from Exercises 4-5.
+        Remind groups of the speaking strategy: speed, stress, volume, repetition.
+        Timer: 8 min (480s)
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the presentation instructions and their performance is structured by clear timing. -->
+<!-- WHY THIS FEATURE: Static — orientation. Simple instructions let the teacher manage the performance phase without on-screen clutter. -->
+<!-- COGNITIVE PRINCIPLE: Segmentation — a separate presentation phase after preparation follows the prepare-perform-reflect cycle. -->
+<section id="slide-group-present" data-background="#1a1a2e">
+    <h2>Let's Present!</h2>
+    <p>Each group presents their talk to the class.</p>
+    <p>As you listen, make a note of one new thing<br />you learn about online safety.</p>
+    <aside class="notes">
+        Stage 6 · 8 min · Ss-Ss
+        Aim: To deliver a short talk on online safety and practise emphasising important points
+        Each group presents (1-2 min each). Listeners note one new thing they learn.
+        Content and language feedback after all presentations.
+        Praise use of target phrases from Exercises 4-5.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see a calm dark closing slide that signals the lesson is complete. -->
+<!-- WHY THIS FEATURE: Static — exit. No interaction needed; clean visual boundary for the lesson. -->
+<!-- COGNITIVE PRINCIPLE: none — this is a boundary marker, not a learning event. -->
+<section id="slide-end" data-background="#2c3e50">
+    <h2>Thank you</h2>
+    <p><em>Online Safety and Cyber Security</em> | B1</p>
+</section>
+</div>
+        </div>
+
+        <!-- Mark.js (CDN) + mark plugin (local) -->
+        <!-- Timer plugin (local) -->
+        <script src="timer-plugin.js"></script>
+
+        <!-- Audio slideshow plugin (CDN) -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/audio-slideshow/plugin.js"></script>
+
+        <!-- reveal.js 5.1.0 via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                audio: {
+                    prefix: 'assets/',
+                    suffix: '.mp3',
+                    advance: -1,
+                    autoplay: false,
+                    defaultAudios: false,
+                    defaultDuration: 0,
+                    playerOpacity: 1.0,
+                    playerStyle: 'position: fixed; bottom: 30px; left: 25%; width: 50%; height:75px; z-index: 33;',
+                    startAtFragment: false,
+                },
+                plugins: [
+                    // WARNING: Every plugin here is loaded and initialized by reveal.js
+                    // at startup. If any plugin's init() function throws an error, the
+                    // entire presentation will show a BLANK PAGE. Always test new plugins
+                    // in a browser and check the console before committing to the template.
+                    // Third-party plugins that depend on external CDN libraries (like
+                    // mark.js) require special care — see SKILL.md for the plugin
+                    // testing protocol.
+                    TimerPlugin,
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                    RevealAudioSlideshow,
+                ],
+            });
+        </script>
+    </body>
+</html>

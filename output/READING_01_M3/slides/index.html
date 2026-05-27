@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Introducing Every Day (Reading Circle)</title>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            /* =============================================
+               LESSON PLAN WRITER 3 — BASE SLIDE STYLES
+               Authoritative stylesheet for all presentations.
+               ============================================= */
+
+            /* --- CEFR Badges --- */
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                padding: 4px 12px;
+                border-radius: 4px;
+
+            .reveal .a-badge {
+                display: inline-block;
+                padding: 0.1em 0.5em;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 0.85em;
+                min-width: 1.8em;
+                text-align: center;
+            }
+            .reveal .a-badge.a-cor {
+                background: rgba(76, 175, 80, 0.4);
+                color: #fff;
+            }
+            .reveal .a-badge.a-inc {
+                background: rgba(244, 67, 54, 0.4);
+                color: #fff;
+            }
+
+                font-size: 0.4em;
+                vertical-align: middle;
+                margin-left: 10px;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+
+
+            /* --- Answer flex layout (replaces answer-table) --- */
+            .reveal .answer-list {
+                width: 100%;
+                font-size: 0.85em;
+            }
+            .reveal .a-row {
+                display: flex;
+                align-items: baseline;
+                padding: 0.4em 0;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                gap: 0.5em;
+            }
+            .reveal .a-row:last-child { border-bottom: none; }
+            .reveal .a-num {
+                flex: 0 0 1.5em;
+                text-align: right;
+                color: rgba(255,255,255,0.5);
+                font-size: 0.85em;
+            }
+            .reveal .a-q {
+                flex: 0 1 auto;
+                min-width: 0;
+                margin-right: 1em;
+            }
+            .reveal .a-ans {
+                flex: 0 0 auto;
+                min-width: 180px;
+                text-align: left;
+                padding: 0.1em 0.3em;
+                border-radius: 4px;
+            }
+            .reveal .a-ans.a-cor {
+                color: #fff;
+            }
+            .reveal .a-ans.a-cor.visible {
+                background: rgba(76, 175, 80, 0.3);
+            }
+            .reveal .a-ans.a-inc {
+                color: #fff;
+            }
+            .reveal .a-ans.a-inc.visible {
+                background: rgba(244, 67, 54, 0.3);
+            }
+
+            /* --- Labels & captions --- */
+            .reveal .aim-label {
+                font-size: 0.7em;
+                color: #888;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            .reveal .material-ref {
+                font-size: 0.65em;
+                color: #888;
+                font-style: italic;
+                margin-top: 0.5em;
+            }
+            .reveal .source-cite {
+                font-size: 0.7em;
+                color: #666;
+                font-style: italic;
+                margin-top: 0.3em;
+            }
+            .reveal .image-caption {
+                font-size: 0.55em;
+                color: #888;
+                text-align: center;
+                margin-top: 0.2em;
+            }
+
+            /* --- Vocabulary slides --- */
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            }
+
+            /* --- Pedagogical strategy slides (teal background) --- */
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal section.pedagogical .strategy-tip {
+                font-size: 0.85em;
+                font-style: italic;
+                color: rgba(255,255,255,0.85);
+                margin-bottom: 0.5em;
+            }
+            .reveal section.pedagogical .evidence {
+                font-size: 0.8em;
+                background: rgba(0,0,0,0.3);
+                padding: 0.4em 0.6em;
+                border-radius: 4px;
+                border-left: 3px solid rgba(255,255,255,0.4);
+            }
+
+            /* --- Global text shadow for readability --- */
+            .reveal p,
+            .reveal li,
+            .reveal h1, .reveal h2, .reveal h3,
+            .reveal h4, .reveal h5, .reveal h6 {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+
+            /* --- Text shield for full-opacity image backgrounds --- */
+            /* Uses display:inline-block + max-width for subtitle-style shielding.
+               inline-block keeps the background tight to the text.
+               max-width prevents full-width bars on very long text.
+               Elements stack naturally (block-level spacing) without ::after artifacts. */
+            .reveal .text-shield {
+                background: rgba(0, 0, 0, 0.55);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                line-height: 1.6;
+            }
+            .reveal .text-shield-light {
+                background: rgba(200, 200, 200, 0.65);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                color: #222;
+                line-height: 1.6;
+            }
+            /* Fragment variant: text already visible, background highlight on click */
+            .reveal .fragment.text-shield-light { opacity: 1; visibility: inherit; }
+            .reveal .fragment.text-shield-light.visible { background: rgba(200, 200, 200, 0.65); padding: 0.15em 0.6em; border-radius: 4px; }
+
+            /* --- Fragment styles --- */
+            /* --- Yellow text for answers on green answer tables --- */
+            .reveal .answer-yellow { color: #ffdd00; }
+            .reveal .fragment.answer-yellow.visible { color: #ffdd00; }
+
+            .reveal .fragment.highlight-green {
+                background: rgba(0, 100, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.highlight-red {
+                background: rgba(100, 0, 0, 0.4);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-correct.visible {
+                background: rgba(0, 120, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal .fragment.answer-incorrect.visible {
+                background: rgba(120, 0, 0, 0.5);
+                padding: 0.3em 0.5em;
+                border-radius: 4px;
+            }
+            .reveal table.answer-table th {
+                background: rgba(0, 0, 0, 0.2);
+                font-weight: bold;
+            }
+            .reveal .fragment.strike {
+                text-decoration: line-through;
+                opacity: 0.6;
+            }
+
+            /* --- YouTube iframe container (16:9 responsive) --- */
+            .reveal .iframe-container {
+                position: relative;
+                width: 90%;
+                padding-bottom: 50.625%;
+                height: 0;
+                overflow: hidden;
+                margin: 0 auto 0.5em;
+            }
+            .reveal .iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* --- Diagnostic talk structure slides (pedagogical, teal) --- */
+            .reveal .structure-talk h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal .structure-talk p,
+            .reveal .structure-talk li  { color: #fff; }
+            .reveal .structure-talk .structure-step {
+                font-size: 1.1em;
+                margin-bottom: 0.6em;
+            }
+            .reveal .structure-talk .transition-words {
+                font-size: 0.9em;
+                color: #ffdd00;
+                font-style: italic;
+                margin-top: 0.8em;
+                padding: 0.4em 0.6em;
+                background: rgba(0,0,0,0.2);
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+<!-- PEDAGOGICAL INTENT: Student sees the lesson topic and CEFR level, orienting them to the session. -->
+<!-- WHY THIS FEATURE: Static — all information visible at once; no transformation needed. -->
+<!-- COGNITIVE PRINCIPLE: none — orientation slide. -->
+<section id="slide-title" data-background-gradient="linear-gradient(145deg, #1a3a5c 0%, #1a1a2e 70%)">
+    <img src="assets/logo.png" style="height: 78px; margin-bottom: 0.3em;" />
+    <h1 style="font-size: 1.6em;">Introducing Every Day <span class="cefr-badge B2">B2</span></h1>
+    <p><em>What if you woke up in a different body every day?</em></p>
+    <img class="r-stretch" src="assets/pixabay_7172289_2.jpg" style="object-fit: contain; border-radius: 6px; border: 2px solid rgba(255,255,255,0.2); box-shadow: 0 4px 20px rgba(0,0,0,0.6);" />
+    <aside class="notes">
+        Lesson: Introducing Every Day (Reading Circle)
+        Duration: 46 minutes · Class: M3-4A · CEFR: B2
+        Teacher: Ed Rush
+        Materials: Every Day by David Levithan (Chapter 1), YouTube trailer, composite cast image, reflection questions handout
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees three clear outcomes they will achieve by the end of the lesson. -->
+<!-- WHY THIS FEATURE: Static — all outcomes visible at once as an advance organizer. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — advance organizer prepares students for what they will learn. -->
+<section id="slide-objective" data-background-color="#1a1a2e">
+    <h2>Here's what you'll be able to do</h2>
+    <ul>
+        <li>I can understand the start of a unusual story</li>
+        <li>I can find important details about the narrator</li>
+        <li>I can share my thoughts about identity and belonging</li>
+    </ul>
+    <p><em>These are skills you use when you read any story in English!</em></p>
+    <aside class="notes">
+        Read through each outcome. Elicit: "Which of these sounds the easiest? The hardest?"
+        Connect to prior knowledge: "Today we start a new novel together — Every Day."
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student watches the movie trailer and forms expectations about the story's unusual concept. -->
+<!-- WHY THIS FEATURE: iframe embed — native YouTube playback with reveal.js slide:start/stop events for automatic pause. -->
+<!-- COGNITIVE PRINCIPLE: Multimedia — video primes visual and auditory channels before reading. -->
+<section id="slide-lead-in-video" data-background-color="#1a1a2e">
+    <h2>Every Day — Trailer</h2>
+    <iframe
+        width="760" height="430"
+        src="https://www.youtube.com/embed/dRvKm__GrqU"
+        frameborder="0"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+        style="border: none; display: block; margin: 0 auto;">
+    </iframe>
+    <p><em>What do you think this story is about? What makes it different from other stories?</em></p>
+    <aside class="notes">
+        Play the trailer (~2 min). After it ends, elicit initial reactions.
+        Stage 1 · 8 min total (incl. discussion on next slide)
+        Goal: To activate learners' interest and build anticipation.
+        Ask: "What do you think this story is about? What makes it different from other stories?"
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the discussion question about identity and connects the theme to personal experience. -->
+<!-- WHY THIS FEATURE: Static — question must remain visible throughout the pair discussion; no reveal needed. -->
+<!-- COGNITIVE PRINCIPLE: Pre-training — activating prior knowledge before reading. -->
+<section id="slide-lead-in-discuss" data-background-color="#1a1a2e">
+    <h2>What would it be like to wake up in a different body every day?</h2>
+    <ul>
+        <li>What would be the hardest part?</li>
+        <li>What would be the best part?</li>
+    </ul>
+    <aside class="notes">
+        Pair discussion: "What would it be like to wake up in a different body every day?"
+        3 min pair discussion. Then 2 min class feedback.
+        Bridge to the novel: "Every Day is about a person named A who wakes up in a different body each morning — boy, girl, tall, short, every type of person. Today we read Chapter 1 together."
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the phase shift from lead-in to author background, signaling a new segment. -->
+<!-- WHY THIS FEATURE: Static — heading only; teacher's spoken introduction bridges the content gap. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — clear phase boundary signals a shift in focus. -->
+<section id="slide-transition-author" data-background-color="#c0392b">
+    <h2>Author Spotlight</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees key facts about the author alongside his photo, building context for the novel. -->
+<!-- WHY THIS FEATURE: Static — facts and image visible at once; r-stretch image fills remaining space. -->
+<!-- COGNITIVE PRINCIPLE: Multimedia — text + image dual-channel encoding builds richer context. -->
+<section id="slide-author" data-background-color="#1a1a2e">
+    <h2>About the Author</h2>
+    <ul style="font-size: 0.85em;">
+        <li>David Levithan — born 1972, editor at Scholastic</li>
+        <li>Wrote <em>Every Day</em> in his spare time, published in 2012</li>
+        <li>Translated into 30+ languages — adapted into a film in 2018</li>
+    </ul>
+    <img class="r-stretch" src="assets/levithan.jpg" style="object-fit: contain; border-radius: 6px;" />
+    <aside class="notes">
+        Stage 2 · 5 min · T-Ss
+        Goal: To give learners context about the author and the novel's significance.
+        Key points: Levithan is also famous for co-writing Nick & Norah's Infinite Playlist with Rachel Cohn.
+        Then transition to vocabulary pre-teach.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the greaser characters with their names, connecting the faces to the story's central group. -->
+<!-- WHY THIS FEATURE: Static — r-stretch image contained within the slide; text above prevents overlap. -->
+<!-- COGNITIVE PRINCIPLE: Multimedia — image anchors character names visually; Spatial Contiguity — names appear near their visual representation. -->
+<section id="slide-character-intro" data-background-color="#1a1a2e">
+    <h2>The Film Adaptation</h2>
+    <p style="font-size: 0.85em; margin-bottom: 0.3em;"><em>Angourie Rice as Rhiannon, with the many faces of A</em></p>
+    <img class="r-stretch" src="assets/composite-cast.jpg" style="object-fit: contain; border-radius: 6px;" />
+    <aside class="notes">
+        Point to the actors in the image. In the film, A is played by multiple actors to show the body-swapping concept.
+        Rhiannon is played by Angourie Rice.
+        Stage 2 · Part of Author Spotlight
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees a transition signalling the shift to vocabulary pre-teach. -->
+<!-- WHY THIS FEATURE: Static — red background transition signals a new segment. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — clear phase boundary before new content. -->
+<section id="slide-transition-vocab" data-background-color="#c0392b">
+    <h2>Some important words</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the first vocabulary word with IPA and context, building word knowledge before reading. -->
+<!-- WHY THIS FEATURE: Static — one word per slide for focused attention; yellow boldface signals importance. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — yellow boldface directs attention to the target word; Segmenting — one word per slide reduces cognitive load. -->
+<section id="slide-vocab-inhabit" class="vocab-slide" data-background-color="#1a1a2e">
+    <h2>Important Words</h2>
+    <p><span class="vocab-word">inhabit</span> <em>/ɪnˈhæbɪt/</em></p>
+    <p><em>A doesn't just visit each person — they <span class="vocab-word">inhabit</span> the body for a full day, feeling everything the person would feel.</em></p>
+    <aside class="notes">
+        Drill: teacher says → class repeats (×3).
+        Explain: "Inhabit means to live in or occupy a place or body. A doesn't just observe — they inhabit the person."
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the word "drifter" with IPA and context. -->
+<!-- WHY THIS FEATURE: Static — one word per slide. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — consistent vocabulary presentation format builds automaticity. -->
+<section id="slide-vocab-drifter" class="vocab-slide" data-background-color="#1a1a2e">
+    <p><span class="vocab-word">drifter</span> <em>/ˈdrɪftər/</em></p>
+    <p><em>A calls themself a <span class="vocab-word">drifter</span> — moving from one life to the next without ever settling down.</em></p>
+    <aside class="notes">
+        Drill: teacher says → class repeats (×3).
+        Explain: "A drifter is someone who moves from place to place without a fixed home or purpose. A drifts through different bodies."
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the word "ephemeral" with IPA and context. -->
+<!-- WHY THIS FEATURE: Static — one word per slide. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — consistent format. -->
+<section id="slide-vocab-ephemeral" class="vocab-slide" data-background-color="#1a1a2e">
+    <p><span class="vocab-word">ephemeral</span> <em>/ɪˈfemərəl/</em></p>
+    <p><em>A's time in each body is <span class="vocab-word">ephemeral</span> — it only lasts one day, then it's gone forever.</em></p>
+    <aside class="notes">
+        Drill: teacher says → class repeats (×3).
+        Explain: "Ephemeral means lasting for a very short time. Each of A's identities is ephemeral."
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the word "profound" with IPA and context. -->
+<!-- WHY THIS FEATURE: Static — one word per slide. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — consistent format. -->
+<section id="slide-vocab-profound" class="vocab-slide" data-background-color="#1a1a2e">
+    <p><span class="vocab-word">profound</span> <em>/prəˈfaʊnd/</em></p>
+    <p><em>Spending the day with Rhiannon has a <span class="vocab-word">profound</span> effect on A — it changes how they see the world.</em></p>
+    <aside class="notes">
+        Drill: teacher says → class repeats (×3).
+        Explain: "Profound means very great or intense, deeply meaningful. A has never felt such a deep connection before."
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the final vocabulary word "transparent" with context. -->
+<!-- WHY THIS FEATURE: Static — one word per slide. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — final vocabulary item in the sequence. -->
+<section id="slide-vocab-transparent" class="vocab-slide" data-background-color="#1a1a2e">
+    <p><span class="vocab-word">transparent</span> <em>/trænsˈpærənt/</em></p>
+    <p><em>Rhiannon's emotions are <span class="vocab-word">transparent</span> — A can see exactly how she feels, even when she tries to hide it.</em></p>
+    <aside class="notes">
+        Drill: teacher says → class repeats (×3).
+        Explain: "Transparent usually means see-through, but for emotions it means obvious and easy to read."
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the phase shift to "Why Read Aloud?" signaling a new segment. -->
+<!-- WHY THIS FEATURE: Static — heading only; teacher bridges the gap. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — clear boundary between vocabulary pre-teach and reading rationale. -->
+<section id="slide-transition-purpose" data-background-color="#c0392b">
+    <h2>Why Read Aloud?</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the benefits of reading aloud in a reading circle, establishing the rationale for the lesson format. -->
+<!-- WHY THIS FEATURE: Static — all benefits listed at once as an advance organizer. -->
+<!-- COGNITIVE PRINCIPLE: none — orientation/rationale. -->
+<section id="slide-purpose" data-background-color="#1a1a2e">
+    <h2>Why do we read together?</h2>
+    <ul>
+        <li>It helps you read more fluently</li>
+        <li>You learn new words from the story</li>
+        <li>You hear the natural rhythm of English</li>
+        <li>We share the experience together</li>
+    </ul>
+    <aside class="notes">
+        Stage 3 · 3 min · T-Ss
+        Elicit: "Why do we read out loud together in a reading circle?"
+        Highlight the benefits. Then explain the format:
+        20 min guided read-aloud → private reading with reflection questions.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the shift to the read-aloud activity, signalling it is time to begin reading. -->
+<!-- WHY THIS FEATURE: Static — heading only. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — clear transition to the main activity. -->
+<section id="slide-transition-read" data-background-color="#c0392b">
+    <h2>Let's Read</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees clear instructions for the guided read-aloud and knows what to expect. -->
+<!-- WHY THIS FEATURE: Static — instructions visible at once; timer optional since teacher controls pace. -->
+<!-- COGNITIVE PRINCIPLE: none — task orientation. -->
+<section id="slide-read-aloud" data-background-color="#1a1a2e">
+    <h2>Reading Circle — Day 5994</h2>
+    <ul>
+        <li>Take turns reading paragraphs aloud</li>
+        <li>Follow along as your classmates read</li>
+        <li>Think about A's voice — what kind of person is A?</li>
+    </ul>
+    <aside class="notes">
+        Stage 4 · 20 min · T-Ss
+        Goal: To guide learners through the opening of the novel.
+        Procedure:
+        - Teacher and students take turns reading aloud — each student reads 1-2 paragraphs then passes.
+        - Pause after the first page: "What is unusual about the narrator?" (A wakes up in a different body each day)
+        - Pause after the beach scene: "Why is A breaking the rules? What does Rhiannon represent for A?"
+        - Draw attention to the central question: Can A ever truly connect with someone?
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the shift to independent work, signalling a change in activity. -->
+<!-- WHY THIS FEATURE: Static — heading only. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — clear transition from guided to independent reading. -->
+<section id="slide-transition-reflect" data-background-color="#c0392b">
+    <h2>Your Turn to Read</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the independent reading task and reflection questions with a visible timer for time management. -->
+<!-- WHY THIS FEATURE: Timer — 10-minute countdown helps students manage their independent work time. -->
+<!-- COGNITIVE PRINCIPLE: none — task orientation with time management support. -->
+<section id="slide-independent-reading" data-timer="600" data-background-color="#1a1a2e">
+    <h2>Read and Reflect</h2>
+    <ul>
+        <li>Read the chapter on your own</li>
+        <li>Write your answers to the reflection questions</li>
+        <li>This is for you — there are no right or wrong answers</li>
+    </ul>
+    <aside class="notes">
+        Stage 5 · 10 min · S
+        Goal: To give learners time to absorb the text individually and respond personally.
+        Hand out reflection questions (printed or point to screen).
+        If time permits, invite 1-2 students to share what they wrote.
+        Reflection questions:
+        1. Who (or what) is the narrator? What do we learn about A in Chapter 1?
+        2. Why does A decide to spend the day with Rhiannon?
+        3. A says: 'I am a drifter, and as lonely as that can be, it is also remarkably freeing.' What does A mean?
+        4. Choose one moment from the beach scene and explain why it is important.
+        5. At the end, A writes 'Remember that you love Rhiannon.' Why does A do this?
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student reviews what they learned through 'I can' statements, consolidating the lesson outcomes. -->
+<!-- WHY THIS FEATURE: Static — all outcomes visible at once for reflection. -->
+<!-- COGNITIVE PRINCIPLE: none — consolidation. -->
+<section id="slide-summary" data-background-color="#1a1a2e">
+    <h2>What you can do now</h2>
+    <ul>
+        <li><i class="fa-solid fa-check" style="color:#4caf50;"></i> I can understand the start of a unusual story</li>
+        <li><i class="fa-solid fa-check" style="color:#4caf50;"></i> I can find important details about the narrator</li>
+        <li><i class="fa-solid fa-check" style="color:#4caf50;"></i> I can share my thoughts about identity and belonging</li>
+    </ul>
+    <aside class="notes">
+        Elicit from students: What did you learn today?
+        Connect back to the objective: "At the start, we said you'd be able to do these three things. Can you do them now?"
+        Praise effort, mention one thing to improve.
+        Preview next lesson: "Next time, we'll continue reading Chapter 1 and explore A's relationship with Rhiannon."
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the lesson is complete. -->
+<!-- WHY THIS FEATURE: Static — exit slide. -->
+<!-- COGNITIVE PRINCIPLE: none. -->
+<section id="slide-end" data-background-color="#2c3e50">
+    <h2>Thank you</h2>
+    <p><em>Introducing Every Day</em> | B2</p>
+</section>
+
+</div>
+        </div>
+
+        <!-- Mark.js (CDN) + mark plugin (local) -->
+        <!-- Timer plugin (local) -->
+        <script src="timer-plugin.js"></script>
+
+        <!-- Audio slideshow plugin (CDN) -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/audio-slideshow/plugin.js"></script>
+
+        <!-- reveal.js 5.1.0 via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                audio: {
+                    prefix: 'assets/',
+                    suffix: '.mp3',
+                    advance: -1,
+                    autoplay: false,
+                    defaultAudios: false,
+                    defaultDuration: 0,
+                    playerOpacity: 1.0,
+                    playerStyle: 'position: fixed; bottom: 30px; left: 25%; width: 50%; height:75px; z-index: 33;',
+                    startAtFragment: false,
+                },
+                plugins: [
+                    // WARNING: Every plugin here is loaded and initialized by reveal.js
+                    // at startup. If any plugin's init() function throws an error, the
+                    // entire presentation will show a BLANK PAGE. Always test new plugins
+                    // in a browser and check the console before committing to the template.
+                    // Third-party plugins that depend on external CDN libraries (like
+                    // mark.js) require special care — see SKILL.md for the plugin
+                    // testing protocol.
+                    TimerPlugin,
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                    RevealAudioSlideshow,
+                ],
+            });
+        </script>
+    </body>
+</html>
