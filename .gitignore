@@ -18,6 +18,15 @@ output/**/_temp_*
 # Large input files (epub, etc.)
 *.epub
 
+# Audio/media files (code-only repo)
+*.mp3
+*.m4a
+*.wav
+*.ogg
+*.opus
+*.avif
+voice-test/
+
 # Node.js
 node_modules/
 
