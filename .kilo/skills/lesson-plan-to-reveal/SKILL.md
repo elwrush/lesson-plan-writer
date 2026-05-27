@@ -72,17 +72,22 @@ All slide `<section>` elements go between `<div class="slides">` and `</div>` in
 
 **Note:** The base template already includes the [audio-slideshow](https://github.com/rajgoel/reveal.js-plugins/tree/master/audio-slideshow) plugin (CDN-loaded) and the `TimerPlugin` in `Reveal.initialize()`. To add audio to a slide, use `data-audio-src="assets/file.mp3"` on the `<section>` element. Audio files go in `slides/assets/`. The plugin is configured with `advance: -1` (no auto-advance) — teacher controls playback via hover controls or `A` key. See the `audio:` config block in `Reveal.initialize()` for details.
 
-**Known limitation — audio on multiple slides**: The audio-slideshow plugin does NOT reliably play the same audio file on more than one slide. If two or more slides need the same audio, copy the file to a distinct filename for each slide (e.g., `podcast_listen1.mp3` and `podcast_listen2.mp3`). Each `data-audio-src` value must be unique across the presentation.
+**Alternative — Plyr iframe player**: If you need reliable speed controls (0.5x–2x) and/or captions/subtitles, use `templates/player.html` in an `<iframe>` instead of the audio-slideshow plugin. The iframe isolates the player from reveal.js CSS completely. Copy `player.html` to the slides directory (Step 2) and use the pattern in `templates/base-slides-template.html` (search for "PATTERN: Plyr Audio Player"). This is preferred for pronunciation, listening diagnostics, or any slide where teachers need to slow down or speed up audio.
 
-### Step 2: Copy supporting files (timer plugin, logo)
+**Known limitation — audio on multiple slides**: The audio-slideshow plugin does NOT reliably play the same audio file on more than one slide. If two or more slides need the same audio, copy the file to a distinct filename for each slide (e.g., `podcast_listen1.mp3` and `podcast_listen2.mp3`). Each `data-audio-src` value must be unique across the presentation. The Plyr iframe approach does NOT have this limitation — each iframe loads independently.
+
+### Step 2: Copy supporting files (timer plugin, logo, iframe player)
 
 ```powershell
 cp "templates/timer-plugin.js" "output/{subfolder}/slides/timer-plugin.js"
 cp "templates/timer-plugin.css" "output/{subfolder}/slides/timer-plugin.css"
 cp "templates/ACT.png" "output/{subfolder}/slides/assets/logo.png"
+cp "templates/player.html" "output/{subfolder}/slides/player.html"
 ```
 
 **Note:** The logo is available in `assets/logo.png` and IS displayed on the title slide (centered at top, height: 78px). See Step 3 for title slide layout patterns.
+
+**Note on `player.html`:** This is an iframe-based audio player using [Plyr](https://plyr.io) — an alternative to the built-in audio-slideshow plugin. It provides full speed controls (0.5x–2x), WebVTT captions, and a transcript display area. Use it on slides that need speed adjustment or subtitles. See the Plyr Audio Player pattern in `templates/base-slides-template.html` for usage.
 
 ### ⚠ Step 2b: Inline style block for answer-list CSS (FIX BROKEN TEMPLATE)
 

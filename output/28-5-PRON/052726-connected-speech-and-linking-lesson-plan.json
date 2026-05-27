@@ -1,0 +1,61 @@
+{
+    "teacher":  "Ed Rush",
+    "duration":  "46 minutes",
+    "date":  "052726",
+    "topic":  "Connected Speech and Linking",
+    "objective":  "By the end of the lesson, learners will be better able to produce connected speech by linking words across boundaries (vowel-to-consonant, silent consonant, and /j/ linking) in the context of evaluating their own pronunciation against the PET speaking scale.",
+    "materials":  "- Headway Pre-Intermediate Pronunciation, p.8\n- Worksheet: linked phrases (Greek_alphabet, modern_email, new_idea, computer_information, 14th-century_English, message_in_a_bottle, etc.)\n- Audio: Coursebook tracks T1.8, T1.9, T1.10\n- Audio: Student recordings (Ana #11111, Gunner #22222, Nine #33333)\n- PET pronunciation scale images (EOI entrance exam + final exit exam)",
+    "lesson_plan":  {
+                        "shape":  "C",
+                        "shape_name":  "Test-Teach-Test Presentation of Language",
+                        "cefr_level":  "B1 and B2",
+                        "class":  "M2-4A and M3",
+                        "stages":  [
+                                       {
+                                           "stage_number":  1,
+                                           "stage":  "Lead-in — Introducing the PET pronunciation scale",
+                                           "stage_aim":  "To familiarise learners with the PET speaking assessment criteria by displaying both the entrance and exit exam scales side by side",
+                                           "procedure":  "- Display the two PET pronunciation scale images side by side (EOI entrance exam on the left, final exit exam on the right).\n- Elicit from Ss: \u0027What\u0027s the difference between these two levels? What do examiners listen for?\u0027\n- Highlight key criteria: intelligibility, rhythm, individual sounds, connected speech features.\n- Frame the lesson: \u0027Today we\u0027re going to listen to some students and decide where they sit on this scale — then learn one feature that will help you move up.\u0027",
+                                           "time":  5,
+                                           "interaction":  "T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  2,
+                                           "stage":  "Test 1 — Diagnostic ranking of student recordings",
+                                           "stage_aim":  "To diagnose learners\u0027 awareness of pronunciation features by having them evaluate three peer recordings against the PET scale",
+                                           "procedure":  "- Explain that Ss will hear three students (Ana, Gunner, Nine) describing a picture.\n- Play Ana\u0027s recording (#11111). After listening, ask: \u0027Where on the scale? What features did you notice?\u0027 Elicit observations. 3 min.\n- Play Gunner\u0027s recording (#22222). Ask the same questions. 3 min.\n- Play Nine\u0027s recording (#33333). Ask the same questions. 3 min.\n- Discuss as a class: \u0027Who scored highest? What did they do differently?\u0027 Note that linked speech is one feature that distinguishes higher bands.\n- Teacher notes which features Ss notice spontaneously and which they miss — this shapes the Teach stage.",
+                                           "time":  12,
+                                           "interaction":  "T-Ss, Ss-Ss"
+                                       },
+                                       {
+                                           "stage_number":  3,
+                                           "stage":  "Teach — Clarifying linking patterns with auto-animate",
+                                           "stage_aim":  "To draw learners\u0027 attention to three types of linking (consonant-to-vowel, silent consonant, /j/ linking) and model how they create natural connected speech",
+                                           "procedure":  "- Use auto-animate slides to reveal linking step by step. Start with the phrases from the worksheet: Greek_alphabet → modern_email.\n- Slide 1 (entry): show \u0027Greek_alphabet\u0027 and \u0027modern_email\u0027 with plain text. Click → Slide 2 (auto-animate reveal): underline the link points between words.\n- Elicit the rule: \u0027When a word ends with a consonant sound and the next begins with a vowel, they link.\u0027\n- Move to silent consonant linking: new_idea (/w/), computer_information (/r/). Use auto-animate to show the inserted sound.\n- Move to /j/ linking: 14th-century_English. Show how the letter \u0027y\u0027 becomes /j/ before a vowel.\n- Drill each phrase chorally and individually after revealing each pattern.",
+                                           "time":  10,
+                                           "interaction":  "T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  4,
+                                           "stage":  "Worksheet practice — Exercises 3 through 6",
+                                           "stage_aim":  "To give learners structured practice applying linking rules by working through every exercise in the worksheet in order",
+                                           "procedure":  "- Distribute the worksheet. Work through each exercise in sequence:\n  - Exercise 3 (T1.8): Play the track. Ss listen and practise the three illustrated phrases (new_idea, computer_information, 14th-century_English). Drill chorally and individually. 3 min.\n  - Exercise 4 (T1.9): Play the track. Ss listen and practise all five phrases from the rules section (Greek_alphabet, modern_email, new_idea, computer_information, 14th-century_English) starting from the end (back-chaining technique). 3 min.\n  - Exercise 5: Ss work individually to mark the links in the six phrases (a message_in_a bottle, anger_and_other_emotions, a lot_of_information, How_is_it possible?, quickly_and_easily, words_on_a page). 3 min.\n  - T1.10: Play the track. Ss listen and check their link-marking against the audio. Refer to p56 for written answers. 2 min.\n  - Exercise 6: Play T1.10 again. Ss listen and practise saying all six phrases with correct linking. 3 min.\n- Circulate throughout, providing individual pronunciation feedback.",
+                                           "time":  14,
+                                           "interaction":  "Ss-Ss, S"
+                                       },
+                                       {
+                                           "stage_number":  5,
+                                           "stage":  "Individual reading — choosing a phrase to read aloud",
+                                           "stage_aim":  "To give each student personalised feedback on their connected speech production by reading a self-selected phrase aloud",
+                                           "procedure":  "- Tell Ss to choose one phrase from the worksheet that they want to read aloud.\n- Give Ss 1-2 minutes to practise silently or with a partner.\n- Teacher calls Ss individually (or in small groups) to read their chosen phrase aloud.\n- Provide individual feedback on their linking: which links they made correctly, which they missed, and one thing to improve.\n- While waiting, other Ss continue practising other phrases from the worksheet with a partner.",
+                                           "time":  5,
+                                           "interaction":  "S, T-S"
+                                       }
+                                   ]
+                    },
+    "transcript":  "output/28-5-PRON/11111.json, output/28-5-PRON/22222.json, output/28-5-PRON/33333.json",
+    "answer_key":  "none",
+    "cefr_level":  "B1 and B2",
+    "class":  "M2-4A and M3",
+    "slideshow_url":  "https://elwrush.github.io/lesson-plan-writer/28-5-PRON/"
+}
