@@ -1,0 +1,69 @@
+{
+    "teacher":  "Ed Rush",
+    "duration":  "46 minutes",
+    "date":  "310526",
+    "topic":  "Run-ons and Comma Splices",
+    "objective":  "By the end of the lesson, learners will be better able to identify and correct run-on sentences and comma splices in the context of writing about a friend.",
+    "materials":  "- Coursebook: First Steps in Academic Writing, pp 59-61",
+    "lesson_plan":  {
+                        "shape":  "C",
+                        "shape_name":  "Test-Teach-Test",
+                        "cefr_level":  "B1",
+                        "class":  "M2-4A",
+                        "stages":  [
+                                       {
+                                           "stage_number":  1,
+                                           "stage":  "Lead-in — Review and Practice 10B",
+                                           "stage_aim":  "To retrieve compound sentence knowledge from Lesson 1 and bridge into error correction",
+                                           "procedure":  "- Quick review: elicit compound sentence formula (SV, coordinator SV) and four coordinators (2 min). Ss complete Practice 10B (7 sentence completions, p. 59) as warm-up. Individual writing (4 min). Pair share (2 min).",
+                                           "time":  8,
+                                           "interaction":  "T-Ss, S, Ss-Ss"
+                                       },
+                                       {
+                                           "stage_number":  2,
+                                           "stage":  "Test 1 — Diagnostic (Error Correction)",
+                                           "stage_aim":  "To diagnose baseline ability to spot and fix run-on and comma splice errors",
+                                           "procedure":  "- Display 5 sentences: 2 run-ons, 2 comma splices, 1 correct. Ss mark each OK or fix it and write a correction. Individual (3 min). Pair check (2 min). Teacher notes common patterns.",
+                                           "time":  5,
+                                           "interaction":  "S, Ss-Ss"
+                                       },
+                                       {
+                                           "stage_number":  3,
+                                           "stage":  "Teach — Two Sentence Errors and Two Fixes",
+                                           "stage_aim":  "To explicitly teach the definitions of run-ons and comma splices and present two correction methods",
+                                           "procedure":  "- Re-display diagnostic sentences. Elicit: \u0027What\u0027s wrong?\u0027 Name errors: comma splice (comma only, no coordinator) and run-on (nothing between sentences). Show textbook definitions (pp. 59-60). Present two fixes: (1) Period + capital, (2) Comma + coordinator. Walk through each diagnostic item with both methods applied.",
+                                           "time":  10,
+                                           "interaction":  "T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  4,
+                                           "stage":  "Test 2 — Controlled Practice: Practice 11",
+                                           "stage_aim":  "To give structured practice identifying and fixing run-ons and comma splices",
+                                           "procedure":  "- Ss complete Practice 11 (items 1-10). Step 1: mark errors with X. Step 2: correct using Method 1 or 2. Individual (7 min). Pair check (3 min). Whole-class feedback on screen. Address tricky items: 4 (run-on with trailing however), 10 (run-on with then).",
+                                           "time":  12,
+                                           "interaction":  "S, Ss-Ss, T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  5,
+                                           "stage":  "Application — Write 3 Perfect Compound Sentences",
+                                           "stage_aim":  "To transfer combined skills of compound sentence formation and error correction to the CA writing context",
+                                           "procedure":  "- \u0027Now you know how to build AND fix compound sentences.\u0027 Ss write 3 original compound sentences about a friend or classmate, each using a different coordinator. Must be run-on-free. Individual (5 min). Pair swap — partner checks each sentence for errors (3 min).",
+                                           "time":  8,
+                                           "interaction":  "S, Ss-Ss"
+                                       },
+                                       {
+                                           "stage_number":  6,
+                                           "stage":  "Wrap-up",
+                                           "stage_aim":  "To consolidate error-correction strategies and preview the CA writing task",
+                                           "procedure":  "- \u0027Name the two errors.\u0027 (run-ons, comma splices). \u0027Name the two fixes.\u0027 (period, or comma + coordinator). \u0027Before you write your CA paragraph, what will you check for?\u0027 Preview: \u0027Next lesson — we start writing the CA paragraph about your friend.\u0027",
+                                           "time":  3,
+                                           "interaction":  "T-Ss"
+                                       }
+                                   ]
+                    },
+    "transcript":  "none",
+    "answer_key":  "C:\\PROJECTS\\LESSON-PLAN-WRITER-3\\inputs\\M2-WRITING-COMPOUND-SENTENCES\\answer_key.typ",
+    "cefr_level":  "B1",
+    "class":  "M2-4A",
+    "slideshow_url":  "https://elwrush.github.io/lesson-plan-writer/M2-WRITING-COMPOUND-SENTENCES-L2/"
+}

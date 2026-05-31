@@ -55,14 +55,14 @@ For each changed file, check the file type and evaluate ALL applicable rules bel
 
 1. **Icon placement**: Icons in pedagogical strategy headers must be inline `<span style="font-size: 2.5em;">` left of `<h2>` inside an `overflow: hidden` div. NOT centered block.
 2. **Icon mapping** correct per slide type: transition = `fa-forward red #c0392b`, strategy = `fa-list-check`/`fa-chess` teal `#1a6b5a`, task = `fa-pencil`, discussion = `fa-comments` red, objective = `fa-seedling`, vocabulary = `fa-spell-check`, summary = `fa-flag-checkered`.
-3. **Transition icons**: use `fa-forward`, red `data-background="#c0392b"`, `class="transition-icon"`. NOT any other icon or color.
+3. **Transition icons**: use `fa-forward`, red `data-background-color="#c0392b"`, `class="transition-icon"`. NOT any other icon or color.
 4. **Answer slides**: lightbulb icons removed. No `fa-lightbulb` anywhere in answer `<section>`s.
 5. **Answer tables**: `<table class="answer-table">` with exactly 3 columns (Statement/Answer/Why?). Add `wrap` class for long text. Right column uses `white-space: normal`.
 6. **Table tick/cross**: middle column uses `data-fragment-index` matching the explanation cell for simultaneous reveal.
 7. **Fragment strike**: `class="fragment strike"` on td/p elements. NOT `class="fragment highlight-green"` or any `highlight-*` class (those force `opacity: 1` and never hide).
 8. **Custom fragment CSS**: `answer-correct`/`answer-incorrect` classes used instead of `highlight-green`/`highlight-red` for background reveals.
 9. **Auto-animate**: only between adjacent slides with matching `data-id` on elements. The previous slide must NOT have `data-auto-animate`.
-10. **Pedagogical**: `data-background="#1a6b5a"` + `class="pedagogical"` + `data-background-transition="none"` on all strategy slides.
+10. **Pedagogical**: `data-background-color="#1a6b5a"` + `class="pedagogical"` + `data-background-transition="none"` on all strategy slides.
 11. **Pedagogical alignment**: `padding-top: 30px` via CSS (NOT negative margin-top). Inline `style="top: 0;"` on the `<section>` if needed.
 12. **Step labels**: format `<p><u><strong>Step N:</strong> description</u></p>`.
 13. **One step per slide**: each strategy step is its own `<section>`. No two steps in one slide.
@@ -72,11 +72,11 @@ For each changed file, check the file type and evaluate ALL applicable rules bel
 17. **Rule embedded at Step 2**: "If you answer Yes to all → TRUE. If you answer No to even one → FALSE." Not a separate slide.
 18. **Auto-animate underline reveal**: uses two `<section data-auto-animate>` with transparent → white border transition. NOT `class="fragment"` for keywords (fragments cause blank space with `opacity: 0`).
 19. **Background transition**: `data-background-transition="none"` on all pedagogical slides.
-20. **Pixabay backgrounds**: NOT used in generated output. All backgrounds are solid colors via `data-background="<color>"`.
+20. **Pixabay backgrounds**: NOT used in generated output. All backgrounds are solid colors via `data-background-color="<color>"`.
 21. **One consistent example**: same exam question carried through all steps of a strategy block. No mid-flow example switching.
 22. **No `data-markdown`**: all slides are raw HTML `<section>`. Markdown pipeline is permanently abandoned.
 23. **Answer slides not used for strategy steps**: strategy steps have teal background; answer/confirmation slides have green `#1e7e34` background.
-24. **Summary background**: white (default). End slide: `data-background="#2c3e50"`.
+24. **Summary background**: white (default). End slide: `data-background-color="#2c3e50"`.
 
 ---
 

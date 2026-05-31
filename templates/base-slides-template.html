@@ -51,11 +51,6 @@
                 background: rgba(244, 67, 54, 0.4);
                 color: #fff;
             }
-
-                font-size: 0.4em;
-                vertical-align: middle;
-                margin-left: 10px;
-            }
             .cefr-badge.A1 { background: #4caf50; }
             .cefr-badge.A2 { background: #8bc34a; }
             .cefr-badge.B1 { background: #2196f3; }
@@ -79,18 +74,18 @@
             .reveal .a-row:last-child { border-bottom: none; }
             .reveal .a-num {
                 flex: 0 0 1.5em;
-                text-align: right;
-                color: rgba(255,255,255,0.5);
+                text-align: left;
+                color: #fff;
                 font-size: 0.85em;
             }
             .reveal .a-q {
-                flex: 0 1 auto;
+                flex: 0 0 auto;
                 min-width: 0;
-                margin-right: 1em;
+                margin-right: 0.5em;
             }
             .reveal .a-ans {
-                flex: 0 0 auto;
-                min-width: 180px;
+                flex: 1 1 auto;
+                min-width: 0;
                 text-align: left;
                 padding: 0.1em 0.3em;
                 border-radius: 4px;
@@ -111,25 +106,25 @@
             /* --- Labels & captions --- */
             .reveal .aim-label {
                 font-size: 0.7em;
-                color: #888;
+                color: #fff;
                 text-transform: uppercase;
                 letter-spacing: 0.1em;
             }
             .reveal .material-ref {
                 font-size: 0.65em;
-                color: #888;
+                color: rgba(255,255,255,0.85);
                 font-style: italic;
                 margin-top: 0.5em;
             }
             .reveal .source-cite {
                 font-size: 0.7em;
-                color: #666;
+                color: rgba(255,255,255,0.85);
                 font-style: italic;
                 margin-top: 0.3em;
             }
             .reveal .image-caption {
                 font-size: 0.55em;
-                color: #888;
+                color: rgba(255,255,255,0.85);
                 text-align: center;
                 margin-top: 0.2em;
             }
@@ -215,26 +210,6 @@
             .reveal .answer-yellow { color: #ffdd00; }
             .reveal .fragment.answer-yellow.visible { color: #ffdd00; }
 
-            .reveal .fragment.highlight-green {
-                background: rgba(0, 100, 0, 0.4);
-                padding: 0.3em 0.5em;
-                border-radius: 4px;
-            }
-            .reveal .fragment.highlight-red {
-                background: rgba(100, 0, 0, 0.4);
-                padding: 0.3em 0.5em;
-                border-radius: 4px;
-            }
-            .reveal .fragment.answer-correct.visible {
-                background: rgba(0, 120, 0, 0.5);
-                padding: 0.3em 0.5em;
-                border-radius: 4px;
-            }
-            .reveal .fragment.answer-incorrect.visible {
-                background: rgba(120, 0, 0, 0.5);
-                padding: 0.3em 0.5em;
-                border-radius: 4px;
-            }
             .reveal table.answer-table th {
                 background: rgba(0, 0, 0, 0.2);
                 font-weight: bold;
@@ -359,7 +334,7 @@
 
                 <!-- ─── PATTERN: Transition Slide (red background) ────────── -->
                 <!--
-                <section data-background="#c0392b">
+                <section data-background-color="#c0392b">
                     <h2>Finding details</h2>
                     <p>We're now going to read the story in more detail.</p>
                     <p>Let's start with some True/False questions.</p>
@@ -369,28 +344,19 @@
 
                 <!-- ─── PATTERN: Auto-Animate Strategy Block ──────────────── -->
                 <!--
-                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a6b5a">
                     <h2>True/False Strategy</h2>
                     <p><strong>Step 1:</strong> Read the statement carefully</p>
                     <p><em>Statement text goes here.</em></p>
                 </section>
-                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
-                    <h2>True/False Strategy</h2>
-                    <p><strong>Step 1:</strong> Read the statement carefully</p>
-                    <p><em>Statement text goes here.</em></p>
-                    <p><strong>Step 2:</strong> Find the keywords</p>
-                    <p>"keyword1" · "keyword2" · "keyword3"</p>
-                </section>
-                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a6b5a">
                     <h2>True/False Strategy</h2>
                     <p><strong>Step 1:</strong> Read the statement carefully</p>
                     <p><em>Statement text goes here.</em></p>
                     <p><strong>Step 2:</strong> Find the keywords</p>
                     <p>"keyword1" · "keyword2" · "keyword3"</p>
-                    <p><strong>Step 3:</strong> Find the evidence</p>
-                    <p>Look in paragraphs X and Y. Do the meanings match?</p>
                 </section>
-                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a6b5a">
                     <h2>True/False Strategy</h2>
                     <p><strong>Step 1:</strong> Read the statement carefully</p>
                     <p><em>Statement text goes here.</em></p>
@@ -398,9 +364,8 @@
                     <p>"keyword1" · "keyword2" · "keyword3"</p>
                     <p><strong>Step 3:</strong> Find the evidence</p>
                     <p>Look in paragraphs X and Y. Do the meanings match?</p>
-                    <p><strong>Step 4:</strong> Check your answer</p>
                 </section>
-                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background="#1a6b5a">
+                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a6b5a">
                     <h2>True/False Strategy</h2>
                     <p><strong>Step 1:</strong> Read the statement carefully</p>
                     <p><em>Statement text goes here.</em></p>
@@ -409,7 +374,17 @@
                     <p><strong>Step 3:</strong> Find the evidence</p>
                     <p>Look in paragraphs X and Y. Do the meanings match?</p>
                     <p><strong>Step 4:</strong> Check your answer</p>
-                    <p class="fragment highlight-green">TRUE — Explanation of why it's true.</p>
+                </section>
+                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a6b5a">
+                    <h2>True/False Strategy</h2>
+                    <p><strong>Step 1:</strong> Read the statement carefully</p>
+                    <p><em>Statement text goes here.</em></p>
+                    <p><strong>Step 2:</strong> Find the keywords</p>
+                    <p>"keyword1" · "keyword2" · "keyword3"</p>
+                    <p><strong>Step 3:</strong> Find the evidence</p>
+                    <p>Look in paragraphs X and Y. Do the meanings match?</p>
+                    <p><strong>Step 4:</strong> Check your answer</p>
+                    <p class="fragment fade-up a-ans a-cor">TRUE — Explanation of why it's true.</p>
                 </section>
                 -->
 
@@ -431,7 +406,7 @@
 
                 <!-- ─── PATTERN: Pedagogical Strategy Slide (non-auto-animate) ─ -->
                 <!--
-                <section class="pedagogical" data-background="#1a6b5a">
+                <section class="pedagogical" data-background-color="#1a6b5a">
                     <h2>Multiple Choice Strategy</h2>
                     <p><strong>Step 1: Read all options first</strong> <span class="fragment"> — look at all three choices</span></p>
                     <ul class="fragment">
@@ -443,21 +418,21 @@
                     <p class="fragment strike">a) Reason for elimination. <strong>Eliminate.</strong></p>
                     <p class="fragment strike">b) Reason for elimination. <strong>Eliminate.</strong></p>
                     <p class="fragment"><strong>Step 3: Confirm the answer</strong></p>
-                    <p class="fragment highlight-green">c) Correct answer explanation. <i class="fa-solid fa-check"></i> <strong>c is correct!</strong></p>
+                    <p class="fragment fade-up a-ans a-cor">c) Correct answer explanation. <i class="fa-solid fa-check"></i> <strong>c is correct!</strong></p>
                 </section>
                 -->
 
                 <!-- ─── PATTERN: Answer Slide (True/False) ─────────────────── -->
                 <!--
-                <section data-background="#1e7e34">
+                <section data-background-color="#1e7e34">
                     <h2>Exercise 2</h2>
                     <p class="aim-label">True/False</p>
                     <table class="answer-table">
                         <thead><tr><th>Statement</th><th>Answer</th></tr></thead>
                         <tbody>
-                            <tr><td>Statement text.</td><td class="fragment answer-correct"><i class="fa-solid fa-check"></i> <strong>True</strong></td></tr>
-                            <tr><td>Another statement.</td><td class="fragment answer-incorrect"><i class="fa-solid fa-times"></i> <strong>False</strong></td></tr>
-                            <tr><td>Corrected statement.</td><td class="fragment answer-correct"><i class="fa-solid fa-check"></i> <em>Explanation</em></td></tr>
+                            <tr><td>Statement text.</td><td class="fragment a-cor"><i class="fa-solid fa-check"></i> <strong>True</strong></td></tr>
+                            <tr><td>Another statement.</td><td class="fragment a-inc"><i class="fa-solid fa-times"></i> <strong>False</strong></td></tr>
+                            <tr><td>Corrected statement.</td><td class="fragment a-cor"><i class="fa-solid fa-check"></i> <em>Explanation</em></td></tr>
                         </tbody>
                     </table>
                 </section>
@@ -465,13 +440,13 @@
 
                 <!-- ─── PATTERN: Answer Slide (Multiple Choice) ────────────── -->
                 <!--
-                <section data-background="#1e7e34">
+                <section data-background-color="#1e7e34">
                     <h2>Exercise 4</h2>
                     <p class="aim-label">Multiple Choice</p>
                     <table class="answer-table">
                         <thead><tr><th>Question</th><th>Answer</th><th>Why?</th></tr></thead>
                         <tbody>
-                            <tr><td>Question text</td><td class="fragment answer-correct"><i class="fa-solid fa-check"></i> <strong>c</strong></td><td class="fragment">citation</td></tr>
+                            <tr><td>Question text</td><td class="fragment a-cor"><i class="fa-solid fa-check"></i> <strong>c</strong></td><td class="fragment">citation</td></tr>
                         </tbody>
                     </table>
                 </section>
@@ -479,14 +454,14 @@
 
                 <!-- ─── PATTERN: Answer Slide (Paragraph Matching) ─────────── -->
                 <!--
-                <section data-background="#1e7e34">
+                <section data-background-color="#1e7e34">
                     <h2>Exercise 3</h2>
                     <p class="aim-label">Paragraph Matching</p>
                     <table class="answer-table">
                         <thead><tr><th>Paragraph</th><th>Match</th></tr></thead>
                         <tbody>
-                            <tr><td>Paragraph description</td><td class="fragment answer-correct"><i class="fa-solid fa-check"></i> <strong>B</strong></td></tr>
-                            <tr><td>Another description</td><td class="fragment answer-correct"><i class="fa-solid fa-check"></i> <strong>C</strong></td></tr>
+                            <tr><td>Paragraph description</td><td class="fragment a-cor"><i class="fa-solid fa-check"></i> <strong>B</strong></td></tr>
+                            <tr><td>Another description</td><td class="fragment a-cor"><i class="fa-solid fa-check"></i> <strong>C</strong></td></tr>
                         </tbody>
                     </table>
                 </section>
@@ -511,7 +486,7 @@
 
                 <!-- ─── PATTERN: End Slide ─────────────────────────────────── -->
                 <!--
-                <section data-background="#2c3e50">
+                <section data-background-color="#2c3e50">
                     <h2>Thank you</h2>
                     <p><em>Topic Name</em> | B2</p>
                 </section>
@@ -519,7 +494,7 @@
 
                 <!-- ─── PATTERN: YouTube Embed Slide ────────────────────────── -->
                 <!--
-                <section data-background="#1a1a2e">
+                <section data-background-color="#1a1a2e">
                     <h2>Video Title</h2>
                     <iframe
                         width="760" height="430"
@@ -535,7 +510,7 @@
 
                 <!-- ─── PATTERN: Diagnostic Talk Structure Slide ────────────── -->
                 <!--
-                <section class="pedagogical structure-talk" data-background="#1a6b5a" data-background-transition="none" style="top: 0;">
+                <section class="pedagogical structure-talk" data-background-color="#1a6b5a" data-background-transition="none" style="top: 0;">
                     <h2>Structure Your Talk</h2>
                     <p class="structure-step"><u><strong>Thesis:</strong> Say your main idea</u></p>
                     <p class="structure-step"><u><strong>Reasons:</strong> Give 1-2 reasons</u></p>
@@ -546,7 +521,7 @@
 
                 <!-- ─── PATTERN: Grammar Diagnostic Test Slide ──────────────── -->
                 <!--
-                <section data-background="#1a1a2e">
+                <section data-background-color="#1a1a2e">
                     <h2>Diagnostic Test</h2>
                     <p><em>Each sentence has ONE error. Find and fix it.</em></p>
                     <ol style="font-size: 0.8em; text-align: left;">
@@ -562,7 +537,7 @@
 
                 <!-- ─── PATTERN: Grammar Rules Slide ────────────────────────── -->
                 <!--
-                <section class="pedagogical" data-background="#1a6b5a" data-background-transition="none">
+                <section class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none">
                     <h2>Rule Title (Rules 1–3)</h2>
                     <p><u><strong>Rule 1:</strong> Description</u></p>
                     <p><em>"Example sentence."</em> Explanation.</p>
@@ -573,12 +548,12 @@
 
                 <!-- ─── PATTERN: Error-Correction Answer Table ───────────────── -->
                 <!--
-                <section data-background="#1e7e34">
+                <section data-background-color="#1e7e34">
                     <h2>Practice N — Answers (1–X)</h2>
                     <table class="answer-table">
                         <thead><tr><th>#</th><th>Original</th><th>Correction</th></tr></thead>
                         <tbody>
-                            <tr><td>1</td><td>Original text.</td><td class="fragment answer-correct"><strong style="color:#ffdd00;">Correction</strong></td></tr>
+                            <tr><td>1</td><td>Original text.</td><td class="fragment a-cor"><strong style="color:#ffdd00;">Correction</strong></td></tr>
                             ...
                         </tbody>
                     </table>
@@ -602,7 +577,7 @@
 
                 <!-- ─── PATTERN: Code/Text Passage with Line Highlights ──── -->
                 <!--
-                <section data-background="#1a1a2e">
+                <section data-background-color="#1a1a2e">
                     <h2>Find the Main Idea</h2>
                     <pre style="font-size: 0.7em;"><code data-trim data-line-numbers="1-5|8-10|12-15">
                         Line 1 of your text passage.

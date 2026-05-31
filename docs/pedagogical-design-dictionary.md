@@ -115,11 +115,11 @@ Two consecutive slides with matching `data-auto-animate-id`. Use `data-id` on ch
 
 ```html
 <!-- Entry: transparent border -->
-<section data-auto-animate data-auto-animate-id="example" data-background="#1a1a2e">
+<section data-auto-animate data-auto-animate-id="example" data-background-color="#1a1a2e">
     <p data-id="target" style="border-bottom: 2px solid transparent;">Key word</p>
 </section>
 <!-- Reveal: visible border -->
-<section data-auto-animate data-auto-animate-id="example" data-background="#1a1a2e">
+<section data-auto-animate data-auto-animate-id="example" data-background-color="#1a1a2e">
     <p data-id="target" style="border-bottom: 3px solid #ffdd00;">Key word</p>
 </section>
 ```
@@ -130,7 +130,7 @@ Items on one side of a two-column layout reposition via `data-id` matching. Both
 
 ```html
 <!-- Entry: items in numerical/default order -->
-<section data-auto-animate data-auto-animate-id="match" data-background="#1a1a2e">
+<section data-auto-animate data-auto-animate-id="match" data-background-color="#1a1a2e">
     <div style="display: grid; grid-template-columns: auto 1fr; gap: 0.3em 2em;">
         <div><!-- A, B, C, ... --></div>
         <div data-id="container">
@@ -141,7 +141,7 @@ Items on one side of a two-column layout reposition via `data-id` matching. Both
     </div>
 </section>
 <!-- Reveal: items in correct matching order -->
-<section data-auto-animate data-auto-animate-id="match" data-background="#1a1a2e">
+<section data-auto-animate data-auto-animate-id="match" data-background-color="#1a1a2e">
     <div style="display: grid; grid-template-columns: auto 1fr; gap: 0.3em 2em;">
         <div><!-- A, B, C, ... --></div>
         <div data-id="container">

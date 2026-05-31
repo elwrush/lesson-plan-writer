@@ -576,7 +576,7 @@ Quick reference of slide types and their pedagogical intent:
 |---|---|---|---|
 | Title | `#1a1a2e` | Topic + CEFR + strap | Static — orientation |
 | Objective | default | 3 outcomes (full visibility) | Static — orientation |
-| Vocabulary | `#1a1a2e` | One word + IPA + context | Static — focus |
+| Vocabulary | `#1a1a2e` | IPA visible first; English word + context reveal on click | Fragment — reveal |
 | Lead-in | `#1a1a2e` | One open question | Static — activation |
 | Transition | `#c0392b` | Heading only, phase signal | Static — rest |
 | Teach (sentence/grammar) | `#1a6b5a` | Word/part transforms (color, border, highlight) | Auto-animate — transformation |
@@ -621,7 +621,7 @@ When asked to edit a slide at a reveal.js URL:
 
 **Stable slide IDs (preferred):** Every `<section>` should have a stable `id` attribute to prevent index confusion when slides are added or removed:
 ```html
-<section id="slide-lead-in" data-background="#1a1a2e">
+<section id="slide-lead-in" data-background-color="#1a1a2e">
 ```
 To locate a slide by its stable ID:
 ```bash
@@ -644,7 +644,7 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
 3. **Title slide: topic + CEFR badge + strap subheader** — NO date, teacher name, duration, or materials.
 4. **Task slides: brief student instructions** — extract task description from procedure, skip teacher-only instructions. Max 3 task lines on screen.
 5. **Stage names: student-friendly language** — "Lead-in" → "Let's get Started", "Reading for gist" → "What's the main idea?", "Reading for detail" → "Finding details", "Reading for inference" → "Making conclusions", "Post-reading" → "Let's Discuss", "Wrap-up" → "Let's Review"
-6. **Vocabulary slides** — generated AFTER lead-in stage. One word per slide with dark navy background. "Important Words" title on first slide only. Yellow bold (#ffdd00) via `<span class="vocab-word">`.
+6. **Vocabulary slides** — generated AFTER lead-in stage. One word per slide with dark navy background. No sub-heading — the preceding red transition slide already signals the vocabulary phase. Yellow bold (#ffdd00) via `<span class="vocab-word">`.
 7. **Answer slides** — use `<div class="answer-list">` flex layout (NOT `<table class="answer-table">`). Green background `#1e7e34`. Statements visible on entry. Structure each row as:
     ```html
     <div class="a-row">
@@ -662,7 +662,40 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
 9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#1a6b5a` (pedagogical/strategy), green `#1e7e34` (answer tables), dark `#2c3e50` (end)
 10. **Title slide visuals**: Logo centered at top (`height: 78px`), title with CEFR badge below, strap subheader, then `r-stretch` image filling remaining space. Use `data-background-color="#1a1a2e"` as base. No `data-background-image` — the image is an `<img>` element in normal document flow.
 11. **Text highlighting**: white text, dark text-shadow, pedagogical sections use white-on-teal
-12. **Vocabulary words**: yellow boldface (`#ffdd00`) via `<span class="vocab-word">` — in both the word heading AND context sentence. **Context sentences must IMPLY meaning, not define.** Test: can a B1 student infer the meaning without a dictionary? If the sentence would still make sense with a blank in place of the target word, the context is insufficient. Good: "The greasers slick their hair back and wear leather jackets — they're the tough kids from the poor side of town." Bad: "Ponyboy is a greaser who lives on the East Side."
+12. **Vocabulary words**: yellow boldface (`#ffdd00`) via `<span class="vocab-word">` — in both the word heading AND context sentence(s).
+
+    **IPA-first fragment reveal pattern** — Each vocab slide MUST show the phonemic script first (visible on entry), then reveal the English spelling AND the context sentence simultaneously on click via fragments with matching `data-fragment-index="1"`.
+
+    **Sequence:**
+    1. **Entry** — Student sees IPA only (e.g., `/juː/`). No English word, no definition, no heading — the preceding red transition slide already announced vocabulary time.
+    2. **Click** — The English word (yellow, bold) and the implicative example sentence (white with yellow target word) appear simultaneously via `class="fragment" data-fragment-index="1"`.
+
+    **Visual layout:**
+    ```html
+    <section class="vocab-slide" data-background-color="#1a1a2e">
+        <p><em>/juː/</em></p>
+        <p class="fragment" data-fragment-index="1"><span class="vocab-word">yew</span></p>
+        <p class="fragment" data-fragment-index="1" style="font-size:0.9em; margin-top:0.3em;">
+            <em>The churchyard is full of <span class="vocab-word">yew</span> trees, some over 2,000 years old.</em>
+        </p>
+    </section>
+    ```
+
+    **Rules:**
+    - The `data-fragment-index` MUST be `"1"` on both the word `<p>` and the sentence `<p>` so they reveal on the same click
+    - The `<span class="vocab-word">` on the target word within the sentence applies yellow boldface (`#ffdd00`) automatically via CSS
+    - Only the target word is yellow — never the entire sentence
+    - **No "Important Words" heading on any vocab slide** — the transition slide (red background, "Some important words") already signals the phase. A heading on the first vocab slide would be redundant.
+
+    **Test for implicative sentence:** Can a B2 student infer the word's meaning without a dictionary, without knowing the story, and with ONLY this one sentence on screen? If the sentence would still make sense with a blank in place of the target word, the context is insufficient.
+
+    | Good (implicative — single sentence is enough) | Bad (just a book quote — doesn't imply meaning) |
+    |---|---|
+    | *The churchyard is full of yew trees, some over 2,000 years old.* | *Conor can see the great yew tree outside his window.* |
+    | *The desert heat made the road ahead shimmering like water.* | *The monster's branches gather into a face, shimmering into a mouth and eyes.* |
+    | *The wild horse had never been ridden — it was completely untamed.* | *The monster's voice has a quality to it — wild and untamed.* |
+
+    The implicative example must come from **general life experience** (weather, nature, school, home, work, animals, plants, common objects) — not from the story world. This ensures the student can access the meaning independently. A single well-chosen sentence does the job — a second "In the story..." sentence adds visual clutter and gray text students won't read.
 13. **Timer pill vs audio**: Never add `data-timer` to a slide that also has `data-audio-src`. Slides with audio playback should not have a timer pill — the two controls conflict visually and functionally.
 14. **Proper HTML lists for letters/numbers**: Never use manual lettering or numbering in `<p>` tags (e.g., `<p><strong>A</strong> Option text</p>`). Use semantically correct HTML lists instead: `<ol type="A">` for lettered options, `<ol>` for numbered items, `<ul>` for bullet points. Each item gets its own `<li>` element. This ensures proper alignment and accessibility.
 15. **Check/cross symbols: Font Awesome only, never Unicode**: Check marks (✓) and cross marks (✗) must use Font Awesome icons `<i class="fa-solid fa-check">` and `<i class="fa-solid fa-times">` — never raw Unicode characters U+2713 and U+2717. These Unicode characters do not render reliably across all browser/system font combinations. Font Awesome is loaded in the base template via CDN and renders consistently in every browser. Use `style="color:#4caf50;"` on check marks and `style="color:#ff5252;"` on cross marks for dark/teal/white backgrounds. On green `#1e7e34` answer slides, use `style="color:#fff;"` for both (only white or yellow allowed on green backgrounds per rule 7).
@@ -739,7 +772,7 @@ See AGENTS.md (`Pedagogical Strategy Slides — Design Principles`) for the full
 - **Step label format**: `<u><strong>Step N:</strong> description</u>`
 - **Header on first slide only**, remaining slides show only the step label
 - **Auto-animate for keyword underlines**: use `<span data-id="...">` with transparent→visible border transitions across consecutive `<section data-auto-animate>` siblings
-- **Teal background**: `data-background="#1a6b5a"` + `class="pedagogical"` on all strategy slides
+- **Teal background**: `data-background-color="#1a6b5a"` + `class="pedagogical"` on all strategy slides
 - **Top alignment**: CSS `.reveal .slides > section.pedagogical { align-self: flex-start; padding-top: 30px; }`
 
 ## Common Pitfalls

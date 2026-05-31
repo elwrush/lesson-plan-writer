@@ -198,11 +198,11 @@ SLIDESHOW FLOW — index2.html
 - **Table tick/cross**: middle column with `data-fragment-index` matching explanation cell for simultaneous reveal
 - **Lightbulb removed** from all answer slides (saves screen real estate)
 - **Green answer slide text contrast**: All text on `#1e7e34` answer slides MUST use only white (`#fff`) or yellow (`#ffdd00`). No gray, blue, or muted colors — they are invisible at projection distance. The template's `.aim-label` uses gray `#888` by default and must be overridden with `color: rgba(255,255,255,0.7)` on green slides.
-- **Pedagogical background**: `data-background="#1a6b5a"` + `class="pedagogical"` + `data-background-transition="none"`
+- **Pedagogical background**: `data-background-color="#1a6b5a"` + `class="pedagogical"` + `data-background-transition="none"`
 - **Max 3 items per answer slide** — whether using answer-list flex layout or inline annotations. Split exercises with >3 items across multiple slides.
 - **Inline S/V/O annotations** — for grammar identification exercises (subjects, verbs, objects), decorate words directly on the sentence rather than using a separate answer column. Use `class="fragment custom svo-s"`, `svo-v`, `svo-o` on `<span>` elements with CSS controlling border/color changes on `.visible`. Superscript labels (`<sup>S</sup>`, `<sup>V</sup>`, `<sup>O</sup>`) use `opacity: 0` → `opacity: 1` with CSS transitions. Use `data-fragment-index` to group each sentence's decorations and confirmation note for per-click reveal.
 - **Custom fragments** — use `class="fragment custom"` when you need an element to stay fully visible but change specific CSS properties (border, color, opacity) on click. The `custom` keyword prevents reveal.js from applying default `opacity: 0; visibility: hidden`. All styling is controlled via CSS rules on `.fragment.custom.*` (default state) and `.fragment.custom.*.visible` (revealed state). Common use: annotations that animate in without hiding the underlying text.
-- **Title slide layout** — ACT logo centered at top with `height: 78px`, lesson title below at reduced font size so it fits on one line, strap subheader, then `r-stretch` Pixabay image filling remaining space. B1 badge in title area. No `data-background-image` — use natural document flow.
+- **Title slide layout** — ACT logo centered at top with `height: 78px`, lesson title below at reduced font size so it fits on one line, strap subheader, then Pixabay image filling remaining space. B1 badge in title area. No `data-background-image` — use natural document flow. **Note:** `r-stretch` on `<img>` must be a direct child of `<section>`, not nested in `<div>` or `r-stack`. For images inside `r-stack`, use explicit CSS: `position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;`.
 
 ## Pedagogical Strategy Slides — Design Principles
 
@@ -232,7 +232,7 @@ Example: A True/False statement about the "generation gap" article runs through 
 - **Real quotes on Step 4** — actual text excerpts from the article, in italics with the relevant phrase highlighted
 - **Rule embedded at Step 2** — not a separate slide. Include it: "If you answer Yes to all → TRUE. If you answer No to even one → FALSE."
 - **Auto-animate for keyword underlines** — use `data-auto-animate` on a pair of adjacent slides to animate keyword underlines appearing. See pattern below.
-- **Teal background** — `data-background="#1a6b5a"` + `class="pedagogical"` on all strategy slides.
+- **Teal background** — `data-background-color="#1a6b5a"` + `class="pedagogical"` on all strategy slides.
 - **Top alignment** — use `padding-top: 30px` on `.reveal .slides > section.pedagogical` in CSS. Do NOT use negative margins (they clip content off-screen). Inline `style="top: 0;"` on the section element if needed.
 
 ### Auto-Animate for Underline Reveal
@@ -245,17 +245,17 @@ Pattern (both sections need `data-auto-animate`):
 
 ```html
 <!-- Enter state: plain sentence, borders invisible -->
-<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate>
-    <div style="overflow: hidden;">
-        <p><u><strong>Step 2:</strong> Underline key words</u></p>
-        <p data-id="mcq" style="color:#ffdd00;">
-            <em>"What is the <span data-id="w1" style="border-bottom: 2px solid transparent;">main message</span>
-            of this <span data-id="w2" style="border-bottom: 2px solid transparent;">article</span>?"</em>
-        </p>
-    </div>
-</section>
-<!-- After click: borders become visible, animate via auto-animate -->
-<section class="pedagogical" data-background="#1a6b5a" data-background-transition="none" data-auto-animate>
+<section class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="underline-demo">
+        <div style="overflow: hidden;">
+            <p><u><strong>Step 2:</strong> Underline key words</u></p>
+            <p data-id="mcq" style="color:#ffdd00;">
+                <em>"What is the <span data-id="w1" style="border-bottom: 2px solid transparent;">main message</span>
+                of this <span data-id="w2" style="border-bottom: 2px solid transparent;">article</span>?"</em>
+            </p>
+        </div>
+    </section>
+    <!-- After click: borders become visible, animate via auto-animate -->
+    <section class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="underline-demo">
     <div style="overflow: hidden;">
         <p><u><strong>Step 2:</strong> Underline key words</u></p>
         <p data-id="mcq" style="color:#ffdd00;">
@@ -287,7 +287,7 @@ Pattern:
 
 ```html
 <!-- Slide 1 (entry): plain sentence, transparent annotations -->
-<section data-auto-animate data-auto-animate-id="svo-demo" data-background="#1a1a2e">
+<section data-auto-animate data-auto-animate-id="svo-demo" data-background-color="#1a1a2e">
     <h2 data-id="title">What's inside a sentence?</h2>
     <p>
         <span data-id="subject" style="border-bottom: 2px solid transparent;">
@@ -302,7 +302,7 @@ Pattern:
     </p>
 </section>
 <!-- Slide 2 (annotated): decorations appear via auto-animate CSS transition -->
-<section data-auto-animate data-auto-animate-id="svo-demo" data-background="#1a1a2e">
+<section data-auto-animate data-auto-animate-id="svo-demo" data-background-color="#1a1a2e">
     <h2 data-id="title">What's inside a sentence?</h2>
     <p>
         <span data-id="subject" style="border-bottom: 2px solid #4fc3f7;">

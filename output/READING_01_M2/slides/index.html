@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <title>Introducing The Outsiders (Reading Circle)</title>
+        <title>Introducing A Monster Calls (Reading Circle)</title>
         <meta name="referrer" content="strict-origin-when-cross-origin" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
@@ -132,6 +132,9 @@
                 font-weight: bold;
                 text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
             }
+            .reveal .ipa {
+                font-style: normal;
+            }
 
             /* --- Pedagogical strategy slides (teal background) --- */
             .reveal section.pedagogical h2 {
@@ -165,10 +168,6 @@
             }
 
             /* --- Text shield for full-opacity image backgrounds --- */
-            /* Uses display:inline-block + max-width for subtitle-style shielding.
-               inline-block keeps the background tight to the text.
-               max-width prevents full-width bars on very long text.
-               Elements stack naturally (block-level spacing) without ::after artifacts. */
             .reveal .text-shield {
                 background: rgba(0, 0, 0, 0.55);
                 padding: 0.15em 0.6em;
@@ -188,12 +187,10 @@
                 color: #222;
                 line-height: 1.6;
             }
-            /* Fragment variant: text already visible, background highlight on click */
             .reveal .fragment.text-shield-light { opacity: 1; visibility: inherit; }
             .reveal .fragment.text-shield-light.visible { background: rgba(200, 200, 200, 0.65); padding: 0.15em 0.6em; border-radius: 4px; }
 
             /* --- Fragment styles --- */
-            /* --- Yellow text for answers on green answer tables --- */
             .reveal .answer-yellow { color: #ffdd00; }
             .reveal .fragment.answer-yellow.visible { color: #ffdd00; }
 
@@ -274,16 +271,16 @@
 <!-- PEDAGOGICAL INTENT: Student sees the lesson topic and CEFR level, orienting them to the session. -->
 <!-- WHY THIS FEATURE: Static — all information visible at once; no transformation needed. -->
 <!-- COGNITIVE PRINCIPLE: none — orientation slide. -->
-<section id="slide-title" data-background-gradient="linear-gradient(145deg, #c0392b 0%, #1a1a2e 70%)">
+<section id="slide-title" data-background-gradient="linear-gradient(145deg, #1a3a5c 0%, #1a1a2e 70%)">
     <img src="assets/logo.png" style="height: 78px; margin-bottom: 0.3em;" />
-    <h1 style="font-size: 1.6em;">Introducing The Outsiders <span class="cefr-badge B1">B1</span></h1>
-    <p><em>Explore the beginning of a classic story</em></p>
-    <img class="r-stretch" src="assets/greasers.jpg" style="object-fit: contain; border-radius: 6px; border: 2px solid rgba(255,255,255,0.2); box-shadow: 0 4px 20px rgba(0,0,0,0.6);" />
+    <h1 style="font-size: 1.5em;">Introducing A Monster Calls <span class="cefr-badge B1">B1</span></h1>
+    <p><em>The monster showed up just after midnight. As they do.</em></p>
+    <img class="r-stretch" src="assets/title.avif" style="object-fit: contain; border-radius: 6px; border: 2px solid rgba(255,255,255,0.2); box-shadow: 0 4px 20px rgba(0,0,0,0.6);" />
     <aside class="notes">
-        Lesson: Introducing The Outsiders (Reading Circle)
-        Duration: 46 minutes · Class: M2-4A · CEFR: B1
+        Lesson: Introducing A Monster Calls (Reading Circle)
+        Duration: 46 minutes · Class: M2 ·         CEFR: B1
         Teacher: Ed Rush
-        Materials: The Outsiders by S.E. Hinton (Chapter 1), YouTube trailer, composite cast image, reflection questions handout
+        Materials: A Monster Calls by Patrick Ness (Chapters 1 & 2), YouTube trailer, composite film image, author photo, reflection questions handout
     </aside>
 </section>
 
@@ -293,31 +290,52 @@
 <section id="slide-objective" data-background-color="#1a1a2e">
     <h2>Here's what you'll be able to do</h2>
     <ul>
-        <li>I can understand the start of a story</li>
-        <li>I can find important details about the characters</li>
-        <li>I can share my thoughts about what I read</li>
+        <li>I can understand the opening of a story about monsters and truth</li>
+        <li>I can find important clues about Conor's hidden fear</li>
+        <li>I can share my thoughts about the monster's purpose</li>
     </ul>
-    <p><em>These are the same skills you use when you read in English every day!</em></p>
+    <p><em>These are skills you use when you read any story in English!</em></p>
     <aside class="notes">
         Read through each outcome. Elicit: "Which of these sounds the easiest? The hardest?"
-        Connect to prior knowledge: "You already do these things when you read in Thai."
-        Explain: "Today we start a new novel together — The Outsiders."
+        Connect to prior knowledge: "Today we start a new novel together — A Monster Calls."
     </aside>
 </section>
 
-<!-- PEDAGOGICAL INTENT: Student sees the discussion question about being an outsider and connects the theme to personal experience. -->
+<!-- PEDAGOGICAL INTENT: Student watches the movie trailer and forms expectations about the story's atmosphere. -->
+<!-- WHY THIS FEATURE: iframe embed — native YouTube playback with reveal.js slide:start/stop events for automatic pause. -->
+<!-- COGNITIVE PRINCIPLE: Multimedia — video primes visual and auditory channels before reading. -->
+<section id="slide-lead-in-video" data-background-color="#1a1a2e">
+    <h2>A Monster Calls — Trailer</h2>
+    <iframe
+        width="760" height="430"
+        src="https://www.youtube.com/embed/R2Xbo-irtBA"
+        frameborder="0"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+        style="border: none; display: block; margin: 0 auto;">
+    </iframe>
+    <p><em>What do you think this story is about? What kind of monster do you expect?</em></p>
+    <aside class="notes">
+        Play the trailer (~2 min). After it ends, elicit initial reactions.
+        Stage 1 · 8 min total (incl. discussion on next slide)
+        Goal: To activate learners' interest and build anticipation.
+        Ask: "What do you think this story is about? What kind of monster do you expect?"
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the discussion question about monsters and connects the theme to personal experience. -->
 <!-- WHY THIS FEATURE: Static — question must remain visible throughout the pair discussion; no reveal needed. -->
-<!-- COGNITIVE PRINCIPLE: Pre-training — activating prior knowledge and personal connection before reading. -->
+<!-- COGNITIVE PRINCIPLE: Pre-training — activating prior knowledge before reading. -->
 <section id="slide-lead-in-discuss" data-background-color="#1a1a2e">
-    <h2>What does it mean to be an outsider?</h2>
+    <h2>What would you do if a monster came to your window at midnight?</h2>
     <ul>
-        <li>Think about a time you felt like an outsider.</li>
-        <li>Was being an outsider different in the 1960s than it is today?</li>
+        <li>Would you be scared? Or curious?</li>
+        <li>What kind of monster would frighten you the most?</li>
     </ul>
     <aside class="notes">
-        Pair discussion: "What does it mean to be an outsider? Can you think of a time you felt like one?"
+        Pair discussion: "What would you do if a monster came to your window at midnight?"
         3 min pair discussion. Then 2 min class feedback.
-        Bridge to the novel: "The Outsiders is a story about teenagers who feel like outsiders — and how they find belonging."
+        Bridge to the novel: "A Monster Calls is about a boy named Conor who is visited by a monster — a yew tree that walks and talks. But this monster wants something more frightening than Conor expects. Today we read Chapter 1 together."
     </aside>
 </section>
 
@@ -328,59 +346,40 @@
     <h2>Author Spotlight</h2>
 </section>
 
-<!-- PEDAGOGICAL INTENT: Student sees key facts about the author alongside a photo of the film cast, building context for the novel. -->
+<!-- PEDAGOGICAL INTENT: Student sees key facts about the authors alongside the photo, building context for the novel. -->
 <!-- WHY THIS FEATURE: Static — facts and image visible at once; r-stretch image fills remaining space. -->
 <!-- COGNITIVE PRINCIPLE: Multimedia — text + image dual-channel encoding builds richer context. -->
 <section id="slide-author" data-background-color="#1a1a2e">
     <h2>About the Author</h2>
     <ul style="font-size: 0.85em;">
-        <li>S.E. Hinton wrote <em>The Outsiders</em> at age 15</li>
-        <li>Published at 19 — 15 million+ copies sold</li>
-        <li>Called the "mother of YA fiction"</li>
+        <li>Patrick Ness — born 1971 in the US, moved to the UK</li>
+        <li>A <em>Monster Calls</em> won the <strong>Carnegie Medal</strong> and the <strong>Kate Greenaway Medal</strong> — the only book ever to win both</li>
+        <li>Ness won the Carnegie two years in a row — only the 2nd author ever</li>
+        <li>Over <strong>1 million copies sold</strong> worldwide, translated into 30+ languages</li>
     </ul>
-    <img class="r-stretch" src="assets/sehinton.jpg" style="object-fit: contain; border-radius: 6px;" />
+    <img class="r-stretch" src="assets/ness.jpg" style="object-fit: contain; border-radius: 6px;" />
     <aside class="notes">
         Stage 2 · 5 min · T-Ss
-        Goal: To give learners context about the author and the novel's significance.
-        Key points to mention: The Outsiders has sold over 15 million copies, adapted into a 1983 film directed by Francis Ford Coppola.
-        Point to actors in the composite image (Matt Dillon, Tom Cruise, Patrick Swayze, Ralph Macchio, C. Thomas Howell).
+        Goal: To give learners context about the author and the novel's unique origin.
+        Key points: Siobhan Dowd wrote four brilliant YA novels. This would have been her fifth.
+        Ness won the Carnegie Medal for this book, and Jim Kay won the Kate Greenaway Medal for the illustrations.
+        Awards: British Children's Book of the Year, Red House Children's Book Award, Kitschies Red Tentacle.
+        Sales: Over 1 million copies. Film starred Liam Neeson, Felicity Jones, Sigourney Weaver.
         Then transition to vocabulary pre-teach.
     </aside>
 </section>
 
-<!-- PEDAGOGICAL INTENT: Student sees the greaser characters with their names, connecting the faces to the story's central group. -->
+<!-- PEDAGOGICAL INTENT: Student sees the film adaptation image, connecting the page to the screen. -->
 <!-- WHY THIS FEATURE: Static — r-stretch image contained within the slide; text above prevents overlap. -->
-<!-- COGNITIVE PRINCIPLE: Multimedia — image anchors character names visually; Spatial Contiguity — names appear near their visual representation. -->
-<section id="slide-character-intro" data-background-color="#1a1a2e">
-    <h2>The Greasers</h2>
-    <p style="font-size: 0.85em; margin-bottom: 0.3em;"><em>A gang of outsiders from the wrong side of town</em></p>
-    <img class="r-stretch" src="assets/composite-cast.png" style="object-fit: contain; border-radius: 6px;" />
+<!-- COGNITIVE PRINCIPLE: Multimedia — image anchors the story visually. -->
+<section id="slide-film-adaptation" data-background-color="#1a1a2e">
+    <h2>The Film Adaptation</h2>
+    <p style="font-size: 0.85em; margin-bottom: 0.3em;"><em>Released 2016, starring Lewis MacDougall, Sigourney Weaver, Felicity Jones, and Liam Neeson as the voice of the monster</em></p>
+    <img class="r-stretch" src="assets/composite.jpg" style="object-fit: contain; border-radius: 6px;" />
     <aside class="notes">
-        Point to the actors in the image. These are the main greaser characters.
-        Each has a different personality — we'll meet them as we read.
+        Point out the cast. The film was directed by J.A. Bayona.
+        It's a faithful and visually stunning adaptation.
         Stage 2 · Part of Author Spotlight
-    </aside>
-</section>
-
-<!-- PEDAGOGICAL INTENT: Student watches the movie trailer and forms expectations about the story's setting, characters, and conflict. -->
-<!-- WHY THIS FEATURE: iframe embed — native YouTube playback with reveal.js slide:start/stop events for automatic pause. -->
-<!-- COGNITIVE PRINCIPLE: Multimedia — video primes visual and auditory channels before reading. -->
-<section id="slide-lead-in-video" data-background-color="#1a1a2e">
-    <h2>The Outsiders — Trailer</h2>
-    <iframe
-        width="760" height="430"
-        src="https://www.youtube.com/embed/uxVZcju_UV0"
-        frameborder="0"
-        allowfullscreen
-        referrerpolicy="strict-origin-when-cross-origin"
-        style="border: none; display: block; margin: 0 auto;">
-    </iframe>
-    <p><em>What do you think this story is about? Who are these people?</em></p>
-    <aside class="notes">
-        Play the trailer (~2 min). After it ends, elicit initial reactions.
-        Stage 1 · 8 min total (incl. discussion on next slide)
-        Goal: To activate learners' interest and build anticipation.
-        Ask: "What do you think this story is about? Who are these people?"
     </aside>
 </section>
 
@@ -393,62 +392,66 @@
 
 <!-- PEDAGOGICAL INTENT: Student sees the first vocabulary word with IPA and context, building word knowledge before reading. -->
 <!-- WHY THIS FEATURE: Static — one word per slide for focused attention; yellow boldface signals importance. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — yellow boldface directs attention to the target word; Segmenting — one word per slide reduces cognitive load. -->
-<section id="slide-vocab-greaser" class="vocab-slide" data-background-color="#1a1a2e">
-    <h2>Important Words</h2>
-    <p><span class="vocab-word">greaser</span> <em>/ˈɡriːsər/</em></p>
-    <p><em>The <span class="vocab-word">greasers</span> slick their hair back and wear leather jackets — they're the tough kids from the poor side of town.</em></p>
+<!-- COGNITIVE PRINCIPLE: Signaling — IPA first builds phonological awareness; fragment reveals spelling + context on click. Segmenting — one word per slide. -->
+<section id="slide-vocab-yew" class="vocab-slide" data-background-color="#1a1a2e">
+    <p><span class="ipa">/juː/</span></p>
+    <p class="fragment" data-fragment-index="1"><span class="vocab-word">yew</span></p>
+    <p class="fragment" data-fragment-index="1" style="font-size:0.9em; margin-top:0.3em;"><em>The churchyard is full of <span class="vocab-word">yew</span> trees, some over 2,000 years old.</em></p>
     <aside class="notes">
         Drill: teacher says → class repeats (×3).
-        Elicit: "In the story, greasers are the poor kids from the East Side. They have long, greased-back hair."
+        Explain: "A yew is an evergreen tree with poisonous berries, often found in church graveyards. Yew trees can live for thousands of years."
     </aside>
 </section>
 
-<!-- PEDAGOGICAL INTENT: Student sees the word "Socs" with IPA and context contrasting with greasers. -->
-<!-- WHY THIS FEATURE: Static — one word per slide; no reveal needed. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — repetition of yellow-bolded pattern maintains consistency. -->
-<section id="slide-vocab-socs" class="vocab-slide" data-background-color="#1a1a2e">
-    <p><span class="vocab-word">Socs</span> <em>/ˈsoʊʃɪz/</em></p>
-    <p><em>The <span class="vocab-word">Socs</span> drive nice cars and live on the West Side — they have money and cool clothes.</em></p>
+<!-- PEDAGOGICAL INTENT: Student hears IPA first, then sees spelling + context on click. -->
+<!-- WHY THIS FEATURE: Fragments on the word and sentence with matching fragment-index reveal them simultaneously. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — yellow highlights target; Segmenting — one word per slide. -->
+<section id="slide-vocab-shimmering" class="vocab-slide" data-background-color="#1a1a2e">
+    <p><span class="ipa">/ˈʃɪmərɪŋ/</span></p>
+    <p class="fragment" data-fragment-index="1"><span class="vocab-word">shimmering</span></p>
+    <p class="fragment" data-fragment-index="1" style="font-size:0.9em; margin-top:0.3em;"><em>The desert heat made the road ahead <span class="vocab-word">shimmering</span> like water.</em></p>
     <aside class="notes">
         Drill: teacher says → class repeats (×3).
-        Note: "Socs" is short for "Socials". They are the rich kids from the West Side — the rivals of the greasers.
+        Explain: "Shimmering means shining with a flickering, unsteady light — like heat haze on a road."
     </aside>
 </section>
 
-<!-- PEDAGOGICAL INTENT: Student sees the word "reckon" with IPA and a story-context sentence. -->
-<!-- WHY THIS FEATURE: Static — one word per slide. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — consistent vocabulary presentation format builds automaticity. -->
-<section id="slide-vocab-reckon" class="vocab-slide" data-background-color="#1a1a2e">
-    <p><span class="vocab-word">reckon</span> <em>/ˈrekən/</em></p>
-    <p><em>Ponyboy looked at the dark clouds. "I <span class="vocab-word">reckon</span> it'll rain," he said, pulling his jacket tighter.</em></p>
+<!-- PEDAGOGICAL INTENT: Student hears IPA first, then sees spelling + context on click. -->
+<!-- WHY THIS FEATURE: Fragments reveal word and sentence together. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — yellow highlights target; Segmenting — one word per slide. -->
+<section id="slide-vocab-ancient" class="vocab-slide" data-background-color="#1a1a2e">
+    <p><span class="ipa">/ˈeɪnʃənt/</span></p>
+    <p class="fragment" data-fragment-index="1"><span class="vocab-word">ancient</span></p>
+    <p class="fragment" data-fragment-index="1" style="font-size:0.9em; margin-top:0.3em;"><em>The <span class="vocab-word">ancient</span> tree must now be at least 500 years old.</em></p>
     <aside class="notes">
         Drill: teacher says → class repeats (×3).
-        Explain: "Reckon means 'think' or 'guess'. It's informal — people use it in casual conversation."
+        Explain: "Ancient means extremely old, from a long time ago."
     </aside>
 </section>
 
-<!-- PEDAGOGICAL INTENT: Student sees the word "savvy" with IPA and context. -->
-<!-- WHY THIS FEATURE: Static — one word per slide. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — consistent format. -->
-<section id="slide-vocab-savvy" class="vocab-slide" data-background-color="#1a1a2e">
-    <p><span class="vocab-word">savvy</span> <em>/ˈsævi/</em></p>
-    <p><em>Johnny didn't <span class="vocab-word">savvy</span> what Dally meant, so he asked him to explain.</em></p>
+<!-- PEDAGOGICAL INTENT: Student hears IPA first, then sees spelling + context on click. -->
+<!-- WHY THIS FEATURE: Fragments reveal word and sentence together. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — yellow highlights target; Segmenting — one word per slide. -->
+<section id="slide-vocab-untamed" class="vocab-slide" data-background-color="#1a1a2e">
+    <p><span class="ipa">/ʌnˈteɪmd/</span></p>
+    <p class="fragment" data-fragment-index="1"><span class="vocab-word">untamed</span></p>
+    <p class="fragment" data-fragment-index="1" style="font-size:0.9em; margin-top:0.3em;"><em>The wild horse had never been ridden — it was completely <span class="vocab-word">untamed</span>.</em></p>
     <aside class="notes">
         Drill: teacher says → class repeats (×3).
-        Explain: "Savvy means 'understand' or 'get it'. It's slang — Two-Bit uses it a lot."
+        Explain: "Untamed means wild, not controlled or trained."
     </aside>
 </section>
 
-<!-- PEDAGOGICAL INTENT: Student sees the final vocabulary word "souped-up" with context about cars. -->
-<!-- WHY THIS FEATURE: Static — one word per slide. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — final vocabulary item in the sequence. -->
-<section id="slide-vocab-souped-up" class="vocab-slide" data-background-color="#1a1a2e">
-    <p><span class="vocab-word">souped-up</span> <em>/ˈsuːpt ʌp/</em></p>
-    <p><em>Two-Bit's <span class="vocab-word">souped-up</span> car was so loud you could hear it coming from a street away.</em></p>
+<!-- PEDAGOGICAL INTENT: Student hears IPA first, then sees spelling + context on click. -->
+<!-- WHY THIS FEATURE: Fragments reveal word and sentence together. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — yellow highlights target; Segmenting — one word per slide. -->
+<section id="slide-vocab-compost" class="vocab-slide" data-background-color="#1a1a2e">
+    <p><span class="ipa">/ˈkɒmpɒst/</span></p>
+    <p class="fragment" data-fragment-index="1"><span class="vocab-word">compost</span></p>
+    <p class="fragment" data-fragment-index="1" style="font-size:0.9em; margin-top:0.3em;"><em>We recycle vegetable peelings and grass cuttings to make <span class="vocab-word">compost</span> for the garden.</em></p>
     <aside class="notes">
         Drill: teacher says → class repeats (×3).
-        Explain: "Souped-up means a car that has been changed to go faster. It has a more powerful engine."
+        Explain: "Compost is decayed organic material used to feed plants."
     </aside>
 </section>
 
@@ -475,7 +478,6 @@
         Elicit: "Why do we read out loud together in a reading circle?"
         Highlight the benefits. Then explain the format:
         20 min guided read-aloud → private reading with reflection questions.
-        Emphasize: "You don't need to be perfect — just try your best."
     </aside>
 </section>
 
@@ -490,20 +492,23 @@
 <!-- WHY THIS FEATURE: Static — instructions visible at once; timer optional since teacher controls pace. -->
 <!-- COGNITIVE PRINCIPLE: none — task orientation. -->
 <section id="slide-read-aloud" data-background-color="#1a1a2e">
-    <h2>Reading Circle — Chapter 1</h2>
+    <h2>Reading Circle — Chapters 1 & 2</h2>
     <ul>
         <li>Take turns reading paragraphs aloud</li>
         <li>Follow along as your classmates read</li>
-        <li>Think about the characters and the setting</li>
+        <li>Think about Conor — why isn't he afraid of the monster?</li>
     </ul>
     <aside class="notes">
         Stage 4 · 20 min · T-Ss
-        Goal: To guide learners through the opening of the novel.
+        Goal: To guide learners through Chapters 1 & 2 of the novel.
         Procedure:
         - Teacher and students take turns reading aloud — each student reads 1-2 paragraphs then passes.
-        - Pause after the Soc attack scene: "What just happened to Ponyboy? How is he feeling?"
-        - As each character is introduced (Darry, Sodapop, Steve, Two-Bit, Dally, Johnny), pause to note key traits.
-        - Draw attention to Ponyboy's narrative voice.
+        - Pause after the opening lines: "What is effective about this opening?"
+        - Pause after 'He'd told no one about the nightmare': "Why do you think Conor keeps the nightmare a secret?"
+        - Pause when Conor says 'Not of you, anyway': "Why isn't Conor afraid of the monster?"
+        - Discuss the final line of Ch1: "You will be. Before the end." What does the monster mean?
+        - Continue into Ch2 (BREAKFAST). Pause after Conor cleans up yew leaves: "Why is Conor hiding the evidence?"
+        - Pause after 'I wish you didn't have to be quite so good': "What does this tell us about Conor's life?"
     </aside>
 </section>
 
@@ -520,21 +525,18 @@
 <section id="slide-independent-reading" data-timer="600" data-background-color="#1a1a2e">
     <h2>Read and Reflect</h2>
     <ul>
-        <li>Read the chapter on your own</li>
+        <li>Read Chapters 1 & 2 on your own</li>
         <li>Write your answers to the reflection questions</li>
         <li>This is for you — there are no right or wrong answers</li>
     </ul>
     <aside class="notes">
         Stage 5 · 10 min · S
         Goal: To give learners time to absorb the text individually and respond personally.
-        Hand out reflection questions (printed or point to screen).
+        Hand out booklet with reflection questions (printed).
         If time permits, invite 1-2 students to share what they wrote.
         Reflection questions:
-        1. Who is telling the story? What do we learn about the narrator in Chapter 1?
-        2. What happened to Ponyboy after the movie? How did the gang help him?
-        3. What are the Greasers and the Socs? How are they different?
-        4. Choose one character and describe them in 2-3 sentences.
-        5. Ponyboy says: "I lie to myself all the time. But I never believe me." What does this tell us about him?
+        1. Conor hides the yew leaves in the bin and lies to his mother about hearing him last night. Why do you think he keeps the monster a secret? What would you do if a monster visited you?
+        2. Conor's mother says 'I wish you didn't have to be quite so good.' What does this tell us about Conor's life at home? How has his life changed since his mother became ill?
     </aside>
 </section>
 
@@ -544,15 +546,15 @@
 <section id="slide-summary" data-background-color="#1a1a2e">
     <h2>What you can do now</h2>
     <ul>
-        <li><i class="fa-solid fa-check" style="color:#4caf50;"></i> I can understand the start of a story</li>
-        <li><i class="fa-solid fa-check" style="color:#4caf50;"></i> I can find important details about characters</li>
-        <li><i class="fa-solid fa-check" style="color:#4caf50;"></i> I can share my thoughts about what I read</li>
+        <li><i class="fa-solid fa-check" style="color:#4caf50;"></i> I can understand the opening of a story about monsters and truth</li>
+        <li><i class="fa-solid fa-check" style="color:#4caf50;"></i> I can find important clues about Conor's hidden fear</li>
+        <li><i class="fa-solid fa-check" style="color:#4caf50;"></i> I can share my thoughts about the monster's purpose</li>
     </ul>
     <aside class="notes">
         Elicit from students: What did you learn today?
         Connect back to the objective: "At the start, we said you'd be able to do these three things. Can you do them now?"
         Praise effort, mention one thing to improve.
-        Preview next lesson: "Next time, we'll continue reading Chapter 1 and look more closely at the characters."
+        Preview next lesson: "Next time, we'll continue reading A Monster Calls and explore the monster's first tale."
     </aside>
 </section>
 
@@ -561,7 +563,7 @@
 <!-- COGNITIVE PRINCIPLE: none. -->
 <section id="slide-end" data-background-color="#2c3e50">
     <h2>Thank you</h2>
-    <p><em>Introducing The Outsiders</em> | B1</p>
+    <p><em>Introducing A Monster Calls</em> | B1</p>
 </section>
 
 </div>
@@ -602,13 +604,6 @@
                     startAtFragment: false,
                 },
                 plugins: [
-                    // WARNING: Every plugin here is loaded and initialized by reveal.js
-                    // at startup. If any plugin's init() function throws an error, the
-                    // entire presentation will show a BLANK PAGE. Always test new plugins
-                    // in a browser and check the console before committing to the template.
-                    // Third-party plugins that depend on external CDN libraries (like
-                    // mark.js) require special care — see SKILL.md for the plugin
-                    // testing protocol.
                     TimerPlugin,
                     RevealHighlight,
                     RevealMath.KaTeX,
