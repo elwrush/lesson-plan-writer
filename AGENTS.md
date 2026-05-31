@@ -188,19 +188,28 @@ SLIDESHOW FLOW — index2.html
 ────────────────────────────────────────────
 ```
 
-### Mandatory Pre-Write Checklist (for agent)
+### Mandatory Pre-Write Ritual (for agent)
 
-Before writing ANY slide HTML for a new or updated presentation, this agent MUST:
-1. **Read `templates/base-slides-template.html`** — open the file and scroll through the reference slides section. Find the EXACT pattern for each slide type you need.
-2. **Copy, don't invent** — use the working example as a template. Change content only, not structure. Any pattern not in the template must be explicitly approved.
-3. **Check font sizes** — every text element must be ≥0.9em (labels) or ≥1em (body). Title slide h2=2.2em, logo 120px. No 0.7em text.
-4. **Check green background** — answer slides use `#0d5e1a`, NOT `#0d5e1a`. The old green is too light for projection contrast.
-5. **Check vertical centering** — title slides need `style="justify-content: center;"`. reveal.js defaults to flex-start.
-6. **One concept per slide** — if a slide feels busy, split it. Max 3 items per answer slide.
-7. **Auto-animate for transformations** — structural changes (simple→compound, error→correction) use 2-slide auto-animate pairs. Entry = transparent borders, Reveal = `#4fc3f7` blue borders.
-8. **Why column on every answer** — every answer slide has an `a-why` span with explanation.
-9. **Fragments on answers only** — task instructions, objectives, and summaries stay static. No fragments on non-answer content.
-10. **Validate** — run `npx revealjs-validator --project "output/{subfolder}/slides/"` and fix all errors.
+Complete these steps IN ORDER before writing ANY slide HTML.
+
+**Phase 1: Pre-generation**
+1. **Open `templates/reference-slideshow.html`** — scroll through EVERY slide type. This is a complete working slideshow with verified patterns. Identify which types you need.
+2. **Open `templates/base-slides-template.html`** — copy the `<head>` and `<script>` blocks exactly. Do not modify.
+3. **Verify colors**: answer green = `#0d5e1a`, pedagogical teal = `#0d4a3d`. Never use `#1e7e34` or `#1a6b5a`.
+4. **Verify font sizes**: body text ≥1em, labels ≥0.9em, title h2=2.2em, logo=120px, subheader=1em. Never use 0.7em.
+5. **Plan the slide count**: ensure no answer slide has >3 items. Split if needed.
+
+**Phase 2: Generation rules**
+6. **Copy, don't invent** — use reference examples. Change content only, not structure.
+7. **Title slides**: must use `data-background-color` + `data-background-image` + `style="justify-content: center;"`. Logo 120px, h2 2.2em, CEFR badge inline in h2.
+8. **Auto-animate**: use only for structural transformations (simple→compound, error→correction). Entry = transparent borders on changed elements. Reveal = `#4fc3f7` blue. Both need matching `data-auto-animate-id`.
+9. **Answer slides**: include `<style>` block with `.a-s`, `.a-v`, `.a-ls`, `.a-lv` S/V annotation classes. Each row reveals classification + formula + sentence with S/V underlines on the same `data-fragment-index`. Why column uses real sentences, not abstractions. Max 3 items.
+10. **Fragments on answers only**: objectives, summaries, transitions, and strategy steps stay static.
+
+**Phase 3: Post-generation validation**
+11. **Run `npx revealjs-validator --project "output/{subfolder}/slides/"`** and fix ALL errors.
+12. **Visual check**: open in browser. Inspect title (full screen, centered, readable), answers (reveals work, S/V underlines visible), auto-animate pairs (transitions smooth), font sizes (minimums met), colors (green = #0d5e1a, teal = #0d4a3d).
+13. **No push until user gives all-clear**. Commit locally only.
 
 If any rule is unclear, ask. Do not guess.
 

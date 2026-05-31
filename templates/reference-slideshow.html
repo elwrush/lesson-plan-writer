@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>SLIDE TYPE REFERENCE — Copy patterns from here</title>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <style>
+            .cefr-badge { display: inline-block; color: white; font-weight: bold; padding: 4px 14px; border-radius: 4px; vertical-align: middle; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+
+            .reveal .answer-list { width: 100%; font-size: 0.95em; }
+            .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid rgba(255,255,255,0.1); gap: 0.5em; }
+            .reveal .a-row:last-child { border-bottom: none; }
+            .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
+            .reveal .a-q { flex: 0 0 6em; min-width: 0; }
+            .reveal .a-ans { flex: 0 0 5em; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; }
+            .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+            .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+            .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
+            .reveal .a-v { border-bottom: 2px solid #ff8a65; }
+            .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+            .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+
+            .reveal section.pedagogical { text-shadow: none; }
+            .reveal section.pedagogical p,
+            .reveal section.pedagogical li,
+            .reveal section.pedagogical h1, .reveal section.pedagogical h2,
+            .reveal section.pedagogical h3, .reveal section.pedagogical h4,
+            .reveal section.pedagogical h5, .reveal section.pedagogical h6 { text-shadow: none; }
+            .reveal section.pedagogical h2 { color: #fff; border-bottom: 3px solid rgba(255,255,255,0.3); padding-bottom: 0.3em; }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal section.pedagogical .strategy-tip { font-size: 0.85em; font-style: italic; color: rgba(255,255,255,0.85); margin-bottom: 0.5em; }
+
+            .reveal p, .reveal li, .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
+            .reveal .aim-label { color: #fff; }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+<!-- ================================================================
+     SLIDE TYPE REFERENCE — Copy any slide below into your presentation.
+     Each slide is a VERIFIED working example. Change content only,
+     not structure. Pedagogical intent is annotated above each slide.
+     ================================================================ -->
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TYPE 1: TITLE SLIDE
+     USE: First slide of every presentation.
+     RULES:
+       - data-background-color AND data-background-image both required
+       - style="justify-content: center;" vertically centers content
+       - Logo 120px, h2 2.2em, subheader 1em
+       - CEFR badge inline in h2 with vertical-align: middle
+       - data-background-opacity 0.85
+     ════════════════════════════════════════════════════════════════ -->
+<section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/pixabay_image.jpg" data-background-opacity="0.85" style="justify-content: center;">
+    <img src="assets/logo.png" style="height: 120px; margin: 0 auto 0.5em; display: block;" alt="ACT" />
+    <h2 style="font-size: 2.2em;">Lesson Topic <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></h2>
+    <p style="font-size: 1em; color: rgba(255,255,255,0.9); margin-top: 0.5em;">Brief subtitle</p>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TYPE 2: OBJECTIVE SLIDE
+     USE: After title. Shows numbered "I can" outcomes.
+     RULES:
+       - All visible on entry — NO fragments
+       - Max 4 outcomes
+       - Numbered (1., 2., 3.)
+       - Static (no animations)
+     ════════════════════════════════════════════════════════════════ -->
+<section id="slide-objective" data-background-color="#1a1a2e">
+    <h2>Today's Goals</h2>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">1.</span> I can [first outcome].</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">2.</span> I can [second outcome].</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">3.</span> I can [third outcome].</p>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TYPE 3: TRANSITION SLIDE (RED)
+     USE: Moving between lesson stages. Heading only — teacher speaks.
+     RULES:
+       - data-background-color="#c0392b"
+       - Heading only — NO descriptive paragraphs
+       - data-background-transition="none"
+     ════════════════════════════════════════════════════════════════ -->
+<section id="slide-transition-stage" data-background-color="#c0392b" data-background-transition="none">
+    <h2>Next Stage Heading</h2>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TYPE 4: LEAD-IN ERROR (AUTO-ANIMATE PAIR)
+     USE: Show a real student error, then reveal the correction on click.
+     RULES:
+       - 2 slides: entry (error, transparent borders) + reveal (correction, blue underlines)
+       - Both need data-auto-animate with matching data-auto-animate-id
+       - The period/full stop is the element that morphs — wrap it in a span with data-id
+       - Entry font-size: 1.2em for the sentence, 0.9em for labels
+       - Reveal font-size: 1em dimmed original, 1.2em correction
+     ════════════════════════════════════════════════════════════════ -->
+
+<!-- Entry: shows the error with transparent borders -->
+<section id="slide-leadin-entry" data-auto-animate data-auto-animate-id="leadin1" data-background-color="#1a1a2e">
+    <div style="overflow: hidden;">
+        <p><strong>Your writing is getting better!</strong></p>
+        <p style="font-size: 0.9em; color: rgba(255,255,255,0.85);">Common error: [error type]</p>
+        <p data-id="err" style="font-size: 1.2em; color: #ffdd00;">
+            "Incorrect <span data-id="fix" style="border-bottom: 2px solid transparent;">sentence</span> here."
+        </p>
+    </div>
+</section>
+
+<!-- Reveal: error dimmed, correction appears with blue underlines -->
+<section id="slide-leadin-reveal" data-auto-animate data-auto-animate-id="leadin1" data-background-color="#1a1a2e">
+    <div style="overflow: hidden;">
+        <p><strong>Your writing is getting better!</strong></p>
+        <p style="font-size: 0.9em; color: rgba(255,255,255,0.85);">Fix: [error type]</p>
+        <p data-id="err" style="font-size: 1em; color: rgba(255,255,255,0.55);">
+            "Incorrect <span data-id="fix" style="border-bottom: 2px solid #ff8a65;">sentence</span> here."
+        </p>
+        <p style="font-size: 1.2em; color: #4fc3f7; margin-top: 0.5em;">
+            Corrected: "Correct <span style="border-bottom: 2px solid #4fc3f7;">sentence</span> here."
+        </p>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TYPE 5: DIAGNOSTIC TEST (AUTO-ANIMATE PAIR, 3 ITEMS)
+     USE: Assess before teaching. The period morphs into comma+coordinator.
+     RULES:
+       - 2 slides: entry (with timer) + reveal (with correction)
+       - Max 3 sentence pairs per pair
+       - Entry has class="pedagogical" and data-timer="180"
+       - Wrap the period in a span with data-id and transparent border
+       - Reveal changes period to ", coordinator" with blue underline
+       - Both need data-auto-animate with matching id
+     ════════════════════════════════════════════════════════════════ -->
+
+<!-- Entry: 3 sentence pairs, timer visible -->
+<section id="slide-diag1-entry" data-auto-animate data-auto-animate-id="diag1" data-background-color="#1a1a2e" data-timer="180">
+    <div style="overflow: hidden;">
+        <p><em>Join each pair. Use and, but, or, or so.</em></p>
+        <ol style="font-size: 0.85em; text-align: left;">
+            <li style="margin: 0.4em 0;"><span data-id="d1">Sentence A<span data-id="j1" style="border-bottom: 2px solid transparent;">.</span> Sentence B.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d2">Sentence C<span data-id="j2" style="border-bottom: 2px solid transparent;">.</span> Sentence D.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d3">Sentence E<span data-id="j3" style="border-bottom: 2px solid transparent;">.</span> Sentence F.</span></li>
+        </ol>
+    </div>
+</section>
+
+<!-- Reveal: periods become comma+coordinator -->
+<section id="slide-diag1-reveal" data-auto-animate data-auto-animate-id="diag1" data-background-color="#1a1a2e">
+    <div style="overflow: hidden;">
+        <p><em>Corrected:</em></p>
+        <ol style="font-size: 0.85em; text-align: left;">
+            <li style="margin: 0.4em 0;"><span data-id="d1">Sentence A<span data-id="j1" style="border-bottom: 2px solid #4fc3f7;">, and</span> sentence B.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d2">Sentence C<span data-id="j2" style="border-bottom: 2px solid #4fc3f7;">, but</span> sentence D.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d3">Sentence E<span data-id="j3" style="border-bottom: 2px solid #4fc3f7;">, so</span> sentence F.</span></li>
+        </ol>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TYPE 6: KEY RULE (AUTO-ANIMATE PAIR)
+     USE: Demonstrate a structural transformation (simple→compound).
+     RULES:
+       - 2 slides: entry (transparent borders on NEW elements) + reveal (blue underlines)
+       - Both need data-auto-animate with matching id
+       - Entry dims version1, highlights version2
+       - New S+V elements get data-id and transparent border on entry
+       - Reveal changes to #4fc3f7 blue + box-shadow
+     ════════════════════════════════════════════════════════════════ -->
+
+<!-- Entry: both versions, transparent borders on new S+V -->
+<section id="slide-rule-entry" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="rule">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">Simple vs. Compound</h2>
+        <p style="font-size: 0.85em;"><u><strong>Simple:</strong> one subject, one verb</u></p>
+        <p data-id="simp" style="color: #ffdd00; font-size: 0.95em;">Subject verb and verb.</p>
+        <p style="font-size: 0.85em; margin-top: 0.5em;"><u><strong>Compound:</strong> two subjects, two verbs</u></p>
+        <p data-id="comp" style="color: #ffdd00; font-size: 0.95em;">Subject verb, and <span data-id="newS" style="border-bottom: 2px solid transparent;">new S</span> <span data-id="newV" style="border-bottom: 2px solid transparent;">new V</span>.</p>
+    </div>
+</section>
+
+<!-- Reveal: new S+V get blue borders + box-shadow -->
+<section id="slide-rule-reveal" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="rule">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">Simple vs. Compound</h2>
+        <p style="font-size: 0.85em;"><u><strong>Simple:</strong> one subject, one verb</u></p>
+        <p data-id="simp" style="color: rgba(255,255,255,0.5); font-size: 0.95em;">Subject verb and verb.</p>
+        <p style="font-size: 0.85em; margin-top: 0.5em;"><u><strong>Compound:</strong> two subjects, two verbs</u></p>
+        <p data-id="comp" style="color: #ffdd00; font-size: 0.95em;">Subject verb, and <span data-id="newS" style="border-bottom: 2px solid #4fc3f7; box-shadow: 0 3px 0 0 #4fc3f7;">new S</span> <span data-id="newV" style="border-bottom: 2px solid #4fc3f7; box-shadow: 0 3px 0 0 #4fc3f7;">new V</span>.</p>
+        <p style="font-size: 0.85em; margin-top: 0.3em; color: #4fc3f7;">S V, and S V</p>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TYPE 7: COORDINATOR DEMO (AUTO-ANIMATE PAIR)
+     USE: Two separate sentences morph into one compound sentence.
+     RULES:
+       - 2 slides: entry (two simple sentences) + reveal (compound)
+       - Entry: wrap the period+first letter in a span with data-id and transparent border
+       - Reveal: period becomes comma+coordinator in blue
+       - Font size 0.85em for body text
+     ════════════════════════════════════════════════════════════════ -->
+
+<!-- Entry: two separate sentences -->
+<section id="slide-coord-entry" data-auto-animate data-auto-animate-id="coord" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">AND</strong></h2>
+        <p><u><strong>Meaning:</strong> similar ideas</u></p>
+        <p data-id="ex" style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
+            "Idea one<span data-id="join" style="border-bottom: 2px solid transparent;">. I</span>dea two."
+        </p>
+    </div>
+</section>
+
+<!-- Reveal: morphs into one compound sentence -->
+<section id="slide-coord-reveal" data-auto-animate data-auto-animate-id="coord" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">AND</strong></h2>
+        <p><u><strong>Meaning:</strong> similar ideas</u></p>
+        <p data-id="ex" style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
+            "Idea one<span data-id="join" style="border-bottom: 2px solid #4fc3f7;">, and</span> idea two."
+        </p>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TYPE 8: STRATEGY SLIDE (STATIC)
+     USE: Teach a test-taking or analysis strategy.
+     RULES:
+       - Class="pedagogical", bg="#0d4a3d"
+       - Step labels with <u><strong>Step N:</strong>
+       - ONE concept per slide — NO worked example embedded
+       - Static — all visible on entry
+       - Worked example goes on a separate auto-animate pair (Type 9)
+     ════════════════════════════════════════════════════════════════ -->
+<section id="slide-strategy" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+    <h2>Strategy Name</h2>
+    <p><u><strong>Step 1:</strong> Find the subject <strong>S</strong></u></p>
+    <p><u><strong>Step 2:</strong> Find the verb <strong>V</strong></u></p>
+    <p><u><strong>Step 3:</strong> Check for TWO S-V pairs</u></p>
+    <p style="margin-left: 1.5em;">Yes → <strong>Compound</strong> (SV, and SV)</p>
+    <p style="margin-left: 1.5em;">No → <strong>Simple</strong> (SV, SVV, SSV)</p>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TYPE 9: WORKED EXAMPLE (AUTO-ANIMATE PAIR)
+     USE: After strategy slide. Walk through ONE item step by step.
+     RULES:
+       - 2 slides: entry (sentence alone) + reveal (S+V underlines)
+       - Entry: just the sentence, transparent borders on S and V words
+       - Reveal: S underlined blue with (S), V underlined orange with (V)
+       - Both need data-auto-animate with matching id
+     ════════════════════════════════════════════════════════════════ -->
+
+<!-- Entry: sentence alone -->
+<section id="slide-example-entry" data-auto-animate data-auto-animate-id="example" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">Let's try one together</h2>
+        <p data-id="sent" style="font-size: 0.85em; color: #ffdd00;">
+            "<span data-id="s1" style="border-bottom: 2px solid transparent;">Subject</span> <span data-id="v1" style="border-bottom: 2px solid transparent;">verb</span>, and <span data-id="s2" style="border-bottom: 2px solid transparent;">subject</span> <span data-id="v2" style="border-bottom: 2px solid transparent;">verb</span>."
+        </p>
+        <p data-id="q" style="font-size: 0.85em; margin-top: 0.5em; color: rgba(255,255,255,0.85);">
+            Does it have TWO S-V pairs?
+        </p>
+    </div>
+</section>
+
+<!-- Reveal: S+V underlines appear -->
+<section id="slide-example-reveal" data-auto-animate data-auto-animate-id="example" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">Let's try one together</h2>
+        <p data-id="sent" style="font-size: 0.85em;">
+            "<span data-id="s1" style="border-bottom: 2px solid #4fc3f7;">Subject</span><span class="a-ls">(S)</span> <span data-id="v1" style="border-bottom: 2px solid #ff8a65;">verb</span><span class="a-lv">(V)</span>, and <span data-id="s2" style="border-bottom: 2px solid #4fc3f7;">subject</span><span class="a-ls">(S)</span> <span data-id="v2" style="border-bottom: 2px solid #ff8a65;">verb</span><span class="a-lv">(V)</span>."
+        </p>
+        <p data-id="q" style="font-size: 0.85em; margin-top: 0.5em; color: #4fc3f7;">
+            Two S-V pairs → <strong>Compound</strong>
+        </p>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TYPE 10: PEDAGOGICAL DEMO (AUTO-ANIMATE, 3 STEPS)
+     USE: Before a freer practice task. Walk through one item.
+     RULES:
+       - 3 consecutive slides with same data-auto-animate-id
+       - Step 1: identify relationship
+       - Step 2: choose coordinator
+       - Step 3: combine
+       - Previous steps dimmed, current step highlighted
+       - Body font-size 0.85em
+     ════════════════════════════════════════════════════════════════ -->
+
+<!-- Step 1: relationship -->
+<section id="slide-demo-step1" data-auto-animate data-auto-animate-id="demo" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+    <div style="overflow: hidden;">
+        <h2 data-id="title" style="font-size: 0.9em;">Let's do one together</h2>
+        <p data-id="item" style="font-size: 0.85em; color: #ffdd00;">Item 1: Sentence A. Sentence B.</p>
+        <p data-id="s1" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 1:</strong> What's the relationship?</u></p>
+        <p data-id="a1" style="font-size: 0.85em; margin-left: 1em; color: #4fc3f7;">Result / Contrast / Choice</p>
+    </div>
+</section>
+
+<!-- Step 2: coordinator choice -->
+<section id="slide-demo-step2" data-auto-animate data-auto-animate-id="demo" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+    <div style="overflow: hidden;">
+        <h2 data-id="title" style="font-size: 0.9em;">Let's do one together</h2>
+        <p data-id="item" style="font-size: 0.85em; color: #ffdd00;">Item 1: Sentence A. Sentence B.</p>
+        <p data-id="s1" style="font-size: 0.75em; margin-top: 0.4em;"><u><strong>Step 1:</strong> What's the relationship?</u></p>
+        <p data-id="a1" style="font-size: 0.7em; margin-left: 1em; color: rgba(255,255,255,0.6);">Result</p>
+        <p data-id="s2" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 2:</strong> Choose the coordinator.</u></p>
+        <p data-id="a2" style="font-size: 0.85em; margin-left: 1em;">Result → use <strong style="color: #4fc3f7;">so</strong></p>
+    </div>
+</section>
+
+<!-- Step 3: combine -->
+<section id="slide-demo-step3" data-auto-animate data-auto-animate-id="demo" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+    <div style="overflow: hidden;">
+        <h2 data-id="title" style="font-size: 0.9em;">Let's do one together</h2>
+        <p data-id="item" style="font-size: 0.85em; color: #ffdd00;">Item 1: Sentence A. Sentence B.</p>
+        <p data-id="s1" style="font-size: 0.7em; margin-top: 0.4em;"><u><strong>Step 1:</strong> What's the relationship?</u></p>
+        <p data-id="a1" style="font-size: 0.65em; margin-left: 1em; color: rgba(255,255,255,0.6);">Result</p>
+        <p data-id="s2" style="font-size: 0.7em; margin-top: 0.3em;"><u><strong>Step 2:</strong> Choose the coordinator.</u></p>
+        <p data-id="a2" style="font-size: 0.65em; margin-left: 1em; color: rgba(255,255,255,0.6);">so</p>
+        <p data-id="s3" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 3:</strong> Combine: comma + coordinator.</u></p>
+        <p data-id="a3" style="font-size: 0.85em; margin-left: 1em; color: #4fc3f7;">"Sentence A, <strong>so</strong> sentence B."</p>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TYPE 11: TASK SLIDE (WITH TIMER)
+     USE: Student work time. Shows exercise number + brief instruction.
+     RULES:
+       - data-timer="seconds" on the section
+       - Brief instruction only — students have workbook
+       - Full procedure in <aside class="notes">
+     ════════════════════════════════════════════════════════════════ -->
+<section id="slide-task" data-background-color="#1a1a2e" data-timer="480">
+    <h2>Practice N — items 1 to X</h2>
+    <p><em>Brief instruction. Students have the workbook.</em></p>
+    <aside class="notes">Individual work X min. Pair check X min.</aside>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TYPE 12: ANSWER SLIDE (S/V ANNOTATIONS, MAX 3 ITEMS)
+     USE: Show answers with S/V analysis.
+     RULES:
+       - data-background-color="#0d5e1a" (NOT #1e7e34)
+       - Include <style> block with .a-s, .a-v, .a-ls, .a-lv classes
+       - Max 3 items per slide
+       - Each row: classification (fragment) + formula (fragment) + Why sentence (fragment)
+       - All 3 columns use same data-fragment-index per item
+       - S words: <span class="a-s">word</span><span class="a-ls">(S)</span>
+       - V words: <span class="a-v">word</span><span class="a-lv">(V)</span>
+       - NO gray text — only white (#fff) or yellow (#ffdd00)
+     ════════════════════════════════════════════════════════════════ -->
+<section id="slide-answers" data-background-color="#0d5e1a" data-background-transition="none">
+<style>
+    .reveal .answer-list { width: 100%; font-size: 0.95em; }
+    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid rgba(255,255,255,0.1); gap: 0.5em; }
+    .reveal .a-row:last-child { border-bottom: none; }
+    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
+    .reveal .a-q { flex: 0 0 6em; min-width: 0; }
+    .reveal .a-ans { flex: 0 0 5em; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; }
+    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
+    .reveal .a-v { border-bottom: 2px solid #ff8a65; }
+    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+    .reveal .aim-label { color: #fff; }
+</style>
+    <h2 style="font-size: 0.95em;">Practice N — Answers (1–3)</h2>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">1.</span>
+            <span class="fragment fade-up a-q" data-fragment-index="1" style="color: #ffdd00;">simple</span>
+            <span class="fragment fade-up a-ans" data-fragment-index="1">SV</span>
+            <span class="fragment fade-up a-why" data-fragment-index="1"><span class="a-s">Subject</span><span class="a-ls">(S)</span> <span class="a-v">verb</span><span class="a-lv">(V)</span> object.</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">2.</span>
+            <span class="fragment fade-up a-q" data-fragment-index="2" style="color: #ffdd00;">compound</span>
+            <span class="fragment fade-up a-ans" data-fragment-index="2">SV, and SV</span>
+            <span class="fragment fade-up a-why" data-fragment-index="2"><span class="a-s">Subject</span><span class="a-ls">(S)</span> <span class="a-v">verb</span><span class="a-lv">(V)</span>, and <span class="a-s">subject</span><span class="a-ls">(S)</span> <span class="a-v">verb</span><span class="a-lv">(V)</span>.</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">3.</span>
+            <span class="fragment fade-up a-q" data-fragment-index="3" style="color: #ffdd00;">simple</span>
+            <span class="fragment fade-up a-ans" data-fragment-index="3">SVV</span>
+            <span class="fragment fade-up a-why" data-fragment-index="3"><span class="a-s">Subject</span><span class="a-ls">(S)</span> <span class="a-v">verb1</span><span class="a-lv">(V)</span> and <span class="a-v">verb2</span><span class="a-lv">(V)</span>.</span>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TYPE 13: SUMMARY SLIDE
+     USE: Consolidate learning at end of lesson.
+     RULES:
+       - data-background-color="#1a1a2e"
+       - Static — all visible on entry
+       - "I can" statements with checkmarks (&#10003;)
+       - Matches objective slide structure
+     ════════════════════════════════════════════════════════════════ -->
+<section id="slide-summary" data-background-color="#1a1a2e">
+    <h2>I can...</h2>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> first outcome</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> second outcome</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> third outcome</p>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TYPE 14: END SLIDE
+     USE: Last slide of every presentation.
+     RULES:
+       - data-background-color="#2c3e50"
+       - Topic title + CEFR badge
+     ════════════════════════════════════════════════════════════════ -->
+<section id="slide-end" data-background-color="#2c3e50" data-background-transition="none">
+    <h2>Lesson Topic</h2>
+    <div><span class="cefr-badge B1">B1</span></div>
+</section>
+
+</div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                plugins: [
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                ],
+            });
+        </script>
+    </body>
+</html>
