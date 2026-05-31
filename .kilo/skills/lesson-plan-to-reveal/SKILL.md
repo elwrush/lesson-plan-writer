@@ -138,7 +138,7 @@ Default background color reference (solid colors — no shielding needed):
 |---|---|
 | Title, lead-in, general content | `#1a1a2e` (dark navy/black) |
 | Transition (forward to next stage) | `#c0392b` (red) |
-| Pedagogical/strategy blocks, grammar rules | `#1a6b5a` (teal) |
+| Pedagogical/strategy blocks, grammar rules | `#0d4a3d` (teal) |
 | Answer tables | `#0d5e1a` (green) |
 | Summary | white (default) — **WARNING: white background + black theme = invisible white text.** Use `#1a1a2e` for summary slides unless text color is explicitly overridden. |
 | End | `#2c3e50` (dark blue-gray) |
@@ -192,7 +192,7 @@ Every distinct exercise type MUST follow this four-slide sequence. This is the c
 | Step | Slide type | Background | Content | Audio/Timer |
 |------|-----------|------------|---------|-------------|
 | 1 | **Transition** | `#c0392b` (red) | Heading only — signals phase change to students | Neither |
-| 2 | **Pedagogical** | `#1a6b5a` (teal), `class="pedagogical"` | Strategy instruction for the skill (e.g., how to listen for gist). May use auto-animate for keyword underline reveals. Differentiation challenge (`🏁 Want a challenge?`) shown here. | **No audio** — audio goes on the task slide |
+| 2 | **Pedagogical** | `#0d4a3d` (teal), `class="pedagogical"` | Strategy instruction for the skill (e.g., how to listen for gist). May use auto-animate for keyword underline reveals. Differentiation challenge (`🏁 Want a challenge?`) shown here. | **No audio** — audio goes on the task slide |
 | 3 | **Task** | `#1a1a2e` (dark) | Exercise number + brief student-facing instruction. **Do NOT print full exercise text** — students have the workbook. | `data-audio-src` for listening exercises; `data-timer` for written exercises. **Never both** on the same slide. |
 | 4 | **Answers** | `#0d5e1a` (green) | answer-list flex layout with max **3 items** per slide. Each row: number, question snippet, answer (fragment fade-up), **WHY line in yellow** (`#ffdd00`) on the line below. | Neither |
 
@@ -407,7 +407,7 @@ if idx >= 0:
 - Verify `autoAnimateUnmatched: true` is in `Reveal.initialize()`
 - Verify every slide with `data-auto-animate` also has `data-auto-animate-id` — without it, `null === null` causes all auto-animate slides to animate into each other.
 - Verify transition slides use `data-background-color="#c0392b"` (use `data-background-color` for solid colors, NOT `data-background` — `data-background` is not recognized by reveal.js 5.x)
-- Verify pedagogical strategy slides use `data-background-color="#1a6b5a"` and `class="pedagogical"`
+- Verify pedagogical strategy slides use `data-background-color="#0d4a3d"` and `class="pedagogical"`
 - Verify listening task slides that need audio have `data-audio-src="assets/filename.mp3"`
 - **Verify no `<section>` has both `data-timer` AND `data-audio-src`** — never place a timer pill on a slide that plays audio or video
 - **Verify no raw Unicode check/cross characters**: Scan for U+2713 (✓) and U+2717 (✗) in the output HTML. If found, replace with `<i class="fa-solid fa-check">` and `<i class="fa-solid fa-times">` respectively. Font Awesome renders reliably; Unicode glyphs do not.
@@ -578,9 +578,9 @@ Quick reference of slide types and their pedagogical intent:
 | Vocabulary | `#1a1a2e` | IPA visible first; English word + context reveal on click | Fragment — reveal |
 | Lead-in | `#1a1a2e` | One open question | Static — activation |
 | Transition | `#c0392b` | Heading only, phase signal | Static — rest |
-| Teach (sentence/grammar) | `#1a6b5a` | Word/part transforms (color, border, highlight) | Auto-animate — transformation |
-| Teach (rules/reference) | `#1a6b5a` | Rules in 2-column table (Rule | Example) | Static — reference |
-| Strategy (step-by-step) | `#1a6b5a` | Each step is one slide | Sibling slides — discrete teaching |
+| Teach (sentence/grammar) | `#0d4a3d` | Word/part transforms (color, border, highlight) | Auto-animate — transformation |
+| Teach (rules/reference) | `#0d4a3d` | Rules in 2-column table (Rule | Example) | Static — reference |
+| Strategy (step-by-step) | `#0d4a3d` | Each step is one slide | Sibling slides — discrete teaching |
 | Task instruction | dark + timer | Instructions full-visible | Static — orientation |
 | Answer (T/F, MC) | `#0d5e1a` | Statements visible; answers reveal per-row | Fragment on `<span>` inside `<td>` |
 | Summary | default | "I can..." checkmarks | Static — consolidation |
@@ -630,7 +630,7 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
 
 ## Key Design Rules
 
-**CRITICAL RULE 0 — NO GRAY TEXT.** Any text on any slide that the student must read MUST use solid white `#fff` or solid yellow `#ffdd00`. Gray `#888`, `#666`, `rgba(255,255,255,0.5)` (50% white), `rgba(255,255,255,0.7)` (70% white), and any other muted/low-opacity colors are **strictly banned on all backgrounds** — dark navy `#1a1a2e`, teal `#1a6b5a`, green `#0d5e1a`, red `#c0392b`, and dark blue-gray `#2c3e50` alike. At classroom projection distance, these render as invisible gray smudges.
+**CRITICAL RULE 0 — NO GRAY TEXT.** Any text on any slide that the student must read MUST use solid white `#fff` or solid yellow `#ffdd00`. Gray `#888`, `#666`, `rgba(255,255,255,0.5)` (50% white), `rgba(255,255,255,0.7)` (70% white), and any other muted/low-opacity colors are **strictly banned on all backgrounds** — dark navy `#1a1a2e`, teal `#0d4a3d`, green `#0d5e1a`, red `#c0392b`, and dark blue-gray `#2c3e50` alike. At classroom projection distance, these render as invisible gray smudges.
 
 **Enforcement rules:**
 - Every visible text element must have `color: #fff` or `color: #ffdd00` — either explicit or inherited from a parent
@@ -658,7 +658,7 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
     - **Do NOT use `highlight-green`/`highlight-red`** (reveal.js keeps them at `opacity: 1`; they never hide)
     - **CRITICAL — No gray text.** Per Rule 0, ALL text on green slides must be white `#fff` or yellow `#ffdd00` — including `.a-num`, `.a-q`, `.aim-label`, and any other element. Gray, blue, or muted colors are invisible at projection distance on `#0d5e1a`.
 8. **Transition slides: heading only (no subheader text).** The red background + icon + heading is sufficient — the teacher's spoken introduction bridges the gap. Remove all `<p>` elements from transition slides.
-9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#1a6b5a` (pedagogical/strategy), green `#0d5e1a` (answer tables), dark `#2c3e50` (end)
+9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#0d4a3d` (pedagogical/strategy), green `#0d5e1a` (answer tables), dark `#2c3e50` (end)
 10. **Title slide visuals**: Full-screen `data-background-image` with `data-background-color="#1a1a2e"` fallback. Logo at `120px`, h2 at `2.2em`, CEFR badge inline inside h2 (`vertical-align: middle`), subheader at `1em`. **Must add `style="justify-content: center;"`** to vertically center content. Opacity `0.85`. Do NOT use `r-stack` — it creates a letterbox effect.
 11. **Text highlighting**: white text, dark text-shadow, pedagogical sections use white-on-teal
 12. **Vocabulary words**: yellow boldface (`#ffdd00`) via `<span class="vocab-word">` — in both the word heading AND context sentence(s).
@@ -771,7 +771,7 @@ See AGENTS.md (`Pedagogical Strategy Slides — Design Principles`) for the full
 - **Step label format**: `<u><strong>Step N:</strong> description</u>`
 - **Header on first slide only**, remaining slides show only the step label
 - **Auto-animate for keyword underlines**: use `<span data-id="...">` with transparent→visible border transitions across consecutive `<section data-auto-animate>` siblings
-- **Teal background**: `data-background-color="#1a6b5a"` + `class="pedagogical"` on all strategy slides
+- **Teal background**: `data-background-color="#0d4a3d"` + `class="pedagogical"` on all strategy slides
 - **Top alignment**: CSS `.reveal .slides > section.pedagogical { align-self: flex-start; padding-top: 30px; }`
 
 ## Common Pitfalls
@@ -815,7 +815,7 @@ The answer-list flex layout has three CSS properties that, if set incorrectly, b
 Per **Rule 0 (No Gray Text)**, gray/muted/low-opacity text is banned on ALL slide backgrounds, not just green. This section documents the specific traps in the base template:
 
 **Template traps:**
-- `.reveal .aim-label { color: #888; }` — gray label, invisible on `#1a1a2e`, `#1a6b5a`, `#0d5e1a`, `#c0392b`, and `#2c3e50`
+- `.reveal .aim-label { color: #888; }` — gray label, invisible on `#1a1a2e`, `#0d4a3d`, `#0d5e1a`, `#c0392b`, and `#2c3e50`
 - `.reveal .source-cite { color: #666; }` — darker gray, still invisible at projection distance
 - `.reveal .material-ref { color: #888; }` — invisible gray
 - `.reveal .a-num { color: rgba(255,255,255,0.5); }` — 50% white = gray

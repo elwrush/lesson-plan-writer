@@ -84,7 +84,7 @@ No words above CEFR B1 on screen without inline definition:
 All slide text (h2, h3, p, li) uses consistent styling via CSS in `templates/base-slides-template.html`:
 
 - **Text shadow**: `<text-shadow: 2px 2px 4px rgba(0,0,0,0.8)>` on all headings and body text
-- **Pedagogical slides**: `class="pedagogical"` + `data-background-color="#1a6b5a"` — white text with teal background, white border-bottom on h2
+- **Pedagogical slides**: `class="pedagogical"` + `data-background-color="#0d4a3d"` — white text with teal background, white border-bottom on h2
 - **Vocabulary words**: `<span class="vocab-word">word</span>` — yellow (`#ffdd00`) bold with text shadow
 - **Transitions**: `data-background-color="#c0392b"` — red background
 - **End slide**: `data-background-color="#2c3e50"` — dark background
@@ -255,7 +255,7 @@ Every distinct exercise type follows this four-slide sequence. This is the **onl
 | Step | Slide type | Background | Content | Audio/Timer |
 |------|-----------|------------|---------|-------------|
 | 1 | **Transition** | `#c0392b` (red) | Heading only — "Listen for Main Ideas", "Finding Details", "Useful Phrases" | Neither |
-| 2 | **Pedagogical** | `#1a6b5a` (teal) `class="pedagogical"` | Strategy instruction. Auto-animate for keyword underline reveals. 🏁 challenge text here. | **No audio** |
+| 2 | **Pedagogical** | `#0d4a3d` (teal) `class="pedagogical"` | Strategy instruction. Auto-animate for keyword underline reveals. 🏁 challenge text here. | **No audio** |
 | 3 | **Task** | `#1a1a2e` (dark) | Exercise number + brief instruction only. **No exercise text** — students have workbook. | `data-audio-src` OR `data-timer` (never both) |
 | 4 | **Answers** | `#0d5e1a` (green) | answer-list flex, max 3 items, each with answer + WHY line in yellow | Neither |
 
@@ -266,7 +266,7 @@ Every distinct exercise type follows this four-slide sequence. This is the **onl
 </section>
 
 <!-- Pedagogical (strategy) -->
-<section id="slide-strategy-{name}" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none">
+<section id="slide-strategy-{name}" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
     <h2>Strategy Title</h2>
     <ul>
         <li>Step 1: ...</li>
@@ -376,7 +376,7 @@ Rules:
 Used for explicit strategy instruction before a task. Goes between the Transition and Task slides in the four-slide block.
 
 ```html
-<section id="slide-strategy-{name}" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none">
+<section id="slide-strategy-{name}" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
     <h2>{{ strategy_heading }}</h2>
     <ul>
         <li>{{ step_1 }}</li>
@@ -390,14 +390,14 @@ Used for explicit strategy instruction before a task. Goes between the Transitio
 **Auto-animate variant** (for keyword underline reveals):
 ```html
 <!-- Entry: transparent keyword borders -->
-<section data-auto-animate data-auto-animate-id="{name}" id="slide-strategy-{name}-entry" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none">
+<section data-auto-animate data-auto-animate-id="{name}" id="slide-strategy-{name}-entry" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
     <h2 data-id="title">{{ strategy_heading }}</h2>
     <p data-id="ex1" style="color:#ffdd00; font-size:0.85em;">
         Listen for <span data-id="w1" style="border-bottom: 2px solid transparent;">key terms</span> in the text.
     </p>
 </section>
 <!-- Reveal: keywords gain coloured borders via auto-animate -->
-<section data-auto-animate data-auto-animate-id="{name}" id="slide-strategy-{name}-reveal" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none">
+<section data-auto-animate data-auto-animate-id="{name}" id="slide-strategy-{name}-reveal" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
     <h2 data-id="title">{{ strategy_heading }}</h2>
     <p data-id="ex1" style="color:#ffdd00; font-size:0.85em;">
         Listen for <span data-id="w1" style="border-bottom: 2px solid #4fc3f7;">key terms</span> in the text.
@@ -409,7 +409,7 @@ Used for explicit strategy instruction before a task. Goes between the Transitio
 
 **Structure talk variant** (for speaking tasks):
 ```html
-<section id="slide-strategy-talk" class="pedagogical structure-talk" data-background-color="#1a6b5a" data-background-transition="none" style="top: 0;">
+<section id="slide-strategy-talk" class="pedagogical structure-talk" data-background-color="#0d4a3d" data-background-transition="none" style="top: 0;">
     <h2>Structure Your Talk</h2>
     <p class="structure-step"><u><strong>Thesis:</strong> Say your main idea</u></p>
     <p class="structure-step"><u><strong>Reasons:</strong> Give 1-2 reasons</u></p>
@@ -420,7 +420,7 @@ Used for explicit strategy instruction before a task. Goes between the Transitio
 ```
 
 Rules:
-- Teal background `#1a6b5a`, `class="pedagogical"`, `data-background-transition="none"`
+- Teal background `#0d4a3d`, `class="pedagogical"`, `data-background-transition="none"`
 - Challenge/differentiation text is **student-facing** ("Want a challenge?…", "Want to go further?…") — never teacher-facing
 - Checkered flag icon marks challenge options
 - Auto-animate requires both sections to have `data-auto-animate` with matching `data-auto-animate-id`
@@ -507,7 +507,7 @@ All questions visible at once. No fragments for discussion.
 
 ### 14. Diagnostic Talk Structure Slide (Pedagogical)
 ```html
-<section class="pedagogical structure-talk" data-background-color="#1a6b5a" data-background-transition="none" style="top: 0;">
+<section class="pedagogical structure-talk" data-background-color="#0d4a3d" data-background-transition="none" style="top: 0;">
     <h2>Structure Your Talk</h2>
     <p class="structure-step"><u><strong>Thesis:</strong> Say your main idea</u></p>
     <p class="structure-step"><u><strong>Reasons:</strong> Give 1-2 reasons</u></p>
@@ -516,7 +516,7 @@ All questions visible at once. No fragments for discussion.
 </section>
 ```
 
-- Teal background `#1a6b5a`, `class="pedagogical structure-talk"`
+- Teal background `#0d4a3d`, `class="pedagogical structure-talk"`
 - Three structure steps (thesis → reasons → example) with underlined labels
 - Transition words at bottom in yellow (`#ffdd00`) inside a semi-transparent box
 - Teacher uses this to model diagnostic speaking task structure
@@ -525,7 +525,7 @@ All questions visible at once. No fragments for discussion.
 
 ### 15. Grammar Rule Explanation Slide (Pedagogical)
 ```html
-<section class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none">
+<section class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
     <h2>Subject-Verb Agreement: Rules 1–3</h2>
     <p><u><strong>Rule 1:</strong> Ignore prepositional phrases</u></p>
     <p><em>"The color of her eyes changes."</em> → Subject is <strong>color</strong>, not <em>eyes</em>.</p>
@@ -535,7 +535,7 @@ All questions visible at once. No fragments for discussion.
     <p><em>"Each of the students has a book."</em></p>
 </section>
 ```
-- Teal background `#1a6b5a`, class `pedagogical`
+- Teal background `#0d4a3d`, class `pedagogical`
 - Group 2-3 related rules per slide
 - Each rule: underlined label + example in quotation marks + brief explanation
 - Key grammar words highlighted with `<span style="color:#ffdd00;">word</span>` inline
@@ -750,30 +750,30 @@ Use `data-auto-animate` on consecutive sibling `<section>` elements to build up 
 
 ### Example: True/False Strategy (5 slides)
 ```html
-<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a6b5a">
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#0d4a3d">
     <h2>True/False Strategy</h2>
     <p><strong>Step 1:</strong> Read the statement carefully</p>
     <p><em>Statement text goes here.</em></p>
 </section>
-<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a6b5a">
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#0d4a3d">
     <h2>True/False Strategy</h2>
     <p><strong>Step 1:</strong> Read the statement carefully</p>
     <p><em>Statement text goes here.</em></p>
     <p><strong>Step 2:</strong> Find the keywords</p>
     <p>"keyword1" · "keyword2" · "keyword3"</p>
 </section>
-<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a6b5a">
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#0d4a3d">
     <h2>True/False Strategy</h2>
     <!-- ... all previous steps ... -->
     <p><strong>Step 3:</strong> Find the evidence</p>
     <p>Look in paragraphs X and Y. Do the meanings match?</p>
 </section>
-<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a6b5a">
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#0d4a3d">
     <h2>True/False Strategy</h2>
     <!-- ... all previous steps ... -->
     <p><strong>Step 4:</strong> Check your answer</p>
 </section>
-<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a6b5a">
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#0d4a3d">
     <h2>True/False Strategy</h2>
     <!-- ... all previous steps ... -->
     <p class="fragment highlight-green">TRUE — Explanation of why it's true.</p>
@@ -785,11 +785,11 @@ Use `data-auto-animate` on consecutive sibling `<section>` elements to build up 
 - `data-auto-animate-id` MUST match across all sections in the block
 - Each section builds on the previous by adding new elements while keeping shared elements
 - `autoAnimateUnmatched: true` in `Reveal.initialize()` handles new/removed elements
-- All sections share `class="pedagogical"` and `data-background-color="#1a6b5a"`
+- All sections share `class="pedagogical"` and `data-background-color="#0d4a3d"`
 
 ### Example: Multiple Choice Strategy (non-stacked, single slide with fragments)
 ```html
-<section class="pedagogical" data-background-color="#1a6b5a">
+<section class="pedagogical" data-background-color="#0d4a3d">
     <h2>Multiple Choice Strategy</h2>
     <p><strong>Step 1: Read all options first</strong> <span class="fragment"> — look at all three choices</span></p>
     <ul class="fragment">
@@ -962,8 +962,8 @@ Slide 2:  Lead-in — Pixabay background + open question
 Slide 3-6: Vocabulary — 4 words, one per slide, Pixabay backgrounds
 Slide 7:  Transition — "What's the main idea?" (red #c0392b)
 Slide 8:  Transition — "Finding details" (red #c0392b)
-Slides 9-13: Auto-animate — True/False Strategy (5 slides, teal #1a6b5a)
-Slide 14: Auto-animate — MC Strategy block (teal #1a6b5a)
+Slides 9-13: Auto-animate — True/False Strategy (5 slides, teal #0d4a3d)
+Slide 14: Auto-animate — MC Strategy block (teal #0d4a3d)
 Slide 15: Task — True/False + Paragraph Matching (timer)
 Slide 16: Transition — "Making conclusions" (red)
 Slide 17: Task — Multiple Choice (timer)
