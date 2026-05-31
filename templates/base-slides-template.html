@@ -263,347 +263,240 @@
                      Delete all comment blocks before publishing.
                      ============================================================ -->
 
-                <!-- ─── PATTERN: Title Slide ──────────────────────────────── -->
-                <!-- CRITICAL: Must use BOTH data-background-color AND data-background-image.
-                     Without data-background-color, the text may lack contrast while the image loads.
-                     justify-content: center is REQUIRED — reveal.js sections default to flex-start,
-                     pushing content to the top of the slide.
-                     Logo: 120px (not 78px — too small on 1280x720).
-                     h2: 2.2em (not default ~1.6em — too small).
-                     CEFR badge: inline inside h2 with vertical-align: middle.
-                     Subheader: 1em (not 0.7em — invisible at projection distance).
-                     data-background-opacity: 0.85 (not 0.7 — too dim). -->
-                <!--
-                <section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.85" style="justify-content: center;">
+                <!-- ============================================================
+                     ⚠️  REFERENCE SLIDES — AGENT MUST READ BEFORE GENERATING
+                     
+                     These are VERIFIED working examples of every slide type. Before
+                     writing ANY slide for a new presentation:
+                     1. Scroll through these examples
+                     2. Copy the EXACT pattern for your slide type
+                     3. Adapt content only — DO NOT change structure, attributes,
+                        CSS classes, or layout patterns
+                     4. Delete ALL reference slides after copying what you need
+                     
+                     Key measurements (1280x720 slides):
+                     - Title h2: 2.2em  |  Subheader: 1em  |  Logo: 120px
+                     - Body text: 1em minimum  |  Labels: 0.9em minimum
+                     - Answer slide bg: #0d5e1a (green)  |  NEVER #1e7e34
+                     - Transition bg: #c0392b (red)
+                     - Pedagogical bg: #1a6b5a (teal)
+                     - Lead-in/Filler bg: #1a1a2e (dark navy)
+                     ============================================================ -->
+
+                <!-- ── TITLE SLIDE ───────────────────────────────────────────────
+                     CRITICAL RULES:
+                     - justify-content: center — reveal.js defaults to flex-start
+                     - Logo 120px (not 78px — invisible on 1280x720)
+                     - h2 2.2em (not default ~1.6em)
+                     - CEFR badge inline in h2 with vertical-align: middle
+                     - Subheader 1em (not 0.7em)
+                     - data-background-opacity 0.85 (not 0.7)
+                --▶
+                <section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/background.jpg" data-background-opacity="0.85" style="justify-content: center;">
                     <img src="assets/logo.png" style="height: 120px; margin: 0 auto 0.5em; display: block;" alt="ACT" />
-                    <h2 style="font-size: 2.2em;">Topic Title <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></h2>
-                    <p style="font-size: 1em; color: rgba(255,255,255,0.9); margin-top: 0.5em;">Strap subheader — derived from lesson objective</p>
+                    <h2 style="font-size: 2.2em;">Lesson Topic <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></h2>
+                    <p style="font-size: 1em; color: rgba(255,255,255,0.9); margin-top: 0.5em;">Brief subtitle</p>
                 </section>
-                -->
 
-                <!-- ─── PATTERN: Objective Slide ──────────────────────────── -->
-                <!--
-                <section>
-                    <h2>Here's what you'll be able to do</h2>
-                    <ul>
-                        <li>Understand what the article is mainly about</li>
-                        <li>Find the most important facts and mistakes</li>
-                        <li>Share your ideas with a partner</li>
-                    </ul>
-                    <p><em>These are the same skills you need for the PET reading test!</em></p>
+                <!-- ── OBJECTIVE SLIDE ───────────────────────────────────────────
+                     CRITICAL: All outcomes visible on entry — NO fragments.
+                     Max 4 outcomes. Each starts with "I can".
+                --▶
+                <section id="slide-objective" data-background-color="#1a1a2e">
+                    <h2>Today's Goals</h2>
+                    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">I can</span> [first outcome].</p>
+                    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">I can</span> [second outcome].</p>
+                    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">I can</span> [third outcome].</p>
                 </section>
-                -->
 
-                <!-- ─── PATTERN: Lead-in Slide (Pixabay background) ───────── -->
-                <!--
-                <section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="1.0">
-                    <h2 class="text-shield">Let's get Started</h2>
-                    <h3 class="text-shield">What do you see? What do you think the lesson is about?</h3>
-                    <aside class="notes">
-                        Display the photo. Give students 20 seconds to look silently.
-                        Then ask the question. Elicit 3-4 responses.
-                        Connect responses to today's topic.
-                    </aside>
+                <!-- ── TRANSITION SLIDE ──────────────────────────────────────────
+                     Red background (#c0392b). Heading only — NO descriptive paragraphs.
+                     The teacher speaks the transition.
+                --▶
+                <section id="slide-transition-stage" data-background-color="#c0392b" data-background-transition="none">
+                    <h2>Next Stage Heading</h2>
                 </section>
-                -->
 
-                <!-- ─── PATTERN: Vocabulary Slide (HEADER — first word only) ─ -->
-                <!--
-                <section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="1.0">
-                    <h2 class="text-shield">Important Words</h2>
-                    <p class="text-shield"><span class="vocab-word">generation gap</span></p>
-                    <p class="text-shield"><em>/ˌdʒenəˈreɪʃn ɡæp/</em></p>
-                    <p class="text-shield"><em>There is a big <span class="vocab-word">generation gap</span> between old people and young people.</em></p>
-                </section>
-                -->
-
-                <!-- ─── PATTERN: Vocabulary Slide (NO HEADER — subsequent words) ─ -->
-                <!--
-                <section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="1.0">
-                    <p class="text-shield"><span class="vocab-word">frustration</span></p>
-                    <p class="text-shield"><em>/frʌˈstreɪʃn/</em></p>
-                    <p class="text-shield"><em>I felt <span class="vocab-word">frustration</span> when my phone died during an important call.</em></p>
-                </section>
-                -->
-
-                <!-- ─── PATTERN: Vocabulary Slide (NO HEADER — subsequent words) ─ -->
-                <!--
-                <section class="vocab-slide" data-background-image="assets/vocab-XXXXXX.jpg" data-background-opacity="1.0">
-                    <p class="text-shield"><span class="vocab-word">frustration</span></p>
-                    <p class="text-shield"><em>/frʌˈstreɪʃn/</em></p>
-                    <p class="text-shield"><em>I felt <span class="vocab-word">frustration</span> when my phone died during an important call.</em></p>
-                </section>
-                -->
-
-                <!-- ─── PATTERN: Transition Slide (red background) ────────── -->
-                <!--
-                <section data-background-color="#c0392b">
-                    <h2>Finding details</h2>
-                    <p>We're now going to read the story in more detail.</p>
-                    <p>Let's start with some True/False questions.</p>
-                    <p>They may look easy, but they can have some surprises!</p>
-                </section>
-                -->
-
-                <!-- ─── PATTERN: Auto-Animate Strategy Block ──────────────── -->
-                <!--
-                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a6b5a">
-                    <h2>True/False Strategy</h2>
-                    <p><strong>Step 1:</strong> Read the statement carefully</p>
-                    <p><em>Statement text goes here.</em></p>
-                </section>
-                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a6b5a">
-                    <h2>True/False Strategy</h2>
-                    <p><strong>Step 1:</strong> Read the statement carefully</p>
-                    <p><em>Statement text goes here.</em></p>
-                    <p><strong>Step 2:</strong> Find the keywords</p>
-                    <p>"keyword1" · "keyword2" · "keyword3"</p>
-                </section>
-                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a6b5a">
-                    <h2>True/False Strategy</h2>
-                    <p><strong>Step 1:</strong> Read the statement carefully</p>
-                    <p><em>Statement text goes here.</em></p>
-                    <p><strong>Step 2:</strong> Find the keywords</p>
-                    <p>"keyword1" · "keyword2" · "keyword3"</p>
-                    <p><strong>Step 3:</strong> Find the evidence</p>
-                    <p>Look in paragraphs X and Y. Do the meanings match?</p>
-                </section>
-                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a6b5a">
-                    <h2>True/False Strategy</h2>
-                    <p><strong>Step 1:</strong> Read the statement carefully</p>
-                    <p><em>Statement text goes here.</em></p>
-                    <p><strong>Step 2:</strong> Find the keywords</p>
-                    <p>"keyword1" · "keyword2" · "keyword3"</p>
-                    <p><strong>Step 3:</strong> Find the evidence</p>
-                    <p>Look in paragraphs X and Y. Do the meanings match?</p>
-                    <p><strong>Step 4:</strong> Check your answer</p>
-                </section>
-                <section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a6b5a">
-                    <h2>True/False Strategy</h2>
-                    <p><strong>Step 1:</strong> Read the statement carefully</p>
-                    <p><em>Statement text goes here.</em></p>
-                    <p><strong>Step 2:</strong> Find the keywords</p>
-                    <p>"keyword1" · "keyword2" · "keyword3"</p>
-                    <p><strong>Step 3:</strong> Find the evidence</p>
-                    <p>Look in paragraphs X and Y. Do the meanings match?</p>
-                    <p><strong>Step 4:</strong> Check your answer</p>
-                    <p class="fragment fade-up a-ans a-cor">TRUE — Explanation of why it's true.</p>
-                </section>
-                -->
-
-                <!-- ─── PATTERN: Formula Auto-Animate (Entry → Reveal, 2 slides) ─── -->
-                <!-- CRITICAL: Use a 2-slide auto-animate pair when demonstrating structural
-                     changes (simple→compound, wrong→right). The entry slide shows both versions
-                     with transparent borders on the KEY CHANGED elements. The reveal slide
-                     changes those borders to colored (#4fc3f7 blue). Both slides MUST have
-                     data-auto-animate with matching data-auto-animate-id. Matching elements
-                     need data-id attributes on both slides. -->
-                <!--
-                <section id="slide-formula-entry" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="formula">
+                <!-- ── LEAD-IN ERROR (auto-animate pair) ────────────────────────
+                     PURPOSE: Show a real student error, then reveal the correction.
+                     Entry: error with transparent borders on wrong words.
+                     Reveal: error dimmed, correction appears with blue underlines.
+                --▶
+                <section id="slide-leadin1-entry" data-auto-animate data-auto-animate-id="leadin1" data-background-color="#1a1a2e">
                     <div style="overflow: hidden;">
-                        <h2 data-id="title">Simple vs Compound</h2>
-                        <p><u><strong>Simple:</strong></u></p>
-                        <p data-id="simp" style="color: #ffdd00;">My family <span>goes</span> camping every summer and usually <span>has</span> fun.</p>
-                        <p><u><strong>Compound:</strong></u></p>
-                        <p data-id="comp" style="color: #ffdd00;">My family goes camping every summer, and <span data-id="newS" style="border-bottom: 2px solid transparent;">we</span> usually <span data-id="newV" style="border-bottom: 2px solid transparent;">have</span> fun.</p>
-                        <p style="color: rgba(255,255,255,0.85);">S V, and S V</p>
+                        <p><strong>Common error:</strong></p>
+                        <p data-id="err" style="font-size: 1.2em; color: #ffdd00;">
+                            "Incorrect <span data-id="fix" style="border-bottom: 2px solid transparent;">sentence</span> here."
+                        </p>
                     </div>
                 </section>
-                <section id="slide-formula-reveal" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="formula">
+                <section id="slide-leadin1-reveal" data-auto-animate data-auto-animate-id="leadin1" data-background-color="#1a1a2e">
                     <div style="overflow: hidden;">
-                        <h2 data-id="title">Simple vs Compound</h2>
-                        <p><u><strong>Simple:</strong></u></p>
-                        <p data-id="simp" style="color: #ffdd00;">My family <span>goes</span> camping every summer and usually <span>has</span> fun.</p>
-                        <p><u><strong>Compound:</strong></u></p>
-                        <p data-id="comp" style="color: #ffdd00;">My family goes camping every summer, and <span data-id="newS" style="border-bottom: 2px solid #4fc3f7; box-shadow: 0 3px 0 0 #4fc3f7;">we</span> usually <span data-id="newV" style="border-bottom: 2px solid #4fc3f7; box-shadow: 0 3px 0 0 #4fc3f7;">have</span> fun.</p>
-                        <p style="color: rgba(255,255,255,0.85);">S V, and <span style="color: #4fc3f7;">S</span> <span style="color: #4fc3f7;">V</span></p>
+                        <p><strong>Fix:</strong> [error type]</p>
+                        <p data-id="err" style="font-size: 1em; color: rgba(255,255,255,0.55);">
+                            "Incorrect <span data-id="fix" style="border-bottom: 2px solid #ff8a65;">sentence</span> here."
+                        </p>
+                        <p style="font-size: 1.2em; color: #4fc3f7; margin-top: 0.5em;">
+                            Corrected: "Correct <span style="border-bottom: 2px solid #4fc3f7;">sentence</span> here."
+                        </p>
                     </div>
                 </section>
-                -->
 
-                <!-- ─── PATTERN: Task Instruction Slide ───────────────────── -->
-                <!--
-                <section data-timer="960">
-                    <h2>Finding details</h2>
-                    <ul>
-                        <li>Read the article again and complete the true/false task.</li>
-                        <li>Complete the paragraph matching task.</li>
-                    </ul>
-                    <aside class="notes">
-                        Stage 3 · 16 min · Ss-Ss
-                        Goal: To identify key facts and supporting details
-                        Materials: Student Book, pp 5-6
-                    </aside>
-                </section>
-                -->
-
-                <!-- ─── PATTERN: Pedagogical Strategy Slide (non-auto-animate) ─ -->
-                <!--
-                <section class="pedagogical" data-background-color="#1a6b5a">
-                    <h2>Multiple Choice Strategy</h2>
-                    <p><strong>Step 1: Read all options first</strong> <span class="fragment"> — look at all three choices</span></p>
-                    <ul class="fragment">
-                        <li>a) Option A text</li>
-                        <li>b) Option B text</li>
-                        <li>c) Option C text</li>
-                    </ul>
-                    <p class="fragment"><strong>Step 2: Eliminate wrong answers</strong></p>
-                    <p class="fragment strike">a) Reason for elimination. <strong>Eliminate.</strong></p>
-                    <p class="fragment strike">b) Reason for elimination. <strong>Eliminate.</strong></p>
-                    <p class="fragment"><strong>Step 3: Confirm the answer</strong></p>
-                    <p class="fragment fade-up a-ans a-cor">c) Correct answer explanation. <i class="fa-solid fa-check"></i> <strong>c is correct!</strong></p>
-                </section>
-                -->
-
-                <!-- ─── PATTERN: Answer Slide (True/False) ─────────────────── -->
-                <!--
-                <section data-background-color="#1e7e34">
-                    <h2>Exercise 2</h2>
-                    <p class="aim-label">True/False</p>
-                    <table class="answer-table">
-                        <thead><tr><th>Statement</th><th>Answer</th></tr></thead>
-                        <tbody>
-                            <tr><td>Statement text.</td><td class="fragment a-cor"><i class="fa-solid fa-check"></i> <strong>True</strong></td></tr>
-                            <tr><td>Another statement.</td><td class="fragment a-inc"><i class="fa-solid fa-times"></i> <strong>False</strong></td></tr>
-                            <tr><td>Corrected statement.</td><td class="fragment a-cor"><i class="fa-solid fa-check"></i> <em>Explanation</em></td></tr>
-                        </tbody>
-                    </table>
-                </section>
-                -->
-
-                <!-- ─── PATTERN: Answer Slide (Multiple Choice) ────────────── -->
-                <!--
-                <section data-background-color="#1e7e34">
-                    <h2>Exercise 4</h2>
-                    <p class="aim-label">Multiple Choice</p>
-                    <table class="answer-table">
-                        <thead><tr><th>Question</th><th>Answer</th><th>Why?</th></tr></thead>
-                        <tbody>
-                            <tr><td>Question text</td><td class="fragment a-cor"><i class="fa-solid fa-check"></i> <strong>c</strong></td><td class="fragment">citation</td></tr>
-                        </tbody>
-                    </table>
-                </section>
-                -->
-
-                <!-- ─── PATTERN: Answer Slide (Paragraph Matching) ─────────── -->
-                <!--
-                <section data-background-color="#1e7e34">
-                    <h2>Exercise 3</h2>
-                    <p class="aim-label">Paragraph Matching</p>
-                    <table class="answer-table">
-                        <thead><tr><th>Paragraph</th><th>Match</th></tr></thead>
-                        <tbody>
-                            <tr><td>Paragraph description</td><td class="fragment a-cor"><i class="fa-solid fa-check"></i> <strong>B</strong></td></tr>
-                            <tr><td>Another description</td><td class="fragment a-cor"><i class="fa-solid fa-check"></i> <strong>C</strong></td></tr>
-                        </tbody>
-                    </table>
-                </section>
-                -->
-
-                <!-- ─── PATTERN: Summary Slide ─────────────────────────────── -->
-                <!--
-                <section>
-                    <h2>What you can do now</h2>
-                    <ul>
-                        <li><i class="fa-solid fa-check"></i> I can find the main idea</li>
-                        <li><i class="fa-solid fa-check"></i> I can find important facts</li>
-                        <li><i class="fa-solid fa-check"></i> I can share my ideas</li>
-                    </ul>
-                    <aside class="notes">
-                        Elicit from students: What did you learn today?
-                        Connect back to their predictions from the beginning.
-                        Praise effort, mention one thing to improve.
-                    </aside>
-                </section>
-                -->
-
-                <!-- ─── PATTERN: End Slide ─────────────────────────────────── -->
-                <!--
-                <section data-background-color="#2c3e50">
-                    <h2>Thank you</h2>
-                    <p><em>Topic Name</em> | B2</p>
-                </section>
-                -->
-
-                <!-- ─── PATTERN: YouTube Embed Slide ────────────────────────── -->
-                <!--
-                <section data-background-color="#1a1a2e">
-                    <h2>Video Title</h2>
-                    <iframe
-                        width="760" height="430"
-                        src="https://www.youtube.com/embed/VIDEO_ID"
-                        frameborder="0"
-                        allowfullscreen
-                        referrerpolicy="strict-origin-when-cross-origin"
-                        style="border: none; display: block; margin: 0 auto;">
-                    </iframe>
-                    <p><em>Discussion prompt below the video.</em></p>
-                </section>
-                -->
-
-                <!-- ─── PATTERN: Diagnostic Talk Structure Slide ────────────── -->
-                <!--
-                <section class="pedagogical structure-talk" data-background-color="#1a6b5a" data-background-transition="none" style="top: 0;">
-                    <h2>Structure Your Talk</h2>
-                    <p class="structure-step"><u><strong>Thesis:</strong> Say your main idea</u></p>
-                    <p class="structure-step"><u><strong>Reasons:</strong> Give 1-2 reasons</u></p>
-                    <p class="structure-step"><u><strong>Example:</strong> Share an example you know</u></p>
-                    <p class="transition-words">First... &nbsp; Also... &nbsp; For example...</p>
-                </section>
-                -->
-
-                <!-- ─── PATTERN: Grammar Diagnostic Test Slide ──────────────── -->
-                <!-- CRITICAL: Split into max 3 items per slide. Add answer fragments below
-                     the questions so the teacher can reveal answers after the timer ends.
-                     Each answer fragment should have the coordinator/answer + Why explanation. -->
-                <!--
-                <section id="slide-diagnostic-1-3" data-background-color="#1a1a2e" data-timer="180">
-                    <p><em>Join each pair into one sentence. Use and, but, or, or so.</em></p>
-                    <ol style="font-size: 0.7em; text-align: left;">
-                        <li>Pair 1a. Pair 1b.</li>
-                        <li>Pair 2a. Pair 2b.</li>
-                        <li>Pair 3a. Pair 3b.</li>
-                    </ol>
-                    <div class="answer-list" style="margin-top: 0.8em;">
-                        <div class="a-row"><span class="a-num">1.</span><span class="fragment fade-up a-ans a-cor" style="color:#ffdd00;">coordinator</span><span class="fragment fade-up a-why">Explanation</span></div>
-                        <div class="a-row"><span class="a-num">2.</span><span class="fragment fade-up a-ans a-cor" style="color:#ffdd00;">coordinator</span><span class="fragment fade-up a-why">Explanation</span></div>
-                        <div class="a-row"><span class="a-num">3.</span><span class="fragment fade-up a-ans a-cor" style="color:#ffdd00;">coordinator</span><span class="fragment fade-up a-why">Explanation</span></div>
+                <!-- ── DIAGNOSTIC TEST (auto-animate, 3 items) ──────────────────
+                     PURPOSE: Assess before teaching. Split to 3 items max per pair.
+                     Entry: original pairs with transparent border on period.
+                     Reveal: period morphs to comma+coordinator with blue underline.
+                --▶
+                <section id="slide-diagnostic-1-3" data-auto-animate data-auto-animate-id="diag1" data-background-color="#1a1a2e" data-timer="180">
+                    <div style="overflow: hidden;">
+                        <p><em>Join each pair:</em></p>
+                        <ol style="font-size: 0.85em; text-align: left;">
+                            <li style="margin: 0.4em 0;">Sentence A<span style="border-bottom: 2px solid transparent;">.</span> Sentence B.</li>
+                        </ol>
                     </div>
-                    <aside class="notes">Individual work, then pair check. Use fragment clicks to reveal answers.</aside>
                 </section>
-                -->
-
-                <!-- ─── PATTERN: Grammar Rules Slide ────────────────────────── -->
-                <!--
-                <section class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none">
-                    <h2>Rule Title (Rules 1–3)</h2>
-                    <p><u><strong>Rule 1:</strong> Description</u></p>
-                    <p><em>"Example sentence."</em> Explanation.</p>
-                    <p><u><strong>Rule 2:</strong> Description</u></p>
-                    <p><em>"Example sentence."</em> Explanation.</p>
+                <section id="slide-diagnostic-1-3-reveal" data-auto-animate data-auto-animate-id="diag1" data-background-color="#1a1a2e">
+                    <div style="overflow: hidden;">
+                        <p><em>Corrected:</em></p>
+                        <ol style="font-size: 0.85em; text-align: left;">
+                            <li style="margin: 0.4em 0;">Sentence A<span style="border-bottom: 2px solid #4fc3f7;">, and</span> sentence B.</li>
+                        </ol>
+                    </div>
                 </section>
-                -->
 
-                <!-- ─── PATTERN: Pedagogical Demo Slide (worked example before task) ─── -->
-                <!-- CRITICAL: Before any freer practice task (e.g. Practice 10A), include
-                     a demo slide. The teacher walks through ONE item step by step so students
-                     see the full reasoning chain before attempting the rest independently. -->
-                <!--
-                <section id="slide-p10a-demo" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none">
-                    <h2>Practice 10A — Let's do one together</h2>
-                    <p style="color: #ffdd00;">Item 1: Sentence A. Sentence B.</p>
-                    <p style="margin-top: 0.4em;"><u><strong>Step 1:</strong> What's the relationship?</u></p>
-                    <p style="margin-left: 1em;">Explanation of relationship (reason/contrast/choice/similar).</p>
-                    <p style="margin-top: 0.3em;"><u><strong>Step 2:</strong> Choose the coordinator.</u></p>
-                    <p style="margin-left: 1em;">Relationship → use <strong>coordinator</strong></p>
-                    <p style="margin-top: 0.3em;"><u><strong>Step 3:</strong> Combine: comma + coordinator.</u></p>
-                    <p style="margin-left: 1em; color: #4fc3f7;">"Combined sentence, coordinator rest."</p>
+                <!-- ── PEDAGOGICAL KEY RULE (with auto-animate) ─────────────────
+                     PURPOSE: Demonstrate a structural transformation (simple→compound).
+                     Entry: transparent borders on NEW elements.
+                     Reveal: blue underlines + box-shadow on the NEW elements.
+                --▶
+                <section id="slide-rule-entry" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="rule">
+                    <div style="overflow: hidden;">
+                        <h2 data-id="title">Rule Name</h2>
+                        <p><u><strong>Version 1:</strong> description</u></p>
+                        <p data-id="vers1" style="color: #ffdd00; font-size: 0.95em;">Example without the new element.</p>
+                        <p style="margin-top: 0.4em;"><u><strong>Version 2:</strong> description</u></p>
+                        <p data-id="vers2" style="color: #ffdd00; font-size: 0.95em;">Example with <span data-id="new" style="border-bottom: 2px solid transparent;">new element</span>.</p>
+                    </div>
                 </section>
-                -->
+                <section id="slide-rule-reveal" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="rule">
+                    <div style="overflow: hidden;">
+                        <h2 data-id="title">Rule Name</h2>
+                        <p><u><strong>Version 1:</strong> description</u></p>
+                        <p data-id="vers1" style="color: rgba(255,255,255,0.5); font-size: 0.95em;">Example without the new element.</p>
+                        <p style="margin-top: 0.4em;"><u><strong>Version 2:</strong> description</u></p>
+                        <p data-id="vers2" style="color: #ffdd00; font-size: 0.95em;">Example with <span data-id="new" style="border-bottom: 2px solid #4fc3f7; box-shadow: 0 3px 0 0 #4fc3f7;">new element</span>.</p>
+                    </div>
+                </section>
 
-                <!-- ─── PATTERN: Error-Correction Answer Table ───────────────── -->
+                <!-- ── COORDINATOR DEMO (auto-animate pair) ─────────────────────
+                     PURPOSE: Two separate sentences morph into one compound.
+                     Entry: two sentences with period between them.
+                     Reveal: period becomes comma+coordinator with blue underline.
+                --▶
+                <section id="slide-coord-entry" data-auto-animate data-auto-animate-id="coord" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none">
+                    <div style="overflow: hidden;">
+                        <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">AND</strong></h2>
+                        <p><u><strong>Meaning:</strong> similar ideas</u></p>
+                        <p data-id="ex" style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
+                            "Sentence one<span data-id="join" style="border-bottom: 2px solid transparent;">. S</span>entence two."
+                        </p>
+                    </div>
+                </section>
+                <section id="slide-coord-reveal" data-auto-animate data-auto-animate-id="coord" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none">
+                    <div style="overflow: hidden;">
+                        <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">AND</strong></h2>
+                        <p><u><strong>Meaning:</strong> similar ideas</u></p>
+                        <p data-id="ex" style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
+                            "Sentence one<span data-id="join" style="border-bottom: 2px solid #4fc3f7;">, and</span> sentence two."
+                        </p>
+                    </div>
+                </section>
+
+                <!-- ── TASK SLIDE (with timer) ──────────────────────────────────
+                     Only shows exercise number + brief instruction.
+                     Full procedure in <aside class="notes">.
+                --▶
+                <section id="slide-practice-task" data-background-color="#1a1a2e" data-timer="480">
+                    <h2>Practice N — items 1 to X</h2>
+                    <p><em>Brief instruction only — students have the workbook.</em></p>
+                    <aside class="notes">Individual work X min. Pair check X min.</aside>
+                </section>
+
+                <!-- ── PEDAGOGICAL DEMO (worked example before task) ────────────
+                     PURPOSE: Teacher walks through ONE item step by step.
+                --▶
+                <section id="slide-demo" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none">
+                    <h2>Let's do one together</h2>
+                    <p style="color: #ffdd00;">Item 1: Original content.</p>
+                    <p style="margin-top: 0.4em;"><u><strong>Step 1:</strong> Identify the relationship.</u></p>
+                    <p style="margin-left: 1em;">Relationship explanation.</p>
+                    <p style="margin-top: 0.3em;"><u><strong>Step 2:</strong> Choose the correct form.</u></p>
+                    <p style="margin-top: 0.3em;"><u><strong>Step 3:</strong> Apply the rule.</u></p>
+                    <p style="margin-left: 1em; color: #4fc3f7;">"Corrected version."</p>
+                </section>
+
+                <!-- ── PEDAGOGICAL STRATEGY (non-auto-animate, single slide) ────
+                     For strategy blocks that don't need auto-animate.
+                     Use step labels with <u><strong>Step N:</strong>.
+                --▶
+                <section id="slide-strategy" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none">
+                    <h2>Strategy Name</h2>
+                    <p><u><strong>Step 1:</strong> First action.</u></p>
+                    <p><u><strong>Step 2:</strong> Second action.</u></p>
+                    <p><u><strong>Step 3:</strong> Third action.</u></p>
+                    <p style="margin-top: 0.5em; color: #ffdd00;"><strong>Example:</strong> "Example demonstrating the strategy."</p>
+                </section>
+
+                <!-- ── ANSWER SLIDE (answer-list, max 3 items, with Why) ───────
+                     CRITICAL RULES:
+                     - data-background-color="#0d5e1a" (dark green — NOT #1e7e34)
+                     - Max 3 items per slide
+                     - <style> block sets .a-why flex
+                     - Each row: formula/answer (fragment fade-up) + Why (fragment fade-up, same index)
+                     - ALL text white #fff or yellow #ffdd00 — NO gray
+                --▶
+                <section id="slide-practice-answers-1-3" data-background-color="#0d5e1a" data-background-transition="none">
+<style>
+    .reveal .answer-list { width: 100%; font-size: 0.85em; }
+    .reveal .a-row { display: flex; align-items: baseline; padding: 0.4em 0; border-bottom: 1px solid rgba(255,255,255,0.1); gap: 0.5em; }
+    .reveal .a-row:last-child { border-bottom: none; }
+    .reveal .a-num { flex: 0 0 1.2em; text-align: left; color: #fff; font-size: 0.85em; }
+    .reveal .a-q { flex: 0 0 4em; min-width: 0; }
+    .reveal .a-ans { flex: 0 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; }
+    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.75em; }
+    .reveal section.pedagogical { align-self: flex-start; margin-top: 0; padding-top: 30px; }
+    .reveal .aim-label { color: #fff; }
+</style>
+    <h2 style="font-size: 0.85em;">Practice N — Answers (1–3)</h2>
+    <div class="answer-list">
+        <div class="a-row"><span class="a-num">1.</span><span class="a-q">label</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">answer</span><span class="fragment fade-up a-why">Explanation</span></div>
+        <div class="a-row"><span class="a-num">2.</span><span class="a-q">label</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">answer</span><span class="fragment fade-up a-why">Explanation</span></div>
+        <div class="a-row"><span class="a-num">3.</span><span class="a-q">label</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">answer</span><span class="fragment fade-up a-why">Explanation</span></div>
+    </div>
+</section>
+
+                <!-- ── SUMMARY SLIDE ────────────────────────────────────────────
+                     Static — all visible on entry. "I can" statements with checkmarks.
+                --▶
+                <section id="slide-summary" data-background-color="#1a1a2e">
+                    <h2>I can...</h2>
+                    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> first outcome</p>
+                    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> second outcome</p>
+                    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> third outcome</p>
+                </section>
+
+                <!-- ── END SLIDE ──────────────────────────────────────────────── -->
+                <section id="slide-end" data-background-color="#2c3e50" data-background-transition="none">
+                    <h2>Lesson Topic</h2>
+                    <div><span class="cefr-badge B1">B1</span></div>
+                </section>
+
+                <!-- ============================================================
+                     END REFERENCE SLIDES — Insert your lesson content below.
+                     ============================================================ -->
                 <!--
-                <section data-background-color="#1e7e34">
+                <section data-background-color="#0d5e1a">
                     <h2>Practice N — Answers (1–X)</h2>
                     <table class="answer-table">
                         <thead><tr><th>#</th><th>Original</th><th>Correction</th></tr></thead>

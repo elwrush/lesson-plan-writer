@@ -188,6 +188,22 @@ SLIDESHOW FLOW — index2.html
 ────────────────────────────────────────────
 ```
 
+### Mandatory Pre-Write Checklist (for agent)
+
+Before writing ANY slide HTML for a new or updated presentation, this agent MUST:
+1. **Read `templates/base-slides-template.html`** — open the file and scroll through the reference slides section. Find the EXACT pattern for each slide type you need.
+2. **Copy, don't invent** — use the working example as a template. Change content only, not structure. Any pattern not in the template must be explicitly approved.
+3. **Check font sizes** — every text element must be ≥0.9em (labels) or ≥1em (body). Title slide h2=2.2em, logo 120px. No 0.7em text.
+4. **Check green background** — answer slides use `#0d5e1a`, NOT `#0d5e1a`. The old green is too light for projection contrast.
+5. **Check vertical centering** — title slides need `style="justify-content: center;"`. reveal.js defaults to flex-start.
+6. **One concept per slide** — if a slide feels busy, split it. Max 3 items per answer slide.
+7. **Auto-animate for transformations** — structural changes (simple→compound, error→correction) use 2-slide auto-animate pairs. Entry = transparent borders, Reveal = `#4fc3f7` blue borders.
+8. **Why column on every answer** — every answer slide has an `a-why` span with explanation.
+9. **Fragments on answers only** — task instructions, objectives, and summaries stay static. No fragments on non-answer content.
+10. **Validate** — run `npx revealjs-validator --project "output/{subfolder}/slides/"` and fix all errors.
+
+If any rule is unclear, ask. Do not guess.
+
 ### Key Design Rules
 
 - **One step per slide** — enforced across all three pedagogy blocks
@@ -197,7 +213,7 @@ SLIDESHOW FLOW — index2.html
 - **Answer tables**: `<table class="answer-table">` with 3 columns (Statement/Answer/Why?). Add `wrap` class for tables with long text. Right column uses `white-space: normal`
 - **Table tick/cross**: middle column with `data-fragment-index` matching explanation cell for simultaneous reveal
 - **Lightbulb removed** from all answer slides (saves screen real estate)
-- **Green answer slide text contrast**: All text on `#1e7e34` answer slides MUST use only white (`#fff`) or yellow (`#ffdd00`). No gray, blue, or muted colors — they are invisible at projection distance. The template's `.aim-label` uses gray `#888` by default and must be overridden with `color: rgba(255,255,255,0.7)` on green slides.
+- **Green answer slide text contrast**: All text on `#0d5e1a` answer slides MUST use only white (`#fff`) or yellow (`#ffdd00`). No gray, blue, or muted colors — they are invisible at projection distance. The template's `.aim-label` uses gray `#888` by default and must be overridden with `color: rgba(255,255,255,0.7)` on green slides.
 - **Pedagogical background**: `data-background-color="#1a6b5a"` + `class="pedagogical"` + `data-background-transition="none"`
 - **Max 3 items per answer slide** — whether using answer-list flex layout or inline annotations. Split exercises with >3 items across multiple slides.
 - **Inline S/V/O annotations** — for grammar identification exercises (subjects, verbs, objects), decorate words directly on the sentence rather than using a separate answer column. Use `class="fragment custom svo-s"`, `svo-v`, `svo-o` on `<span>` elements with CSS controlling border/color changes on `.visible`. Superscript labels (`<sup>S</sup>`, `<sup>V</sup>`, `<sup>O</sup>`) use `opacity: 0` → `opacity: 1` with CSS transitions. Use `data-fragment-index` to group each sentence's decorations and confirmation note for per-click reveal.

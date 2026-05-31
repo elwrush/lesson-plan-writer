@@ -257,7 +257,7 @@ Every distinct exercise type follows this four-slide sequence. This is the **onl
 | 1 | **Transition** | `#c0392b` (red) | Heading only — "Listen for Main Ideas", "Finding Details", "Useful Phrases" | Neither |
 | 2 | **Pedagogical** | `#1a6b5a` (teal) `class="pedagogical"` | Strategy instruction. Auto-animate for keyword underline reveals. 🏁 challenge text here. | **No audio** |
 | 3 | **Task** | `#1a1a2e` (dark) | Exercise number + brief instruction only. **No exercise text** — students have workbook. | `data-audio-src` OR `data-timer` (never both) |
-| 4 | **Answers** | `#1e7e34` (green) | answer-list flex, max 3 items, each with answer + WHY line in yellow | Neither |
+| 4 | **Answers** | `#0d5e1a` (green) | answer-list flex, max 3 items, each with answer + WHY line in yellow | Neither |
 
 ```html
 <!-- Transition -->
@@ -284,7 +284,7 @@ Every distinct exercise type follows this four-slide sequence. This is the **onl
 </section>
 
 <!-- Answers (max 3 items per slide) -->
-<section id="slide-ex{n}-answers-1-3" data-background-color="#1e7e34">
+<section id="slide-ex{n}-answers-1-3" data-background-color="#0d5e1a">
     <h2>Exercise {n} — Answers (1–3)</h2>
     <div class="answer-list">
         <div class="a-row">
@@ -338,7 +338,7 @@ Rules:
 Replace the old `table.answer-table` with the answer-list flex layout. This is the **only** answer slide pattern.
 
 ```html
-<section id="slide-ex{n}-answers-{range}" data-background-color="#1e7e34">
+<section id="slide-ex{n}-answers-{range}" data-background-color="#0d5e1a">
     <h2>Exercise {{ number }} — Answers (1–3)</h2>
     <div class="answer-list">
         <div class="a-row">
@@ -359,7 +359,7 @@ Replace the old `table.answer-table` with the answer-list flex layout. This is t
 ```
 
 Rules:
-- Green background `#1e7e34` for all answer slides
+- Green background `#0d5e1a` for all answer slides
 - **Max 3 items per slide** — split exercises with >3 items (e.g., `slide-ex2-answers-1-3`, `slide-ex2-answers-4-5`)
 - `a-cor` for correct answers (green background on reveal), `a-inc` for incorrect answers (red background on reveal)
 - **Do NOT use** `answer-correct`/`answer-incorrect`, `highlight-green`/`highlight-red`, or `table.answer-table` — these are legacy
@@ -563,7 +563,7 @@ All questions visible at once. No fragments for discussion.
 
 ### 17. Error-Correction Answer Table (Grammar)
 ```html
-<section data-background-color="#1e7e34">
+<section data-background-color="#0d5e1a">
     <h2>Practice 3A — Answers (1-3)</h2>
     <table class="answer-table" style="font-size:0.875em;">
         <thead><tr><th style="width:8%;">#</th><th style="width:42%;">Sentence</th><th style="width:15%;">Answer</th><th style="width:35%;">Why?</th></tr></thead>
@@ -590,7 +590,7 @@ All questions visible at once. No fragments for discussion.
     </table>
 </section>
 ```
-- Green `#1e7e34` background, `answer-table` class
+- Green `#0d5e1a` background, `answer-table` class
 - **Max 3 items per slide** with a Why column (4 columns: # / Sentence / Answer / Why?)
 - Answer and Why cells use `class="fragment answer-correct"` with matching `data-fragment-index` for per-row reveal
 - Table font: `0.875em` for readability; Why column: `0.9em`
@@ -627,7 +627,7 @@ For grammar exercises where students identify subjects, verbs, and objects, **an
 
 **HTML pattern (max 3 sentences per slide):**
 ```html
-<section data-background-color="#1e7e34">
+<section data-background-color="#0d5e1a">
     <h2>Practice 3 — Answers (1–3)</h2>
     <p class="aim-label">Subjects, Verbs, and Objects</p>
     <div style="font-size: 0.95em; line-height: 2.5; text-align: left; width: 100%;">
@@ -657,11 +657,11 @@ Rules:
 - Superscript labels use `opacity: 0` → `opacity: 1` via CSS transitions (NOT `color: transparent`, which causes anti-aliasing artifacts)
 - Transparent borders + padding are applied from the start to prevent layout shift when the color appears
 - Confirmation notes use `fragment fade-up` (not `fragment custom`) so they actually slide in from hidden
-- Green `#1e7e34` background with white (`#fff`) or yellow (`#ffdd00`) text only — no gray or muted colors
+- Green `#0d5e1a` background with white (`#fff`) or yellow (`#ffdd00`) text only — no gray or muted colors
 
 **Deprecated alternative — Multi-Column Grammar Table:**
 ```html
-<section data-background-color="#1e7e34">
+<section data-background-color="#0d5e1a">
     <h2>Practice 3 — Answers (1–5)</h2>
     <p class="aim-label">Subjects, Verbs, and Objects</p>
     <table class="answer-table">

@@ -75,7 +75,7 @@ For each changed file, check the file type and evaluate ALL applicable rules bel
 20. **Pixabay backgrounds**: NOT used in generated output. All backgrounds are solid colors via `data-background-color="<color>"`.
 21. **One consistent example**: same exam question carried through all steps of a strategy block. No mid-flow example switching.
 22. **No `data-markdown`**: all slides are raw HTML `<section>`. Markdown pipeline is permanently abandoned.
-23. **Answer slides not used for strategy steps**: strategy steps have teal background; answer/confirmation slides have green `#1e7e34` background.
+23. **Answer slides not used for strategy steps**: strategy steps have teal background; answer/confirmation slides have green `#0d5e1a` background.
 24. **Summary background**: white (default). End slide: `data-background-color="#2c3e50"`.
 
 ---

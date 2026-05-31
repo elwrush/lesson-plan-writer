@@ -100,7 +100,7 @@ The base template has a CSS syntax error in `.cefr-badge` (missing closing `}`) 
     .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
     .reveal .a-ans.a-inc { color: #fff; }
     .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
-    /* Override template's gray #888 aim-label — invisible on green #1e7e34 */
+    /* Override template's gray #888 aim-label — invisible on green #0d5e1a */
     .reveal .aim-label { color: #fff; }
 </style>
 ```
@@ -139,7 +139,7 @@ Default background color reference (solid colors — no shielding needed):
 | Title, lead-in, general content | `#1a1a2e` (dark navy/black) |
 | Transition (forward to next stage) | `#c0392b` (red) |
 | Pedagogical/strategy blocks, grammar rules | `#1a6b5a` (teal) |
-| Answer tables | `#1e7e34` (green) |
+| Answer tables | `#0d5e1a` (green) |
 | Summary | white (default) — **WARNING: white background + black theme = invisible white text.** Use `#1a1a2e` for summary slides unless text color is explicitly overridden. |
 | End | `#2c3e50` (dark blue-gray) |
 
@@ -194,7 +194,7 @@ Every distinct exercise type MUST follow this four-slide sequence. This is the c
 | 1 | **Transition** | `#c0392b` (red) | Heading only — signals phase change to students | Neither |
 | 2 | **Pedagogical** | `#1a6b5a` (teal), `class="pedagogical"` | Strategy instruction for the skill (e.g., how to listen for gist). May use auto-animate for keyword underline reveals. Differentiation challenge (`🏁 Want a challenge?`) shown here. | **No audio** — audio goes on the task slide |
 | 3 | **Task** | `#1a1a2e` (dark) | Exercise number + brief student-facing instruction. **Do NOT print full exercise text** — students have the workbook. | `data-audio-src` for listening exercises; `data-timer` for written exercises. **Never both** on the same slide. |
-| 4 | **Answers** | `#1e7e34` (green) | answer-list flex layout with max **3 items** per slide. Each row: number, question snippet, answer (fragment fade-up), **WHY line in yellow** (`#ffdd00`) on the line below. | Neither |
+| 4 | **Answers** | `#0d5e1a` (green) | answer-list flex layout with max **3 items** per slide. Each row: number, question snippet, answer (fragment fade-up), **WHY line in yellow** (`#ffdd00`) on the line below. | Neither |
 
 **Key rules:**
 - Audio always goes on the **task slide**, never the pedagogical slide
@@ -582,7 +582,7 @@ Quick reference of slide types and their pedagogical intent:
 | Teach (rules/reference) | `#1a6b5a` | Rules in 2-column table (Rule | Example) | Static — reference |
 | Strategy (step-by-step) | `#1a6b5a` | Each step is one slide | Sibling slides — discrete teaching |
 | Task instruction | dark + timer | Instructions full-visible | Static — orientation |
-| Answer (T/F, MC) | `#1e7e34` | Statements visible; answers reveal per-row | Fragment on `<span>` inside `<td>` |
+| Answer (T/F, MC) | `#0d5e1a` | Statements visible; answers reveal per-row | Fragment on `<span>` inside `<td>` |
 | Summary | default | "I can..." checkmarks | Static — consolidation |
 | End | `#2c3e50` | Topic + CEFR | Static — exit |
 
@@ -630,7 +630,7 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
 
 ## Key Design Rules
 
-**CRITICAL RULE 0 — NO GRAY TEXT.** Any text on any slide that the student must read MUST use solid white `#fff` or solid yellow `#ffdd00`. Gray `#888`, `#666`, `rgba(255,255,255,0.5)` (50% white), `rgba(255,255,255,0.7)` (70% white), and any other muted/low-opacity colors are **strictly banned on all backgrounds** — dark navy `#1a1a2e`, teal `#1a6b5a`, green `#1e7e34`, red `#c0392b`, and dark blue-gray `#2c3e50` alike. At classroom projection distance, these render as invisible gray smudges.
+**CRITICAL RULE 0 — NO GRAY TEXT.** Any text on any slide that the student must read MUST use solid white `#fff` or solid yellow `#ffdd00`. Gray `#888`, `#666`, `rgba(255,255,255,0.5)` (50% white), `rgba(255,255,255,0.7)` (70% white), and any other muted/low-opacity colors are **strictly banned on all backgrounds** — dark navy `#1a1a2e`, teal `#1a6b5a`, green `#0d5e1a`, red `#c0392b`, and dark blue-gray `#2c3e50` alike. At classroom projection distance, these render as invisible gray smudges.
 
 **Enforcement rules:**
 - Every visible text element must have `color: #fff` or `color: #ffdd00` — either explicit or inherited from a parent
@@ -644,7 +644,7 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
 4. **Task slides: brief student instructions** — extract task description from procedure, skip teacher-only instructions. Max 3 task lines on screen.
 5. **Stage names: student-friendly language** — "Lead-in" → "Let's get Started", "Reading for gist" → "What's the main idea?", "Reading for detail" → "Finding details", "Reading for inference" → "Making conclusions", "Post-reading" → "Let's Discuss", "Wrap-up" → "Let's Review"
 6. **Vocabulary slides** — generated AFTER lead-in stage. One word per slide with dark navy background. No sub-heading — the preceding red transition slide already signals the vocabulary phase. Yellow bold (#ffdd00) via `<span class="vocab-word">`.
-7. **Answer slides** — use `<div class="answer-list">` flex layout (NOT `<table class="answer-table">`). Green background `#1e7e34`. Statements visible on entry. Structure each row as:
+7. **Answer slides** — use `<div class="answer-list">` flex layout (NOT `<table class="answer-table">`). Green background `#0d5e1a`. Statements visible on entry. Structure each row as:
     ```html
     <div class="a-row">
         <span class="a-num">#</span>
@@ -656,9 +656,9 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
     - `fragment fade-up` for animated reveal (not bare `fragment`)
     - Font Awesome `fa-check`/`fa-times` for icons (never raw Unicode U+2713/U+2717)
     - **Do NOT use `highlight-green`/`highlight-red`** (reveal.js keeps them at `opacity: 1`; they never hide)
-    - **CRITICAL — No gray text.** Per Rule 0, ALL text on green slides must be white `#fff` or yellow `#ffdd00` — including `.a-num`, `.a-q`, `.aim-label`, and any other element. Gray, blue, or muted colors are invisible at projection distance on `#1e7e34`.
+    - **CRITICAL — No gray text.** Per Rule 0, ALL text on green slides must be white `#fff` or yellow `#ffdd00` — including `.a-num`, `.a-q`, `.aim-label`, and any other element. Gray, blue, or muted colors are invisible at projection distance on `#0d5e1a`.
 8. **Transition slides: heading only (no subheader text).** The red background + icon + heading is sufficient — the teacher's spoken introduction bridges the gap. Remove all `<p>` elements from transition slides.
-9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#1a6b5a` (pedagogical/strategy), green `#1e7e34` (answer tables), dark `#2c3e50` (end)
+9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#1a6b5a` (pedagogical/strategy), green `#0d5e1a` (answer tables), dark `#2c3e50` (end)
 10. **Title slide visuals**: Full-screen `data-background-image` with `data-background-color="#1a1a2e"` fallback. Logo at `120px`, h2 at `2.2em`, CEFR badge inline inside h2 (`vertical-align: middle`), subheader at `1em`. **Must add `style="justify-content: center;"`** to vertically center content. Opacity `0.85`. Do NOT use `r-stack` — it creates a letterbox effect.
 11. **Text highlighting**: white text, dark text-shadow, pedagogical sections use white-on-teal
 12. **Vocabulary words**: yellow boldface (`#ffdd00`) via `<span class="vocab-word">` — in both the word heading AND context sentence(s).
@@ -697,7 +697,7 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
     The implicative example must come from **general life experience** (weather, nature, school, home, work, animals, plants, common objects) — not from the story world. This ensures the student can access the meaning independently. A single well-chosen sentence does the job — a second "In the story..." sentence adds visual clutter and gray text students won't read.
 13. **Timer pill vs audio**: Never add `data-timer` to a slide that also has `data-audio-src`. Slides with audio playback should not have a timer pill — the two controls conflict visually and functionally.
 14. **Proper HTML lists for letters/numbers**: Never use manual lettering or numbering in `<p>` tags (e.g., `<p><strong>A</strong> Option text</p>`). Use semantically correct HTML lists instead: `<ol type="A">` for lettered options, `<ol>` for numbered items, `<ul>` for bullet points. Each item gets its own `<li>` element. This ensures proper alignment and accessibility.
-15. **Check/cross symbols: Font Awesome only, never Unicode**: Check marks (✓) and cross marks (✗) must use Font Awesome icons `<i class="fa-solid fa-check">` and `<i class="fa-solid fa-times">` — never raw Unicode characters U+2713 and U+2717. These Unicode characters do not render reliably across all browser/system font combinations. Font Awesome is loaded in the base template via CDN and renders consistently in every browser. Use `style="color:#4caf50;"` on check marks and `style="color:#ff5252;"` on cross marks for dark/teal/white backgrounds. On green `#1e7e34` answer slides, use `style="color:#fff;"` for both (only white or yellow allowed on green backgrounds per rule 7).
+15. **Check/cross symbols: Font Awesome only, never Unicode**: Check marks (✓) and cross marks (✗) must use Font Awesome icons `<i class="fa-solid fa-check">` and `<i class="fa-solid fa-times">` — never raw Unicode characters U+2713 and U+2717. These Unicode characters do not render reliably across all browser/system font combinations. Font Awesome is loaded in the base template via CDN and renders consistently in every browser. Use `style="color:#4caf50;"` on check marks and `style="color:#ff5252;"` on cross marks for dark/teal/white backgrounds. On green `#0d5e1a` answer slides, use `style="color:#fff;"` for both (only white or yellow allowed on green backgrounds per rule 7).
 ## Authorial Voice & Audience
 
 This skill generates slides for **Thai secondary students (CEFR A2–B2)**. The default voice targets **B1** (Mathayom 2-3). All student-facing text on screen MUST follow these rules, with level-appropriate relaxations noted.
@@ -815,7 +815,7 @@ The answer-list flex layout has three CSS properties that, if set incorrectly, b
 Per **Rule 0 (No Gray Text)**, gray/muted/low-opacity text is banned on ALL slide backgrounds, not just green. This section documents the specific traps in the base template:
 
 **Template traps:**
-- `.reveal .aim-label { color: #888; }` — gray label, invisible on `#1a1a2e`, `#1a6b5a`, `#1e7e34`, `#c0392b`, and `#2c3e50`
+- `.reveal .aim-label { color: #888; }` — gray label, invisible on `#1a1a2e`, `#1a6b5a`, `#0d5e1a`, `#c0392b`, and `#2c3e50`
 - `.reveal .source-cite { color: #666; }` — darker gray, still invisible at projection distance
 - `.reveal .material-ref { color: #888; }` — invisible gray
 - `.reveal .a-num { color: rgba(255,255,255,0.5); }` — 50% white = gray
