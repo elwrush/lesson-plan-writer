@@ -62,12 +62,12 @@
             /* --- Answer flex layout (replaces answer-table) --- */
             .reveal .answer-list {
                 width: 100%;
-                font-size: 0.85em;
+                font-size: 0.95em;
             }
             .reveal .a-row {
                 display: flex;
                 align-items: baseline;
-                padding: 0.4em 0;
+                padding: 0.5em 0;
                 border-bottom: 1px solid #fff;
                 gap: 0.5em;
             }
@@ -76,7 +76,7 @@
                 flex: 0 0 1.5em;
                 text-align: left;
                 color: #fff;
-                font-size: 0.85em;
+                font-size: 0.95em;
             }
             .reveal .a-q {
                 flex: 0 0 auto;
@@ -84,7 +84,7 @@
                 margin-right: 0.5em;
             }
             .reveal .a-ans {
-                flex: 0 1 auto;
+                flex: 1 1 auto;
                 min-width: 0;
                 text-align: left;
                 padding: 0.1em 0.3em;
@@ -94,30 +94,35 @@
             .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
             .reveal .a-ans.a-inc { color: #fff; }
             .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
-            /* Why column on answer rows — yellow explanation, fills remaining space */
-            .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.75em; }
+            /* Why column on answer rows — explanation text, fills remaining space */
+            .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+            /* S/V annotation underlines and labels for grammar identification */
+            .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
+            .reveal .a-v { border-bottom: 2px solid #ff8a65; }
+            .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+            .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
 
             /* --- Labels & captions --- */
             .reveal .aim-label {
-                font-size: 0.7em;
+                font-size: 0.85em;
                 color: #fff;
                 text-transform: uppercase;
                 letter-spacing: 0.1em;
             }
             .reveal .material-ref {
-                font-size: 0.65em;
+                font-size: 0.85em;
                 color: rgba(255,255,255,0.85);
                 font-style: italic;
                 margin-top: 0.5em;
             }
             .reveal .source-cite {
-                font-size: 0.7em;
+                font-size: 0.85em;
                 color: rgba(255,255,255,0.85);
                 font-style: italic;
                 margin-top: 0.3em;
             }
             .reveal .image-caption {
-                font-size: 0.55em;
+                font-size: 0.85em;
                 color: rgba(255,255,255,0.85);
                 text-align: center;
                 margin-top: 0.2em;

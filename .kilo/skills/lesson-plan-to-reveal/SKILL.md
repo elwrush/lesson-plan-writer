@@ -15,9 +15,13 @@ Convert a lesson plan JSON into a reveal.js slideshow for ESL classroom delivery
 
 ## ⚠ CRITICAL — Tier-1 Reference Hierarchy
 
+**Pre-generation ritual — mandatory before Step 0:**
+
+Open `templates/reference-slideshow.html` in a browser and scroll through EVERY slide type. This is a complete working slideshow with verified HTML patterns for every slide type (title, lead-in, diagnostic, teach, auto-animate pairs, strategy, task, answer with S/V annotations, summary, end). Identify which types you need for the current lesson. Copy the pattern, change only the content.
+
 **The lesson plan JSON is the SOLE AUTHORITY for WHAT to teach. Everything else is HOW to present it.**
 
-Design slides using this **four-tier priority hierarchy**. Each tier overrides everything below it:
+Design slides using this **four-tier priority hierarchy** (after the pre-generation ritual above). Each tier overrides everything below it:
 
 1. **👑 Tier 1 — The lesson plan JSON** (`output/{subfolder}/{mmddyy}-{topic}-lesson-plan.json`)
    - `lesson_plan.stages[]` defines EXACTLY what slides to build, in what order, with what timing
@@ -84,28 +88,29 @@ cp "templates/ACT.png" "output/{subfolder}/slides/assets/logo.png"
 
 **Note:** The logo is available in `assets/logo.png` and IS displayed on the title slide (centered at top, height: 78px). See Step 3 for title slide layout patterns.
 
-### ⚠ Step 2b: Inline style block for answer-list CSS (FIX BROKEN TEMPLATE)
+### ⚠ Step 2b: Inline style block for answer-list CSS (ANSWER-LIST STYLE OVERRIDES)
 
-The base template has a CSS syntax error in `.cefr-badge` (missing closing `}`) that can break `.answer-list` and `.a-row` rules. Add this `<style>` block inside the slides, immediately after the vocab task slide or before the first answer slide:
+The template's base answer-list CSS provides structural layout (flex, alignment). The inline block below adds color overrides and S/V annotation classes for green-background answer slides where the black theme's defaults are invisible. Add this `<style>` block inside the slides, immediately after the vocab task slide or before the first answer slide:
 
 ```html
 <style>
-    .reveal .answer-list { width: 100%; font-size: 0.85em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.4em 0; border-bottom: 1px solid rgba(255,255,255,0.1); gap: 0.5em; }
+    .reveal .answer-list { width: 100%; font-size: 0.95em; }
+    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
     .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: rgba(255,255,255,0.5); font-size: 0.85em; }
-    .reveal .a-q { flex: 0 0 auto; min-width: 0; margin-right: 0.5em; }
-    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; }
-    .reveal .a-ans.a-cor { color: #fff; }
+    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
+    .reveal .a-q { flex: 0 0 auto; min-width: 0; color: #ffdd00; font-size: 0.9em; }
+    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 0.9em; line-height: 1.5; }
     .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-ans.a-inc { color: #fff; }
-    .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
-    /* Override template's gray #888 aim-label — invisible on green #0d5e1a */
+    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
+    .reveal .a-v { border-bottom: 2px solid #ff8a65; }
+    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
     .reveal .aim-label { color: #fff; }
 </style>
 ```
 
-**Do NOT skip this.** Without it, the answer-list flex layout may not render correctly due to the template CSS bug.
+**Do NOT skip this.** Without it, answer rows may use wrong font sizes, borders, and missing S/V annotation classes.
 
 ### Step 3: Layout and Backgrounds
 
@@ -276,26 +281,63 @@ If `.a-num` is `text-align: right`, the number floats right and breaks the visua
 
 ### Step 4B: Build slides (new build)
 
-**PEDAGOGICAL PRE-CHECK — mandatory before writing any slide:**
+**⚠ THIS IS A DESIGN GATE. WRITE THE ANNOTATIONS FIRST, THEN THE HTML. DO NOT REVERSE THIS ORDER. ⚠**
 
-For each slide block you are about to build, write a pedagogical intent comment before the HTML:
+Before writing a single `<section>` tag, you must write three comment lines for every slide:
 
 ```html
 <!-- PEDAGOGICAL INTENT: [what the student must SEE happen on screen] -->
 <!-- WHY THIS FEATURE: [reveal.js feature + why alternatives fail] -->
-<!-- FEATURE CHECK: Must pick from [auto-animate | fragments | sibling slides | data-line-numbers | data-mark | data-transition | data-background-gradient | vertical slides | audio | autoslide | code blocks | lightbox | r-fit-text | r-stack | r-stretch | custom-fragment | nested-fragment]. If none fit, state "static — [reason]" -->
-<!-- COGNITIVE PRINCIPLE: Must name the principle from Mayer's 12 (e.g. Signaling, Segmenting, Spatial Contiguity, Coherence, Temporal Contiguity, Modality). If none fit, state "none — [explain why]" -->
+<!-- COGNITIVE PRINCIPLE: Mayer's 12 principle. If none fits, state "none — assessment task" -->
 ```
 
-The `FEATURE CHECK` and `COGNITIVE PRINCIPLE` lines are mandatory. They force you to:
-1. Explicitly choose a reveal.js feature from the list
-2. Justify it against established learning theory
+**These three lines are a design gate.** If you cannot fill in all three convincingly, you do not understand what the student needs to learn from this slide. Redesign the slide until you can. Do NOT write the `<section>` HTML until the annotations are complete.
 
-If you keep choosing the same 2-3 features, or cannot name a cognitive principle for a teaching slide, reconsider the design.
+How it works:
+1. Identify the next stage from the lesson plan JSON
+2. Decide what visual transformation the student must witness on each slide
+3. Write the three comment lines for each slide in that stage
+4. Only then write the `<section>` HTML
+5. Advance to the next stage and repeat
 
-**For the full feature lookup table with pedagogical sweet spots, see `docs/pedagogical-design-dictionary.md`.** If you cannot pick a specific feature from that list AND justify why the others don't fit, you have not thought enough about the slide's design. Reconsider.
+If you catch yourself writing annotation lines that are identical across multiple slides in a row (same intent, same feature, same principle, same justification), you are NOT designing each slide intentionally. Stop and reconsider each slide's unique purpose.
 
-If you cannot write all three comments, you do not understand what the student needs to learn from this slide. Reconsider the design until you can.
+**Three-line format (exactly these, no additions):**
+
+| Line | Purpose | Example |
+|------|---------|---------|
+| `PEDAGOGICAL INTENT` | What the student MUST SEE HAPPEN on screen | `Student sees the error sentence transform into a correct one. The added comma+coordinator animates in with a blue border.` |
+| `WHY THIS FEATURE` | Which reveal.js feature + why alternatives fail | `Auto-animate morphs WRONG to RIGHT across two slides; fragments would hide the original, losing the comparison.` |
+| `COGNITIVE PRINCIPLE` | Name from Mayer's 12 (Signaling, Segmenting, Spatial Contiguity, Coherence, Temporal Contiguity, Modality) or explain why none applies | `Temporal Contiguity — both versions visible simultaneously; the animated border signals exactly what changed.` |
+
+For the feature choice in `WHY THIS FEATURE`, pick from: `auto-animate`, `fragments`, `sibling slides`, `data-line-numbers`, `data-mark`, `data-transition`, `data-background-gradient`, `vertical slides`, `audio`, `autoslide`, `code blocks`, `lightbox`, `r-fit-text`, `r-stack`, `r-stretch`, `custom-fragment`, `nested-fragment`, or `static — [reason]`.
+
+**These annotations are enforced by `tests/test_slide_structure.py::TestPedagogicalIntent`** — every non-exempt slide must have all three lines, or the test suite fails. Exempt slides (transitions, end, title, objective) are hard-coded in the test and should not be expanded.
+
+### Option A: Component builder (preferred for answer slides, transitions, tasks, auto-animate pairs)
+
+Import `scripts.slides_builder` and call helper functions instead of hand-writing repetitive HTML. This produces correct HTML with verified fragment indices, icon classes, flex layout, and auto-animate attributes.
+
+```python
+from scripts.slides_builder import (
+    answer_row, answer_slide,
+    transition_slide,
+    task_slide,
+    pedagogical_slide,
+    intent_comment, aside_notes,
+    title_slide, objective_slide, end_slide,
+    auto_animate_underline_pair,
+    auto_animate_highlight_pair,
+    auto_animate_svo_pair,
+    svo_annotation_span,
+)
+```
+
+Functions output HTML strings only — no file I/O, no side effects. Compose them into the splice file as shown in the usage examples below.
+
+### Option B: Hand-written HTML (for bespoke content)
+
+Use only for slides that don't fit a builder function (e.g. grammar diagrams, bespoke visual layouts, custom structures). Every slide must still pass the pedagogical intent and structural tests.
 
 Write slide sections to a temp file, then splice them into the template. **Do NOT attempt to write the entire `index.html` in a single Write tool call** — at 600+ lines with Unicode content, the Write tool may reject or mangle the file. Do NOT copy the template and then incrementally replace sections with Edit tool calls — this is slow, fragile, and causes timeouts.
 
@@ -362,6 +404,11 @@ When the user asks to modify an already-built slideshow (e.g., "change slide 7" 
 npx revealjs-validator --project "output/{subfolder}/slides/"
 ```
 
+You can also target a single slideshow for faster iteration using the `--slideshow-html` CLI argument:
+```bash
+python -m pytest tests/test_slide_structure.py --slideshow-html "output/{subfolder}/slides/index.html" -v --tb=short
+```
+
 This catches broken auto-animate pairs, invalid fragment classes, missing assets, CSS misuse, and more. **However, the validator only checks static HTML structure — it CANNOT detect runtime errors that cause a blank page.** A presentation can pass all 66 rules and still show a blank screen due to a JavaScript error during `Reveal.initialize()`.
 
 **CRITICAL — Browser test every build:** After the validator passes, open the slides in a browser and check the JavaScript console (`F12` → Console tab):
@@ -411,7 +458,7 @@ if idx >= 0:
 - Verify listening task slides that need audio have `data-audio-src="assets/filename.mp3"`
 - **Verify no `<section>` has both `data-timer` AND `data-audio-src`** — never place a timer pill on a slide that plays audio or video
 - **Verify no raw Unicode check/cross characters**: Scan for U+2713 (✓) and U+2717 (✗) in the output HTML. If found, replace with `<i class="fa-solid fa-check">` and `<i class="fa-solid fa-times">` respectively. Font Awesome renders reliably; Unicode glyphs do not.
-- **PEDAGOGICAL INTENT CHECK**: Run `python scripts/check_pedagogical_intent.py --project "output/{subfolder}/slides/"` — verifies every non-exempt slide has mandatory `<!-- PEDAGOGICAL INTENT: -->` and `<!-- WHY THIS FEATURE: -->` annotations. If missing, the slide was built without intentional design and must be fixed.
+- **PEDAGOGICAL INTENT CHECK**: Run `python -m pytest tests/ -k "pedagogical" -v` — verifies every non-exempt slide has mandatory `PEDAGOGICAL INTENT`, `WHY THIS FEATURE`, and `COGNITIVE PRINCIPLE` annotations. If missing, the slide was built without intentional design and must be fixed. Do NOT ship slides that fail this check.
 - **Regression check on slide moves**: When moving a slide from one position to another, insert the slide at the new location FIRST, then remove it from the old location. Removing first and forgetting to re-insert causes silent slide loss. After any move, verify total section count matches expected count.
 
 ### Step 6: Publish and write URL to lesson plan JSON

@@ -1,13 +1,9 @@
 """
-check_pedagogical_intent.py — Verify every slide has pedagogical intent + feature check.
+check_pedagogical_intent.py — Verify every slide has pedagogical intent annotations.
 
-Scans the output HTML file and checks that every non-transition, non-end
-<section> is preceded by mandatory comment annotations:
-
-    <!-- PEDAGOGICAL INTENT: [what the student must SEE happen] -->
-    <!-- WHY THIS FEATURE: [reveal.js feature + why alternatives fail] -->
-    <!-- COGNITIVE PRINCIPLE: [name from Mayer's 12, or explain why none applies] -->
-    <!-- FEATURE CHECK: [chosen feature from the allowed list, or "static — reason"] -->
+Scans the output HTML file and checks that every non-exempt <section> is
+preceded by the three mandatory annotation comments (PEDAGOGICAL INTENT,
+WHY THIS FEATURE, COGNITIVE PRINCIPLE).
 
 Usage:
     python scripts/check_pedagogical_intent.py output/<subfolder>/slides/index.html

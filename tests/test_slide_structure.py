@@ -160,6 +160,70 @@ class TestAutoAnimatePairs:
         )
 
 
+class TestPedagogicalIntent:
+    """Every non-exempt slide must have PEDAGOGICAL INTENT, WHY THIS FEATURE,
+    and COGNITIVE PRINCIPLE annotations written BEFORE the <section> tag.
+
+    These annotations are a design gate — they must be written at creation time,
+    not retroactively. If this test fails, a slide was added without intentional
+    pedagogical design and must be fixed before the presentation can ship.
+
+    Exempt slides (transitions, end, title, objective) are structural/orienting
+    and don't carry instructional transformations.
+    """
+
+    EXEMPT_PREFIXES = (
+        "slide-transition-",
+        "slide-end",
+        "slide-title",
+        "slide-objective",
+    )
+
+    def test_pedagogical_intent_present(self, slideshow):
+        content, path = slideshow
+        # Find all <section> tags with id attributes
+        pattern = re.compile(r'<section\s+id="(?P<id>slide-[^"]+)"[^>]*>')
+        violations = []
+
+        for match in pattern.finditer(content):
+            section_id = match.group("id")
+
+            # Skip exempt slides
+            if section_id.startswith(self.EXEMPT_PREFIXES):
+                continue
+
+            # Look at the 1000 characters immediately before this <section> tag
+            preceding_start = max(0, match.start() - 1000)
+            preceding = content[preceding_start : match.start()]
+
+            has_intent = "PEDAGOGICAL INTENT:" in preceding
+            has_feature = "WHY THIS FEATURE:" in preceding
+            has_principle = "COGNITIVE PRINCIPLE:" in preceding
+            missing = []
+            if not has_intent:
+                missing.append("PEDAGOGICAL INTENT")
+            if not has_feature:
+                missing.append("WHY THIS FEATURE")
+            if not has_principle:
+                missing.append("COGNITIVE PRINCIPLE")
+
+            if missing:
+                line_num = content[: match.start()].count("\n") + 1
+                violations.append((line_num, section_id, missing))
+
+        assert not violations, (
+            f"{path.parent.parent.name}/: {len(violations)} slide(s) missing "
+            f"pedagogical intent annotations:\n"
+            + "\n".join(
+                f"  {path}:{ln}: {sid} — missing {', '.join(m)}" for ln, sid, m in violations
+            )
+            + "\n\nEvery non-exempt slide must have all three:\n"
+            + "  <!-- PEDAGOGICAL INTENT: [what student must SEE happen] -->\n"
+            + "  <!-- WHY THIS FEATURE: [reveal.js feature + why alternatives fail] -->\n"
+            + "  <!-- COGNITIVE PRINCIPLE: [Mayer's 12 principle or explain why none] -->\n"
+        )
+
+
 class TestFragmentClasses:
     """Fragment classes should not conflict with reveal.js built-in highlight classes.
 
