@@ -1,0 +1,69 @@
+{
+    "teacher":  "Ed Rush",
+    "duration":  "46 minutes",
+    "date":  "310526",
+    "topic":  "Compound Sentences",
+    "objective":  "By the end of the lesson, learners will be better able to use coordinating conjunctions (and, but, or, so) to write compound sentences in the context of describing a memorable event.",
+    "materials":  "- Coursebook: Introduction to Academic Writing, Chapter 2, pp 30-32\n- Grammar accuracy feedback: 31-05-26-M3-3A-combined.pdf",
+    "lesson_plan":  {
+                        "shape":  "C",
+                        "shape_name":  "Test-Teach-Test",
+                        "cefr_level":  "B1",
+                        "class":  "M3-3A",
+                        "stages":  [
+                                       {
+                                           "stage_number":  1,
+                                           "stage":  "Lead-in — Grammar Feedback Review",
+                                           "stage_aim":  "To activate awareness of their own writing errors and build motivation for the grammar focus",
+                                           "procedure":  "- Distribute individual grammar accuracy feedback from the ERRANT PDF. Ss review their errors silently (3 min). Highlight class patterns: comma splices are the most common error. \u0027Your next CA is a narrative paragraph about a memorable event. But first — how do we join two sentences correctly?\u0027 Write goal on board.",
+                                           "time":  5,
+                                           "interaction":  "T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  2,
+                                           "stage":  "Test 1 — Diagnostic (Compound Sentences)",
+                                           "stage_aim":  "To diagnose baseline ability to combine simple sentences into compound sentences",
+                                           "procedure":  "- Display 6 pairs of simple sentences on screen. Ss join each pair into one compound using and/but/or/so. No instruction given — pure discovery task. Individual (4 min). Pair check (2 min). Teacher circulates, notes common errors in coordinator choice and comma placement.",
+                                           "time":  6,
+                                           "interaction":  "S, Ss-Ss"
+                                       },
+                                       {
+                                           "stage_number":  3,
+                                           "stage":  "Teach — Coordinators: and, but, or, so",
+                                           "stage_aim":  "To clarify the meaning and function of the four coordinating conjunctions in compound sentences",
+                                           "procedure":  "- Display compound sentence formula: SV, and SV. Elicit: \u0027What makes a sentence compound?\u0027 (two subjects, two verb groups, comma + coordinator). Walk through each coordinator\u0027s meaning using textbook examples from the folktale on p.29. Highlight comma rule: comma BEFORE coordinator.",
+                                           "time":  10,
+                                           "interaction":  "T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  4,
+                                           "stage":  "Test 2 — Controlled Practice: Practice 2A + 2B",
+                                           "stage_aim":  "To give structured practice identifying coordinating conjunctions and classifying simple vs compound sentences",
+                                           "procedure":  "- Ss complete Practice 2A: circle coordinating conjunctions in the folktale \u0027Omusubi Kororin\u0027 and explain why some have commas (5 min). Then Practice 2B: label CS or SS for items 1-10, add commas (7 min). Pair check (3 min). Whole-class feedback on screen.",
+                                           "time":  12,
+                                           "interaction":  "S, Ss-Ss, T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  5,
+                                           "stage":  "Test 3 — Freer Practice: Practice 2C + 2D",
+                                           "stage_aim":  "To give extended practice choosing coordinators and writing original compound sentences",
+                                           "procedure":  "- Practice 2C: Ss combine 8 sentence pairs using and/but/or/so (6 min). Pair compare (2 min). Display model answers. Then Practice 2D: Ss write 5 original compound sentences following the directions on p.32 (p. 36 if using new edition). Begin in class, finish for homework if needed.",
+                                           "time":  10,
+                                           "interaction":  "S, Ss-Ss"
+                                       },
+                                       {
+                                           "stage_number":  6,
+                                           "stage":  "Wrap-up",
+                                           "stage_aim":  "To consolidate key learning and connect to the narrative paragraph CA task",
+                                           "procedure":  "- Quick review: \u0027How do you make a compound sentence?\u0027 (SV, coordinator SV). \u0027What does but signal?\u0027 (contrast). \u0027Where does the comma go?\u0027 (before coordinator). Connect to CA: \u0027In your paragraph about a memorable event, use compound sentences.\u0027 Preview: \u0027Next lesson — comma rules and freewriting.\u0027",
+                                           "time":  3,
+                                           "interaction":  "T-Ss"
+                                       }
+                                   ]
+                    },
+    "transcript":  "none",
+    "answer_key":  "C:\\PROJECTS\\LESSON-PLAN-WRITER-3\\inputs\\M3-WRITING-COMPOUND-SENTENCES\\answer_key.typ",
+    "cefr_level":  "B1",
+    "class":  "M3-3A",
+    "slideshow_url":  "https://elwrush.github.io/lesson-plan-writer/M3-WRITING-COMPOUND-SENTENCES/"
+}

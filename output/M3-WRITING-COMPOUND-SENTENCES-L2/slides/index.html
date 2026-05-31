@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Comma Rules &amp; Freewriting — Lesson 2</title>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                font-size: 0.7em;
+                padding: 4px 12px;
+                border-radius: 4px;
+                vertical-align: middle;
+                position: relative;
+                top: -2px;
+            }
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+            .reveal .a-badge {
+                display: inline-block;
+                padding: 0.1em 0.5em;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 0.85em;
+                min-width: 1.8em;
+                text-align: center;
+            }
+            .reveal .a-badge.a-cor { background: rgba(76, 175, 80, 0.4); color: #fff; }
+            .reveal .a-badge.a-inc { background: rgba(244, 67, 54, 0.4); color: #fff; }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+
+            .reveal .answer-list { width: 100%; font-size: 0.85em; }
+            .reveal .a-row { display: flex; align-items: baseline; padding: 0.4em 0; border-bottom: 1px solid rgba(255,255,255,0.1); gap: 0.5em; }
+            .reveal .a-row:last-child { border-bottom: none; }
+            .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.85em; }
+            .reveal .a-q { flex: 0 0 auto; min-width: 0; margin-right: 0.5em; }
+            .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; }
+            .reveal .a-ans.a-cor { color: #fff; }
+            .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+            .reveal .a-ans.a-inc { color: #fff; }
+            .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
+
+            .reveal .aim-label { font-size: 0.7em; color: #fff; text-transform: uppercase; letter-spacing: 0.1em; }
+            .reveal .material-ref { font-size: 0.65em; color: rgba(255,255,255,0.85); font-style: italic; margin-top: 0.5em; }
+            .reveal .source-cite { font-size: 0.7em; color: rgba(255,255,255,0.85); font-style: italic; margin-top: 0.3em; }
+            .reveal .image-caption { font-size: 0.55em; color: rgba(255,255,255,0.85); text-align: center; margin-top: 0.2em; }
+
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word { color: #ffdd00; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
+
+            .reveal section.pedagogical { text-shadow: none; }
+            .reveal section.pedagogical p,
+            .reveal section.pedagogical li,
+            .reveal section.pedagogical h1, .reveal section.pedagogical h2,
+            .reveal section.pedagogical h3, .reveal section.pedagogical h4,
+            .reveal section.pedagogical h5, .reveal section.pedagogical h6 { text-shadow: none; }
+            .reveal section.pedagogical h2 { color: #fff; border-bottom: 3px solid rgba(255,255,255,0.3); padding-bottom: 0.3em; }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal section.pedagogical .strategy-tip { font-size: 0.85em; font-style: italic; color: rgba(255,255,255,0.85); margin-bottom: 0.5em; }
+            .reveal section.pedagogical .evidence { font-size: 0.8em; background: rgba(0,0,0,0.3); padding: 0.4em 0.6em; border-radius: 4px; border-left: 3px solid rgba(255,255,255,0.4); }
+
+            .reveal p, .reveal li,
+            .reveal h1, .reveal h2, .reveal h3,
+            .reveal h4, .reveal h5, .reveal h6 { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); }
+
+            .reveal .text-shield { background: rgba(0, 0, 0, 0.55); padding: 0.15em 0.6em; border-radius: 4px; display: inline-block; max-width: 90%; text-shadow: none; line-height: 1.6; }
+            .reveal .text-shield-light { background: rgba(200, 200, 200, 0.65); padding: 0.15em 0.6em; border-radius: 4px; display: inline-block; max-width: 90%; text-shadow: none; color: #222; line-height: 1.6; }
+            .reveal .fragment.text-shield-light { opacity: 1; visibility: inherit; }
+            .reveal .fragment.text-shield-light.visible { background: rgba(200, 200, 200, 0.65); padding: 0.15em 0.6em; border-radius: 4px; }
+
+            .reveal .answer-yellow { color: #ffdd00; }
+            .reveal .fragment.answer-yellow.visible { color: #ffdd00; }
+
+            .reveal table.answer-table th { background: rgba(0, 0, 0, 0.2); font-weight: bold; }
+            .reveal .fragment.strike { text-decoration: line-through; opacity: 0.6; }
+
+            .reveal .iframe-container { position: relative; width: 90%; padding-bottom: 50.625%; height: 0; overflow: hidden; margin: 0 auto 0.5em; }
+            .reveal .iframe-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+            .reveal .structure-talk h2 { color: #fff; border-bottom: 3px solid rgba(255,255,255,0.3); padding-bottom: 0.3em; }
+            .reveal .structure-talk p, .reveal .structure-talk li  { color: #fff; }
+            .reveal .structure-talk .structure-step { font-size: 1.1em; margin-bottom: 0.6em; }
+            .reveal .structure-talk .transition-words { font-size: 0.9em; color: #ffdd00; font-style: italic; margin-top: 0.8em; padding: 0.4em 0.6em; background: rgba(0,0,0,0.2); border-radius: 4px; }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+<!-- ============================================================
+     LESSON 2 — COMMA RULES AND FREEWRITING (M3-3A)
+     ============================================================ -->
+
+<!-- SLIDE 0: Title -->
+<section id="slide-title" data-background-color="#1a1a2e">
+    <div class="r-stack" style="height: 100%;">
+        <img src="assets/notebook.jpg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.85;" />
+        <div style="position: relative; z-index: 1; text-align: center; align-self: center;">
+            <img src="assets/logo.png" style="height: 78px; margin: 0 auto; display: block;" alt="ACT" />
+            <h2 style="margin-top: 0.3em;">Comma Rules &amp; Freewriting</h2>
+            <div><span class="cefr-badge B1">B1</span></div>
+            <p style="font-size: 0.7em; color: rgba(255,255,255,0.85); margin-top: 0.5em;">Three rules to use — and when to skip them</p>
+        </div>
+    </div>
+    <aside class="notes">Lesson 2 of 2. M3-3A. 46 min. Start with compound sentence review from L1, then move into comma rules and freewriting.</aside>
+</section>
+
+<!-- SLIDE 1: Objective -->
+<section id="slide-objective" data-background-color="#1a1a2e">
+    <h2>Today's Goal</h2>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">I can</span> use commas after time order signals (like First, Yesterday).</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">I can</span> use commas before coordinators in compound sentences.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">I can</span> use commas between items in a series.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">I can</span> freewrite to get ideas for my paragraph.</p>
+    <aside class="notes">"Last lesson: building compound sentences. This lesson: placing commas correctly and freewriting for your CA."</aside>
+</section>
+
+<!-- SLIDE 2: Transition to review -->
+<section id="slide-transition-review" data-background-color="#c0392b" data-background-transition="none">
+    <h2>Let's Review</h2>
+</section>
+
+<!-- SLIDE 3: Lead-in — Review + Practice 2D -->
+<section id="slide-lead-in" data-background-color="#1a1a2e" data-timer="300">
+    <p><strong>A compound sentence =</strong> SV, coordinator SV</p>
+    <p style="color: #ffdd00; font-size: 0.75em; margin-top: 0.3em;">and, but, or, so</p>
+    <p style="margin-top: 0.8em;"><em>Practice 2D — Write 5 sentences. Follow the directions on p.32.</em></p>
+    <p style="font-size: 0.65em; margin-top: 0.3em;">1. One thing you like + one you don't (but)</p>
+    <p style="font-size: 0.65em;">3. Two things you might do on vacation (or)</p>
+    <aside class="notes">Quick review 2 min. Practice 2D individual 5 min. Pair share: partner checks comma+coordinator 2 min.</aside>
+</section>
+
+<!-- SLIDE 4: Transition to diagnostic -->
+<section id="slide-transition-diagnostic" data-background-color="#c0392b" data-background-transition="none">
+    <h2>Where Do Commas Go?</h2>
+</section>
+
+<!-- SLIDE 5: Diagnostic test -->
+<section id="slide-diagnostic" data-background-color="#1a1a2e" data-timer="180">
+    <p><em>Add commas where needed. Some sentences may be correct.</em></p>
+    <ol style="font-size: 0.7em; text-align: left;">
+        <li style="margin: 0.3em 0;">Yesterday I went to the mall.</li>
+        <li style="margin: 0.3em 0;">I like pizza and my brother likes pasta.</li>
+        <li style="margin: 0.3em 0;">She bought apples bananas and oranges.</li>
+        <li style="margin: 0.3em 0;">First we ate lunch and then we went home.</li>
+        <li style="margin: 0.3em 0;">He wanted to go out but he was too tired.</li>
+        <li style="margin: 0.3em 0;">The flag is red white and blue.</li>
+    </ol>
+    <aside class="notes">Individual 3 min, pair check 2 min. Covers all 3 rules. Do NOT give answers yet.</aside>
+</section>
+
+<!-- SLIDE 6: Transition to teach -->
+<section id="slide-transition-teach" data-background-color="#c0392b" data-background-transition="none">
+    <h2>Three Comma Rules</h2>
+</section>
+
+<!-- SLIDE 7: Teach — Rules (entry, transparent borders) -->
+<section id="slide-teach-rules-entry" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="rules">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">Three Comma Rules</h2>
+        <p data-id="r1" style="font-size: 0.8em;"><u><strong>Rule 1:</strong> After a time order signal</u></p>
+        <p data-id="e1" style="font-size: 0.75em; color: #ffdd00; margin-left: 0.5em;">"<span data-id="ex1" style="border-bottom: 2px solid transparent;">Yesterday</span>, I did homework for three hours."</p>
+        <p data-id="r2" style="font-size: 0.8em; margin-top: 0.3em;"><u><strong>Rule 2:</strong> Before a coordinator in compound sentences</u></p>
+        <p data-id="e2" style="font-size: 0.75em; color: #ffdd00; margin-left: 0.5em;">"I was tired, <span data-id="ex2" style="border-bottom: 2px solid transparent;">so</span> I took a break."</p>
+        <p data-id="r3" style="font-size: 0.8em; margin-top: 0.3em;"><u><strong>Rule 3:</strong> Between items in a series (3+)</u></p>
+        <p data-id="e3" style="font-size: 0.75em; color: #ffdd00; margin-left: 0.5em;">"I got up, took a shower, <span data-id="ex3" style="border-bottom: 2px solid transparent;">and</span> ran out the door."</p>
+    </div>
+    <aside class="notes">"Three rules today. Each one is about joining things — time + sentence, sentence + sentence, item + item."</aside>
+</section>
+
+<!-- SLIDE 8: Teach — Rules (reveal, white borders) -->
+<section id="slide-teach-rules-reveal" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="rules">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">Three Comma Rules</h2>
+        <p data-id="r1" style="font-size: 0.8em;"><u><strong>Rule 1:</strong> After a time order signal</u></p>
+        <p data-id="e1" style="font-size: 0.75em; color: #ffdd00; margin-left: 0.5em;">"<span data-id="ex1" style="border-bottom: 2px solid #4fc3f7;">Yesterday</span>, I did homework for three hours."</p>
+        <p style="font-size: 0.65em; margin-left: 0.5em; color: rgba(255,255,255,0.85);">Exception: Then, soon, now — NO comma.</p>
+        <p data-id="r2" style="font-size: 0.8em; margin-top: 0.3em;"><u><strong>Rule 2:</strong> Before a coordinator in compound sentences</u></p>
+        <p data-id="e2" style="font-size: 0.75em; color: #ffdd00; margin-left: 0.5em;">"I was tired, <span data-id="ex2" style="border-bottom: 2px solid #4fc3f7;">so</span> I took a break."</p>
+        <p style="font-size: 0.65em; margin-left: 0.5em; color: rgba(255,255,255,0.85);">Only for compound sentences — NOT simple sentences!</p>
+        <p data-id="r3" style="font-size: 0.8em; margin-top: 0.3em;"><u><strong>Rule 3:</strong> Between items in a series (3+)</u></p>
+        <p data-id="e3" style="font-size: 0.75em; color: #ffdd00; margin-left: 0.5em;">"I got up, took a shower, <span data-id="ex3" style="border-bottom: 2px solid #4fc3f7;">and</span> ran out the door."</p>
+        <p style="font-size: 0.65em; margin-left: 0.5em; color: rgba(255,255,255,0.85);">Only for 3+ items — NOT for 2 items.</p>
+    </div>
+    <aside class="notes">"The exception on each rule is important. Then/soon/now = no comma. Simple sentences = no comma. Two items = no comma."</aside>
+</section>
+
+<!-- SLIDE 9: Teach — When NOT to use commas -->
+<section id="slide-teach-exceptions" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none">
+    <h2>When NOT to Use a Comma</h2>
+    <p style="font-size: 0.75em; color: #ff8a65; margin-top: 0.3em;">"My mom was okay with it too <strong>so</strong>, I can play piano."</p>
+    <p style="font-size: 0.7em; margin-left: 0.5em;">Wrong! Comma goes BEFORE so, not after. Correct: "...too, so I can play piano."</p>
+    <p style="font-size: 0.75em; color: #ff8a65; margin-top: 0.5em;">"They were happy <strong>and</strong> they were poor."</p>
+    <p style="font-size: 0.7em; margin-left: 0.5em;">Wrong! Compound sentence needs a comma before 'and.'</p>
+    <p style="font-size: 0.75em; color: #ff8a65; margin-top: 0.5em;">"Tomiko and Keiko are from Japan."</p>
+    <p style="font-size: 0.7em; margin-left: 0.5em;">Correct! Simple sentence with compound subject. NO comma before 'and.'</p>
+    <p style="font-size: 0.75em; color: #ff8a65; margin-top: 0.5em;">"He went to the store <strong>and</strong> bought milk."</p>
+    <p style="font-size: 0.7em; margin-left: 0.5em;">Correct! Simple sentence with compound verb. NO comma.</p>
+    <aside class="notes">Show real ERRANT errors: M3-3A students put commas after 'so' instead of before it. Teach the difference: simple (no comma) vs compound (comma).</aside>
+</section>
+
+<!-- SLIDE 10: Transition to Practice 3A -->
+<section id="slide-transition-p3a" data-background-color="#c0392b" data-background-transition="none">
+    <h2>Practice: Add the Commas</h2>
+</section>
+
+<!-- SLIDE 11: Strategy — Practice 3A -->
+<section id="slide-strategy-p3a" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none">
+    <h2>How to Add Commas</h2>
+    <p><u><strong>Step 1:</strong> Check for a time signal at the start.</u></p>
+    <p style="margin-left: 1em;">Add comma after it (unless it's Then/Soon/Now).</p>
+    <p><u><strong>Step 2:</strong> Check for two S-V pairs + coordinator.</u></p>
+    <p style="margin-left: 1em;">Compound sentence? Add comma before the coordinator.</p>
+    <p><u><strong>Step 3:</strong> Check for a list of 3+ items.</u></p>
+    <p style="margin-left: 1em;">Add commas between them. Comma before 'and' too.</p>
+    <aside class="notes">Demo items 1, 4, and 7 together to show all three rules. Then Ss work individually on the rest.</aside>
+</section>
+
+<!-- SLIDE 12: Task — Practice 3A -->
+<section id="slide-p3a-task" data-background-color="#1a1a2e" data-timer="420">
+    <h2>Practice 3A — items 1 to 12</h2>
+    <p><em>Add commas where necessary. Some need more than one.</em></p>
+    <aside class="notes">Individual work 7 min. Pair check 3 min. Then display answers.</aside>
+</section>
+
+<!-- SLIDE 13: Answers — Practice 3A (1-6) -->
+<section id="slide-p3a-answers-1-6" data-background-color="#1e7e34" data-background-transition="none">
+<style>
+    .reveal .answer-list { width: 100%; font-size: 0.85em; }
+    .reveal .a-row { display: flex; align-items: baseline; padding: 0.4em 0; border-bottom: 1px solid rgba(255,255,255,0.1); gap: 0.5em; }
+    .reveal .a-row:last-child { border-bottom: none; }
+    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.85em; }
+    .reveal .a-q { flex: 0 0 auto; min-width: 0; margin-right: 0.5em; }
+    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #fff; }
+    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+    .reveal section.pedagogical { align-self: flex-start; margin-top: 0; padding-top: 30px; }
+    .reveal .aim-label { color: #fff; }
+</style>
+    <h2 style="font-size: 0.85em;">Practice 3A — Answers (1–6)</h2>
+    <div class="answer-list">
+        <div class="a-row"><span class="a-num">1.</span><span class="a-q" style="font-size: 0.65em;">Daisy, Tomiko, Keiko, and Nina...</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">Rule 3 — series</span></div>
+        <div class="a-row"><span class="a-num">2.</span><span class="a-q" style="font-size: 0.65em;">...from Japan, and Nina and Daisy...</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">Rule 2 — compound</span></div>
+        <div class="a-row"><span class="a-num">3.</span><span class="a-q" style="font-size: 0.65em;">(no change — "June 3 on different continents")</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">no comma needed</span></div>
+        <div class="a-row"><span class="a-num">4.</span><span class="a-q" style="font-size: 0.65em;">Last week, ...party, so they invited...</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">Rule 1 + Rule 2</span></div>
+        <div class="a-row"><span class="a-num">5.</span><span class="a-q" style="font-size: 0.65em;">...Mexican food, but Keiko wanted...</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">Rule 2 — compound</span></div>
+        <div class="a-row"><span class="a-num">6.</span><span class="a-q" style="font-size: 0.65em;">Finally, they agreed on the menu.</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">Rule 1 — time signal</span></div>
+    </div>
+    <aside class="notes">Item 3: No comma needed. 'June 3 on different continents' is fine without one. Discuss if students disagree.</aside>
+</section>
+
+<!-- SLIDE 14: Answers — Practice 3A (7-12) -->
+<section id="slide-p3a-answers-7-12" data-background-color="#1e7e34" data-background-transition="none">
+    <h2 style="font-size: 0.85em;">Practice 3A — Answers (7–12)</h2>
+    <div class="answer-list">
+        <div class="a-row"><span class="a-num">7.</span><span class="a-q" style="font-size: 0.65em;">...tempura, Mexican arroz, Chinese ... vegetables, and American ice cream.</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">Rule 3 — series of 4</span></div>
+        <div class="a-row"><span class="a-num">8.</span><span class="a-q" style="font-size: 0.65em;">First, Nina made the rice.</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">Rule 1 — time signal</span></div>
+        <div class="a-row"><span class="a-num">9.</span><span class="a-q" style="font-size: 0.65em;">Then Keiko cooked the tempura.</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">Rule 1 exception — Then</span></div>
+        <div class="a-row"><span class="a-num">10.</span><span class="a-q" style="font-size: 0.65em;">After that, Tomiko prepared the vegetables.</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">Rule 1 — time signal</span></div>
+        <div class="a-row"><span class="a-num">11.</span><span class="a-q" style="font-size: 0.65em;">After dinner, Daisy served the dessert.</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">Rule 1 — time signal</span></div>
+        <div class="a-row"><span class="a-num">12.</span><span class="a-q" style="font-size: 0.65em;">(no change — only 2 items)</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">Rule 3 exception</span></div>
+    </div>
+    <aside class="notes">Item 9: 'Then' is an exception. No comma. Item 12: Only two items 'chocolate or vanilla' — no comma needed.</aside>
+</section>
+
+<!-- SLIDE 15: Transition to freewriting -->
+<section id="slide-transition-freewriting" data-background-color="#c0392b" data-background-transition="none">
+    <h2>Let's Freewrite!</h2>
+</section>
+
+<!-- SLIDE 16: Teach — Freewriting model -->
+<section id="slide-teach-freewriting" data-background-color="#1a1a2e">
+    <h2>What is Freewriting?</h2>
+    <p style="font-size: 0.75em; text-align: left;">You write without stopping for a set time.</p>
+    <p style="font-size: 0.75em; text-align: left;">Don't worry about mistakes — just keep writing.</p>
+    <p style="font-size: 0.75em; text-align: left;">If you get stuck, write "I don't know what to write" until a new idea comes.</p>
+    <p style="font-size: 0.7em; color: #ffdd00; margin-top: 0.5em;">Model (from p.34):</p>
+    <p style="font-size: 0.6em; font-style: italic; color: rgba(255,255,255,0.85); background: rgba(0,0,0,0.3); padding: 0.3em 0.5em; border-radius: 4px;">"I'm supposed to freewrite for ten minutes about a memorable event in my life. I don't know what to write about. Maybe about my brother's boat accident. We were so scared..."</p>
+    <aside class="notes">Explain: "Your topic is 'A Memorable Event.' This will be your CA paragraph topic. Freewrite for 10 minutes."</aside>
+</section>
+
+<!-- SLIDE 17: Task — Freewriting timer -->
+<section id="slide-freewriting-task" data-background-color="#1a1a2e" data-timer="600">
+    <h2>My Memorable Event</h2>
+    <p style="font-size: 0.7em;">Freewrite for <strong>10 minutes</strong> without stopping.</p>
+    <p style="font-size: 0.6em; color: rgba(255,255,255,0.85); margin-top: 0.3em;">Try to use compound sentences (and, but, or, so).</p>
+    <p style="font-size: 0.6em; color: rgba(255,255,255,0.85);">Don't worry about commas — you can fix them later!</p>
+    <aside class="notes">Ss freewrite for 10 min. Timer on screen. Teacher circulates. After timer: pair share one good sentence.</aside>
+</section>
+
+<!-- SLIDE 18: Transition to summary -->
+<section id="slide-transition-summary" data-background-color="#c0392b" data-background-transition="none">
+    <h2>Let's Review</h2>
+</section>
+
+<!-- SLIDE 19: Summary -->
+<section id="slide-summary" data-background-color="#1a1a2e">
+    <h2>I can...</h2>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> use commas after time signals (First, Yesterday)</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> use commas before and/but/or/so in compound sentences</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> use commas in a series of 3+ items</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> freewrite to get ideas for my narrative paragraph</p>
+    <p style="margin-top: 1em; font-size: 0.75em;">Next: organize your freewrite into a first draft!</p>
+    <aside class="notes">Elicit all three comma rules. Connect freewrite to Step 1 of the writing process.</aside>
+</section>
+
+<!-- SLIDE 20: End -->
+<section id="slide-end" data-background-color="#2c3e50" data-background-transition="none">
+    <h2>Comma Rules &amp; Freewriting</h2>
+    <div><span class="cefr-badge B1">B1</span></div>
+    <p style="font-size: 0.7em; color: rgba(255,255,255,0.85); margin-top: 0.5em;">Three rules to use — and when to skip them</p>
+</section>
+
+</div>
+        </div>
+
+        <script src="timer-plugin.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/audio-slideshow/plugin.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                audio: {
+                    prefix: 'assets/',
+                    suffix: '.mp3',
+                    advance: -1,
+                    autoplay: false,
+                    defaultAudios: false,
+                    defaultDuration: 0,
+                    playerOpacity: 1.0,
+                    playerStyle: 'position: fixed; bottom: 30px; left: 25%; width: 50%; height:75px; z-index: 33;',
+                    startAtFragment: false,
+                },
+                plugins: [
+                    TimerPlugin,
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                    RevealAudioSlideshow,
+                ],
+            });
+        </script>
+    </body>
+</html>
