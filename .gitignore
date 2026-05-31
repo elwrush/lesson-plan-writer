@@ -53,3 +53,9 @@ node_modules/
 # OS
 Thumbs.db
 Desktop.ini
+
+
+# Build infrastructure assets (not lesson media — required for PDF pipeline)
+!templates/ACT.png
+!templates/Image_20260324_141022.png
+!templates/cambridge.png
