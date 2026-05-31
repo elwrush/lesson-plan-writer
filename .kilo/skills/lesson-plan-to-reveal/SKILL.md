@@ -109,25 +109,24 @@ The base template has a CSS syntax error in `.cefr-badge` (missing closing `}`) 
 
 ### Step 3: Layout and Backgrounds
 
-**Prefer `r-stack` over `data-background-image` for image+text slides.** Instead of using a full background image (which forces text-shield on every element), use `r-stack` to layer a slide-level image with text positioned over it:
+**Title slides: use `data-background-image` with `data-background-color` (NOT `r-stack`).** The `r-stack` approach creates a letterbox effect (content compressed into the middle). Use both background attributes plus `style="justify-content: center;"` to vertically center content:
 
 ```html
-<section>
-  <div class="r-stack" style="height: 100%;">
-    <img class="r-stretch" src="assets/photo.jpg" style="object-fit: cover; opacity: 0.85;" />
-    <h2 style="position: relative; z-index: 1; align-self: center;">Title over image</h2>
-  </div>
+<section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/photo.jpg" data-background-opacity="0.85" style="justify-content: center;">
+    <img src="assets/logo.png" style="height: 120px; margin: 0 auto 0.5em; display: block;" alt="ACT" />
+    <h2 style="font-size: 2.2em;">Topic Title <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></h2>
+    <p style="font-size: 1em; color: rgba(255,255,255,0.9); margin-top: 0.5em;">Subheader</p>
 </section>
 ```
 
-This avoids the text-shield entirely: the image is a normal `<img>` element you can style, dim, or position independently of the text.
+**Other image slides** (vocabulary, lead-in with photo): Use `data-background-image` with `text-shield` classes on all text elements.
 
 **When to use each approach:**
 
 | Scenario | Approach | Why |
 |---|---|---|
-| Text overlaid on image | `r-stack` + `<img>` + positioned text | No text-shield needed; image is a normal element you can dim, crop, or position |
-| Full-bleed background image | `data-background-image` | When image must fill entire slide edge-to-edge; requires text-shield |
+| Title slide with full-bleed image | `data-background-image` + `data-background-color` + `justify-content: center` | Full edge-to-edge image; no letterbox; text is centered |
+| Vocabulary/lead-in with image | `data-background-image` + `text-shield` | Image fills slide edge-to-edge; text needs shield for readability |
 | Image fills remaining space after title | `r-stretch` on `<img>` | Responsive; title stays at top, image fills middle, caption at bottom |
 | Stacking elements on top of each other | `r-stack` + fragments | Reveal images one at a time, or layer text over image |
 | Framing an image/link | `r-frame` on element | Subtle border, hover effect on links |
@@ -660,7 +659,7 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
     - **CRITICAL — No gray text.** Per Rule 0, ALL text on green slides must be white `#fff` or yellow `#ffdd00` — including `.a-num`, `.a-q`, `.aim-label`, and any other element. Gray, blue, or muted colors are invisible at projection distance on `#1e7e34`.
 8. **Transition slides: heading only (no subheader text).** The red background + icon + heading is sufficient — the teacher's spoken introduction bridges the gap. Remove all `<p>` elements from transition slides.
 9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#1a6b5a` (pedagogical/strategy), green `#1e7e34` (answer tables), dark `#2c3e50` (end)
-10. **Title slide visuals**: Logo centered at top (`height: 78px`), title with CEFR badge below, strap subheader, then `r-stretch` image filling remaining space. Use `data-background-color="#1a1a2e"` as base. No `data-background-image` — the image is an `<img>` element in normal document flow.
+10. **Title slide visuals**: Full-screen `data-background-image` with `data-background-color="#1a1a2e"` fallback. Logo at `120px`, h2 at `2.2em`, CEFR badge inline inside h2 (`vertical-align: middle`), subheader at `1em`. **Must add `style="justify-content: center;"`** to vertically center content. Opacity `0.85`. Do NOT use `r-stack` — it creates a letterbox effect.
 11. **Text highlighting**: white text, dark text-shadow, pedagogical sections use white-on-teal
 12. **Vocabulary words**: yellow boldface (`#ffdd00`) via `<span class="vocab-word">` — in both the word heading AND context sentence(s).
 
