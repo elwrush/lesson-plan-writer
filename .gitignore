@@ -11,12 +11,29 @@ __pycache__/
 
 # PDF output (generated)
 PDF/
+*.pdf
 
 # Temp files
 output/**/_temp_*
+output/.image-cache/
 
 # Large input files (epub, etc.)
 *.epub
+
+# Image files (code-only repo; media goes to gh-pages)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp
+*.bmp
+*.ico
+
+# Office documents (source, not code)
+*.doc
+*.docx
+*.xls
+*.xlsx
 
 # Audio/media files (code-only repo)
 *.mp3
