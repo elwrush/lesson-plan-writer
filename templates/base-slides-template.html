@@ -84,24 +84,18 @@
                 margin-right: 0.5em;
             }
             .reveal .a-ans {
-                flex: 1 1 auto;
+                flex: 0 1 auto;
                 min-width: 0;
                 text-align: left;
                 padding: 0.1em 0.3em;
                 border-radius: 4px;
             }
-            .reveal .a-ans.a-cor {
-                color: #fff;
-            }
-            .reveal .a-ans.a-cor.visible {
-                background: rgba(76, 175, 80, 0.3);
-            }
-            .reveal .a-ans.a-inc {
-                color: #fff;
-            }
-            .reveal .a-ans.a-inc.visible {
-                background: rgba(244, 67, 54, 0.3);
-            }
+            .reveal .a-ans.a-cor { color: #fff; }
+            .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+            .reveal .a-ans.a-inc { color: #fff; }
+            .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
+            /* Why column on answer rows — yellow explanation, fills remaining space */
+            .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.75em; }
 
             /* --- Labels & captions --- */
             .reveal .aim-label {
@@ -270,11 +264,20 @@
                      ============================================================ -->
 
                 <!-- ─── PATTERN: Title Slide ──────────────────────────────── -->
+                <!-- CRITICAL: Must use BOTH data-background-color AND data-background-image.
+                     Without data-background-color, the text may lack contrast while the image loads.
+                     justify-content: center is REQUIRED — reveal.js sections default to flex-start,
+                     pushing content to the top of the slide.
+                     Logo: 120px (not 78px — too small on 1280x720).
+                     h2: 2.2em (not default ~1.6em — too small).
+                     CEFR badge: inline inside h2 with vertical-align: middle.
+                     Subheader: 1em (not 0.7em — invisible at projection distance).
+                     data-background-opacity: 0.85 (not 0.7 — too dim). -->
                 <!--
-                <section data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.7">
-                    <img src="assets/logo.png" class="title-logo" alt="Logo" />
-                    <h1>Topic Title <span class="cefr-badge B1">B1</span></h1>
-                    <p><em>Strap subheader — derived from lesson objective</em></p>
+                <section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/pixabay_XXXXXXX_1.jpg" data-background-opacity="0.85" style="justify-content: center;">
+                    <img src="assets/logo.png" style="height: 120px; margin: 0 auto 0.5em; display: block;" alt="ACT" />
+                    <h2 style="font-size: 2.2em;">Topic Title <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></h2>
+                    <p style="font-size: 1em; color: rgba(255,255,255,0.9); margin-top: 0.5em;">Strap subheader — derived from lesson objective</p>
                 </section>
                 -->
 
@@ -385,6 +388,36 @@
                     <p>Look in paragraphs X and Y. Do the meanings match?</p>
                     <p><strong>Step 4:</strong> Check your answer</p>
                     <p class="fragment fade-up a-ans a-cor">TRUE — Explanation of why it's true.</p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Formula Auto-Animate (Entry → Reveal, 2 slides) ─── -->
+                <!-- CRITICAL: Use a 2-slide auto-animate pair when demonstrating structural
+                     changes (simple→compound, wrong→right). The entry slide shows both versions
+                     with transparent borders on the KEY CHANGED elements. The reveal slide
+                     changes those borders to colored (#4fc3f7 blue). Both slides MUST have
+                     data-auto-animate with matching data-auto-animate-id. Matching elements
+                     need data-id attributes on both slides. -->
+                <!--
+                <section id="slide-formula-entry" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="formula">
+                    <div style="overflow: hidden;">
+                        <h2 data-id="title">Simple vs Compound</h2>
+                        <p><u><strong>Simple:</strong></u></p>
+                        <p data-id="simp" style="color: #ffdd00;">My family <span>goes</span> camping every summer and usually <span>has</span> fun.</p>
+                        <p><u><strong>Compound:</strong></u></p>
+                        <p data-id="comp" style="color: #ffdd00;">My family goes camping every summer, and <span data-id="newS" style="border-bottom: 2px solid transparent;">we</span> usually <span data-id="newV" style="border-bottom: 2px solid transparent;">have</span> fun.</p>
+                        <p style="color: rgba(255,255,255,0.85);">S V, and S V</p>
+                    </div>
+                </section>
+                <section id="slide-formula-reveal" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none" data-auto-animate data-auto-animate-id="formula">
+                    <div style="overflow: hidden;">
+                        <h2 data-id="title">Simple vs Compound</h2>
+                        <p><u><strong>Simple:</strong></u></p>
+                        <p data-id="simp" style="color: #ffdd00;">My family <span>goes</span> camping every summer and usually <span>has</span> fun.</p>
+                        <p><u><strong>Compound:</strong></u></p>
+                        <p data-id="comp" style="color: #ffdd00;">My family goes camping every summer, and <span data-id="newS" style="border-bottom: 2px solid #4fc3f7; box-shadow: 0 3px 0 0 #4fc3f7;">we</span> usually <span data-id="newV" style="border-bottom: 2px solid #4fc3f7; box-shadow: 0 3px 0 0 #4fc3f7;">have</span> fun.</p>
+                        <p style="color: rgba(255,255,255,0.85);">S V, and <span style="color: #4fc3f7;">S</span> <span style="color: #4fc3f7;">V</span></p>
+                    </div>
                 </section>
                 -->
 
@@ -520,18 +553,23 @@
                 -->
 
                 <!-- ─── PATTERN: Grammar Diagnostic Test Slide ──────────────── -->
+                <!-- CRITICAL: Split into max 3 items per slide. Add answer fragments below
+                     the questions so the teacher can reveal answers after the timer ends.
+                     Each answer fragment should have the coordinator/answer + Why explanation. -->
                 <!--
-                <section data-background-color="#1a1a2e">
-                    <h2>Diagnostic Test</h2>
-                    <p><em>Each sentence has ONE error. Find and fix it.</em></p>
-                    <ol style="font-size: 0.8em; text-align: left;">
-                        <li>Sentence with error 1.</li>
-                        <li>Sentence with error 2.</li>
-                        ...
+                <section id="slide-diagnostic-1-3" data-background-color="#1a1a2e" data-timer="180">
+                    <p><em>Join each pair into one sentence. Use and, but, or, or so.</em></p>
+                    <ol style="font-size: 0.7em; text-align: left;">
+                        <li>Pair 1a. Pair 1b.</li>
+                        <li>Pair 2a. Pair 2b.</li>
+                        <li>Pair 3a. Pair 3b.</li>
                     </ol>
-                    <aside class="notes">
-                        Timing and procedure here.
-                    </aside>
+                    <div class="answer-list" style="margin-top: 0.8em;">
+                        <div class="a-row"><span class="a-num">1.</span><span class="fragment fade-up a-ans a-cor" style="color:#ffdd00;">coordinator</span><span class="fragment fade-up a-why">Explanation</span></div>
+                        <div class="a-row"><span class="a-num">2.</span><span class="fragment fade-up a-ans a-cor" style="color:#ffdd00;">coordinator</span><span class="fragment fade-up a-why">Explanation</span></div>
+                        <div class="a-row"><span class="a-num">3.</span><span class="fragment fade-up a-ans a-cor" style="color:#ffdd00;">coordinator</span><span class="fragment fade-up a-why">Explanation</span></div>
+                    </div>
+                    <aside class="notes">Individual work, then pair check. Use fragment clicks to reveal answers.</aside>
                 </section>
                 -->
 
@@ -543,6 +581,23 @@
                     <p><em>"Example sentence."</em> Explanation.</p>
                     <p><u><strong>Rule 2:</strong> Description</u></p>
                     <p><em>"Example sentence."</em> Explanation.</p>
+                </section>
+                -->
+
+                <!-- ─── PATTERN: Pedagogical Demo Slide (worked example before task) ─── -->
+                <!-- CRITICAL: Before any freer practice task (e.g. Practice 10A), include
+                     a demo slide. The teacher walks through ONE item step by step so students
+                     see the full reasoning chain before attempting the rest independently. -->
+                <!--
+                <section id="slide-p10a-demo" class="pedagogical" data-background-color="#1a6b5a" data-background-transition="none">
+                    <h2>Practice 10A — Let's do one together</h2>
+                    <p style="color: #ffdd00;">Item 1: Sentence A. Sentence B.</p>
+                    <p style="margin-top: 0.4em;"><u><strong>Step 1:</strong> What's the relationship?</u></p>
+                    <p style="margin-left: 1em;">Explanation of relationship (reason/contrast/choice/similar).</p>
+                    <p style="margin-top: 0.3em;"><u><strong>Step 2:</strong> Choose the coordinator.</u></p>
+                    <p style="margin-left: 1em;">Relationship → use <strong>coordinator</strong></p>
+                    <p style="margin-top: 0.3em;"><u><strong>Step 3:</strong> Combine: comma + coordinator.</u></p>
+                    <p style="margin-left: 1em; color: #4fc3f7;">"Combined sentence, coordinator rest."</p>
                 </section>
                 -->
 
