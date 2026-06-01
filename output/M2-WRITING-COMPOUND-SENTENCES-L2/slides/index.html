@@ -80,7 +80,7 @@
             .reveal .a-num {
                 flex: 0 0 1.5em;
                 text-align: right;
-                color: rgba(255,255,255,0.5);
+                color: #fff;
                 font-size: 0.85em;
             }
             .reveal .a-q {
@@ -154,7 +154,7 @@
             }
             .reveal section.pedagogical h2 {
                 color: #fff;
-                border-bottom: 3px solid rgba(255,255,255,0.3);
+                border-bottom: 3px solid #fff;
                 padding-bottom: 0.3em;
             }
             .reveal section.pedagogical h3 { color: #fff; }
@@ -163,7 +163,7 @@
             .reveal section.pedagogical .strategy-tip {
                 font-size: 0.85em;
                 font-style: italic;
-                color: rgba(255,255,255,0.85);
+                color: #fff;
                 margin-bottom: 0.5em;
             }
             .reveal section.pedagogical .evidence {
@@ -171,7 +171,7 @@
                 background: rgba(0,0,0,0.3);
                 padding: 0.4em 0.6em;
                 border-radius: 4px;
-                border-left: 3px solid rgba(255,255,255,0.4);
+                border-left: 3px solid #fff;
             }
 
             /* --- Global text shadow for readability --- */
@@ -265,7 +265,7 @@
             /* --- Diagnostic talk structure slides (pedagogical, teal) --- */
             .reveal .structure-talk h2 {
                 color: #fff;
-                border-bottom: 3px solid rgba(255,255,255,0.3);
+                border-bottom: 3px solid #fff;
                 padding-bottom: 0.3em;
             }
             .reveal .structure-talk p,
@@ -282,6 +282,21 @@
                 padding: 0.4em 0.6em;
                 background: rgba(0,0,0,0.2);
                 border-radius: 4px;
+            }
+
+            /* --- Sentence swap: fragment toggles original ↔ corrected --- */
+            .reveal .fragment.custom.sentence-swap {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+            .reveal .fragment.custom.sentence-swap .corrected {
+                display: none;
+            }
+            .reveal .fragment.custom.sentence-swap.visible .original {
+                display: none;
+            }
+            .reveal .fragment.custom.sentence-swap.visible .corrected {
+                display: inline;
             }
         </style>
     </head>
@@ -300,7 +315,7 @@
 <section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/shattered-glass.jpg" data-background-opacity="0.85" style="justify-content: center;">
     <img src="assets/logo.png" style="height: 120px; margin: 0 auto 0.5em; display: block;" alt="ACT" />
     <h2 style="font-size: 2.2em;">Fixing Run-ons &amp; Comma Splices <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></h2>
-    <p style="font-size: 1em; color: rgba(255,255,255,0.9); margin-top: 0.5em;">Two ways to fix broken sentences</p>
+    <p style="font-size: 1em; color: #fff; margin-top: 0.5em;">Two ways to fix broken sentences</p>
     <aside class="notes">Lesson 2 of 2 on compound sentences. M2-4A. 46 min. Start by reviewing compound sentence rules from last lesson, then move into error correction.</aside>
 </section>
 
@@ -324,19 +339,58 @@
     <h2>Let's Review</h2>
 </section>
 
-<!-- SLIDE 3: Lead-in — Review + Practice 10B -->
-<!-- PEDAGOGICAL INTENT: Student sees a quick compound sentence recap and then a completion task. -->
-<!-- WHY THIS FEATURE: Static — warm-up retrieval practice. -->
-<!-- COGNITIVE PRINCIPLE: Pretraining — retrieving L1 knowledge prepares for L2 task. -->
-<section id="slide-lead-in" data-background-color="#1a1a2e" data-timer="240">
-    <p><strong>A compound sentence =</strong> SV, coordinator SV</p>
-    <p style="color: #ffdd00; font-size: 0.9em; margin-top: 0.3em;">and, but, or, so</p>
-    <p style="margin-top: 0.8em;"><em>Practice 10B — Complete each sentence (items 1–7).</em></p>
-    <p style="font-size: 0.9em; margin-top: 0.3em;">My brother and I look like twins, but <span style="color: #ffdd00;">____</span></p>
-    <aside class="notes">Quick review 2 min, then Practice 10B individual 4 min, pair share 2 min.</aside>
+<!-- SLIDE 3: Lead-in — Review + Error teaser -->
+<!-- PEDAGOGICAL INTENT: Student retrieves compound sentence formula + coordinators, then sees a sentence with a hidden comma splice. The question "Is this correct?" creates cognitive conflict that primes error-correction learning. -->
+<!-- WHY THIS FEATURE: Auto-animate error→fix animation reveals the missing coordinator without hiding the original — students compare the error and fix side by side. -->
+<!-- COGNITIVE PRINCIPLE: Pretraining + Cognitive Conflict — retrieving L1 knowledge primes the learner; the unexpected error creates productive confusion that motivates the diagnostic task. -->
+<section id="slide-lead-in" data-auto-animate data-auto-animate-id="leadin-review" data-background-color="#1a1a2e" data-timer="240" style="justify-content: center;">
+    <div style="overflow: hidden;">
+        <h2 style="font-size: 1.6em; margin-bottom: 0.3em;">Quick Review</h2>
+        <p style="font-size: 0.95em; color: #fff;">A compound sentence = <strong>SV, coordinator SV</strong></p>
+        <p style="font-size: 0.95em; color: #ffdd00; margin-bottom: 0.8em; display: flex; align-items: center; justify-content: center; gap: 0.6em;">
+            <span>and</span> <span style="color: #fff;">•</span>
+            <span>but</span> <span style="color: #fff;">•</span>
+            <span>or</span> <span style="color: #fff;">•</span>
+            <span>so</span>
+        </p>
+        <p data-id="example" style="font-size: 1.1em; color: #ffdd00;">
+            "Maria studies hard, <span data-id="error1" style="border-bottom: 2px solid transparent;">she always gets good grades.</span>"
+        </p>
+        <p style="font-size: 0.85em; color: #ffdd00; margin-top: 0.8em;">
+            &#9888; Is this a correct compound sentence?
+        </p>
+    </div>
+    <aside class="notes">Elicit formula + coordinators (2 min). Then ask: "SV, comma, SV — but where's the coordinator?" This sentence has a comma splice. "Let's see if you can find more errors like this."</aside>
 </section>
 
-<!-- SLIDE 4: Transition to diagnostic -->
+<!-- SLIDE 4: Lead-in — Error reveal -->
+<!-- PEDAGOGICAL INTENT: Auto-animate draws attention to the missing coordinator. The original (at smaller font size) stays visible, the correction in yellow appears. The bridge statement leads to the diagnostic task without naming the error type (preserves test validity). -->
+<!-- WHY THIS FEATURE: Auto-animate transforms the transparent border → white underline on the error and reveals the correction with white underline. Students see exactly what changed. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — error and correction visible simultaneously; the animated underline signals what changed. -->
+<section id="slide-lead-in-reveal" data-auto-animate data-auto-animate-id="leadin-review" data-background-color="#1a1a2e" style="justify-content: center;">
+    <div style="overflow: hidden;">
+        <h2 style="font-size: 1.6em; margin-bottom: 0.3em;">Quick Review</h2>
+        <p style="font-size: 0.95em; color: #fff;">A compound sentence = <strong>SV, coordinator SV</strong></p>
+        <p style="font-size: 0.95em; color: #ffdd00; margin-bottom: 0.8em; display: flex; align-items: center; justify-content: center; gap: 0.6em;">
+            <span>and</span> <span style="color: #fff;">•</span>
+            <span>but</span> <span style="color: #fff;">•</span>
+            <span>or</span> <span style="color: #fff;">•</span>
+            <span>so</span>
+        </p>
+        <p data-id="example" style="font-size: 1em; color: #fff;">
+            "Maria studies hard, <span data-id="error1" style="border-bottom: 2px solid #fff;">she always gets good grades.</span>" &#10060;
+        </p>
+        <p style="font-size: 1.2em; color: #ffdd00; margin-top: 0.5em;">
+            &#9989; "Maria studies hard, <span style="border-bottom: 2px solid #fff;">and</span> she always gets good grades."
+        </p>
+        <p style="font-size: 0.9em; color: #fff; margin-top: 0.6em;">
+            Something was missing &mdash; <strong style="color: #ffdd00;">the coordinator</strong>.
+        </p>
+    </div>
+    <aside class="notes">"The comma is there but the coordinator is missing. This is called a comma splice. Now let's see if you can spot errors like this." Advance to diagnostic.</aside>
+</section>
+
+<!-- SLIDE 5: Transition to diagnostic -->
 <!-- PEDAGOGICAL INTENT: Student sees a phase-change heading on red background. The color signals a new section of the lesson. -->
 <!-- WHY THIS FEATURE: Static — red background + heading signals shift; fragments or animation would distract from the transition cue. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — visual cue (red) marks a boundary between lesson phases, helping learners segment content. -->
@@ -344,76 +398,144 @@
     <h2>Find the Mistakes</h2>
 </section>
 
-<!-- SLIDE 5: Diagnostic test -->
-<!-- PEDAGOGICAL INTENT: Student sees 5 sentences and must decide: OK or fix it? This reveals whether they can spot errors instinctively. -->
-<!-- WHY THIS FEATURE: Static — diagnostic assessment, not instruction. -->
+<!-- SLIDE 6: Diagnostic test — items 1-3 -->
+<!-- PEDAGOGICAL INTENT: Student sees 3 sentences, marks OK or fix it. Fragment replaceEach sentence in place with its corrected version or OK. -->
+<!-- WHY THIS FEATURE: Fragment toggles original text → corrected text at same position; no duplicate lines. -->
 <!-- COGNITIVE PRINCIPLE: None — assessment task. -->
-<section id="slide-diagnostic" data-background-color="#1a1a2e" data-timer="180">
-    <p><em>Mark each sentence: OK or fix it. If fix it, write a correction.</em></p>
-    <ol style="font-size: 0.85em; text-align: left;">
-        <li style="margin: 0.3em 0;">My friend is very kind, she always helps me with homework.</li>
-        <li style="margin: 0.3em 0;">I go to school by bus it takes about thirty minutes.</li>
-        <li style="margin: 0.3em 0;">My sister loves reading, and she has over a hundred books.</li>
-        <li style="margin: 0.3em 0;">The food was delicious we ate everything on the table.</li>
-        <li style="margin: 0.3em 0;">I wanted to call him, but I forgot my phone at home.</li>
-    </ol>
-    <aside class="notes">Individual 3 min, pair check 2 min. Do NOT give answers yet — save for Teach stage.</aside>
+<section id="slide-diagnostic-1-3" data-background-color="#1a1a2e" data-timer="180">
+    <p style="margin-bottom: 0.5em;"><em>Mark each sentence: OK or fix it. If fix it, write a correction.</em></p>
+    <div style="width: 100%; font-size: 0.95em;">
+        <!-- Item 1: comma splice → comma + and -->
+        <div style="display: flex; align-items: flex-start; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em;">
+            <span style="flex: 0 0 1.5em; color: #fff;">1.</span>
+            <span class="fragment custom sentence-swap" data-fragment-index="1" style="flex: 1 1 auto; font-size: 0.9em; line-height: 1.5;">
+                <span class="original" style="color: #ffdd00;">My friend is very kind, she always helps me with homework.</span>
+                <span class="corrected" style="color: #fff;">My friend is very kind, <span style="border-bottom: 2px solid #fff;">and</span> she always helps me with homework.</span>
+            </span>
+        </div>
+        <!-- Item 2: run-on → comma + and -->
+        <div style="display: flex; align-items: flex-start; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em;">
+            <span style="flex: 0 0 1.5em; color: #fff;">2.</span>
+            <span class="fragment custom sentence-swap" data-fragment-index="2" style="flex: 1 1 auto; font-size: 0.9em; line-height: 1.5;">
+                <span class="original" style="color: #ffdd00;">I go to school by bus it takes about thirty minutes.</span>
+                <span class="corrected" style="color: #fff;">I go to school by bus, <span style="border-bottom: 2px solid #fff;">and</span> it takes about thirty minutes.</span>
+            </span>
+        </div>
+        <!-- Item 3: correct → OK -->
+        <div style="display: flex; align-items: flex-start; padding: 0.5em 0; gap: 0.5em; border-bottom: none;">
+            <span style="flex: 0 0 1.5em; color: #fff;">3.</span>
+            <span class="fragment custom sentence-swap" data-fragment-index="3" style="flex: 1 1 auto; font-size: 0.9em; line-height: 1.5;">
+                <span class="original" style="color: #ffdd00;">My sister loves reading, and she has over a hundred books.</span>
+                <span class="corrected" style="color: #ffdd00; font-weight: bold;">OK</span>
+            </span>
+        </div>
+    </div>
+    <aside class="notes">Individual 3 min, pair check 2 min. Navigate back during Teach to reveal corrections.</aside>
 </section>
 
-<!-- SLIDE 6: Transition to teach -->
+<!-- SLIDE 7: Diagnostic test — items 4-5 -->
+<!-- PEDAGOGICAL INTENT: Same task. Fragment replaceEach sentence in place with corrected version. -->
+<!-- WHY THIS FEATURE: Fragment toggles original → corrected at same position. -->
+<!-- COGNITIVE PRINCIPLE: None — assessment task. -->
+<section id="slide-diagnostic-4-5" data-background-color="#1a1a2e" data-timer="120">
+    <p style="margin-bottom: 0.5em;"><em>Mark each sentence: OK or fix it. If fix it, write a correction.</em></p>
+    <div style="width: 100%; font-size: 0.95em;">
+        <!-- Item 4: run-on → comma + so -->
+        <div style="display: flex; align-items: flex-start; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em;">
+            <span style="flex: 0 0 1.5em; color: #fff;">4.</span>
+            <span class="fragment custom sentence-swap" data-fragment-index="1" style="flex: 1 1 auto; font-size: 0.9em; line-height: 1.5;">
+                <span class="original" style="color: #ffdd00;">The food was delicious we ate everything on the table.</span>
+                <span class="corrected" style="color: #fff;">The food was delicious, <span style="border-bottom: 2px solid #fff;">so</span> we ate everything on the table.</span>
+            </span>
+        </div>
+        <!-- Item 5: correct → OK -->
+        <div style="display: flex; align-items: flex-start; padding: 0.5em 0; gap: 0.5em; border-bottom: none;">
+            <span style="flex: 0 0 1.5em; color: #fff;">5.</span>
+            <span class="fragment custom sentence-swap" data-fragment-index="2" style="flex: 1 1 auto; font-size: 0.9em; line-height: 1.5;">
+                <span class="original" style="color: #ffdd00;">I wanted to call him, but I forgot my phone at home.</span>
+                <span class="corrected" style="color: #ffdd00; font-weight: bold;">OK</span>
+            </span>
+        </div>
+    </div>
+    <aside class="notes">Same task. Navigate back during Teach to reveal corrections.</aside>
+</section>
+
+<!-- SLIDE 8: Transition to teach -->
 <!-- PEDAGOGICAL INTENT: Student sees a phase-change heading on red background. The color signals a new section of the lesson. -->
 <!-- WHY THIS FEATURE: Static — red background + heading signals shift; fragments or animation would distract from the transition cue. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — visual cue (red) marks a boundary between lesson phases, helping learners segment content. -->
 <section id="slide-transition-teach" data-background-color="#c0392b" data-background-transition="none">
-    <h2>Two Sentence Errors</h2>
+    <h2 style="font-size: 1.2em;">Let's Not Make Two Common Sentence Errors</h2>
 </section>
 
-<!-- SLIDE 7: Teach — Run-on + Comma Splice (entry) -->
-<!-- PEDAGOGICAL INTENT: Student sees a wrong sentence morph into a right one. The added period or comma+coordinator appears while the original stays — the difference IS the lesson. -->
-<!-- WHY THIS FEATURE: Auto-animate morphs WRONG to RIGHT across two slides. Fragments would hide the wrong answer first, losing the comparison. -->
-<!-- COGNITIVE PRINCIPLE: Temporal Contiguity + Signaling — the correction appears simultaneously with the error, and the added punctuation IS the signal. -->
-<section id="slide-teach-errors-entry" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="errors">
+<!-- SLIDE 9: Teach — Comma Splice (entry) -->
+<!-- PEDAGOGICAL INTENT: Student sees a comma splice — comma present but coordinator missing. The question prompts the student to identify what's wrong. -->
+<!-- WHY THIS FEATURE: Auto-animate entry shows the error with transparent border on the second clause; advancing reveals the fix with white underline. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the missing coordinator is signaled by the transparent border area that will animate to white on reveal. -->
+<section id="slide-teach-cs-entry" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="cs-entry">
     <div style="overflow: hidden;">
-        <h2 data-id="title">Two Sentence Errors</h2>
+        <h2 data-id="title" style="font-size: 1.2em;">Error 1: The Comma Splice</h2>
         <p style="font-size: 0.85em;"><u><strong>Comma splice</strong> — comma without a coordinator</u></p>
-        <p data-id="cs" style="color: #ff8a65; font-size: 0.85em;">My roommate wants to win the Tour de France, <span data-id="fix1" style="border-bottom: 2px solid transparent;">he spends hours riding his bicycle.</span></p>
-        <p style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Run-on</strong> — nothing between two sentences</u></p>
-        <p data-id="ro" style="color: #ff8a65; font-size: 0.85em;">Write your signature on the line <span data-id="fix2" style="border-bottom: 2px solid transparent;">print your name below it.</span></p>
+        <p data-id="cs" style="color: #ffdd00; font-size: 0.85em;">My roommate wants to win the Tour de France, <span data-id="fix1" style="border-bottom: 2px solid transparent;">he spends hours riding his bicycle.</span></p>
     </div>
-    <aside class="notes">"What's wrong? No coordinator after the comma. Nothing between 'line' and 'print'."</aside>
+    <aside class="notes">"What's wrong? There's a comma, but where's the coordinator?"</aside>
 </section>
 
-<!-- SLIDE 8: Teach — Error reveal (after click) -->
-<!-- PEDAGOGICAL INTENT: Student sees the comma splice become a correct compound sentence. The animated border draws attention to the added coordinator or period. -->
-<!-- WHY THIS FEATURE: Auto-animate slides the entries into their corrected forms; the border color animation IS the correction visual. -->
-<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the error and correction remain visible simultaneously; the animated border signals exactly what changed. -->
-<section id="slide-teach-errors-reveal" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="errors">
+<!-- SLIDE 10: Teach — Comma Splice (reveal) -->
+<!-- PEDAGOGICAL INTENT: Student sees the comma splice corrected with comma + coordinator. The animated white underline draws attention to the added coordinator. -->
+<!-- WHY THIS FEATURE: Auto-animate reveals the added 'so' with white underline. The error sentence stays visible for comparison. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — error and correction visible simultaneously; white underline signals what was added. -->
+<section id="slide-teach-cs-reveal" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="cs-entry">
     <div style="overflow: hidden;">
-        <h2 data-id="title">Two Sentence Errors</h2>
+        <h2 data-id="title" style="font-size: 1.2em;">Error 1: The Comma Splice</h2>
         <p style="font-size: 0.85em;"><u><strong>Comma splice</strong> — add a coordinator</u></p>
         <p data-id="cs" style="color: #fff; font-size: 0.85em;">My roommate wants to win the Tour de France, <span data-id="fix1" style="border-bottom: 2px solid white;">so he spends hours riding his bicycle.</span></p>
-        <p style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Run-on</strong> — add a period</u></p>
-        <p data-id="ro" style="color: #fff; font-size: 0.85em;">Write your signature on the line. <span data-id="fix2" style="border-bottom: 2px solid white;">Print your name below it.</span></p>
     </div>
-    <aside class="notes">"Now the comma splice is fixed — comma + so. The run-on is fixed — period + capital."</aside>
+    <aside class="notes">"Now the comma splice is fixed — comma + so. The coordinator 'so' connects cause and effect."</aside>
 </section>
 
-<!-- SLIDE 9: Teach — Two Fixes Reference -->
+<!-- SLIDE 11: Teach — Run-on (entry) -->
+<!-- PEDAGOGICAL INTENT: Student sees a run-on — nothing joins the two sentences. The transparent border signals the separation is missing. -->
+<!-- WHY THIS FEATURE: Auto-animate entry shows the error; advancing reveals the fix. Transparent border on the second sentence signals punctuation is needed. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the missing punctuation is signaled by the transparent border area that will animate to white. -->
+<section id="slide-teach-ro-entry" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="ro-entry">
+    <div style="overflow: hidden;">
+        <h2 data-id="title" style="font-size: 1.2em;">Error 2: The Run-on</h2>
+        <p style="font-size: 0.85em;"><u><strong>Run-on</strong> — nothing between two sentences</u></p>
+        <p data-id="ro" style="color: #ffdd00; font-size: 0.85em;">Write your signature on the line <span data-id="fix2" style="border-bottom: 2px solid transparent;">print your name below it.</span></p>
+    </div>
+    <aside class="notes">"What's wrong? Nothing at all between 'line' and 'print'."</aside>
+</section>
+
+<!-- SLIDE 12: Teach — Run-on (reveal) -->
+<!-- PEDAGOGICAL INTENT: Student sees the run-on corrected with period + capital letter. The animated white underline draws attention to the added punctuation. -->
+<!-- WHY THIS FEATURE: Auto-animate reveals the added period and capital letter with white underline. The original error text remains visible for comparison. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — error and correction visible simultaneously; white underline signals exactly what changed. -->
+<section id="slide-teach-ro-reveal" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="ro-entry">
+    <div style="overflow: hidden;">
+        <h2 data-id="title" style="font-size: 1.2em;">Error 2: The Run-on</h2>
+        <p style="font-size: 0.85em;"><u><strong>Run-on</strong> — add a period</u></p>
+        <p data-id="ro" style="color: #fff; font-size: 0.85em;">Write your signature on the line. <span data-id="fix2" style="border-bottom: 2px solid white;">Print your name below it.</span></p>
+    </div>
+    <aside class="notes">"Now the run-on is fixed — period + capital letter."</aside>
+</section>
+
+<!-- SLIDE 13: Teach — Two Fixes Reference -->
 <!-- PEDAGOGICAL INTENT: Student sees two methods for fixing errors side by side on the same wrong sentence. The visual comparison shows both are valid. -->
 <!-- WHY THIS FEATURE: Static — both methods visible simultaneously for comparison; fragments would hide one method. -->
 <!-- COGNITIVE PRINCIPLE: Segmenting — two methods presented as discrete options on a single reference slide. -->
 <section id="slide-teach-fixes" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
     <h2>Two Ways to Fix</h2>
     <p style="font-size: 0.85em;"><u><strong>Method 1:</strong> Add a period. Capitalize the next word.</u></p>
-    <p style="font-size: 0.9em; color: #4fc3f7; font-style: italic; margin-left: 0.5em;">Wrong: "It's raining we can't go out."</p>
-    <p style="font-size: 0.9em; color: #4fc3f7; margin-left: 0.5em;">Right: "It's raining. We can't go out."</p>
+    <p style="font-size: 0.9em; color: #ffdd00; font-style: italic; margin-left: 0.5em;">Wrong: "It's raining we can't go out."</p>
+    <p style="font-size: 0.9em; color: #ffdd00; margin-left: 0.5em;">Right: "It's raining. We can't go out."</p>
     <p style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Method 2:</strong> Add a comma. Add a coordinator (and, but, or, so).</u></p>
-    <p style="font-size: 0.9em; color: #4fc3f7; font-style: italic; margin-left: 0.5em;">Wrong: "It's raining we can't go out."</p>
-    <p style="font-size: 0.9em; color: #4fc3f7; margin-left: 0.5em;">Right: "It's raining, so we can't go out."</p>
+    <p style="font-size: 0.9em; color: #ffdd00; font-style: italic; margin-left: 0.5em;">Wrong: "It's raining we can't go out."</p>
+    <p style="font-size: 0.9em; color: #ffdd00; margin-left: 0.5em;">Right: "It's raining, so we can't go out."</p>
     <aside class="notes">Show both methods on the same wrong sentence. Students can use either method — both are correct.</aside>
 </section>
 
-<!-- SLIDE 10: Transition to practice -->
+<!-- SLIDE 14: Transition to practice -->
 <!-- PEDAGOGICAL INTENT: Student sees a phase-change heading on red background. The color signals a new section of the lesson. -->
 <!-- WHY THIS FEATURE: Static — red background + heading signals shift; fragments or animation would distract from the transition cue. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — visual cue (red) marks a boundary between lesson phases, helping learners segment content. -->
@@ -421,7 +543,7 @@
     <h2>Fix the Errors</h2>
 </section>
 
-<!-- SLIDE 11: Pedagogical — Practice 11 Strategy -->
+<!-- SLIDE 15: Pedagogical — Practice 11 Strategy -->
 <!-- PEDAGOGICAL INTENT: Student sees a 3-step strategy for identifying and fixing run-ons and comma splices. Each step is visible immediately. -->
 <!-- WHY THIS FEATURE: Static — strategy steps are reference material; all need to be visible for the teacher to walk through. -->
 <!-- COGNITIVE PRINCIPLE: Segmenting — strategy broken into discrete steps; worked example demonstrates each step. -->
@@ -436,18 +558,18 @@
     <aside class="notes">Demo item 1 together. Then Ss work individually on items 2-10.</aside>
 </section>
 
-<!-- SLIDE 12: Task — Practice 11 -->
+<!-- SLIDE 16: Task — Practice 11 -->
 <!-- PEDAGOGICAL INTENT: Student sees the exercise number + brief instruction + timer. The timer shows how much time remains. -->
 <!-- WHY THIS FEATURE: Static — task instruction with timer for independent work pacing. -->
 <!-- COGNITIVE PRINCIPLE: None — procedural slide for timed independent practice. -->
 <section id="slide-p11-task" data-background-color="#1a1a2e" data-timer="420">
     <h2>Practice 11 — items 1 to 10</h2>
     <p><em>Find the errors. Fix them using Method 1 or 2.</em></p>
-    <p style="font-size: 0.85em; color: rgba(255,255,255,0.85);">Pat's Pet Shop — the cartoon gives you clues!</p>
+    <p style="font-size: 0.85em; color: #fff;">Pat's Pet Shop — the cartoon gives you clues!</p>
     <aside class="notes">Individual work 7 min, pair check 3 min. Walk around, look for patterns.</aside>
 </section>
 
-<!-- SLIDE 13: Answers — Practice 11 (1-3) -->
+<!-- SLIDE 17: Answers — Practice 11 (1-3) -->
 <!-- PEDAGOGICAL INTENT: Student sees each sentence's error type + correction revealed per row. -->
 <!-- WHY THIS FEATURE: Fragment fade-up reveals each row on click. -->
 <!-- COGNITIVE PRINCIPLE: Segmenting — 3 items per slide. -->
@@ -479,7 +601,7 @@
         </div>
         <div class="a-row">
             <span class="a-num">3.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="3" style="color: #4fc3f7;">OK</span>
+            <span class="fragment fade-up a-q" data-fragment-index="3" style="color: #ffdd00;">OK</span>
             <span class="fragment fade-up a-ans" data-fragment-index="3">"Dogs are good companions, <strong style="color:#ffdd00;">and</strong> they can protect you."</span>
             <span class="fragment fade-up a-why" data-fragment-index="3">Comma + and = correct compound sentence. No fix needed.</span>
         </div>
@@ -487,7 +609,7 @@
     <aside class="notes">Items 1-2: comma splice. Item 3: correct compound sentence with comma + and.</aside>
 </section>
 
-<!-- SLIDE 14: Answers — Practice 11 (4-6) -->
+<!-- SLIDE 18: Answers — Practice 11 (4-6) -->
 <!-- PEDAGOGICAL INTENT: Student sees each sentence's error type + correction revealed per click. The fix is highlighted in yellow. -->
 <!-- WHY THIS FEATURE: Fragment fade-up reveals each row on click; teacher discusses each item before revealing the next. -->
 <!-- COGNITIVE PRINCIPLE: Segmenting — 3 items per slide, one revealed at a time, prevents cognitive overload. -->
@@ -513,7 +635,7 @@
         </div>
         <div class="a-row">
             <span class="a-num">5.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="2" style="color: #4fc3f7;">OK</span>
+            <span class="fragment fade-up a-q" data-fragment-index="2" style="color: #ffdd00;">OK</span>
             <span class="fragment fade-up a-ans" data-fragment-index="2">"Lions are good protectors, <strong style="color:#ffdd00;">but</strong> they eat too much."</span>
             <span class="fragment fade-up a-why" data-fragment-index="2">Comma + but = correct compound sentence. No fix needed.</span>
         </div>
@@ -527,7 +649,7 @@
     <aside class="notes">Item 4: 'however' is a conjunctive adverb, not a coordinator — doesn't fix the run-on.</aside>
 </section>
 
-<!-- SLIDE 15: Answers — Practice 11 (7-8) -->
+<!-- SLIDE 19: Answers — Practice 11 (7-8) -->
 <!-- PEDAGOGICAL INTENT: Student sees each sentence's error type + correction revealed per click. The fix is highlighted in yellow. -->
 <!-- WHY THIS FEATURE: Fragment fade-up reveals each row on click; teacher discusses each item before revealing the next. -->
 <!-- COGNITIVE PRINCIPLE: Segmenting — 3 items per slide, one revealed at a time, prevents cognitive overload. -->
@@ -553,7 +675,7 @@
         </div>
         <div class="a-row">
             <span class="a-num">8.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="2" style="color: #4fc3f7;">OK</span>
+            <span class="fragment fade-up a-q" data-fragment-index="2" style="color: #ffdd00;">OK</span>
             <span class="fragment fade-up a-ans" data-fragment-index="2">"Goats eat grass, <strong style="color:#ffdd00;">so</strong> you never have to cut your lawn."</span>
             <span class="fragment fade-up a-why" data-fragment-index="2">Comma + so = correct compound sentence. No fix needed.</span>
         </div>
@@ -561,7 +683,7 @@
     <aside class="notes">Item 7: comma splice. Item 8: correct compound sentence.</aside>
 </section>
 
-<!-- SLIDE 16: Answers — Practice 11 (9-10) -->
+<!-- SLIDE 20: Answers — Practice 11 (9-10) -->
 <!-- PEDAGOGICAL INTENT: Student sees each sentence's error type + correction revealed per click. The fix is highlighted in yellow. -->
 <!-- WHY THIS FEATURE: Fragment fade-up reveals each row on click; teacher discusses each item before revealing the next. -->
 <!-- COGNITIVE PRINCIPLE: Segmenting — 3 items per slide, one revealed at a time, prevents cognitive overload. -->
@@ -595,7 +717,7 @@
     <aside class="notes">Item 10: 'then' is not a coordinator. Use Method 1 (period) or Method 2 (comma + and).</aside>
 </section>
 
-<!-- SLIDE 15: Transition to application -->
+<!-- SLIDE 21: Transition to application -->
 <!-- PEDAGOGICAL INTENT: Student sees a phase-change heading on red background. The color signals a new section of the lesson. -->
 <!-- WHY THIS FEATURE: Static — red background + heading signals shift; fragments or animation would distract from the transition cue. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — visual cue (red) marks a boundary between lesson phases, helping learners segment content. -->
@@ -603,18 +725,23 @@
     <h2>Use What You Know</h2>
 </section>
 
-<!-- SLIDE 16: Task — Application writing -->
-<!-- PEDAGOGICAL INTENT: Student sees the writing prompt + timer. They independently write compound sentences about a friend. -->
+<!-- SLIDE 22: Task — Free writing -->
+<!-- PEDAGOGICAL INTENT: Student writes a natural paragraph, applying compound sentence skills without artificial constraints. The word count (~75 words) ensures enough text to produce multiple sentences with coordination opportunities. -->
 <!-- WHY THIS FEATURE: Static — task instruction with timer for independent writing; no answer slide needed (freer practice). -->
-<!-- COGNITIVE PRINCIPLE: Active Learning — learners apply the skill by producing original sentences. -->
-<section id="slide-apply-task" data-background-color="#1a1a2e" data-timer="300">
-    <h2>Write 3 Perfect Sentences</h2>
-    <p><em>Write 3 compound sentences about your friend. Each with a different coordinator. No run-ons!</em></p>
-    <p style="font-size: 0.85em; margin-top: 0.5em; color: rgba(255,255,255,0.85);">Then swap with a partner. Check: comma + coordinator present? Two subjects?</p>
-    <aside class="notes">Individual writing 5 min. Pair check 3 min. Teacher circulates.</aside>
+<!-- COGNITIVE PRINCIPLE: Active Learning — transfer-appropriate processing: writing a real paragraph mirrors the CA task more closely than isolated sentences. -->
+<section id="slide-apply-task" data-background-color="#1a1a2e" data-timer="480">
+    <h2 style="font-size: 1.2em;">Write a Paragraph &mdash; <span style="color: #ffdd00;">~75 words</span></h2>
+    <p style="font-size: 0.95em; margin-top: 0.3em;"><em>Describe a friend or family member. What are they like? What do you do together? Why do you like them?</em></p>
+    <div style="margin-top: 0.6em; padding: 0.6em; border: 1px solid #fff; border-radius: 4px; text-align: left; font-size: 0.85em;">
+        <p style="margin: 0.2em 0; color: #ffdd00;">&#10003; Use compound sentences where natural</p>
+        <p style="margin: 0.2em 0; color: #ffdd00;">&#10003; Check for run-ons (nothing between two sentences)</p>
+        <p style="margin: 0.2em 0; color: #ffdd00;">&#10003; Check for comma splices (comma without a coordinator)</p>
+    </div>
+    <p style="font-size: 0.85em; margin-top: 0.5em; color: #fff;">When done &mdash; swap with a partner. Check each other&rsquo;s paragraph for errors.</p>
+    <aside class="notes">Individual writing 5-6 min. Then pair swap 2-3 min. Teacher circulates. Remind Ss: method 1 (period) or method 2 (comma + coordinator) to fix errors.</aside>
 </section>
 
-<!-- SLIDE 17: Transition to summary -->
+<!-- SLIDE 23: Transition to summary -->
 <!-- PEDAGOGICAL INTENT: Student sees a phase-change heading on red background. The color signals a new section of the lesson. -->
 <!-- WHY THIS FEATURE: Static — red background + heading signals shift; fragments or animation would distract from the transition cue. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — visual cue (red) marks a boundary between lesson phases, helping learners segment content. -->
@@ -622,14 +749,14 @@
     <h2>Let's Review</h2>
 </section>
 
-<!-- SLIDE 18: Summary -->
+<!-- SLIDE 24: Summary -->
 <!-- PEDAGOGICAL INTENT: Student sees the "I can..." checklist with checkmarks, consolidating what was learned. -->
 <!-- WHY THIS FEATURE: Static — summary/reference slide; all items visible for final review. -->
 <!-- COGNITIVE PRINCIPLE: Consolidation — reviewing learning objectives strengthens retention and metacognitive awareness. -->
 <section id="slide-summary" data-background-color="#1a1a2e">
     <h2>I can...</h2>
-    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> find a run-on and a comma splice</p>
-    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> fix them with a period or with a comma + coordinator</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">&#10003;</span> find a run-on and a comma splice</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">&#10003;</span> fix them with a period or with a comma + coordinator</p>
     <p style="margin-top: 1em; font-size: 0.85em;">Next: write your CA paragraph about a friend!</p>
     <aside class="notes">Elicit the two errors and two fixes. Connect directly to the CA writing task.</aside>
 </section>
@@ -637,11 +764,11 @@
 <!-- PEDAGOGICAL INTENT: Student sees the lesson topic + CEFR badge as a closing screen. Signals the lesson is complete. -->
 <!-- WHY THIS FEATURE: Static — orienting exit slide; no interaction needed. -->
 <!-- COGNITIVE PRINCIPLE: Closure — the topic repetition bookends the lesson, reinforcing what was learned. -->
-<!-- SLIDE 19: End -->
+<!-- SLIDE 25: End -->
 <section id="slide-end" data-background-color="#2c3e50" data-background-transition="none">
     <h2>Fixing Run-ons &amp; Comma Splices</h2>
     <div><span class="cefr-badge B1">B1</span></div>
-    <p style="font-size: 0.85em; color: rgba(255,255,255,0.85); margin-top: 0.5em;">Two ways to fix broken sentences</p>
+    <p style="font-size: 0.85em; color: #fff; margin-top: 0.5em;">Two ways to fix broken sentences</p>
 </section>
 
 </div>

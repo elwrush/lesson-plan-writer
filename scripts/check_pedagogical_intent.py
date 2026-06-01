@@ -2,8 +2,8 @@
 check_pedagogical_intent.py — Verify every slide has pedagogical intent annotations.
 
 Scans the output HTML file and checks that every non-exempt <section> is
-preceded by the three mandatory annotation comments (PEDAGOGICAL INTENT,
-WHY THIS FEATURE, COGNITIVE PRINCIPLE).
+preceded by the FOUR mandatory annotation comments (PEDAGOGICAL INTENT,
+WHY THIS FEATURE, COGNITIVE PRINCIPLE, DESIGN MECHANISM).
 
 Usage:
     python scripts/check_pedagogical_intent.py output/<subfolder>/slides/index.html
@@ -65,12 +65,13 @@ def check_file(path: str) -> int:
         preceding_start = max(0, match.start() - 1000)
         preceding = content[preceding_start : match.start()]
 
-        # Check that the last comment block before this section contains both annotations
+        # Check that the last comment block before this section contains all four annotations
         has_intent = "PEDAGOGICAL INTENT:" in preceding
         has_feature = "WHY THIS FEATURE:" in preceding
         has_principle = "COGNITIVE PRINCIPLE:" in preceding
+        has_mechanism = "DESIGN MECHANISM:" in preceding
 
-        if not has_intent or not has_feature or not has_principle:
+        if not has_intent or not has_feature or not has_principle or not has_mechanism:
             line_num = content[: match.start()].count("\n") + 1
             missing = []
             if not has_intent:
@@ -79,6 +80,8 @@ def check_file(path: str) -> int:
                 missing.append("WHY THIS FEATURE")
             if not has_principle:
                 missing.append("COGNITIVE PRINCIPLE")
+            if not has_mechanism:
+                missing.append("DESIGN MECHANISM")
             violations.append((line_num, section_id, missing))
 
     if violations:
@@ -89,7 +92,7 @@ def check_file(path: str) -> int:
                 file=sys.stderr,
             )
         print(
-            "Every non-exempt slide must have all three:",
+            "Every non-exempt slide must have all four:",
             file=sys.stderr,
         )
         print(
@@ -98,6 +101,14 @@ def check_file(path: str) -> int:
         )
         print(
             "  <!-- WHY THIS FEATURE: [reveal.js feature + why alternatives fail] -->",
+            file=sys.stderr,
+        )
+        print(
+            "  <!-- COGNITIVE PRINCIPLE: [Mayer's 12 principle or explanation] -->",
+            file=sys.stderr,
+        )
+        print(
+            "  <!-- DESIGN MECHANISM: [concrete design choice that achieves the principle] -->",
             file=sys.stderr,
         )
         return 1

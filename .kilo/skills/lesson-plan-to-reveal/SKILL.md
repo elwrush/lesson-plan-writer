@@ -279,40 +279,86 @@ If `.a-num` is `text-align: right`, the number floats right and breaks the visua
 
 **CRITICAL — Add the inline style block from Step 2b before any answer slide.** Without it, the flex layout breaks on green backgrounds because the template's CSS is corrupted by a missing `}` in `.cefr-badge`.
 
+### Step 4A-bis: Design Blueprint (MANDATORY — Design Gate)
+
+**⚠ THIS IS A DESIGN GATE. NO HTML IS WRITTEN UNTIL THE BLUEPRINT IS COMPLETE. ⚠**
+
+Before writing any `<section>` tags, create a design blueprint that enumerates every planned slide and specifies exactly how each one achieves its pedagogical goal. The blueprint is a planning document that validates design choices against the existing templates and cognitive principles.
+
+**Blueprint format** (write to `.kilo/plans/` as a plan file):
+
+```
+## Design Blueprint — [Lesson Topic]
+
+### Stage-to-Slide Mapping
+| Stage # | Stage Name | Slide Type(s) | Template Pattern | Slide IDs |
+|---------|-----------|---------------|------------------|-----------|
+| 1       | Lead-in   | Auto-animate error pair (×2) | Type 4: reference-slideshow.html | slide-leadin1-entry, slide-leadin1-reveal, ... |
+
+### Per-Slide Design
+| Slide ID | Intent | Feature | Principle | Mechanism | Template Ref |
+|----------|--------|---------|-----------|-----------|--------------|
+
+### Auto-Animate Pairs
+| data-auto-animate-id | Slide count | Slide IDs | Same bg? | Prev slide no AA? |
+|---------------------|-------------|-----------|----------|-------------------|
+
+### Answer Slide Sizing
+| Exercise | Total items | Slides needed | Slide IDs | All ≤3 items? |
+|----------|------------|---------------|-----------|---------------|
+
+### Fragment Verification
+| Slide ID | Fragment usage | On allowed slide type? | Notes |
+|----------|---------------|----------------------|-------|
+
+### Color & Font Audit
+| Slide ID | Background | Correct for type? | Font-size check | Notes |
+|----------|------------|------------------|-----------------|-------|
+```
+
+**Reference rule:** When filling in "Template Pattern," reference the exact type number from `templates/reference-slideshow.html` (e.g., "Type 4: Lead-in Error Auto-animate Pair") or `templates/base-slides-template.html`. Do not describe the pattern in prose — point to the existing verified example.
+
+**Mechanism litmus test:** For every row in the Per-Slide Design table, the Mechanism column must answer the rubric question for the named principle. If the mechanism is generic ("the teacher clicks to advance"), stop and rethink until you can name a design choice unique to this slide.
+
+**After the blueprint is complete**, advance to Step 4B and write the HTML, using the blueprint as your guide. The blueprint IS the design — the HTML is its implementation.
+
 ### Step 4B: Build slides (new build)
 
 **⚠ THIS IS A DESIGN GATE. WRITE THE ANNOTATIONS FIRST, THEN THE HTML. DO NOT REVERSE THIS ORDER. ⚠**
 
-Before writing a single `<section>` tag, you must write three comment lines for every slide:
+Before writing a single `<section>` tag, you must write **FOUR** comment lines for every slide:
 
 ```html
 <!-- PEDAGOGICAL INTENT: [what the student must SEE happen on screen] -->
 <!-- WHY THIS FEATURE: [reveal.js feature + why alternatives fail] -->
-<!-- COGNITIVE PRINCIPLE: Mayer's 12 principle. If none fits, state "none — assessment task" -->
+<!-- COGNITIVE PRINCIPLE: [Mayer's 12 principle. If none fits, state "none — assessment task"] -->
+<!-- DESIGN MECHANISM: [specific design choice that makes the principle manifest — must pass the litmus test: "if I remove this mechanism, would the slide need to change?"] -->
 ```
 
-**These three lines are a design gate.** If you cannot fill in all three convincingly, you do not understand what the student needs to learn from this slide. Redesign the slide until you can. Do NOT write the `<section>` HTML until the annotations are complete.
+**These four lines are a design gate.** If you cannot fill in all four convincingly, you do not understand what the student needs to learn from this slide. Redesign the slide until you can. Do NOT write the `<section>` HTML until the annotations are complete.
+
+The DESIGN MECHANISM is the most important line — it bridges the abstract principle to the concrete implementation. See the **Mechanism Rubric** in `docs/pedagogical-design-dictionary.md` for principle-specific questions.
 
 How it works:
-1. Identify the next stage from the lesson plan JSON
-2. Decide what visual transformation the student must witness on each slide
-3. Write the three comment lines for each slide in that stage
-4. Only then write the `<section>` HTML
-5. Advance to the next stage and repeat
+1. Iterate through the Design Blueprint from Step 4A-bis
+2. For each planned slide, write the four annotation lines
+3. Then write the `<section>` HTML
+4. Advance to the next blueprint row and repeat
 
-If you catch yourself writing annotation lines that are identical across multiple slides in a row (same intent, same feature, same principle, same justification), you are NOT designing each slide intentionally. Stop and reconsider each slide's unique purpose.
+If you catch yourself writing annotation lines that are identical across multiple slides in a row (same intent, same feature, same principle, same mechanism, same justification), you are NOT designing each slide intentionally. Stop and reconsider each slide's unique purpose.
 
-**Three-line format (exactly these, no additions):**
+**Four-line format (exactly these, no additions):**
 
 | Line | Purpose | Example |
 |------|---------|---------|
 | `PEDAGOGICAL INTENT` | What the student MUST SEE HAPPEN on screen | `Student sees the error sentence transform into a correct one. The added comma+coordinator animates in with a blue border.` |
 | `WHY THIS FEATURE` | Which reveal.js feature + why alternatives fail | `Auto-animate morphs WRONG to RIGHT across two slides; fragments would hide the original, losing the comparison.` |
 | `COGNITIVE PRINCIPLE` | Name from Mayer's 12 (Signaling, Segmenting, Spatial Contiguity, Coherence, Temporal Contiguity, Modality) or explain why none applies | `Temporal Contiguity — both versions visible simultaneously; the animated border signals exactly what changed.` |
+| `DESIGN MECHANISM` | Concrete design choice that operationalizes the principle on THIS specific slide | `The period between sentences is wrapped in a transparent-border span that reserves layout space. On reveal, it morphs to comma+coordinator with a blue double-underline. Without the reserved space, the morph would cause line jump, breaking contiguity.` |
 
 For the feature choice in `WHY THIS FEATURE`, pick from: `auto-animate`, `fragments`, `sibling slides`, `data-line-numbers`, `data-mark`, `data-transition`, `data-background-gradient`, `vertical slides`, `audio`, `autoslide`, `code blocks`, `lightbox`, `r-fit-text`, `r-stack`, `r-stretch`, `custom-fragment`, `nested-fragment`, or `static — [reason]`.
 
-**These annotations are enforced by `tests/test_slide_structure.py::TestPedagogicalIntent`** — every non-exempt slide must have all three lines, or the test suite fails. Exempt slides (transitions, end, title, objective) are hard-coded in the test and should not be expanded.
+**These annotations are enforced by `check_pedagogical_intent.py`** — every non-exempt slide must have all four lines, or the script exits with code 1. Exempt slides (transitions, end, title, objective) are hard-coded in the script and should not be expanded.
 
 ### Option A: Component builder (preferred for answer slides, transitions, tasks, auto-animate pairs)
 
@@ -458,7 +504,7 @@ if idx >= 0:
 - Verify listening task slides that need audio have `data-audio-src="assets/filename.mp3"`
 - **Verify no `<section>` has both `data-timer` AND `data-audio-src`** — never place a timer pill on a slide that plays audio or video
 - **Verify no raw Unicode check/cross characters**: Scan for U+2713 (✓) and U+2717 (✗) in the output HTML. If found, replace with `<i class="fa-solid fa-check">` and `<i class="fa-solid fa-times">` respectively. Font Awesome renders reliably; Unicode glyphs do not.
-- **PEDAGOGICAL INTENT CHECK**: Run `python -m pytest tests/ -k "pedagogical" -v` — verifies every non-exempt slide has mandatory `PEDAGOGICAL INTENT`, `WHY THIS FEATURE`, and `COGNITIVE PRINCIPLE` annotations. If missing, the slide was built without intentional design and must be fixed. Do NOT ship slides that fail this check.
+- **PEDAGOGICAL INTENT CHECK**: Run `python scripts/check_pedagogical_intent.py --project <slides-dir>` — verifies every non-exempt slide has mandatory `PEDAGOGICAL INTENT`, `WHY THIS FEATURE`, `COGNITIVE PRINCIPLE`, and `DESIGN MECHANISM` annotations. If missing, the slide was built without intentional design and must be fixed. Do NOT ship slides that fail this check.
 - **Regression check on slide moves**: When moving a slide from one position to another, insert the slide at the new location FIRST, then remove it from the old location. Removing first and forgetting to re-insert causes silent slide loss. After any move, verify total section count matches expected count.
 
 ### Step 6: Publish and write URL to lesson plan JSON
@@ -485,117 +531,44 @@ Write-Host "Slideshow URL written to $jsonPath : $url"
 ## Fragment Policy
 
 | Use fragments for | DO NOT use fragments for |
-|---|---|---|
-| Revealing answers (`a-cor`) | Task instructions |
-| Highlighting wrong answers (`a-inc`) | Vocabulary lists |
-| Strategy step reveals (on pedagogical slides) | Objectives/outcomes |
-| Eliminating wrong MC options (`strike`) | Discussion questions |
-| Key vocabulary emphasis (`grow`) | Lead-in images and prompts |
-| Temporary hints (`fade-in-then-out`, `current-visible`) | Material references |
-| Progressive word focus (custom CSS: blur, rotate, scale) | Any expository content |
-| Directional emphasis (`fade-up`, `fade-down`, `fade-left`, `fade-right`) | — |
+|---|---|
+| Revealing answers (`a-cor`/`a-inc` with `fragment fade-up`) | Task instructions, vocabulary lists |
+| Eliminating wrong MC options (`fragment strike`) | Objectives/outcomes, discussion questions |
+| Strategy step reveals (on pedagogical slides) | Lead-in images and prompts, transitions |
+| Directional emphasis (`fade-up`, `fade-down`, etc.) | Any expository or static content |
 
-Fragment classes — available but constrained:
+**Class quick reference:** `fragment fade-up a-ans a-cor` for correct reveals, `fragment strike` for elimination, `fragment grow` for single-word emphasis. NEVER use `highlight-green`/`highlight-red` (they force `opacity: 1` — never hide).
 
-| Class | Behavior | When to use |
-|---|---|---|
-| `fragment` (bare) | Hidden until click, fades in | Generic answer reveal |
-| `fragment fade-up a-ans a-cor` | Hidden until click, slides up + green background on reveal | Correct answer rows (preferred over answer-correct) |
-| `fragment fade-up a-ans a-inc` | Hidden until click, slides up + red background on reveal | Incorrect answer rows (preferred over answer-incorrect) |
-| `fragment strike` | Always visible, strikethrough on click | Eliminating wrong MC options |
-| `fragment grow` | Scales up on click | Emphasizing a single vocabulary word |
-| `fragment shrink` | Scales down on click | De-emphasizing a distractor |
-| `fragment fade-up / fade-down / fade-left / fade-right` | Slides in from direction while fading | Directional emphasis — draws eye to specific location |
-| `fragment fade-in-then-out` | Fades in, then fades out on NEXT click | Temporary scaffolding — hint appears, then disappears |
-| `fragment current-visible` | Same as fade-in-then-out | Scaffolding that should vanish |
-| `fragment fade-in-then-semi-out` | Fades in, then to 50% opacity | Keeping reference visible without distraction |
-| `fragment semi-fade-out` | Fades to 50% opacity | Partially hiding a completed item |
-| `fragment highlight-current-red/green/blue` | Temporarily changes color, reverts on NEXT click | Word emphasis without permanent change — SAFE to use |
-| `fragment highlight-red/green/blue` | Permanently changes color, forces `opacity: 1` | **AVOID** — cannot hide, content always visible |
-
-**Custom CSS fragments**: Define your own effects. Elements with `class="fragment custom blur"` get no default reveal.js styles — you control everything:
-
-```css
-.fragment.blur { filter: blur(5px); }
-.fragment.blur.visible { filter: none; }
-```
-
-Replace `visible` with `current-fragment` to blur all EXCEPT the current step:
-
-```css
-.fragment.blur.current-fragment { filter: none; }
-```
-
-**Nested fragments**: Multiple sequential effects on the same element:
-```html
-<span class="fragment fade-in">
-  <span class="fragment highlight-red">
-    <span class="fragment fade-out">Fade in → Turn red → Fade out</span>
-  </span>
-</span>
-```
-
+For custom CSS fragments, nested fragments, `highlight-current-*`, `fade-in-then-out`, and `current-visible`, see `docs/pedagogical-design-dictionary.md`. Copy verified fragment patterns from `templates/reference-slideshow.html` — do not invent new class combinations.
 
 ## Pedagogical Design Principles
 
-Before building any slide, you MUST answer these three questions for every student-facing element:
+Before building any slide, you MUST answer these **FOUR** questions for every student-facing element:
 
 1. **What must the student *see* happen?** The student needs to witness a visual transformation — a word changing color, an answer appearing, a wrong option being eliminated. Slides are not documents; they are moments of revealed understanding.
 2. **Which reveal.js feature achieves that?** Consult the **Decision Framework** and **Feature Lookup Table** in `docs/pedagogical-design-dictionary.md`. The table maps every reveal.js feature to a specific pedagogical use case. Do not guess from training data.
 3. **Which cognitive principle does this serve?** Every design choice must be justified against established multimedia learning theory (Mayer, Sweller). See `docs/pedagogical-design-dictionary.md` for the complete Mayer's 12 Principles reference table and Decision Framework. If you cannot name the principle, the design may be cosmetic rather than pedagogical.
-What must the student see happen?
-│
-├─ A word/part changes appearance (color, border, strikethrough)?
-│   → AUTO-ANIMATE (two consecutive <section> with matching data-id)
-│   Example: Subject word turns yellow → student sees WHERE the subject is
-│
-├─ Content reveals on click (answer appears, step builds)?
-│   → FRAGMENTS on a single <section>
-│   Example: Answer column appears row by row
-│
-├─ Each step is a discrete teaching moment (teacher pauses)?
-│   → SIBLING SLIDES (one <section> per step, no auto-animate)
-│   Example: Strategy demonstration — one slide per step
-│
-├─ Text needs progressive highlighting within a block?
-│   → CODE + DATA-LINE-NUMBERS on <pre><code>
-│   Example: Reading passage — highlight key sentence, then details
-│
-├─ A wrong option gets visually eliminated?
-│   → FRAGMENT STRIKE (class="fragment strike")
-│   Example: Multiple choice — strike out eliminated answers
-│
-├─ Items on one side need to reposition to show correct matching?
-│   → AUTO-ANIMATE (matching data-id on sibling elements within a shared container)
-│   Example: Letters A–F on the left, paragraph numbers on the right. The right-side
-│   elements have data-id="p1"…"p8". On the reveal slide they reorder to match the
-│   correct letter → paragraph pairing. Auto-animate animates each item sliding to
-│   its new position. The transformation IS the answer — no fragments needed.
-│   Design rule: do NOT add instructional text ("Click to check", "Click to reveal").
-│   The visual rearrangement is self-evident. Unmatched items dim and sink to the bottom.
-│
-└─ A word needs temporary emphasis (grow, color)?
-    → FRAGMENT GROW or FRAGMENT HIGHLIGHT-CURRENT-*
-    Example: Key vocabulary word on click
-```
+4. **What specific design mechanism makes this principle manifest on this particular slide?** Name the exact visual/interactive/structural choice that would be absent if the principle were ignored. See the **Mechanism Rubric** in `docs/pedagogical-design-dictionary.md` for principle-specific questions.
 
+For the feature choice question (#2), consult the **Decision Framework** and **Feature Lookup Table** in `docs/pedagogical-design-dictionary.md` — they map every reveal.js feature to a specific pedagogical use case. Do not guess from training data.
 ### Pedagogical Intent Annotation
 
-Every slide block must be preceded by a comment block explaining the pedagogical goal. This is **mandatory** — it forces intentionality before writing code:
+Every slide block must be preceded by a FOUR-line comment block explaining the pedagogical goal. This is **mandatory** — it forces intentionality before writing code:
 
 ```html
 <!-- PEDAGOGICAL INTENT: Student sees the subject word transform from white to yellow. -->
 <!-- WHY THIS FEATURE: Auto-animate transforms appearance; fragments only reveal/hide. -->
-<!-- COGNITIVE PRINCIPLE: Signaling + Temporal Contiguity —
-     highlighting essential material while the label appears simultaneously improves transfer. -->
+<!-- COGNITIVE PRINCIPLE: Signaling + Temporal Contiguity — highlighting essential material while the label appears simultaneously improves transfer. -->
+<!-- DESIGN MECHANISM: The subject word has a transparent underline on entry (reserving layout space). On reveal, the underline becomes #ffdd00 yellow with a box-shadow double-underline — the eye tracks the color transition, which IS the subject identification. Without the transparent pre-reserved space, the underline would appear abruptly, causing layout shift. -->
 ```
 
 The annotation must state:
 - **What visual transformation the student witnesses** (not what the slide *says*, but what *happens* on screen)
 - **Why this feature was chosen** (and implicitly, why alternatives would fail)
-- **Which cognitive principle it serves** (from the Mayer’s 12 reference table above)
+- **Which cognitive principle it serves** (from the Mayer's 12 reference table above)
+- **What specific design mechanism operationalizes this principle on THIS slide** (named a choice that would be absent if the principle were ignored)
 
-If you cannot write all three, you do not understand what the student needs to learn from this slide. Stop and reconsider the slide design.
+If you cannot write all four, you do not understand what the student needs to learn from this slide. Stop and reconsider the slide design.
 
 ### Common Anti-Patterns (DO NOT DO)
 
@@ -608,12 +581,13 @@ See `docs/pedagogical-design-dictionary.md` for the full anti-patterns table. Ke
 
 Full HTML patterns with pedagogical intent annotations live in `templates/base-slides-template.html` as HTML comments. **Copy the pattern, paste it into `<div class="slides">`, and adapt the content.** Do not invent new patterns — use only variants documented there.
 
-Every slide must be preceded by this mandatory comment block:
+Every slide must be preceded by this mandatory FOUR-line comment block:
 
 ```html
 <!-- PEDAGOGICAL INTENT: [what the student must SEE happen on screen] -->
 <!-- WHY THIS FEATURE: [reveal.js feature + why alternatives fail] -->
 <!-- COGNITIVE PRINCIPLE: [name the principle from Mayer's 12, or state why it doesn't apply] -->
+<!-- DESIGN MECHANISM: [specific design choice that makes the principle manifest — see Mechanism Rubric in pedagogical-design-dictionary.md] -->
 ```
 
 Quick reference of slide types and their pedagogical intent:
@@ -677,132 +651,25 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
 
 ## Key Design Rules
 
-**CRITICAL RULE 0 — NO GRAY TEXT.** Any text on any slide that the student must read MUST use solid white `#fff` or solid yellow `#ffdd00`. Gray `#888`, `#666`, `rgba(255,255,255,0.5)` (50% white), `rgba(255,255,255,0.7)` (70% white), and any other muted/low-opacity colors are **strictly banned on all backgrounds** — dark navy `#1a1a2e`, teal `#0d4a3d`, green `#0d5e1a`, red `#c0392b`, and dark blue-gray `#2c3e50` alike. At classroom projection distance, these render as invisible gray smudges.
+Rules 0–15 covering colors, layout, backgrounds, fragments, annotations, and file output. See `references/key-design-rules.md` for the complete reference. Critical rules to remember:
 
-**Enforcement rules:**
-- Every visible text element must have `color: #fff` or `color: #ffdd00` — either explicit or inherited from a parent
-- `rgba(255,255,255, 0.85)` is the MAXIMUM dimming for any text element, and only for decorative/secondary metadata (source citations, material references) — NEVER for task instructions, answer text, strategy steps, labels, or student-facing content
-- The base template's `.aim-label { color: #888; }` and `.source-cite { color: #666; }` are **traps** — override them in the inline `<style>` block (Step 2b) to `#fff`
-- This rule applies universally — green slides are NOT the only affected case. Every background color in this project is dark enough that gray text is unreadable.
+- **Rule 0 — No gray text.** Only `#fff` and `#ffdd00` on all backgrounds. No green, blue, red, or gray text.
+- **Rule 7 — Answer slides**: `<div class="answer-list">` flex layout, `a-cor`/`a-inc` with `fragment fade-up`, max 3 items. Never use `highlight-green`/`highlight-red`.
+- **Rule 9 — Backgrounds**: dark `#1a1a2e` (title/lead-in), red `#c0392b` (transitions), teal `#0d4a3d` (pedagogical), green `#0d5e1a` (answers), `#2c3e50` (end).
+- **Rule 10 — Title slides**: `justify-content: center;`, logo 120px, h2 2.2em, CEFR badge inline.
+- **Rule 15 — Symbols**: Font Awesome only (`<i class="fa-solid fa-check">` / `<i class="fa-solid fa-times">`). Never raw Unicode U+2713/U+2717.
 
-1. **Student-facing content on screen only** — task instructions, questions, vocabulary, answers. Teacher procedure text goes in `<aside class="notes">`. "Ss" is never used on screen.
-2. **Objective slide uses accessible language** — avoid complex words like "identify", "distinguish", "inference". Use simple phrases. Tie outcomes to PET reading test.
-3. **Title slide: topic + CEFR badge + strap subheader** — NO date, teacher name, duration, or materials.
-4. **Task slides: brief student instructions** — extract task description from procedure, skip teacher-only instructions. Max 3 task lines on screen.
-5. **Stage names: student-friendly language** — "Lead-in" → "Let's get Started", "Reading for gist" → "What's the main idea?", "Reading for detail" → "Finding details", "Reading for inference" → "Making conclusions", "Post-reading" → "Let's Discuss", "Wrap-up" → "Let's Review"
-6. **Vocabulary slides** — generated AFTER lead-in stage. One word per slide with dark navy background. No sub-heading — the preceding red transition slide already signals the vocabulary phase. Yellow bold (#ffdd00) via `<span class="vocab-word">`.
-7. **Answer slides** — use `<div class="answer-list">` flex layout (NOT `<table class="answer-table">`). Green background `#0d5e1a`. Statements visible on entry. Structure each row as:
-    ```html
-    <div class="a-row">
-        <span class="a-num">#</span>
-        <span class="a-q">Statement text</span>
-        <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> Answer</span>
-    </div>
-    ```
-    - `a-cor` for correct answers, `a-inc` for incorrect (not `answer-correct`/`answer-incorrect`)
-    - `fragment fade-up` for animated reveal (not bare `fragment`)
-    - Font Awesome `fa-check`/`fa-times` for icons (never raw Unicode U+2713/U+2717)
-    - **Do NOT use `highlight-green`/`highlight-red`** (reveal.js keeps them at `opacity: 1`; they never hide)
-    - **CRITICAL — No gray text.** Per Rule 0, ALL text on green slides must be white `#fff` or yellow `#ffdd00` — including `.a-num`, `.a-q`, `.aim-label`, and any other element. Gray, blue, or muted colors are invisible at projection distance on `#0d5e1a`.
-8. **Transition slides: heading only (no subheader text).** The red background + icon + heading is sufficient — the teacher's spoken introduction bridges the gap. Remove all `<p>` elements from transition slides.
-9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#0d4a3d` (pedagogical/strategy), green `#0d5e1a` (answer tables), dark `#2c3e50` (end)
-10. **Title slide visuals**: Full-screen `data-background-image` with `data-background-color="#1a1a2e"` fallback. Logo at `120px`, h2 at `2.2em`, CEFR badge inline inside h2 (`vertical-align: middle`), subheader at `1em`. **Must add `style="justify-content: center;"`** to vertically center content. Opacity `0.85`. Do NOT use `r-stack` — it creates a letterbox effect.
-11. **Text highlighting**: white text, dark text-shadow, pedagogical sections use white-on-teal
-12. **Vocabulary words**: yellow boldface (`#ffdd00`) via `<span class="vocab-word">` — in both the word heading AND context sentence(s).
-
-    **IPA-first fragment reveal pattern** — Each vocab slide MUST show the phonemic script first (visible on entry), then reveal the English spelling AND the context sentence simultaneously on click via fragments with matching `data-fragment-index="1"`.
-
-    **Sequence:**
-    1. **Entry** — Student sees IPA only (e.g., `/juː/`). No English word, no definition, no heading — the preceding red transition slide already announced vocabulary time.
-    2. **Click** — The English word (yellow, bold) and the implicative example sentence (white with yellow target word) appear simultaneously via `class="fragment" data-fragment-index="1"`.
-
-    **Visual layout:**
-    ```html
-    <section class="vocab-slide" data-background-color="#1a1a2e">
-        <p><em>/juː/</em></p>
-        <p class="fragment" data-fragment-index="1"><span class="vocab-word">yew</span></p>
-        <p class="fragment" data-fragment-index="1" style="font-size:0.9em; margin-top:0.3em;">
-            <em>The churchyard is full of <span class="vocab-word">yew</span> trees, some over 2,000 years old.</em>
-        </p>
-    </section>
-    ```
-
-    **Rules:**
-    - The `data-fragment-index` MUST be `"1"` on both the word `<p>` and the sentence `<p>` so they reveal on the same click
-    - The `<span class="vocab-word">` on the target word within the sentence applies yellow boldface (`#ffdd00`) automatically via CSS
-    - Only the target word is yellow — never the entire sentence
-    - **No "Important Words" heading on any vocab slide** — the transition slide (red background, "Some important words") already signals the phase. A heading on the first vocab slide would be redundant.
-
-    **Test for implicative sentence:** Can a B2 student infer the word's meaning without a dictionary, without knowing the story, and with ONLY this one sentence on screen? If the sentence would still make sense with a blank in place of the target word, the context is insufficient.
-
-    | Good (implicative — single sentence is enough) | Bad (just a book quote — doesn't imply meaning) |
-    |---|---|
-    | *The churchyard is full of yew trees, some over 2,000 years old.* | *Conor can see the great yew tree outside his window.* |
-    | *The desert heat made the road ahead shimmering like water.* | *The monster's branches gather into a face, shimmering into a mouth and eyes.* |
-    | *The wild horse had never been ridden — it was completely untamed.* | *The monster's voice has a quality to it — wild and untamed.* |
-
-    The implicative example must come from **general life experience** (weather, nature, school, home, work, animals, plants, common objects) — not from the story world. This ensures the student can access the meaning independently. A single well-chosen sentence does the job — a second "In the story..." sentence adds visual clutter and gray text students won't read.
-13. **Timer pill vs audio**: Never add `data-timer` to a slide that also has `data-audio-src`. Slides with audio playback should not have a timer pill — the two controls conflict visually and functionally.
-14. **Proper HTML lists for letters/numbers**: Never use manual lettering or numbering in `<p>` tags (e.g., `<p><strong>A</strong> Option text</p>`). Use semantically correct HTML lists instead: `<ol type="A">` for lettered options, `<ol>` for numbered items, `<ul>` for bullet points. Each item gets its own `<li>` element. This ensures proper alignment and accessibility.
-15. **Check/cross symbols: Font Awesome only, never Unicode**: Check marks (✓) and cross marks (✗) must use Font Awesome icons `<i class="fa-solid fa-check">` and `<i class="fa-solid fa-times">` — never raw Unicode characters U+2713 and U+2717. These Unicode characters do not render reliably across all browser/system font combinations. Font Awesome is loaded in the base template via CDN and renders consistently in every browser. Use `style="color:#4caf50;"` on check marks and `style="color:#ff5252;"` on cross marks for dark/teal/white backgrounds. On green `#0d5e1a` answer slides, use `style="color:#fff;"` for both (only white or yellow allowed on green backgrounds per rule 7).
+Read the full rule list from `references/key-design-rules.md` when you encounter an unfamiliar slide type or when a rule check fails.
 ## Authorial Voice & Audience
 
-This skill generates slides for **Thai secondary students (CEFR A2–B2)**. The default voice targets **B1** (Mathayom 2-3). All student-facing text on screen MUST follow these rules, with level-appropriate relaxations noted.
+B1 default (Mathayom 2-3). See `references/authorial-voice.md` for the complete vocabulary ceiling, sentence complexity limits, and B2 adaptation rules. Core rules:
 
-### Baseline (Applies to all CEFR levels)
+- **Person Rule**: Direct "you" imperatives on screen. Third-person ("Students read...") is banned.
+- **Vocabulary Ceiling**: No words above CEFR B1 without inline definition (e.g., "identify" → "find", "infer" → "understand what the writer means").
+- **Sentence Complexity**: Max 15 words, no semicolons, no passive voice on screen.
+- **Summary**: "I can..." statements only.
 
-#### 1. Person Rule
-All on-screen student-facing text MUST use **direct "you" imperatives**, never third person:
-
-| Wrong | Correct |
-|-------|---------|
-| "Students read the article again..." | "Read the article again." |
-| "They must correct the false statements." | "Correct the false statements." |
-| "Ss complete the task individually." | "Complete the task on your own." |
-
-**`<aside class="notes">` remains unrestricted** — teacher procedure can use full professional vocabulary.
-
-#### 2. Person Rule
-- Collective framing: "We can see...", "Our class can think about..."
-- Positive, concrete questions — avoid abstract philosophical prompts
-- Group participation questions, not individual introspection
-
-#### 3. No Automatic Image Downloads
-When regenerating slides, **do not auto-download images**. Start with solid theme colors. Use gradients, images, or videos only when the teacher provides assets or when they serve a clear pedagogical purpose. Never fetch images independently.
-
-### B1 Default (Mathayom 2-3)
-
-#### Vocabulary Ceiling
-No words above CEFR B1 on screen without inline definition:
-- "identify" → use "find"
-- "predict" → use "guess"
-- "convincing" → use "makes sense"
-- "distinguish" → use "tell the difference"
-- "evaluate" → use "decide"
-- "analyze" → use "look at carefully"
-- "infer" → use "understand what the writer means"
-
-#### Sentence Complexity
-- Max 15 words per sentence on screen
-- No semicolons — break into two sentences
-- One clause preferred, two max
-- No passive voice on screen
-
-#### Summary: "I Can" Statements
-| Wrong | Correct |
-|-------|---------|
-| "Identify the main purpose" | "I can find the main idea" |
-| "Find key facts" | "I can find important facts" |
-| "Express opinions" | "I can share my ideas" |
-
-### B2 Adaptation (for higher-level classes)
-
-When the lesson targets B2 learners, relax the B1 rules as follows:
-
-- **Vocabulary ceiling**: academic words (identify, evaluate, analyze) may appear but must be defined or exemplified on screen
-- **Sentence complexity**: max 20 words per sentence; semicolons OK for contrast
-- **Summary**: may use slightly more specific outcomes (e.g., "I can use correct subject-verb agreement when a prepositional phrase separates subject and verb")
-- **All other rules remain** (person rule, no auto-download, collective framing)
+Read the full file from `references/authorial-voice.md` during the Design Blueprint phase to check language against the B1 word list.
 
 ## reveal.js Feature Lookup
 
@@ -823,65 +690,18 @@ See AGENTS.md (`Pedagogical Strategy Slides — Design Principles`) for the full
 
 ## Common Pitfalls
 
-### Plugin safety protocol
+Debug reference for when builds fail or layouts break. See `references/common-pitfalls.md` for the complete guide covering:
 
-Adding a plugin to the base template's `plugins` array can cause a silent blank page if the plugin's `init()` fails. Protocol:
-1. **Add to the `plugins` array LAST** — build and test WITHOUT the new plugin first
-2. **Add one plugin at a time** — never add multiple untested plugins simultaneously
-3. **Test in browser** — open slides, `F12` → Console tab. Verify: page shows content, zero red errors, navigation works
-4. **Isolate on failure** — if page is blank, remove ALL recently added plugins, re-add one at a time
+- **Plugin safety protocol** — blank page on init failure, add plugins one at a time
+- **Temp file workflow** — write to temp dir, splice with Python, never write large files directly
+- **Answer-list CSS traps** — `.a-num: text-align: left`, `.a-q: flex: 0 0 auto`, `.a-ans: flex: 1 1 auto`
+- **Gray text ban** — template traps in `.aim-label`, `.source-cite`, `.material-ref`, `.a-num`
 
-### Temp file workflow (proven pattern)
-
-The ONLY reliable approach given Windows tooling constraints:
-1. **Write slide sections** to `C:\Users\elwru\AppData\Local\Temp\kilo\slides_sections.html` via the Write tool
-2. **Copy template** to output dir via PowerShell `cp`
-3. **Write splice script** to `C:\Users\elwru\AppData\Local\Temp\kilo\splice_slides.py`
-4. **Run splice script** via `python ...\splice_slides.py`
-5. **Write verification script** to `C:\Users\elwru\AppData\Local\Temp\kilo\verify_slides.py`
-6. **Clean up** temp files only after verification passes
-
-**Do NOT:** Write large files (>300 lines) directly via Write tool to `output/` — may hit permission blocks. Use PowerShell `>`, `Out-File`, or `Set-Content` for files with Unicode — they add BOM or corrupt codepoints.
-
-### Answer-list CSS alignment traps
-
-The answer-list flex layout has three CSS properties that, if set incorrectly, break left-alignment. All three must be set correctly in the inline `<style>` block (Step 2b):
-
-| Element | Correct value | Wrong value | What breaks |
-|---------|--------------|-------------|-------------|
-| `.a-num` | `text-align: left` | `text-align: right` | Number pushes away from text |
-| `.a-q` | `flex: 0 0 auto` | `flex: 1 1 auto` | Question fills all space, answer pinned to far right |
-| `.a-ans` | `flex: 1 1 auto; min-width: 0` | `flex: 0 0 auto; min-width: 160px` | Answer pinned to far right with fixed width |
-
-**Rule of thumb:** The answer-list should read left-to-right naturally, like a sentence: `[1] [anxious →] [d — worried because...]`. If any column looks separated or floating on the right, check these three CSS values.
-
-**Also verify the inline `<style>` block is present** — if the template CSS bug (missing `}` in `.cefr-badge`) broke the cascade, the flex rules may not apply at all, causing the browser to fall back to default inline layout (which looks broken). Step 2b is mandatory, not optional.
-
-### Gray text on any background — universal ban
-
-Per **Rule 0 (No Gray Text)**, gray/muted/low-opacity text is banned on ALL slide backgrounds, not just green. This section documents the specific traps in the base template:
-
-**Template traps:**
-- `.reveal .aim-label { color: #888; }` — gray label, invisible on `#1a1a2e`, `#0d4a3d`, `#0d5e1a`, `#c0392b`, and `#2c3e50`
-- `.reveal .source-cite { color: #666; }` — darker gray, still invisible at projection distance
-- `.reveal .material-ref { color: #888; }` — invisible gray
-- `.reveal .a-num { color: rgba(255,255,255,0.5); }` — 50% white = gray
-- `.reveal .image-caption { color: #888; }` — invisible gray
-
-**Fix in Step 2b inline `<style>` block:**
-```css
-.reveal .aim-label { color: #fff; }
-.reveal .source-cite { color: rgba(255,255,255,0.85); }
-.reveal .material-ref { color: rgba(255,255,255,0.85); }
-.reveal .a-num { color: #fff; }
-.reveal .image-caption { color: rgba(255,255,255,0.85); }
-```
-
-**Test before commit:** Open the slides in a browser at full-screen projection brightness. If you can't read any text element clearly from 3 meters away, it's too gray. Fix it to `#fff`.
+Consult `references/common-pitfalls.md` only when: verification fails, answer-list layout breaks, or the slides appear blank/empty in browser.
 
 ## Files
 
-| File | Purpose |
+| File / Directory | Purpose |
 |---|---|
 | `docs/slide-design-reference.md` | Slide design rules (authoritative) — consult before building |
 | `docs/pedagogical-design-dictionary.md` | Decision Framework, Feature Lookup Table, Mayer's 12 Principles, Anti-Patterns |
@@ -889,3 +709,6 @@ Per **Rule 0 (No Gray Text)**, gray/muted/low-opacity text is banned on ALL slid
 | `scripts/locate_slide.py` | Map reveal.js URL index to HTML section |
 | `scripts/pixabay_download.py` | Pixabay image downloader |
 | `templates/ACT.png` | Institution logo — copy to `assets/logo.png` |
+| `references/key-design-rules.md` | Complete design rules (15+ rules) |
+| `references/authorial-voice.md` | B1 authorial voice rules, vocabulary ceiling, sentence complexity |
+| `references/common-pitfalls.md` | Plugin safety, CSS traps, gray text fixes |

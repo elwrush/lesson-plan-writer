@@ -265,18 +265,67 @@
     <h2>Let's Check Your Writing</h2>
 </section>
 
-<!-- SLIDE 3: Lead-in — Grammar Feedback Review -->
-<!-- PEDAGOGICAL INTENT: Student sees a retrieval prompt or activation question. They recall prior knowledge before new input. -->
-<!-- WHY THIS FEATURE: Static — the question itself activates prior knowledge; no reveal needed for the prompt. -->
-<!-- COGNITIVE PRINCIPLE: Pretraining — retrieving known material prepares the learner to integrate new content. -->
-<section id="slide-lead-in" data-background-color="#1a1a2e">
-    <p><strong>Your writing is getting better!</strong> Let's look at two common errors from your feedback:</p>
-    <p style="font-size: 0.9em; text-align: left; margin-top: 1em;">Before: <span style="color: #ff8a65;">"Hello my name is Krabi, my most prized posession is playing games."</span></p>
-    <p style="font-size: 0.9em; text-align: left;">After: <span style="color: #4fc3f7;">"Hello, my name is Krabi. My most prized possession is playing games."</span></p>
-    <p style="font-size: 0.9em; text-align: left; margin-top: 0.8em;">Before: <span style="color: #ff8a65;">"When I wear it I feel more confident it does give me more security."</span></p>
-    <p style="font-size: 0.9em; text-align: left;">After: <span style="color: #4fc3f7;">"When I wear it, I feel more confident. It does give me more security."</span></p>
-    <p style="margin-top: 1em;">Soon: write a paragraph about a memorable event. First — compound sentences!</p>
-    <aside class="notes">Distribute individual feedback. 3 min silent review. Highlight comma splices and run-ons as the biggest class problems. Then introduce CA goal.</aside>
+<!-- SLIDE 3a: Lead-in — Error 1 (comma splice) entry -->
+<!-- PEDAGOGICAL INTENT: Student sees a real comma splice error from their writing. The transparent border marks the problem word. The teacher uses this to activate awareness before showing the fix. -->
+<!-- WHY THIS FEATURE: Auto-animate entry — transparent border on the error word signals "something to notice here." No fragments (would hide text); the border IS the signal. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the transparent border primes the student to look for what changes on the next slide. -->
+<section id="slide-leadin1-entry" data-auto-animate data-auto-animate-id="leadin1" data-background-color="#1a1a2e">
+    <div style="overflow: hidden;">
+        <p><strong>Your writing is getting better!</strong></p>
+        <p style="font-size: 0.9em; color: rgba(255,255,255,0.85);">Common error: <strong style="color: #ff8a65;">comma splice</strong> — two sentences with only a comma</p>
+        <p data-id="err1" style="font-size: 1.1em; color: #ffdd00;">
+            "Hello my name is Krabi, my most prized <span data-id="fix1" style="border-bottom: 2px solid transparent;">possession</span> is playing games."
+        </p>
+    </div>
+</section>
+
+<!-- SLIDE 3b: Lead-in — Error 1 (comma splice) reveal -->
+<!-- PEDAGOGICAL INTENT: Student sees the error dim with an orange underline on the problem area, and a corrected version appears in blue with an underline on the fix. The transformation IS the learning — they see comma splice → period fix. -->
+<!-- WHY THIS FEATURE: Auto-animate reveal — the error stays in place (dimmed) while the correction materializes below. The orange underline marks the old error; the blue underline marks the new fix. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the error and its correction are visible simultaneously. The student compares them directly. -->
+<section id="slide-leadin1-reveal" data-auto-animate data-auto-animate-id="leadin1" data-background-color="#1a1a2e">
+    <div style="overflow: hidden;">
+        <p><strong>Your writing is getting better!</strong></p>
+        <p style="font-size: 0.9em; color: rgba(255,255,255,0.85);">Fix: <strong>add a period</strong> — split into two sentences</p>
+        <p data-id="err1" style="font-size: 0.95em; color: rgba(255,255,255,0.55);">
+            "Hello my name is Krabi, my most prized <span data-id="fix1" style="border-bottom: 2px solid #ff8a65;">possession</span> is playing games."
+        </p>
+        <p style="font-size: 1.1em; color: #4fc3f7; margin-top: 0.5em;">
+            Corrected: "Hello, my name is Krabi. My most prized <span style="border-bottom: 2px solid #4fc3f7;">possession</span> is playing games."
+        </p>
+    </div>
+</section>
+
+<!-- SLIDE 3c: Lead-in — Error 2 (run-on) entry -->
+<!-- PEDAGOGICAL INTENT: Student sees a run-on error from their writing. Same pattern as Error 1 — transparent border signals the problem. -->
+<!-- WHY THIS FEATURE: Auto-animate entry — same pattern as the comma splice pair; consistency helps students recognize the pattern across error types. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — repeating the auto-animate pattern builds familiarity; students learn to look for what will transform. -->
+<section id="slide-leadin2-entry" data-auto-animate data-auto-animate-id="leadin2" data-background-color="#1a1a2e">
+    <div style="overflow: hidden;">
+        <p><strong>Your writing is getting better!</strong></p>
+        <p style="font-size: 0.9em; color: rgba(255,255,255,0.85);">Common error: <strong style="color: #ff8a65;">run-on</strong> — no period between two sentences</p>
+        <p data-id="err2" style="font-size: 1.1em; color: #ffdd00;">
+            "When I wear it I feel more confident <span data-id="fix2" style="border-bottom: 2px solid transparent;">it</span> does give me more security."
+        </p>
+    </div>
+</section>
+
+<!-- SLIDE 3d: Lead-in — Error 2 (run-on) reveal -->
+<!-- PEDAGOGICAL INTENT: Student sees the run-on transform into two proper sentences. The CA goal is introduced as the bridge to the lesson. -->
+<!-- WHY THIS FEATURE: Auto-animate reveal — same pattern as Error 1. The orange underline marks the run-on junction; the blue underline shows the new period + capital letter. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity + Pre-training — the error-correction pair simultaneously visible; the CA goal frames why this skill matters. -->
+<section id="slide-leadin2-reveal" data-auto-animate data-auto-animate-id="leadin2" data-background-color="#1a1a2e">
+    <div style="overflow: hidden;">
+        <p><strong>Your writing is getting better!</strong></p>
+        <p style="font-size: 0.9em; color: rgba(255,255,255,0.85);">Fix: <strong>add a period</strong> between the two ideas</p>
+        <p data-id="err2" style="font-size: 0.95em; color: rgba(255,255,255,0.55);">
+            "When I wear it I feel more confident <span data-id="fix2" style="border-bottom: 2px solid #ff8a65;">it</span> does give me more security."
+        </p>
+        <p style="font-size: 1.1em; color: #4fc3f7; margin-top: 0.5em;">
+            Corrected: "When I wear it, I feel more confident. <span style="border-bottom: 2px solid #4fc3f7;">It</span> does give me more security."
+        </p>
+        <p style="margin-top: 1em; font-size: 0.9em; color: rgba(255,255,255,0.9);">Soon: write a paragraph about a memorable event. First — compound sentences!</p>
+    </div>
 </section>
 
 <!-- SLIDE 4: Transition to diagnostic -->
@@ -287,21 +336,66 @@
     <h2>What Do You Already Know?</h2>
 </section>
 
-<!-- SLIDE 5: Diagnostic test -->
-<!-- PEDAGOGICAL INTENT: Student sees test items and attempts them independently. No answers are shown — this is a baseline check. -->
-<!-- WHY THIS FEATURE: Static — assessment task; answers would defeat the diagnostic purpose. Timer controls pacing. -->
-<!-- COGNITIVE PRINCIPLE: None — this is an assessment task, not instruction. -->
-<section id="slide-diagnostic" data-background-color="#1a1a2e" data-timer="360">
-    <p><em>Join each pair into one sentence. Use and, but, or, or so.</em></p>
-    <ol style="font-size: 0.85em; text-align: left;">
-        <li style="margin: 0.3em 0;">I like cats. I like dogs.</li>
-        <li style="margin: 0.3em 0;">She is tired. She keeps working.</li>
-        <li style="margin: 0.3em 0;">We can go to the park. We can stay home.</li>
-        <li style="margin: 0.3em 0;">He studied hard. He passed the test.</li>
-        <li style="margin: 0.3em 0;">My brother plays guitar. My sister sings.</li>
-        <li style="margin: 0.3em 0;">The food was expensive. It was delicious.</li>
-    </ol>
-    <aside class="notes">Individual work 4 min, then pair check 2 min. Collect common errors in coordinator choice and comma placement. Do NOT give answers yet.</aside>
+<!-- SLIDE 5a: Diagnostic — items 1-3 (entry, with timer) -->
+<!-- PEDAGOGICAL INTENT: Student sees the first 3 sentence pairs and attempts them independently. The timer controls pacing. The transparent borders on the periods signal that these are the transformation points. -->
+<!-- WHY THIS FEATURE: Auto-animate entry — the periods have transparent borders that will morph into comma+coordinator on the reveal slide. The timer ensures students work within a set pace. -->
+<!-- COGNITIVE PRINCIPLE: None — this is an assessment task, not instruction. The timer provides pacing. -->
+<section id="slide-diagnostic-1-3" data-auto-animate data-auto-animate-id="diag1" data-background-color="#1a1a2e" data-timer="180">
+    <div style="overflow: hidden;">
+        <p><em>Join each pair. Use and, but, or, or so.</em></p>
+        <ol style="font-size: 0.85em; text-align: left;">
+            <li style="margin: 0.4em 0;"><span data-id="d1">I like cats<span data-id="j1" style="border-bottom: 2px solid transparent;">. I</span> like dogs.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d2">She is tired<span data-id="j2" style="border-bottom: 2px solid transparent;">. She</span> keeps working.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d3">We can go to the park<span data-id="j3" style="border-bottom: 2px solid transparent;">. We</span> can stay home.</span></li>
+        </ol>
+    </div>
+</section>
+
+<!-- SLIDE 5b: Diagnostic — items 1-3 (reveal) -->
+<!-- PEDAGOGICAL INTENT: Student sees the periods morph into comma+coordinator with blue underlines. The transformation IS the answer — they see their gap immediately. -->
+<!-- WHY THIS FEATURE: Auto-animate reveal — the same sentence pairs now show the correct connector. The blue border on the new comma+coordinator+lowercase signals the structural change. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the blue underline draws attention to the critical change (period → comma+coordinator). Temporal Contiguity — the original sentence structure stays in place so students see what changed. -->
+<section id="slide-diagnostic-1-3-reveal" data-auto-animate data-auto-animate-id="diag1" data-background-color="#1a1a2e">
+    <div style="overflow: hidden;">
+        <p><em>Corrected:</em></p>
+        <ol style="font-size: 0.85em; text-align: left;">
+            <li style="margin: 0.4em 0;"><span data-id="d1">I like cats<span data-id="j1" style="border-bottom: 2px solid #4fc3f7;">, and I</span> like dogs.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d2">She is tired<span data-id="j2" style="border-bottom: 2px solid #4fc3f7;">, but she</span> keeps working.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d3">We can go to the park<span data-id="j3" style="border-bottom: 2px solid #4fc3f7;">, or we</span> can stay home.</span></li>
+        </ol>
+        <aside class="notes">Item 1: addition (and). Item 2: contrast (but). Item 3: choice (or). Note lowercasing after the coordinator.</aside>
+    </div>
+</section>
+
+<!-- SLIDE 5c: Diagnostic — items 4-6 (entry, with timer) -->
+<!-- PEDAGOGICAL INTENT: Student sees the remaining 3 sentence pairs. Same structure as items 1-3 for consistency. Timer controls pacing. -->
+<!-- WHY THIS FEATURE: Auto-animate entry — same pattern as the first pair. The transparent border on periods maintains consistency. -->
+<!-- COGNITIVE PRINCIPLE: None — assessment task. Timer provides pacing for the remaining half of the diagnostic. -->
+<section id="slide-diagnostic-4-6" data-auto-animate data-auto-animate-id="diag2" data-background-color="#1a1a2e" data-timer="180">
+    <div style="overflow: hidden;">
+        <p><em>Join each pair. Use and, but, or, or so.</em></p>
+        <ol style="font-size: 0.85em; text-align: left;">
+            <li style="margin: 0.4em 0;"><span data-id="d4">He studied hard<span data-id="j4" style="border-bottom: 2px solid transparent;">. He</span> passed the test.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d5">My brother plays guitar<span data-id="j5" style="border-bottom: 2px solid transparent;">. My</span> sister sings.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d6">The food was expensive<span data-id="j6" style="border-bottom: 2px solid transparent;">. It</span> was delicious.</span></li>
+        </ol>
+    </div>
+</section>
+
+<!-- SLIDE 5d: Diagnostic — items 4-6 (reveal) -->
+<!-- PEDAGOGICAL INTENT: Student sees the second set of periods morph into comma+coordinator. Completes the diagnostic feedback cycle before moving to the teach phase. -->
+<!-- WHY THIS FEATURE: Auto-animate reveal — same pattern as items 1-3. Consistent structure allows students to focus on content, not navigation. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the blue underline on the new connector draws attention to the coordinator choice. Each item uses a different coordinator, reinforcing the four-option system. -->
+<section id="slide-diagnostic-4-6-reveal" data-auto-animate data-auto-animate-id="diag2" data-background-color="#1a1a2e">
+    <div style="overflow: hidden;">
+        <p><em>Corrected:</em></p>
+        <ol style="font-size: 0.85em; text-align: left;">
+            <li style="margin: 0.4em 0;"><span data-id="d4">He studied hard<span data-id="j4" style="border-bottom: 2px solid #4fc3f7;">, so he</span> passed the test.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d5">My brother plays guitar<span data-id="j5" style="border-bottom: 2px solid #4fc3f7;">, and my</span> sister sings.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d6">The food was expensive<span data-id="j6" style="border-bottom: 2px solid #4fc3f7;">, but it</span> was delicious.</span></li>
+        </ol>
+        <aside class="notes">Item 4: reason/result (so). Item 5: addition (and). Item 6: contrast (but). Common errors to expect: item 2 may use 'and' instead of 'but'; item 6 may use 'and' instead of 'but'.</aside>
+    </div>
 </section>
 
 <!-- SLIDE 6: Transition to teach -->
@@ -320,10 +414,10 @@
     <div style="overflow: hidden;">
         <h2 data-id="title">Simple vs Compound</h2>
         <p style="font-size: 0.8em;"><u><strong>Simple (compound verb):</strong></u></p>
-        <p data-id="simp" style="color: #ffdd00; font-size: 0.9em;">My family <span data-id="sv1" style="border-bottom: 2px solid transparent;">goes</span> camping every summer and usually <span data-id="sv2" style="border-bottom: 2px solid transparent;">has</span> fun.</p>
+        <p data-id="simp" style="color: #ffdd00; font-size: 1em;">My family <span data-id="sv1" style="border-bottom: 2px solid transparent;">goes</span> camping every summer and usually <span data-id="sv2" style="border-bottom: 2px solid transparent;">has</span> fun.</p>
         <p style="font-size: 0.85em; color: rgba(255,255,255,0.85);">Formula: <strong>S V V</strong> (one subject, two verbs)</p>
         <p style="font-size: 0.85em; margin-top: 0.5em;"><u><strong>Compound:</strong></u></p>
-        <p data-id="comp" style="color: #ffdd00; font-size: 0.9em;">My family <span data-id="cv1" style="border-bottom: 2px solid transparent;">goes</span> camping every summer, and <span data-id="cv2" style="border-bottom: 2px solid transparent;">we</span> usually <span data-id="cv3" style="border-bottom: 2px solid transparent;">have</span> fun.</p>
+        <p data-id="comp" style="color: #ffdd00; font-size: 1em;">My family <span data-id="cv1" style="border-bottom: 2px solid transparent;">goes</span> camping every summer, and <span data-id="cv2" style="border-bottom: 2px solid transparent;">we</span> usually <span data-id="cv3" style="border-bottom: 2px solid transparent;">have</span> fun.</p>
         <p style="font-size: 0.85em; color: rgba(255,255,255,0.85);">Formula: <strong>S V, and S V</strong> (two subjects, two verbs)</p>
     </div>
     <aside class="notes">"Simple: one subject, two actions. Compound: two subjects, two actions, comma + and."</aside>
@@ -337,10 +431,10 @@
     <div style="overflow: hidden;">
         <h2 data-id="title">Simple vs Compound</h2>
         <p style="font-size: 0.8em;"><u><strong>Simple (compound verb):</strong></u></p>
-        <p data-id="simp" style="color: #ffdd00; font-size: 0.9em;">My family <span data-id="sv1" style="border-bottom: 2px solid transparent;">goes</span> camping every summer and usually <span data-id="sv2" style="border-bottom: 2px solid transparent;">has</span> fun.</p>
+        <p data-id="simp" style="color: #ffdd00; font-size: 1em;">My family <span data-id="sv1" style="border-bottom: 2px solid transparent;">goes</span> camping every summer and usually <span data-id="sv2" style="border-bottom: 2px solid transparent;">has</span> fun.</p>
         <p style="font-size: 0.85em; color: rgba(255,255,255,0.85);">Formula: <strong>S V V</strong> (one subject, two verbs)</p>
         <p style="font-size: 0.85em; margin-top: 0.5em;"><u><strong>Compound:</strong></u></p>
-        <p data-id="comp" style="color: #ffdd00; font-size: 0.9em;">My family <span data-id="cv1" style="border-bottom: 2px solid transparent;">goes</span> camping every summer, and <span data-id="cv2" style="border-bottom: 2px solid white;">we</span> usually <span data-id="cv3" style="border-bottom: 2px solid white;">have</span> fun.</p>
+        <p data-id="comp" style="color: #ffdd00; font-size: 1em;">My family <span data-id="cv1" style="border-bottom: 2px solid transparent;">goes</span> camping every summer, and <span data-id="cv2" style="border-bottom: 2px solid white;">we</span> usually <span data-id="cv3" style="border-bottom: 2px solid white;">have</span> fun.</p>
         <p style="font-size: 0.85em; color: rgba(255,255,255,0.85);">Formula: <strong>S V, and S V</strong> (two subjects, two verbs)</p>
     </div>
     <aside class="notes">"The second subject 'we' and verb 'have' — that's what makes it compound. Notice the comma before 'and'."</aside>
@@ -403,7 +497,21 @@
     <h2>Find the Coordinators</h2>
 </section>
 
-<!-- SLIDE 14: Task — Practice 2A -->
+<!-- SLIDE 14: Strategy — How to Find Coordinators -->
+<!-- PEDAGOGICAL INTENT: Student sees the 3-step process for identifying coordinators in a text and deciding simple vs compound. The steps scaffold the analysis before independent work. -->
+<!-- WHY THIS FEATURE: Static — all steps visible for the teacher to model with a worked example from the folktale. No fragments needed — the teacher points to each step. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — the decision process is broken into clear steps. The S-V count rule anchors the simple-vs-compound distinction. -->
+<section id="slide-strategy-p2a" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+    <h2>How to Find Coordinators</h2>
+    <p><u><strong>Step 1:</strong> Look for connector words: <strong style="color: #ffdd00;">and, but, or, so</strong></u></p>
+    <p><u><strong>Step 2:</strong> Check if there is a comma before the connector.</u></p>
+    <p><u><strong>Step 3:</strong> Count subject-verb pairs.</u></p>
+    <p style="margin-left: 1.5em;">One pair + no comma = <strong>simple</strong> (compound verb)</p>
+    <p style="margin-left: 1.5em;">Two pairs + comma + connector = <strong>compound</strong></p>
+    <aside class="notes">Model item S3: "The old man went to work in the forest and took his lunch." One subject, two verbs = simple, no comma. Then S4: "He dropped a rice ball, and it rolled into a hole." Two S-V pairs = compound, comma before and.</aside>
+</section>
+
+<!-- SLIDE 15: Task — Practice 2A -->
 <!-- PEDAGOGICAL INTENT: Student sees the exercise number + instruction for finding coordinators in the folktale. -->
 <!-- WHY THIS FEATURE: Static — task instruction only; exercise content is in the workbook. Timer controls pacing. -->
 <!-- COGNITIVE PRINCIPLE: None — procedural slide for timed independent work. -->
@@ -423,10 +531,10 @@
     .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
     .reveal .a-row:last-child { border-bottom: none; }
     .reveal .a-num { flex: 0 0 2em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 auto; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.9em; }
-    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #fff; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-q { flex: 0 0 auto; min-width: 0; text-align: left; color: #ffdd00; font-size: 1em; }
+    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #fff; font-size: 1em; line-height: 1.5; }
     .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 1em; line-height: 1.5; }
     .reveal .aim-label { color: #fff; }
 </style>
     <h2 style="font-size: 0.95em;">Practice 2A — Coordinators (1–3)</h2>
@@ -463,10 +571,10 @@
     .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
     .reveal .a-row:last-child { border-bottom: none; }
     .reveal .a-num { flex: 0 0 2em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 auto; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.9em; }
-    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #fff; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-q { flex: 0 0 auto; min-width: 0; text-align: left; color: #ffdd00; font-size: 1em; }
+    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #fff; font-size: 1em; line-height: 1.5; }
     .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 1em; line-height: 1.5; }
     .reveal .aim-label { color: #fff; }
 </style>
     <h2 style="font-size: 0.95em;">Practice 2A — Coordinators (4–6)</h2>
@@ -535,14 +643,14 @@
     .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
     .reveal .a-row:last-child { border-bottom: none; }
     .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 5em; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.9em; }
-    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-q { flex: 0 0 5em; min-width: 0; text-align: left; color: #ffdd00; font-size: 1em; }
+    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 1em; line-height: 1.5; }
     .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 1em; line-height: 1.5; }
     .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
     .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+    .reveal .a-ls { color: #4fc3f7; font-size: 0.85em; font-style: italic; margin-right: 1px; }
+    .reveal .a-lv { color: #ff8a65; font-size: 0.85em; font-style: italic; margin-right: 1px; }
     .reveal .aim-label { color: #fff; }
 </style>
     <h2 style="font-size: 0.95em;">Practice 2B — Answers (1–3)</h2>
@@ -579,14 +687,14 @@
     .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
     .reveal .a-row:last-child { border-bottom: none; }
     .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 5em; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.9em; }
-    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-q { flex: 0 0 5em; min-width: 0; text-align: left; color: #ffdd00; font-size: 1em; }
+    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 1em; line-height: 1.5; }
     .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 1em; line-height: 1.5; }
     .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
     .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+    .reveal .a-ls { color: #4fc3f7; font-size: 0.85em; font-style: italic; margin-right: 1px; }
+    .reveal .a-lv { color: #ff8a65; font-size: 0.85em; font-style: italic; margin-right: 1px; }
     .reveal .aim-label { color: #fff; }
 </style>
     <h2 style="font-size: 0.95em;">Practice 2B — Answers (4–5)</h2>
@@ -617,14 +725,14 @@
     .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
     .reveal .a-row:last-child { border-bottom: none; }
     .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 5em; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.9em; }
-    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-q { flex: 0 0 5em; min-width: 0; text-align: left; color: #ffdd00; font-size: 1em; }
+    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 1em; line-height: 1.5; }
     .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 1em; line-height: 1.5; }
     .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
     .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+    .reveal .a-ls { color: #4fc3f7; font-size: 0.85em; font-style: italic; margin-right: 1px; }
+    .reveal .a-lv { color: #ff8a65; font-size: 0.85em; font-style: italic; margin-right: 1px; }
     .reveal .aim-label { color: #fff; }
 </style>
     <h2 style="font-size: 0.95em;">Practice 2B — Answers (6–8)</h2>
@@ -661,14 +769,14 @@
     .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
     .reveal .a-row:last-child { border-bottom: none; }
     .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 5em; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.9em; }
-    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-q { flex: 0 0 5em; min-width: 0; text-align: left; color: #ffdd00; font-size: 1em; }
+    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 1em; line-height: 1.5; }
     .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 1em; line-height: 1.5; }
     .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
     .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+    .reveal .a-ls { color: #4fc3f7; font-size: 0.85em; font-style: italic; margin-right: 1px; }
+    .reveal .a-lv { color: #ff8a65; font-size: 0.85em; font-style: italic; margin-right: 1px; }
     .reveal .aim-label { color: #fff; }
 </style>
     <h2 style="font-size: 0.95em;">Practice 2B — Answers (9–10)</h2>
@@ -697,7 +805,52 @@
     <h2>Write Your Own Sentences</h2>
 </section>
 
-<!-- SLIDE 25: Task — Practice 2C -->
+<!-- SLIDE 25a: Demo — Step 1: Identify the relationship -->
+<!-- PEDAGOGICAL INTENT: Student sees the teacher walk through ONE item step by step before attempting Practice 2C independently. Step 1 shows how to identify the logical relationship between two clauses. -->
+<!-- WHY THIS FEATURE: Auto-animate builds up the three steps across consecutive slides. Step 1 is highlighted; subsequent steps will dim it as they add new steps. -->
+<!-- COGNITIVE PRINCIPLE: Worked Example (Mayer) — a guided demonstration before independent practice reduces cognitive load by modelling the decision chain. -->
+<section id="slide-demo-p2c-step1" data-auto-animate data-auto-animate-id="demo-p2c" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+    <div style="overflow: hidden;">
+        <h2 data-id="title" style="font-size: 0.9em;">Let's do one together</h2>
+        <p data-id="item" style="font-size: 0.85em; color: #ffdd00;">Item 1: It became very dark. Blanchette was suddenly afraid.</p>
+        <p data-id="s1" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 1:</strong> What's the relationship?</u></p>
+        <p data-id="a1" style="font-size: 0.85em; margin-left: 1em; color: #4fc3f7;">The darkness caused her fear → <strong>Result</strong></p>
+    </div>
+</section>
+
+<!-- SLIDE 25b: Demo — Step 2: Choose the coordinator -->
+<!-- PEDAGOGICAL INTENT: Student sees Step 1 dim as Step 2 appears. They learn to map relationship → coordinator. Result → so. -->
+<!-- WHY THIS FEATURE: Auto-animate dims the previous step and highlights the current step. The visual dimming signals "we've covered this" without removing the information. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — each reasoning step gets its own slide. The teacher pauses at each step, ensuring students follow the logic before moving on. -->
+<section id="slide-demo-p2c-step2" data-auto-animate data-auto-animate-id="demo-p2c" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+    <div style="overflow: hidden;">
+        <h2 data-id="title" style="font-size: 0.9em;">Let's do one together</h2>
+        <p data-id="item" style="font-size: 0.85em; color: #ffdd00;">Item 1: It became very dark. Blanchette was suddenly afraid.</p>
+        <p data-id="s1" style="font-size: 0.7em; margin-top: 0.4em; color: rgba(255,255,255,0.6);"><u><strong>Step 1:</strong> What's the relationship?</u></p>
+        <p data-id="a1" style="font-size: 0.65em; margin-left: 1em; color: rgba(255,255,255,0.6);">Result</p>
+        <p data-id="s2" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 2:</strong> Choose the coordinator.</u></p>
+        <p data-id="a2" style="font-size: 0.85em; margin-left: 1em;">Result → use <strong style="color: #4fc3f7;">so</strong></p>
+    </div>
+</section>
+
+<!-- SLIDE 25c: Demo — Step 3: Combine -->
+<!-- PEDAGOGICAL INTENT: Student sees the complete reasoning chain: relationship → coordinator → combined sentence. The final compound sentence appears in blue, showing the comma + coordinator rule in action. -->
+<!-- WHY THIS FEATURE: Auto-animate completes the 3-step build-up. All previous steps are dimmed, the final combined sentence is highlighted in blue — the transformation IS the result. -->
+<!-- COGNITIVE PRINCIPLE: Worked Example (complete) — the full chain from relationship to output models exactly what students must do independently in Practice 2C. -->
+<section id="slide-demo-p2c-step3" data-auto-animate data-auto-animate-id="demo-p2c" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+    <div style="overflow: hidden;">
+        <h2 data-id="title" style="font-size: 0.9em;">Let's do one together</h2>
+        <p data-id="item" style="font-size: 0.85em; color: #ffdd00;">Item 1: It became very dark. Blanchette was suddenly afraid.</p>
+        <p data-id="s1" style="font-size: 0.65em; margin-top: 0.4em; color: rgba(255,255,255,0.6);"><u><strong>Step 1:</strong> What's the relationship?</u></p>
+        <p data-id="a1" style="font-size: 0.6em; margin-left: 1em; color: rgba(255,255,255,0.6);">Result</p>
+        <p data-id="s2" style="font-size: 0.65em; margin-top: 0.3em; color: rgba(255,255,255,0.6);"><u><strong>Step 2:</strong> Choose the coordinator.</u></p>
+        <p data-id="a2" style="font-size: 0.6em; margin-left: 1em; color: rgba(255,255,255,0.6);">so</p>
+        <p data-id="s3" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 3:</strong> Combine: comma + coordinator.</u></p>
+        <p data-id="a3" style="font-size: 0.85em; margin-left: 1em; color: #4fc3f7;">"It became very dark, <strong>so</strong> Blanchette was suddenly afraid."</p>
+    </div>
+</section>
+
+<!-- SLIDE 26: Task — Practice 2C -->
 <!-- PEDAGOGICAL INTENT: Student sees the exercise number + instruction for joining sentence pairs with coordinators. -->
 <!-- WHY THIS FEATURE: Static — task instruction only. Timer controls pacing. -->
 <!-- COGNITIVE PRINCIPLE: None — procedural slide for timed independent work. -->
@@ -717,9 +870,9 @@
     .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
     .reveal .a-row:last-child { border-bottom: none; }
     .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #fff; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #fff; font-size: 1em; line-height: 1.5; }
     .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 0 0 7em; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.9em; line-height: 1.5; margin-left: 0.5em; }
+    .reveal .a-why { flex: 0 0 7em; min-width: 0; text-align: left; color: #ffdd00; font-size: 1em; line-height: 1.5; margin-left: 0.5em; }
     .reveal .aim-label { color: #fff; }
 </style>
     <h2 style="font-size: 0.95em;">Practice 2C — Model Answers (1–3)</h2>
@@ -753,9 +906,9 @@
     .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
     .reveal .a-row:last-child { border-bottom: none; }
     .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #fff; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #fff; font-size: 1em; line-height: 1.5; }
     .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 0 0 7em; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.9em; line-height: 1.5; margin-left: 0.5em; }
+    .reveal .a-why { flex: 0 0 7em; min-width: 0; text-align: left; color: #ffdd00; font-size: 1em; line-height: 1.5; margin-left: 0.5em; }
     .reveal .aim-label { color: #fff; }
 </style>
     <h2 style="font-size: 0.95em;">Practice 2C — Model Answers (4–5)</h2>
@@ -784,9 +937,9 @@
     .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
     .reveal .a-row:last-child { border-bottom: none; }
     .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #fff; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #fff; font-size: 1em; line-height: 1.5; }
     .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 0 0 7em; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.9em; line-height: 1.5; margin-left: 0.5em; }
+    .reveal .a-why { flex: 0 0 7em; min-width: 0; text-align: left; color: #ffdd00; font-size: 1em; line-height: 1.5; margin-left: 0.5em; }
     .reveal .aim-label { color: #fff; }
 </style>
     <h2 style="font-size: 0.95em;">Practice 2C — Model Answers (6–8)</h2>

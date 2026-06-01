@@ -158,3 +158,26 @@ Design rules:
 - No instructional text ("Click to check", "Click to reveal") — the rearrangement IS the answer
 - Same background on both slides (prevents flash)
 - Unmatched items remain on reveal slide but dimmed (`opacity: 0.4`)
+
+---
+
+## Mechanism Rubric — Principle to Implementation Bridge
+
+The `DESIGN MECHANISM` annotation bridges the abstract cognitive principle to the concrete slide implementation. For each principle, the mechanism must answer the question in the right column.
+
+| Principle | Mechanism MUST specify | Example (good) | Example (bad — too vague) |
+|-----------|----------------------|----------------|--------------------------|
+| **Signaling** | Which words/elements have visual treatment? Why those and not others? | "The coordinator `and` is bold yellow on an otherwise white example sentence — the eye is drawn to the only yellow word." | "Uses color to highlight key information." |
+| **Segmenting** | What is the chunk boundary? Max items per slide? Click pacing? Why this size? | "3 items max per answer slide. Each row reveals on a separate `data-fragment-index` (1,2,3) so the teacher cannot show all at once." | "Content is broken into chunks." |
+| **Temporal Contiguity** | Which elements appear on the SAME click? Why must they be paired? | "The answer cell and its Why explanation cell share `data-fragment-index='1'` on every row — the student sees the answer AND its reason simultaneously." | "Related content appears together." |
+| **Spatial Contiguity** | What elements are visually adjacent? Why is adjacency critical? | "The formula S V, and S V appears directly below the compound example sentence, not in the speaker notes or on a separate slide." | "Text is placed near the example." |
+| **Consolidation** | What earlier slide does this mirror verbatim? What retrieval cue is repeated? Is there active recall? | "Summary restates the objective slide's exact numbered 'I can...' wording. The teacher elicits each point — the blue ✓ symbols differ from yellow numbers, creating a 'before vs. after' contrast." | "Reviews what was learned." |
+| **Worked Example** | Which specific item is modeled? What is the step chain? How does it connect to the freer practice? | "Uses Item 1 from Practice 2C ('It became very dark' / 'Blanchette was suddenly afraid') — the same item students will encounter in the task immediately after." | "Walks through one example." |
+| **Pretraining** | What prior knowledge is activated? How does this slide set up the next one? | "The diagnostic entry slide uses the period-between-sentences pattern that the teach slides will transform into comma+coordinator — the student has already searched for a solution before the answer is revealed." | "Prepares students for the lesson." |
+| **Coherence** | What has been intentionally stripped out? What extraneous element is absent? | "The transition slide contains only a heading — no subheading, no icons, no procedure text. The teacher's spoken introduction provides all context, eliminating visual redundancy." | "Keeps things simple." |
+
+### Litmus Test
+
+Remove the DESIGN MECHANISM annotation. Can you still build the same slide?
+- If **YES** → the mechanism is too vague. Rewrite until it names a choice unique to THIS slide.
+- If **NO** → the mechanism is specific enough.
