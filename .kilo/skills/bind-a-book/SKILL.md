@@ -24,27 +24,66 @@ Welcome the user and ask:
    - Validate the file exists; abort with error if not
    - Supported formats: `.epub`, `.pdf`, `.txt`, `.md`
 
-2. **Book title** — "What's the book title?" (default: auto-detect from filename)
+2. **Chapter/page range** — "Which chapters or pages should I bind? (e.g., `1-5`, `3,4`, or `all`)"
+   - For EPUB: maps to chapter HTML files in the manifest (e.g., `c03_r1.htm` = Chapter 3)
+   - For PDF: maps to page ranges (requires pymupdf)
+   - For TXT/MD: no range support (always `all`)
+   - Default: `all` (bind the entire file)
+   - When a range is specified, only extract content from those chapters/pages
 
-3. **Author name** — "Who's the author?" (default: none, skip author line)
+3. **Book title** — "What's the book title?" (default: auto-detect from filename)
 
-4. **Gloss words** — "Any words to gloss as footnotes? Provide as `word=definition;word2=def2` or 'none'"
+4. **Author name** — "Who's the author?" (default: none, skip author line)
+
+5. **Gloss words** — "Any words to gloss as footnotes? Provide as `word=definition;word2=def2` or 'none'"
    - Example: `lone=to go or be alone;reckon=think or suppose`
    - Semicolons separate entries, commas are allowed inside definitions
    - Each word gets glossed only on its FIRST occurrence
    - The word `lone` has special handling to also match `loned`
 
-5. **Output location** — "Where should the PDF go?" (default: `PDF/{input_subfolder}/`)
+6. **Output location** — "Where should the PDF go?" (default: `PDF/{input_subfolder}/`)
    - If the input is in `inputs/`, output goes to `PDF/{subfolder}/`
 
-### Step 2: Run bookbinder.py
+### Step 2: Handle chapter/page range (if specified)
+
+**For EPUB source:**
+1. List the EPUB's chapter files by examining `namelist()` for patterns like `*c03*.htm` (Chapter 3)
+2. Map numeric chapter numbers to their internal filenames
+3. Extract text only from the selected chapter files using `ebooklib` (filter by item index or filename pattern)
+4. **Inject chapter headings and title block into body text as Typst markup** — since the bookbinder places body text raw into a Typst block, you can prepend markup directly:
+   - Prepend a compact title block (title + author + horizontal rule) to the body text
+   - Before each chapter's text, inject a centered chapter heading: `#align(center)[*CHAPTER N*]`
+   - Between chapters, inject a decorative ornament divider: `#v(0.8em)\n#align(center)[— · — · — · — · —]\n#v(0.4em)`
+   - See the "Chapter divider design" section below for exact patterns
+5. Write the extracted text (with Typst markup) to a temporary `.txt` file in `%TEMP%\kilo\`
+6. Use this `.txt` file as the input to bookbinder.py instead of the original EPUB
+
+**For PDF source:**
+- Use PyMuPDF to extract only the specified page range (e.g., `doc[2:5]` for pages 3-5)
+- Write extracted text to a temporary `.txt` file
+
+**For TXT/MD source:**
+- Chapter ranges are not supported; warn the user and proceed with the full file.
+
+### Step 3: Run bookbinder.py
+
+**Important:** To ensure the first chapter starts on page 1 (no separate title page), pass spaces for title/author so the bookbinder's built-in title block is invisible:
+```powershell
+python scripts/bookbinder.py "<input_path>" --title " " --author " " --gloss "<gloss_string>" --outdir "<output_dir>"
+```
+
+Instead, inject the title, author, and chapter headings directly into the body text as Typst markup (see Step 2 for the pattern).
+
+If the user does NOT plan to use `insert-pdf-to-template` and wants a standalone booklet with a proper title page, use the full title/author:
 ```powershell
 python scripts/bookbinder.py "<input_path>" --title "<title>" --author "<author>" --gloss "<gloss_string>" --outdir "<output_dir>"
 ```
 
 Omit `--gloss` if none. Omit `--author` if not provided.
 
-### Step 3: Override any defaults (optional)
+**After compilation, rename the output file** from the temp-text derived name to a meaningful name like `{Title}_Ch{range}_A5_booklet.pdf`.
+
+### Step 4: Override any defaults (optional)
 The user can request changes to:
 - Font (default: RobotoSerif)
 - Font size (default: 11pt)
@@ -57,7 +96,7 @@ For each override, re-run with the appropriate `--font`, `--font-size`, `--margi
 
 **Page count changes**: Adding glosses increases the page count (footnotes push content to new pages). When passing the output to `insert-pdf-to-template`, always re-derive the page count — do not reuse a previously cached count.
 
-### Step 4: Report output
+### Step 5: Report output
 Inform the user where the PDF was saved and how to print:
 ```
 Booklet created at: PDF/{subfolder}/{filename}_A5_booklet.pdf
@@ -65,6 +104,17 @@ Format: A5, {font} {size}pt, leading {leading}em
 
 To print: Open PDF → Ctrl+P → Booklet mode → A4 paper
 ```
+
+### Default workflow: insert-pdf-to-template
+
+By default, the A5 booklet PDF is generated **without a separate title page** so the first chapter content starts on page 1. The title and author are set to spaces (`--title " " --author " "`) to suppress the bookbinder's built-in title block. Instead, the proper title, author, and chapter headings are injected directly into the body text as Typst markup. The booklet is then inserted into the school header template via the `insert-pdf-to-template` skill.
+
+To run this step:
+1. Load the `insert-pdf-to-template` skill
+2. Follow its interactive workflow
+3. The template adds a narrow school header band (logos + horizontal rule) on page 1 only
+
+**Page count**: The source PDF page count (excluding the template's own first page) is `{page_count}`. After insertion into the template, the final PDF has `{page_count + 1}` pages (template = 1 + booklet = N). Always re-derive page counts — do not reuse cached counts from previous runs.
 
 ## File locations
 - **Script:** `C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\bookbinder.py`
@@ -188,6 +238,7 @@ Mitigation:
 | Entire text is one continuous paragraph | Tags stripped before `</p>` → `\n\n` conversion | Reorder: replace `</p>` first, then strip tags |
 | Title appears twice ("A Monster Calls A MONSTER CALLS") | `<title>` tag content not stripped | Add `re.sub(r'<title>.*?</title>', ...)` to extraction |
 | Chapter heading missing between sections | Heading stripped by `strip_leading_heading()` or manually | Insert a `CHAPTER N` heading with ornament divider in the combined text |
+| First chapter heading missing when using range | Only chapters after the first get ornament dividers; first chapter has no label | Always inject `#align(center)[*CHAPTER N*]` before the first chapter's text, not just between chapters |
 | Reflection questions run directly into story text | No page break or separator | Add `#pagebreak()` + ornament divider before questions |
 | Gloss words also taught in lesson slides | Overlap between pre-taught vocab and gloss list | Audit both lists before running bookbinder |
 | Line is a short stub, not decorative | Using `#line(length: 30%)` | Replace with centered `#align(center)[— · — · — · — · —]` |

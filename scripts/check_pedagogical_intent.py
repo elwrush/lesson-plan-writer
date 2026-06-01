@@ -61,8 +61,10 @@ def check_file(path: str) -> int:
         if section_id.startswith(EXEMPT_PREFIXES):
             continue
 
-        # Look at the 1000 characters immediately before this <section> tag
-        preceding_start = max(0, match.start() - 1000)
+        # Look at the 2000 characters immediately before this <section> tag
+        # 1000 was insufficient for 4-line annotations (PEDAGOGICAL INTENT + WHY THIS FEATURE +
+        # COGNITIVE PRINCIPLE + DESIGN MECHANISM) which can exceed 1000 chars total.
+        preceding_start = max(0, match.start() - 2000)
         preceding = content[preceding_start : match.start()]
 
         # Check that the last comment block before this section contains all four annotations

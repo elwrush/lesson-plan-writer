@@ -192,8 +192,9 @@ class TestPedagogicalIntent:
             if section_id.startswith(self.EXEMPT_PREFIXES):
                 continue
 
-            # Look at the 1000 characters immediately before this <section> tag
-            preceding_start = max(0, match.start() - 1000)
+            # Look at the 2000 characters immediately before this <section> tag
+            # 1000 was insufficient for 4-line annotations exceeding 1000 chars
+            preceding_start = max(0, match.start() - 2000)
             preceding = content[preceding_start : match.start()]
 
             has_intent = "PEDAGOGICAL INTENT:" in preceding

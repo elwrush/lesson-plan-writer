@@ -681,7 +681,7 @@ See the complete Decision Framework, Feature Lookup Table, Mayer's 12 Principles
 
 See AGENTS.md (`Pedagogical Strategy Slides — Design Principles`) for the full SBI design framework. Key rules for this project:
 - **One consistent worked example** per strategy block — carry one exam item through all steps
-- **One step per slide** — each `<section>` covers a single step so the teacher can pause
+- **One step per slide — STRICTLY ENFORCED. NEVER cram multiple steps onto one pedagogical or strategy slide.** Each `<section>` covers exactly one step so the teacher can pause at each decision point. If your strategy has steps labelled Step 1, Step 2, Step 3, and Step 4, you need FOUR consecutive `<section>` slides (not one slide with four bullet points). Use sibling slides (static, or chained with `data-auto-animate` for step-build-up effects). This rule applies to ALL pedagogical teaching slides — skimming strategy, T/F/NG strategy, critical thinking frames, error correction demos, and any slide that walks through a sequence. A single pedagogical slide with 4 step-labels is a design violation. Test: if any student-facing text on a pedagogical slide contains more than one `<u><strong>Step N:</strong>` element, the slide is violating this rule and must be split.
 - **Step label format**: `<u><strong>Step N:</strong> description</u>`
 - **Header on first slide only**, remaining slides show only the step label
 - **Auto-animate for keyword underlines**: use `<span data-id="...">` with transparent→visible border transitions across consecutive `<section data-auto-animate>` siblings

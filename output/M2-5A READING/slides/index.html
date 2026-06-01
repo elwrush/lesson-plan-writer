@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>The Foods of Indonesia — B1 Reading</title>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            /* =============================================
+               LESSON PLAN WRITER 3 — BASE SLIDE STYLES
+               Authoritative stylesheet for all presentations.
+               ============================================= */
+
+            /* --- CEFR Badges --- */
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                font-size: 0.7em;
+                padding: 4px 12px;
+                border-radius: 4px;
+                vertical-align: middle;
+                position: relative;
+                top: -2px;
+            }
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+
+            .reveal .a-badge {
+                display: inline-block;
+                padding: 0.1em 0.5em;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 0.85em;
+                min-width: 1.8em;
+                text-align: center;
+            }
+            .reveal .a-badge.a-cor {
+                background: rgba(76, 175, 80, 0.4);
+                color: #fff;
+            }
+            .reveal .a-badge.a-inc {
+                background: rgba(244, 67, 54, 0.4);
+                color: #fff;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+
+
+            /* --- Answer flex layout (replaces answer-table) --- */
+            .reveal .answer-list {
+                width: 100%;
+                font-size: 0.95em;
+            }
+            .reveal .a-row {
+                display: flex;
+                align-items: baseline;
+                padding: 0.5em 0;
+                border-bottom: 1px solid #fff;
+                gap: 0.5em;
+            }
+            .reveal .a-row:last-child { border-bottom: none; }
+            .reveal .a-num {
+                flex: 0 0 1.5em;
+                text-align: left;
+                color: #fff;
+                font-size: 0.95em;
+            }
+            .reveal .a-q {
+                flex: 0 0 auto;
+                min-width: 0;
+                margin-right: 0.5em;
+            }
+            .reveal .a-ans {
+                flex: 1 1 auto;
+                min-width: 0;
+                text-align: left;
+                padding: 0.1em 0.3em;
+                border-radius: 4px;
+            }
+            .reveal .a-ans.a-cor { color: #fff; }
+            .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+            .reveal .a-ans.a-inc { color: #fff; }
+            .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
+            /* Why column on answer rows — explanation text, fills remaining space */
+            .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+            /* S/V annotation underlines and labels for grammar identification */
+            .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
+            .reveal .a-v { border-bottom: 2px solid #ff8a65; }
+            .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+            .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+
+            /* --- Labels & captions --- */
+            .reveal .aim-label {
+                font-size: 0.85em;
+                color: #fff;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            .reveal .material-ref {
+                font-size: 0.85em;
+                color: rgba(255,255,255,0.85);
+                font-style: italic;
+                margin-top: 0.5em;
+            }
+            .reveal .source-cite {
+                font-size: 0.85em;
+                color: rgba(255,255,255,0.85);
+                font-style: italic;
+                margin-top: 0.3em;
+            }
+            .reveal .image-caption {
+                font-size: 0.85em;
+                color: rgba(255,255,255,0.85);
+                text-align: center;
+                margin-top: 0.2em;
+            }
+
+            /* --- Vocabulary slides --- */
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            }
+
+            /* --- Pedagogical strategy slides (teal background) --- */
+            .reveal section.pedagogical { text-shadow: none; }
+            .reveal section.pedagogical p,
+            .reveal section.pedagogical li,
+            .reveal section.pedagogical h1, .reveal section.pedagogical h2,
+            .reveal section.pedagogical h3, .reveal section.pedagogical h4,
+            .reveal section.pedagogical h5, .reveal section.pedagogical h6 {
+                text-shadow: none;
+            }
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal section.pedagogical .strategy-tip {
+                font-size: 0.85em;
+                font-style: italic;
+                color: rgba(255,255,255,0.85);
+                margin-bottom: 0.5em;
+            }
+            .reveal section.pedagogical .evidence {
+                font-size: 0.8em;
+                background: rgba(0,0,0,0.3);
+                padding: 0.4em 0.6em;
+                border-radius: 4px;
+                border-left: 3px solid rgba(255,255,255,0.4);
+            }
+
+            /* --- Global text shadow for readability --- */
+            .reveal p,
+            .reveal li,
+            .reveal h1, .reveal h2, .reveal h3,
+            .reveal h4, .reveal h5, .reveal h6 {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+
+            /* --- Text shield for full-opacity image backgrounds --- */
+            /* Uses display:inline-block + max-width for subtitle-style shielding.
+               inline-block keeps the background tight to the text.
+               max-width prevents full-width bars on very long text.
+               Elements stack naturally (block-level spacing) without ::after artifacts. */
+            .reveal .text-shield {
+                background: rgba(0, 0, 0, 0.55);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                line-height: 1.6;
+            }
+            .reveal .text-shield-light {
+                background: rgba(200, 200, 200, 0.65);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                color: #222;
+                line-height: 1.6;
+            }
+            /* Fragment variant: text already visible, background highlight on click */
+            .reveal .fragment.text-shield-light { opacity: 1; visibility: inherit; }
+            .reveal .fragment.text-shield-light.visible { background: rgba(200, 200, 200, 0.65); padding: 0.15em 0.6em; border-radius: 4px; }
+
+            /* --- Fragment styles --- */
+            /* --- Yellow text for answers on green answer tables --- */
+            .reveal .answer-yellow { color: #ffdd00; }
+            .reveal .fragment.answer-yellow.visible { color: #ffdd00; }
+
+            .reveal table.answer-table th {
+                background: rgba(0, 0, 0, 0.2);
+                font-weight: bold;
+            }
+            .reveal .fragment.strike {
+                text-decoration: line-through;
+                opacity: 0.6;
+            }
+
+            /* --- YouTube iframe container (16:9 responsive) --- */
+            .reveal .iframe-container {
+                position: relative;
+                width: 90%;
+                padding-bottom: 50.625%;
+                height: 0;
+                overflow: hidden;
+                margin: 0 auto 0.5em;
+            }
+            .reveal .iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* --- Diagnostic talk structure slides (pedagogical, teal) --- */
+            .reveal .structure-talk h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal .structure-talk p,
+            .reveal .structure-talk li  { color: #fff; }
+            .reveal .structure-talk .structure-step {
+                font-size: 1.1em;
+                margin-bottom: 0.6em;
+            }
+            .reveal .structure-talk .transition-words {
+                font-size: 0.9em;
+                color: #ffdd00;
+                font-style: italic;
+                margin-top: 0.8em;
+                padding: 0.4em 0.6em;
+                background: rgba(0,0,0,0.2);
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+<!-- PEDAGOGICAL INTENT: Student sees the lesson topic and CEFR level on a full-screen centered slide with the ACT logo. This orients them to the lesson. -->
+<!-- WHY THIS FEATURE: Static — no animation needed for an orientation slide. data-background-color and justified-center layout ensure full-screen readability without letterboxing. -->
+<!-- COGNITIVE PRINCIPLE: Coherence — only essential information (topic, level, logo) is shown. No date, teacher name, or materials. -->
+<section id="slide-title" data-background-color="#1a1a2e" data-background-transition="none" style="justify-content: center;">
+    <img src="assets/logo.png" style="height: 120px; margin: 0 auto 0.5em; display: block;" alt="ACT" />
+    <h2 style="font-size: 2.2em;">The Foods of Indonesia <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></h2>
+    <p style="font-size: 1em; color: rgba(255,255,255,0.9); margin-top: 0.5em;">Reading: Receptive Skills</p>
+</section>
+
+<section id="slide-objective" data-background-color="#1a1a2e" data-background-transition="none">
+    <h2>Today's Goals</h2>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">1.</span> I can find the main idea of a text about food.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">2.</span> I can find specific details in a reading text.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">3.</span> I can share my ideas and opinions about what I read.</p>
+    <aside class="notes">
+        Stage aim: To orient students to the lesson outcomes.
+        Timing: 1 min.
+        Interaction: T-Ss.
+        Procedure: Welcome Ss. Read each outcome aloud. Ask Ss to put up fingers: 1 finger = easy, 3 fingers = hard for each goal. This gives you a quick sense of how confident they feel about today's skills.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student watches a 1-minute YouTube video of people eating giant frogs in Indonesia. This sparks curiosity and activates prior knowledge about Indonesian food culture. -->
+<!-- WHY THIS FEATURE: YouTube iframe embed plays the video in-slide. No audio plugin needed — YouTube handles playback natively. -->
+<!-- COGNITIVE PRINCIPLE: Multimedia — the video provides a concrete, memorable experience of Indonesian food culture before students encounter the written text. -->
+<section id="slide-lead-in" data-background-color="#1a1a2e" data-background-transition="none">
+    <h2>Let's get Started</h2>
+    <p style="font-size: 0.9em; margin-bottom: 0.5em; color: #ffdd00;">What do you know about Indonesian food?</p>
+    <iframe width="760" height="430" src="https://www.youtube.com/embed/VqhJca0beE8" frameborder="0" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="border: none; display: block; margin: 0 auto;"></iframe>
+    <aside class="notes">
+        Stage 1 · 7 min · Ss-Ss
+        Aim: To spark curiosity about Indonesian food culture through an engaging video and activate prior knowledge.
+        Play the first minute of the YouTube video. Stop after 1 min. Ask: "What did you see?" In pairs, learners discuss what it suggests about Indonesian food culture and what they already know. Elicit 3-4 ideas as a class. Connect responses to the lesson topic.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see 2 concrete discussion questions that connect the video to the lesson topic. They discuss in pairs before sharing with the class. -->
+<!-- WHY THIS FEATURE: Static slide — both questions visible simultaneously for pair discussion. No fragments needed; students discuss at their own pace. -->
+<!-- COGNITIVE PRINCIPLE: Personalization — questions use direct "you" language and ask about students' own knowledge and reactions. -->
+<section id="slide-lead-in-q" data-background-color="#1a1a2e" data-background-transition="none">
+    <h2>Talk with your partner</h2>
+    <ol style="font-size: 1em; text-align: left;">
+        <li style="margin: 0.5em 0;">What did you see in the video?</li>
+        <li style="margin: 0.5em 0;">What does this tell us about food in Indonesia?</li>
+    </ol>
+    <aside class="notes">
+        Ss discuss in pairs for 2 min. Elicit ideas as a class.
+        Connect responses: "Indonesia is a country with amazing and different kinds of food — from street food to traditional dishes. Today we're going to read a text about food in Indonesia."
+    </aside>
+</section>
+
+<section id="slide-transition-vocab" data-background-color="#c0392b" data-background-transition="none">
+    <h2>Words to Know</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the vocabulary task instruction. They open their workbooks and complete Exercise A individually. -->
+<!-- WHY THIS FEATURE: Timer pill (300s = 5 min) structures the pace. Static instruction — all content visible on entry. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — the matching task is timed and bounded, giving students clear work parameters. -->
+<section id="slide-exA-task" data-background-color="#1a1a2e" data-background-transition="none" data-timer="300">
+    <h2>Exercise A — Vocabulary Preview</h2>
+    <p><em>Match the words with the definitions. Work alone.</em></p>
+    <aside class="notes">
+        Stage 2 · 5 min · S (Individual)
+        Aim: To introduce key vocabulary needed to understand the reading text.
+        Learners complete Exercise A individually, matching the eight words with their definitions. 5 min. Then pair check + whole-class feedback.
+    </aside>
+</section>
+
+<style>
+    .reveal .answer-list { width: 100%; font-size: 0.95em; }
+    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
+    .reveal .a-row:last-child { border-bottom: none; }
+    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
+    .reveal .a-q { flex: 0 0 8em; min-width: 0; }
+    .reveal .a-ans { flex: 0 0 3em; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; }
+    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+    .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
+    .reveal .a-v { border-bottom: 2px solid #ff8a65; }
+    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+    .reveal .aim-label { color: #fff; }
+</style>
+
+<!-- PEDAGOGICAL INTENT: Students see the answers revealed one row at a time. Each row shows the word, the correct letter, and the full definition for confirmation. -->
+<!-- WHY THIS FEATURE: fragment fade-up reveals one row per click. Matching data-fragment-index pairs word+definition so they appear simultaneously. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the word and its definition appear at the same time on the same click, reinforcing the connection. -->
+<section id="slide-exA-answers-1-4" data-background-color="#0d5e1a" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise A — Answers (1–4)</h2>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">1.</span>
+            <span class="a-q">farming</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1">c</span>
+            <span class="fragment fade-up a-why" data-fragment-index="1">growing crops or producing animal products</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">2.</span>
+            <span class="a-q">food stall</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2">g</span>
+            <span class="fragment fade-up a-why" data-fragment-index="2">a small building open at the front, used for selling food</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">3.</span>
+            <span class="a-q">groceries</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="3">f</span>
+            <span class="fragment fade-up a-why" data-fragment-index="3">food you regularly buy in a store</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">4.</span>
+            <span class="a-q">herbs and spices</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="4">d</span>
+            <span class="fragment fade-up a-why" data-fragment-index="4">things used to add flavor to food</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answers row by row. For each word, ask a student to read their answer before clicking to reveal.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the remaining 4 answers revealed one row at a time. -->
+<!-- WHY THIS FEATURE: fragment fade-up reveals one row per click. Same pattern as previous slide. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — splitting 8 items into 2 slides of 4 reduces cognitive load per slide. -->
+<section id="slide-exA-answers-5-8" data-background-color="#0d5e1a" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise A — Answers (5–8)</h2>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">5.</span>
+            <span class="a-q">industry</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1">h</span>
+            <span class="fragment fade-up a-why" data-fragment-index="1">people and organizations involved in producing goods</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">6.</span>
+            <span class="a-q">plant</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2">e</span>
+            <span class="fragment fade-up a-why" data-fragment-index="2">to put seeds in the ground to grow</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">7.</span>
+            <span class="a-q">processed food</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="3">b</span>
+            <span class="fragment fade-up a-why" data-fragment-index="3">food changed from its natural state</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">8.</span>
+            <span class="a-q">soil</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="4">a</span>
+            <span class="fragment fade-up a-why" data-fragment-index="4">the substance on the surface of the Earth where plants grow</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check remaining answers.
+    </aside>
+</section>
+
+<section id="slide-transition-gist" data-background-color="#c0392b" data-background-transition="none">
+    <h2>What's the Main Idea?</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 1 — Student sees the strategy title and the first step: look at the picture and heading to guess the topic. The teacher demonstrates on the actual text. -->
+<!-- WHY THIS FEATURE: Auto-animate (1 of 4). Only Step 1 is visible. Subsequent slides will add steps while dimming previous ones. -->
+<!-- COGNITIVE PRINCIPLE: Worked Example — the strategy is modeled using the actual text's picture and heading as the concrete example. -->
+<section id="slide-strategy-skim-1" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="skim-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="skim-title">How to Skim</h2>
+        <p data-id="skim-strap" style="font-size: 0.9em; color: #ffdd00; margin-bottom: 0.3em;">Don't read every word. Read fast to get the general idea.</p>
+        <p data-id="skim-s1" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 1:</strong> Look at the picture and the heading.</u></p>
+        <p data-id="skim-a1" style="font-size: 0.85em; margin-left: 1.5em; color: #ffdd00;">"The Food of Indonesia" + a man cooking Kerak Telor</p>
+        <p data-id="skim-tip1" style="font-size: 0.8em; margin-top: 0.3em; color: rgba(255,255,255,0.85); font-style: italic;">The heading and picture tell you the topic before you read a single word.</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 2 — Student sees Step 1 dimmed and Step 2 appear: read only the first sentence of each paragraph. The teacher demonstrates on paragraph 1's first sentence. -->
+<!-- WHY THIS FEATURE: Auto-animate (2 of 4). Step 1 dims. Step 2 label and example appear. The title and strap persist via data-id. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the first-sentence strategy is the key to skimming. Dedicating a full slide to it signals its importance. -->
+<section id="slide-strategy-skim-2" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="skim-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="skim-title">How to Skim</h2>
+        <p data-id="skim-strap" style="font-size: 0.8em; color: rgba(255,255,255,0.6); margin-bottom: 0.2em;">Don't read every word. Read fast to get the general idea.</p>
+        <p data-id="skim-s1" style="font-size: 0.75em; margin-top: 0.2em; color: rgba(255,255,255,0.5);"><u><strong>Step 1:</strong> Look at the picture and the heading.</u></p>
+        <p data-id="skim-a1" style="font-size: 0.7em; margin-left: 1.5em; color: rgba(255,255,255,0.5);">"The Food of Indonesia" + Kerak Telor</p>
+        <p data-id="skim-s2" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 2:</strong> Read ONLY the first sentence of each paragraph.</u></p>
+        <p data-id="skim-a2" style="font-size: 0.85em; margin-left: 1.5em; color: #ffdd00;"><em>"Situated in a warm, tropical region, Indonesia has a lot of rain and sunshine..."</em></p>
+        <p data-id="skim-tip2" style="font-size: 0.8em; margin-top: 0.3em; color: rgba(255,255,255,0.85); font-style: italic;">That's from paragraph 1 — it tells you this text is about Indonesia's climate and farming.</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 3 — Student sees Steps 1-2 dimmed and Step 3 appear: find repeated words. The teacher scans for keywords that reveal the text's themes. -->
+<!-- WHY THIS FEATURE: Auto-animate (3 of 4). Previous steps dim further. Step 3 appears with example keywords. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the repeated-keywords strategy trains students to recognize thematic words without reading every sentence. -->
+<section id="slide-strategy-skim-3" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="skim-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="skim-title">How to Skim</h2>
+        <p data-id="skim-strap" style="font-size: 0.75em; color: rgba(255,255,255,0.4); margin-bottom: 0.1em;">Don't read every word.</p>
+        <p data-id="skim-s1" style="font-size: 0.7em; margin-top: 0.1em; color: rgba(255,255,255,0.3);"><u><strong>Step 1:</strong> Look at the picture.</u></p>
+        <p data-id="skim-s2" style="font-size: 0.7em; margin-top: 0.1em; color: rgba(255,255,255,0.3);"><u><strong>Step 2:</strong> Read first sentences.</u></p>
+        <p data-id="skim-s3" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 3:</strong> Find words that appear many times.</u></p>
+        <p data-id="skim-a3" style="font-size: 0.85em; margin-left: 1.5em; color: #ffdd00;">food &middot; Indonesia &middot; farming &middot; crops &middot; people</p>
+        <p data-id="skim-tip3" style="font-size: 0.8em; margin-top: 0.3em; color: rgba(255,255,255,0.85); font-style: italic;">These repeated words tell you the text is about Indonesian food and farming.</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 4 — Student sees the full strategy chain completed. Step 4 appears: check the summary against what you found while skimming. -->
+<!-- WHY THIS FEATURE: Auto-animate (4 of 4). All previous steps dimmed. Step 4 appears as the culmination of the strategy. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — the 4-step strategy is broken into 4 discrete slides. The teacher pauses at each step to demonstrate and check understanding. -->
+<section id="slide-strategy-skim-4" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="skim-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="skim-title">How to Skim</h2>
+        <p data-id="skim-s1" style="font-size: 0.65em; margin-top: 0.1em; color: rgba(255,255,255,0.25);"><u><strong>Step 1:</strong> Look at the picture.</u></p>
+        <p data-id="skim-s2" style="font-size: 0.65em; margin-top: 0.05em; color: rgba(255,255,255,0.25);"><u><strong>Step 2:</strong> Read first sentences.</u></p>
+        <p data-id="skim-s3" style="font-size: 0.65em; margin-top: 0.05em; color: rgba(255,255,255,0.25);"><u><strong>Step 3:</strong> Find repeated words.</u></p>
+        <p data-id="skim-s4" style="font-size: 0.85em; margin-top: 0.5em;"><u><strong>Step 4:</strong> Check the summary.</u></p>
+        <p data-id="skim-a4" style="font-size: 0.85em; margin-left: 1.5em; color: #ffdd00;">"Indonesia produces different plants and crops..."</p>
+        <p data-id="skim-tip4" style="font-size: 0.8em; margin-top: 0.3em; color: rgba(255,255,255,0.85); font-style: italic;">Your skim notes should match the summary. If not, skim again!</p>
+        <p style="margin-top: 0.8em; color: #ffdd00;"><i class="fa-solid fa-flag-checkered" style="color:#ffdd00;"></i> Want a challenge? Try to guess the missing summary words before you read.</p>
+    </div>
+    <aside class="notes">
+        Stage 3 · 10 min · Ss-Ss
+        Aim: To get the general idea of the text and identify its main topics.
+        Walk through each step. For Step 1, show the textbook page picture. For Step 2, turn to the text and demonstrate reading only the first sentence of paragraph 1 ("Situated in a warm, tropical region..."). For Step 3, scan the text for repeated words. For Step 4, preview the summary in Exercise C2.
+        Then tell Ss: "Now you try. Open your books. Do Exercises B and C."
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the task instruction for Exercise B and C. They open their workbooks and complete the exercises. -->
+<!-- WHY THIS FEATURE: Timer pill (600s = 10 min) structures the work period. Static instruction — all information visible on entry. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — the timer gives a clear work boundary and helps students pace themselves. -->
+<section id="slide-exBC-task" data-background-color="#1a1a2e" data-background-transition="none" data-timer="600">
+    <h2>Exercise B and C</h2>
+    <p><em>Exercise B: Look at the picture and heading. What is the text's purpose?</em></p>
+    <p><em>Exercise C1: Skim the text. Check the topics that are mentioned.</em></p>
+    <p><em>Exercise C2: Complete the summary.</em></p>
+    <aside class="notes">
+        Step 1 (2 min): Ss look at picture + heading, answer Ex B (choose text purpose). Quick feedback.
+        Step 2 (3 min): Ss skim the text for Ex C1 — check which topics are mentioned.
+        Step 3 (5 min): Ss use their answers to complete the summary in Ex C2.
+        Quick pair-check before feedback.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see which topics were mentioned in the text. Checkmarks confirm the correct choices. -->
+<!-- WHY THIS FEATURE: fragment fade-up reveals each checkmark row by row. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — each topic and its check/cross appear simultaneously. -->
+<section id="slide-exC1-answers" data-background-color="#0d5e1a" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise C1 — Checked Topics</h2>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">1.</span>
+            <span class="a-q">challenges today</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check" style="color:#fff;"></i> yes</span>
+            <span class="fragment fade-up a-why" data-fragment-index="1">Paragraph 5 discusses challenges facing the food industry today.</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">2.</span>
+            <span class="a-q">changes to diet and shopping</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2"><i class="fa-solid fa-check" style="color:#fff;"></i> yes</span>
+            <span class="fragment fade-up a-why" data-fragment-index="2">Paragraph 4 describes how diets and shopping habits have changed.</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">3.</span>
+            <span class="a-q">local dishes</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="3"><i class="fa-solid fa-check" style="color:#fff;"></i> yes</span>
+            <span class="fragment fade-up a-why" data-fragment-index="3">Paragraph 3 mentions Kerak Telor and street food culture.</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">4.</span>
+            <span class="a-q">plants and crops</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="4"><i class="fa-solid fa-check" style="color:#fff;"></i> yes</span>
+            <span class="fragment fade-up a-why" data-fragment-index="4">Paragraphs 1 and 2 discuss farming, crops, and what Indonesia produces.</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answers row by row. Ask Ss to read their checked list before revealing.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the summary blanks filled in one by one. Each blank reveals with a WHY line showing the text evidence. -->
+<!-- WHY THIS FEATURE: fragment fade-up reveals each answer+evidence pair. Matching data-fragment-index keeps answer and explanation together. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the summary answer and the text location appear simultaneously, showing where the information comes from. -->
+<section id="slide-exC2-answers-1-3" data-background-color="#0d5e1a" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise C2 — Summary (1–3)</h2>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">1.</span>
+            <span class="a-q">produces different...</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1">plants and crops</span>
+            <span class="fragment fade-up a-why" data-fragment-index="1">From para 1-2: Indonesia grows many kinds of crops.</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">2.</span>
+            <span class="a-q">herbs and spices used in...</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2">local dishes</span>
+            <span class="fragment fade-up a-why" data-fragment-index="2">From para 3: "a long history of cooking with herbs and spices" — street foods like Kerak Telor.</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">3.</span>
+            <span class="a-q">However, ... and ... are changing</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="3">diets</span>
+            <span class="fragment fade-up a-why" data-fragment-index="3">From para 4: "As Indonesia has become richer... local diets have gradually changed."</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check summary answers row by row. Ask Ss to share their answer before revealing.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the remaining 3 summary blanks filled in. -->
+<!-- WHY THIS FEATURE: fragment fade-up reveals each answer+evidence pair. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — splitting 6 summary items into 2 slides of 3 keeps each slide manageable. -->
+<section id="slide-exC2-answers-4-6" data-background-color="#0d5e1a" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise C2 — Summary (4–6)</h2>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">4.</span>
+            <span class="a-q">and ... habits are changing</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1">shopping</span>
+            <span class="fragment fade-up a-why" data-fragment-index="1">From para 4: "People still shop in traditional stores, but supermarkets sell more."</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">5.</span>
+            <span class="a-q">One of the main ...</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2">challenges</span>
+            <span class="fragment fade-up a-why" data-fragment-index="2">From para 5: "many challenges facing the Indonesian food industry."</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">6.</span>
+            <span class="a-q">for the food industry ...</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="3">today</span>
+            <span class="fragment fade-up a-why" data-fragment-index="3">From para 5: The challenges are about current and future issues.</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check remaining summary answers.
+    </aside>
+</section>
+
+<section id="slide-transition-detail" data-background-color="#c0392b" data-background-transition="none">
+    <h2>True or False? Or Not Given?</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 1 — Student sees the statement in yellow. The teacher reads it aloud and asks: "What exactly does this sentence say?" -->
+<!-- WHY THIS FEATURE: Auto-animate (1 of 4). Entering element: Step 1 label and the statement text. No keywords underlined yet. -->
+<!-- COGNITIVE PRINCIPLE: Worked Example — the first of 4 slides demonstrating the T/F/NG decision process on a real exercise item. -->
+<section id="slide-detail-step1" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="tfng-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">True, False, or Not Given?</h2>
+        <p style="font-size: 0.9em; color: rgba(255,255,255,0.7);">We'll try one together from Exercise D.</p>
+        <p data-id="statement" style="font-size: 0.95em; color: #ffdd00; font-style: italic;">
+        "Very few people now work in farming in Indonesia."
+        </p>
+        <p data-id="s1" style="font-size: 0.85em; margin-top: 0.5em;"><u><strong>Step 1:</strong> Read each part carefully. What is being claimed?</u></p>
+        <p data-id="a1" style="font-size: 0.85em; margin-left: 1.5em; color: rgba(255,255,255,0.85);">The sentence claims that not many people work in farming now.</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 2 — Student sees key words underlined in blue via auto-animate. The teacher asks: "Which paragraph talks about farming and people?" -->
+<!-- WHY THIS FEATURE: Auto-animate (2 of 4). Previous step dims. New elements: Step 2 label + underlined keywords (farming, people, work) + paragraph location. The keyword borders animate from transparent to blue. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the blue underlines on "farming", "people", and "work" draw attention to the exact words to search for in the text. -->
+<section id="slide-detail-step2" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="tfng-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">True, False, or Not Given?</h2>
+        <p data-id="statement" style="font-size: 0.95em; color: #ffdd00; font-style: italic;">
+        "Very few people now work in <span data-id="kw1" style="border-bottom: 2px solid #4fc3f7;">farming</span> in Indonesia."
+        </p>
+        <p data-id="s1" style="font-size: 0.75em; margin-top: 0.3em; color: rgba(255,255,255,0.5);"><u><strong>Step 1:</strong> Read each part carefully.</u></p>
+        <p data-id="a1" style="font-size: 0.7em; margin-left: 1.5em; color: rgba(255,255,255,0.4);">Not many people work in farming.</p>
+        <p data-id="s2" style="font-size: 0.85em; margin-top: 0.5em;"><u><strong>Step 2:</strong> Find the key words. Which paragraph talks about them?</u></p>
+        <p data-id="a2" style="font-size: 0.85em; margin-left: 1.5em; color: #4fc3f7;"><span data-id="kw1-l" style="border-bottom: 2px solid #4fc3f7;">farming</span>, <span data-id="kw2-l" style="border-bottom: 2px solid #4fc3f7;">people</span>, <span data-id="kw3-l" style="border-bottom: 2px solid #4fc3f7;">work</span> &rarr; Look in <strong>paragraph 1</strong>.</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 3 — Student sees the text quote alongside the original statement. The comparison highlights that the text and the statement CONTRADICT each other. -->
+<!-- WHY THIS FEATURE: Auto-animate (3 of 4). Previous 2 steps dim. New elements: Step 3 label + text quote comparison box. -->
+<!-- COGNITIVE PRINCIPLE: Spatial Contiguity — the statement and the text quote are placed side by side on screen, enabling direct comparison. -->
+<section id="slide-detail-step3" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="tfng-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">True, False, or Not Given?</h2>
+        <p data-id="statement" style="font-size: 0.85em; color: #ffdd00; font-style: italic;">
+        "Very few people now work in <span data-id="kw1" style="border-bottom: 2px solid #4fc3f7;">farming</span> in Indonesia."
+        </p>
+        <p data-id="s1" style="font-size: 0.7em; margin-top: 0.3em; color: rgba(255,255,255,0.4);"><u><strong>Step 1:</strong> Read each part carefully.</u></p>
+        <p data-id="s2" style="font-size: 0.7em; margin-top: 0.2em; color: rgba(255,255,255,0.4);"><u><strong>Step 2:</strong> Find the key words.</u></p>
+        <p data-id="s3" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 3:</strong> Compare with the text. What does paragraph 1 say?</u></p>
+        <p data-id="a3" style="font-size: 0.85em; margin-left: 1.5em; margin-top: 0.3em;">
+            <span style="color: rgba(255,255,255,0.6);">Statement: "Very few people work in farming"</span><br/>
+            <span style="color: #4fc3f7;">Text: <em>"A large percentage of the population works in the farming industry."</em></span>
+        </p>
+        <p style="font-size: 0.85em; margin-left: 1.5em; margin-top: 0.3em; color: #ffdd00;">
+            "Very few" &ne; "A large percentage" &rarr; The text says the <strong>opposite</strong>.
+        </p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 4 — Student sees the final decision revealed: FALSE, with a summary of the reasoning chain. The animation shows the complete process from start to finish. -->
+<!-- WHY THIS FEATURE: Auto-animate (4 of 4). Previous steps fully dim. Step 4 label + final answer in blue appear. The completed reasoning chain shows what TRUE/FALSE/NG means. -->
+<!-- COGNITIVE PRINCIPLE: Worked Example — the student witnesses the complete decision-making process. The NG trap warning reinforces the distinction between FALSE and NG. -->
+<section id="slide-detail-step4" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="tfng-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">True, False, or Not Given?</h2>
+        <p data-id="statement" style="font-size: 0.75em; color: rgba(255,255,255,0.5); font-style: italic;">
+        "Very few people now work in farming in Indonesia."
+        </p>
+        <p data-id="s1" style="font-size: 0.65em; margin-top: 0.2em; color: rgba(255,255,255,0.3);"><u><strong>Step 1:</strong> Read each part carefully.</u></p>
+        <p data-id="s2" style="font-size: 0.65em; margin-top: 0.1em; color: rgba(255,255,255,0.3);"><u><strong>Step 2:</strong> Find the key words.</u></p>
+        <p data-id="s3" style="font-size: 0.65em; margin-top: 0.1em; color: rgba(255,255,255,0.3);"><u><strong>Step 3:</strong> Compare with the text.</u></p>
+        <p data-id="s4" style="font-size: 0.85em; margin-top: 0.5em;"><u><strong>Step 4:</strong> Decide. Is it T, F, or NG?</u></p>
+        <p style="font-size: 0.95em; margin-left: 1.5em; margin-top: 0.3em; color: #4fc3f7;">
+            <strong>Answer: FALSE</strong>
+        </p>
+        <p style="font-size: 0.85em; margin-left: 1.5em; color: rgba(255,255,255,0.85);">
+            The text says "A large percentage" — that's the <strong>opposite</strong> of "very few." When the text says the opposite &rarr; <strong>False</strong>.
+        </p>
+        <p style="font-size: 0.8em; margin-top: 0.5em; padding: 0.3em 0.8em; border: 1px solid #ffdd00; border-radius: 4px; display: inline-block;">
+            Remember: <strong>NOT GIVEN</strong> = the text doesn't talk about it at all. <strong>FALSE</strong> = the text says the opposite.
+        </p>
+    </div>
+    <aside class="notes">
+        Emphasize the NG vs FALSE distinction. For NG to apply, the information must be absent from the entire text.
+        Now say: "Now you try Exercise D. Read each sentence. Follow the same steps: 1) Read carefully, 2) Find keywords, 3) Compare with text, 4) Decide. You have 14 minutes."
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the task instruction for Exercise D. They apply the T/F/NG strategy independently. -->
+<!-- WHY THIS FEATURE: Timer pill (840s = 14 min) structures this longer work period. Static instruction. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — the 14-minute timer gives a clear boundary. The strategy was just modeled, so students apply the same steps. -->
+<section id="slide-exD-task" data-background-color="#1a1a2e" data-background-transition="none" data-timer="840">
+    <h2>Exercise D — Close Reading</h2>
+    <p><em>Read the text again. Write T (True), F (False), or NG (Not Given) for each sentence.</em></p>
+    <p style="font-size: 0.85em; color: #ffdd00;">Remember: Underline the evidence in the text for each answer.</p>
+    <aside class="notes">
+        Stage 4 · 14 min · Ss-Ss
+        Aim: To extract specific information and distinguish between stated, false, and unstated information.
+        10 min individual work. Then 4 min pair check. Encourage Ss to underline the text evidence for each answer.
+        After the timer, do class feedback with justification for each answer.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the first 3 T/F/NG answers revealed one at a time. Each row shows the answer (T/F/NG), the text evidence, and a WHY explanation. -->
+<!-- WHY THIS FEATURE: fragment fade-up reveals each row. Matching data-fragment-index keeps answer, icon, and evidence together in one click. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its text evidence appear simultaneously, reinforcing the connection between the decision and the source. -->
+<section id="slide-exD-answers-1-3" data-background-color="#0d5e1a" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise D — Answers (1–3)</h2>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">1.</span>
+            <span class="a-q">Very few people work in farming.</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check" style="color:#fff;"></i> False</span>
+            <span class="fragment fade-up a-why" data-fragment-index="1">Text: "A large percentage of the population works in the farming industry." The text says the opposite.</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">2.</span>
+            <span class="a-q">Indonesia does not produce any meat.</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2"><i class="fa-solid fa-check" style="color:#fff;"></i> Not Given</span>
+            <span class="fragment fade-up a-why" data-fragment-index="2">Text mentions dairy and meat are imported (para 4), but doesn't say whether any meat IS produced in Indonesia.</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">3.</span>
+            <span class="a-q">Herbs and spices are new in Indonesian cooking.</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="3"><i class="fa-solid fa-check" style="color:#fff;"></i> False</span>
+            <span class="fragment fade-up a-why" data-fragment-index="3">Text: "Indonesia has a long history of cooking with herbs and spices" (para 3). The opposite of "new."</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answers row by row. For each, ask: "Which paragraph did you find the evidence in?"
+        Emphasize the difference between statement 2 (NG) and statement 3 (F).
+        For NG: "Could not find the answer anywhere in the text" vs False: "Found the opposite."
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see answers 4-5 revealed. These are less ambiguous but still reinforce the strategy. -->
+<!-- WHY THIS FEATURE: fragment fade-up reveals each row. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — 5 items split across 2 slides keeps answer density manageable. -->
+<section id="slide-exD-answers-4-5" data-background-color="#0d5e1a" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise D — Answers (4–5)</h2>
+    <div class="answer-list">
+        <div class="a-row">
+            <span class="a-num">4.</span>
+            <span class="a-q">People now eat more processed foods.</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check" style="color:#fff;"></i> True</span>
+            <span class="fragment fade-up a-why" data-fragment-index="1">Text: "the amount of dairy, meat, and sugar people eat has grown" and "supermarkets mostly sell processed foods" (para 4).</span>
+        </div>
+        <div class="a-row">
+            <span class="a-num">5.</span>
+            <span class="a-q">Indonesia produces all the rice and sugar it needs.</span>
+            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2"><i class="fa-solid fa-check" style="color:#fff;"></i> False</span>
+            <span class="fragment fade-up a-why" data-fragment-index="2">Text: "In the past, produced enough rice and sugar... but now it needs to import these foods" (para 5). Opposite of what the statement says.</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check final 2 answers. Review the TRUE/FALSE/NG rules one more time.
+        Quick recap: "What's the difference between False and Not Given?"
+    </aside>
+</section>
+
+<section id="slide-transition-discuss" data-background-color="#c0392b" data-background-transition="none">
+    <h2>Let's Discuss</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 1 — Student sees the discussion framework and Step 1: think about what the text said. A modelled sentence starter shows how to begin. -->
+<!-- WHY THIS FEATURE: Auto-animate (1 of 4). Only Step 1 is visible. Subsequent slides build the framework step by step. -->
+<!-- COGNITIVE PRINCIPLE: Worked Example — the teacher models one complete text-to-opinion response using Exercise E1. -->
+<section id="slide-strategy-think-1" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="think-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="think-title">How to Discuss What You Read</h2>
+        <p data-id="think-s1" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 1:</strong> Think — What did the text say?</u></p>
+        <p data-id="think-a1" style="font-size: 0.85em; margin-left: 1.5em; margin-top: 0.3em; color: #fff;">"The text says that Indonesian people eat more processed food now."</p>
+        <p data-id="think-tip1" style="font-size: 0.8em; margin-top: 0.3em; color: rgba(255,255,255,0.85); font-style: italic;">Start with one fact from the reading.</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 2 — Student sees Step 1 dimmed and Step 2 appear: connect to your own country. The modelled response adds a personal comparison. -->
+<!-- WHY THIS FEATURE: Auto-animate (2 of 4). Step 1 dims, Step 2 appears. The framework builds vertically. -->
+<!-- COGNITIVE PRINCIPLE: Personalization — connecting text information to personal experience creates meaningful learning. -->
+<section id="slide-strategy-think-2" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="think-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="think-title">How to Discuss What You Read</h2>
+        <p data-id="think-s1" style="font-size: 0.75em; margin-top: 0.2em; color: rgba(255,255,255,0.5);"><u><strong>Step 1:</strong> Think — What did the text say?</u></p>
+        <p data-id="think-a1" style="font-size: 0.7em; margin-left: 1.5em; color: rgba(255,255,255,0.5);">"Indonesian people eat more processed food now."</p>
+        <p data-id="think-s2" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 2:</strong> Connect — Is it the same in your country?</u></p>
+        <p data-id="think-a2" style="font-size: 0.85em; margin-left: 1.5em; margin-top: 0.3em; color: #fff;">"In my country, we also eat more fast food than before."</p>
+        <p data-id="think-tip2" style="font-size: 0.8em; margin-top: 0.3em; color: rgba(255,255,255,0.85); font-style: italic;">Use: "In my country..." or "It's the same / different because..."</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 3 — Student sees Steps 1-2 dimmed and Step 3 appear: explain why you think that. The modelled response adds a reason. -->
+<!-- WHY THIS FEATURE: Auto-animate (3 of 4). Previous steps dim. Step 3 introduces cause-effect reasoning. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — cause-effect reasoning is broken out as its own slide, giving students time to process each part of the discussion. -->
+<section id="slide-strategy-think-3" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="think-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="think-title">How to Discuss What You Read</h2>
+        <p data-id="think-s1" style="font-size: 0.65em; margin-top: 0.1em; color: rgba(255,255,255,0.3);"><u><strong>Step 1:</strong> Think.</u></p>
+        <p data-id="think-s2" style="font-size: 0.65em; margin-top: 0.1em; color: rgba(255,255,255,0.3);"><u><strong>Step 2:</strong> Connect to your country.</u></p>
+        <p data-id="think-s3" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 3:</strong> Explain — Why do you think that?</u></p>
+        <p data-id="think-a3" style="font-size: 0.85em; margin-left: 1.5em; margin-top: 0.3em; color: #fff;">"I think this happens because people have less time to cook."</p>
+        <p data-id="think-tip3" style="font-size: 0.8em; margin-top: 0.3em; color: rgba(255,255,255,0.85); font-style: italic;">Use: "I think... because..." or "One reason is..."</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 4 — Student sees the full discussion framework. Step 4 appears: ask your partner. The teacher releases students to discuss Exercise E1 and E2 in pairs. -->
+<!-- WHY THIS FEATURE: Auto-animate (4 of 4). All previous steps dimmed. Step 4 completes the framework with the peer discussion prompt. -->
+<!-- COGNITIVE PRINCIPLE: Personalization — the framework ends with a peer prompt, making the discussion social rather than individual. -->
+<section id="slide-strategy-think-4" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="think-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="think-title">How to Discuss What You Read</h2>
+        <p data-id="think-s1" style="font-size: 0.6em; margin-top: 0.05em; color: rgba(255,255,255,0.2);"><u><strong>Step 1:</strong> Think.</u></p>
+        <p data-id="think-s2" style="font-size: 0.6em; margin-top: 0.05em; color: rgba(255,255,255,0.2);"><u><strong>Step 2:</strong> Connect.</u></p>
+        <p data-id="think-s3" style="font-size: 0.6em; margin-top: 0.05em; color: rgba(255,255,255,0.2);"><u><strong>Step 3:</strong> Explain.</u></p>
+        <p data-id="think-s4" style="font-size: 0.85em; margin-top: 0.5em;"><u><strong>Step 4:</strong> Discuss — Ask your partner.</u></p>
+        <p data-id="think-a4" style="font-size: 0.9em; margin-left: 1.5em; margin-top: 0.3em; color: #ffdd00;">"What do you think?"</p>
+        <p data-id="think-tip4" style="font-size: 0.8em; margin-top: 0.3em; color: rgba(255,255,255,0.85); font-style: italic;">Now try it yourself with Exercises E1 and E2.</p>
+        <p style="margin-top: 0.8em; color: #ffdd00;"><i class="fa-solid fa-flag-checkered" style="color:#ffdd00;"></i> Want a challenge? Add a second reason: "Another reason is..."</p>
+    </div>
+    <aside class="notes">
+        Stage 5 · 10 min · Ss-Ss
+        Aim: To discuss ideas from the reading and relate them to personal experience.
+        Walk through all 4 steps using Exercise E1 as the model:
+        "The text says Indonesians eat more dairy, meat, and sugar now. In Thailand, we also eat more fast food than before. I think this happens because people are busier and don't have time to cook. What do you think?"
+        Then Ss discuss in small groups: 6 min discussion, 4 min feedback.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the two discussion questions from Exercise E. Sentence starters are visible as scaffolding. All content visible simultaneously for open-ended discussion. -->
+<!-- WHY THIS FEATURE: Static — no fragments. Discussion is open-ended; students need access to all questions and frames at once. -->
+<!-- COGNITIVE PRINCIPLE: Personalization — questions ask students to connect text information to their own country and opinions. Sentence starters reduce language barrier. -->
+<section id="slide-exE-task" data-background-color="#1a1a2e" data-background-transition="none">
+    <h2>Exercise E — Critical Thinking</h2>
+    <p style="text-align: left; font-size: 0.95em; color: #ffdd00; font-weight: bold;">E1:</p>
+    <p style="text-align: left; margin: 0.2em 0 0.8em 1.5em;">What changes in diet have there been in Indonesia? Have you had similar changes in your country?</p>
+    <p style="text-align: left; font-size: 0.95em; color: #ffdd00; font-weight: bold;">E2:</p>
+    <p style="text-align: left; margin: 0.2em 0 0.8em 1.5em;">Why do people eat more processed food today? What health problems can it cause?</p>
+    <hr style="border-color: rgba(255,255,255,0.2); margin: 0.5em 0;"/>
+    <p style="font-size: 0.85em; color: rgba(255,255,255,0.85); margin-top: 0.3em;">Use these: "I think... because..." / "In my country..." / "One reason is..."</p>
+    <aside class="notes">
+        Ss discuss in small groups (4-6 min). Then whole-class feedback (4 min).
+        Collect 2-3 ideas from each question. Brief content and language correction.
+        Tell Ss: "Use the sentence starters from the previous slide."
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Students see the lesson outcomes restated with checkmarks. This mirrors the objective slide and creates a sense of completion. -->
+<!-- WHY THIS FEATURE: Static — all outcomes visible simultaneously. No fragments. Teacher elicits each one before showing. -->
+<!-- COGNITIVE PRINCIPLE: Consolidation — the summary mirrors the objective slide's exact wording. The blue checkmarks visually confirm achievement. -->
+<section id="slide-summary" data-background-color="#1a1a2e" data-background-transition="none">
+    <h2>I can...</h2>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> I can find the main idea of a text about food.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> I can find specific details in a reading text.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> I can share my ideas and opinions about what I read.</p>
+    <aside class="notes">
+        Elicit: "What did you learn today?" Connect back to the objective slide.
+        Ask Ss to rate each outcome with fingers (1=easy, 3=hard) again — compare with the start of class.
+    </aside>
+</section>
+
+<section id="slide-end" data-background-color="#2c3e50" data-background-transition="none">
+    <h2>The Foods of Indonesia</h2>
+    <div><span class="cefr-badge B1">B1</span></div>
+</section>
+
+</div>
+        </div>
+
+        <!-- Mark.js (CDN) + mark plugin (local) -->
+        <!-- Timer plugin (local) -->
+        <script src="timer-plugin.js"></script>
+
+        <!-- Audio slideshow plugin (CDN) -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/audio-slideshow/plugin.js"></script>
+
+        <!-- reveal.js 5.1.0 via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                audio: {
+                    prefix: 'assets/',
+                    suffix: '.mp3',
+                    advance: -1,
+                    autoplay: false,
+                    defaultAudios: false,
+                    defaultDuration: 0,
+                    playerOpacity: 1.0,
+                    playerStyle: 'position: fixed; bottom: 30px; left: 25%; width: 50%; height:75px; z-index: 33;',
+                    startAtFragment: false,
+                },
+                plugins: [
+                    // WARNING: Every plugin here is loaded and initialized by reveal.js
+                    // at startup. If any plugin's init() function throws an error, the
+                    // entire presentation will show a BLANK PAGE. Always test new plugins
+                    // in a browser and check the console before committing to the template.
+                    // Third-party plugins that depend on external CDN libraries (like
+                    // mark.js) require special care — see SKILL.md for the plugin
+                    // testing protocol.
+                    TimerPlugin,
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                    RevealAudioSlideshow,
+                ],
+            });
+        </script>
+    </body>
+</html>
