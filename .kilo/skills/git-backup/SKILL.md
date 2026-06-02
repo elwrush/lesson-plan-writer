@@ -6,7 +6,7 @@ description: Stages all changes, auto-generates a categorised multi-line commit 
 # Skill: Git Backup
 
 ## Purpose
-Stage all working-tree changes, generate a structured commit message categorised by file type (skills/commands/scripts/lessons), confirm with the user, commit to main, and push to origin.
+Stage all working-tree changes, derive the next version number (`v{N}` from total commit count), generate a structured commit message categorised by file type (skills/commands/scripts/lessons), confirm with the user, commit to main, and push to origin.
 
 ## Prerequisites
 - `gh` CLI authenticated
@@ -34,11 +34,40 @@ git add -A
 git diff --cached --stat
 ```
 
-### Step 4: Build categorised commit message
-Parse `git diff --cached --name-status` into categories: skills, commands, scripts, lesson content (inputs/output/PDF), plans, and other. Build a subject line ("Update (N files)" or "Add/Remove/Update path") and body grouped by category.
+### Step 4: Derive version and build categorised commit message
+
+**Version number:** Count total commits on main that will exist AFTER this commit:
+```powershell
+$version = (git rev-list --count HEAD) + 1
+```
+Format as `v{N}` (e.g., `v101`, `v102`). Every commit gets a unique incrementing version.
+
+**Body categories:** Parse `git diff --cached --name-status` into categories: skills, commands, scripts, lesson content (inputs/output/PDF), plans, and other.
+
+**Subject line format:** `v{N} — {brief description}` (e.g., `v101 — Update colors, answer layouts, and templates`)
+
+**Full message structure:**
+```
+v{N} — {description}
+
+Skills/commands:
+- ...
+
+Configuration:
+- ...
+
+Lessons:
+- ...
+
+Templates:
+- ...
+
+Scripts:
+- ...
+```
 
 ### Step 5: Confirm with user
-Display the generated message. Ask `Commit with this message? (Y/n)`:
+Display the generated message (with version number in the subject line). Ask `Commit v{N} with this message? (Y/n)`:
 - **Y** or empty — commit with the generated message (via `-F` temp file)
 - **N** — prompt for custom message; empty = abort
 
@@ -48,8 +77,11 @@ git push origin main
 ```
 
 ### Step 7: Report
+Show the new version number and commit count ahead:
 ```powershell
-git rev-list --count origin/main..HEAD
+$newCount = git rev-list --count HEAD
+$ahead = git rev-list --count origin/main..HEAD
+Write-Host "Committed v$newCount (${ahead} ahead of origin)"
 ```
 
 ## Edge cases
