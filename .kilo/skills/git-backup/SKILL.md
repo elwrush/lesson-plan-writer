@@ -6,7 +6,7 @@ description: Stages all changes, auto-generates a categorised multi-line commit 
 # Skill: Git Backup
 
 ## Purpose
-Stage all working-tree changes, derive the next version number (`v{N}` from total commit count), generate a structured commit message categorised by file type (skills/commands/scripts/lessons), confirm with the user, commit to main, and push to origin.
+Stage all working-tree changes, increment the semantic version from `VERSION` (`v{M}.{m}.{p}`), generate a structured commit message categorised by file type (skills/commands/scripts/lessons), confirm with the user, commit to main, and push to origin.
 
 ## Prerequisites
 - `gh` CLI authenticated
@@ -36,19 +36,31 @@ git diff --cached --stat
 
 ### Step 4: Derive version and build categorised commit message
 
-**Version number:** Count total commits on main that will exist AFTER this commit. PowerShell trap: `git` returns a string, so use `[int]()` to force numeric addition (otherwise `"100" + 1` becomes `"1001"`):
+**Version number:** Read `VERSION` from project root (e.g., `1.2.3`). Ask the user which part to bump:
 ```powershell
-$version = [int](git rev-list --count HEAD) + 1
+$oldVer = (Get-Content "VERSION").Trim()
+$bump = Read-Host "Bump (patch/minor/major)? [patch]"
+if (-not $bump) { $bump = "patch" }
+$parts = $oldVer.Split(".")
+switch ($bump) {
+    "major" { $newVer = "$([int]$parts[0]+1).0.0" }
+    "minor" { $newVer = "$($parts[0]).$([int]$parts[1]+1).0" }
+    default { $newVer = "$($parts[0]).$($parts[1]).$([int]$parts[2]+1)" }  # patch
+}
+Write-Host "$oldVer → $newVer ($bump)"
 ```
-Format as `v{N}` (e.g., `v101`, `v102`). Every commit gets a unique incrementing version.
+Write the new version back to `VERSION`:
+```powershell
+$newVer | Set-Content "VERSION" -NoNewline
+```
 
 **Body categories:** Parse `git diff --cached --name-status` into categories: skills, commands, scripts, lesson content (inputs/output/PDF), plans, and other.
 
-**Subject line format:** `v{N} — {brief description}` (e.g., `v101 — Update colors, answer layouts, and templates`)
+**Subject line format:** `v{M.m.p} — {brief description}` (e.g., `v1.0.1 — Update colors, answer layouts, and templates`)
 
 **Full message structure:**
 ```
-v{N} — {description}
+v{M.m.p} — {description}
 
 Skills/commands:
 - ...
@@ -77,11 +89,11 @@ git push origin main
 ```
 
 ### Step 7: Report
-Show the new version number and commit count ahead:
+Read the final version from `VERSION` and show commit status:
 ```powershell
-$newCount = [int](git rev-list --count HEAD)
+$ver = (Get-Content "VERSION").Trim()
 $ahead = [int](git rev-list --count origin/main..HEAD)
-Write-Host "Committed v$newCount (${ahead} ahead of origin)"
+Write-Host "Committed v$ver (${ahead} ahead of origin)"
 ```
 
 ## Edge cases
