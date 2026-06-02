@@ -36,11 +36,33 @@ git diff --cached --stat
 
 ### Step 4: Derive version and build categorised commit message
 
-**Version number:** Read `VERSION` from project root (e.g., `1.2.3`). Ask the user which part to bump:
+**Version bump:** Read `VERSION` from project root, then auto-detect the bump type by scanning staged file paths:
 ```powershell
 $oldVer = (Get-Content "VERSION").Trim()
-$bump = Read-Host "Bump (patch/minor/major)? [patch]"
-if (-not $bump) { $bump = "patch" }
+$changed = git diff --cached --name-only
+
+# Heuristics: core infrastructure changes → major, new content → minor, fixes → patch
+$majorPatterns = @('templates/', 'AGENTS.md', '.kilo/skills/', '.kilo/command/', 'scripts/', 'pyproject.toml')
+$minorPatterns = @('output/', 'inputs/', 'docs/', 'knowledge-base/')
+
+$hasMajor = ($changed | Where-Object { $_ -match ($majorPatterns -join '|') }).Count -gt 0
+$hasMinor = ($changed | Where-Object { $_ -match ($minorPatterns -join '|') }).Count -gt 0
+
+if ($hasMajor -and $hasMinor) {
+    # Both core infra AND new content changed → likely a significant release
+    $bump = Read-Host "Major, minor, or patch? (auto-detected: major+minor, suggest major) [minor]"
+    if (-not $bump) { $bump = "minor" }
+} elseif ($hasMajor) {
+    $bump = Read-Host "Major, minor, or patch? (auto-detected: major) [major]"
+    if (-not $bump) { $bump = "major" }
+} elseif ($hasMinor) {
+    $bump = Read-Host "Major, minor, or patch? (auto-detected: minor) [minor]"
+    if (-not $bump) { $bump = "minor" }
+} else {
+    $bump = Read-Host "Major, minor, or patch? (auto-detected: patch) [patch]"
+    if (-not $bump) { $bump = "patch" }
+}
+
 $parts = $oldVer.Split(".")
 switch ($bump) {
     "major" { $newVer = "$([int]$parts[0]+1).0.0" }
