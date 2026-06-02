@@ -1,0 +1,98 @@
+[
+  {
+    "text": "I",
+    "start": 31,
+    "end": 1771,
+    "confidence": 0.14233398
+  },
+  {
+    "text": "want",
+    "start": 1771,
+    "end": 2231,
+    "confidence": 0.8286133
+  },
+  {
+    "text": "to",
+    "start": 2231,
+    "end": 2431,
+    "confidence": 0.548
+  },
+  {
+    "text": "finish",
+    "start": 2431,
+    "end": 3011,
+    "confidence": 0.91552734
+  },
+  {
+    "text": "this",
+    "start": 3011,
+    "end": 3511,
+    "confidence": 0.415
+  },
+  {
+    "text": "job.You",
+    "start": 3511,
+    "end": 4771,
+    "confidence": 0.524
+  },
+  {
+    "text": "want",
+    "start": 4771,
+    "end": 5151,
+    "confidence": 0.67822266
+  },
+  {
+    "text": "to",
+    "start": 5151,
+    "end": 5311,
+    "confidence": 0.54
+  },
+  {
+    "text": "finish",
+    "start": 5311,
+    "end": 5671,
+    "confidence": 0.92333984
+  },
+  {
+    "text": "that.But",
+    "start": 5671,
+    "end": 6871,
+    "confidence": 0.357
+  },
+  {
+    "text": "a",
+    "start": 6871,
+    "end": 7051,
+    "confidence": 0.3095703
+  },
+  {
+    "text": "little",
+    "start": 7051,
+    "end": 7191,
+    "confidence": 0.64746094
+  },
+  {
+    "text": "sec.You",
+    "start": 7191,
+    "end": 8231,
+    "confidence": 0.459
+  },
+  {
+    "text": "need",
+    "start": 8231,
+    "end": 8471,
+    "confidence": 0.5908203
+  },
+  {
+    "text": "to",
+    "start": 8471,
+    "end": 8611,
+    "confidence": 0.535
+  },
+  {
+    "text": "prepare.เพราะฉะนั้นเราจะเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราคุณพุทธไม่รู้ว่าคุณพุทธรู้ว่าคุณพุทธรู้ว่าคุณพุทธรู้ว่าคุณพุทธรู้ว่า",
+    "start": 8611,
+    "end": 11611,
+    "confidence": 0.645
+  }
+]

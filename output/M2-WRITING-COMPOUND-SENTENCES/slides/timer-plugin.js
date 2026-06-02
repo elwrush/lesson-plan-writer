@@ -1,5 +1,6 @@
 (function () {
-    var CHIME_AUDIO_SRC = "assets/chime.mp3";
+    var BLIP_AUDIO_SRC = "assets/blip.mp3";
+    var BELL_AUDIO_SRC = "assets/BELL.mp3";
     var WARNING_THRESHOLD = 10;
 
     var pillEl = null;
@@ -7,13 +8,15 @@
     var startBtn = null;
     var pauseBtn = null;
     var resetBtn = null;
-    var chimeAudio = null;
+    var blipAudio = null;
+    var bellAudio = null;
 
     var totalSeconds = 0;
     var secondsLeft = 0;
     var intervalId = null;
-    var warned = false;    // true after first chime played (at ≤10s)
-    var finished = false;  // true once timer hit 0 and final chime played
+    var warned = false;    // true after first bell warning played (at &le;10s)
+    var finished = false;  // true once timer hit 0 and final bell played
+    var lastMinute = -1;   // track minute for blip-at-every-minute
 
     function createPill() {
         if (pillEl) return;
@@ -28,7 +31,7 @@
 
         pauseBtn = document.createElement("button");
         pauseBtn.className = "timer-pill__btn timer-pill__btn--hidden";
-        pauseBtn.innerHTML = "⏸";  // pause symbol
+        pauseBtn.innerHTML = "\u23F8";  // ⏸ pause
         pauseBtn.title = "Pause timer";
 
         resetBtn = document.createElement("button");
@@ -46,9 +49,18 @@
 
         document.body.appendChild(pillEl);
 
-        startBtn.addEventListener("click", onStart);
-        pauseBtn.addEventListener("click", onPause);
-        resetBtn.addEventListener("click", onReset);
+        startBtn.addEventListener("click", function () {
+            playBlip();
+            onStart();
+        });
+        pauseBtn.addEventListener("click", function () {
+            playBlip();
+            onPause();
+        });
+        resetBtn.addEventListener("click", function () {
+            playBlip();
+            onReset();
+        });
     }
 
     function formatTime(seconds) {
@@ -71,6 +83,8 @@
         if (finished) return; // timer expired, must reset first
         startBtn.classList.add("timer-pill__btn--hidden");
         pauseBtn.classList.remove("timer-pill__btn--hidden");
+        // Record current minute for minute-blip tracking
+        lastMinute = Math.floor(secondsLeft / 60);
         intervalId = setInterval(tick, 1000);
         tick(); // update display immediately
     }
@@ -88,6 +102,7 @@
         secondsLeft = totalSeconds;
         warned = false;
         finished = false;
+        lastMinute = -1;
         startBtn.classList.remove("timer-pill__btn--hidden");
         pauseBtn.classList.add("timer-pill__btn--hidden");
         pillEl.classList.remove("timer-pill--warning");
@@ -104,29 +119,45 @@
             pauseBtn.classList.add("timer-pill__btn--hidden");
             pillEl.classList.add("timer-pill--expired");
             displayEl.textContent = "00:00";
-            playChime();
+            playBell();
             return;
         }
 
         secondsLeft--;
         displayEl.textContent = formatTime(secondsLeft);
 
+        // Blip at every minute boundary
+        var currentMinute = Math.floor(secondsLeft / 60);
+        if (lastMinute !== -1 && currentMinute !== lastMinute) {
+            playBlip();
+        }
+        lastMinute = currentMinute;
+
+        // Bell warning at &le;10 seconds
         if (secondsLeft <= WARNING_THRESHOLD && !warned) {
             warned = true;
             pillEl.classList.add("timer-pill--warning");
-            playChime();
+            playBell();
         }
     }
 
-    function playChime() {
-        if (chimeAudio) {
-            chimeAudio.currentTime = 0;
-            chimeAudio.play().catch(function () {});
+    function playBlip() {
+        if (blipAudio) {
+            blipAudio.currentTime = 0;
+            blipAudio.play().catch(function () {});
+        }
+    }
+
+    function playBell() {
+        if (bellAudio) {
+            bellAudio.currentTime = 0;
+            bellAudio.play().catch(function () {});
         }
     }
 
     function loadSlideTimer(deck) {
         hidePill();
+        lastMinute = -1;
 
         var slide = deck.getCurrentSlide();
         if (!slide) return;
@@ -156,9 +187,11 @@
         init: function (deck) {
             createPill();
 
-            // Preload chime audio
-            chimeAudio = new Audio(CHIME_AUDIO_SRC);
-            chimeAudio.preload = "auto";
+            // Preload blip and bell audio
+            blipAudio = new Audio(BLIP_AUDIO_SRC);
+            blipAudio.preload = "auto";
+            bellAudio = new Audio(BELL_AUDIO_SRC);
+            bellAudio.preload = "auto";
 
             // When slide changes, load or hide timer
             deck.on("slidechanged", function () {
@@ -171,8 +204,6 @@
                     onPause();
                 }
             });
-
-            // On resize or layout change, no special action needed
         },
     };
 

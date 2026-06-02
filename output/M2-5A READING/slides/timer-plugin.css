@@ -24,7 +24,7 @@
     background: rgba(180, 40, 40, 0.85);
 }
 .timer-pill__display {
-    color: #ffffff;
+    color: #dc143c;
     font-size: 2em;
     font-weight: bold;
     min-width: 80px;

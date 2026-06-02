@@ -1,0 +1,17 @@
+MEETING SEGMENT (2:39-3:29) - INTERPRETED
+==================================================
+
+ENGLISH MODEL:
+I want to finish this job. You want to finish, right? Yes.
+
+THAI MODEL:
+I want to finish this job. You want to finish that. But a little sec. You need to prepare. เพราะฉะนั้นเราจะเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราคุณพุทธไม่รู้ว่าคุณพุทธรู้ว่าคุณพุทธรู้ว่าคุณพุทธรู้ว่าคุณพุทธรู้ว่า
+
+JAPANESE MODEL:
+Iwantofishjb. Yuwantofish,rg? Bualitesc. Younedtprepare. 日本 語 の 翻訳 が 苦手 な 方 も いる か も しれ ませ ん。 私 たち の ため に、 私 たち の ため に、 私 たち の ため に、
+
+COMBINED TIMELINE:
+[EN] @ 1.7s-17.2s: I want to finish this job. You want to finish, right? Yes.
+[TH] @ 8.6s-11.6s: prepare.เพราะฉะนั้นเราจะเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราเราคุณพุทธไม่รู้ว่าคุณพุทธรู้ว่าคุณพุทธรู้ว่าคุณพุทธรู้ว่าคุณพุทธรู้ว่า
+[JA] @ 19.0s-31.0s: 日本語の翻訳が苦手な方もいるかもしれません。
+[JA] @ 41.8s-47.0s: 私たちのために、私たちのために、私たちのために、
