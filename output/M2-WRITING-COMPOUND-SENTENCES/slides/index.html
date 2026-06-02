@@ -51,11 +51,6 @@
                 background: rgba(244, 67, 54, 0.4);
                 color: #fff;
             }
-
-                font-size: 0.4em;
-                vertical-align: middle;
-                margin-left: 10px;
-            }
             .cefr-badge.A1 { background: #4caf50; }
             .cefr-badge.A2 { background: #8bc34a; }
             .cefr-badge.B1 { background: #2196f3; }
@@ -67,69 +62,68 @@
             /* --- Answer flex layout (replaces answer-table) --- */
             .reveal .answer-list {
                 width: 100%;
-                font-size: 0.85em;
+                font-size: 0.95em;
             }
             .reveal .a-row {
                 display: flex;
                 align-items: baseline;
-                padding: 0.4em 0;
+                padding: 0.5em 0;
                 border-bottom: 1px solid #fff;
                 gap: 0.5em;
             }
             .reveal .a-row:last-child { border-bottom: none; }
             .reveal .a-num {
                 flex: 0 0 1.5em;
-                text-align: right;
-                color: rgba(255,255,255,0.5);
-                font-size: 0.85em;
+                text-align: left;
+                color: #fff;
+                font-size: 0.95em;
             }
             .reveal .a-q {
-                flex: 0 1 auto;
+                flex: 0 0 auto;
                 min-width: 0;
-                margin-right: 1em;
+                margin-right: 0.5em;
             }
             .reveal .a-ans {
-                flex: 0 0 auto;
-                min-width: 180px;
+                flex: 1 1 auto;
+                min-width: 0;
                 text-align: left;
                 padding: 0.1em 0.3em;
                 border-radius: 4px;
             }
-            .reveal .a-ans.a-cor {
-                color: #fff;
-            }
-            .reveal .a-ans.a-cor.visible {
-                background: rgba(76, 175, 80, 0.3);
-            }
-            .reveal .a-ans.a-inc {
-                color: #fff;
-            }
-            .reveal .a-ans.a-inc.visible {
-                background: rgba(244, 67, 54, 0.3);
-            }
+            .reveal .a-ans.a-cor { color: #fff; }
+            .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+            .reveal .a-ans.a-inc { color: #fff; }
+            .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
+            /* Why column on answer rows — explanation text, fills remaining space */
+            .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+            /* S/V annotation underlines and labels for grammar identification */
+            .reveal .a-s { border-bottom: 2px solid #fff; }
+            .reveal .a-v { border-bottom: 3px solid #ffdd00; }
+            .reveal .a-ls { color: #ffdd00; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+            .reveal .a-lv { color: #fff; font-size: 0.75em; font-style: italic; margin-right: 1px; }
 
             /* --- Labels & captions --- */
             .reveal .aim-label {
-                font-size: 0.7em;
-                color: #888;
+                font-size: 0.85em;
+                color: #fff;
                 text-transform: uppercase;
                 letter-spacing: 0.1em;
             }
             .reveal .material-ref {
-                font-size: 0.65em;
-                color: #888;
+                font-size: 0.85em;
+                color: #fff;
                 font-style: italic;
                 margin-top: 0.5em;
             }
             .reveal .source-cite {
-                font-size: 0.7em;
-                color: #666;
+                font-size: 0.85em;
+                color: #fff;
                 font-style: italic;
                 margin-top: 0.3em;
             }
             .reveal .image-caption {
-                font-size: 0.55em;
-                color: #888;
+                font-size: 0.85em;
+                color: #fff;
                 text-align: center;
                 margin-top: 0.2em;
             }
@@ -163,7 +157,7 @@
             .reveal section.pedagogical .strategy-tip {
                 font-size: 0.85em;
                 font-style: italic;
-                color: rgba(255,255,255,0.85);
+                color: #fff;
                 margin-bottom: 0.5em;
             }
             .reveal section.pedagogical .evidence {
@@ -210,31 +204,29 @@
             .reveal .fragment.text-shield-light { opacity: 1; visibility: inherit; }
             .reveal .fragment.text-shield-light.visible { background: rgba(200, 200, 200, 0.65); padding: 0.15em 0.6em; border-radius: 4px; }
 
+            /* --- Answer slides with both methods (p11 pattern) --- */
+            .reveal section.answer-slide p,
+            .reveal section.answer-slide li,
+            .reveal section.answer-slide h1,
+            .reveal section.answer-slide h2,
+            .reveal section.answer-slide h3,
+            .reveal section.answer-slide h4,
+            .reveal section.answer-slide h5,
+            .reveal section.answer-slide h6 { text-shadow: none !important; }
+            .reveal .p11-answer { width: 100%; font-size: 0.9em; text-align: left; }
+            .reveal .p11-badge { display: inline-block; padding: 0.15em 0.6em; border-radius: 4px; font-weight: bold; font-size: 0.85em; color: #ffdd00; }
+            .reveal .p11-original { font-size: 0.9em; color: #ffdd00; font-style: italic; padding: 0.4em 0; border-bottom: 3px solid rgba(255,255,255,0.15); margin: 0.5em 0; line-height: 1.5; }
+            .reveal .p11-method { padding: 0.3em 0; }
+            .reveal .p11-method p { margin: 0.1em 0; }
+            .reveal .p11-fix { color: #fff; font-size: 0.9em; margin-left: 0.5em !important; line-height: 1.5; }
+            .reveal .p11-fix span.cor-add { color: #ffdd00; border-bottom: 3px solid #fff; padding-bottom: 1px; }
+            .reveal .p11-why { color: #fff; font-size: 0.85em; font-style: italic; padding: 0.4em; background: rgba(0,0,0,0.2); border-radius: 4px; border-left: 3px solid #ffdd00; margin-top: 0.5em; line-height: 1.5; }
+
             /* --- Fragment styles --- */
             /* --- Yellow text for answers on green answer tables --- */
             .reveal .answer-yellow { color: #ffdd00; }
             .reveal .fragment.answer-yellow.visible { color: #ffdd00; }
 
-            .reveal .fragment.highlight-green {
-                background: rgba(0, 100, 0, 0.4);
-                padding: 0.3em 0.5em;
-                border-radius: 4px;
-            }
-            .reveal .fragment.highlight-red {
-                background: rgba(100, 0, 0, 0.4);
-                padding: 0.3em 0.5em;
-                border-radius: 4px;
-            }
-            .reveal .fragment.answer-correct.visible {
-                background: rgba(0, 120, 0, 0.5);
-                padding: 0.3em 0.5em;
-                border-radius: 4px;
-            }
-            .reveal .fragment.answer-incorrect.visible {
-                background: rgba(120, 0, 0, 0.5);
-                padding: 0.3em 0.5em;
-                border-radius: 4px;
-            }
             .reveal table.answer-table th {
                 background: rgba(0, 0, 0, 0.2);
                 font-weight: bold;
@@ -293,15 +285,15 @@
      LESSON 1 — COMPOUND SENTENCES (M2-4A)
      ============================================================ -->
 
-<!-- SLIDE 0: Title -->
+<!-- SLIDE: Title -->
 <section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/chain.jpg" data-background-opacity="0.85" style="justify-content: center;">
     <img src="assets/logo.png" style="height: 120px; margin: 0 auto 0.5em; display: block;" alt="ACT" />
     <h2 style="font-size: 2.2em;">Writing Compound Sentences <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></h2>
-    <p style="font-size: 1em; color: rgba(255,255,255,0.9); margin-top: 0.5em;">and, but, or, so</p>
+    <p style="font-size: 1em; color: #fff; margin-top: 0.5em;">and, but, or, so</p>
     <aside class="notes">Lesson 1 of 2 on compound sentences. M2-4A. 46 min. Start by distributing grammar feedback. Then introduce the CA writing goal: paragraph about a friend.</aside>
 </section>
 
-<!-- SLIDE 1: Objective -->
+<!-- SLIDE: Objective -->
 <section id="slide-objective" data-background-color="#1a1a2e">
     <h2>Today's Goals</h2>
     <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">1.</span> I can tell the difference between a simple sentence and a compound sentence.</p>
@@ -310,19 +302,19 @@
     <aside class="notes">Elicit: "What did we learn last lesson?" (subjects, verbs, objects). "Today we connect two sentences together — compound sentences."</aside>
 </section>
 
-<!-- SLIDE 2: Transition to grammar feedback review -->
+<!-- SLIDE: Transition to grammar feedback review -->
 <section id="slide-transition-review" data-background-color="#c0392b" data-background-transition="none">
     <h2>Let's Check Your Writing</h2>
 </section>
 
-<!-- SLIDE 3: Lead-in — Error 1 (entry) -->
+<!-- SLIDE: Lead-in — Error 1 (entry) -->
 <!-- PEDAGOGICAL INTENT: Student sees a real error from peer writing. Auto-animate will highlight the error words on reveal. -->
 <!-- WHY THIS FEATURE: Auto-animate from entry to reveal — borders change transparent→colored, correction sentence enters. Fragments would hide the error text. -->
 <!-- COGNITIVE PRINCIPLE: Temporal Contiguity — error + correction visible simultaneously. -->
 <section id="slide-leadin1-entry" data-auto-animate data-auto-animate-id="leadin1" data-background-color="#1a1a2e">
     <div style="overflow: hidden;">
         <p><strong>Your writing is getting better!</strong></p>
-        <p style="font-size: 0.9em; color: rgba(255,255,255,0.85);">Common error: subject-verb agreement</p>
+        <p style="font-size: 0.9em; color: #fff;">Common error: subject-verb agreement</p>
         <p data-id="err1" style="font-size: 1.2em; color: #ffdd00;">
             "Sanrio <span data-id="w1" style="border-bottom: 2px solid transparent;">have</span> many <span data-id="w2" style="border-bottom: 2px solid transparent;">character</span>."
         </p>
@@ -330,32 +322,32 @@
     <aside class="notes">"What's wrong with this sentence? The subject is Sanrio — third person singular. The verb should be 'has' not 'have.' And 'character' should be plural."</aside>
 </section>
 
-<!-- SLIDE 4: Lead-in — Error 1 (reveal) -->
+<!-- SLIDE: Lead-in — Error 1 (reveal) -->
 <!-- PEDAGOGICAL INTENT: Student sees the error words highlighted in orange and the corrected words below in blue. The transformation shows exactly what changed. -->
 <!-- WHY THIS FEATURE: Auto-animate morphs the entry to reveal — error words gain orange borders, corrections appear in blue. Fragments would hide the original error. -->
 <!-- COGNITIVE PRINCIPLE: Temporal Contiguity — error and correction visible simultaneously for comparison. -->
 <section id="slide-leadin1-reveal" data-auto-animate data-auto-animate-id="leadin1" data-background-color="#1a1a2e">
     <div style="overflow: hidden;">
         <p><strong>Your writing is getting better!</strong></p>
-        <p style="font-size: 0.9em; color: rgba(255,255,255,0.85);">Fix: subject-verb agreement + plural noun</p>
-        <p data-id="err1" style="font-size: 1em; color: rgba(255,255,255,0.55);">
-            "Sanrio <span data-id="w1" style="border-bottom: 2px solid #ff8a65;">have</span> many <span data-id="w2" style="border-bottom: 2px solid #ff8a65;">character</span>."
+        <p style="font-size: 0.9em; color: #fff;">Fix: subject-verb agreement + plural noun</p>
+        <p data-id="err1" style="font-size: 1em; color: #fff;">
+            "Sanrio <span data-id="w1" style="border-bottom: 3px solid #ffdd00;">have</span> many <span data-id="w2" style="border-bottom: 3px solid #ffdd00;">character</span>."
         </p>
-        <p style="font-size: 1.2em; color: #4fc3f7; margin-top: 0.5em;">
-            Corrected: "Sanrio <span style="border-bottom: 2px solid #4fc3f7;">has</span> many <span style="border-bottom: 2px solid #4fc3f7;">characters</span>."
+        <p style="font-size: 1.2em; color: #ffdd00; margin-top: 0.5em;">
+            Corrected: "Sanrio <span style="border-bottom: 2px solid #fff;">has</span> many <span style="border-bottom: 2px solid #fff;">characters</span>."
         </p>
     </div>
     <aside class="notes">"The error words are highlighted in orange. Below, the corrections are in blue. Subject 'Sanrio' needs 'has' and 'characters' needs an 's'."</aside>
 </section>
 
-<!-- SLIDE 5: Lead-in — Error 2 (entry) -->
+<!-- SLIDE: Lead-in — Error 2 (entry) -->
 <!-- PEDAGOGICAL INTENT: Student sees a sentence fragment. Advancing morphs it into a complete sentence via auto-animate, showing the fragment colour-coded and the added predicate in blue. -->
 <!-- WHY THIS FEATURE: Auto-animate transforms fragment to complete sentence; fragment stays visible but dimmed so students see both states. -->
 <!-- COGNITIVE PRINCIPLE: Comparison — seeing fragment and corrected version side by side clarifies the missing element. -->
 <section id="slide-leadin2-entry" data-auto-animate data-auto-animate-id="leadin2" data-background-color="#1a1a2e">
     <div style="overflow: hidden;">
         <p><strong>Another common error:</strong></p>
-        <p style="font-size: 0.9em; color: rgba(255,255,255,0.85);">Sentence fragment — missing main verb</p>
+        <p style="font-size: 0.9em; color: #fff;">Sentence fragment — missing main verb</p>
         <p data-id="err2" style="font-size: 1.2em; color: #ffdd00;">
             "My most prized <span data-id="w3" style="border-bottom: 2px solid transparent;">possession.</span>"
         </p>
@@ -363,26 +355,26 @@
     <aside class="notes">"This is a sentence fragment. It starts a sentence but doesn't complete it. There's no main verb — what about the possession?"</aside>
 </section>
 
-<!-- SLIDE 6: Lead-in — Error 2 (reveal) -->
+<!-- SLIDE: Lead-in — Error 2 (reveal) -->
 <!-- PEDAGOGICAL INTENT: Student sees the fragment now completed. The fragment part is dimmed, and the added predicate appears in blue. -->
 <!-- WHY THIS FEATURE: Auto-animate completes the transformation. Fragment text remains visible at reduced opacity. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — blue highlights what was added, orange marks the fragment word. -->
 <section id="slide-leadin2-reveal" data-auto-animate data-auto-animate-id="leadin2" data-background-color="#1a1a2e">
     <div style="overflow: hidden;">
         <p><strong>Another common error:</strong></p>
-        <p style="font-size: 0.9em; color: rgba(255,255,255,0.85);">Fix: add a main verb</p>
-        <p data-id="err2" style="font-size: 1em; color: rgba(255,255,255,0.55);">
-            "My most prized <span data-id="w3" style="border-bottom: 2px solid #ff8a65;">possession.</span>"
+        <p style="font-size: 0.9em; color: #fff;">Fix: add a main verb</p>
+        <p data-id="err2" style="font-size: 1em; color: #fff;">
+            "My most prized <span data-id="w3" style="border-bottom: 3px solid #ffdd00;">possession.</span>"
         </p>
-        <p style="font-size: 1.2em; color: #4fc3f7; margin-top: 0.5em;">
-            Corrected: "My most prized possession <span style="border-bottom: 2px solid #4fc3f7;">is my PS5</span>."
+        <p style="font-size: 1.2em; color: #ffdd00; margin-top: 0.5em;">
+            Corrected: "My most prized possession <span style="border-bottom: 2px solid #fff;">is my PS5</span>."
         </p>
         <p style="margin-top: 1em; font-size: 0.9em; color: #ffdd00;">Soon: write a paragraph about a friend. First — compound sentences!</p>
     </div>
     <aside class="notes">"The fragment 'possession.' now has 'is my PS5' — a complete predicate with a main verb. Now it's a proper sentence."</aside>
 </section>
 
-<!-- SLIDE 7: Feedback reflection time -->
+<!-- SLIDE: Feedback reflection time -->
 <!-- PEDAGOGICAL INTENT: Student sees a prompt to review their individual feedback silently. No interaction — reflection time. -->
 <!-- WHY THIS FEATURE: Static — orienting pause. Fragments or animation would distract from reflection. -->
 <!-- COGNITIVE PRINCIPLE: None — procedural pause for metacognitive reflection. -->
@@ -391,12 +383,12 @@
     <aside class="notes">Give students 2-3 minutes to review their individual feedback silently. Circulate and answer questions.</aside>
 </section>
 
-<!-- SLIDE 8: Transition to diagnostic -->
+<!-- SLIDE: Transition to diagnostic -->
 <section id="slide-transition-diagnostic" data-background-color="#c0392b" data-background-transition="none">
     <h2>What Do You Already Know?</h2>
 </section>
 
-<!-- SLIDE 8: Diagnostic test 1 — entry (items 1-3, with timer) -->
+<!-- SLIDE: Diagnostic test 1 — entry (items 1-3, with timer) -->
 <!-- PEDAGOGICAL INTENT: Student sees 3 sentence pairs. On advancing to slide 9, the periods morph into comma+coordinator with blue underlines via auto-animate. -->
 <!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the correction morphs from the original, keeping both visible simultaneously. -->
 <!-- WHY THIS FEATURE: Auto-animate avoids a clunky separate answer table — the correction IS the sentence. -->
@@ -412,7 +404,7 @@
     <aside class="notes">Individual work 3 min, then pair check 1 min. Click advance to reveal corrections.</aside>
 </section>
 
-<!-- SLIDE 9: Diagnostic test 1 — reveal (items 1-3, corrected) -->
+<!-- SLIDE 10: Diagnostic test 1 — reveal (items 1-3, corrected) -->
 <!-- PEDAGOGICAL INTENT: Student sees the three corrected sentences with comma+coordinator highlighted in blue. The period-to-comma transformation is the answer. -->
 <!-- WHY THIS FEATURE: Auto-animate reveals the corrections by morphing the periods into comma+coordinator in place. No separate answer table needed. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — blue underlines on the comma+coordinator draw attention to the structural change. -->
@@ -420,15 +412,15 @@
     <div style="overflow: hidden;">
         <p><em>Corrected — notice the comma + coordinator:</em></p>
         <ol style="font-size: 0.85em; text-align: left;">
-            <li style="margin: 0.4em 0;"><span data-id="d1">My friend speaks Thai<span data-id="sep1" style="border-bottom: 2px solid #4fc3f7;">, and</span> she also speaks English.</span></li>
-            <li style="margin: 0.4em 0;"><span data-id="d2">I like football<span data-id="sep2" style="border-bottom: 2px solid #4fc3f7;">, but</span> my brother prefers basketball.</span></li>
-            <li style="margin: 0.4em 0;"><span data-id="d3">We can go to the cinema<span data-id="sep3" style="border-bottom: 2px solid #4fc3f7;">, or</span> we can stay home.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d1">My friend speaks Thai<span data-id="sep1" style="border-bottom: 2px solid #fff;">, and</span> she also speaks English.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d2">I like football<span data-id="sep2" style="border-bottom: 2px solid #fff;">, but</span> my brother prefers basketball.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d3">We can go to the cinema<span data-id="sep3" style="border-bottom: 2px solid #fff;">, or</span> we can stay home.</span></li>
         </ol>
     </div>
     <aside class="notes">Item 1: similar ideas → and. Item 2: contrast → but. Item 3: choice → or.</aside>
 </section>
 
-<!-- SLIDE 10: Diagnostic test 2 — entry (items 4-6, with timer) -->
+<!-- SLIDE: Diagnostic test 2 — entry (items 4-6, with timer) -->
 <!-- PEDAGOGICAL INTENT: Student sees 3 more sentence pairs to join. Advancing morphs the periods into comma+coordinator with blue underlines. -->
 <!-- WHY THIS FEATURE: Auto-animate avoids a clunky separate answer table — the correction IS the sentence. -->
 <!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the correction morphs from the original, keeping both visible simultaneously. -->
@@ -444,7 +436,7 @@
     <aside class="notes">Individual work 3 min, then pair check 1 min.</aside>
 </section>
 
-<!-- SLIDE 11: Diagnostic test 2 — reveal (items 4-6, corrected) -->
+<!-- SLIDE: Diagnostic test 2 — reveal (items 4-6, corrected) -->
 <!-- PEDAGOGICAL INTENT: Student sees the three corrected sentences. Periods transformed to comma+coordinator with blue underlines. -->
 <!-- WHY THIS FEATURE: Auto-animate reveals corrections in place. No separate answer table. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — blue underlines draw attention to each comma+coordinator. -->
@@ -452,24 +444,24 @@
     <div style="overflow: hidden;">
         <p><em>Corrected — notice the comma + coordinator:</em></p>
         <ol style="font-size: 0.85em; text-align: left;">
-            <li style="margin: 0.4em 0;"><span data-id="d4">It started raining<span data-id="sep4" style="border-bottom: 2px solid #4fc3f7;">, so</span> we went inside.</span></li>
-            <li style="margin: 0.4em 0;"><span data-id="d5">The test was difficult<span data-id="sep5" style="border-bottom: 2px solid #4fc3f7;">, so</span> I studied hard for it.</span></li>
-            <li style="margin: 0.4em 0;"><span data-id="d6">He doesn't like coffee<span data-id="sep6" style="border-bottom: 2px solid #4fc3f7;">, so</span> he drinks tea every morning.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d4">It started raining<span data-id="sep4" style="border-bottom: 2px solid #fff;">, so</span> we went inside.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d5">The test was difficult<span data-id="sep5" style="border-bottom: 2px solid #fff;">, so</span> I studied hard for it.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d6">He doesn't like coffee<span data-id="sep6" style="border-bottom: 2px solid #fff;">, so</span> he drinks tea every morning.</span></li>
         </ol>
     </div>
     <aside class="notes">Item 4: result → so. Item 5: result → so. Item 6: result → so. Also accepts 'but' or 'or' depending on interpretation.</aside>
 </section>
 
-<!-- SLIDE 10: Transition to teach -->
+<!-- SLIDE: Transition to teach -->
 <section id="slide-transition-teach" data-background-color="#c0392b" data-background-transition="none">
     <h2>How to Build a Compound Sentence</h2>
 </section>
 
-<!-- SLIDE 11: Teach — Formula (entry, transparent borders on new elements) -->
+<!-- SLIDE: Teach — Formula (entry, transparent borders on new elements) -->
 <!-- PEDAGOGICAL INTENT: Student sees simple vs compound side by side. Advancing highlights the new subject+verb in the compound sentence. -->
 <!-- WHY THIS FEATURE: Auto-animate creates the before/after comparison on the compound example. Fragments cannot show the structural change. -->
 <!-- COGNITIVE PRINCIPLE: Comparison — simple and compound visible simultaneously for contrast. -->
-<section id="slide-teach-formula-entry" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="formula">
+<section id="slide-teach-formula-entry" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="formula">
     <div style="overflow: hidden;">
         <h2 data-id="title">Simple vs. Compound</h2>
         <p style="font-size: 0.8em;"><u><strong>Simple:</strong> one subject, one verb (or compound verb)</u></p>
@@ -480,146 +472,146 @@
     <aside class="notes">"Elicit: Which sentence has two subjects? What makes the second one compound?"</aside>
 </section>
 
-<!-- SLIDE 12: Teach — Formula (reveal, blue underlines highlight new S+V) -->
+<!-- SLIDE: Teach — Formula (reveal, blue underlines highlight new S+V) -->
 <!-- PEDAGOGICAL INTENT: Student sees the compound sentence with the new subject and verb highlighted with blue underlines, plus the SV, and SV formula at the bottom. The simple sentence dims for comparison. -->
 <!-- WHY THIS FEATURE: Auto-animate reveals the underlines and formula line. The simple sentence stays visible at reduced opacity. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — blue underlines draw attention to the second S-V pair that makes it compound. -->
-<section id="slide-teach-formula-reveal" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="formula">
+<section id="slide-teach-formula-reveal" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="formula">
     <div style="overflow: hidden;">
         <h2 data-id="title">Simple vs. Compound</h2>
         <p style="font-size: 0.8em;"><u><strong>Simple:</strong> one subject, one verb (or compound verb)</u></p>
-        <p data-id="simp" style="color: rgba(255,255,255,0.5); font-size: 0.95em;">My family goes camping every summer and usually has fun.</p>
+        <p data-id="simp" style="color: #fff; font-size: 0.95em;">My family goes camping every summer and usually has fun.</p>
         <p style="font-size: 0.8em; margin-top: 0.5em;"><u><strong>Compound:</strong> two subjects, two verbs, comma + coordinator</u></p>
-        <p data-id="comp" style="color: #ffdd00; font-size: 0.95em;">My family goes camping every summer, and <span data-id="we" style="border-bottom: 2px solid #4fc3f7; box-shadow: 0 3px 0 0 #4fc3f7;">we</span> usually <span data-id="have" style="border-bottom: 2px solid #4fc3f7; box-shadow: 0 3px 0 0 #4fc3f7;">have</span> fun.</p>
-        <p style="font-size: 0.8em; margin-top: 0.5em; color: #4fc3f7;">S &nbsp; V , and <span style="color: #4fc3f7;">S</span> &nbsp; <span style="color: #4fc3f7;">V</span></p>
+        <p data-id="comp" style="color: #ffdd00; font-size: 0.95em;">My family goes camping every summer, and <span data-id="we" style="border-bottom: 2px solid #fff; box-shadow: 0 3px 0 0 #ffdd00;">we</span> usually <span data-id="have" style="border-bottom: 2px solid #fff; box-shadow: 0 3px 0 0 #ffdd00;">have</span> fun.</p>
+        <p style="font-size: 0.8em; margin-top: 0.5em; color: #ffdd00;">S &nbsp; V , and <span style="color: #ffdd00;">S</span> &nbsp; <span style="color: #ffdd00;">V</span></p>
     </div>
     <aside class="notes">"The blue underline highlights the NEW subject 'we' and the NEW verb 'have.' Two S-V pairs = compound."</aside>
 </section>
 
-<!-- SLIDE 13: Teach — AND (entry: two separate sentences) -->
+<!-- SLIDE: Teach — AND (entry: two separate sentences) -->
 <!-- WHY THIS FEATURE: Auto-animate morphs two separate sentences into one compound with comma+and highlighted in blue. Fragments would hide the original sentence. -->
 <!-- COGNITIVE PRINCIPLE: Temporal Contiguity — both states visible; the comma+coordinator animation signals exactly what changed. -->
 <!-- PEDAGOGICAL INTENT: Student sees two simple sentences. Advancing morphs them into one compound. -->
-<section id="slide-teach-and-entry" data-auto-animate data-auto-animate-id="and" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-teach-and-entry" data-auto-animate data-auto-animate-id="and" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">AND</strong></h2>
         <p><u><strong>Meaning:</strong> connects two similar ideas</u></p>
         <p data-id="ex" style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
             "My roommate is an art student<span data-id="join" style="border-bottom: 2px solid transparent;">. H</span>er boyfriend plays in a rock band."
         </p>
-        <p style="font-size: 0.85em; color: rgba(255,255,255,0.85); margin-top: 0.3em;">Idea 1 + <strong>and</strong> + Idea 2</p>
+        <p style="font-size: 0.85em; color: #fff; margin-top: 0.3em;">Idea 1 + <strong>and</strong> + Idea 2</p>
     </div>
     <aside class="notes">"Two separate ideas. How can we join them?" Elicit suggestions.</aside>
 </section>
 
-<!-- SLIDE 14: Teach — AND (reveal: compound sentence) -->
+<!-- SLIDE: Teach — AND (reveal: compound sentence) -->
 <!-- PEDAGOGICAL INTENT: Student sees the two sentences now joined by comma+and. The period changed to comma+and with a blue underline showing the transformation. -->
 <!-- WHY THIS FEATURE: Auto-animate reveals the combined sentence. The blue underline on the join point shows what changed. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — blue underline draws attention to the comma+coordinator. -->
-<section id="slide-teach-and-reveal" data-auto-animate data-auto-animate-id="and" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-teach-and-reveal" data-auto-animate data-auto-animate-id="and" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">AND</strong></h2>
         <p><u><strong>Meaning:</strong> connects two similar ideas</u></p>
         <p data-id="ex" style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
-            "My roommate is an art student<span data-id="join" style="border-bottom: 2px solid #4fc3f7;">, and</span> her boyfriend plays in a rock band."
+            "My roommate is an art student<span data-id="join" style="border-bottom: 2px solid #fff;">, and</span> her boyfriend plays in a rock band."
         </p>
-        <p style="font-size: 0.85em; color: rgba(255,255,255,0.85); margin-top: 0.3em;">Idea 1 + <strong>and</strong> + Idea 2</p>
+        <p style="font-size: 0.85em; color: #fff; margin-top: 0.3em;">Idea 1 + <strong>and</strong> + Idea 2</p>
     </div>
     <aside class="notes">"The period changed to comma+and. The 'H' became lowercase — one sentence now."</aside>
 </section>
 
-<!-- SLIDE 15: Teach — BUT (entry: two separate sentences) -->
+<!-- SLIDE: Teach — BUT (entry: two separate sentences) -->
 <!-- PEDAGOGICAL INTENT: Student sees two opposite ideas as separate sentences. Advancing morphs them into one compound with comma+but. -->
 <!-- WHY THIS FEATURE: Auto-animate morphs the period to comma+but. Fragments would hide the original. -->
 <!-- COGNITIVE PRINCIPLE: Temporal Contiguity — both states visible; the comma+but animation shows the contrast join. -->
-<section id="slide-teach-but-entry" data-auto-animate data-auto-animate-id="but" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-teach-but-entry" data-auto-animate data-auto-animate-id="but" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">BUT</strong></h2>
         <p><u><strong>Meaning:</strong> connects two opposite ideas</u></p>
         <p data-id="ex" style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
             "She likes classical music<span data-id="join" style="border-bottom: 2px solid transparent;">. S</span>he doesn't like rock."
         </p>
-        <p style="font-size: 0.85em; color: rgba(255,255,255,0.85); margin-top: 0.3em;">Idea 1 + <strong>but</strong> + opposite idea</p>
+        <p style="font-size: 0.85em; color: #fff; margin-top: 0.3em;">Idea 1 + <strong>but</strong> + opposite idea</p>
     </div>
     <aside class="notes">"Two separate ideas. How can we show the contrast?" Elicit suggestions.</aside>
 </section>
 
-<!-- SLIDE 16: Teach — BUT (reveal: compound sentence) -->
+<!-- SLIDE: Teach — BUT (reveal: compound sentence) -->
 <!-- PEDAGOGICAL INTENT: Student sees the two opposite ideas joined by comma+but. The transformation from two sentences to one is now complete. -->
 <!-- WHY THIS FEATURE: Auto-animate reveals the combined sentence. Blue underline on comma+but draws attention to the join. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — blue underline highlights the contrast connector. -->
-<section id="slide-teach-but-reveal" data-auto-animate data-auto-animate-id="but" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-teach-but-reveal" data-auto-animate data-auto-animate-id="but" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">BUT</strong></h2>
         <p><u><strong>Meaning:</strong> connects two opposite ideas</u></p>
         <p data-id="ex" style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
-            "She likes classical music<span data-id="join" style="border-bottom: 2px solid #4fc3f7;">, but</span> she doesn't like rock."
+            "She likes classical music<span data-id="join" style="border-bottom: 2px solid #fff;">, but</span> she doesn't like rock."
         </p>
-        <p style="font-size: 0.85em; color: rgba(255,255,255,0.85); margin-top: 0.3em;">Idea 1 + <strong>but</strong> + opposite idea</p>
+        <p style="font-size: 0.85em; color: #fff; margin-top: 0.3em;">Idea 1 + <strong>but</strong> + opposite idea</p>
     </div>
     <aside class="notes">"The period became comma+but. The capital 'S' became lowercase — one sentence now, showing contrast."</aside>
 </section>
 
-<!-- SLIDE 17: Teach — OR (entry: two separate sentences) -->
+<!-- SLIDE: Teach — OR (entry: two separate sentences) -->
 <!-- PEDAGOGICAL INTENT: Student sees two alternative activities as separate sentences. Advancing morphs them into one compound with comma+or. -->
 <!-- WHY THIS FEATURE: Auto-animate morphs the period to comma+or. Fragments would hide the original. -->
 <!-- COGNITIVE PRINCIPLE: Temporal Contiguity — both states visible; the comma+or animation shows the choice. -->
-<section id="slide-teach-or-entry" data-auto-animate data-auto-animate-id="or" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-teach-or-entry" data-auto-animate data-auto-animate-id="or" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">OR</strong></h2>
         <p><u><strong>Meaning:</strong> shows a choice or alternative</u></p>
         <p data-id="ex" style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
             "Every Friday, they go to a concert<span data-id="join" style="border-bottom: 2px solid transparent;">. T</span>hey visit an art gallery."
         </p>
-        <p style="font-size: 0.85em; color: rgba(255,255,255,0.85); margin-top: 0.3em;">Option 1 + <strong>or</strong> + Option 2</p>
+        <p style="font-size: 0.85em; color: #fff; margin-top: 0.3em;">Option 1 + <strong>or</strong> + Option 2</p>
     </div>
     <aside class="notes">"Two separate activities. How do we show they're choices?"</aside>
 </section>
 
-<!-- SLIDE 18: Teach — OR (reveal: compound sentence) -->
+<!-- SLIDE: Teach — OR (reveal: compound sentence) -->
 <!-- PEDAGOGICAL INTENT: Student sees the two options joined by comma+or. The transformation from two sentences to one is now complete. -->
 <!-- WHY THIS FEATURE: Auto-animate reveals the combined sentence. Blue underline on comma+or draws attention to the join. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — blue underline highlights the choice connector. -->
-<section id="slide-teach-or-reveal" data-auto-animate data-auto-animate-id="or" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-teach-or-reveal" data-auto-animate data-auto-animate-id="or" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">OR</strong></h2>
         <p><u><strong>Meaning:</strong> shows a choice or alternative</u></p>
         <p data-id="ex" style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
-            "Every Friday, they go to a concert<span data-id="join" style="border-bottom: 2px solid #4fc3f7;">, or</span> they visit an art gallery."
+            "Every Friday, they go to a concert<span data-id="join" style="border-bottom: 2px solid #fff;">, or</span> they visit an art gallery."
         </p>
-        <p style="font-size: 0.85em; color: rgba(255,255,255,0.85); margin-top: 0.3em;">Option 1 + <strong>or</strong> + Option 2</p>
+        <p style="font-size: 0.85em; color: #fff; margin-top: 0.3em;">Option 1 + <strong>or</strong> + Option 2</p>
     </div>
     <aside class="notes">"The period became comma+or. The capital 'T' became lowercase — one sentence showing a choice."</aside>
 </section>
 
-<!-- SLIDE 19: Teach — SO (entry: two separate sentences) -->
+<!-- SLIDE: Teach — SO (entry: two separate sentences) -->
 <!-- PEDAGOGICAL INTENT: Student sees a reason and result as separate sentences. Advancing morphs them into one compound with comma+so. -->
 <!-- WHY THIS FEATURE: Auto-animate morphs the period to comma+so. Fragments would hide the original. -->
 <!-- COGNITIVE PRINCIPLE: Temporal Contiguity — both states visible; the comma+so animation shows cause to effect. -->
-<section id="slide-teach-so-entry" data-auto-animate data-auto-animate-id="so" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-teach-so-entry" data-auto-animate data-auto-animate-id="so" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">SO</strong></h2>
         <p><u><strong>Meaning:</strong> shows a reason and its result</u></p>
         <p data-id="ex" style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
             "They both like jazz<span data-id="join" style="border-bottom: 2px solid transparent;">. T</span>hey go to jazz concerts together."
         </p>
-        <p style="font-size: 0.85em; color: rgba(255,255,255,0.85); margin-top: 0.3em;">Reason + <strong>so</strong> + Result</p>
+        <p style="font-size: 0.85em; color: #fff; margin-top: 0.3em;">Reason + <strong>so</strong> + Result</p>
     </div>
     <aside class="notes">"Two sentences. One is the reason, one is the result. How do we show that?"</aside>
 </section>
 
-<!-- SLIDE 20: Teach — SO (reveal: compound sentence) -->
+<!-- SLIDE: Teach — SO (reveal: compound sentence) -->
 <!-- PEDAGOGICAL INTENT: Student sees the reason and result joined by comma+so. The cause to effect structure is now visible in one sentence. -->
 <!-- WHY THIS FEATURE: Auto-animate reveals the combined sentence. Blue underline on comma+so draws attention to the join. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — blue underline highlights the result connector. -->
-<section id="slide-teach-so-reveal" data-auto-animate data-auto-animate-id="so" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-teach-so-reveal" data-auto-animate data-auto-animate-id="so" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">SO</strong></h2>
         <p><u><strong>Meaning:</strong> shows a reason and its result</u></p>
         <p data-id="ex" style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
-            "They both like jazz<span data-id="join" style="border-bottom: 2px solid #4fc3f7;">, so</span> they go to jazz concerts together."
+            "They both like jazz<span data-id="join" style="border-bottom: 2px solid #fff;">, so</span> they go to jazz concerts together."
         </p>
-        <p style="font-size: 0.85em; color: rgba(255,255,255,0.85); margin-top: 0.3em;">Reason + <strong>so</strong> + Result</p>
+        <p style="font-size: 0.85em; color: #fff; margin-top: 0.3em;">Reason + <strong>so</strong> + Result</p>
     </div>
     <aside class="notes">"The period became comma+so. The capital 'T' became lowercase — cause and effect in one sentence."</aside>
 </section>
@@ -628,7 +620,7 @@
 <!-- PEDAGOGICAL INTENT: Student sees the comma rule explicitly. Comma BEFORE the coordinator, not after. A reference example reinforces the pattern. -->
 <!-- WHY THIS FEATURE: Static — reference slide; all elements visible at once for easy scanning. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — the comma and coordinator are visually emphasized to draw attention to the rule. -->
-<section id="slide-teach-comma" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-teach-comma" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <h2>The Comma Rule</h2>
     <p style="font-size: 1em; color: #ffdd00; text-align: center;">Comma <strong style="color: #fff; font-size: 1.3em;">BEFORE</strong> the coordinator</p>
     <p style="font-size: 0.8em; color: #ffdd00; margin-top: 0.5em;"><em>"My family goes camping every summer, <strong style="color: #fff;">and</strong> we usually have fun."</em></p>
@@ -645,7 +637,7 @@
 <!-- PEDAGOGICAL INTENT: Student sees a 3-step decision tree for classifying sentences. Find S, find V, check for two S-V pairs plus comma plus coordinator. -->
 <!-- WHY THIS FEATURE: Static — reference; all steps visible for the strategy demonstration. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — the decision tree structure helps learners build a mental model for classification. -->
-<section id="slide-ped-p8" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-ped-p8" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <h2>Practice 8 Strategy</h2>
     <p><u><strong>Step 1:</strong> Find the subject <strong>S</strong></u></p>
     <p><u><strong>Step 2:</strong> Find the verb <strong>V</strong> (just check — how many S-V pairs?)</u></p>
@@ -659,13 +651,13 @@
 <!-- PEDAGOGICAL INTENT: Student sees a sentence and is prompted. Does it have two S-V pairs? Advancing reveals the S and V annotations with the conclusion. -->
 <!-- WHY THIS FEATURE: Auto-animate from plain sentence to annotated sentence with S/V underlines. Fragments cannot transform inline annotation appearance. -->
 <!-- COGNITIVE PRINCIPLE: Segmenting — question first, then answer via auto-animate. -->
-<section id="slide-p8-example-entry" data-auto-animate data-auto-animate-id="p8ex" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-p8-example-entry" data-auto-animate data-auto-animate-id="p8ex" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title">Let's try one together</h2>
         <p style="font-size: 0.85em; color: #ffdd00;">
             "You can tie me with a longer rope, or you can build a special enclosure."
         </p>
-        <p style="font-size: 0.85em; margin-top: 0.5em; color: rgba(255,255,255,0.85);">
+        <p style="font-size: 0.85em; margin-top: 0.5em; color: #fff;">
             Does it have TWO S-V pairs?
         </p>
     </div>
@@ -676,16 +668,16 @@
 <!-- PEDAGOGICAL INTENT: Student sees the sentence with S underlined in blue and V underlined in orange, plus the conclusion: Two S-V pairs equals Compound. -->
 <!-- WHY THIS FEATURE: Auto-animate reveals the underlines and conclusion. The S/V underlines persist as visual anchors. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — S and V underlines direct attention to the critical features for classification. -->
-<section id="slide-p8-example-reveal" data-auto-animate data-auto-animate-id="p8ex" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-p8-example-reveal" data-auto-animate data-auto-animate-id="p8ex" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title">Let's try one together</h2>
         <p style="font-size: 0.85em;">
-            "<span data-id="s1" style="border-bottom: 2px solid #4fc3f7;">You</span> can tie me with a longer rope, or <span data-id="s2" style="border-bottom: 2px solid #4fc3f7;">you</span> can build a special enclosure."
+            "<span data-id="s1" style="border-bottom: 2px solid #fff;">You</span> can tie me with a longer rope, or <span data-id="s2" style="border-bottom: 2px solid #fff;">you</span> can build a special enclosure."
         </p>
-        <p style="font-size: 0.85em; margin-top: 0.4em; color: rgba(255,255,255,0.85);">
-            <span data-id="v1" style="border-bottom: 2px solid #ff8a65;">can tie</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span data-id="v2" style="border-bottom: 2px solid #ff8a65;">can build</span>
+        <p style="font-size: 0.85em; margin-top: 0.4em; color: #fff;">
+            <span data-id="v1" style="border-bottom: 3px solid #ffdd00;">can tie</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span data-id="v2" style="border-bottom: 3px solid #ffdd00;">can build</span>
         </p>
-        <p style="font-size: 0.85em; margin-top: 0.5em; color: #4fc3f7;">
+        <p style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
             Two S-V pairs + comma + or → <strong>Compound</strong>
         </p>
     </div>
@@ -703,168 +695,178 @@
 </section>
 
 <!-- SLIDE 27: Answers — Practice 8A (1-3) -->
-<!-- PEDAGOGICAL INTENT: Student sees classification plus formula plus sentence with S/V underlines revealed per click. The S/V underlines SHOW why it is simple or compound. -->
-<!-- WHY THIS FEATURE: Fragment fade-up reveals each row; S/V annotations use custom CSS for underlines that persist. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — S/V underlines and labels direct attention to the critical features for classification. -->
-<!-- Each click reveals one full row: classification + formula + sentence with S/V annotations -->
-<section id="slide-p8a-answers-1-3" data-background-color="#0d5e1a" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 6em; min-width: 0; }
-    .reveal .a-ans { flex: 0 0 5em; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-    .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
-    .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.95em;">Practice 8A — Answers (1–3)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">1.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="1" style="color: #ffdd00;">simple</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="1">SV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1"><span class="a-s">The summers</span><span class="a-ls">(S)</span> <span class="a-v">were</span><span class="a-lv">(V)</span> hot and humid in my childhood hometown.</span>
+<!-- ============================================================
+     Practice 8A — Answer Slides (one per item)
+     ============================================================ -->
+
+<!-- SLIDE: Answer — Practice 8A Item 1 -->
+<!-- PEDAGOGICAL INTENT: Student sees classification + formula + S/V annotated sentence for item 1. -->
+<!-- WHY THIS FEATURE: Fragment reveals badge → formula → sentence → Why one at a time. One item per slide prevents cognitive overload. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — one item at a time; S/V underlines show why it's simple. -->
+<section id="slide-p8a-answer-1" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8A — Item 1</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">simple</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2">
+            <p><u><strong>Formula:</strong> SV</u></p>
         </div>
-        <div class="a-row">
-            <span class="a-num">2.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="2" style="color: #ffdd00;">compound</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="2">SV, so SSV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2">Every evening <span class="a-s">it</span><span class="a-ls">(S)</span> <span class="a-v">was</span><span class="a-lv">(V)</span> too hot to sleep, so <span class="a-s">my sisters and I</span><span class="a-ls">(S)</span> <span class="a-v">played</span><span class="a-lv">(V)</span> outside until dark.</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">3.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="3" style="color: #ffdd00;">simple</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="3">SVV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3"><span class="a-s">Our parents</span><span class="a-ls">(S)</span> <span class="a-v">sat</span><span class="a-lv">(V)</span> in chairs on the grass and <span class="a-v">watched</span><span class="a-lv">(V)</span> us play our children's games.</span>
-        </div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3"><span class="a-s">The summers</span><span class="a-ls">(S)</span> <span class="a-v">were</span><span class="a-lv">(V)</span> hot and humid in my childhood hometown.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: One subject, one verb. No comma — simple SV.</p>
     </div>
-    <aside class="notes">Item 3: compound verb 'sat' + 'watched' — one subject 'our parents,' two actions. Simple.</aside>
+    <aside class="notes">Simple sentence: one S-V pair, no coordinator. No comma needed.</aside>
 </section>
 
-<!-- SLIDE 28: Answers — Practice 8A (4-6) -->
-<!-- PEDAGOGICAL INTENT: Student sees classification plus formula plus sentence with S/V underlines for items 4-6. Each reveals per click. -->
-<!-- WHY THIS FEATURE: Fragment fade-up reveals each row; S/V annotations use custom CSS for underlines that persist. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — S/V underlines direct attention to the critical classification features. -->
-<section id="slide-p8a-answers-4-6" data-background-color="#0d5e1a" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 6em; min-width: 0; }
-    .reveal .a-ans { flex: 0 0 5em; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-    .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
-    .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.95em;">Practice 8A — Answers (4–6)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">4.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="1" style="color: #ffdd00;">compound</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="1">SV, or SVV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1"><span class="a-s">We</span><span class="a-ls">(S)</span> <span class="a-v">played</span><span class="a-lv">(V)</span> games such as hide-and-seek and tag or <span class="a-s">we</span><span class="a-ls">(S)</span> just <span class="a-v">sat</span><span class="a-lv">(V)</span> on the grass and <span class="a-v">told</span><span class="a-lv">(V)</span> stories.</span>
+<!-- SLIDE: Answer — Practice 8A Item 2 -->
+<!-- PEDAGOGICAL INTENT: Student sees classification + formula + S/V annotated sentence for item 2. -->
+<!-- WHY THIS FEATURE: Fragment reveals badge → formula → sentence → Why one at a time. One item per slide prevents cognitive overload. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — one item at a time; S/V underlines show both S-V pairs. -->
+<section id="slide-p8a-answer-2" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8A — Item 2</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">compound</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2">
+            <p><u><strong>Formula:</strong> SV, so SSV</u></p>
         </div>
-        <div class="a-row">
-            <span class="a-num">5.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="2" style="color: #ffdd00;">simple</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="2">SV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2"><span class="a-s">We</span><span class="a-ls">(S)</span> also <span class="a-v">caught</span><span class="a-lv">(V)</span> fireflies.</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">6.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="3" style="color: #ffdd00;">compound</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="3">SV, and SV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3"><span class="a-s">We</span><span class="a-ls">(S)</span> <span class="a-v">put</span><span class="a-lv">(V)</span> the fireflies into a glass jar and <span class="a-s">our father</span><span class="a-ls">(S)</span> <span class="a-v">punched</span><span class="a-lv">(V)</span> air holes in the metal lid.</span>
-        </div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3">Every evening <span class="a-s">it</span><span class="a-ls">(S)</span> <span class="a-v">was</span><span class="a-lv">(V)</span> too hot to sleep, so <span class="a-s">my sisters and I</span><span class="a-ls">(S)</span> <span class="a-v">played</span><span class="a-lv">(V)</span> outside until dark.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: Two S-V pairs + "so" = compound. Comma before "so."</p>
     </div>
-    <aside class="notes">Item 4: compound sentence with a compound verb in the second clause 'sat and told.' Two S-V pairs + or = compound.</aside>
+    <aside class="notes">Compound: two S-V pairs separated by comma + so.</aside>
 </section>
 
-<!-- SLIDE 29: Answers — Practice 8A (7-9) -->
-<!-- PEDAGOGICAL INTENT: Student sees classification plus formula plus sentence with S/V underlines for items 7-9. Each reveals per click. -->
-<!-- WHY THIS FEATURE: Fragment fade-up reveals each row; S/V annotations use custom CSS for underlines that persist. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — S/V underlines direct attention to the critical classification features. -->
-<section id="slide-p8a-answers-7-9" data-background-color="#0d5e1a" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 6em; min-width: 0; }
-    .reveal .a-ans { flex: 0 0 5em; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-    .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
-    .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.95em;">Practice 8A — Answers (7–9)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">7.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="1" style="color: #ffdd00;">compound</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="1">SV, but SV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1"><span class="a-s">My sisters</span><span class="a-ls">(S)</span> <span class="a-v">were</span><span class="a-lv">(V)</span> afraid of most bugs but <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">loved</span><span class="a-lv">(V)</span> fireflies.</span>
+<!-- SLIDE: Answer — Practice 8A Item 3 -->
+<!-- PEDAGOGICAL INTENT: Student sees classification + formula + S/V annotated sentence for item 3. -->
+<!-- WHY THIS FEATURE: Fragment reveals badge → formula → sentence → Why one at a time. One item per slide prevents cognitive overload. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — one item at a time; S/V underlines show compound verb. -->
+<section id="slide-p8a-answer-3" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8A — Item 3</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">simple</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2">
+            <p><u><strong>Formula:</strong> SVV</u></p>
         </div>
-        <div class="a-row">
-            <span class="a-num">8.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="2" style="color: #ffdd00;">compound</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="2">SV, but SV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2"><span class="a-s">We</span><span class="a-ls">(S)</span> usually <span class="a-v">went</span><span class="a-lv">(V)</span> to bed at nine o'clock but <span class="a-s">we</span><span class="a-ls">(S)</span> <span class="a-v">stayed</span><span class="a-lv">(V)</span> up until ten on really warm evenings.</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">9.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="3" style="color: #ffdd00;">simple</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="3">SSV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3">Around ten o'clock <span class="a-s">our mother and father</span><span class="a-ls">(S)</span> <span class="a-v">told</span><span class="a-lv">(V)</span> us to come inside.</span>
-        </div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3"><span class="a-s">Our parents</span><span class="a-ls">(S)</span> <span class="a-v">sat</span><span class="a-lv">(V)</span> in chairs on the grass and <span class="a-v">watched</span><span class="a-lv">(V)</span> us play our children's games.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: One subject, two verbs "sat" + "watched." Compound verb, no comma — simple SVV.</p>
     </div>
-    <aside class="notes">Item 9: 'our mother AND father' = compound subject, one verb 'told' = simple SSV.</aside>
+    <aside class="notes">Simple with compound verb. 'sat and watched' — two actions, one subject. No comma.</aside>
 </section>
 
-<!-- SLIDE 30: Answers — Practice 8A (10) -->
-<!-- PEDAGOGICAL INTENT: Student sees the final answer for item 10 with S/V annotation. The imperative sentence has an implied subject. -->
-<!-- WHY THIS FEATURE: Fragment fade-up reveals row with S/V annotations. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — S/V annotations show the compound verb in an imperative sentence. -->
-<section id="slide-p8a-answers-10" data-background-color="#0d5e1a" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 6em; min-width: 0; }
-    .reveal .a-ans { flex: 0 0 5em; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-    .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
-    .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.95em;">Practice 8A — Answer (10)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">10.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="1" style="color: #ffdd00;">simple</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="1">(S) V V</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1"><span class="a-ls">(S)</span><span class="a-v">Come</span><span class="a-lv">(V)</span> inside now but <span class="a-v">leave</span><span class="a-lv">(V)</span> the fireflies outside, please.</span>
+<!-- SLIDE: Answer — Practice 8A Item 4 -->
+<!-- PEDAGOGICAL INTENT: Student sees classification + formula + S/V annotated sentence for item 4. -->
+<!-- WHY THIS FEATURE: Fragment reveals badge → formula → sentence → Why one at a time. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — one item at a time; S/V underlines show both S-V pairs. -->
+<section id="slide-p8a-answer-4" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8A — Item 4</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">compound</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2">
+            <p><u><strong>Formula:</strong> SV, or SVV</u></p>
         </div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3"><span class="a-s">We</span><span class="a-ls">(S)</span> <span class="a-v">played</span><span class="a-lv">(V)</span> games such as hide-and-seek and tag, or <span class="a-s">we</span><span class="a-ls">(S)</span> just <span class="a-v">sat</span><span class="a-lv">(V)</span> on the grass and <span class="a-v">told</span><span class="a-lv">(V)</span> stories.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: Two S-V pairs + "or" = compound. Second clause has compound verb "sat and told."</p>
     </div>
-    <aside class="notes">Item 10: imperative, implied subject (you), compound verb 'come' + 'leave'.</aside>
+    <aside class="notes">Compound with 'or'. Second clause: 'we sat and told' — compound verb within a compound sentence.</aside>
+</section>
+
+<!-- SLIDE: Answer — Practice 8A Item 5 -->
+<!-- PEDAGOGICAL INTENT: Student sees classification + formula + S/V annotated sentence for item 5. -->
+<!-- WHY THIS FEATURE: Fragment reveals badge → formula → sentence → Why one at a time. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — one item at a time; S/V underlines show one S-V pair. -->
+<section id="slide-p8a-answer-5" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8A — Item 5</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">simple</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2">
+            <p><u><strong>Formula:</strong> SV</u></p>
+        </div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3"><span class="a-s">We</span><span class="a-ls">(S)</span> also <span class="a-v">caught</span><span class="a-lv">(V)</span> fireflies.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: One subject, one verb. No comma — simple SV.</p>
+    </div>
+    <aside class="notes">Simple SV. One subject, one verb, no coordinator.</aside>
+</section>
+
+<!-- SLIDE: Answer — Practice 8A Item 6 -->
+<!-- PEDAGOGICAL INTENT: Student sees classification + formula + S/V annotated sentence for item 6. -->
+<!-- WHY THIS FEATURE: Fragment reveals badge → formula → sentence → Why one at a time. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — one item at a time; S/V underlines show two S-V pairs. -->
+<section id="slide-p8a-answer-6" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8A — Item 6</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">compound</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2">
+            <p><u><strong>Formula:</strong> SV, and SV</u></p>
+        </div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3"><span class="a-s">We</span><span class="a-ls">(S)</span> <span class="a-v">put</span><span class="a-lv">(V)</span> the fireflies into a glass jar, and <span class="a-s">our father</span><span class="a-ls">(S)</span> <span class="a-v">punched</span><span class="a-lv">(V)</span> air holes in the metal lid.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: Two S-V pairs + "and" = compound. Comma before "and."</p>
+    </div>
+    <aside class="notes">Compound: two S-V pairs separated by comma + and.</aside>
+</section>
+
+<!-- SLIDE: Answer — Practice 8A Item 7 -->
+<!-- PEDAGOGICAL INTENT: Student sees classification + formula + S/V annotated sentence for item 7. -->
+<!-- WHY THIS FEATURE: Fragment reveals badge → formula → sentence → Why one at a time. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — one item at a time; S/V underlines show contrast structure. -->
+<section id="slide-p8a-answer-7" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8A — Item 7</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">compound</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2">
+            <p><u><strong>Formula:</strong> SV, but SV</u></p>
+        </div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3"><span class="a-s">My sisters</span><span class="a-ls">(S)</span> <span class="a-v">were</span><span class="a-lv">(V)</span> afraid of most bugs, but <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">loved</span><span class="a-lv">(V)</span> fireflies.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: Two S-V pairs + "but" = compound. Comma before "but" to show contrast.</p>
+    </div>
+    <aside class="notes">Compound: BUT shows contrast between 'afraid' and 'loved'.</aside>
+</section>
+
+<!-- SLIDE: Answer — Practice 8A Item 8 -->
+<!-- PEDAGOGICAL INTENT: Student sees classification + formula + S/V annotated sentence for item 8. -->
+<!-- WHY THIS FEATURE: Fragment reveals badge → formula → sentence → Why one at a time. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — one item at a time; S/V underlines show contrast structure. -->
+<section id="slide-p8a-answer-8" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8A — Item 8</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">compound</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2">
+            <p><u><strong>Formula:</strong> SV, but SV</u></p>
+        </div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3"><span class="a-s">We</span><span class="a-ls">(S)</span> usually <span class="a-v">went</span><span class="a-lv">(V)</span> to bed at nine o'clock, but <span class="a-s">we</span><span class="a-ls">(S)</span> <span class="a-v">stayed</span><span class="a-lv">(V)</span> up until ten on really warm evenings.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: Two S-V pairs + "but" = compound. Comma before "but" to show contrast.</p>
+    </div>
+    <aside class="notes">Compound: BUT shows contrast between 'nine o'clock' and 'stayed up until ten'.</aside>
+</section>
+
+<!-- SLIDE: Answer — Practice 8A Item 9 -->
+<!-- PEDAGOGICAL INTENT: Student sees classification + formula + S/V annotated sentence for item 9. -->
+<!-- WHY THIS FEATURE: Fragment reveals badge → formula → sentence → Why one at a time. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — one item at a time; S/V underlines show compound subject. -->
+<section id="slide-p8a-answer-9" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8A — Item 9</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">simple</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2">
+            <p><u><strong>Formula:</strong> SSV</u></p>
+        </div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3">Around ten o'clock <span class="a-s">our mother and father</span><span class="a-ls">(S)</span> <span class="a-v">told</span><span class="a-lv">(V)</span> us to come inside.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: Compound subject "our mother and father," one verb "told." No comma — simple SSV.</p>
+    </div>
+    <aside class="notes">Simple with compound subject. 'mother and father' = one subject, two people, one verb. No comma.</aside>
+</section>
+
+<!-- SLIDE: Answer — Practice 8A Item 10 -->
+<!-- PEDAGOGICAL INTENT: Student sees classification + formula + S/V annotated sentence for item 10. -->
+<!-- WHY THIS FEATURE: Fragment reveals badge → formula → sentence → Why one at a time. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — one item at a time; S/V underlines show implied subject. -->
+<section id="slide-p8a-answer-10" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8A — Item 10</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">simple</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2">
+            <p><u><strong>Formula:</strong> (S) V V</u></p>
+        </div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3"><span class="a-ls">(S)</span><span class="a-v">Come</span><span class="a-lv">(V)</span> inside now but <span class="a-v">leave</span><span class="a-lv">(V)</span> the fireflies outside, please.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: Imperative — implied subject (you). Compound verb "come" + "leave." No comma — simple.</p>
+    </div>
+    <aside class="notes">Imperative sentence. Implied subject (you). Compound verb 'come + leave'. Simple.</aside>
 </section>
 
 <!-- SLIDE 31: Task — Practice 8B -->
@@ -877,136 +879,107 @@
     <aside class="notes">Individual work 8 min. Pair check 3 min. Walk through the Teenagers paragraph.</aside>
 </section>
 
-<!-- SLIDE 32: Answers — Practice 8B (1-3) -->
-<!-- PEDAGOGICAL INTENT: Student sees classification plus formula plus sentence with S/V underlines for the Teenagers paragraph items 1-3. -->
-<!-- WHY THIS FEATURE: Fragment fade-up reveals each row; S/V annotations use custom CSS for underlines that persist. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — S/V underlines direct attention to the critical classification features. -->
-<section id="slide-p8b-answers-1-3" data-background-color="#0d5e1a" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 6em; min-width: 0; }
-    .reveal .a-ans { flex: 0 0 5em; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-    .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
-    .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.95em;">Practice 8B — Answers (1–3)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">1.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="1" style="color: #ffdd00;">simple</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="1">SV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1"><span class="a-s">Teenagers</span><span class="a-ls">(S)</span> <span class="a-v">find</span><span class="a-lv">(V)</span> many ways to drive their parents crazy.</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">2.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="2" style="color: #ffdd00;">compound</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="2">SV, or SV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2">First, <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">dye</span><span class="a-lv">(V)</span> their hair purple, or <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">shave</span><span class="a-lv">(V)</span> their heads bald.</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">3.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="3" style="color: #ffdd00;">simple</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="3">SVV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3"><span class="a-s">They</span><span class="a-ls">(S)</span> also <span class="a-v">tattoo</span><span class="a-lv">(V)</span> their skin and <span class="a-v">wear</span><span class="a-lv">(V)</span> rings in their noses.</span>
-        </div>
+<!-- ============================================================
+     Practice 8B — Answer Slides (one per item)
+     ============================================================ -->
+
+<!-- SLIDE: Answer — Practice 8B Item 1 -->
+<section id="slide-p8b-answer-1" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8B — Item 1</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">simple</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2"><p><u><strong>Formula:</strong> SV</u></p></div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3"><span class="a-s">Teenagers</span><span class="a-ls">(S)</span> <span class="a-v">find</span><span class="a-lv">(V)</span> many ways to drive their parents crazy.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: One subject, one verb. Simple SV.</p>
     </div>
-    <aside class="notes">Sentence 3: 'tattoo and wear' = compound verb. One subject 'they,' two verbs. Simple SVV. No comma.</aside>
 </section>
 
-<!-- SLIDE 33: Answers — Practice 8B (4-6) -->
-<!-- PEDAGOGICAL INTENT: Student sees classification plus formula plus sentence with S/V underlines for items 4-6. Each reveals per click. -->
-<!-- WHY THIS FEATURE: Fragment fade-up reveals each row; S/V annotations use custom CSS for underlines that persist. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — S/V underlines direct attention to the critical classification features. -->
-<section id="slide-p8b-answers-4-6" data-background-color="#0d5e1a" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 6em; min-width: 0; }
-    .reveal .a-ans { flex: 0 0 5em; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-    .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
-    .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.95em;">Practice 8B — Answers (4–6)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">4.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="1" style="color: #ffdd00;">simple</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="1">SV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1">In addition, <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">spend</span><span class="a-lv">(V)</span> hours at the shopping mall and on the phone.</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">5.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="2" style="color: #ffdd00;">compound</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="2">SV, but SV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2"><span class="a-s">They</span><span class="a-ls">(S)</span> <span class="a-v">have</span><span class="a-lv">(V)</span> time to watch TV, but <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">don't have</span><span class="a-lv">(V)</span> time to do their homework.</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">6.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="3" style="color: #ffdd00;">compound</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="3">SV, but SV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3">Also, <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">are</span><span class="a-lv">(V)</span> always too busy to clean up their rooms, but <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">are</span><span class="a-lv">(V)</span> never too busy to clean out the refrigerator.</span>
-        </div>
+<!-- SLIDE: Answer — Practice 8B Item 2 -->
+<section id="slide-p8b-answer-2" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8B — Item 2</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">compound</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2"><p><u><strong>Formula:</strong> SV, or SV</u></p></div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3">First, <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">dye</span><span class="a-lv">(V)</span> their hair purple, or <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">shave</span><span class="a-lv">(V)</span> their heads bald.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: Two S-V pairs + "or" = compound. Comma before "or."</p>
     </div>
-    <aside class="notes">Sentence 4: 'and' joins prepositional phrases 'at the mall' + 'on the phone', not clauses. Simple SV.</aside>
 </section>
 
-<!-- SLIDE 34: Answers — Practice 8B (7-9) -->
-<!-- PEDAGOGICAL INTENT: Student sees classification plus formula plus sentence with S/V underlines for items 7-9. Each reveals per click. -->
-<!-- WHY THIS FEATURE: Fragment fade-up reveals each row; S/V annotations use custom CSS for underlines that persist. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — S/V underlines direct attention to the critical classification features. -->
-<section id="slide-p8b-answers-7-9" data-background-color="#0d5e1a" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 6em; min-width: 0; }
-    .reveal .a-ans { flex: 0 0 5em; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-    .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
-    .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.95em;">Practice 8B — Answers (7–9)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">7.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="1" style="color: #ffdd00;">simple</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="1">SV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1">Finally, <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">are</span><span class="a-lv">(V)</span> old enough to drive but too young to pay for gas.</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">8.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="2" style="color: #ffdd00;">compound</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="2">SV, so SV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2"><span class="a-s">They</span><span class="a-ls">(S)</span> <span class="a-v">are</span><span class="a-lv">(V)</span> usually broke, so <span class="a-s">they</span><span class="a-ls">(S)</span> always <span class="a-v">return</span><span class="a-lv">(V)</span> the family car with an empty gas tank.</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">9.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="3" style="color: #ffdd00;">compound</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="3">SV, but SV</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3"><span class="a-s">It</span><span class="a-ls">(S)</span> <span class="a-v">is</span><span class="a-lv">(V)</span> hard to be a teenager, but <span class="a-s">it</span><span class="a-ls">(S)</span> <span class="a-v">is</span><span class="a-lv">(V)</span> even harder to be the parent of one.</span>
-        </div>
+<!-- SLIDE: Answer — Practice 8B Item 3 -->
+<section id="slide-p8b-answer-3" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8B — Item 3</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">simple</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2"><p><u><strong>Formula:</strong> SVV</u></p></div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3"><span class="a-s">They</span><span class="a-ls">(S)</span> also <span class="a-v">tattoo</span><span class="a-lv">(V)</span> their skin and <span class="a-v">wear</span><span class="a-lv">(V)</span> rings in their noses.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: One subject, two verbs "tattoo" + "wear." Compound verb, no comma — simple SVV.</p>
     </div>
-    <aside class="notes">Sentence 7: 'they are old enough...but too young...' — one linking verb 'are' with compound predicate adjective. Simple.</aside>
+</section>
+
+<!-- SLIDE: Answer — Practice 8B Item 4 -->
+<section id="slide-p8b-answer-4" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8B — Item 4</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">simple</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2"><p><u><strong>Formula:</strong> SV</u></p></div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3">In addition, <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">spend</span><span class="a-lv">(V)</span> hours at the shopping mall and on the phone.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: One subject, one verb. "and" joins phrases, not clauses. Simple SV.</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 8B Item 5 -->
+<section id="slide-p8b-answer-5" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8B — Item 5</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">compound</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2"><p><u><strong>Formula:</strong> SV, but SV</u></p></div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3"><span class="a-s">They</span><span class="a-ls">(S)</span> <span class="a-v">have</span><span class="a-lv">(V)</span> time to watch TV, but <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">don't have</span><span class="a-lv">(V)</span> time to do their homework.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: Two S-V pairs + "but" = compound. Comma before "but."</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 8B Item 6 -->
+<section id="slide-p8b-answer-6" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8B — Item 6</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">compound</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2"><p><u><strong>Formula:</strong> SV, but SV</u></p></div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3">Also, <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">are</span><span class="a-lv">(V)</span> always too busy to clean up their rooms, but <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">are</span><span class="a-lv">(V)</span> never too busy to clean out the refrigerator.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: Two S-V pairs + "but" = compound. Comma before "but."</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 8B Item 7 -->
+<section id="slide-p8b-answer-7" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8B — Item 7</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">simple</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2"><p><u><strong>Formula:</strong> SV</u></p></div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3">Finally, <span class="a-s">they</span><span class="a-ls">(S)</span> <span class="a-v">are</span><span class="a-lv">(V)</span> old enough to drive but too young to pay for gas.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: One linking verb "are" with compound predicate adjective. No comma — simple SV.</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 8B Item 8 -->
+<section id="slide-p8b-answer-8" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8B — Item 8</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">compound</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2"><p><u><strong>Formula:</strong> SV, so SV</u></p></div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3"><span class="a-s">They</span><span class="a-ls">(S)</span> <span class="a-v">are</span><span class="a-lv">(V)</span> usually broke, so <span class="a-s">they</span><span class="a-ls">(S)</span> always <span class="a-v">return</span><span class="a-lv">(V)</span> the family car with an empty gas tank.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: Two S-V pairs + "so" = compound. Comma before "so."</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 8B Item 9 -->
+<section id="slide-p8b-answer-9" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 8B — Item 9</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">compound</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2"><p><u><strong>Formula:</strong> SV, but SV</u></p></div>
+        <p class="p11-fix fragment fade-up" data-fragment-index="3"><span class="a-s">It</span><span class="a-ls">(S)</span> <span class="a-v">is</span><span class="a-lv">(V)</span> hard to be a teenager, but <span class="a-s">it</span><span class="a-ls">(S)</span> <span class="a-v">is</span><span class="a-lv">(V)</span> even harder to be the parent of one.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: Two S-V pairs + "but" = compound. Comma before "but."</p>
+    </div>
 </section>
 
 <!-- SLIDE 35: Transition to Practice 9 -->
@@ -1024,192 +997,138 @@
     <aside class="notes">Rapid oral check. Call out item numbers, students shout the answer. Then display answers with reasons.</aside>
 </section>
 
-<!-- SLIDE 37: Answers — Practice 9 (1-3) -->
-<!-- PEDAGOGICAL INTENT: Student sees the correct coordinator plus reason plus sentence revealed per click. Each row explains WHY that coordinator fits. -->
-<!-- WHY THIS FEATURE: Fragment fade-up reveals each row with answer and explanation simultaneously. -->
-<!-- COGNITIVE PRINCIPLE: Feedback — immediate explanation of coordinator meaning reinforces the semantic understanding. -->
-<section id="slide-p9-answers-1-3" data-background-color="#0d5e1a" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 4em; min-width: 0; }
-    .reveal .a-ans { flex: 0 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 0.9em; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.95em;">Practice 9 — Answers (1–3)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">1.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="1" style="color: #ffdd00;">and</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="1">joins two nouns</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1">"...fried chicken <strong style="color:#ffdd00;">and</strong> meatloaf."</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">2.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="2" style="color: #ffdd00;">and</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="2">joins two clauses (compound)</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2">"I ordered meatloaf, <strong style="color:#ffdd00;">and</strong> my friend ordered fried chicken."</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">3.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="3" style="color: #ffdd00;">or</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="3">after negative (not ... or)</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3">"We don't have chicken <strong style="color:#ffdd00;">or</strong> meatloaf."</span>
-        </div>
+<!-- ============================================================
+     Practice 9 — Answer Slides (one per item)
+     ============================================================ -->
+
+<!-- SLIDE: Answer — Practice 9 Item 1 -->
+<section id="slide-p9-answer-1" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 9 — Item 1</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">and</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Joins two nouns</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">"...fried chicken <strong style="color:#ffdd00;">and</strong> meatloaf."</p>
     </div>
-    <aside class="notes">Item 3: 'don't' is negative → use 'or' instead of 'and'.</aside>
 </section>
 
-<!-- SLIDE 38: Answers — Practice 9 (4-6) -->
-<!-- PEDAGOGICAL INTENT: Student sees the correct coordinator plus reason plus sentence for items 4-6. Each row explains WHY that coordinator fits. -->
-<!-- WHY THIS FEATURE: Fragment fade-up reveals each row with answer and explanation simultaneously. -->
-<!-- COGNITIVE PRINCIPLE: Feedback — immediate explanation of coordinator meaning reinforces the semantic understanding. -->
-<section id="slide-p9-answers-4-6" data-background-color="#0d5e1a" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 4em; min-width: 0; }
-    .reveal .a-ans { flex: 0 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 0.9em; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.95em;">Practice 9 — Answers (4–6)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">4.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="1" style="color: #ffdd00;">but</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="1">contrast — opposite ideas</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1">"I wanted to leave immediately, <strong style="color:#ffdd00;">but</strong> my friend wanted to stay."</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">5.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="2" style="color: #ffdd00;">and / but</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="2">two blanks — nouns + contrast</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2">"He ordered a hamburger <strong style="color:#ffdd00;">and</strong> french fries, <strong style="color:#ffdd00;">but</strong> I didn't order anything."</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">6.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="3" style="color: #ffdd00;">so</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="3">result — reason → result</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3">"My new neighbors are vegetarians, <strong style="color:#ffdd00;">so</strong> they don't eat meat."</span>
-        </div>
+<!-- SLIDE: Answer — Practice 9 Item 2 -->
+<section id="slide-p9-answer-2" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 9 — Item 2</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">and</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Joins two clauses (compound)</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">"I ordered meatloaf, <strong style="color:#ffdd00;">and</strong> my friend ordered fried chicken."</p>
     </div>
-    <aside class="notes">Item 5: first 'and' joins two nouns in a simple sentence. Second 'but' contrasts the two clauses.</aside>
 </section>
 
-<!-- SLIDE 39: Answers — Practice 9 (7-9) -->
-<!-- PEDAGOGICAL INTENT: Student sees the correct coordinator plus reason plus sentence for items 7-9. Multiple acceptable answers shown where applicable. -->
-<!-- WHY THIS FEATURE: Fragment fade-up reveals each row with answer and explanation simultaneously. -->
-<!-- COGNITIVE PRINCIPLE: Feedback — immediate explanation of coordinator meaning reinforces semantic understanding. -->
-<section id="slide-p9-answers-7-9" data-background-color="#0d5e1a" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 4em; min-width: 0; }
-    .reveal .a-ans { flex: 0 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 0.9em; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.95em;">Practice 9 — Answers (7–9)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">7.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="1" style="color: #ffdd00;">or / but</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="1">two blanks — negative + contrast</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1">"They don't eat meat <strong style="color:#ffdd00;">or</strong> chicken, <strong style="color:#ffdd00;">but</strong> sometimes they eat a little fish."</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">8.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="2" style="color: #ffdd00;">so</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="2">result — reason → result</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2">"I wanted to be friendly, <strong style="color:#ffdd00;">so</strong> I invited them to my house for dinner."</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">9.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="3" style="color: #ffdd00;">and</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="3">compound verb (simple sentence)</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3">"They came <strong style="color:#ffdd00;">and</strong> brought their young son." <span style="color:#ffdd00; font-size:0.8em;">No comma — compound verb</span></span>
-        </div>
+<!-- SLIDE: Answer — Practice 9 Item 3 -->
+<section id="slide-p9-answer-3" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 9 — Item 3</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">or</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">After negative (not ... or)</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">"We don't have chicken <strong style="color:#ffdd00;">or</strong> meatloaf."</p>
     </div>
-    <aside class="notes">Item 7: 'don't eat' → 'or' not 'and'. Then 'but' adds contrast. Item 9: 'came AND brought' = compound verb, simple sentence. No comma.</aside>
 </section>
 
-<!-- SLIDE 40: Answers — Practice 9 (10-12) -->
-<!-- PEDAGOGICAL INTENT: Student sees the correct coordinator plus reason plus sentence for items 10-12. Each row explains WHY that coordinator fits. -->
-<!-- WHY THIS FEATURE: Fragment fade-up reveals each row with answer and explanation simultaneously. -->
-<!-- COGNITIVE PRINCIPLE: Feedback — immediate explanation of coordinator meaning reinforces the semantic understanding. -->
-<section id="slide-p9-answers-10-12" data-background-color="#0d5e1a" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 4em; min-width: 0; }
-    .reveal .a-ans { flex: 0 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 0.9em; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.95em;">Practice 9 — Answers (10–12)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">10.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="1" style="color: #ffdd00;">so</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="1">result — reason → result</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1">"He is just a baby, <strong style="color:#ffdd00;">so</strong> he can't talk yet."</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">11.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="2" style="color: #ffdd00;">or / so</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="2">two blanks — negative + result</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2">"They don't drink coffee <strong style="color:#ffdd00;">or</strong> tea, <strong style="color:#ffdd00;">so</strong> I served lemonade."</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">12.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="3" style="color: #ffdd00;">or</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="3">choice — alternative</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3">"...a choice of chocolate cake <strong style="color:#ffdd00;">or</strong> apple pie."</span>
-        </div>
+<!-- SLIDE: Answer — Practice 9 Item 4 -->
+<section id="slide-p9-answer-4" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 9 — Item 4</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">but</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Contrast — opposite ideas</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">"I wanted to leave immediately, <strong style="color:#ffdd00;">but</strong> my friend wanted to stay."</p>
     </div>
-    <aside class="notes">Item 11: 'don't drink' → 'or' not 'and'. Then 'so' shows the result.</aside>
 </section>
 
-<!-- SLIDE 41: Answers — Practice 9 (13) -->
-<!-- PEDAGOGICAL INTENT: Student sees the answer for item 13 with the contrast explanation. -->
-<!-- WHY THIS FEATURE: Fragment fade-up reveals answer plus rationale simultaneously. -->
-<!-- COGNITIVE PRINCIPLE: Feedback — immediate explanation reinforces the contrast meaning of BUT. -->
-<section id="slide-p9-answers-13" data-background-color="#0d5e1a" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-q { flex: 0 0 4em; min-width: 0; }
-    .reveal .a-ans { flex: 0 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 0.9em; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.95em;">Practice 9 — Answer (13)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">13.</span>
-            <span class="fragment fade-up a-q" data-fragment-index="1" style="color: #ffdd00;">but</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="1">contrast — opposite ideas</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1">"The husband wanted both cake and pie, <strong style="color:#ffdd00;">but</strong> the wife didn't want either."</span>
-        </div>
+<!-- SLIDE: Answer — Practice 9 Item 5 -->
+<section id="slide-p9-answer-5" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 9 — Item 5</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">and</strong> / <strong style="color:#fff;">but</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Two blanks — nouns + contrast</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">"He ordered a hamburger <strong style="color:#ffdd00;">and</strong> french fries, <strong style="color:#ffdd00;">but</strong> I didn't order anything."</p>
     </div>
-    <aside class="notes">BUT shows contrast between the husband's desire and the wife's lack of interest.</aside>
+</section>
+
+<!-- SLIDE: Answer — Practice 9 Item 6 -->
+<section id="slide-p9-answer-6" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 9 — Item 6</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">so</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Result — reason &rarr; result</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">"My new neighbors are vegetarians, <strong style="color:#ffdd00;">so</strong> they don't eat meat."</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 9 Item 7 -->
+<section id="slide-p9-answer-7" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 9 — Item 7</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">or</strong> / <strong style="color:#fff;">but</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Two blanks — negative + contrast</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">"They don't eat meat <strong style="color:#ffdd00;">or</strong> chicken, <strong style="color:#ffdd00;">but</strong> sometimes they eat a little fish."</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 9 Item 8 -->
+<section id="slide-p9-answer-8" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 9 — Item 8</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">so</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Result — reason &rarr; result</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">"I wanted to be friendly, <strong style="color:#ffdd00;">so</strong> I invited them to my house for dinner."</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 9 Item 9 -->
+<section id="slide-p9-answer-9" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 9 — Item 9</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">and</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Compound verb (simple sentence) &mdash; no comma</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">"They came <strong style="color:#ffdd00;">and</strong> brought their young son."</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 9 Item 10 -->
+<section id="slide-p9-answer-10" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 9 — Item 10</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">so</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Result — reason &rarr; result</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">"He is just a baby, <strong style="color:#ffdd00;">so</strong> he can't talk yet."</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 9 Item 11 -->
+<section id="slide-p9-answer-11" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 9 — Item 11</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">or</strong> / <strong style="color:#fff;">so</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Two blanks — negative + result</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">"They don't drink coffee <strong style="color:#ffdd00;">or</strong> tea, <strong style="color:#ffdd00;">so</strong> I served lemonade."</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 9 Item 12 -->
+<section id="slide-p9-answer-12" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 9 — Item 12</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">or</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Choice — alternative</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">"...a choice of chocolate cake <strong style="color:#ffdd00;">or</strong> apple pie."</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 9 Item 13 -->
+<section id="slide-p9-answer-13" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 9 — Item 13</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">but</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Contrast — opposite ideas</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">"The husband wanted both cake and pie, <strong style="color:#ffdd00;">but</strong> the wife didn't want either."</p>
+    </div>
 </section>
 
 <!-- SLIDE 40: Transition to Practice 10 -->
@@ -1221,12 +1140,12 @@
 <!-- PEDAGOGICAL INTENT: Student sees Step 1 of the worked example. Read both sentences and identify the relationship: result. -->
 <!-- WHY THIS FEATURE: Auto-animate Step 1 to Step 2 to Step 3. Each click adds the next step, building the reasoning chain incrementally. -->
 <!-- COGNITIVE PRINCIPLE: Segmenting — each reasoning step is one slide, reducing cognitive load. -->
-<section id="slide-p10a-demo-1" data-auto-animate data-auto-animate-id="p10ademo" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-p10a-demo-1" data-auto-animate data-auto-animate-id="p10ademo" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title" style="font-size: 0.9em;">Practice 10A — Let's do one together</h2>
         <p style="font-size: 0.85em; color: #ffdd00;">Item 1: Canada has two languages. Everything is in English and French.</p>
         <p style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 1:</strong> Read both sentences. What's the relationship?</u></p>
-        <p style="font-size: 0.85em; margin-left: 1em; color: #4fc3f7;">Canada has two languages → Everything is in those languages. <strong>Result</strong></p>
+        <p style="font-size: 0.85em; margin-left: 1em; color: #ffdd00;">Canada has two languages → Everything is in those languages. <strong>Result</strong></p>
     </div>
     <aside class="notes">"The first sentence tells us Canada has two languages. The second tells us everything is in those languages. That's a result."</aside>
 </section>
@@ -1235,14 +1154,14 @@
 <!-- PEDAGOGICAL INTENT: Student sees Step 2 of the demo. Choose the coordinator: so for result. Step 1 stays but dims. -->
 <!-- WHY THIS FEATURE: Auto-animate adds Step 2 while Step 1 dims. The cumulative build shows the reasoning sequence. -->
 <!-- COGNITIVE PRINCIPLE: Segmenting — each reasoning step revealed sequentially. -->
-<section id="slide-p10a-demo-2" data-auto-animate data-auto-animate-id="p10ademo" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-p10a-demo-2" data-auto-animate data-auto-animate-id="p10ademo" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title" style="font-size: 0.9em;">Practice 10A — Let's do one together</h2>
         <p style="font-size: 0.85em; color: #ffdd00;">Item 1: Canada has two languages. Everything is in English and French.</p>
         <p style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 1:</strong> Read both sentences. What's the relationship?</u></p>
-        <p style="font-size: 0.75em; margin-left: 1em; color: rgba(255,255,255,0.6);">Canada has two languages → Everything is in those languages. Result</p>
+        <p style="font-size: 0.75em; margin-left: 1em; color: #fff;">Canada has two languages → Everything is in those languages. Result</p>
         <p style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 2:</strong> Choose the right coordinator.</u></p>
-        <p style="font-size: 0.85em; margin-left: 1em;">Result → use <strong style="color: #4fc3f7;">so</strong></p>
+        <p style="font-size: 0.85em; margin-left: 1em;">Result → use <strong style="color: #ffdd00;">so</strong></p>
     </div>
     <aside class="notes">"When the second sentence is a result of the first, we use 'so'."</aside>
 </section>
@@ -1251,16 +1170,16 @@
 <!-- PEDAGOGICAL INTENT: Student sees Step 3 of the demo. The complete compound sentence. All three steps visible with the final combined sentence highlighted. -->
 <!-- WHY THIS FEATURE: Auto-animate completes the demo. The full chain from relationship to coordinator to combined sentence is visible. -->
 <!-- COGNITIVE PRINCIPLE: Segmenting plus Signaling — the complete chain is visible; the final sentence is highlighted as the goal. -->
-<section id="slide-p10a-demo-3" data-auto-animate data-auto-animate-id="p10ademo" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-p10a-demo-3" data-auto-animate data-auto-animate-id="p10ademo" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title" style="font-size: 0.9em;">Practice 10A — Let's do one together</h2>
         <p style="font-size: 0.85em; color: #ffdd00;">Item 1: Canada has two languages. Everything is in English and French.</p>
         <p style="font-size: 0.75em; margin-top: 0.4em;"><u><strong>Step 1:</strong> What's the relationship?</u></p>
-        <p style="font-size: 0.7em; margin-left: 1em; color: rgba(255,255,255,0.6);">Result</p>
+        <p style="font-size: 0.7em; margin-left: 1em; color: #fff;">Result</p>
         <p style="font-size: 0.75em; margin-top: 0.3em;"><u><strong>Step 2:</strong> Choose the coordinator.</u></p>
-        <p style="font-size: 0.7em; margin-left: 1em; color: rgba(255,255,255,0.6);">so</p>
+        <p style="font-size: 0.7em; margin-left: 1em; color: #fff;">so</p>
         <p style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 3:</strong> Combine: comma + coordinator.</u></p>
-        <p style="font-size: 0.85em; margin-left: 1em; color: #4fc3f7;">"Canada has two languages, <strong>so</strong> everything is in English and French."</p>
+        <p style="font-size: 0.85em; margin-left: 1em; color: #ffdd00;">"Canada has two languages, <strong>so</strong> everything is in English and French."</p>
     </div>
     <aside class="notes">"Comma before 'so,' then the second clause. Full compound sentence."</aside>
 </section>
@@ -1275,107 +1194,88 @@
     <aside class="notes">Individual writing 6 min. Pair check 4 min. Discuss multiple acceptable answers.</aside>
 </section>
 
-<!-- SLIDE 45: Answers — Practice 10A (2-4) -->
-<!-- PEDAGOGICAL INTENT: Student sees each model sentence revealed per click with the coordinator highlighted in yellow and a meaning label. -->
-<!-- WHY THIS FEATURE: Fragment fade-up reveals each row; coordinator highlighting signals the key choice point. -->
-<!-- COGNITIVE PRINCIPLE: Segmenting — max 3 items per slide; each reveals independently so teacher can discuss coordinator choice. -->
-<section id="slide-p10a-answers-2-4" data-background-color="#0d5e1a" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-ans { flex: 0 1 auto; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.9em; line-height: 1.5; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; margin-left: 0.5em; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.95em;">Practice 10A — Model Answers (2–4)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">2.</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="1">There are hundreds of languages, <strong style="color:#fff;">but</strong> not all have a written form.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1">Contrast</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">3.</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="2">Chinese is spoken by more people, <strong style="color:#fff;">but</strong> English is spoken in more countries.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2">Contrast</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">4.</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="3">Russian is the third most spoken, <strong style="color:#fff;">and</strong> Spanish is the fourth.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3">Similar</span>
-        </div>
+<!-- ============================================================
+     Practice 10A — Answer Slides (one per item)
+     ============================================================ -->
+
+<!-- SLIDE: Answer — Practice 10A Item 2 -->
+<section id="slide-p10a-answer-2" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 10A — Item 2</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">but</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">There are hundreds of languages, <strong style="color:#ffdd00;">but</strong> not all have a written form.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">Why: Contrast = "but." Also accepts "and."</p>
     </div>
-    <aside class="notes">Items 2-3 also accept 'and'. Both coordinators work depending on how you interpret the relationship.</aside>
 </section>
 
-<!-- SLIDE 46: Answers — Practice 10A (5-7) -->
-<!-- PEDAGOGICAL INTENT: Student sees each model sentence with coordinator highlighted and meaning label for items 5-7. Each reveals per click. -->
-<!-- WHY THIS FEATURE: Fragment fade-up reveals each row; coordinator highlighting signals the key choice point. -->
-<!-- COGNITIVE PRINCIPLE: Segmenting — max 3 items per slide; each reveals independently so teacher can discuss coordinator choice. -->
-<section id="slide-p10a-answers-5-7" data-background-color="#0d5e1a" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-ans { flex: 0 1 auto; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.9em; line-height: 1.5; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; margin-left: 0.5em; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.95em;">Practice 10A — Model Answers (5–7)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">5.</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="1">There are one million words in English, <strong style="color:#fff;">but</strong> most people use only ten thousand.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1">Contrast</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">6.</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="2">Chinese has many dialects, <strong style="color:#fff;">so</strong> Chinese people cannot always understand each other.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2">Result</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">7.</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="3">French used to be for diplomacy, <strong style="color:#fff;">but</strong> now it is English.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3">Contrast</span>
-        </div>
+<!-- SLIDE: Answer — Practice 10A Item 3 -->
+<section id="slide-p10a-answer-3" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 10A — Item 3</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">but</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Chinese is spoken by more people, <strong style="color:#ffdd00;">but</strong> English is spoken in more countries.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">Why: Contrast = "but." Also accepts "and."</p>
     </div>
-    <aside class="notes">Item 7: BUT contrast between past (French) and present (English).</aside>
 </section>
 
-<!-- SLIDE 47: Answers — Practice 10A (8-9) -->
-<!-- PEDAGOGICAL INTENT: Student sees each model sentence with coordinator highlighted and meaning label for items 8-9. Each reveals per click. -->
-<!-- WHY THIS FEATURE: Fragment fade-up reveals each row; coordinator highlighting signals the key choice point. -->
-<!-- COGNITIVE PRINCIPLE: Segmenting — max 2 items; each reveals independently so teacher can discuss coordinator choice. -->
-<section id="slide-p10a-answers-8-9" data-background-color="#0d5e1a" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-ans { flex: 0 1 auto; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.9em; line-height: 1.5; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; margin-left: 0.5em; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.95em;">Practice 10A — Model Answers (8–9)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">8.</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="1">International companies are growing, <strong style="color:#fff;">so</strong> they will need more bilingual workers.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1">Result</span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">9.</span>
-            <span class="fragment fade-up a-ans" data-fragment-index="2">Young people should know a second language, <strong style="color:#fff;">or</strong> they will be at a disadvantage.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2">Consequence</span>
-        </div>
+<!-- SLIDE: Answer — Practice 10A Item 4 -->
+<section id="slide-p10a-answer-4" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 10A — Item 4</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">and</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Russian is the third most spoken, <strong style="color:#ffdd00;">and</strong> Spanish is the fourth.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">Why: Similar ranking = "and."</p>
     </div>
-    <aside class="notes">Item 9: OR shows consequence (if you don't → disadvantage).</aside>
+</section>
+
+<!-- SLIDE: Answer — Practice 10A Item 5 -->
+<section id="slide-p10a-answer-5" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 10A — Item 5</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">but</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">There are one million words in English, <strong style="color:#ffdd00;">but</strong> most people use only ten thousand.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">Why: Contrast between total words and usage = "but."</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 10A Item 6 -->
+<section id="slide-p10a-answer-6" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 10A — Item 6</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">so</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Chinese has many dialects, <strong style="color:#ffdd00;">so</strong> Chinese people cannot always understand each other.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">Why: Many dialects &rarr; can't understand = result. "So."</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 10A Item 7 -->
+<section id="slide-p10a-answer-7" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 10A — Item 7</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">but</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">French used to be for diplomacy, <strong style="color:#ffdd00;">but</strong> now it is English.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">Why: Contrast between past and present = "but."</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 10A Item 8 -->
+<section id="slide-p10a-answer-8" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 10A — Item 8</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">so</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">International companies are growing, <strong style="color:#ffdd00;">so</strong> they will need more bilingual workers.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">Why: Growing companies &rarr; need bilingual workers = result. "So."</p>
+    </div>
+</section>
+
+<!-- SLIDE: Answer — Practice 10A Item 9 -->
+<section id="slide-p10a-answer-9" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice 10A — Item 9</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1"><strong style="color:#fff;">or</strong></p>
+        <p class="p11-fix fragment fade-up" data-fragment-index="2">Young people should know a second language, <strong style="color:#ffdd00;">or</strong> they will be at a disadvantage.</p>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">Why: Consequence = "or" (if not, then disadvantage).</p>
+    </div>
 </section>
 
 <!-- SLIDE 48: Transition to summary -->
@@ -1389,9 +1289,9 @@
 <!-- COGNITIVE PRINCIPLE: Consolidation — reviewing learning objectives strengthens retention and metacognitive awareness. -->
 <section id="slide-summary" data-background-color="#1a1a2e">
     <h2>I can...</h2>
-    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> tell simple sentences from compound sentences</p>
-    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> use and, but, or, so with the right meaning</p>
-    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> put a comma before the coordinator</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">&#10003;</span> tell simple sentences from compound sentences</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">&#10003;</span> use and, but, or, so with the right meaning</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">&#10003;</span> put a comma before the coordinator</p>
     <p style="margin-top: 1em; font-size: 0.8em; color: #ffdd00;">Next: fixing broken sentences!</p>
     <aside class="notes">Elicit each "I can" from students. Connect to CA: "You'll use these skills in your CA paragraph."</aside>
 </section>
@@ -1400,7 +1300,7 @@
 <section id="slide-end" data-background-color="#2c3e50" data-background-transition="none">
     <h2>Writing Compound Sentences</h2>
     <div><span class="cefr-badge B1">B1</span></div>
-    <p style="font-size: 0.7em; color: rgba(255,255,255,0.85); margin-top: 0.5em;">and, but, or, so</p>
+    <p style="font-size: 0.85em; color: #fff; margin-top: 0.5em;">and, but, or, so</p>
 </section>
 
 </div>

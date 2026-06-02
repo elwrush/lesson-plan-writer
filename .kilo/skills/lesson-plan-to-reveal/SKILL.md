@@ -102,10 +102,10 @@ The template's base answer-list CSS provides structural layout (flex, alignment)
     .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 0.9em; line-height: 1.5; }
     .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
     .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-    .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
-    .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+    .reveal .a-s { border-bottom: 2px solid #fff; }
+    .reveal .a-v { border-bottom: 3px solid #ffdd00; }
+    .reveal .a-ls { color: #ffdd00; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+    .reveal .a-lv { color: #fff; font-size: 0.75em; font-style: italic; margin-right: 1px; }
     .reveal .aim-label { color: #fff; }
 </style>
 ```
@@ -143,8 +143,8 @@ Default background color reference (solid colors — no shielding needed):
 |---|---|
 | Title, lead-in, general content | `#1a1a2e` (dark navy/black) |
 | Transition (forward to next stage) | `#c0392b` (red) |
-| Pedagogical/strategy blocks, grammar rules | `#0d4a3d` (teal) |
-| Answer tables | `#0d5e1a` (green) |
+| Pedagogical/strategy blocks, grammar rules | `#1a237e` (teal) |
+| Answer tables | `#052e0d` (green) |
 | Summary | white (default) — **WARNING: white background + black theme = invisible white text.** Use `#1a1a2e` for summary slides unless text color is explicitly overridden. |
 | End | `#2c3e50` (dark blue-gray) |
 
@@ -197,9 +197,9 @@ Every distinct exercise type MUST follow this four-slide sequence. This is the c
 | Step | Slide type | Background | Content | Audio/Timer |
 |------|-----------|------------|---------|-------------|
 | 1 | **Transition** | `#c0392b` (red) | Heading only — signals phase change to students | Neither |
-| 2 | **Pedagogical** | `#0d4a3d` (teal), `class="pedagogical"` | Strategy instruction for the skill (e.g., how to listen for gist). May use auto-animate for keyword underline reveals. Differentiation challenge (`🏁 Want a challenge?`) shown here. | **No audio** — audio goes on the task slide |
+| 2 | **Pedagogical** | `#1a237e` (teal), `class="pedagogical"` | Strategy instruction for the skill (e.g., how to listen for gist). May use auto-animate for keyword underline reveals. Differentiation challenge (`🏁 Want a challenge?`) shown here. | **No audio** — audio goes on the task slide |
 | 3 | **Task** | `#1a1a2e` (dark) | Exercise number + brief student-facing instruction. **Do NOT print full exercise text** — students have the workbook. | `data-audio-src` for listening exercises; `data-timer` for written exercises. **Never both** on the same slide. |
-| 4 | **Answers** | `#0d5e1a` (green) | answer-list flex layout with max **3 items** per slide. Each row: number, question snippet, answer (fragment fade-up), **WHY line in yellow** (`#ffdd00`) on the line below. | Neither |
+| 4 | **Answers** | `#052e0d` (green) | For simple reveals (T/F, MC): answer-list flex layout, max 3 items per slide. For error-correction with two fix methods: **both-methods pattern** (one item per slide, both M1 + M2). See "Answer Slides: Both-Methods Pattern" below. | Neither |
 
 **Key rules:**
 - Audio always goes on the **task slide**, never the pedagogical slide
@@ -278,6 +278,84 @@ If `.a-num` is `text-align: right`, the number floats right and breaks the visua
 
 
 **CRITICAL — Add the inline style block from Step 2b before any answer slide.** Without it, the flex layout breaks on green backgrounds because the template's CSS is corrupted by a missing `}` in `.cefr-badge`.
+
+### Answer Slides: Both-Methods Pattern (one per item)
+
+For error-correction exercises where students need to see **both fix methods** (e.g., Method 1: period, Method 2: comma + coordinator) with an explanation, use the **one-item-per-slide pattern** with stacked vertical layout:
+
+**When to use:**
+- Error-correction exercises (run-ons, comma splices, fragment fixes)
+- Any exercise where the answer key lists alternative correction methods
+- Exercises where showing both correct alternatives is pedagogically important
+
+**Do NOT use this pattern for:**
+- Simple answer reveals (T/F, MC, comprehension Qs) — use the `answer-list` row layout instead
+- Exercises with >1 item needing a quick overview (no space for 10+ slides)
+
+**CRITICAL RULES:**
+- **One item per slide** — never bundle multiple items
+- Fragment sequence: error badge → Method 1 → Method 2 → Why
+- Correct items (no fix needed): fewer fragments — badge → "No fix needed" → Why
+- Use `class="answer-slide"` on the `<section>` tag — this removes text-shadow for a clean look on green
+- Use `.p11-answer`, `.p11-badge`, `.p11-original`, `.p11-method`, `.p11-fix`, `.p11-why` classes (CSS is in the base template; no inline `<style>` block needed for the base styles)
+- **Underlines on changes**: use `<span class="cor-add">` around added/changed text — renders as yellow (`#ffdd00`) text with a thick white (`3px solid #fff`) underline
+- **No text shadows** — `.answer-slide` strips them via `text-shadow: none !important`
+- **No gray text** — only `#fff` and `#ffdd00`
+
+**Pattern for error items:**
+
+```html
+<section id="slide-practice-answers-N" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice N — Item N</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">error type</p>
+        <p class="p11-original">"Original sentence with the error."</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2">
+            <p><u><strong>Method 1:</strong> Add a period</u></p>
+            <p class="p11-fix">&rarr; "Fixed sentence<span class="cor-add">.</span>"</p>
+        </div>
+        <div class="p11-method fragment fade-up" data-fragment-index="3">
+            <p><u><strong>Method 2:</strong> Add a comma + coordinator</u></p>
+            <p class="p11-fix">&rarr; "Fixed sentence, <span class="cor-add">and</span> ..."</p>
+        </div>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: Explanation of the error and why both fixes work.</p>
+    </div>
+</section>
+```
+
+**Pattern for correct items (no error):**
+
+```html
+<section id="slide-practice-answers-N" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice N — Item N</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1" style="color: #fff;">OK &mdash; Correct</p>
+        <p class="p11-original">"Correct sentence."</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2">
+            <p>Both methods: <strong>No fix needed</strong> &mdash; correct compound sentence.</p>
+        </div>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">Why: Already has comma + coordinator. &#10003;</p>
+    </div>
+</section>
+```
+
+**Key CSS classes** (defined in `base-slides-template.html`):
+| Class | Purpose |
+|-------|---------|
+| `.answer-slide` | Strips text-shadow from all text inside the slide |
+| `.p11-answer` | Flex container, 0.9em, left-aligned |
+| `.p11-badge` | Inline error-type label (e.g., "comma splice", "run-on") |
+| `.p11-original` | Yellow italic original sentence, bottom-bordered |
+| `.p11-method` | Wrapper for one correction method |
+| `.p11-fix` | White fix text, indented |
+| `.cor-add` | **Yellow text + thick white underline** — marks added/changed text |
+| `.p11-why` | Explanation box with yellow left border, dark background |
+
+**Design rules for `.cor-add`:**
+- Use on added punctuation, capitalized letters, added coordinators
+- Always wraps ONLY the text that changed
+- Use multiple `<span class="cor-add">` per fix if multiple changes (period + capitalized letter):  
+  `"...strangers<span class="cor-add">.</span> <span class="cor-add">T</span>hey..."`
 
 ### Step 4A-bis: Design Blueprint (MANDATORY — Design Gate)
 
@@ -492,6 +570,9 @@ if idx >= 0:
 - Verify answer slides use `fragment fade-up` (not bare `fragment`) on answer spans
 - Verify answer slides use `<div class="answer-list">` flex layout, not `<table class="answer-table">`
 - **Answer list sizing**: Count item rows per answer-list. Max 3 items per answer slide. Flag any slide with >3. Split exercises with >3 items across multiple slides (e.g., `slide-ex2-answers-1-3`, `slide-ex2-answers-4-5`).
+- **Both-methods answer slides**: Verify each slide uses `class="answer-slide"` on `<section>` — without it, global text-shadow creates a blurry look on green backgrounds.
+- **Both-methods answer slides**: Verify `.cor-add` spans exist on added/changed text — without them, students can't see what was modified. Check `border-bottom: 3px solid #fff` in the CSS.
+- **Both-methods answer slides**: Verify each error-type slide has BOTH `.p11-method` blocks (M1 + M2), and correct-item slides have exactly one "No fix needed" block.
 - Verify no instructional text like "Click to reveal" appears on slides — answer reveal behavior is self-evident.
 - Verify fragment usage: only on answer reveal slides and strategy demonstrations, not on expository content
 - Verify procedure text is in `<aside class="notes">`, not on screen
@@ -500,7 +581,7 @@ if idx >= 0:
 - Verify `autoAnimateUnmatched: true` is in `Reveal.initialize()`
 - Verify every slide with `data-auto-animate` also has `data-auto-animate-id` — without it, `null === null` causes all auto-animate slides to animate into each other.
 - Verify transition slides use `data-background-color="#c0392b"` (use `data-background-color` for solid colors, NOT `data-background` — `data-background` is not recognized by reveal.js 5.x)
-- Verify pedagogical strategy slides use `data-background-color="#0d4a3d"` and `class="pedagogical"`
+- Verify pedagogical strategy slides use `data-background-color="#1a237e"` and `class="pedagogical"`
 - Verify listening task slides that need audio have `data-audio-src="assets/filename.mp3"`
 - **Verify no `<section>` has both `data-timer` AND `data-audio-src`** — never place a timer pill on a slide that plays audio or video
 - **Verify no raw Unicode check/cross characters**: Scan for U+2713 (✓) and U+2717 (✗) in the output HTML. If found, replace with `<i class="fa-solid fa-check">` and `<i class="fa-solid fa-times">` respectively. Font Awesome renders reliably; Unicode glyphs do not.
@@ -599,11 +680,11 @@ Quick reference of slide types and their pedagogical intent:
 | Vocabulary | `#1a1a2e` | IPA visible first; English word + context reveal on click | Fragment — reveal |
 | Lead-in | `#1a1a2e` | One open question | Static — activation |
 | Transition | `#c0392b` | Heading only, phase signal | Static — rest |
-| Teach (sentence/grammar) | `#0d4a3d` | Word/part transforms (color, border, highlight) | Auto-animate — transformation |
-| Teach (rules/reference) | `#0d4a3d` | Rules in 2-column table (Rule | Example) | Static — reference |
-| Strategy (step-by-step) | `#0d4a3d` | Each step is one slide | Sibling slides — discrete teaching |
+| Teach (sentence/grammar) | `#1a237e` | Word/part transforms (color, border, highlight) | Auto-animate — transformation |
+| Teach (rules/reference) | `#1a237e` | Rules in 2-column table (Rule | Example) | Static — reference |
+| Strategy (step-by-step) | `#1a237e` | Each step is one slide | Sibling slides — discrete teaching |
 | Task instruction | dark + timer | Instructions full-visible | Static — orientation |
-| Answer (T/F, MC) | `#0d5e1a` | Statements visible; answers reveal per-row | Fragment on `<span>` inside `<td>` |
+| Answer (T/F, MC) | `#052e0d` | Statements visible; answers reveal per-row | Fragment on `<span>` inside `<td>` |
 | Summary | default | "I can..." checkmarks | Static — consolidation |
 | End | `#2c3e50` | Topic + CEFR | Static — exit |
 
@@ -655,7 +736,7 @@ Rules 0–15 covering colors, layout, backgrounds, fragments, annotations, and f
 
 - **Rule 0 — No gray text.** Only `#fff` and `#ffdd00` on all backgrounds. No green, blue, red, or gray text.
 - **Rule 7 — Answer slides**: `<div class="answer-list">` flex layout, `a-cor`/`a-inc` with `fragment fade-up`, max 3 items. Never use `highlight-green`/`highlight-red`.
-- **Rule 9 — Backgrounds**: dark `#1a1a2e` (title/lead-in), red `#c0392b` (transitions), teal `#0d4a3d` (pedagogical), green `#0d5e1a` (answers), `#2c3e50` (end).
+- **Rule 9 — Backgrounds**: dark `#1a1a2e` (title/lead-in), red `#c0392b` (transitions), teal `#1a237e` (pedagogical), green `#052e0d` (answers), `#2c3e50` (end).
 - **Rule 10 — Title slides**: `justify-content: center;`, logo 120px, h2 2.2em, CEFR badge inline.
 - **Rule 15 — Symbols**: Font Awesome only (`<i class="fa-solid fa-check">` / `<i class="fa-solid fa-times">`). Never raw Unicode U+2713/U+2717.
 
@@ -685,7 +766,7 @@ See AGENTS.md (`Pedagogical Strategy Slides — Design Principles`) for the full
 - **Step label format**: `<u><strong>Step N:</strong> description</u>`
 - **Header on first slide only**, remaining slides show only the step label
 - **Auto-animate for keyword underlines**: use `<span data-id="...">` with transparent→visible border transitions across consecutive `<section data-auto-animate>` siblings
-- **Teal background**: `data-background-color="#0d4a3d"` + `class="pedagogical"` on all strategy slides
+- **Teal background**: `data-background-color="#1a237e"` + `class="pedagogical"` on all strategy slides
 - **Top alignment**: CSS `.reveal .slides > section.pedagogical { align-self: flex-start; padding-top: 30px; }`
 
 ## Common Pitfalls

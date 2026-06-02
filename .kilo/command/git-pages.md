@@ -1,30 +1,37 @@
 ---
-description: Deploy a single slideshow from output/ to its subfolder on gh-pages. Updates the landing page card grid, commits, and pushes.
+description: Deploy or update a single slideshow on gh-pages. Detects whether the subfolder already exists and acts accordingly.
 ---
 # Command: Git Pages
 
 ## Usage
 `/git-pages [subfolder]`
 
-If `subfolder` is provided, only that slideshow is deployed. If omitted, you will be prompted for one.
+If `subfolder` is provided, only that slideshow is deployed/updated. If omitted, you will be prompted for one.
+
+**New deploy** = the slideshow subfolder does NOT exist on gh-pages yet. Creates the gh-pages branch if needed and pushes the slideshow for the first time.
+
+**Update** = the slideshow subfolder ALREADY exists on gh-pages. Overwrites the existing files, regenerates the landing page, and pushes.
+
+**Do NOT ask the user whether to deploy or update — detect it automatically.** Check if `git ls-tree --name-only origin/gh-paths 2>$null` lists the subfolder. If yes → update. If no → new deploy.
 
 Examples:
 ```
+/git-pages M2-WRITING-COMPOUND-SENTENCES-L2
 /git-pages M2_Lesson01_Listening
-/git-pages M3_Lesson01_Listening
 ```
 
 ## What it does
 1. Scans `output/` for the requested slideshow
 2. Warns if none found and stops
-3. Runs `/lint`
-4. Copies the slideshow to a temp staging directory
-5. Creates/updates a git worktree for the gh-pages branch in a **separate** temp directory
-6. Copies the slideshow into its own subfolder inside the worktree
-7. Regenerates the root `index.html` (card grid listing ALL presentations on gh-pages)
-8. Commits and pushes from the worktree
-9. Removes the worktree — `main` is never switched away from
-10. Prints the URL
+3. **Detects** whether this is a new deploy or an update (by checking gh-pages branch for the subfolder)
+4. Runs `/lint`
+5. Copies the slideshow to a temp staging directory
+6. Creates/updates a git worktree for the gh-pages branch in a **separate** temp directory
+7. Copies the slideshow into its own subfolder inside the worktree (overwrites if updating)
+8. Regenerates the root `index.html` (card grid listing ALL presentations on gh-pages)
+9. Commits and pushes from the worktree
+10. Removes the worktree — `main` is never switched away from
+11. Prints the URL
 
 ## Safety
 **This command NEVER switches branches in the main working tree.** All gh-pages operations happen inside a `git worktree` — a separate directory that acts as an independent checkout. If anything fails, the main project directory is completely untouched. No stashing, no `git clean`, no `Remove-Item` on project files.
@@ -47,11 +54,11 @@ Run: `python -m pytest tests/test_git_pages_safety.py -v`
 
 ## Workflow
 
-### Step 0: Detect the target slideshow
+### Step 0: Detect the target slideshow and determine deploy vs update
 ```powershell
 $targetSubfolder = $args[0]
 if (-not $targetSubfolder) {
-    $targetSubfolder = Read-Host "Enter the subfolder to deploy (e.g. M2_Lesson01_Listening)"
+    $targetSubfolder = Read-Host "Enter the subfolder to deploy (e.g. M2_WRITING_COMPOUND_SENTENCES_L2)"
 }
 
 $slidesHtml = "output/$targetSubfolder/slides/index.html"
@@ -66,7 +73,15 @@ if (-not (Test-Path $slidesHtml)) {
 }
 
 $presentations = @(@{ subfolder = $targetSubfolder })
-Write-Host "Deploying: $targetSubfolder"
+
+# Detect whether this is a new deploy or an update
+git fetch origin gh-pages 2>$null
+$subfolderExists = git ls-tree --name-only origin/gh-pages 2>$null | Select-String "^$([regex]::Escape($targetSubfolder))$" -Quiet
+if ($subfolderExists) {
+    Write-Host "UPDATE: $targetSubfolder (already exists on gh-pages, overwriting files)"
+} else {
+    Write-Host "NEW DEPLOY: $targetSubfolder (first time on gh-pages)"
+}
 ```
 
 ### Step 1: Check prerequisites
@@ -109,7 +124,7 @@ foreach ($p in $presentations) {
 }
 ```
 
-### Step 5: Create/update the gh-pages worktree
+### Step 5: Add the gh-pages worktree (shared by both new deploy and update)
 ```powershell
 $worktreeDir = "$env:TEMP\gh-pages-worktree"
 
@@ -327,9 +342,10 @@ if ($lessonPlanJson -and $jsonContent.slideshow_url -eq $url) {
 ## Edge cases
 - **No argument**: prompts interactively for the subfolder name
 - **Not found**: lists available slideshows and exits
-- **First deploy**: pushes an empty commit from an isolated `git init` in %TEMP% — never touches the working tree
+- **New deploy vs update**: detected automatically in Step 0 by checking `git ls-tree --name-only origin/gh-pages`. Do NOT ask the user.
+- **First deploy (gh-pages branch doesn't exist)**: pushes an empty commit from an isolated `git init` in %TEMP% — never touches the working tree. Then proceeds with the normal worktree flow.
+- **Update (subfolder already exists)**: files are simply overwritten in Step 6. The old files are replaced; the landing page is regenerated with all presentations.
 - **gh not authenticated**: aborts with instruction to run `gh auth login`
 - **Worktree add fails**: exits with error; main directory untouched; stale worktree cleaned up
 - **Push fails**: worktree is left on disk for manual recovery; error is printed
 - **Landing page**: regenerated each time, listing ALL presentations on gh-pages
-- **Existing subfolders on gh-pages**: preserved — only updated if source was copied

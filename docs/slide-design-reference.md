@@ -84,7 +84,7 @@ No words above CEFR B1 on screen without inline definition:
 All slide text (h2, h3, p, li) uses consistent styling via CSS in `templates/base-slides-template.html`:
 
 - **Text shadow**: `<text-shadow: 2px 2px 4px rgba(0,0,0,0.8)>` on all headings and body text
-- **Pedagogical slides**: `class="pedagogical"` + `data-background-color="#0d4a3d"` — white text with teal background, white border-bottom on h2
+- **Pedagogical slides**: `class="pedagogical"` + `data-background-color="#1a237e"` — white text with teal background, white border-bottom on h2
 - **Vocabulary words**: `<span class="vocab-word">word</span>` — yellow (`#ffdd00`) bold with text shadow
 - **Transitions**: `data-background-color="#c0392b"` — red background
 - **End slide**: `data-background-color="#2c3e50"` — dark background
@@ -255,9 +255,9 @@ Every distinct exercise type follows this four-slide sequence. This is the **onl
 | Step | Slide type | Background | Content | Audio/Timer |
 |------|-----------|------------|---------|-------------|
 | 1 | **Transition** | `#c0392b` (red) | Heading only — "Listen for Main Ideas", "Finding Details", "Useful Phrases" | Neither |
-| 2 | **Pedagogical** | `#0d4a3d` (teal) `class="pedagogical"` | Strategy instruction. Auto-animate for keyword underline reveals. 🏁 challenge text here. | **No audio** |
+| 2 | **Pedagogical** | `#1a237e` (teal) `class="pedagogical"` | Strategy instruction. Auto-animate for keyword underline reveals. 🏁 challenge text here. | **No audio** |
 | 3 | **Task** | `#1a1a2e` (dark) | Exercise number + brief instruction only. **No exercise text** — students have workbook. | `data-audio-src` OR `data-timer` (never both) |
-| 4 | **Answers** | `#0d5e1a` (green) | answer-list flex, max 3 items, each with answer + WHY line in yellow | Neither |
+| 4 | **Answers** | `#052e0d` (green) | answer-list flex, max 3 items, each with answer + WHY line in yellow | Neither |
 
 ```html
 <!-- Transition -->
@@ -266,7 +266,7 @@ Every distinct exercise type follows this four-slide sequence. This is the **onl
 </section>
 
 <!-- Pedagogical (strategy) -->
-<section id="slide-strategy-{name}" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-strategy-{name}" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <h2>Strategy Title</h2>
     <ul>
         <li>Step 1: ...</li>
@@ -284,7 +284,7 @@ Every distinct exercise type follows this four-slide sequence. This is the **onl
 </section>
 
 <!-- Answers (max 3 items per slide) -->
-<section id="slide-ex{n}-answers-1-3" data-background-color="#0d5e1a">
+<section id="slide-ex{n}-answers-1-3" data-background-color="#052e0d">
     <h2>Exercise {n} — Answers (1–3)</h2>
     <div class="answer-list">
         <div class="a-row">
@@ -338,7 +338,7 @@ Rules:
 Replace the old `table.answer-table` with the answer-list flex layout. This is the **only** answer slide pattern.
 
 ```html
-<section id="slide-ex{n}-answers-{range}" data-background-color="#0d5e1a">
+<section id="slide-ex{n}-answers-{range}" data-background-color="#052e0d">
     <h2>Exercise {{ number }} — Answers (1–3)</h2>
     <div class="answer-list">
         <div class="a-row">
@@ -359,7 +359,7 @@ Replace the old `table.answer-table` with the answer-list flex layout. This is t
 ```
 
 Rules:
-- Green background `#0d5e1a` for all answer slides
+- Green background `#052e0d` for all answer slides
 - **Max 3 items per slide** — split exercises with >3 items (e.g., `slide-ex2-answers-1-3`, `slide-ex2-answers-4-5`)
 - `a-cor` for correct answers (green background on reveal), `a-inc` for incorrect answers (red background on reveal)
 - **Do NOT use** `answer-correct`/`answer-incorrect`, `highlight-green`/`highlight-red`, or `table.answer-table` — these are legacy
@@ -376,7 +376,7 @@ Rules:
 Used for explicit strategy instruction before a task. Goes between the Transition and Task slides in the four-slide block.
 
 ```html
-<section id="slide-strategy-{name}" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-strategy-{name}" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <h2>{{ strategy_heading }}</h2>
     <ul>
         <li>{{ step_1 }}</li>
@@ -390,17 +390,17 @@ Used for explicit strategy instruction before a task. Goes between the Transitio
 **Auto-animate variant** (for keyword underline reveals):
 ```html
 <!-- Entry: transparent keyword borders -->
-<section data-auto-animate data-auto-animate-id="{name}" id="slide-strategy-{name}-entry" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section data-auto-animate data-auto-animate-id="{name}" id="slide-strategy-{name}-entry" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <h2 data-id="title">{{ strategy_heading }}</h2>
     <p data-id="ex1" style="color:#ffdd00; font-size:0.85em;">
         Listen for <span data-id="w1" style="border-bottom: 2px solid transparent;">key terms</span> in the text.
     </p>
 </section>
 <!-- Reveal: keywords gain coloured borders via auto-animate -->
-<section data-auto-animate data-auto-animate-id="{name}" id="slide-strategy-{name}-reveal" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section data-auto-animate data-auto-animate-id="{name}" id="slide-strategy-{name}-reveal" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <h2 data-id="title">{{ strategy_heading }}</h2>
     <p data-id="ex1" style="color:#ffdd00; font-size:0.85em;">
-        Listen for <span data-id="w1" style="border-bottom: 2px solid #4fc3f7;">key terms</span> in the text.
+        Listen for <span data-id="w1" style="border-bottom: 2px solid #fff;">key terms</span> in the text.
     </p>
     <p style="margin-top:1em; color:#ffdd00;"><i class="fa-solid fa-flag-checkered" style="color:#ffdd00;"></i> Want a challenge? {{ challenge_text }}</p>
     <aside class="notes">{{ teacher_notes }}</aside>
@@ -409,7 +409,7 @@ Used for explicit strategy instruction before a task. Goes between the Transitio
 
 **Structure talk variant** (for speaking tasks):
 ```html
-<section id="slide-strategy-talk" class="pedagogical structure-talk" data-background-color="#0d4a3d" data-background-transition="none" style="top: 0;">
+<section id="slide-strategy-talk" class="pedagogical structure-talk" data-background-color="#1a237e" data-background-transition="none" style="top: 0;">
     <h2>Structure Your Talk</h2>
     <p class="structure-step"><u><strong>Thesis:</strong> Say your main idea</u></p>
     <p class="structure-step"><u><strong>Reasons:</strong> Give 1-2 reasons</u></p>
@@ -420,12 +420,12 @@ Used for explicit strategy instruction before a task. Goes between the Transitio
 ```
 
 Rules:
-- Teal background `#0d4a3d`, `class="pedagogical"`, `data-background-transition="none"`
+- Teal background `#1a237e`, `class="pedagogical"`, `data-background-transition="none"`
 - Challenge/differentiation text is **student-facing** ("Want a challenge?…", "Want to go further?…") — never teacher-facing
 - Checkered flag icon marks challenge options
 - Auto-animate requires both sections to have `data-auto-animate` with matching `data-auto-animate-id`
 - Keyword spans need matching `data-id` on both entry and reveal slides
-- Entry uses `transparent` border; reveal uses coloured border (blue `#4fc3f7`, orange `#ff8a65`)
+- Entry uses `transparent` border; reveal uses coloured border (white `#fff`, yellow `#ffdd00`)
 - No audio on pedagogical slides — audio goes on the task slide
 
 ### 9. Section Transition Slide
@@ -507,7 +507,7 @@ All questions visible at once. No fragments for discussion.
 
 ### 14. Diagnostic Talk Structure Slide (Pedagogical)
 ```html
-<section class="pedagogical structure-talk" data-background-color="#0d4a3d" data-background-transition="none" style="top: 0;">
+<section class="pedagogical structure-talk" data-background-color="#1a237e" data-background-transition="none" style="top: 0;">
     <h2>Structure Your Talk</h2>
     <p class="structure-step"><u><strong>Thesis:</strong> Say your main idea</u></p>
     <p class="structure-step"><u><strong>Reasons:</strong> Give 1-2 reasons</u></p>
@@ -516,7 +516,7 @@ All questions visible at once. No fragments for discussion.
 </section>
 ```
 
-- Teal background `#0d4a3d`, `class="pedagogical structure-talk"`
+- Teal background `#1a237e`, `class="pedagogical structure-talk"`
 - Three structure steps (thesis → reasons → example) with underlined labels
 - Transition words at bottom in yellow (`#ffdd00`) inside a semi-transparent box
 - Teacher uses this to model diagnostic speaking task structure
@@ -525,7 +525,7 @@ All questions visible at once. No fragments for discussion.
 
 ### 15. Grammar Rule Explanation Slide (Pedagogical)
 ```html
-<section class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <h2>Subject-Verb Agreement: Rules 1–3</h2>
     <p><u><strong>Rule 1:</strong> Ignore prepositional phrases</u></p>
     <p><em>"The color of her eyes changes."</em> → Subject is <strong>color</strong>, not <em>eyes</em>.</p>
@@ -535,7 +535,7 @@ All questions visible at once. No fragments for discussion.
     <p><em>"Each of the students has a book."</em></p>
 </section>
 ```
-- Teal background `#0d4a3d`, class `pedagogical`
+- Teal background `#1a237e`, class `pedagogical`
 - Group 2-3 related rules per slide
 - Each rule: underlined label + example in quotation marks + brief explanation
 - Key grammar words highlighted with `<span style="color:#ffdd00;">word</span>` inline
@@ -563,7 +563,7 @@ All questions visible at once. No fragments for discussion.
 
 ### 17. Error-Correction Answer Table (Grammar)
 ```html
-<section data-background-color="#0d5e1a">
+<section data-background-color="#052e0d">
     <h2>Practice 3A — Answers (1-3)</h2>
     <table class="answer-table" style="font-size:0.875em;">
         <thead><tr><th style="width:8%;">#</th><th style="width:42%;">Sentence</th><th style="width:15%;">Answer</th><th style="width:35%;">Why?</th></tr></thead>
@@ -590,7 +590,7 @@ All questions visible at once. No fragments for discussion.
     </table>
 </section>
 ```
-- Green `#0d5e1a` background, `answer-table` class
+- Green `#052e0d` background, `answer-table` class
 - **Max 3 items per slide** with a Why column (4 columns: # / Sentence / Answer / Why?)
 - Answer and Why cells use `class="fragment answer-correct"` with matching `data-fragment-index` for per-row reveal
 - Table font: `0.875em` for readability; Why column: `0.9em`
@@ -610,24 +610,24 @@ For grammar exercises where students identify subjects, verbs, and objects, **an
 **CSS (add to inline `<style>` block before answer slides):**
 ```css
 .reveal .fragment.custom.svo-s { border-bottom: 2px solid transparent; }
-.reveal .fragment.custom.svo-s.visible { border-bottom: 2px solid #4fc3f7; }
+.reveal .fragment.custom.svo-s.visible { border-bottom: 2px solid #fff; }
 .reveal .fragment.custom.svo-s sup { opacity: 0; transition: opacity 0.2s ease, color 0.2s ease; }
-.reveal .fragment.custom.svo-s.visible sup { opacity: 1; color: #4fc3f7; }
+.reveal .fragment.custom.svo-s.visible sup { opacity: 1; color: #ffdd00; }
 
 .reveal .fragment.custom.svo-v { border-bottom: 2px solid transparent; }
-.reveal .fragment.custom.svo-v.visible { border-bottom: 2px solid #ff8a65; box-shadow: 0 5px 0 0 #ff8a65; }
+.reveal .fragment.custom.svo-v.visible { border-bottom: 3px solid #ffdd00; box-shadow: 0 5px 0 0 #ffdd00; }
 .reveal .fragment.custom.svo-v sup { opacity: 0; transition: opacity 0.2s ease, color 0.2s ease; }
-.reveal .fragment.custom.svo-v.visible sup { opacity: 1; color: #ff8a65; }
+.reveal .fragment.custom.svo-v.visible sup { opacity: 1; color: #fff; }
 
 .reveal .fragment.custom.svo-o { border: 1.5px solid transparent; padding: 0 3px; border-radius: 3px; }
-.reveal .fragment.custom.svo-o.visible { border: 1.5px solid #aed581; }
+.reveal .fragment.custom.svo-o.visible { border: 1.5px solid #fff; }
 .reveal .fragment.custom.svo-o sup { opacity: 0; transition: opacity 0.2s ease, color 0.2s ease; }
-.reveal .fragment.custom.svo-o.visible sup { opacity: 1; color: #aed581; }
+.reveal .fragment.custom.svo-o.visible sup { opacity: 1; color: #fff; }
 ```
 
 **HTML pattern (max 3 sentences per slide):**
 ```html
-<section data-background-color="#0d5e1a">
+<section data-background-color="#052e0d">
     <h2>Practice 3 — Answers (1–3)</h2>
     <p class="aim-label">Subjects, Verbs, and Objects</p>
     <div style="font-size: 0.95em; line-height: 2.5; text-align: left; width: 100%;">
@@ -657,11 +657,11 @@ Rules:
 - Superscript labels use `opacity: 0` → `opacity: 1` via CSS transitions (NOT `color: transparent`, which causes anti-aliasing artifacts)
 - Transparent borders + padding are applied from the start to prevent layout shift when the color appears
 - Confirmation notes use `fragment fade-up` (not `fragment custom`) so they actually slide in from hidden
-- Green `#0d5e1a` background with white (`#fff`) or yellow (`#ffdd00`) text only — no gray or muted colors
+- Green `#052e0d` background with white (`#fff`) or yellow (`#ffdd00`) text only — no gray or muted colors
 
 **Deprecated alternative — Multi-Column Grammar Table:**
 ```html
-<section data-background-color="#0d5e1a">
+<section data-background-color="#052e0d">
     <h2>Practice 3 — Answers (1–5)</h2>
     <p class="aim-label">Subjects, Verbs, and Objects</p>
     <table class="answer-table">
@@ -750,30 +750,30 @@ Use `data-auto-animate` on consecutive sibling `<section>` elements to build up 
 
 ### Example: True/False Strategy (5 slides)
 ```html
-<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#0d4a3d">
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a237e">
     <h2>True/False Strategy</h2>
     <p><strong>Step 1:</strong> Read the statement carefully</p>
     <p><em>Statement text goes here.</em></p>
 </section>
-<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#0d4a3d">
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a237e">
     <h2>True/False Strategy</h2>
     <p><strong>Step 1:</strong> Read the statement carefully</p>
     <p><em>Statement text goes here.</em></p>
     <p><strong>Step 2:</strong> Find the keywords</p>
     <p>"keyword1" · "keyword2" · "keyword3"</p>
 </section>
-<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#0d4a3d">
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a237e">
     <h2>True/False Strategy</h2>
     <!-- ... all previous steps ... -->
     <p><strong>Step 3:</strong> Find the evidence</p>
     <p>Look in paragraphs X and Y. Do the meanings match?</p>
 </section>
-<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#0d4a3d">
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a237e">
     <h2>True/False Strategy</h2>
     <!-- ... all previous steps ... -->
     <p><strong>Step 4:</strong> Check your answer</p>
 </section>
-<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#0d4a3d">
+<section data-auto-animate data-auto-animate-id="tf-strategy" class="pedagogical" data-background-color="#1a237e">
     <h2>True/False Strategy</h2>
     <!-- ... all previous steps ... -->
     <p class="fragment highlight-green">TRUE — Explanation of why it's true.</p>
@@ -785,11 +785,11 @@ Use `data-auto-animate` on consecutive sibling `<section>` elements to build up 
 - `data-auto-animate-id` MUST match across all sections in the block
 - Each section builds on the previous by adding new elements while keeping shared elements
 - `autoAnimateUnmatched: true` in `Reveal.initialize()` handles new/removed elements
-- All sections share `class="pedagogical"` and `data-background-color="#0d4a3d"`
+- All sections share `class="pedagogical"` and `data-background-color="#1a237e"`
 
 ### Example: Multiple Choice Strategy (non-stacked, single slide with fragments)
 ```html
-<section class="pedagogical" data-background-color="#0d4a3d">
+<section class="pedagogical" data-background-color="#1a237e">
     <h2>Multiple Choice Strategy</h2>
     <p><strong>Step 1: Read all options first</strong> <span class="fragment"> — look at all three choices</span></p>
     <ul class="fragment">
@@ -962,8 +962,8 @@ Slide 2:  Lead-in — Pixabay background + open question
 Slide 3-6: Vocabulary — 4 words, one per slide, Pixabay backgrounds
 Slide 7:  Transition — "What's the main idea?" (red #c0392b)
 Slide 8:  Transition — "Finding details" (red #c0392b)
-Slides 9-13: Auto-animate — True/False Strategy (5 slides, teal #0d4a3d)
-Slide 14: Auto-animate — MC Strategy block (teal #0d4a3d)
+Slides 9-13: Auto-animate — True/False Strategy (5 slides, teal #1a237e)
+Slide 14: Auto-animate — MC Strategy block (teal #1a237e)
 Slide 15: Task — True/False + Paragraph Matching (timer)
 Slide 16: Transition — "Making conclusions" (red)
 Slide 17: Task — Multiple Choice (timer)

@@ -22,10 +22,10 @@
             .reveal .a-ans { flex: 0 0 5em; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; }
             .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
             .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-            .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
-            .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-            .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-            .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+            .reveal .a-s { border-bottom: 2px solid #fff; }
+            .reveal .a-v { border-bottom: 3px solid #ffdd00; }
+            .reveal .a-ls { color: #ffdd00; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+            .reveal .a-lv { color: #fff; font-size: 0.75em; font-style: italic; margin-right: 1px; }
 
             .reveal section.pedagogical { text-shadow: none; }
             .reveal section.pedagogical p,
@@ -133,10 +133,10 @@
         <p><strong>Your writing is getting better!</strong></p>
         <p style="font-size: 0.9em; color: rgba(255,255,255,0.85);">Fix: [error type]</p>
         <p data-id="err" style="font-size: 1em; color: rgba(255,255,255,0.55);">
-            "Incorrect <span data-id="fix" style="border-bottom: 2px solid #ff8a65;">sentence</span> here."
+            "Incorrect <span data-id="fix" style="border-bottom: 2px solid #ffdd00;">sentence</span> here."
         </p>
-        <p style="font-size: 1.2em; color: #4fc3f7; margin-top: 0.5em;">
-            Corrected: "Correct <span style="border-bottom: 2px solid #4fc3f7;">sentence</span> here."
+        <p style="font-size: 1.2em; color: #ffdd00; margin-top: 0.5em;">
+            Corrected: "Correct <span style="border-bottom: 2px solid #fff;">sentence</span> here."
         </p>
     </div>
 </section>
@@ -170,9 +170,9 @@
     <div style="overflow: hidden;">
         <p><em>Corrected:</em></p>
         <ol style="font-size: 0.85em; text-align: left;">
-            <li style="margin: 0.4em 0;"><span data-id="d1">Sentence A<span data-id="j1" style="border-bottom: 2px solid #4fc3f7;">, and</span> sentence B.</span></li>
-            <li style="margin: 0.4em 0;"><span data-id="d2">Sentence C<span data-id="j2" style="border-bottom: 2px solid #4fc3f7;">, but</span> sentence D.</span></li>
-            <li style="margin: 0.4em 0;"><span data-id="d3">Sentence E<span data-id="j3" style="border-bottom: 2px solid #4fc3f7;">, so</span> sentence F.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d1">Sentence A<span data-id="j1" style="border-bottom: 2px solid #fff;">, and</span> sentence B.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d2">Sentence C<span data-id="j2" style="border-bottom: 2px solid #fff;">, but</span> sentence D.</span></li>
+            <li style="margin: 0.4em 0;"><span data-id="d3">Sentence E<span data-id="j3" style="border-bottom: 2px solid #fff;">, so</span> sentence F.</span></li>
         </ol>
     </div>
 </section>
@@ -185,11 +185,11 @@
        - Both need data-auto-animate with matching id
        - Entry dims version1, highlights version2
        - New S+V elements get data-id and transparent border on entry
-       - Reveal changes to #4fc3f7 blue + box-shadow
+       - Reveal changes to #ffdd00 blue + box-shadow
      ════════════════════════════════════════════════════════════════ -->
 
 <!-- Entry: both versions, transparent borders on new S+V -->
-<section id="slide-rule-entry" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="rule">
+<section id="slide-rule-entry" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="rule">
     <div style="overflow: hidden;">
         <h2 data-id="title">Simple vs. Compound</h2>
         <p style="font-size: 0.85em;"><u><strong>Simple:</strong> one subject, one verb</u></p>
@@ -200,14 +200,14 @@
 </section>
 
 <!-- Reveal: new S+V get blue borders + box-shadow -->
-<section id="slide-rule-reveal" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="rule">
+<section id="slide-rule-reveal" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="rule">
     <div style="overflow: hidden;">
         <h2 data-id="title">Simple vs. Compound</h2>
         <p style="font-size: 0.85em;"><u><strong>Simple:</strong> one subject, one verb</u></p>
         <p data-id="simp" style="color: rgba(255,255,255,0.5); font-size: 0.95em;">Subject verb and verb.</p>
         <p style="font-size: 0.85em; margin-top: 0.5em;"><u><strong>Compound:</strong> two subjects, two verbs</u></p>
-        <p data-id="comp" style="color: #ffdd00; font-size: 0.95em;">Subject verb, and <span data-id="newS" style="border-bottom: 2px solid #4fc3f7; box-shadow: 0 3px 0 0 #4fc3f7;">new S</span> <span data-id="newV" style="border-bottom: 2px solid #4fc3f7; box-shadow: 0 3px 0 0 #4fc3f7;">new V</span>.</p>
-        <p style="font-size: 0.85em; margin-top: 0.3em; color: #4fc3f7;">S V, and S V</p>
+        <p data-id="comp" style="color: #ffdd00; font-size: 0.95em;">Subject verb, and <span data-id="newS" style="border-bottom: 2px solid #fff; box-shadow: 0 3px 0 0 #fff;">new S</span> <span data-id="newV" style="border-bottom: 2px solid #fff; box-shadow: 0 3px 0 0 #fff;">new V</span>.</p>
+        <p style="font-size: 0.85em; margin-top: 0.3em; color: #ffdd00;">S V, and S V</p>
     </div>
 </section>
 
@@ -222,7 +222,7 @@
      ════════════════════════════════════════════════════════════════ -->
 
 <!-- Entry: two separate sentences -->
-<section id="slide-coord-entry" data-auto-animate data-auto-animate-id="coord" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-coord-entry" data-auto-animate data-auto-animate-id="coord" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">AND</strong></h2>
         <p><u><strong>Meaning:</strong> similar ideas</u></p>
@@ -233,12 +233,12 @@
 </section>
 
 <!-- Reveal: morphs into one compound sentence -->
-<section id="slide-coord-reveal" data-auto-animate data-auto-animate-id="coord" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-coord-reveal" data-auto-animate data-auto-animate-id="coord" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">AND</strong></h2>
         <p><u><strong>Meaning:</strong> similar ideas</u></p>
         <p data-id="ex" style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
-            "Idea one<span data-id="join" style="border-bottom: 2px solid #4fc3f7;">, and</span> idea two."
+            "Idea one<span data-id="join" style="border-bottom: 2px solid #fff;">, and</span> idea two."
         </p>
     </div>
 </section>
@@ -247,13 +247,13 @@
      TYPE 8: STRATEGY SLIDE (STATIC)
      USE: Teach a test-taking or analysis strategy.
      RULES:
-       - Class="pedagogical", bg="#0d4a3d"
+       - Class="pedagogical", bg="#1a237e"
        - Step labels with <u><strong>Step N:</strong>
        - ONE concept per slide — NO worked example embedded
        - Static — all visible on entry
        - Worked example goes on a separate auto-animate pair (Type 9)
      ════════════════════════════════════════════════════════════════ -->
-<section id="slide-strategy" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-strategy" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <h2>Strategy Name</h2>
     <p><u><strong>Step 1:</strong> Find the subject <strong>S</strong></u></p>
     <p><u><strong>Step 2:</strong> Find the verb <strong>V</strong></u></p>
@@ -273,7 +273,7 @@
      ════════════════════════════════════════════════════════════════ -->
 
 <!-- Entry: sentence alone -->
-<section id="slide-example-entry" data-auto-animate data-auto-animate-id="example" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-example-entry" data-auto-animate data-auto-animate-id="example" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title">Let's try one together</h2>
         <p data-id="sent" style="font-size: 0.85em; color: #ffdd00;">
@@ -286,13 +286,13 @@
 </section>
 
 <!-- Reveal: S+V underlines appear -->
-<section id="slide-example-reveal" data-auto-animate data-auto-animate-id="example" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-example-reveal" data-auto-animate data-auto-animate-id="example" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title">Let's try one together</h2>
         <p data-id="sent" style="font-size: 0.85em;">
-            "<span data-id="s1" style="border-bottom: 2px solid #4fc3f7;">Subject</span><span class="a-ls">(S)</span> <span data-id="v1" style="border-bottom: 2px solid #ff8a65;">verb</span><span class="a-lv">(V)</span>, and <span data-id="s2" style="border-bottom: 2px solid #4fc3f7;">subject</span><span class="a-ls">(S)</span> <span data-id="v2" style="border-bottom: 2px solid #ff8a65;">verb</span><span class="a-lv">(V)</span>."
+            "<span data-id="s1" style="border-bottom: 2px solid #fff;">Subject</span><span class="a-ls">(S)</span> <span data-id="v1" style="border-bottom: 2px solid #ffdd00;">verb</span><span class="a-lv">(V)</span>, and <span data-id="s2" style="border-bottom: 2px solid #fff;">subject</span><span class="a-ls">(S)</span> <span data-id="v2" style="border-bottom: 2px solid #ffdd00;">verb</span><span class="a-lv">(V)</span>."
         </p>
-        <p data-id="q" style="font-size: 0.85em; margin-top: 0.5em; color: #4fc3f7;">
+        <p data-id="q" style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
             Two S-V pairs → <strong>Compound</strong>
         </p>
     </div>
@@ -311,29 +311,29 @@
      ════════════════════════════════════════════════════════════════ -->
 
 <!-- Step 1: relationship -->
-<section id="slide-demo-step1" data-auto-animate data-auto-animate-id="demo" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-demo-step1" data-auto-animate data-auto-animate-id="demo" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title" style="font-size: 0.9em;">Let's do one together</h2>
         <p data-id="item" style="font-size: 0.85em; color: #ffdd00;">Item 1: Sentence A. Sentence B.</p>
         <p data-id="s1" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 1:</strong> What's the relationship?</u></p>
-        <p data-id="a1" style="font-size: 0.85em; margin-left: 1em; color: #4fc3f7;">Result / Contrast / Choice</p>
+        <p data-id="a1" style="font-size: 0.85em; margin-left: 1em; color: #ffdd00;">Result / Contrast / Choice</p>
     </div>
 </section>
 
 <!-- Step 2: coordinator choice -->
-<section id="slide-demo-step2" data-auto-animate data-auto-animate-id="demo" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-demo-step2" data-auto-animate data-auto-animate-id="demo" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title" style="font-size: 0.9em;">Let's do one together</h2>
         <p data-id="item" style="font-size: 0.85em; color: #ffdd00;">Item 1: Sentence A. Sentence B.</p>
         <p data-id="s1" style="font-size: 0.75em; margin-top: 0.4em;"><u><strong>Step 1:</strong> What's the relationship?</u></p>
         <p data-id="a1" style="font-size: 0.7em; margin-left: 1em; color: rgba(255,255,255,0.6);">Result</p>
         <p data-id="s2" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 2:</strong> Choose the coordinator.</u></p>
-        <p data-id="a2" style="font-size: 0.85em; margin-left: 1em;">Result → use <strong style="color: #4fc3f7;">so</strong></p>
+        <p data-id="a2" style="font-size: 0.85em; margin-left: 1em;">Result → use <strong style="color: #ffdd00;">so</strong></p>
     </div>
 </section>
 
 <!-- Step 3: combine -->
-<section id="slide-demo-step3" data-auto-animate data-auto-animate-id="demo" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-demo-step3" data-auto-animate data-auto-animate-id="demo" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <div style="overflow: hidden;">
         <h2 data-id="title" style="font-size: 0.9em;">Let's do one together</h2>
         <p data-id="item" style="font-size: 0.85em; color: #ffdd00;">Item 1: Sentence A. Sentence B.</p>
@@ -342,7 +342,7 @@
         <p data-id="s2" style="font-size: 0.7em; margin-top: 0.3em;"><u><strong>Step 2:</strong> Choose the coordinator.</u></p>
         <p data-id="a2" style="font-size: 0.65em; margin-left: 1em; color: rgba(255,255,255,0.6);">so</p>
         <p data-id="s3" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 3:</strong> Combine: comma + coordinator.</u></p>
-        <p data-id="a3" style="font-size: 0.85em; margin-left: 1em; color: #4fc3f7;">"Sentence A, <strong>so</strong> sentence B."</p>
+        <p data-id="a3" style="font-size: 0.85em; margin-left: 1em; color: #ffdd00;">"Sentence A, <strong>so</strong> sentence B."</p>
     </div>
 </section>
 
@@ -364,7 +364,7 @@
      TYPE 12: ANSWER SLIDE (S/V ANNOTATIONS, MAX 3 ITEMS)
      USE: Show answers with S/V analysis.
      RULES:
-       - data-background-color="#0d5e1a" (NOT #1e7e34)
+       - data-background-color="#052e0d" (NOT #1e7e34)
        - Include <style> block with .a-s, .a-v, .a-ls, .a-lv classes
        - Max 3 items per slide
        - Each row: classification (fragment) + formula (fragment) + Why sentence (fragment)
@@ -373,7 +373,7 @@
        - V words: <span class="a-v">word</span><span class="a-lv">(V)</span>
        - NO gray text — only white (#fff) or yellow (#ffdd00)
      ════════════════════════════════════════════════════════════════ -->
-<section id="slide-answers" data-background-color="#0d5e1a" data-background-transition="none">
+<section id="slide-answers" data-background-color="#052e0d" data-background-transition="none">
 <style>
     .reveal .answer-list { width: 100%; font-size: 0.95em; }
     .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
@@ -383,10 +383,10 @@
     .reveal .a-ans { flex: 0 0 5em; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; }
     .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
     .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-    .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
-    .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-    .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-    .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+    .reveal .a-s { border-bottom: 2px solid #fff; }
+    .reveal .a-v { border-bottom: 2px solid #ffdd00; }
+    .reveal .a-ls { color: #ffdd00; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+    .reveal .a-lv { color: #ffdd00; font-size: 0.75em; font-style: italic; margin-right: 1px; }
     .reveal .aim-label { color: #fff; }
 </style>
     <h2 style="font-size: 0.95em;">Practice N — Answers (1–3)</h2>
@@ -423,9 +423,9 @@
      ════════════════════════════════════════════════════════════════ -->
 <section id="slide-summary" data-background-color="#1a1a2e">
     <h2>I can...</h2>
-    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> first outcome</p>
-    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> second outcome</p>
-    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> third outcome</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">&#10003;</span> first outcome</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">&#10003;</span> second outcome</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">&#10003;</span> third outcome</p>
 </section>
 
 <!-- ════════════════════════════════════════════════════════════════════

@@ -39,7 +39,7 @@ The answer-list flex layout has three CSS properties that, if set incorrectly, b
 Per **Rule 0 (No Gray Text)**, gray/muted/low-opacity text is banned on ALL slide backgrounds, not just green. This section documents the specific traps in the base template:
 
 **Template traps:**
-- `.reveal .aim-label { color: #888; }` — gray label, invisible on `#1a1a2e`, `#0d4a3d`, `#0d5e1a`, `#c0392b`, and `#2c3e50`
+- `.reveal .aim-label { color: #888; }` — gray label, invisible on `#1a1a2e`, `#1a237e`, `#052e0d`, `#c0392b`, and `#2c3e50`
 - `.reveal .source-cite { color: #666; }` — darker gray, still invisible at projection distance
 - `.reveal .material-ref { color: #888; }` — invisible gray
 - `.reveal .a-num { color: rgba(255,255,255,0.5); }` — 50% white = gray

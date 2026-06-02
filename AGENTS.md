@@ -220,21 +220,21 @@ The blueprint is a planning document — no HTML at this stage. Reference templa
 **Phase 1: Pre-generation**
 1. **Open `templates/reference-slideshow.html`** — scroll through EVERY slide type. This is a complete working slideshow with verified patterns. Identify which types you need, guided by the blueprint.
 2. **Open `templates/base-slides-template.html`** — copy the `<head>` and `<script>` blocks exactly. Do not modify.
-3. **Verify colors**: answer green = `#0d5e1a`, pedagogical teal = `#0d4a3d`. Never use `#1e7e34` or `#1a6b5a`.
+3. **Verify colors**: answer green = `#052e0d`, pedagogical teal = `#1a237e`. Never use `#1e7e34` or `#1a6b5a`.
 4. **Verify font sizes**: body text ≥1em, labels ≥0.9em, title h2=2.2em, logo=120px, subheader=1em. Never use 0.7em.
 5. **Plan the slide count**: ensure no answer slide has >3 items. Split if needed.
 
 **Phase 2: Generation rules**
 6. **Copy, don't invent** — use reference examples. Change content only, not structure.
 7. **Title slides**: must use `data-background-color` + `data-background-image` + `style="justify-content: center;"`. Logo 120px, h2 2.2em, CEFR badge inline in h2.
-8. **Auto-animate**: use only for structural transformations (simple→compound, error→correction). Entry = transparent borders on changed elements. Reveal = `#4fc3f7` blue. Both need matching `data-auto-animate-id`.
+8. **Auto-animate**: use only for structural transformations (simple→compound, error→correction). Entry = transparent borders on changed elements. Reveal = white `#fff` or yellow `#ffdd00`. Both need matching `data-auto-animate-id`.
 9. **Answer slides**: include `<style>` block with `.a-s`, `.a-v`, `.a-ls`, `.a-lv` S/V annotation classes. Each row reveals classification + formula + sentence with S/V underlines on the same `data-fragment-index`. Why column uses real sentences, not abstractions. Max 3 items.
 10. **DESIGN MECHANISM annotation** — Every pedagogical annotation block must now include a fourth line: `<!-- DESIGN MECHANISM: [specific design choice that makes the principle manifest — must pass the litmus test: "if I remove this mechanism, would the slide need to change?"] -->`. See `docs/pedagogical-design-dictionary.md` for the full Mechanism Rubric with principle-specific questions.
 11. **Fragments on answers only**: objectives, summaries, transitions, and strategy steps stay static.
 
 **Phase 3: Post-generation validation**
 11. **Run `npx revealjs-validator --project "output/{subfolder}/slides/"`** and fix ALL errors.
-12. **Visual check**: open in browser. Inspect title (full screen, centered, readable), answers (reveals work, S/V underlines visible), auto-animate pairs (transitions smooth), font sizes (minimums met), colors (green = #0d5e1a, teal = #0d4a3d).
+12. **Visual check**: open in browser. Inspect title (full screen, centered, readable), answers (reveals work, S/V underlines visible), auto-animate pairs (transitions smooth), font sizes (minimums met), colors (green = #052e0d, teal = #1a237e).
 13. **No push until user gives all-clear**. Commit locally only.
 
 If any rule is unclear, ask. Do not guess.
@@ -248,8 +248,8 @@ If any rule is unclear, ask. Do not guess.
 - **Answer tables**: `<table class="answer-table">` with 3 columns (Statement/Answer/Why?). Add `wrap` class for tables with long text. Right column uses `white-space: normal`
 - **Table tick/cross**: middle column with `data-fragment-index` matching explanation cell for simultaneous reveal
 - **Lightbulb removed** from all answer slides (saves screen real estate)
-- **Color rule — ALL slides**: Only `#fff` (white) and `#ffdd00` (yellow) are permitted for ALL visible CSS properties — font color, borders, underlines, box-shadows, highlights. Never use `rgba(255,255,255,X)` with X < 1 — semi-transparent white creates invisible gray text at projection distance. No colored underlines, no blue/orange/green annotation colors — differentiate via style (solid vs dashed), font size, or symbols (❌/✅) instead. This applies to every slide background (#1a1a2e, #0d5e1a, #0d4a3d, #c0392b). The template's `.aim-label` uses gray `#888` by default and must be overridden with `#fff` on all slides.
-- **Pedagogical background**: `data-background-color="#0d4a3d"` + `class="pedagogical"` + `data-background-transition="none"`
+- **Color rule — ALL slides**: Only `#fff` (white) and `#ffdd00` (yellow) are permitted for ALL visible CSS properties — font color, borders, underlines, box-shadows, highlights. Never use `rgba(255,255,255,X)` with X < 1 — semi-transparent white creates invisible gray text at projection distance. No colored underlines, no blue/orange/green annotation colors — differentiate via style (solid vs dashed), font size, or symbols (❌/✅) instead. This applies to every slide background (#1a1a2e, #052e0d, #1a237e, #c0392b). The template's `.aim-label` uses gray `#888` by default and must be overridden with `#fff` on all slides.
+- **Pedagogical background**: `data-background-color="#1a237e"` + `class="pedagogical"` + `data-background-transition="none"`
 - **Max 3 items per answer slide** — whether using answer-list flex layout or inline annotations. Split exercises with >3 items across multiple slides.
 - **Inline S/V/O annotations** — for grammar identification exercises (subjects, verbs, objects), decorate words directly on the sentence rather than using a separate answer column. Use `class="fragment custom svo-s"`, `svo-v`, `svo-o` on `<span>` elements with CSS controlling border/color changes on `.visible`. Superscript labels (`<sup>S</sup>`, `<sup>V</sup>`, `<sup>O</sup>`) use `opacity: 0` → `opacity: 1` with CSS transitions. Use `data-fragment-index` to group each sentence's decorations and confirmation note for per-click reveal.
 - **Custom fragments** — use `class="fragment custom"` when you need an element to stay fully visible but change specific CSS properties (border, color, opacity) on click. The `custom` keyword prevents reveal.js from applying default `opacity: 0; visibility: hidden`. All styling is controlled via CSS rules on `.fragment.custom.*` (default state) and `.fragment.custom.*.visible` (revealed state). Common use: annotations that animate in without hiding the underlying text.
@@ -259,7 +259,7 @@ If any rule is unclear, ask. Do not guess.
 - **Demo slide before freer practice** — Before any freer practice task (e.g. Practice 2C, 10A), include a pedagogical demo slide. The teacher walks through ONE item step by step (Step 1: identify relationship, Step 2: choose coordinator, Step 3: combine) so students see the reasoning chain before attempting independently.
 - **Lead-in error slides** — Each error gets a 2-slide auto-animate pair: Entry shows the error with transparent borders on problem words. Reveal shows the original (at a smaller font size or with ❌ mark) and the corrected version in `#ffdd00` yellow with white underlines on fix words. Label line tells what type of error it is. Do NOT use opacity < 1 on the original text — it creates invisible gray text. Differentiate via font size or a visible ❌ mark instead. All borders/underlines must be white (`#fff`) — use style (dashed vs solid) for differentiation if needed.
 - **Diagnostic tests max 3 items per slide** — Split diagnostic tests across multiple slides (e.g. `slide-diagnostic-1-3`, `slide-diagnostic-4-6`). Add answer fragments below the questions with the correct coordinator and a Why explanation. Timer on each slide.
-- **Formula reveals: 2-slide auto-animate pair** — When demonstrating a structural transformation (simple→compound, wrong→right): Entry shows both versions with transparent borders on CHANGED elements. Reveal changes borders to `#4fc3f7` blue + `box-shadow: 0 3px 0 0 #4fc3f7` for a visual double-underline effect. Both need `data-auto-animate` with matching `data-auto-animate-id`. Key elements need matching `data-id` on both slides.
+- **Formula reveals: 2-slide auto-animate pair** — When demonstrating a structural transformation (simple→compound, wrong→right): Entry shows both versions with transparent borders on CHANGED elements. Reveal changes borders to `#fff` white + `box-shadow: 0 3px 0 0 #ffdd00` for a visual double-underline effect (yellow shadow, white border). Both need `data-auto-animate` with matching `data-auto-animate-id`. Key elements need matching `data-id` on both slides.
 
 ## Pedagogical Strategy Slides — Design Principles
 
@@ -289,7 +289,7 @@ Example: A True/False statement about the "generation gap" article runs through 
 - **Real quotes on Step 4** — actual text excerpts from the article, in italics with the relevant phrase highlighted
 - **Rule embedded at Step 2** — not a separate slide. Include it: "If you answer Yes to all → TRUE. If you answer No to even one → FALSE."
 - **Auto-animate for keyword underlines** — use `data-auto-animate` on a pair of adjacent slides to animate keyword underlines appearing. See pattern below.
-- **Teal background** — `data-background-color="#0d4a3d"` + `class="pedagogical"` on all strategy slides.
+- **Teal background** — `data-background-color="#1a237e"` + `class="pedagogical"` on all strategy slides.
 - **Top alignment** — use `padding-top: 30px` on `.reveal .slides > section.pedagogical` in CSS. Do NOT use negative margins (they clip content off-screen). Inline `style="top: 0;"` on the section element if needed.
 
 ### Auto-Animate for Underline Reveal
@@ -302,7 +302,7 @@ Pattern (both sections need `data-auto-animate`):
 
 ```html
 <!-- Enter state: plain sentence, borders invisible -->
-<section class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="underline-demo">
+<section class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="underline-demo">
         <div style="overflow: hidden;">
             <p><u><strong>Step 2:</strong> Underline key words</u></p>
             <p data-id="mcq" style="color:#ffdd00;">
@@ -312,7 +312,7 @@ Pattern (both sections need `data-auto-animate`):
         </div>
     </section>
     <!-- After click: borders become visible, animate via auto-animate -->
-    <section class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="underline-demo">
+    <section class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="underline-demo">
     <div style="overflow: hidden;">
         <p><u><strong>Step 2:</strong> Underline key words</u></p>
         <p data-id="mcq" style="color:#ffdd00;">
@@ -336,9 +336,9 @@ Requirements:
 
 For grammar lead-in slides where you want to demonstrate subjects (S), verbs (V), and objects (O) on a single sentence, use the same two-slide auto-animate pattern but with THREE simultaneous annotations:
 
-- **Subject**: `border-bottom: 2px solid #4fc3f7` (blue single underline) + `<sup style="opacity:0">S </sup>` → `opacity:1; color:#4fc3f7`
-- **Verb**: `border-bottom: 2px solid #ff8a65` (orange) + `box-shadow: 0 5px 0 0 #ff8a65` (visual double underline) + `<sup>V </sup>`
-- **Object**: `border: 2px solid #aed581` (green box) + `<sup>O </sup>`
+- **Subject**: `border-bottom: 2px solid #fff` (white solid underline) + `<sup style="opacity:0">S </sup>` → `opacity:1; color:#ffdd00`
+- **Verb**: `border-bottom: 3px solid #ffdd00` (yellow, heavier) + `box-shadow: 0 5px 0 0 #ffdd00` (visual double underline) + `<sup>V </sup>`
+- **Object**: `border: 2px solid #fff` (white box) + `<sup>O </sup>`
 
 Pattern:
 
@@ -362,14 +362,14 @@ Pattern:
 <section data-auto-animate data-auto-animate-id="svo-demo" data-background-color="#1a1a2e">
     <h2 data-id="title">What's inside a sentence?</h2>
     <p>
-        <span data-id="subject" style="border-bottom: 2px solid #4fc3f7;">
-            <sup style="color:#4fc3f7;">S </sup>My roommate
+        <span data-id="subject" style="border-bottom: 2px solid #fff;">
+            <sup style="color:#ffdd00;">S </sup>My roommate
         </span>
-        <span data-id="verb" style="border-bottom: 2px solid #ff8a65; box-shadow: 0 5px 0 0 #ff8a65;">
-            <sup style="color:#ff8a65;">V </sup>lost
+        <span data-id="verb" style="border-bottom: 3px solid #ffdd00; box-shadow: 0 5px 0 0 #ffdd00;">
+            <sup style="color:#fff;">V </sup>lost
         </span>
-        <span data-id="object" style="border: 2px solid #aed581; padding: 0 4px; border-radius: 4px;">
-            <sup style="color:#aed581;">O </sup>his keys
+        <span data-id="object" style="border: 2px solid #fff; padding: 0 4px; border-radius: 4px;">
+            <sup style="color:#fff;">O </sup>his keys
         </span>
     </p>
 </section>

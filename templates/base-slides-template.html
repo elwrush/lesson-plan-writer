@@ -97,10 +97,10 @@
             /* Why column on answer rows — explanation text, fills remaining space */
             .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
             /* S/V annotation underlines and labels for grammar identification */
-            .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
-            .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-            .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-            .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+            .reveal .a-s { border-bottom: 2px solid #fff; }
+            .reveal .a-v { border-bottom: 3px solid #ffdd00; }
+            .reveal .a-ls { color: #ffdd00; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+            .reveal .a-lv { color: #fff; font-size: 0.75em; font-style: italic; margin-right: 1px; }
 
             /* --- Labels & captions --- */
             .reveal .aim-label {
@@ -111,19 +111,19 @@
             }
             .reveal .material-ref {
                 font-size: 0.85em;
-                color: rgba(255,255,255,0.85);
+                color: #fff;
                 font-style: italic;
                 margin-top: 0.5em;
             }
             .reveal .source-cite {
                 font-size: 0.85em;
-                color: rgba(255,255,255,0.85);
+                color: #fff;
                 font-style: italic;
                 margin-top: 0.3em;
             }
             .reveal .image-caption {
                 font-size: 0.85em;
-                color: rgba(255,255,255,0.85);
+                color: #fff;
                 text-align: center;
                 margin-top: 0.2em;
             }
@@ -157,7 +157,7 @@
             .reveal section.pedagogical .strategy-tip {
                 font-size: 0.85em;
                 font-style: italic;
-                color: rgba(255,255,255,0.85);
+                color: #fff;
                 margin-bottom: 0.5em;
             }
             .reveal section.pedagogical .evidence {
@@ -203,6 +203,24 @@
             /* Fragment variant: text already visible, background highlight on click */
             .reveal .fragment.text-shield-light { opacity: 1; visibility: inherit; }
             .reveal .fragment.text-shield-light.visible { background: rgba(200, 200, 200, 0.65); padding: 0.15em 0.6em; border-radius: 4px; }
+
+            /* --- Answer slides with both methods (p11 pattern) --- */
+            .reveal section.answer-slide p,
+            .reveal section.answer-slide li,
+            .reveal section.answer-slide h1,
+            .reveal section.answer-slide h2,
+            .reveal section.answer-slide h3,
+            .reveal section.answer-slide h4,
+            .reveal section.answer-slide h5,
+            .reveal section.answer-slide h6 { text-shadow: none !important; }
+            .reveal .p11-answer { width: 100%; font-size: 0.9em; text-align: left; }
+            .reveal .p11-badge { display: inline-block; padding: 0.15em 0.6em; border-radius: 4px; font-weight: bold; font-size: 0.85em; color: #ffdd00; }
+            .reveal .p11-original { font-size: 0.9em; color: #ffdd00; font-style: italic; padding: 0.4em 0; border-bottom: 3px solid rgba(255,255,255,0.15); margin: 0.5em 0; line-height: 1.5; }
+            .reveal .p11-method { padding: 0.3em 0; }
+            .reveal .p11-method p { margin: 0.1em 0; }
+            .reveal .p11-fix { color: #fff; font-size: 0.9em; margin-left: 0.5em !important; line-height: 1.5; }
+            .reveal .p11-fix span.cor-add { color: #ffdd00; border-bottom: 3px solid #fff; padding-bottom: 1px; }
+            .reveal .p11-why { color: #fff; font-size: 0.85em; font-style: italic; padding: 0.4em; background: rgba(0,0,0,0.2); border-radius: 4px; border-left: 3px solid #ffdd00; margin-top: 0.5em; line-height: 1.5; }
 
             /* --- Fragment styles --- */
             /* --- Yellow text for answers on green answer tables --- */
@@ -290,9 +308,9 @@
                      Key measurements (1280x720 slides):
                      - Title h2: 2.2em  |  Subheader: 1em  |  Logo: 120px
                      - Body text: 1em minimum  |  Labels: 0.9em minimum
-                     - Answer slide bg: #0d5e1a (green)  |  NEVER #1e7e34
+                     - Answer slide bg: #052e0d (green)  |  NEVER #1e7e34
                      - Transition bg: #c0392b (red)
-                     - Pedagogical bg: #0d4a3d (teal)
+                     - Pedagogical bg: #1a237e (teal)
                      - Lead-in/Filler bg: #1a1a2e (dark navy)
                      ============================================================ -->
 
@@ -308,7 +326,7 @@
                 <section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/background.jpg" data-background-opacity="0.85" style="justify-content: center;">
                     <img src="assets/logo.png" style="height: 120px; margin: 0 auto 0.5em; display: block;" alt="ACT" />
                     <h2 style="font-size: 2.2em;">Lesson Topic <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></h2>
-                    <p style="font-size: 1em; color: rgba(255,255,255,0.9); margin-top: 0.5em;">Brief subtitle</p>
+                    <p style="font-size: 1em; color: #fff; margin-top: 0.5em;">Brief subtitle</p>
                 </section>
 
                 <!-- ── OBJECTIVE SLIDE ───────────────────────────────────────────
@@ -346,11 +364,11 @@
                 <section id="slide-leadin1-reveal" data-auto-animate data-auto-animate-id="leadin1" data-background-color="#1a1a2e">
                     <div style="overflow: hidden;">
                         <p><strong>Fix:</strong> [error type]</p>
-                        <p data-id="err" style="font-size: 1em; color: rgba(255,255,255,0.55);">
-                            "Incorrect <span data-id="fix" style="border-bottom: 2px solid #ff8a65;">sentence</span> here."
+                        <p data-id="err" style="font-size: 1em; color: #fff;">
+                            "Incorrect <span data-id="fix" style="border-bottom: 3px solid #ffdd00;">sentence</span> here."
                         </p>
-                        <p style="font-size: 1.2em; color: #4fc3f7; margin-top: 0.5em;">
-                            Corrected: "Correct <span style="border-bottom: 2px solid #4fc3f7;">sentence</span> here."
+                        <p style="font-size: 1.2em; color: #ffdd00; margin-top: 0.5em;">
+                            Corrected: "Correct <span style="border-bottom: 2px solid #fff;">sentence</span> here."
                         </p>
                     </div>
                 </section>
@@ -372,7 +390,7 @@
                     <div style="overflow: hidden;">
                         <p><em>Corrected:</em></p>
                         <ol style="font-size: 0.85em; text-align: left;">
-                            <li style="margin: 0.4em 0;">Sentence A<span style="border-bottom: 2px solid #4fc3f7;">, and</span> sentence B.</li>
+                            <li style="margin: 0.4em 0;">Sentence A<span style="border-bottom: 2px solid #fff;">, and</span> sentence B.</li>
                         </ol>
                     </div>
                 </section>
@@ -382,7 +400,7 @@
                      Entry: transparent borders on NEW elements.
                      Reveal: blue underlines + box-shadow on the NEW elements.
                 --▶
-                <section id="slide-rule-entry" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="rule">
+                <section id="slide-rule-entry" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="rule">
                     <div style="overflow: hidden;">
                         <h2 data-id="title">Rule Name</h2>
                         <p><u><strong>Version 1:</strong> description</u></p>
@@ -391,13 +409,13 @@
                         <p data-id="vers2" style="color: #ffdd00; font-size: 0.95em;">Example with <span data-id="new" style="border-bottom: 2px solid transparent;">new element</span>.</p>
                     </div>
                 </section>
-                <section id="slide-rule-reveal" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none" data-auto-animate data-auto-animate-id="rule">
+                <section id="slide-rule-reveal" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="rule">
                     <div style="overflow: hidden;">
                         <h2 data-id="title">Rule Name</h2>
                         <p><u><strong>Version 1:</strong> description</u></p>
-                        <p data-id="vers1" style="color: rgba(255,255,255,0.5); font-size: 0.95em;">Example without the new element.</p>
+                        <p data-id="vers1" style="color: #fff; font-size: 0.95em;">Example without the new element.</p>
                         <p style="margin-top: 0.4em;"><u><strong>Version 2:</strong> description</u></p>
-                        <p data-id="vers2" style="color: #ffdd00; font-size: 0.95em;">Example with <span data-id="new" style="border-bottom: 2px solid #4fc3f7; box-shadow: 0 3px 0 0 #4fc3f7;">new element</span>.</p>
+                        <p data-id="vers2" style="color: #ffdd00; font-size: 0.95em;">Example with <span data-id="new" style="border-bottom: 2px solid #fff; box-shadow: 0 3px 0 0 #ffdd00;">new element</span>.</p>
                     </div>
                 </section>
 
@@ -406,7 +424,7 @@
                      Entry: two sentences with period between them.
                      Reveal: period becomes comma+coordinator with blue underline.
                 --▶
-                <section id="slide-coord-entry" data-auto-animate data-auto-animate-id="coord" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+                <section id="slide-coord-entry" data-auto-animate data-auto-animate-id="coord" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
                     <div style="overflow: hidden;">
                         <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">AND</strong></h2>
                         <p><u><strong>Meaning:</strong> similar ideas</u></p>
@@ -415,12 +433,12 @@
                         </p>
                     </div>
                 </section>
-                <section id="slide-coord-reveal" data-auto-animate data-auto-animate-id="coord" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+                <section id="slide-coord-reveal" data-auto-animate data-auto-animate-id="coord" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
                     <div style="overflow: hidden;">
                         <h2 data-id="title">Coordinator: <strong style="color: #ffdd00;">AND</strong></h2>
                         <p><u><strong>Meaning:</strong> similar ideas</u></p>
                         <p data-id="ex" style="font-size: 0.85em; margin-top: 0.5em; color: #ffdd00;">
-                            "Sentence one<span data-id="join" style="border-bottom: 2px solid #4fc3f7;">, and</span> sentence two."
+                            "Sentence one<span data-id="join" style="border-bottom: 2px solid #fff;">, and</span> sentence two."
                         </p>
                     </div>
                 </section>
@@ -438,21 +456,21 @@
                 <!-- ── PEDAGOGICAL DEMO (worked example before task) ────────────
                      PURPOSE: Teacher walks through ONE item step by step.
                 --▶
-                <section id="slide-demo" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+                <section id="slide-demo" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
                     <h2>Let's do one together</h2>
                     <p style="color: #ffdd00;">Item 1: Original content.</p>
                     <p style="margin-top: 0.4em;"><u><strong>Step 1:</strong> Identify the relationship.</u></p>
                     <p style="margin-left: 1em;">Relationship explanation.</p>
                     <p style="margin-top: 0.3em;"><u><strong>Step 2:</strong> Choose the correct form.</u></p>
                     <p style="margin-top: 0.3em;"><u><strong>Step 3:</strong> Apply the rule.</u></p>
-                    <p style="margin-left: 1em; color: #4fc3f7;">"Corrected version."</p>
+                    <p style="margin-left: 1em; color: #ffdd00;">"Corrected version."</p>
                 </section>
 
                 <!-- ── PEDAGOGICAL STRATEGY (non-auto-animate, single slide) ────
                      For strategy blocks that don't need auto-animate.
                      Use step labels with <u><strong>Step N:</strong>.
                 --▶
-                <section id="slide-strategy" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+                <section id="slide-strategy" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
                     <h2>Strategy Name</h2>
                     <p><u><strong>Step 1:</strong> First action.</u></p>
                     <p><u><strong>Step 2:</strong> Second action.</u></p>
@@ -461,14 +479,15 @@
                 </section>
 
                 <!-- ── ANSWER SLIDE (answer-list, max 3 items, with Why) ───────
+                     Use for: simple answer reveals (T/F, MC, comprehension Qs)
                      CRITICAL RULES:
-                     - data-background-color="#0d5e1a" (dark green — NOT #1e7e34)
+                     - data-background-color="#052e0d" (dark green — NOT #1e7e34)
                      - Max 3 items per slide
                      - <style> block sets .a-why flex
                      - Each row: formula/answer (fragment fade-up) + Why (fragment fade-up, same index)
                      - ALL text white #fff or yellow #ffdd00 — NO gray
                 --▶
-                <section id="slide-practice-answers-1-3" data-background-color="#0d5e1a" data-background-transition="none">
+                <section id="slide-practice-answers-1-3" data-background-color="#052e0d" data-background-transition="none">
 <style>
     .reveal .answer-list { width: 100%; font-size: 0.85em; }
     .reveal .a-row { display: flex; align-items: baseline; padding: 0.4em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
@@ -489,14 +508,59 @@
     </div>
 </section>
 
+                <!-- ── ANSWER SLIDE (both methods, one per item) ──────────────
+                     Use for: error-correction exercises where students need to see
+                     BOTH fix methods (period + comma+coordinator).
+                     
+                     CRITICAL RULES:
+                     - One item per slide (never bundle)
+                     - Fragment sequence: error badge → Method 1 → Method 2 → Why
+                     - class="answer-slide" (removes text-shadow, clean on green bg)
+                     - .cor-add spans highlight added/changed text with yellow + thick white underline
+                     - Correct items (OK): use fewer fragments (badge → "No fix needed" → Why)
+                     
+                     PATTERN (error item):
+                --▶
+                <section id="slide-p11-answer-N" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice N — Item N</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1">[error type]</p>
+        <p class="p11-original">"Original sentence with error."</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2">
+            <p><u><strong>Method 1:</strong> Add a period</u></p>
+            <p class="p11-fix">&rarr; "Corrected <span class="cor-add">sentence.</span>"</p>
+        </div>
+        <div class="p11-method fragment fade-up" data-fragment-index="3">
+            <p><u><strong>Method 2:</strong> Add a comma + coordinator</u></p>
+            <p class="p11-fix">&rarr; "Corrected sentence, <span class="cor-add">and</span> ..."</p>
+        </div>
+        <p class="p11-why fragment fade-up" data-fragment-index="4">Why: Grammatical explanation of the error and both fixes.</p>
+    </div>
+</section>
+
+                <!-- ── ANSWER SLIDE (both methods, correct item) ──────────────
+                     PATTERN (correct item):
+                --▶
+                <section id="slide-p11-answer-N" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2>Practice N — Item N</h2>
+    <div class="p11-answer">
+        <p class="fragment fade-up p11-badge" data-fragment-index="1" style="color: #fff;">OK &mdash; Correct</p>
+        <p class="p11-original">"Correct sentence."</p>
+        <div class="p11-method fragment fade-up" data-fragment-index="2">
+            <p>Both methods: <strong>No fix needed</strong> &mdash; correct compound sentence.</p>
+        </div>
+        <p class="p11-why fragment fade-up" data-fragment-index="3">Why: Already has comma + coordinator. &#10003;</p>
+    </div>
+</section>
+
                 <!-- ── SUMMARY SLIDE ────────────────────────────────────────────
                      Static — all visible on entry. "I can" statements with checkmarks.
                 --▶
                 <section id="slide-summary" data-background-color="#1a1a2e">
                     <h2>I can...</h2>
-                    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> first outcome</p>
-                    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> second outcome</p>
-                    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">&#10003;</span> third outcome</p>
+                    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">&#10003;</span> first outcome</p>
+                    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">&#10003;</span> second outcome</p>
+                    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">&#10003;</span> third outcome</p>
                 </section>
 
                 <!-- ── END SLIDE ──────────────────────────────────────────────── -->
@@ -509,7 +573,7 @@
                      END REFERENCE SLIDES — Insert your lesson content below.
                      ============================================================ -->
                 <!--
-                <section data-background-color="#0d5e1a">
+                <section data-background-color="#052e0d">
                     <h2>Practice N — Answers (1–X)</h2>
                     <table class="answer-table">
                         <thead><tr><th>#</th><th>Original</th><th>Correction</th></tr></thead>
