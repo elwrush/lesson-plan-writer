@@ -8,15 +8,15 @@
     "lesson_plan":  {
                         "shape":  "C",
                         "shape_name":  "Test-Teach-Test",
-                        "cefr_level":  "B1",
+"cefr_level":  "B2",
                         "class":  "M3-3A",
                         "stages":  [
                                        {
-                                           "stage_number":  1,
-                                           "stage":  "Lead-in — Review and Practice 2D",
-                                           "stage_aim":  "To retrieve compound sentence knowledge from Lesson 1 and bridge into comma rules",
-                                           "procedure":  "- Quick review: elicit compound sentence formula (SV, coordinator SV) and the four coordinators (2 min). Ss complete Practice 2D — write 5 original compound sentences following the directions on p.32 (5 min). Pair share — partner checks for comma + coordinator (2 min).",
-                                           "time":  9,
+"stage_number":  1,
+                                            "stage":  "Lead-in — Quick Review",
+                                            "stage_aim":  "To retrieve compound sentence knowledge from Lesson 1 and bridge into comma rules",
+                                            "procedure":  "- Quick review: elicit compound sentence formula (SV, coordinator SV) and the four coordinators (2 min). Bridge: \u0027Now — what do you already know about commas?\u0027",
+                                            "time":  2,
                                            "interaction":  "T-Ss, S, Ss-Ss"
                                        },
                                        {

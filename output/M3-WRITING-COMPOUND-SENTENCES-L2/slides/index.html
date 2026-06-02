@@ -97,10 +97,10 @@
             /* Why column on answer rows — explanation text, fills remaining space */
             .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
             /* S/V annotation underlines and labels for grammar identification */
-            .reveal .a-s { border-bottom: 2px solid #4fc3f7; }
-            .reveal .a-v { border-bottom: 2px solid #ff8a65; }
-            .reveal .a-ls { color: #4fc3f7; font-size: 0.75em; font-style: italic; margin-right: 1px; }
-            .reveal .a-lv { color: #ff8a65; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+            .reveal .a-s { border-bottom: 2px solid #fff; }
+            .reveal .a-v { border-bottom: 3px solid #ffdd00; }
+            .reveal .a-ls { color: #ffdd00; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+            .reveal .a-lv { color: #fff; font-size: 0.75em; font-style: italic; margin-right: 1px; }
 
             /* --- Labels & captions --- */
             .reveal .aim-label {
@@ -111,19 +111,19 @@
             }
             .reveal .material-ref {
                 font-size: 0.85em;
-                color: rgba(255,255,255,0.85);
+                color: #fff;
                 font-style: italic;
                 margin-top: 0.5em;
             }
             .reveal .source-cite {
                 font-size: 0.85em;
-                color: rgba(255,255,255,0.85);
+                color: #fff;
                 font-style: italic;
                 margin-top: 0.3em;
             }
             .reveal .image-caption {
                 font-size: 0.85em;
-                color: rgba(255,255,255,0.85);
+                color: #fff;
                 text-align: center;
                 margin-top: 0.2em;
             }
@@ -134,18 +134,9 @@
             .reveal .vocab-word {
                 color: #ffdd00;
                 font-weight: bold;
-                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
             }
 
             /* --- Pedagogical strategy slides (teal background) --- */
-            .reveal section.pedagogical { text-shadow: none; }
-            .reveal section.pedagogical p,
-            .reveal section.pedagogical li,
-            .reveal section.pedagogical h1, .reveal section.pedagogical h2,
-            .reveal section.pedagogical h3, .reveal section.pedagogical h4,
-            .reveal section.pedagogical h5, .reveal section.pedagogical h6 {
-                text-shadow: none;
-            }
             .reveal section.pedagogical h2 {
                 color: #fff;
                 border-bottom: 3px solid rgba(255,255,255,0.3);
@@ -157,7 +148,7 @@
             .reveal section.pedagogical .strategy-tip {
                 font-size: 0.85em;
                 font-style: italic;
-                color: rgba(255,255,255,0.85);
+                color: #fff;
                 margin-bottom: 0.5em;
             }
             .reveal section.pedagogical .evidence {
@@ -166,14 +157,6 @@
                 padding: 0.4em 0.6em;
                 border-radius: 4px;
                 border-left: 3px solid rgba(255,255,255,0.4);
-            }
-
-            /* --- Global text shadow for readability --- */
-            .reveal p,
-            .reveal li,
-            .reveal h1, .reveal h2, .reveal h3,
-            .reveal h4, .reveal h5, .reveal h6 {
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             }
 
             /* --- Text shield for full-opacity image backgrounds --- */
@@ -267,11 +250,11 @@
 <!-- PEDAGOGICAL INTENT: Student sees the lesson topic, CEFR B1 badge, and subtitle on a full-bleed background. -->
 <!-- WHY THIS FEATURE: Static — orientation content, no transformation needed. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — the CEFR badge and logo provide immediate context. -->
-<!-- DESIGN MECHANISM: justify-content: center centers content. Logo 120px, h2 2.2em. Opacity 0.85 dims the background for readability. -->
-<section id="slide-title" data-background-color="#1a1a2e" data-background-opacity="0.85" style="justify-content: center;">
+<!-- DESIGN MECHANISM: Full-bleed background image via data-background-image. text-shield on h2 and subtitle ensures readability without dimming the image. Logo 120px, h2 2.2em. justify-content: center vertically centers content. -->
+<section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/title_bg.jpg" style="justify-content: center;">
     <img src="assets/logo.png" style="height: 120px; margin: 0 auto 0.5em; display: block;" alt="ACT" />
-    <h2 style="font-size: 2.2em;">Comma Rules and Freewriting <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></h2>
-    <p style="font-size: 1em; color: rgba(255,255,255,0.9); margin-top: 0.5em;">Apply comma rules and begin writing your paragraph</p>
+    <h2 style="font-size: 2.2em;" class="text-shield">Comma Rules and Freewriting <span class="cefr-badge B2" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B2</span></h2>
+    <p style="font-size: 1em; color: #fff; margin-top: 0.5em;" class="text-shield">Apply comma rules and begin writing your paragraph</p>
 </section>
 
 <!-- SLIDE 1: Objective -->
@@ -280,47 +263,13 @@
 <!-- COGNITIVE PRINCIPLE: Pretraining — knowing the goals before instruction primes learning. -->
 <!-- DESIGN MECHANISM: All three visible at entry. Yellow numbers (#ffdd00) are the only colored elements — the eye tracks to them as a structural index. No fragments — they would hide the lesson map. -->
 <section id="slide-objective" data-background-color="#1a1a2e">
-    <h2>Today's Goals</h2>
+    <h2 style="text-align: left;">Today's Goals</h2>
     <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">1.</span> I can use commas after time order signals.</p>
     <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">2.</span> I can use commas in compound sentences.</p>
     <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">3.</span> I can use commas between items in a series.</p>
 </section>
 
-<!-- SLIDE 2: Transition — Review -->
-<!-- PEDAGOGICAL INTENT: Phase-change signal for the review and Practice 2D task. -->
-<!-- WHY THIS FEATURE: Static — red heading only. -->
-<!-- COGNITIVE PRINCIPLE: Coherence — heading only, teacher speaks. -->
-<!-- DESIGN MECHANISM: Red background signals the start of the lead-in phase. Teacher reviews compound sentences from Lesson 1. -->
-<section id="slide-transition-review" data-background-color="#c0392b" data-background-transition="none">
-    <h2>Let's Review</h2>
-</section>
-
-<!-- SLIDE 3: Review — Compound Sentence Recap -->
-<!-- PEDAGOGICAL INTENT: Student sees the compound sentence formula and four coordinators from Lesson 1, reactivating prior knowledge before the comma rules lesson. -->
-<!-- WHY THIS FEATURE: Static — all reference visible at once for the teacher to point to. -->
-<!-- COGNITIVE PRINCIPLE: Pretraining — activating prior knowledge prepares the learner to integrate new comma rules. -->
-<!-- DESIGN MECHANISM: The formula "S V , coordinator S V" is displayed in yellow. Below, the four coordinators are listed with their meanings (and=addition, but=contrast, or=choice, so=result). The teacher says: "Now — Practice 2D. Write your own compound sentences." This bridges Lesson 1's knowledge to Lesson 2's comma focus. -->
-<section id="slide-review-compound" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
-    <h2>Compound Sentences Recap</h2>
-    <p style="font-size: 1.1em; color: #ffdd00; margin-top: 0.5em;"><strong>S V</strong> , <strong>coordinator S V</strong></p>
-    <p style="margin-top: 0.5em;">Four coordinators:</p>
-    <p style="margin-left: 1em;"><strong style="color: #ffdd00;">and</strong> — addition &nbsp;&nbsp; <strong style="color: #ffdd00;">but</strong> — contrast &nbsp;&nbsp; <strong style="color: #ffdd00;">or</strong> — choice &nbsp;&nbsp; <strong style="color: #ffdd00;">so</strong> — result</p>
-    <p style="margin-top: 0.8em;"><em>Now — Practice 2D. Write your own compound sentences!</em></p>
-    <aside class="notes">Elicit the formula and four coordinators (2 min). Then introduce Practice 2D — write 5 original compound sentences (5 min). Pair check for comma + coordinator (2 min).</aside>
-</section>
-
-<!-- SLIDE 4: Task — Practice 2D -->
-<!-- PEDAGOGICAL INTENT: Student sees the 5 writing prompts for Practice 2D. Timer controls pacing. -->
-<!-- WHY THIS FEATURE: Static + timer — instruction only. Students write in their notebooks. -->
-<!-- COGNITIVE PRINCIPLE: None — procedural. -->
-<!-- DESIGN MECHANISM: Brief instructions with the 5 prompts. Students write 5 original compound sentences. The required coordinator is listed per item. Timer 300s (5 min) matches the lesson plan. -->
-<section id="slide-p2d-task" data-background-color="#1a1a2e" data-timer="300">
-    <h2>Practice 2D — Write Your Own</h2>
-    <p><em>Write 5 compound sentences. Use a comma + coordinator in each.</em></p>
-    <aside class="notes">Individual work 5 min. Pair share 2 min — partner checks for comma + coordinator.</aside>
-</section>
-
-<!-- SLIDE 5: Transition — Diagnostic -->
+<!-- SLIDE 2: Transition — Diagnostic -->
 <!-- PEDAGOGICAL INTENT: Phase-change signal for the comma rules diagnostic. -->
 <!-- WHY THIS FEATURE: Static — red heading only. -->
 <!-- COGNITIVE PRINCIPLE: Coherence. -->
@@ -329,73 +278,59 @@
     <h2>What Do You Already Know?</h2>
 </section>
 
-<!-- SLIDE 6a: Diagnostic — Items 1-3 entry -->
-<!-- PEDAGOGICAL INTENT: Student sees 3 sentences with missing commas. Transparent borders mark where commas should appear. Timer 90s. -->
-<!-- WHY THIS FEATURE: Auto-animate entry + timer — transparent border spans reserve space for the comma morph on the reveal slide. -->
-<!-- COGNITIVE PRINCIPLE: None — assessment task. Timer provides pacing. -->
-<!-- DESIGN MECHANISM: Each sentence has a span wrapping the word AFTER the missing comma position. The span uses transparent border. On reveal, the span morphs to include a comma + space before the word (e.g., "I" → ", I"). The reserved space ensures the morph has no layout jump. Timer 90s enforces quick diagnostic pace. -->
-<section id="slide-diagnostic-1-3" data-auto-animate data-auto-animate-id="diag1" data-background-color="#1a1a2e" data-timer="90">
+<!-- SLIDE 6a: Diagnostic — Items 1-3 with inline corrections -->
+<!-- PEDAGOGICAL INTENT: Student sees 3 sentences with missing commas. The corrected version fades in beneath each original with the comma underlined. Timer controls the attempt phase; fragments control the reveal phase. -->
+<!-- WHY THIS FEATURE: Fragments on each correction line — the teacher advances through items one by one, discussing each correction before moving to the next. No auto-animate across separate slides needed. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — each correction appears directly beneath its original sentence, so the student compares them without navigating slides. -->
+<!-- DESIGN MECHANISM: Each list item has the original sentence always visible, followed by a `fragment fade-up` span showing the corrected sentence with the new comma underlined in yellow. The rule label (Rule 1/2/3) appears in white beside the correction. The per-item reveal lets the teacher discuss each rule individually. -->
+<section id="slide-diagnostic-1-3" data-background-color="#1a1a2e" data-timer="90">
     <div style="overflow: hidden;">
         <p><em>Add commas where needed.</em></p>
         <ol style="font-size: 0.85em; text-align: left;">
-            <li style="margin: 0.4em 0;">Yesterday <span data-id="c1" style="border-bottom: 2px solid transparent;"><span style="color: rgba(255,255,255,0.85);">I</span></span> went to the mall.</li>
-            <li style="margin: 0.4em 0;">I like pizza <span data-id="c2" style="border-bottom: 2px solid transparent;"><span style="color: rgba(255,255,255,0.85);">and</span></span> my brother likes pasta.</li>
-            <li style="margin: 0.4em 0;">She bought apples <span data-id="c3" style="border-bottom: 2px solid transparent;"><span style="color: rgba(255,255,255,0.85);">bananas</span></span> <span data-id="c4" style="border-bottom: 2px solid transparent;"><span style="color: rgba(255,255,255,0.85);">and</span></span> oranges.</li>
-        </ol>
-    </div>
-</section>
-
-<!-- SLIDE 6b: Diagnostic — Items 1-3 reveal -->
-<!-- PEDAGOGICAL INTENT: Student sees the commas appear with blue underlines at the correct positions. The transformation IS the answer — they see exactly where commas go. -->
-<!-- WHY THIS FEATURE: Auto-animate reveal — the transparent span borders become blue and the span text morphs to include the comma. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — the blue underline draws attention to each comma position. Temporal Contiguity — the original sentence structure stays in place. -->
-<!-- DESIGN MECHANISM: Each span morphs: "I" → ", I", "and" → ", and", "bananas" → ", bananas, and". The text transformation shows exactly what changes. The blue underline persists on the new comma, making the correction visible even when the student blinks. Without this auto-animate, the student would see only the final state without witnessing the transformation. -->
-<section id="slide-diagnostic-1-3-reveal" data-auto-animate data-auto-animate-id="diag1" data-background-color="#1a1a2e">
-    <div style="overflow: hidden;">
-        <p><em>Corrected:</em></p>
-        <ol style="font-size: 0.85em; text-align: left;">
-            <li style="margin: 0.4em 0;">Yesterday<span data-id="c1" style="border-bottom: 2px solid #4fc3f7;">, I</span> went to the mall. <span style="color: rgba(255,255,255,0.6); font-size: 0.8em;">(Rule 1 — time signal)</span></li>
-            <li style="margin: 0.4em 0;">I like pizza<span data-id="c2" style="border-bottom: 2px solid #4fc3f7;">, and</span> my brother likes pasta. <span style="color: rgba(255,255,255,0.6); font-size: 0.8em;">(Rule 2 — compound)</span></li>
-            <li style="margin: 0.4em 0;">She bought apples<span data-id="c3" style="border-bottom: 2px solid #4fc3f7;">, bananas,</span><span data-id="c4" style="border-bottom: 2px solid #4fc3f7;"> and</span> oranges. <span style="color: rgba(255,255,255,0.6); font-size: 0.8em;">(Rule 3 — series)</span></li>
+            <li style="margin: 0.4em 0;">
+                <span>Yesterday I went to the mall.</span>
+                <span class="fragment fade-up" style="display: block; color: #ffdd00; margin-top: 0.2em;" data-fragment-index="1"><span style="border-bottom: 4px solid #ffdd00;">Yesterday,</span> I went to the mall. <span style="color: #fff; font-size: 0.85em;">(Rule 1 — time signal)</span></span>
+            </li>
+            <li style="margin: 0.4em 0;">
+                <span>I like pizza and my brother likes pasta.</span>
+                <span class="fragment fade-up" style="display: block; color: #ffdd00; margin-top: 0.2em;" data-fragment-index="2">I like pizza<span style="border-bottom: 4px solid #ffdd00;">, and</span> my brother likes pasta. <span style="color: #fff; font-size: 0.85em;">(Rule 2 — compound)</span></span>
+            </li>
+            <li style="margin: 0.4em 0;">
+                <span>She bought apples bananas and oranges.</span>
+                <span class="fragment fade-up" style="display: block; color: #ffdd00; margin-top: 0.2em;" data-fragment-index="3">She bought apples<span style="border-bottom: 4px solid #ffdd00;">, bananas, and</span> oranges. <span style="color: #fff; font-size: 0.85em;">(Rule 3 — series)</span></span>
+            </li>
         </ol>
         <aside class="notes">Item 1: Rule 1 — time order signal. Item 2: Rule 2 — compound sentence. Item 3: Rule 3 — items in a series with Oxford comma.</aside>
     </div>
 </section>
 
-<!-- SLIDE 7a: Diagnostic — Items 4-6 entry -->
-<!-- PEDAGOGICAL INTENT: Student sees the remaining 3 sentences with missing commas. Same pattern as items 1-3. Timer 90s. -->
-<!-- WHY THIS FEATURE: Auto-animate entry + timer — consistent pattern. -->
-<!-- COGNITIVE PRINCIPLE: None — assessment. -->
-<!-- DESIGN MECHANISM: Same transparent-border span pattern. Items 4-6 cover Rule 1+2 combined, Rule 2 alone, and Rule 3. -->
-<section id="slide-diagnostic-4-6" data-auto-animate data-auto-animate-id="diag2" data-background-color="#1a1a2e" data-timer="90">
+<!-- SLIDE 6b: Diagnostic — Items 4-6 with inline corrections -->
+<!-- PEDAGOGICAL INTENT: Student sees sentences 4-6 with missing commas. Same fragment pattern as items 1-3 for consistency. -->
+<!-- WHY THIS FEATURE: Fragments — same approach as items 1-3. Consistent reveal behaviour lets students focus on the rules. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — each correction directly beneath its original. -->
+<!-- DESIGN MECHANISM: Same inline fragment pattern. Items 4-6 cover Rule 1+2 combined (two commas), Rule 2 alone, and Rule 3. Item 4 is the first time students see two comma rules in one sentence. The underline on each comma uses the same yellow style. -->
+<section id="slide-diagnostic-4-6" data-background-color="#1a1a2e" data-timer="90">
     <div style="overflow: hidden;">
         <p><em>Add commas where needed.</em></p>
         <ol style="font-size: 0.85em; text-align: left;">
-            <li style="margin: 0.4em 0;">First <span data-id="c5" style="border-bottom: 2px solid transparent;"><span style="color: rgba(255,255,255,0.85);">we</span></span> ate lunch <span data-id="c6" style="border-bottom: 2px solid transparent;"><span style="color: rgba(255,255,255,0.85);">and</span></span> then we went home.</li>
-            <li style="margin: 0.4em 0;">He wanted to go out <span data-id="c7" style="border-bottom: 2px solid transparent;"><span style="color: rgba(255,255,255,0.85);">but</span></span> he was too tired.</li>
-            <li style="margin: 0.4em 0;">The flag is red white <span data-id="c8" style="border-bottom: 2px solid transparent;"><span style="color: rgba(255,255,255,0.85);">and</span></span> blue.</li>
+            <li style="margin: 0.4em 0;">
+                <span>First we ate lunch and then we went home.</span>
+                <span class="fragment fade-up" style="display: block; color: #ffdd00; margin-top: 0.2em;" data-fragment-index="1"><span style="border-bottom: 4px solid #ffdd00;">First,</span> we ate lunch<span style="border-bottom: 4px solid #ffdd00;">, and</span> then we went home. <span style="color: #fff; font-size: 0.85em;">(Rule 1 + Rule 2)</span></span>
+            </li>
+            <li style="margin: 0.4em 0;">
+                <span>He wanted to go out but he was too tired.</span>
+                <span class="fragment fade-up" style="display: block; color: #ffdd00; margin-top: 0.2em;" data-fragment-index="2">He wanted to go out<span style="border-bottom: 4px solid #ffdd00;">, but</span> he was too tired. <span style="color: #fff; font-size: 0.85em;">(Rule 2 — compound)</span></span>
+            </li>
+            <li style="margin: 0.4em 0;">
+                <span>The flag is red white and blue.</span>
+                <span class="fragment fade-up" style="display: block; color: #ffdd00; margin-top: 0.2em;" data-fragment-index="3">The flag is red<span style="border-bottom: 4px solid #ffdd00;">, white, and</span> blue. <span style="color: #fff; font-size: 0.85em;">(Rule 3 — series)</span></span>
+            </li>
         </ol>
+        <aside class="notes">Item 1: two rules (Rule 1 after "First," Rule 2 before "and"). Item 2: Rule 2. Item 3: Rule 3.</aside>
     </div>
 </section>
 
-<!-- SLIDE 7b: Diagnostic — Items 4-6 reveal -->
-<!-- PEDAGOGICAL INTENT: Student sees commas appear for items 4-6. Completes the diagnostic feedback cycle. -->
-<!-- WHY THIS FEATURE: Auto-animate reveal — same pattern as items 1-3. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — blue underline on each new comma. -->
-<!-- DESIGN MECHANISM: Item 4 requires TWO commas — after the time signal and before the coordinator in the compound sentence. This is the first time students see that multiple comma rules can apply to one sentence. The two separate spans morph independently. -->
-<section id="slide-diagnostic-4-6-reveal" data-auto-animate data-auto-animate-id="diag2" data-background-color="#1a1a2e">
-    <div style="overflow: hidden;">
-        <p><em>Corrected:</em></p>
-        <ol style="font-size: 0.85em; text-align: left;">
-            <li style="margin: 0.4em 0;">First<span data-id="c5" style="border-bottom: 2px solid #4fc3f7;">, we</span> ate lunch<span data-id="c6" style="border-bottom: 2px solid #4fc3f7;">, and</span> then we went home. <span style="color: rgba(255,255,255,0.6); font-size: 0.8em;">(Rule 1 + Rule 2)</span></li>
-            <li style="margin: 0.4em 0;">He wanted to go out<span data-id="c7" style="border-bottom: 2px solid #4fc3f7;">, but</span> he was too tired. <span style="color: rgba(255,255,255,0.6); font-size: 0.8em;">(Rule 2 — compound)</span></li>
-            <li style="margin: 0.4em 0;">The flag is red, white<span data-id="c8" style="border-bottom: 2px solid #4fc3f7;">, and</span> blue. <span style="color: rgba(255,255,255,0.6); font-size: 0.8em;">(Rule 3 — series)</span></li>
-        </ol>
-        <aside class="notes">Item 4: two rules (Rule 1 after "First," Rule 2 before "and"). Item 5: Rule 2. Item 6: Rule 3.</aside>
-    </div>
-</section>
-
-<!-- SLIDE 8: Transition — Teach -->
+<!-- SLIDE 7: Transition — Teach -->
 <!-- PEDAGOGICAL INTENT: Phase-change signal for the three comma rules teaching phase. -->
 <!-- WHY THIS FEATURE: Static — red heading only. -->
 <!-- COGNITIVE PRINCIPLE: Coherence. -->
@@ -404,50 +339,50 @@
     <h2>Three Comma Rules</h2>
 </section>
 
-<!-- SLIDE 9: Teach — Rule 1 -->
+<!-- SLIDE 8: Teach — Rule 1 -->
 <!-- PEDAGOGICAL INTENT: Student sees Rule 1: comma after time order signal (except then/soon/now). -->
 <!-- WHY THIS FEATURE: Static — pedagogical reference. All visible for the teacher to explain. -->
 <!-- COGNITIVE PRINCIPLE: Spatial Contiguity — the rule statement is directly above its examples. -->
 <!-- DESIGN MECHANISM: The rule is stated in bold yellow. Two columns below: "Yes — comma" examples (Yesterday, / First, / Finally, / At 8:00,) in green check, and "Exception — no comma" examples (Then, / Soon, / Now) in white text. The exception is highlighted because B1 learners commonly over-apply the rule. -->
-<section id="slide-teach-rule1" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-teach-rule1" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <h2>Rule 1: Time Order Signals</h2>
     <p style="font-size: 1em; color: #ffdd00; margin-top: 0.5em;">Put a comma <strong>after</strong> most time order signals at the beginning of a sentence.</p>
-    <p style="margin-top: 0.5em;"><i class="fa-solid fa-check" style="color: #4caf50;"></i> <strong style="color: #ffdd00;">Yesterday,</strong> I did homework for three hours.</p>
-    <p><i class="fa-solid fa-check" style="color: #4caf50;"></i> <strong style="color: #ffdd00;">Finally,</strong> I was too tired to think.</p>
-    <p style="margin-top: 0.5em; color: rgba(255,255,255,0.85); font-size: 0.9em;"><strong>Exception:</strong> <em>Then</em>, <em>Soon</em>, and <em>Now</em> usually do NOT take a comma.</p>
-    <p style="margin-left: 1em; font-size: 0.9em;"><i class="fa-solid fa-times" style="color: #ff5252;"></i> Then I went home. <span style="color: rgba(255,255,255,0.6);">(no comma)</span></p>
+    <p style="margin-top: 0.5em;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> <strong style="color: #ffdd00;">Yesterday,</strong> I did homework for three hours.</p>
+    <p><i class="fa-solid fa-check" style="color: #ffdd00;"></i> <strong style="color: #ffdd00;">Finally,</strong> I was too tired to think.</p>
+    <p style="margin-top: 0.5em; color: #fff; font-size: 0.9em;"><strong>Exception:</strong> <em>Then</em>, <em>Soon</em>, and <em>Now</em> usually do NOT take a comma.</p>
+    <p style="margin-left: 1em; font-size: 0.9em;"><i class="fa-solid fa-times" style="color: #ffdd00;"></i> Then I went home. <span style="color: #fff;">(no comma)</span></p>
     <aside class="notes">Rule 1 from textbook p.33. Emphasise the exception: then, soon, now do NOT take a comma. Use ERRANT examples from M3-3A feedback where students added comma after "then."</aside>
 </section>
 
-<!-- SLIDE 10: Teach — Rule 2 -->
+<!-- SLIDE 9: Teach — Rule 2 -->
 <!-- PEDAGOGICAL INTENT: Student sees Rule 2: comma before coordinator in compound sentences. -->
 <!-- WHY THIS FEATURE: Static — pedagogical reference. -->
 <!-- COGNITIVE PRINCIPLE: Spatial Contiguity — rule + example side by side. -->
 <!-- DESIGN MECHANISM: The rule "Put a comma BEFORE the coordinator in compound sentences" is in bold yellow. Example sentence has the comma visible. Below it, a contrast example shows a simple sentence with a compound verb — no comma needed. This prevents the common B1 error of adding commas before every "and" regardless of sentence type. -->
-<section id="slide-teach-rule2" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-teach-rule2" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <h2>Rule 2: Compound Sentences</h2>
     <p style="font-size: 1em; color: #ffdd00; margin-top: 0.5em;">Put a comma <strong>BEFORE</strong> the coordinator in a compound sentence.</p>
-    <p style="margin-top: 0.5em;"><i class="fa-solid fa-check" style="color: #4caf50;"></i> I was too tired to think, so I decided to watch TV.</p>
-    <p style="margin-top: 0.5em; color: rgba(255,255,255,0.85); font-size: 0.9em;"><strong>Simple sentences with compound verbs:</strong> NO comma.</p>
-    <p style="margin-left: 1em; font-size: 0.9em;"><i class="fa-solid fa-check" style="color: #4caf50;"></i> I woke up <strong>and</strong> finished my homework. <span style="color: rgba(255,255,255,0.6);">(one subject — no comma)</span></p>
+    <p style="margin-top: 0.5em;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> I was too tired to think, so I decided to watch TV.</p>
+    <p style="margin-top: 0.5em; color: #fff; font-size: 0.9em;"><strong>Simple sentences with compound verbs:</strong> NO comma.</p>
+    <p style="margin-left: 1em; font-size: 0.9em;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> I woke up <strong>and</strong> finished my homework. <span style="color: #fff;">(one subject — no comma)</span></p>
     <aside class="notes">Rule 2 from textbook p.33. The distinction between compound sentence (two S-V pairs, needs comma) and compound verb (one S, two Vs, no comma) is the key teaching point.</aside>
 </section>
 
-<!-- SLIDE 11: Teach — Rule 3 -->
+<!-- SLIDE 10: Teach — Rule 3 -->
 <!-- PEDAGOGICAL INTENT: Student sees Rule 3: comma between items in a series of 3 or more. -->
 <!-- WHY THIS FEATURE: Static — pedagogical reference. -->
 <!-- COGNITIVE PRINCIPLE: Spatial Contiguity — rule + example. -->
 <!-- DESIGN MECHANISM: The rule "Put a comma between items in a series of three or more" is in bold yellow. Example with commas visually marked. Below: "Only two items? NO comma" — this addresses the most common B1 error (adding a comma between two items). -->
-<section id="slide-teach-rule3" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-teach-rule3" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <h2>Rule 3: Items in a Series</h2>
     <p style="font-size: 1em; color: #ffdd00; margin-top: 0.5em;">Put a comma between items in a series of <strong>three or more</strong>.</p>
-    <p style="margin-top: 0.5em;"><i class="fa-solid fa-check" style="color: #4caf50;"></i> I bought <strong style="color: #ffdd00;">apples,</strong> <strong style="color: #ffdd00;">bananas,</strong> and <strong style="color: #ffdd00;">oranges.</strong></p>
-    <p style="margin-top: 0.5em; color: rgba(255,255,255,0.85); font-size: 0.9em;"><strong>Only two items?</strong> NO comma needed.</p>
-    <p style="margin-left: 1em; font-size: 0.9em;"><i class="fa-solid fa-check" style="color: #4caf50;"></i> Red <strong>and</strong> gold are the school colors. <span style="color: rgba(255,255,255,0.6);">(two items — no comma)</span></p>
+    <p style="margin-top: 0.5em;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> I bought <strong style="color: #ffdd00;">apples,</strong> <strong style="color: #ffdd00;">bananas,</strong> and <strong style="color: #ffdd00;">oranges.</strong></p>
+    <p style="margin-top: 0.5em; color: #fff; font-size: 0.9em;"><strong>Only two items?</strong> NO comma needed.</p>
+    <p style="margin-left: 1em; font-size: 0.9em;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> Red <strong>and</strong> gold are the school colors. <span style="color: #fff;">(two items — no comma)</span></p>
     <aside class="notes">Rule 3 from textbook p.33. The Oxford comma (comma before 'and' in a series) is used in this textbook. Two items never take a comma — this is a common error.</aside>
 </section>
 
-<!-- SLIDE 12: Transition — Practice 3A -->
+<!-- SLIDE 11: Transition — Practice 3A -->
 <!-- PEDAGOGICAL INTENT: Phase-change signal for the controlled practice. -->
 <!-- WHY THIS FEATURE: Static — red heading only. -->
 <!-- COGNITIVE PRINCIPLE: Coherence. -->
@@ -456,21 +391,21 @@
     <h2>Practice 3A — Add Commas</h2>
 </section>
 
-<!-- SLIDE 13: Strategy — Which Rule to Use? -->
+<!-- SLIDE 12: Strategy — Which Rule to Use? -->
 <!-- PEDAGOGICAL INTENT: Student sees a 3-question decision process for choosing the correct comma rule. -->
 <!-- WHY THIS FEATURE: Static — all visible for the teacher to model with examples. -->
 <!-- COGNITIVE PRINCIPLE: Segmenting — the decision process breaks comma placement into three clear yes/no questions. -->
 <!-- DESIGN MECHANISM: Three questions vertically: (1) Time signal at the start? → Rule 1. (2) Two S-V pairs with coordinator? → Rule 2. (3) Three or more items in a list? → Rule 3. Below: "Some sentences need more than one rule (e.g., Rule 1 + Rule 2)." This prevents the student from assuming only one rule applies per sentence. -->
-<section id="slide-strategy-p3a" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-strategy-p3a" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <h2>Which Comma Rule to Use?</h2>
     <p style="margin-top: 0.5em;"><u><strong>Question 1:</strong> Is there a time signal at the start?</u> → <strong style="color: #ffdd00;">Rule 1</strong></p>
     <p style="margin-top: 0.3em;"><u><strong>Question 2:</strong> Two S-V pairs with and/but/or/so?</u> → <strong style="color: #ffdd00;">Rule 2</strong></p>
     <p style="margin-top: 0.3em;"><u><strong>Question 3:</strong> Three or more items in a list?</u> → <strong style="color: #ffdd00;">Rule 3</strong></p>
-    <p style="margin-top: 0.8em; font-size: 0.85em; color: rgba(255,255,255,0.85);">Some sentences need more than one rule <span style="font-size: 0.8em;">(e.g., Rule 1 + Rule 2)</span></p>
+    <p style="margin-top: 0.8em; font-size: 0.85em; color: #fff;">Some sentences need more than one rule <span style="font-size: 0.8em;">(e.g., Rule 1 + Rule 2)</span></p>
     <aside class="notes">Model items 1 and 4 from 3A as examples. Item 1 needs Rule 3 (series). Item 4 needs Rule 1 + Rule 2 (time signal + compound).</aside>
 </section>
 
-<!-- SLIDE 14: Task — Practice 3A -->
+<!-- SLIDE 13: Task — Practice 3A -->
 <!-- PEDAGOGICAL INTENT: Student sees the exercise number + brief instruction. Timer controls pacing. -->
 <!-- WHY THIS FEATURE: Static + timer — procedural. -->
 <!-- COGNITIVE PRINCIPLE: None — procedural. -->
@@ -481,125 +416,223 @@
     <aside class="notes">Individual work 7 min. Pair check 3 min. Display answers with rule labels.</aside>
 </section>
 
-<!-- SLIDE 15: Answers — Practice 3A (items 1-3) -->
-<!-- PEDAGOGICAL INTENT: Student sees corrected sentences for items 1-3 with the rule label for each. Reveals row by row. -->
-<!-- WHY THIS FEATURE: Fragment fade-up per row — teacher controls pacing of answer reveal. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — the rule label tells the student WHY the comma goes there. -->
-<!-- DESIGN MECHANISM: Each row shows the corrected sentence with commas in yellow. The rule label (Rule 1/2/3) is the explanation — no separate Why column needed. Item 3 shows "(no change)" to reinforce that commas are not always needed. -->
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.95em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.5em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.5em; text-align: left; color: #fff; font-size: 0.95em; }
-    .reveal .a-ans { flex: 1 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; color: #ffdd00; font-size: 0.9em; line-height: 1.5; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 0 0 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
-    .reveal .aim-label { color: #fff; }
-</style>
-<section id="slide-p3a-answers-1-3" data-background-color="#0d5e1a">
-    <h2>Practice 3A — Answers (1-3)</h2>
+<!-- SLIDE 14: Answer — Practice 3A Item 1 -->
+<!-- PEDAGOGICAL INTENT: Student sees the original sentence, its rule classification (R3), the corrected version, and an explanation. -->
+<!-- WHY THIS FEATURE: Static — the entire answer row (label, corrected sentence, explanation) is visible on slide entry. Teacher advances to the next slide for the next item. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — original and corrected visible on the same slide; the explanation appears simultaneously with the correction. -->
+<!-- DESIGN MECHANISM: The original sentence is displayed as a `<p>` above the answer-list (following M3 L1 pattern). The a-row shows: rule label in a-q, corrected sentence in a-ans with checkmark, and explanation in a-why. One item per slide lets the teacher discuss each rule individually. -->
+<section id="slide-p3a-answer-1" class="answer-slide" data-background-color="#052e0d">
+    <h2>Practice 3A — Item 1</h2>
+    <p style="font-size: 0.8em; color: #fff; margin-bottom: 0.5em;">Daisy Tomiko Keiko and Nina live near the college that they all attend.</p>
     <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">1</span>
-            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check"></i> Daisy, Tomiko, Keiko, and Nina live near the college.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1"><strong>Rule 3 — series</strong></span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">2</span>
-            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2"><i class="fa-solid fa-check"></i> Tomiko and Keiko are from Japan, and Nina and Daisy are from Mexico.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2"><strong>Rule 2 — compound</strong></span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">3</span>
-            <span class="fragment fade-up a-ans a-inc" data-fragment-index="3"><i class="fa-solid fa-times"></i> No change — no comma needed</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3"><strong>— no rule applies</strong></span>
+        <div class="a-row fragment fade-up">
+            <span class="a-q">R3</span>
+            <span class="a-ans a-cor" style="color: #ffdd00;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> Daisy, Tomiko, Keiko, and Nina live near the college that they all attend.</span>
+            <span class="a-why">4 names in a series — Rule 3</span>
         </div>
     </div>
-    <aside class="notes">Item 1: Rule 3 — series of 4 names. Item 2: Rule 2 — compound sentence with 'and.' Item 3: 'on June 3 on different continents' — no comma needed here, only two time phrases.</aside>
+    <aside class="notes">Rule 3 — series of 4 names. Comma after each except the last (Oxford comma).</aside>
 </section>
 
-<!-- SLIDE 16: Answers — Practice 3A (items 4-6) -->
-<!-- PEDAGOGICAL INTENT: Student sees items 4-6. Item 4 uses two rules simultaneously. -->
-<!-- WHY THIS FEATURE: Fragment fade-up per row. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — the "Rule 1 + Rule 2" label shows combined application. -->
-<!-- DESIGN MECHANISM: Item 4 requires both Rule 1 (comma after "Last week") and Rule 2 (comma before "so"). This is highlighted as a combined case. Items 5-6 each use a single rule. -->
-<section id="slide-p3a-answers-4-6" data-background-color="#0d5e1a">
-    <h2>Practice 3A — Answers (4-6)</h2>
+<!-- SLIDE 15: Answer — Practice 3A Item 2 -->
+<!-- PEDAGOGICAL INTENT: Student sees the original sentence, its rule label (R2), the corrected version with comma, and an explanation. -->
+<!-- WHY THIS FEATURE: Static — the entire answer row appears on slide entry. Teacher advances to the next slide for the next item. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — original and corrected visible simultaneously. -->
+<!-- DESIGN MECHANISM: a-q="R2". a-ans shows the compound with comma before 'and'. a-why explains the two S-V pairs. -->
+<section id="slide-p3a-answer-2" class="answer-slide" data-background-color="#052e0d">
+    <h2>Practice 3A — Item 2</h2>
+    <p style="font-size: 0.8em; color: #fff; margin-bottom: 0.5em;">Tomiko and Keiko are from Japan and Nina and Daisy are from Mexico.</p>
     <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">4</span>
-            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check"></i> Last week, the girls decided to have a party, so they invited friends.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1"><strong>Rule 1 + Rule 2</strong></span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">5</span>
-            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2"><i class="fa-solid fa-check"></i> Nina wanted to cook Mexican food, but Keiko wanted Japanese food.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2"><strong>Rule 2 — compound</strong></span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">6</span>
-            <span class="fragment fade-up a-ans a-cor" data-fragment-index="3"><i class="fa-solid fa-check"></i> Finally, they agreed on the menu.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3"><strong>Rule 1 — time signal</strong></span>
+        <div class="a-row fragment fade-up">
+            <span class="a-q">R2</span>
+            <span class="a-ans a-cor" style="color: #ffdd00;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> Tomiko and Keiko are from Japan, and Nina and Daisy are from Mexico.</span>
+            <span class="a-why">Two clauses joined by 'and' — comma before coordinator</span>
         </div>
     </div>
-    <aside class="notes">Item 4: two rules applied. Item 5: Rule 2 — compound. Item 6: Rule 1 — time signal (Finally).</aside>
+    <aside class="notes">Rule 2 — compound. Two S-V pairs: (Tomiko and Keiko) are… (Nina and Daisy) are… Comma before 'and'.</aside>
 </section>
 
-<!-- SLIDE 17: Answers — Practice 3A (items 7-9) -->
-<!-- PEDAGOGICAL INTENT: Student sees items 7-9. Item 9 is the "Then" exception — no comma. -->
-<!-- WHY THIS FEATURE: Fragment fade-up per row. -->
+<!-- SLIDE 16: Answer — Practice 3A Item 3 -->
+<!-- PEDAGOGICAL INTENT: Student sees that item 3 needs no comma — only two time phrases. -->
+<!-- WHY THIS FEATURE: Static — no fragments. The "no change" verdict is visible on slide entry. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the exception is noted explicitly so students learn when NOT to use commas. -->
+<!-- DESIGN MECHANISM: a-q="—" indicates no rule applies. a-ans shows a-inc (no change) with cross. a-why explains: only two time phrases. -->
+<section id="slide-p3a-answer-3" class="answer-slide" data-background-color="#052e0d">
+    <h2>Practice 3A — Item 3</h2>
+    <p style="font-size: 0.8em; color: #fff; margin-bottom: 0.5em;">Both girls were born on June 3 on different continents.</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up">
+            <span class="a-q">—</span>
+            <span class="a-ans a-inc" style="color: #ffdd00;"><i class="fa-solid fa-times"></i> No change</span>
+            <span class="a-why">Only two time phrases — no comma needed</span>
+        </div>
+    </div>
+    <aside class="notes">Item 3: 'on June 3 on different continents' — only two time phrases, no comma needed. Could add comma after '3' for clarity but not required.</aside>
+</section>
+
+<!-- SLIDE 17: Answer — Practice 3A Item 4 -->
+<!-- PEDAGOGICAL INTENT: Student sees item 4 — two comma rules applied to one sentence (time signal + compound). -->
+<!-- WHY THIS FEATURE: Static — the combined rule application is visible on slide entry. Teacher discusses before advancing. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — "R1+R2" label shows that multiple rules can apply to one sentence. -->
+<!-- DESIGN MECHANISM: a-q="R1+R2" signals two rules. a-ans shows both commas. a-why explains which rule applies where. This is the first time students see multiple comma rules in one sentence. -->
+<section id="slide-p3a-answer-4" class="answer-slide" data-background-color="#052e0d">
+    <h2>Practice 3A — Item 4</h2>
+    <p style="font-size: 0.8em; color: #fff; margin-bottom: 0.5em;">Last week the girls decided to have a joint birthday party so they invited several friends for dinner.</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up">
+            <span class="a-q">R1+R2</span>
+            <span class="a-ans a-cor" style="color: #ffdd00;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> Last week, the girls decided to have a joint birthday party, so they invited several friends for dinner.</span>
+            <span class="a-why">'Last week' = time signal (R1); two clauses joined by 'so' (R2)</span>
+        </div>
+    </div>
+    <aside class="notes">Item 4: two rules. Comma after "Last week," (R1) and comma before "so" (R2).</aside>
+</section>
+
+<!-- SLIDE 18: Answer — Practice 3A Item 5 -->
+<!-- PEDAGOGICAL INTENT: Student sees item 5 — compound sentence with 'but' showing contrast. -->
+<!-- WHY THIS FEATURE: Static — answer and explanation visible on slide entry. Teacher advances to the next slide. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — R2 label tells students this is a compound sentence rule. -->
+<!-- DESIGN MECHANISM: a-q="R2". a-ans shows comma before 'but'. a-why explains contrast between the two clauses. -->
+<section id="slide-p3a-answer-5" class="answer-slide" data-background-color="#052e0d">
+    <h2>Practice 3A — Item 5</h2>
+    <p style="font-size: 0.8em; color: #fff; margin-bottom: 0.5em;">Nina wanted to cook Mexican food but Keiko wanted to have Japanese food.</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up">
+            <span class="a-q">R2</span>
+            <span class="a-ans a-cor" style="color: #ffdd00;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> Nina wanted to cook Mexican food, but Keiko wanted to have Japanese food.</span>
+            <span class="a-why">Two clauses, contrast — comma before 'but' (R2)</span>
+        </div>
+    </div>
+    <aside class="notes">Rule 2 — compound with 'but' (contrast). Two subjects: Nina / Keiko.</aside>
+</section>
+
+<!-- SLIDE 19: Answer — Practice 3A Item 6 -->
+<!-- PEDAGOGICAL INTENT: Student sees item 6 — time signal 'Finally' takes a comma. -->
+<!-- WHY THIS FEATURE: Static — answer and explanation visible on slide entry. Teacher advances to the next slide. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — R1 label reinforces the time signal rule. -->
+<!-- DESIGN MECHANISM: a-q="R1". Short sentence. a-ans shows comma after 'Finally'. a-why: "'Finally' is a time signal." -->
+<section id="slide-p3a-answer-6" class="answer-slide" data-background-color="#052e0d">
+    <h2>Practice 3A — Item 6</h2>
+    <p style="font-size: 0.8em; color: #fff; margin-bottom: 0.5em;">Finally they agreed on the menu.</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up">
+            <span class="a-q">R1</span>
+            <span class="a-ans a-cor" style="color: #ffdd00;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> Finally, they agreed on the menu.</span>
+            <span class="a-why">'Finally' is a time signal — comma after it (R1)</span>
+        </div>
+    </div>
+    <aside class="notes">Rule 1 — 'Finally' takes a comma.</aside>
+</section>
+
+<!-- SLIDE 20: Answer — Practice 3A Item 7 -->
+<!-- PEDAGOGICAL INTENT: Student sees item 7 — long series of 4 food items with Oxford comma. -->
+<!-- WHY THIS FEATURE: Static — answer and explanation visible on slide entry. Teacher advances to the next slide. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — R3 label reinforces the series rule. -->
+<!-- DESIGN MECHANISM: a-q="R3". Long sentence with 3 commas between 4 items. a-why: "4 items in a series." -->
+<section id="slide-p3a-answer-7" class="answer-slide" data-background-color="#052e0d">
+    <h2>Practice 3A — Item 7</h2>
+    <p style="font-size: 0.8em; color: #fff; margin-bottom: 0.5em;">They served Japanese tempura Mexican arroz con pollo Chinese stir-fried vegetables and American ice cream.</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up">
+            <span class="a-q">R3</span>
+            <span class="a-ans a-cor" style="color: #ffdd00;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> They served Japanese tempura, Mexican arroz con pollo, Chinese stir-fried vegetables, and American ice cream.</span>
+            <span class="a-why">4 items in a series — comma after each (R3)</span>
+        </div>
+    </div>
+    <aside class="notes">Rule 3 — series of 4 items. Oxford comma before 'and'.</aside>
+</section>
+
+<!-- SLIDE 21: Answer — Practice 3A Item 8 -->
+<!-- PEDAGOGICAL INTENT: Student sees item 8 — time signal 'First' takes a comma. -->
+<!-- WHY THIS FEATURE: Static — answer and explanation visible on slide entry. Teacher advances to the next slide. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — R1 label reinforces the time signal rule. -->
+<!-- DESIGN MECHANISM: a-q="R1". Short sentence. a-ans shows comma after 'First'. a-why: "'First' is a time signal." -->
+<section id="slide-p3a-answer-8" class="answer-slide" data-background-color="#052e0d">
+    <h2>Practice 3A — Item 8</h2>
+    <p style="font-size: 0.8em; color: #fff; margin-bottom: 0.5em;">First Nina made the rice.</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up">
+            <span class="a-q">R1</span>
+            <span class="a-ans a-cor" style="color: #ffdd00;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> First, Nina made the rice.</span>
+            <span class="a-why">'First' is a time signal — comma after it (R1)</span>
+        </div>
+    </div>
+    <aside class="notes">Rule 1 — 'First' takes a comma.</aside>
+</section>
+
+<!-- SLIDE 22: Answer — Practice 3A Item 9 -->
+<!-- PEDAGOGICAL INTENT: Student sees item 9 — 'Then' is a Rule 1 exception, no comma. -->
+<!-- WHY THIS FEATURE: Fragment fade-up reveals the exception verdict. Original sentence visible above. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the exception is noted explicitly to prevent over-application of Rule 1. -->
+<!-- DESIGN MECHANISM: a-q="Exc". a-ans shows a-inc: "No change." a-why: "'Then' is a Rule 1 exception." Contrasts with item 8 ('First' takes comma). -->
+<section id="slide-p3a-answer-9" class="answer-slide" data-background-color="#052e0d">
+    <h2>Practice 3A — Item 9</h2>
+    <p style="font-size: 0.8em; color: #fff; margin-bottom: 0.5em;">Then Keiko cooked the tempura.</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up">
+            <span class="a-q">Exc</span>
+            <span class="a-ans a-inc" style="color: #ffdd00;"><i class="fa-solid fa-times"></i> Then Keiko cooked the tempura. (no change)</span>
+            <span class="a-why">'Then' is a Rule 1 exception — no comma after Then</span>
+        </div>
+    </div>
+    <aside class="notes">Rule 1 exception — 'Then' takes no comma. Different from 'First' (item 8) which does take a comma.</aside>
+</section>
+
+<!-- SLIDE 23: Answer — Practice 3A Item 10 -->
+<!-- PEDAGOGICAL INTENT: Student sees item 10 — time signal 'After that' takes a comma. -->
+<!-- WHY THIS FEATURE: Static — answer and explanation visible on slide entry. Teacher advances to the next slide. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — R1 label reinforces the time signal rule. -->
+<!-- DESIGN MECHANISM: a-q="R1". a-ans: "After that, Tomiko prepared..." a-why: "'After that' is a time signal." -->
+<section id="slide-p3a-answer-10" class="answer-slide" data-background-color="#052e0d">
+    <h2>Practice 3A — Item 10</h2>
+    <p style="font-size: 0.8em; color: #fff; margin-bottom: 0.5em;">After that Tomiko prepared the vegetables.</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up">
+            <span class="a-q">R1</span>
+            <span class="a-ans a-cor" style="color: #ffdd00;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> After that, Tomiko prepared the vegetables.</span>
+            <span class="a-why">'After that' is a time signal — comma after it (R1)</span>
+        </div>
+    </div>
+    <aside class="notes">Rule 1 — 'After that' takes a comma.</aside>
+</section>
+
+<!-- SLIDE 24: Answer — Practice 3A Item 11 -->
+<!-- PEDAGOGICAL INTENT: Student sees item 11 — time signal 'After dinner' takes a comma. -->
+<!-- WHY THIS FEATURE: Static — answer and explanation visible on slide entry. Teacher advances to the next slide. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — R1 label reinforces the time signal rule. -->
+<!-- DESIGN MECHANISM: a-q="R1". a-ans: "After dinner, Daisy served..." a-why: "'After dinner' is a time signal." -->
+<section id="slide-p3a-answer-11" class="answer-slide" data-background-color="#052e0d">
+    <h2>Practice 3A — Item 11</h2>
+    <p style="font-size: 0.8em; color: #fff; margin-bottom: 0.5em;">After dinner Daisy served the dessert.</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up">
+            <span class="a-q">R1</span>
+            <span class="a-ans a-cor" style="color: #ffdd00;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> After dinner, Daisy served the dessert.</span>
+            <span class="a-why">'After dinner' is a time signal — comma after it (R1)</span>
+        </div>
+    </div>
+    <aside class="notes">Rule 1 — 'After dinner' takes a comma.</aside>
+</section>
+
+<!-- SLIDE 25: Answer — Practice 3A Item 12 -->
+<!-- PEDAGOGICAL INTENT: Student sees item 12 — two items, no comma needed (Rule 3 exception). -->
+<!-- WHY THIS FEATURE: Fragment fade-up reveals the exception verdict. Original sentence visible above. -->
 <!-- COGNITIVE PRINCIPLE: Signaling — the exception is noted explicitly. -->
-<!-- DESIGN MECHANISM: Item 7 uses Rule 3 (series of 4 items). Item 8 uses Rule 1 (First). Item 9 shows "(no change)" because "Then" is the exception — no comma. The reason text explains: "Rule 1 exception — then takes no comma." -->
-<section id="slide-p3a-answers-7-9" data-background-color="#0d5e1a">
-    <h2>Practice 3A — Answers (7-9)</h2>
+<!-- DESIGN MECHANISM: a-q="Exc". a-ans shows a-inc: "No change." a-why: "Only two items — no comma (R3 exception)." This reinforces the three-or-more rule. -->
+<section id="slide-p3a-answer-12" class="answer-slide" data-background-color="#052e0d">
+    <h2>Practice 3A — Item 12</h2>
+    <p style="font-size: 0.8em; color: #fff; margin-bottom: 0.5em;">The guests could choose chocolate ice cream or vanilla ice cream with chocolate sauce.</p>
     <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">7</span>
-            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check"></i> They served Japanese tempura, Mexican arroz con pollo, Chinese stir-fried vegetables, and American ice cream.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1"><strong>Rule 3 — series</strong></span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">8</span>
-            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2"><i class="fa-solid fa-check"></i> First, Nina made the rice.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2"><strong>Rule 1 — time signal</strong></span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">9</span>
-            <span class="fragment fade-up a-ans a-inc" data-fragment-index="3"><i class="fa-solid fa-times"></i> No change — <em>Then</em> no comma</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3"><strong>Rule 1 exception</strong></span>
+        <div class="a-row fragment fade-up">
+            <span class="a-q">Exc</span>
+            <span class="a-ans a-inc" style="color: #ffdd00;"><i class="fa-solid fa-times"></i> No change</span>
+            <span class="a-why">Only two items — no comma (R3 exception)</span>
         </div>
     </div>
-    <aside class="notes">Item 7: long series with 4 items. Item 8: First = comma. Item 9: Then = NO comma (the exception mentioned on the teach slide).</aside>
+    <aside class="notes">Rule 3 exception — only two items (chocolate ice cream or vanilla ice cream), no comma needed.</aside>
 </section>
 
-<!-- SLIDE 18: Answers — Practice 3A (items 10-12) -->
-<!-- PEDAGOGICAL INTENT: Student sees the final 3 items. Item 12 is the two-item exception — no comma. -->
-<!-- WHY THIS FEATURE: Fragment fade-up per row. -->
-<!-- COGNITIVE PRINCIPLE: Signaling — the final items close the set. -->
-<!-- DESIGN MECHANISM: Items 10-11 use Rule 1 (After that, After dinner). Item 12 shows "(no change)" — only two items in a series, no comma needed. The reason explains: "Only two items — Rule 3 exception." This completes the full Practice 3A answer set. -->
-<section id="slide-p3a-answers-10-12" data-background-color="#0d5e1a">
-    <h2>Practice 3A — Answers (10-12)</h2>
-    <div class="answer-list">
-        <div class="a-row">
-            <span class="a-num">10</span>
-            <span class="fragment fade-up a-ans a-cor" data-fragment-index="1"><i class="fa-solid fa-check"></i> After that, Tomiko prepared the vegetables.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="1"><strong>Rule 1 — time signal</strong></span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">11</span>
-            <span class="fragment fade-up a-ans a-cor" data-fragment-index="2"><i class="fa-solid fa-check"></i> After dinner, Daisy served the dessert.</span>
-            <span class="fragment fade-up a-why" data-fragment-index="2"><strong>Rule 1 — time signal</strong></span>
-        </div>
-        <div class="a-row">
-            <span class="a-num">12</span>
-            <span class="fragment fade-up a-ans a-inc" data-fragment-index="3"><i class="fa-solid fa-times"></i> No change — only two items</span>
-            <span class="fragment fade-up a-why" data-fragment-index="3"><strong>Rule 3 exception</strong></span>
-        </div>
-    </div>
-    <aside class="notes">Items 10-11: Rule 1 (After that, After dinner — both take commas). Item 12: chocolate ice cream or vanilla ice cream — only two items, no comma needed.</aside>
-</section>
-
-<!-- SLIDE 19: Transition — Practice 3B -->
+<!-- SLIDE 26: Transition — Practice 3B -->
 <!-- PEDAGOGICAL INTENT: Phase-change signal for the writing exercise. -->
 <!-- WHY THIS FEATURE: Static — red heading only. -->
 <!-- COGNITIVE PRINCIPLE: Coherence. -->
@@ -608,7 +641,7 @@
     <h2>Practice 3B — Your Answers</h2>
 </section>
 
-<!-- SLIDE 20: Task — Practice 3B -->
+<!-- SLIDE 27: Task — Practice 3B -->
 <!-- PEDAGOGICAL INTENT: Student sees 7 questions requiring complete sentences. Timer controls in-class work. -->
 <!-- WHY THIS FEATURE: Static + timer — instruction only. -->
 <!-- COGNITIVE PRINCIPLE: None — procedural. -->
@@ -628,7 +661,7 @@
     <aside class="notes">Students answer 7 questions with complete sentences. Start in class 5 min, finish for homework. Encourage use of commas (time signals, compound sentences, series).</aside>
 </section>
 
-<!-- SLIDE 21: Transition — Freewriting -->
+<!-- SLIDE 28: Transition — Freewriting -->
 <!-- PEDAGOGICAL INTENT: Phase-change signal for the freewriting introduction. -->
 <!-- WHY THIS FEATURE: Static — red heading only. -->
 <!-- COGNITIVE PRINCIPLE: Coherence. -->
@@ -637,12 +670,12 @@
     <h2>Freewriting</h2>
 </section>
 
-<!-- SLIDE 22: Teach — What is Freewriting? -->
+<!-- SLIDE 29: Teach — What is Freewriting? -->
 <!-- PEDAGOGICAL INTENT: Student sees the definition of freewriting and its key rules. Teacher explains the technique before the timed practice. -->
 <!-- WHY THIS FEATURE: Static — pedagogical reference. All key points visible. -->
 <!-- COGNITIVE PRINCIPLE: Pretraining — knowing the rules of freewriting before attempting it. -->
 <!-- DESIGN MECHANISM: Definition: "Write without stopping for a specific amount of time." Three rules: (1) Don't stop — keep your pencil moving, (2) Don't correct errors — fix them later, (3) Try to use compound sentences with correct commas. The third rule connects this technique to the lesson's grammar focus. The teacher demonstrates by reading the model (next slide). -->
-<section id="slide-teach-freewriting" class="pedagogical" data-background-color="#0d4a3d" data-background-transition="none">
+<section id="slide-teach-freewriting" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
     <h2>What is Freewriting?</h2>
     <p style="margin-top: 0.5em;">Write <strong>without stopping</strong> for a set time. Don't worry about errors — you can fix them later.</p>
     <p style="margin-top: 0.5em;"><strong style="color: #ffdd00;">Rules:</strong></p>
@@ -652,20 +685,7 @@
     <aside class="notes">Explain: freewriting is Step 1 of the writing process. Read the model on the next slide aloud. Then start the 10-minute timer.</aside>
 </section>
 
-<!-- SLIDE 23: Freewriting Model -->
-<!-- PEDAGOGICAL INTENT: Student sees a real freewriting sample showing the informal, flowing style. The teacher reads it aloud. -->
-<!-- WHY THIS FEATURE: Static — reference text for the teacher to read aloud. -->
-<!-- COGNITIVE PRINCIPLE: Worked Example — the model shows what freewriting output looks like. -->
-<!-- DESIGN MECHANISM: The model text from the textbook p.34 shows incomplete sentences, topic shifts, and informal language. The teacher reads it at a natural pace, demonstrating that freewriting doesn't need to be polished. The text uses "I don't know what to write about" to show that it's OK to start with uncertainty. -->
-<section id="slide-freewrite-model" data-background-color="#1a1a2e">
-    <h2 style="font-size: 1.2em;">Freewriting Model</h2>
-    <p style="font-size: 0.85em; text-align: left; color: rgba(255,255,255,0.9); font-style: italic;">"I'm supposed to freewrite for ten minutes about a memorable event in my life. I don't know what to write about. Maybe about my brother's boat accident. We were so scared. We thought he was going to drown. He was trapped under an overturned boat and didn't have any air to breathe. But it ended all right.</p>
-    <p style="font-size: 0.85em; text-align: left; color: rgba(255,255,255,0.9); font-style: italic; margin-top: 0.3em;">He was rescued and had only a broken arm. What else can I write about? Oh! I know. A day I will always remember was the day I left my country..."</p>
-    <p style="font-size: 0.85em; color: rgba(255,255,255,0.6); margin-top: 0.3em;">— From <em>Introduction to Academic Writing</em>, p.34</p>
-    <aside class="notes">Read the model aloud. Point out: incomplete sentences are OK, topic shifts are OK, writer finds a topic through writing. The goal is to keep moving.</aside>
-</section>
-
-<!-- SLIDE 24: Task — Freewriting Timer -->
+<!-- SLIDE 30: Task — Freewriting Timer -->
 <!-- PEDAGOGICAL INTENT: Student sees the freewriting prompt and timer. They write for 10 minutes without stopping. -->
 <!-- WHY THIS FEATURE: Static + timer — the timer is the key control. 600s (10 min). -->
 <!-- COGNITIVE PRINCIPLE: None — procedural. Timer enforces the time limit. -->
@@ -673,11 +693,11 @@
 <section id="slide-freewrite-task" data-background-color="#1a1a2e" data-timer="600">
     <h2>Freewriting: A Memorable Event</h2>
     <p><em>Write without stopping for 10 minutes about a memorable event in your life.</em></p>
-    <p style="font-size: 0.85em; color: rgba(255,255,255,0.85); margin-top: 0.3em;">Keep writing — don't stop to correct. Try to use compound sentences with correct commas.</p>
+    <p style="font-size: 0.85em; color: #fff; margin-top: 0.3em;">Keep writing — don't stop to correct. Try to use compound sentences with correct commas.</p>
     <aside class="notes">10 minute timer. Students freewrite on the topic. After: optional share one sentence with a partner. This freewrite is Step 1 of the writing process for the CA paragraph.</aside>
 </section>
 
-<!-- SLIDE 25: Transition — Summary -->
+<!-- SLIDE 31: Transition — Summary -->
 <!-- PEDAGOGICAL INTENT: Phase-change signal for the lesson wrap-up. -->
 <!-- WHY THIS FEATURE: Static — red heading only. -->
 <!-- COGNITIVE PRINCIPLE: Coherence. -->
@@ -686,29 +706,29 @@
     <h2>Let's Review</h2>
 </section>
 
-<!-- SLIDE 26: Summary -->
-<!-- PEDAGOGICAL INTENT: Student sees the "I can..." objectives with blue ✓ marks. Teacher elicits each point. -->
+<!-- SLIDE 32: Summary -->
+<!-- PEDAGOGICAL INTENT: Student sees the "I can..." objectives with yellow ✓ marks. Teacher elicits each point. -->
 <!-- WHY THIS FEATURE: Static — no fragments. Teacher controls pacing through elicitation. -->
 <!-- COGNITIVE PRINCIPLE: Consolidation — mirrors the objective slide verbatim for retrieval cues. -->
-<!-- DESIGN MECHANISM: The summary mirrors the objective slide exactly — same wording, same numbered structure. The only difference: yellow numbers are replaced with blue ✓ symbols. This creates a retrieval cue — the student mentally matches each "I can" to what they just learned. The teacher asks: "What are the three comma rules?" and "What is freewriting?" — active recall is the mechanism of consolidation. The bottom text connects to the next step: "Next lesson — organize your ideas and write your first draft." -->
+<!-- DESIGN MECHANISM: The summary mirrors the objective slide exactly — same wording, same numbered structure. The only difference: yellow ✓ symbols replace the numbered list. This creates a retrieval cue — the student mentally matches each "I can" to what they just learned. The teacher asks: "What are the three comma rules?" and "What is freewriting?" — active recall is the mechanism of consolidation. The bottom text connects to the next step: "Next lesson — organize your ideas and write your first draft." -->
 <section id="slide-summary" data-background-color="#1a1a2e">
     <h2>I can...</h2>
-    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">✓</span> use commas after time order signals.</p>
-    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">✓</span> use commas in compound sentences.</p>
-    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">✓</span> use commas between items in a series.</p>
-    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #4fc3f7;">✓</span> use freewriting to generate ideas.</p>
-    <p style="margin-top: 1em; color: rgba(255,255,255,0.85); font-size: 0.9em;">Next lesson: organize your ideas and write your first draft.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">✓</span> use commas after time order signals.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">✓</span> use commas in compound sentences.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">✓</span> use commas between items in a series.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">✓</span> use freewriting to generate ideas.</p>
+    <p style="margin-top: 1em; color: #fff; font-size: 0.9em;">Next lesson: organize your ideas and write your first draft.</p>
     <aside class="notes">Elicit: "Name the three comma rules." (time signals, compound sentences, series). "What is freewriting?" (writing without stopping). "Your freewrite is Step 1 of the writing process — next lesson we'll organize your ideas."</aside>
 </section>
 
-<!-- SLIDE 27: End -->
+<!-- SLIDE 33: End -->
 <!-- PEDAGOGICAL INTENT: Student sees the lesson topic with CEFR badge and a closing message. -->
 <!-- WHY THIS FEATURE: Static — exit slide. -->
 <!-- COGNITIVE PRINCIPLE: None — exit. -->
-<!-- DESIGN MECHANISM: Topic title + B1 badge + "See you next lesson!" on dark blue-gray background (#2c3e50). Clean exit with no additional text. -->
+<!-- DESIGN MECHANISM: Topic title + B2 badge + "See you next lesson!" on dark blue-gray background (#2c3e50). Clean exit with no additional text. -->
 <section id="slide-end" data-background-color="#2c3e50">
-    <h2>Comma Rules and Freewriting <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></h2>
-    <p style="font-size: 1em; color: rgba(255,255,255,0.85); margin-top: 0.5em;">See you next lesson!</p>
+    <h2>Comma Rules and Freewriting <span class="cefr-badge B2" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B2</span></h2>
+    <p style="font-size: 1em; color: #fff; margin-top: 0.5em;">See you next lesson!</p>
 </section>
 
 </div>

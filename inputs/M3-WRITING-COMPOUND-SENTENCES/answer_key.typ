@@ -27,7 +27,7 @@ The coordinating conjunctions in the story are (in order):
 5. "or" in sentence 9: _He could choose a big box, or he could choose a small one._ — comma before "or" (compound sentence)
 6. "but" in sentence 10: _...taking a big box, but he finally chose a small one._ — comma before "but" (compound sentence)
 7. "and" in sentence 13: _...he pushed several rice balls into it, and sure enough, the mice invited him in._ — comma before "and" (compound sentence)
-8. "but" in sentence 16: _...the greedy man got nothing, but he didn't even get a rice ball._ — comma before "but" (compound sentence)
+8. "so" in sentence 16: _The gold disappeared with the mice, so the greedy man got nothing, not even a rice ball._ — comma before "so" (compound sentence)
 
 == PRACTICE 2B — Simple or Compound? (items 1-10)
 
@@ -36,25 +36,25 @@ The coordinating conjunctions in the story are (in order):
   table.header[*\#*][*Simple or Compound?*][*Formula*],
   [1], [simple], [SV],
   [2], [simple], [SVV],
-  [3], [simple], [SVV],
+  [3], [simple], [SV],
   [4], [simple], [SV],
-  [5], [simple], [SVV],
+  [5], [compound], [SV, and SV],
   [6], [simple], [SVV],
-  [7], [compound], [SV, or SV],
-  [8], [simple], [SV],
-  [9], [simple], [SVV],
-  [10], [compound], [SV, so SV],
+  [7], [simple], [SV],
+  [8], [compound], [SV, or SV],
+  [9], [compound], [SV, but SV],
+  [10], [simple], [SV],
 )
 
 *Notes:*
-- Sentence 7: compound — "You can tie me with a longer rope, or you can build a special enclosure." Comma before "or."
-- Sentence 10: compound — "...very happy about this decision, but soon the enclosure seemed very small." Comma before "but."
-- Sentence 12: compound — "...decided to leave for the mountains, so she jumped out..." Comma before "so."
+- Item 5: compound — "She was often sad, and sometimes she didn't eat her food." — two clauses, different subjects. Comma needed before "and."
+- Item 8: compound — "You can tie me with a longer rope, or you can build a special enclosure for me." — two clauses. Comma needed before "or."
+- Item 9: compound — "At first, he tied her with a longer rope, but Blanchette was still sad." — two clauses, two different subjects. Comma needed before "but."
 
 *Corrected sentences with commas:*
-- 7: You can tie me with a longer rope, or you can build a special enclosure for me.
-- 10: For a while, Blanchette was very happy about this decision, but soon the enclosure seemed very small.
-- 12: One summer morning, Blanchette decided to leave for the mountains, so she jumped out of the enclosure and ran away.
+- 5: She was often sad, and sometimes she didn't eat her food.
+- 8: You can tie me with a longer rope, or you can build a special enclosure for me.
+- 9: At first, he tied her with a longer rope, but Blanchette was still sad.
 
 == PRACTICE 2C — Combining Sentences (items 1-8)
 
@@ -112,16 +112,16 @@ The coordinating conjunctions in the story are (in order):
   table.header[*\#*][*Corrected Sentence*][*Rule*],
   [1], [Daisy, Tomiko, Keiko, and Nina live near the college that they all attend.], [Rule 3 — series],
   [2], [Tomiko and Keiko are from Japan, and Nina and Daisy are from Mexico.], [Rule 2 — compound],
-  [3], [Both girls were born on June 3 on different continents.] (no change), [— no comma needed],
+  [3], [Both girls were born on June 3 on different continents. (no change)], [— no comma needed],
   [4], [Last week, the girls decided to have a joint birthday party, so they invited several friends for dinner.], [Rule 1 + Rule 2],
   [5], [Nina wanted to cook Mexican food, but Keiko wanted to have Japanese food.], [Rule 2 — compound],
   [6], [Finally, they agreed on the menu.], [Rule 1 — time signal],
   [7], [They served Japanese tempura, Mexican arroz con pollo, Chinese stir-fried vegetables, and American ice cream.], [Rule 3 — series],
   [8], [First, Nina made the rice.], [Rule 1 — time signal],
-  [9], [Then Keiko cooked the tempura.] (no change — "Then" no comma), [Rule 1 exception],
+  [9], [Then Keiko cooked the tempura. (no change — "Then" no comma)], [Rule 1 exception],
   [10], [After that, Tomiko prepared the vegetables.], [Rule 1 — time signal],
   [11], [After dinner, Daisy served the dessert.], [Rule 1 — time signal],
-  [12], [The guests could choose chocolate ice cream or vanilla ice cream with chocolate sauce.] (no change), [— only two items, no comma needed],
+  [12], [The guests could choose chocolate ice cream or vanilla ice cream with chocolate sauce. (no change)], [— only two items, no comma needed],
 )
 
 *Notes:*

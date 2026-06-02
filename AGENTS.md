@@ -228,7 +228,7 @@ The blueprint is a planning document — no HTML at this stage. Reference templa
 6. **Copy, don't invent** — use reference examples. Change content only, not structure.
 7. **Title slides**: must use `data-background-color` + `data-background-image` + `style="justify-content: center;"`. Logo 120px, h2 2.2em, CEFR badge inline in h2.
 8. **Auto-animate**: use only for structural transformations (simple→compound, error→correction). Entry = transparent borders on changed elements. Reveal = white `#fff` or yellow `#ffdd00`. Both need matching `data-auto-animate-id`.
-9. **Answer slides**: include `<style>` block with `.a-s`, `.a-v`, `.a-ls`, `.a-lv` S/V annotation classes. Each row reveals classification + formula + sentence with S/V underlines on the same `data-fragment-index`. Why column uses real sentences, not abstractions. Max 3 items.
+9. **Answer slides**: One item per slide. Show the original sentence as a `<p>` above the `answer-list`. Use `class="a-row fragment fade-up"` so the entire row reveals on one click. Include `a-q` (classification label), `a-ans` (corrected sentence, yellow `#ffdd00`), and `a-why` (explanation, white). No `a-num` span — item number goes in the `<h2>`.
 10. **DESIGN MECHANISM annotation** — Every pedagogical annotation block must now include a fourth line: `<!-- DESIGN MECHANISM: [specific design choice that makes the principle manifest — must pass the litmus test: "if I remove this mechanism, would the slide need to change?"] -->`. See `docs/pedagogical-design-dictionary.md` for the full Mechanism Rubric with principle-specific questions.
 11. **Fragments on answers only**: objectives, summaries, transitions, and strategy steps stay static.
 
@@ -248,18 +248,18 @@ If any rule is unclear, ask. Do not guess.
 - **Answer tables**: `<table class="answer-table">` with 3 columns (Statement/Answer/Why?). Add `wrap` class for tables with long text. Right column uses `white-space: normal`
 - **Table tick/cross**: middle column with `data-fragment-index` matching explanation cell for simultaneous reveal
 - **Lightbulb removed** from all answer slides (saves screen real estate)
-- **Color rule — ALL slides**: Only `#fff` (white) and `#ffdd00` (yellow) are permitted for ALL visible CSS properties — font color, borders, underlines, box-shadows, highlights. Never use `rgba(255,255,255,X)` with X < 1 — semi-transparent white creates invisible gray text at projection distance. No colored underlines, no blue/orange/green annotation colors — differentiate via style (solid vs dashed), font size, or symbols (❌/✅) instead. This applies to every slide background (#1a1a2e, #052e0d, #1a237e, #c0392b). The template's `.aim-label` uses gray `#888` by default and must be overridden with `#fff` on all slides.
+- **Color rule — ALL slides**: Only `#fff` (white) and `#ffdd00` (yellow) are permitted for ALL visible CSS properties — font color, borders, underlines, highlights. Never use `rgba(255,255,255,X)` with X < 1 — semi-transparent white creates invisible gray text at projection distance. No colored underlines, no blue/orange/green annotation colors — differentiate via style (solid vs dashed), font size, or symbols (❌/✅) instead. This applies to every slide background (#1a1a2e, #052e0d, #1a237e, #c0392b). The template's `.aim-label` uses gray `#888` by default and must be overridden with `#fff` on all slides. **No `box-shadow` on any slide except title slides** (where text-shield uses it, but only as an implementation detail — avoid explicit box-shadow in inline styles). Use `border-bottom: 4px solid #fff` or `4px solid #ffdd00` for emphasis instead.
 - **Pedagogical background**: `data-background-color="#1a237e"` + `class="pedagogical"` + `data-background-transition="none"`
-- **Max 3 items per answer slide** — whether using answer-list flex layout or inline annotations. Split exercises with >3 items across multiple slides.
+- **One item per answer slide** — When each answer has a Why explanation, use exactly one `a-row` per slide. The item number goes in the `<h2>` heading. Do not use `a-num` spans. The entire row (label + answer + why) reveals on one click via `class="a-row fragment fade-up"`.
 - **Inline S/V/O annotations** — for grammar identification exercises (subjects, verbs, objects), decorate words directly on the sentence rather than using a separate answer column. Use `class="fragment custom svo-s"`, `svo-v`, `svo-o` on `<span>` elements with CSS controlling border/color changes on `.visible`. Superscript labels (`<sup>S</sup>`, `<sup>V</sup>`, `<sup>O</sup>`) use `opacity: 0` → `opacity: 1` with CSS transitions. Use `data-fragment-index` to group each sentence's decorations and confirmation note for per-click reveal.
 - **Custom fragments** — use `class="fragment custom"` when you need an element to stay fully visible but change specific CSS properties (border, color, opacity) on click. The `custom` keyword prevents reveal.js from applying default `opacity: 0; visibility: hidden`. All styling is controlled via CSS rules on `.fragment.custom.*` (default state) and `.fragment.custom.*.visible` (revealed state). Common use: annotations that animate in without hiding the underlying text.
-- **Title slide layout** — Full-screen Pixabay background image using `data-background-image` with `data-background-color="#1a1a2e"` as fallback. Logo at `120px` (not 78px — too small on 1280x720). h2 at `2.2em` (not default ~1.6em). CEFR badge inline inside h2 with `vertical-align: middle`. Subheader at `1em` (not 0.7em). Opacity at `0.85` (not 0.7 — too dim). **CRITICAL:** Must add `style="justify-content: center;"` to the section — reveal.js defaults to `flex-start`, pushing content to the top of the slide. Both `data-background-color` AND `data-background-image` are required (background-color shows while image loads). Do NOT use `r-stack` for title slides — it creates a letterbox effect.
+- **Title slide layout** — Full-screen Pixabay background image using `data-background-image` with `data-background-color="#1a1a2e"` as fallback. Logo at `120px` (not 78px — too small on 1280x720). h2 at `2.2em` (not default ~1.6em). CEFR badge inline inside h2 with `vertical-align: middle`. Subheader at `1em` (not 0.7em). **ALL title text (h2, subtitle) MUST use `class="text-shield"`** for readability against the image — this applies a semi-transparent dark background behind the text instead of dimming the entire image. No `data-background-opacity` needed (image stays at full brightness). **CRITICAL:** Must add `style="justify-content: center;"` to the section — reveal.js defaults to `flex-start`, pushing content to the top of the slide. Both `data-background-color` AND `data-background-image` are required (background-color shows while image loads). Do NOT use `r-stack` for title slides — it creates a letterbox effect.
 - **Font size minimums for readability** — On 1280x720 slides: main sentence text `1.2em`, labels/annotations `0.9em`, faded "before" comparison text `1em`. Never go below `0.85em` for any text. The default reveal.js base sizes assume desktop presentation — ESL students at projection distance need larger. Differentiate faded "before" text via font size or a ❌ mark, never via opacity.
-- **Why column on every answer row** — Every answer slide must include `class="a-why"` with a short explanation text (coordinator meaning, grammar rule, error type). The `a-why` class is defined in the base template CSS. Use `fragment fade-up` matching the answer cell's `data-fragment-index` so answer + explanation reveal simultaneously.
+- **Why column on every answer row** — Every answer slide must include `class="a-why"` with a short explanation text (coordinator meaning, grammar rule, error type). The `a-why` class is defined in the base template CSS. Use `class="a-row fragment fade-up"` on the row div so the entire row (label, answer, why) reveals on one click — NOT per-span fragments.
 - **Demo slide before freer practice** — Before any freer practice task (e.g. Practice 2C, 10A), include a pedagogical demo slide. The teacher walks through ONE item step by step (Step 1: identify relationship, Step 2: choose coordinator, Step 3: combine) so students see the reasoning chain before attempting independently.
 - **Lead-in error slides** — Each error gets a 2-slide auto-animate pair: Entry shows the error with transparent borders on problem words. Reveal shows the original (at a smaller font size or with ❌ mark) and the corrected version in `#ffdd00` yellow with white underlines on fix words. Label line tells what type of error it is. Do NOT use opacity < 1 on the original text — it creates invisible gray text. Differentiate via font size or a visible ❌ mark instead. All borders/underlines must be white (`#fff`) — use style (dashed vs solid) for differentiation if needed.
 - **Diagnostic tests max 3 items per slide** — Split diagnostic tests across multiple slides (e.g. `slide-diagnostic-1-3`, `slide-diagnostic-4-6`). Add answer fragments below the questions with the correct coordinator and a Why explanation. Timer on each slide.
-- **Formula reveals: 2-slide auto-animate pair** — When demonstrating a structural transformation (simple→compound, wrong→right): Entry shows both versions with transparent borders on CHANGED elements. Reveal changes borders to `#fff` white + `box-shadow: 0 3px 0 0 #ffdd00` for a visual double-underline effect (yellow shadow, white border). Both need `data-auto-animate` with matching `data-auto-animate-id`. Key elements need matching `data-id` on both slides.
+- **Formula reveals: 2-slide auto-animate pair** — When demonstrating a structural transformation (simple→compound, wrong→right): Entry shows both versions with transparent borders on CHANGED elements. Reveal changes borders to `#fff` white `border-bottom: 4px solid #fff` for a thick underline effect. Both need `data-auto-animate` with matching `data-auto-animate-id`. Key elements need matching `data-id` on both slides.
 
 ## Pedagogical Strategy Slides — Design Principles
 
@@ -337,7 +337,7 @@ Requirements:
 For grammar lead-in slides where you want to demonstrate subjects (S), verbs (V), and objects (O) on a single sentence, use the same two-slide auto-animate pattern but with THREE simultaneous annotations:
 
 - **Subject**: `border-bottom: 2px solid #fff` (white solid underline) + `<sup style="opacity:0">S </sup>` → `opacity:1; color:#ffdd00`
-- **Verb**: `border-bottom: 3px solid #ffdd00` (yellow, heavier) + `box-shadow: 0 5px 0 0 #ffdd00` (visual double underline) + `<sup>V </sup>`
+- **Verb**: `border-bottom: 4px solid #ffdd00` (yellow, thick) + `<sup>V </sup>`
 - **Object**: `border: 2px solid #fff` (white box) + `<sup>O </sup>`
 
 Pattern:
@@ -365,7 +365,7 @@ Pattern:
         <span data-id="subject" style="border-bottom: 2px solid #fff;">
             <sup style="color:#ffdd00;">S </sup>My roommate
         </span>
-        <span data-id="verb" style="border-bottom: 3px solid #ffdd00; box-shadow: 0 5px 0 0 #ffdd00;">
+        <span data-id="verb" style="border-bottom: 4px solid #ffdd00;">
             <sup style="color:#fff;">V </sup>lost
         </span>
         <span data-id="object" style="border: 2px solid #fff; padding: 0 4px; border-radius: 4px;">
@@ -393,7 +393,9 @@ Do not use `margin-top: -X%` — it pushes content off-screen. A small positive 
 
 ## Slide Icons
 
-Icons are no longer used on slides — they were removed to save screen real estate. All `<i class="fa-solid fa-... slide-icon ...">` elements and their associated CSS (`.slide-icon`, `.transition-icon`, `.pedagogical-icon`, `.objective-icon`) have been removed from all slide templates and the base template. The Font Awesome CDN link may remain in the base template for backwards compatibility but is not actively used. Do not add icons to any slide.
+Decorative slide icons (`.slide-icon`, `.transition-icon`, `.pedagogical-icon`, `.objective-icon`) have been removed from all slide templates and the base template — they wasted screen real estate. Do not add decorative icons to any slide.
+
+**Font Awesome IS still used for functional answer markers** — `<i class="fa-solid fa-check">` for correct answers and `<i class="fa-solid fa-times">` for incorrect answers on answer slides. These are functional indicators, not decorative icons. Never use raw Unicode check/cross characters (U+2713/U+2717) — Font Awesome renders reliably across all browsers and projection systems.
 
 ## Dependencies
 
@@ -454,7 +456,17 @@ windows_path = url.replace("/", "\\")
 path = Path(windows_path)
 ```
 
-## Slide Editing Workflow
+### Pre-build Linter
+
+Before running `revealjs-validator`, run the design-rule linter:
+
+```bash
+python scripts/lint_slides.py --project "output/<subfolder>/slides/"
+```
+
+This checks for banned colors (old teal/green/blue/orange), `text-shadow` CSS, `box-shadow`, and answer-slide structural violations (bundled items, missing original sentence, per-span fragments). Fix any errors before running the validator.
+
+# Slide Editing Workflow
 
 When the user asks to edit a slide at a reveal.js URL (e.g., `index.html#/7`):
 

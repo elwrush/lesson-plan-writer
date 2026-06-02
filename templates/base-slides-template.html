@@ -134,17 +134,6 @@
             .reveal .vocab-word {
                 color: #ffdd00;
                 font-weight: bold;
-                text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-            }
-
-            /* --- Pedagogical strategy slides (teal background) --- */
-            .reveal section.pedagogical { text-shadow: none; }
-            .reveal section.pedagogical p,
-            .reveal section.pedagogical li,
-            .reveal section.pedagogical h1, .reveal section.pedagogical h2,
-            .reveal section.pedagogical h3, .reveal section.pedagogical h4,
-            .reveal section.pedagogical h5, .reveal section.pedagogical h6 {
-                text-shadow: none;
             }
             .reveal section.pedagogical h2 {
                 color: #fff;
@@ -166,14 +155,6 @@
                 padding: 0.4em 0.6em;
                 border-radius: 4px;
                 border-left: 3px solid rgba(255,255,255,0.4);
-            }
-
-            /* --- Global text shadow for readability --- */
-            .reveal p,
-            .reveal li,
-            .reveal h1, .reveal h2, .reveal h3,
-            .reveal h4, .reveal h5, .reveal h6 {
-                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
             }
 
             /* --- Text shield for full-opacity image backgrounds --- */
@@ -321,9 +302,10 @@
                      - h2 2.2em (not default ~1.6em)
                      - CEFR badge inline in h2 with vertical-align: middle
                      - Subheader 1em (not 0.7em)
-                     - data-background-opacity 0.85 (not 0.7)
+                     - When using data-background-image, do NOT use data-background-opacity — use class="text-shield" on h2 and p instead
+                     - Both data-background-color AND data-background-image required (color shows while image loads)
                 --▶
-                <section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/background.jpg" data-background-opacity="0.85" style="justify-content: center;">
+                <section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/background.jpg" style="justify-content: center;">
                     <img src="assets/logo.png" style="height: 120px; margin: 0 auto 0.5em; display: block;" alt="ACT" />
                     <h2 style="font-size: 2.2em;">Lesson Topic <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></h2>
                     <p style="font-size: 1em; color: #fff; margin-top: 0.5em;">Brief subtitle</p>
@@ -351,7 +333,7 @@
                 <!-- ── LEAD-IN ERROR (auto-animate pair) ────────────────────────
                      PURPOSE: Show a real student error, then reveal the correction.
                      Entry: error with transparent borders on wrong words.
-                     Reveal: error dimmed, correction appears with blue underlines.
+                     Reveal: error dimmed, correction appears with white/yellow underlines.
                 --▶
                 <section id="slide-leadin1-entry" data-auto-animate data-auto-animate-id="leadin1" data-background-color="#1a1a2e">
                     <div style="overflow: hidden;">
@@ -376,7 +358,10 @@
                 <!-- ── DIAGNOSTIC TEST (auto-animate, 3 items) ──────────────────
                      PURPOSE: Assess before teaching. Split to 3 items max per pair.
                      Entry: original pairs with transparent border on period.
-                     Reveal: period morphs to comma+coordinator with blue underline.
+                     Reveal: period morphs to comma+coordinator with white underline.
+                     NOTE: For answer reveal after the timer, use inline fragments
+                     (one per item showing correction beneath original) instead of
+                     a second auto-animate slide — see M3 L1 diagnostic pattern.
                 --▶
                 <section id="slide-diagnostic-1-3" data-auto-animate data-auto-animate-id="diag1" data-background-color="#1a1a2e" data-timer="180">
                     <div style="overflow: hidden;">
@@ -398,7 +383,7 @@
                 <!-- ── PEDAGOGICAL KEY RULE (with auto-animate) ─────────────────
                      PURPOSE: Demonstrate a structural transformation (simple→compound).
                      Entry: transparent borders on NEW elements.
-                     Reveal: blue underlines + box-shadow on the NEW elements.
+                     Reveal: thick white underlines on the NEW elements.
                 --▶
                 <section id="slide-rule-entry" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="rule">
                     <div style="overflow: hidden;">
@@ -415,7 +400,7 @@
                         <p><u><strong>Version 1:</strong> description</u></p>
                         <p data-id="vers1" style="color: #fff; font-size: 0.95em;">Example without the new element.</p>
                         <p style="margin-top: 0.4em;"><u><strong>Version 2:</strong> description</u></p>
-                        <p data-id="vers2" style="color: #ffdd00; font-size: 0.95em;">Example with <span data-id="new" style="border-bottom: 2px solid #fff; box-shadow: 0 3px 0 0 #ffdd00;">new element</span>.</p>
+                        <p data-id="vers2" style="color: #ffdd00; font-size: 0.95em;">Example with <span data-id="new" style="border-bottom: 4px solid #ffdd00;">new element</span>.</p>
                     </div>
                 </section>
 
@@ -478,35 +463,48 @@
                     <p style="margin-top: 0.5em; color: #ffdd00;"><strong>Example:</strong> "Example demonstrating the strategy."</p>
                 </section>
 
-                <!-- ── ANSWER SLIDE (answer-list, max 3 items, with Why) ───────
-                     Use for: simple answer reveals (T/F, MC, comprehension Qs)
+                <!-- ── ANSWER SLIDE (one per item, with original sentence) ───
+                     AUTHORITATIVE PATTERN — use for ALL answer slides.
+                     
                      CRITICAL RULES:
-                     - data-background-color="#052e0d" (dark green — NOT #1e7e34)
-                     - Max 3 items per slide
-                     - <style> block sets .a-why flex
-                     - Each row: formula/answer (fragment fade-up) + Why (fragment fade-up, same index)
-                     - ALL text white #fff or yellow #ffdd00 — NO gray
+                     - One item per slide (NEVER bundle multiple a-rows)
+                     - Original sentence shown as <p> above the answer-list
+                     - No <span class="a-num"> — item number is in the <h2>
+                     - fragment fade-up on the a-row div (entire row reveals at once)
+                     - a-ans text in yellow #ffdd00 (both the text AND the FA icon)
+                     - a-why explanation in white #fff (matches M3 L1 production)
+                     - class="answer-slide" on the section
+                     - data-background-color="#052e0d"
                 --▶
-                <section id="slide-practice-answers-1-3" data-background-color="#052e0d" data-background-transition="none">
-<style>
-    .reveal .answer-list { width: 100%; font-size: 0.85em; }
-    .reveal .a-row { display: flex; align-items: baseline; padding: 0.4em 0; border-bottom: 1px solid #fff; gap: 0.5em; }
-    .reveal .a-row:last-child { border-bottom: none; }
-    .reveal .a-num { flex: 0 0 1.2em; text-align: left; color: #fff; font-size: 0.85em; }
-    .reveal .a-q { flex: 0 0 4em; min-width: 0; }
-    .reveal .a-ans { flex: 0 1 auto; min-width: 0; text-align: left; padding: 0.1em 0.3em; border-radius: 4px; }
-    .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
-    .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #ffdd00; font-size: 0.75em; }
-    .reveal section.pedagogical { align-self: flex-start; margin-top: 0; padding-top: 30px; }
-    .reveal .aim-label { color: #fff; }
-</style>
-    <h2 style="font-size: 0.85em;">Practice N — Answers (1–3)</h2>
-    <div class="answer-list">
-        <div class="a-row"><span class="a-num">1.</span><span class="a-q">label</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">answer</span><span class="fragment fade-up a-why">Explanation</span></div>
-        <div class="a-row"><span class="a-num">2.</span><span class="a-q">label</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">answer</span><span class="fragment fade-up a-why">Explanation</span></div>
-        <div class="a-row"><span class="a-num">3.</span><span class="a-q">label</span><span class="fragment fade-up a-ans a-cor" style="color: #ffdd00;">answer</span><span class="fragment fade-up a-why">Explanation</span></div>
-    </div>
-</section>
+                <section id="slide-practice-answer-N" class="answer-slide" data-background-color="#052e0d">
+                    <h2>Practice N — Item N</h2>
+                    <p style="font-size: 0.8em; color: #fff; margin-bottom: 0.5em;">Original sentence here.</p>
+                    <div class="answer-list">
+                        <div class="a-row fragment fade-up">
+                            <span class="a-q">R3</span>
+                            <span class="a-ans a-cor" style="color: #ffdd00;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> Corrected sentence with commas.</span>
+                            <span class="a-why">Explanation of the rule applied.</span>
+                        </div>
+                    </div>
+                    <aside class="notes">Teacher notes for this item.</aside>
+                </section>
+
+                <!-- ── ANSWER SLIDE (no-change variant) ───────────────────────
+                     Use when the answer is "no change" (no comma/correction needed).
+                     Uses a-inc instead of a-cor, fa-times instead of fa-check.
+                --▶
+                <section id="slide-practice-answer-N" class="answer-slide" data-background-color="#052e0d">
+                    <h2>Practice N — Item N</h2>
+                    <p style="font-size: 0.8em; color: #fff; margin-bottom: 0.5em;">Original sentence with no error.</p>
+                    <div class="answer-list">
+                        <div class="a-row fragment fade-up">
+                            <span class="a-q">Exc</span>
+                            <span class="a-ans a-inc" style="color: #ffdd00;"><i class="fa-solid fa-times"></i> No change</span>
+                            <span class="a-why">Explanation why no comma needed.</span>
+                        </div>
+                    </div>
+                    <aside class="notes">Teacher notes for this item.</aside>
+                </section>
 
                 <!-- ── ANSWER SLIDE (both methods, one per item) ──────────────
                      Use for: error-correction exercises where students need to see

@@ -8,7 +8,7 @@
     "lesson_plan":  {
                         "shape":  "C",
                         "shape_name":  "Test-Teach-Test",
-                        "cefr_level":  "B1",
+                        "cefr_level":  "B2",
                         "class":  "M3-3A",
                         "stages":  [
                                        {
@@ -63,7 +63,7 @@
                     },
     "transcript":  "none",
     "answer_key":  "C:\\PROJECTS\\LESSON-PLAN-WRITER-3\\inputs\\M3-WRITING-COMPOUND-SENTENCES\\answer_key.typ",
-    "cefr_level":  "B1",
+    "cefr_level":  "B2",
     "class":  "M3-3A",
     "slideshow_url":  "https://elwrush.github.io/lesson-plan-writer/M3-WRITING-COMPOUND-SENTENCES/"
 }

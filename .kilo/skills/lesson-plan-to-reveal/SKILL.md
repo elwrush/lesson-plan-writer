@@ -17,7 +17,9 @@ Convert a lesson plan JSON into a reveal.js slideshow for ESL classroom delivery
 
 **Pre-generation ritual — mandatory before Step 0:**
 
-Open `templates/reference-slideshow.html` in a browser and scroll through EVERY slide type. This is a complete working slideshow with verified HTML patterns for every slide type (title, lead-in, diagnostic, teach, auto-animate pairs, strategy, task, answer with S/V annotations, summary, end). Identify which types you need for the current lesson. Copy the pattern, change only the content.
+1. Open `templates/reference-slideshow.html` in a browser and scroll through EVERY slide type. This is a complete working slideshow with verified HTML patterns for every slide type (title, lead-in, diagnostic, teach, auto-animate pairs, strategy, task, answer with S/V annotations, summary, end). Identify which types you need for the current lesson. Copy the pattern, change only the content.
+
+2. **Cross-lesson dedup check**: Read `lesson_plan.stages[].procedure` for every stage. For any exercise referenced by name (e.g., "Practice 2D"), search the `output/` directory for OTHER lesson plan JSONs that reference the same exercise. If the exercise was already assigned in a prior lesson, flag it to the user — do NOT build duplicate slides unless the user explicitly confirms.
 
 **The lesson plan JSON is the SOLE AUTHORITY for WHAT to teach. Everything else is HOW to present it.**
 
@@ -117,10 +119,10 @@ The template's base answer-list CSS provides structural layout (flex, alignment)
 **Title slides: use `data-background-image` with `data-background-color` (NOT `r-stack`).** The `r-stack` approach creates a letterbox effect (content compressed into the middle). Use both background attributes plus `style="justify-content: center;"` to vertically center content:
 
 ```html
-<section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/photo.jpg" data-background-opacity="0.85" style="justify-content: center;">
+<section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/photo.jpg" data-background-size="cover" style="justify-content: center;">
     <img src="assets/logo.png" style="height: 120px; margin: 0 auto 0.5em; display: block;" alt="ACT" />
-    <h2 style="font-size: 2.2em;">Topic Title <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></h2>
-    <p style="font-size: 1em; color: rgba(255,255,255,0.9); margin-top: 0.5em;">Subheader</p>
+    <h2 style="font-size: 2.2em;"><span class="text-shield">Topic Title <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></span></h2>
+    <p style="font-size: 1em; margin-top: 0.5em;"><span class="text-shield">Subheader</span></p>
 </section>
 ```
 
@@ -130,7 +132,7 @@ The template's base answer-list CSS provides structural layout (flex, alignment)
 
 | Scenario | Approach | Why |
 |---|---|---|
-| Title slide with full-bleed image | `data-background-image` + `data-background-color` + `justify-content: center` | Full edge-to-edge image; no letterbox; text is centered |
+| Title slide with full-bleed image | `data-background-image` + `data-background-color` + `text-shield` + `justify-content: center` | Full edge-to-edge image; no letterbox; text-shield keeps image at full opacity |
 | Vocabulary/lead-in with image | `data-background-image` + `text-shield` | Image fills slide edge-to-edge; text needs shield for readability |
 | Image fills remaining space after title | `r-stretch` on `<img>` | Responsive; title stays at top, image fills middle, caption at bottom |
 | Stacking elements on top of each other | `r-stack` + fragments | Reveal images one at a time, or layer text over image |
@@ -432,7 +434,7 @@ If you catch yourself writing annotation lines that are identical across multipl
 | `PEDAGOGICAL INTENT` | What the student MUST SEE HAPPEN on screen | `Student sees the error sentence transform into a correct one. The added comma+coordinator animates in with a blue border.` |
 | `WHY THIS FEATURE` | Which reveal.js feature + why alternatives fail | `Auto-animate morphs WRONG to RIGHT across two slides; fragments would hide the original, losing the comparison.` |
 | `COGNITIVE PRINCIPLE` | Name from Mayer's 12 (Signaling, Segmenting, Spatial Contiguity, Coherence, Temporal Contiguity, Modality) or explain why none applies | `Temporal Contiguity — both versions visible simultaneously; the animated border signals exactly what changed.` |
-| `DESIGN MECHANISM` | Concrete design choice that operationalizes the principle on THIS specific slide | `The period between sentences is wrapped in a transparent-border span that reserves layout space. On reveal, it morphs to comma+coordinator with a blue double-underline. Without the reserved space, the morph would cause line jump, breaking contiguity.` |
+| `DESIGN MECHANISM` | Concrete design choice that operationalizes the principle on THIS specific slide | `The period between sentences is wrapped in a transparent-border span that reserves layout space. On reveal, it morphs to comma+coordinator with a thick yellow underline (`4px solid #ffdd00`). Without the reserved space, the morph would cause line jump, breaking contiguity.` |
 
 For the feature choice in `WHY THIS FEATURE`, pick from: `auto-animate`, `fragments`, `sibling slides`, `data-line-numbers`, `data-mark`, `data-transition`, `data-background-gradient`, `vertical slides`, `audio`, `autoslide`, `code blocks`, `lightbox`, `r-fit-text`, `r-stack`, `r-stretch`, `custom-fragment`, `nested-fragment`, or `static — [reason]`.
 
@@ -505,7 +507,7 @@ Instead, use the **splice approach**:
 
 **Why this works:**
 - The Write tool call writes to the allowed `C:\Users\elwru\AppData\Local\Temp\kilo\` directory (no permission issues)
-- Python handles UTF-8 cleanly (no BOM, no PowerShell encoding corruption)
+**CRITICAL — PowerShell `-replace` destroyes UTF-8.** PowerShell `-replace` on HTML files with non-ASCII characters (em dashes —, curly quotes "", apostrophes ', accented letters) silently corrupts them. The mismatch between .NET's UTF-16 and the file's UTF-8 produces bytes like `0x97` that break Python decoders. **Never use PowerShell `-replace` for HTML content modifications.** Write a Python script to `C:\Users\elwru\AppData\Local\Temp\kilo\` and execute it instead — Python handles UTF-8 natively and its `re.sub()` matches exactly what the HTML contains.
 - The splice is deterministic — finds `<div class="slides">` then anchors on `<!-- Mark.js` to locate the correct closing `</div>`. Never uses `template.find("</div>")` directly — the sections themselves contain `</div>` in answer-list flex rows (`<div class="a-row">...</div>`), and naive `</div>` search causes silent truncation to ~6 slides.
 - No size limit concerns — sections and template are written separately
 
@@ -513,10 +515,39 @@ The boilerplate (everything before `<div class="slides">` and everything after t
 
 #### C. Editing an existing slideshow
 
-When the user asks to modify an already-built slideshow (e.g., "change slide 7" or "add a new slide after the vocabulary"):
-1. Read the current `index.html`.
-2. Use the `Edit` tool for targeted incremental changes.
-3. Use `scripts/locate_slide.py` to find the exact line numbers.
+**Editing an existing slideshow is fundamentally different from building one from scratch.** Existing slideshows may contain legacy patterns (old color schemes, stale CSS, bundled answer slides, incorrect annotations) that must be audited before any changes are made.
+
+##### Phase 1: Pre-edit audit (MANDATORY)
+
+Before touching any HTML, run this audit checklist:
+
+1. **Read the lesson plan JSON** — this is the SOLE authority for what content should exist. Identify every stage and exercise.
+2. **Count slides** — use `grep '<section ' index.html` to get the total. Verify against expected count from stage mapping.
+3. **Scan for legacy colors** — `#4fc3f7` (blue), `#ff8a65` (orange), `#0d4a3d` (old teal), `#0d5e1a` (old green), `#4caf50` (green checkmark) are all deprecated. If any exist, note them for a batch color fix pass.
+4. **Check answer slide sizing** — count `a-row` items per answer slide. Any slide with >1 `a-row` violates the one-per-item rule.
+5. **Check for box-shadow** — `grep "box-shadow"` on the file. Except title slides, all must be removed.
+6. **Check for text-shadow** — `grep "text-shadow"` on the CSS. Must be none.
+7. **Scan auto-animate IDs** — ensure each `data-auto-animate-id` appears exactly twice (entry + reveal) and pairs are adjacent siblings.
+
+Create a task list from the audit findings before proceeding to Phase 2.
+
+##### Phase 2: Edit strategy
+
+1. **Git safety first** — run `git status` to check for uncommitted changes. If the working tree is dirty, either commit or `git stash` before editing. This gives you a clean rollback point via `git checkout -- <file>` without losing unrelated work.
+2. **Batch edits by type** — never mix edit types. Process in this order:
+   - Global color replacements (CSS, background colors, badge levels)
+   - Structural changes (adding/removing slides, splitting bundles, replacing auto-animate patterns)
+   - Content corrections (answer text, Why columns, original sentences)
+   - Comment updates (stale slide numbers, DESIGN MECHANISM annotations)
+3. **Use Python for bulk changes** — for any change that affects more than 3 locations, write a Python script to `C:\Users\elwru\AppData\Local\Temp\kilo\` and execute it. Do NOT use PowerShell `-replace` — it corrupts Unicode.
+4. **Verify after each batch** — run `npx revealjs-validator --project "output/{subfolder}/slides/"` after each batch. If it fails, the last batch introduced an error — fix before proceeding.
+
+##### Phase 3: Targeted edits
+
+When the user asks to modify a specific slide:
+1. Use `scripts/locate_slide.py` to find the exact line numbers by slide ID.
+2. Use the `Edit` tool for targeted changes — ideally one edit per slide.
+3. **Never use large replace-all when a targeted edit will do.** Large oldString replacements are fragile: whitespace differences, encoding mismatches, or partial matches can leave orphan content in the file.
 
 **Rule**: Every slide is a raw `<section>` element inside `<div class="slides">`.
 
@@ -569,7 +600,7 @@ if idx >= 0:
 - Verify answer slides use `a-cor`/`a-inc` (NOT `answer-correct`/`answer-incorrect`, NOT `highlight-green`/`highlight-red`)
 - Verify answer slides use `fragment fade-up` (not bare `fragment`) on answer spans
 - Verify answer slides use `<div class="answer-list">` flex layout, not `<table class="answer-table">`
-- **Answer list sizing**: Count item rows per answer-list. Max 3 items per answer slide. Flag any slide with >3. Split exercises with >3 items across multiple slides (e.g., `slide-ex2-answers-1-3`, `slide-ex2-answers-4-5`).
+- **Answer list sizing**: Count item rows per answer-list. Max 3 items per answer slide. **However, when each item has a Why explanation (full sentence or grammatical rule), use ONE item per slide** — the combination of sentence text + answer (+ S/V annotation where applicable) + Why explanation is too much for more than one item. Split exercises with >3 items across multiple slides (e.g., `slide-ex2-answers-1-3`, `slide-ex2-answers-4-5`), and use one-per-item for any exercise where answers include explanations.
 - **Both-methods answer slides**: Verify each slide uses `class="answer-slide"` on `<section>` — without it, global text-shadow creates a blurry look on green backgrounds.
 - **Both-methods answer slides**: Verify `.cor-add` spans exist on added/changed text — without them, students can't see what was modified. Check `border-bottom: 3px solid #fff` in the CSS.
 - **Both-methods answer slides**: Verify each error-type slide has BOTH `.p11-method` blocks (M1 + M2), and correct-item slides have exactly one "No fix needed" block.
@@ -640,7 +671,7 @@ Every slide block must be preceded by a FOUR-line comment block explaining the p
 <!-- PEDAGOGICAL INTENT: Student sees the subject word transform from white to yellow. -->
 <!-- WHY THIS FEATURE: Auto-animate transforms appearance; fragments only reveal/hide. -->
 <!-- COGNITIVE PRINCIPLE: Signaling + Temporal Contiguity — highlighting essential material while the label appears simultaneously improves transfer. -->
-<!-- DESIGN MECHANISM: The subject word has a transparent underline on entry (reserving layout space). On reveal, the underline becomes #ffdd00 yellow with a box-shadow double-underline — the eye tracks the color transition, which IS the subject identification. Without the transparent pre-reserved space, the underline would appear abruptly, causing layout shift. -->
+<!-- DESIGN MECHANISM: The subject word has a transparent underline on entry (reserving layout space). On reveal, the underline becomes #ffdd00 yellow with a thick underline (`4px solid #ffdd00`) — the eye tracks the color transition, which IS the subject identification. Without the transparent pre-reserved space, the underline would appear abruptly, causing layout shift. -->
 ```
 
 The annotation must state:
@@ -657,6 +688,8 @@ See `docs/pedagogical-design-dictionary.md` for the full anti-patterns table. Ke
 - `highlight-green`/`highlight-red` — use `a-cor`/`a-inc` with `fragment fade-up` instead
 - Putting the answer in the slide title — use a separate answer slide after the task slide
 - Instructional text like "Click to check" on auto-animate reveals — the visual transformation IS the answer, no instruction needed
+- **Guessing the slide pattern instead of reading the reference** — if you are tempted to write a `<section>` without first reading the closest matching pattern in `templates/reference-slideshow.html` or `templates/base-slides-template.html`, stop. The correct pattern already exists. Reading it takes 30 seconds. Guessing and redoing takes 30 minutes.
+- **Editing without auditing first** — modifying an existing slideshow without running the pre-edit audit (see Section C, Phase 1) guarantees missed legacy patterns and duplicated work.
 
 ## Slide Type Templates
 
@@ -735,10 +768,15 @@ Use kebab-case names matching the slide function (e.g., `slide-title`, `slide-ob
 Rules 0–15 covering colors, layout, backgrounds, fragments, annotations, and file output. See `references/key-design-rules.md` for the complete reference. Critical rules to remember:
 
 - **Rule 0 — No gray text.** Only `#fff` and `#ffdd00` on all backgrounds. No green, blue, red, or gray text.
-- **Rule 7 — Answer slides**: `<div class="answer-list">` flex layout, `a-cor`/`a-inc` with `fragment fade-up`, max 3 items. Never use `highlight-green`/`highlight-red`.
+- **Rule 7 — Answer slides**: Use one `a-row` per slide (NEVER bundle multiple items). Show the original sentence as a `<p>` above the `answer-list`. No `<span class="a-num">` — the item number goes in the `<h2>`. Use `class="a-row fragment fade-up"` on the row div so the entire row (label + answer + why) appears on one click. `a-ans` text must be yellow `#ffdd00` (both text and FA icon). `a-why` remains white `#fff`. Never use `highlight-green`/`highlight-red`.
 - **Rule 9 — Backgrounds**: dark `#1a1a2e` (title/lead-in), red `#c0392b` (transitions), teal `#1a237e` (pedagogical), green `#052e0d` (answers), `#2c3e50` (end).
-- **Rule 10 — Title slides**: `justify-content: center;`, logo 120px, h2 2.2em, CEFR badge inline.
+- **Rule 10 — Title slides**: `justify-content: center;`, logo 120px, h2 2.2em, CEFR badge inline. When using `data-background-image`, do NOT use `data-background-opacity` — add `class="text-shield"` to all text elements instead.
 - **Rule 15 — Symbols**: Font Awesome only (`<i class="fa-solid fa-check">` / `<i class="fa-solid fa-times">`). Never raw Unicode U+2713/U+2717.
+- **Rule 16 — One per item**: When each answer has a Why explanation, use exactly one `a-row` per slide. Do not bundle multiple items even if the max-3 limit permits it. The heading must say "Practice N — Item N", not "Practice N — Answers (1-3)".
+- **Rule 17 — Answer text verbatim**: Every corrected sentence in an answer slide must exactly match the answer key. No truncation, no paraphrasing. Read the `.typ` file and copy the corrected text character by character.
+- **Rule 18 — Whole-row fragment**: Use `class="a-row fragment fade-up"` on the `<div class="a-row">`, not on individual spans. The entire row (label + answer + explanation) appears on one click.
+- **Rule 19 — Original sentence on answer slides**: Always show the original (uncorrected) sentence as `<p style="font-size: 0.8em; color: #fff; margin-bottom: 0.5em;">` above the answer-list. Students need to compare original vs corrected.
+- **Rule 20 — No text-shadow**: The global `text-shadow` CSS block is removed from the template. Do not add `text-shadow` to any CSS rule or inline style. Use `class="answer-slide"` on answer sections to strip any remaining shadows.
 
 Read the full rule list from `references/key-design-rules.md` when you encounter an unfamiliar slide type or when a rule check fails.
 ## Authorial Voice & Audience
