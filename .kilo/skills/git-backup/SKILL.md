@@ -36,9 +36,9 @@ git diff --cached --stat
 
 ### Step 4: Derive version and build categorised commit message
 
-**Version number:** Count total commits on main that will exist AFTER this commit:
+**Version number:** Count total commits on main that will exist AFTER this commit. PowerShell trap: `git` returns a string, so use `[int]()` to force numeric addition (otherwise `"100" + 1` becomes `"1001"`):
 ```powershell
-$version = (git rev-list --count HEAD) + 1
+$version = [int](git rev-list --count HEAD) + 1
 ```
 Format as `v{N}` (e.g., `v101`, `v102`). Every commit gets a unique incrementing version.
 
@@ -79,8 +79,8 @@ git push origin main
 ### Step 7: Report
 Show the new version number and commit count ahead:
 ```powershell
-$newCount = git rev-list --count HEAD
-$ahead = git rev-list --count origin/main..HEAD
+$newCount = [int](git rev-list --count HEAD)
+$ahead = [int](git rev-list --count origin/main..HEAD)
 Write-Host "Committed v$newCount (${ahead} ahead of origin)"
 ```
 
