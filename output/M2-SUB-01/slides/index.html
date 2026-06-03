@@ -262,10 +262,17 @@
         <div class="reveal">
             <div class="slides">
 
-<!-- PEDAGOGICAL INTENT: Student sees the lesson title, CEFR level, and teacher name against a full-screen image. The logo anchors institutional identity. -->
+<!-- PEDAGOGICAL INTENT: Student sees a full-screen image without any text, establishing the lesson's visual theme before any information appears. -->
+<!-- WHY THIS FEATURE: static — no interaction; the image sets the mood and primes the topic -->
+<!-- COGNITIVE PRINCIPLE: Coherence — no text, no distractions; the image alone introduces the theme -->
+<!-- DESIGN MECHANISM: Full-bleed background image with no content overlays. The student sees the image first, then on the next slide the title + badge + strap line appear together. This separates the visual hook from the informational content. -->
+<section id="slide-splash" data-background-color="#1a1a2e" data-background-image="assets/title-bg.jpg" data-background-size="cover">
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the lesson title, CEFR level, strap line, and lesson-type CTA against the full-screen image. The logo anchors institutional identity. -->
 <!-- WHY THIS FEATURE: static — title slide is purely informational; no animation needed -->
 <!-- COGNITIVE PRINCIPLE: Coherence — extraneous content is stripped; only essential identifiers visible -->
-<!-- DESIGN MECHANISM: Logo is 120px (not 78px) so it reads at projection distance; CEFR badge is inline in the h2 for compact status signaling -->
+<!-- DESIGN MECHANISM: Logo is 120px (not 78px) so it reads at projection distance; CEFR badge is inline in the h2 for compact status signaling. The second subtitle uses a crimson text-shield to visually pop as a call-to-action. -->
 <section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/title-bg.jpg" data-background-size="cover" style="justify-content: center;">
     <img src="assets/logo.png" style="height: 120px; margin: 0 auto 0.5em; display: block;" alt="ACT" />
     <h2 style="font-size: 2.2em;"><span class="text-shield">Super Recognizers <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></span></h2>
@@ -666,8 +673,8 @@
 <!-- DESIGN MECHANISM: Each row shows the statement number, the T/F badge with icon, the correction text for F items, and a short why from the article. -->
 <section id="slide-ex2-answer-1" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
     <h2>Exercise 2 — True or False (1)</h2>
+    <p style="color: #fff; font-size: 0.95em; font-style: italic;">"The term 'super recognizer' was first used by Richard Russell in 2009."</p>
     <div class="fragment fade-up">
-        <p style="color: #fff; font-size: 0.95em; font-style: italic;">"The term 'super recognizer' was first used by Richard Russell in 2009."</p>
         <p style="color: #fff; font-size: 1.1em; font-weight: bold; margin-top: 0.5em;"><i class="fa-solid fa-check"></i> True</p>
         <p style="color: #ffdd00; margin-top: 0.3em;">Term first used by Richard Russell in 2009</p>
         <p style="color: #fff; font-size: 0.85em; margin-top: 0.2em;">— Para 2</p>
@@ -679,8 +686,8 @@
 
 <section id="slide-ex2-answer-2" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
     <h2>Exercise 2 — True or False (2)</h2>
+    <p style="color: #fff; font-size: 0.95em; font-style: italic;">"Being a super recognizer is the same as having prosopagnosia."</p>
     <div class="fragment fade-up">
-        <p style="color: #fff; font-size: 0.95em; font-style: italic;">"Being a super recognizer is the same as having prosopagnosia."</p>
         <p style="color: #fff; font-size: 1.1em; font-weight: bold; margin-top: 0.5em;"><i class="fa-solid fa-times"></i> False</p>
         <p style="color: #ffdd00; margin-top: 0.3em;">Correction: the opposite of prosopagnosia</p>
         <p style="color: #fff; margin-top: 0.3em;">Super recognizers are the opposite — they recognise faces very well</p>
@@ -693,8 +700,8 @@
 
 <section id="slide-ex2-answer-3" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
     <h2>Exercise 2 — True or False (3)</h2>
+    <p style="color: #fff; font-size: 0.95em; font-style: italic;">"Only one person works as a super recognizer for the Metropolitan Police."</p>
     <div class="fragment fade-up">
-        <p style="color: #fff; font-size: 0.95em; font-style: italic;">"Only one person works as a super recognizer for the Metropolitan Police."</p>
         <p style="color: #fff; font-size: 1.1em; font-weight: bold; margin-top: 0.5em;"><i class="fa-solid fa-times"></i> False</p>
         <p style="color: #ffdd00; margin-top: 0.3em;">Correction: a team of officers, not one person</p>
         <p style="color: #fff; margin-top: 0.3em;">The police recruited a team, not just one person</p>
@@ -711,8 +718,8 @@
 <!-- DESIGN MECHANISM: Identical structure. Three items per slide maintains readability. -->
 <section id="slide-ex2-answer-4" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
     <h2>Exercise 2 — True or False (4)</h2>
+    <p style="color: #fff; font-size: 0.95em; font-style: italic;">"Super recognizers can recognise people from pictures taken when they were much younger."</p>
     <div class="fragment fade-up">
-        <p style="color: #fff; font-size: 0.95em; font-style: italic;">"Super recognizers can recognise people from pictures taken when they were much younger."</p>
         <p style="color: #fff; font-size: 1.1em; font-weight: bold; margin-top: 0.5em;"><i class="fa-solid fa-check"></i> True</p>
         <p style="color: #ffdd00; margin-top: 0.3em;">They can recognise people from pictures taken when much younger</p>
         <p style="color: #fff; font-size: 0.85em; margin-top: 0.2em;">— Para 3</p>
@@ -724,8 +731,8 @@
 
 <section id="slide-ex2-answer-5" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
     <h2>Exercise 2 — True or False (5)</h2>
+    <p style="color: #fff; font-size: 0.95em; font-style: italic;">"Super recognizers are better at identifying people than face recognition scanners."</p>
     <div class="fragment fade-up">
-        <p style="color: #fff; font-size: 0.95em; font-style: italic;">"Super recognizers are better at identifying people than face recognition scanners."</p>
         <p style="color: #fff; font-size: 1.1em; font-weight: bold; margin-top: 0.5em;"><i class="fa-solid fa-check"></i> True</p>
         <p style="color: #ffdd00; margin-top: 0.3em;">They are often better than face recognition scanners</p>
         <p style="color: #fff; font-size: 0.85em; margin-top: 0.2em;">— Para 3</p>
@@ -737,8 +744,8 @@
 
 <section id="slide-ex2-answer-6" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
     <h2>Exercise 2 — True or False (6)</h2>
+    <p style="color: #fff; font-size: 0.95em; font-style: italic;">"Porritt only developed his super recognizer skills in early adulthood."</p>
     <div class="fragment fade-up">
-        <p style="color: #fff; font-size: 0.95em; font-style: italic;">"Porritt only developed his super recognizer skills in early adulthood."</p>
         <p style="color: #fff; font-size: 1.1em; font-weight: bold; margin-top: 0.5em;"><i class="fa-solid fa-times"></i> False</p>
         <p style="color: #ffdd00; margin-top: 0.3em;">Correction: childhood, not early adulthood</p>
         <p style="color: #fff; margin-top: 0.3em;">Porritt says "when I was young"</p>
