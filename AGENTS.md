@@ -13,6 +13,7 @@ Before writing any HTML, CSS, Typst, slide markup, or configuration, **read the 
 - Slide attributes: check `templates/base-slides-template.html` for the exact attribute pattern
 - Typst syntax: check `.kilo/skills/create-pdf-lesson-file/SKILL.md` (Typst Pitfalls section)
 - Slide structure: check the most recently built `output/*/slides/index.html`
+- Reveal.js bugs: check `docs/revealjs-known-issues.md` before debugging audio, fragment, or plugin issues
 
 ## Two pipelines
 
@@ -253,13 +254,20 @@ If any rule is unclear, ask. Do not guess.
 - **One item per answer slide** — When each answer has a Why explanation, use exactly one `a-row` per slide. The item number goes in the `<h2>` heading. Do not use `a-num` spans. The entire row (label + answer + why) reveals on one click via `class="a-row fragment fade-up"`.
 - **Inline S/V/O annotations** — for grammar identification exercises (subjects, verbs, objects), decorate words directly on the sentence rather than using a separate answer column. Use `class="fragment custom svo-s"`, `svo-v`, `svo-o` on `<span>` elements with CSS controlling border/color changes on `.visible`. Superscript labels (`<sup>S</sup>`, `<sup>V</sup>`, `<sup>O</sup>`) use `opacity: 0` → `opacity: 1` with CSS transitions. Use `data-fragment-index` to group each sentence's decorations and confirmation note for per-click reveal.
 - **Custom fragments** — use `class="fragment custom"` when you need an element to stay fully visible but change specific CSS properties (border, color, opacity) on click. The `custom` keyword prevents reveal.js from applying default `opacity: 0; visibility: hidden`. All styling is controlled via CSS rules on `.fragment.custom.*` (default state) and `.fragment.custom.*.visible` (revealed state). Common use: annotations that animate in without hiding the underlying text.
-- **Title slide layout** — Full-screen Pixabay background image using `data-background-image` with `data-background-color="#1a1a2e"` as fallback. Logo at `120px` (not 78px — too small on 1280x720). h2 at `2.2em` (not default ~1.6em). CEFR badge inline inside h2 with `vertical-align: middle`. Subheader at `1em` (not 0.7em). **ALL title text (h2, subtitle) MUST use `class="text-shield"`** for readability against the image — this applies a semi-transparent dark background behind the text instead of dimming the entire image. No `data-background-opacity` needed (image stays at full brightness). **CRITICAL:** Must add `style="justify-content: center;"` to the section — reveal.js defaults to `flex-start`, pushing content to the top of the slide. Both `data-background-color` AND `data-background-image` are required (background-color shows while image loads). Do NOT use `r-stack` for title slides — it creates a letterbox effect.
+- **Title slide layout** — Full-screen Pixabay background image using `data-background-image` with `data-background-color="#1a1a2e"` as fallback. Logo at `120px` (not 78px — too small on 1280x720). h2 at `2.2em` (not default ~1.6em). CEFR badge inline inside h2 with `vertical-align: middle`. Subheader at `1em` (not 0.7em) containing a **topic tagline or strap line** (e.g., "Are You a Super Recognizer?"), NOT teacher name, duration, or class identifier — those are presentation metadata, not student-facing content. Add a **second subtitle line** hinting at the lesson type (e.g., "Let's Read and Find Out" for reading, "Let's Listen and Find Out" for listening, "Let's Write" for writing, "Let's Learn" for grammar/vocab). This second line should be at 0.9em in bold white (`#fff`, `font-weight: bold`) with a **crimson text-shield** (`background: rgba(180, 0, 0, 0.65)`) so it visually pops as a call-to-action. **ALL title text (h2, subtitle lines) MUST use `class="text-shield"`** for readability against the image — this applies a semi-transparent dark background behind the text instead of dimming the entire image. No `data-background-opacity` needed (image stays at full brightness). **CRITICAL:** Must add `style="justify-content: center;"` to the section — reveal.js defaults to `flex-start`, pushing content to the top of the slide. Both `data-background-color` AND `data-background-image` are required (background-color shows while image loads). Do NOT use `r-stack` for title slides — it creates a letterbox effect.
 - **Font size minimums for readability** — On 1280x720 slides: main sentence text `1.2em`, labels/annotations `0.9em`, faded "before" comparison text `1em`. Never go below `0.85em` for any text. The default reveal.js base sizes assume desktop presentation — ESL students at projection distance need larger. Differentiate faded "before" text via font size or a ❌ mark, never via opacity.
 - **Why column on every answer row** — Every answer slide must include `class="a-why"` with a short explanation text (coordinator meaning, grammar rule, error type). The `a-why` class is defined in the base template CSS. Use `class="a-row fragment fade-up"` on the row div so the entire row (label, answer, why) reveals on one click — NOT per-span fragments.
+- **Paragraph numbers on reading answers** — Every reading comprehension answer (summary, T/F, open questions) must include the paragraph number where the evidence is found, appended as `— Para N` at the end of the `a-why` text. This enables the teacher to direct students to the exact location for justification. Example: `"Term first used by Richard Russell in 2009 — Para 2"`.
 - **Demo slide before freer practice** — Before any freer practice task (e.g. Practice 2C, 10A), include a pedagogical demo slide. The teacher walks through ONE item step by step (Step 1: identify relationship, Step 2: choose coordinator, Step 3: combine) so students see the reasoning chain before attempting independently.
+- **Pedagogical slide before every exercise type** — In reading and listening lessons, include a pedagogical slide before EVERY distinct exercise type (gist summary, T/F, comprehension questions, matching, etc.). Use ONE item from the exercise as a worked example. Model the skill using auto-animate across 2-3 slides or fragments on a single slide. Do NOT put the pedagogical slide only before the first exercise — every exercise type needs its own modelled example. The demo must always use the **first question or item** from the following exercise, not a made-up example.
+- **Opinion question structure** — For open-ended opinion exercises (e.g. "Do you think you are a super recogniser?"), teach a three-part response structure: **Opinion → Reason → Detail/Example**. Provide sentence starters for each part and a model answer that uses all three, so B1 learners have a concrete template to follow.
 - **Lead-in error slides** — Each error gets a 2-slide auto-animate pair: Entry shows the error with transparent borders on problem words. Reveal shows the original (at a smaller font size or with ❌ mark) and the corrected version in `#ffdd00` yellow with white underlines on fix words. Label line tells what type of error it is. Do NOT use opacity < 1 on the original text — it creates invisible gray text. Differentiate via font size or a visible ❌ mark instead. All borders/underlines must be white (`#fff`) — use style (dashed vs solid) for differentiation if needed.
 - **Diagnostic tests max 3 items per slide** — Split diagnostic tests across multiple slides (e.g. `slide-diagnostic-1-3`, `slide-diagnostic-4-6`). Add answer fragments below the questions with the correct coordinator and a Why explanation. Timer on each slide.
 - **Formula reveals: 2-slide auto-animate pair** — When demonstrating a structural transformation (simple→compound, wrong→right): Entry shows both versions with transparent borders on CHANGED elements. Reveal changes borders to `#fff` white `border-bottom: 4px solid #fff` for a thick underline effect. Both need `data-auto-animate` with matching `data-auto-animate-id`. Key elements need matching `data-id` on both slides.
+- **Vocabulary context sentences** — Context sentences for vocabulary words must make the meaning completely obvious from context alone. Use a two-sentence pattern: the first sentence uses the target word in natural context; the second sentence rephrases or demonstrates the meaning with simpler language. The sentences do NOT need to connect to the lesson's reading or listening text.
+  ✅ Good: "Her job is to **recruit** new employees. Last week she gave jobs to five new people."
+  ❌ Bad: "The police use special tests to **recruit** super recognizers." (does not make the meaning obvious)
+- **Vocabulary word display** — On vocabulary slides: the English word is followed by a part-of-speech marker in smaller gray text, e.g. `remarkable (adjective)`. The target word in the context sentence must be wrapped in `<span class="vocab-word">` so it renders in yellow. The phonemic script must use `font-family: 'Times New Roman', Times, serif;` for reliable IPA character rendering.
 
 ## Pedagogical Strategy Slides — Design Principles
 
@@ -395,7 +403,38 @@ Do not use `margin-top: -X%` — it pushes content off-screen. A small positive 
 
 Decorative slide icons (`.slide-icon`, `.transition-icon`, `.pedagogical-icon`, `.objective-icon`) have been removed from all slide templates and the base template — they wasted screen real estate. Do not add decorative icons to any slide.
 
-**Font Awesome IS still used for functional answer markers** — `<i class="fa-solid fa-check">` for correct answers and `<i class="fa-solid fa-times">` for incorrect answers on answer slides. These are functional indicators, not decorative icons. Never use raw Unicode check/cross characters (U+2713/U+2717) — Font Awesome renders reliably across all browsers and projection systems.
+**Font Awesome IS still used for functional answer markers** — `<i class="fa-solid fa-check">` for correct answers and `<i class="fa-solid fa-times">` for incorrect answers on answer slides. These are functional indicators, not decorative icons. Never use raw Unicode check/cross characters (U+2713/U+2717), arrows (U+2192), bullets, or any other typographic symbols — Font Awesome renders reliably across all browsers and projection systems while Unicode symbols do not.
+
+## Hard Rules (from real failures)
+
+These rules exist because they were violated in production and cost hours to debug. Do not bypass them.
+
+### Audio playback on vocabulary slides
+- Audio must be placed **inside the word's `<p class="fragment fade-up">`** with `data-autoplay`. It fires on fragment reveal, NOT on slide entry.
+- Remove `RevealAudioSlideshow` from the plugins array when using vocab TTS — its `fragmentshown`/`fragmenthidden` handlers interfere with native `<audio>` playback.
+- Never use both `autoplay` (native HTML5) and `data-autoplay` (reveal.js) on the same element — they both fire independently, causing double-play.
+- Hide audio via `position: absolute; width: 0; height: 0; overflow: hidden` (not `display:none`) so the browser loads audio data.
+
+### DOM integrity after scripted edits
+Every Python script that does `content.replace()` on raw HTML is a risk. After any such script, verify:
+```python
+opens = html.count('<section')
+closes = html.count('</section>')
+assert opens == closes, f"Mismatch: {opens} opens, {closes} closes"
+```
+revealjs-validator does NOT catch unbalanced tags or orphaned elements — only a tag-count check does.
+
+### Strategy demonstrations
+- Use **auto-animate across separate slides** (one per step), not fragments on a single slide.
+- Fragments stack text vertically, creating a wall of text that overwhelms B1 learners.
+- The key element (question, sentence, etc.) should have `data-id` across all slides so auto-animate keeps it stationary while step content changes.
+
+### Timer + audio/video exclusion
+Never put `data-timer` on a slide that plays any audio or video, regardless of mechanism:
+- `data-audio-src` (plugin)
+- Native `<audio data-autoplay>`
+- `<video>` elements
+- YouTube iframes or `data-background-iframe`
 
 ## Dependencies
 
@@ -467,6 +506,10 @@ python scripts/lint_slides.py --project "output/<subfolder>/slides/"
 This checks for banned colors (old teal/green/blue/orange), `text-shadow` CSS, `box-shadow`, and answer-slide structural violations (bundled items, missing original sentence, per-span fragments). Fix any errors before running the validator.
 
 # Slide Editing Workflow
+
+## Authorial Voice for Slide Design
+
+When designing or editing slides, you are an **experienced ESL teacher with training in instructional design and materials writing**, not a software engineer. See the `lesson-plan-to-reveal` skill's **Authorial Voice** section for detailed guidance on how to phrase pedagogical annotations, context sentences, and design rationale in teaching terms, not engineering terms.
 
 When the user asks to edit a slide at a reveal.js URL (e.g., `index.html#/7`):
 

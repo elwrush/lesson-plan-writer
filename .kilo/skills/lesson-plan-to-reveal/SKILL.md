@@ -7,6 +7,17 @@ description: Converts a lesson plan JSON into a reveal.js presentation using raw
 ## Purpose
 Convert a lesson plan JSON into a reveal.js slideshow for ESL classroom delivery. The teacher controls all slides — students never interact directly. **Slides support the teacher's narration, not replace it.** Student-facing content appears on screen; teacher procedure text goes in speaker notes only.
 
+## Authorial Voice
+
+When designing slides, adopt the voice of an **experienced ESL teacher with training in instructional design and materials writing**. All pedagogical annotations, context sentences, and design decisions must be articulated from this perspective. The technical implementation (HTML, CSS, reveal.js) is *how* you achieve the pedagogical goals, but the reasoning should always be expressed in teaching terms, not engineering terms.
+
+- **PEDAGOGICAL INTENT** annotations should sound like a veteran teacher justifying a classroom decision to a colleague ("Students need to see the contrast at a glance, not read two paragraphs"), not an engineer documenting code ("The section uses a two-column flex layout with a vertical divider").
+- **DESIGN MECHANISM** annotations should name the concrete design choice and what happens if it's removed, in teaching language ("If both columns were on separate slides, the comparison would be lost — students can't hold one in memory while they look at the other").
+- **Context sentences** for vocabulary should be written as a teacher would model the word's meaning: clear, natural, immediately understandable from context.
+- **Exercise instructions** on task slides should read as teacher-to-learner cues, not documentation.
+
+When in doubt about phrasing, ask: "Would a teacher in the staffroom explain it this way?" If the answer is no, rewrite it.
+
 **Pipeline**: JSON → hand-built `index.html` with raw HTML `<section>` elements → open directly in browser (no server needed).
 
 **Markdown is permanently abandoned** for slide generation. The reveal.js auto-animate feature requires sibling `<section data-auto-animate>` elements, which cannot be produced from a single `<section data-markdown>` container. All new presentations start from `templates/base-slides-template.html`.
@@ -79,6 +90,44 @@ All slide `<section>` elements go between `<div class="slides">` and `</div>` in
 **Note:** The base template already includes the [audio-slideshow](https://github.com/rajgoel/reveal.js-plugins/tree/master/audio-slideshow) plugin (CDN-loaded) and the `TimerPlugin` in `Reveal.initialize()`. To add audio to a slide, use `data-audio-src="assets/file.mp3"` on the `<section>` element. Audio files go in `slides/assets/`. The plugin is configured with `advance: -1` (no auto-advance) — teacher controls playback via hover controls or `A` key. See the `audio:` config block in `Reveal.initialize()` for details.
 
 **Known limitation — audio on multiple slides**: The audio-slideshow plugin does NOT reliably play the same audio file on more than one slide. If two or more slides need the same audio, copy the file to a distinct filename for each slide (e.g., `podcast_listen1.mp3` and `podcast_listen2.mp3`). Each `data-audio-src` value must be unique across the presentation.
+
+### Vocabulary TTS Audio Pattern
+
+When a lesson plan includes pre-teach vocabulary, generate TTS audio clips and embed them in the vocabulary slides so the word is spoken aloud when the English word fragment is revealed.
+
+**Prerequisites:**
+1. Run `scripts/design_tts_voice.py` (one-time per voice) to design and publish a bespoke voice.
+2. Run `scripts/generate_vocab_audio.py` to create MP3 clips for each vocabulary word.
+
+**Slide structure:** Place the `<audio>` element INSIDE the English word's `<p class="fragment fade-up">`, NOT at the `<section>` level. Use `data-autoplay` so reveal.js plays it when that fragment becomes visible.
+
+```html
+<section id="slide-vocab-1" class="vocab-slide" data-background-color="#1a1a2e" data-background-transition="none">
+    <div style="text-align: center; padding: 60px 40px;">
+        <p style="font-size: 1.8em; color: #ffdd00; letter-spacing: 0.05em;">
+            /fəˈnetɪk/
+        </p>
+        <p class="fragment fade-up" style="font-size: 2.2em; color: #fff; font-weight: bold; margin-top: 0.5em;">
+            <!-- Audio inside the word fragment — plays when this fragment is revealed -->
+            <audio data-autoplay preload="auto" style="position: absolute; width: 0; height: 0; overflow: hidden;"
+                   src="assets/vocab-word.mp3"></audio>
+            <span class="vocab-word">word</span> <span style="color: #888; font-size: 0.5em;">(noun)</span>
+        </p>
+        <p class="fragment fade-up" style="font-size: 1.2em; color: #fff; margin-top: 1em;">
+            Context sentence with <span class="vocab-word">word</span> highlighted.
+        </p>
+    </div>
+</section>
+```
+
+**Key rules:**
+- Audio fires on the **first fragment reveal** (English word), NOT on slide entry (phonemic script)
+- Use `data-autoplay` (not native HTML5 `autoplay`) — reveal.js's `startEmbeddedContent(el)` plays it when the fragment becomes `.visible`
+- Remove `RevealAudioSlideshow` from the plugins array — its `fragmentshown`/`fragmenthidden` handlers interfere with reliable single-playback
+- Do NOT use a custom `slidechanged` handler — let reveal.js manage playback via `data-autoplay` inside the fragment
+- Hide via `position: absolute; width: 0; height: 0; overflow: hidden` (not `display:none`) so the browser loads audio data
+- Add part-of-speech marker after the English word in smaller gray text: `word (noun)`
+- The phonemic script must use `font-family: 'Times New Roman', Times, serif;` for reliable IPA rendering
 
 ### Step 2: Copy supporting files (timer plugin, logo)
 
@@ -200,7 +249,7 @@ Every distinct exercise type MUST follow this four-slide sequence. This is the c
 |------|-----------|------------|---------|-------------|
 | 1 | **Transition** | `#c0392b` (red) | Heading only — signals phase change to students | Neither |
 | 2 | **Pedagogical** | `#1a237e` (teal), `class="pedagogical"` | Strategy instruction for the skill (e.g., how to listen for gist). May use auto-animate for keyword underline reveals. Differentiation challenge (`🏁 Want a challenge?`) shown here. | **No audio** — audio goes on the task slide |
-| 3 | **Task** | `#1a1a2e` (dark) | Exercise number + brief student-facing instruction. **Do NOT print full exercise text** — students have the workbook. | `data-audio-src` for listening exercises; `data-timer` for written exercises. **Never both** on the same slide. |
+| 3 | **Task** | `#1a1a2e` (dark) | Exercise number + brief student-facing instruction. **Do NOT print full exercise text** — students have the workbook. | `data-audio-src` for listening exercises; `data-timer` for written exercises. **Never both** on the same slide. Also never put a timer on a slide with any audio (native `<audio autoplay>`, `<video>`, or embedded YouTube). |
 | 4 | **Answers** | `#052e0d` (green) | For simple reveals (T/F, MC): answer-list flex layout, max 3 items per slide. For error-correction with two fix methods: **both-methods pattern** (one item per slide, both M1 + M2). See "Answer Slides: Both-Methods Pattern" below. | Neither |
 
 **Key rules:**
@@ -400,7 +449,51 @@ Before writing any `<section>` tags, create a design blueprint that enumerates e
 
 **Mechanism litmus test:** For every row in the Per-Slide Design table, the Mechanism column must answer the rubric question for the named principle. If the mechanism is generic ("the teacher clicks to advance"), stop and rethink until you can name a design choice unique to this slide.
 
-**After the blueprint is complete**, advance to Step 4B and write the HTML, using the blueprint as your guide. The blueprint IS the design — the HTML is its implementation.
+**After the blueprint is complete**, advance to Step 4A-ter.
+
+### Step 4A-ter: Human-Readable Pedagogical Narrative (MANDATORY — Design Gate)
+
+**⚠ THIS IS A HUMAN GATE. THE NARRATIVE IS SHOWN TO THE USER FOR APPROVAL BEFORE ANY CODE IS WRITTEN. ⚠**
+
+Before writing any `<section>` tags, write a plain-English narrative of the entire slideshow that explains:
+- What each stage does
+- Why it is designed this way (pedagogical justification)
+- What design choices were made (fragments, timers, auto-animate, audio, answer reveals)
+- How the learner experiences each stage
+
+The narrative should be written in an instructional voice — as if explaining the lesson to a fellow teacher. It must walk through every stage in order.
+
+**Narrative format:**
+
+```
+The slideshow is organised like this.
+
+We begin with [stage/activity]. This [explain purpose]. It is pedagogically useful because [explain why]. I have included [specific features — questions, fragments, timers, auto-animate, audio, answer reveals] so the learner can [explain what the learner gains].
+
+[Repeat for every stage of the lesson. Be specific about design choices:
+- "I have included fragment clickthroughs so the learner can see how we add commas and coordinators to form compound sentences."
+- "There is one slide for each coordinator type."
+- "Each vocabulary word has an autoplay audio file embedded in the word fragment. The audio fires when the English word fragment is revealed, not when the slide enters — so students attempt to decode the phonemic script first, then hear the word as they see the spelling."
+- "Answers are split across multiple slides (one per item) so the teacher can pause and discuss each answer before revealing the next."
+]
+
+We end with [summary/end].
+```
+
+**⚠ THIS IS A DESIGN GATE. THE NARRATIVE IS NOT SHOWN UNTIL THE LINTER PASSES. ⚠**
+
+Before showing the narrative to the user, run both lint checks and fix all violations:
+
+```bash
+python scripts/lint_slides.py --project "output/{subfolder}/slides/"
+python scripts/check_authorial_voice.py --project "output/{subfolder}/slides/"
+```
+
+If **either** check produces violations (errors or warnings about authorial voice, lazy references, technical-only mechanisms, or identical annotations), **fix the HTML annotations first**, then re-run the checks. Only proceed to the user when both checks pass cleanly with 0 authorial voice violations.
+
+**Only then** present the narrative to the user for approval. No HTML is written until the user gives approval.
+
+**After the user approves the narrative**, advance to Step 4B and write the HTML, using both the narrative and the blueprint as guides.
 
 ### Step 4B: Build slides (new build)
 
@@ -614,7 +707,7 @@ if idx >= 0:
 - Verify transition slides use `data-background-color="#c0392b"` (use `data-background-color` for solid colors, NOT `data-background` — `data-background` is not recognized by reveal.js 5.x)
 - Verify pedagogical strategy slides use `data-background-color="#1a237e"` and `class="pedagogical"`
 - Verify listening task slides that need audio have `data-audio-src="assets/filename.mp3"`
-- **Verify no `<section>` has both `data-timer` AND `data-audio-src`** — never place a timer pill on a slide that plays audio or video
+- **Verify no `<section>` has both `data-timer` AND any audio or video** — never place a timer pill on a slide that plays audio or video (whether via `data-audio-src`, native `<audio autoplay>`, `<video>` elements, or embedded YouTube/iframe content). Timers and audio/video are mutually exclusive across ALL mechanisms, not just the audio-slideshow plugin.
 - **Verify no raw Unicode check/cross characters**: Scan for U+2713 (✓) and U+2717 (✗) in the output HTML. If found, replace with `<i class="fa-solid fa-check">` and `<i class="fa-solid fa-times">` respectively. Font Awesome renders reliably; Unicode glyphs do not.
 - **PEDAGOGICAL INTENT CHECK**: Run `python scripts/check_pedagogical_intent.py --project <slides-dir>` — verifies every non-exempt slide has mandatory `PEDAGOGICAL INTENT`, `WHY THIS FEATURE`, `COGNITIVE PRINCIPLE`, and `DESIGN MECHANISM` annotations. If missing, the slide was built without intentional design and must be fixed. Do NOT ship slides that fail this check.
 - **Regression check on slide moves**: When moving a slide from one position to another, insert the slide at the new location FIRST, then remove it from the old location. Removing first and forgetting to re-insert causes silent slide loss. After any move, verify total section count matches expected count.

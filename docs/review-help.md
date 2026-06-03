@@ -205,3 +205,22 @@ Summarise results. List violations with file paths and fix instructions.
 ## Summary
 
 A `/review` command gives a non-programmer user systematic quality control over AI-generated code. It does not replace human judgment — it replaces the absence of judgment by encoding project knowledge into a checklist that the AI runs against itself. The command is simple to create, requires no external tools beyond what the project already uses, and integrates naturally into commit workflows.
+
+---
+
+## Concrete Examples from Lesson Plan Writer 3
+
+This project's audit/forensic scripts are at `scripts/` and serve as working examples of the review pattern:
+
+| Script | What it checks | Reference doc |
+|--------|---------------|---------------|
+| `lint_slides.py` | Banned colors, text-shadow, box-shadow, answer-slide structure, CEFR consistency, structural tag balance (`<section>` + `<div>` + per-section), literal Unicode escapes, authorial voice | `docs/revealjs-known-issues.md`, `AGENTS.md` |
+| `check_authorial_voice.py` | Pedagogical annotation quality (lazy references, thin WHY lines, technical-only mechanisms, identical annotations) | `.kilo/skills/lesson-plan-to-reveal/SKILL.md` (Authorial Voice section) |
+| `toggle_helpers\kilo\forensic_audit_v2.py` | Lesson plan JSON vs slides: stage coverage, exercise content, answer accuracy, no hallucinated content | `output/*/lesson-plan.json` + `inputs/*/answer_key.typ` |
+| `toggle_helpers\kilo\forensic_codebase.py` | Documentation vs implementation: AGENTS.md rules, skill rules, known-issues.md, linter coverage | `AGENTS.md`, `.kilo/skills/*/SKILL.md`, `docs/revealjs-known-issues.md` |
+
+To create a similar audit for a new project:
+1. Write the linter first (catching the most frequent violations)
+2. Write the forensic checker (comparing output against source of truth)
+3. Write the doc checker (ensuring docs stay in sync with code)
+4. Wire them all into the project's review workflow
