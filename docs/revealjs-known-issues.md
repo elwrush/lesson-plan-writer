@@ -134,6 +134,27 @@ The check must cover ALL audio/video mechanisms, not just the audio-slideshow pl
 
 ---
 
+## YouTube Embed Aspect Ratio
+
+### Problem
+Embedding a YouTube iframe with `width: 90%; height: 90%` causes the wrong aspect ratio because reveal.js scales slide content. The iframe's height percentage is relative to the scaled slide container, not the viewport, resulting in a distorted or letterboxed video.
+
+### Fix
+Use `aspect-ratio: 16 / 9` on the iframe to maintain correct proportions regardless of container size:
+
+```html
+<section id="slide-video-task" data-background-color="#1a1a2e"
+         style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0"
+            style="width: 90%; max-width: 1100px; aspect-ratio: 16 / 9; border: none; border-radius: 4px;"
+            allowfullscreen></iframe>
+</section>
+```
+
+The flex container centers the iframe vertically and horizontally. `aspect-ratio: 16 / 9` ensures the video maintains a widescreen shape at any width. `max-width` prevents oversizing on large displays.
+
+---
+
 ## DOM Corruption from Scripted HTML Replacements
 
 ### Problem
