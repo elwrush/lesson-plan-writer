@@ -55,6 +55,7 @@ def generate_word_audio(word: str, voice_id: str, output_dir: Path) -> Path:
 
 if __name__ == "__main__":
     import argparse
+
     parser = argparse.ArgumentParser(description="Generate TTS audio clips for vocabulary words")
     parser.add_argument("words", nargs="+", help="Vocabulary words to generate")
     parser.add_argument("--output-dir", required=True, help="Path to slides/assets/ directory")

@@ -38,9 +38,9 @@
   columns: (auto, auto, auto),
   column-gutter: 2em,
   align: bottom + left,
-  [*CLASS:* __CLASS__],
-  [*ID:* __ID__],
-  [*NAME:* __NAME__],
+  [*CLASS:* M3-3A],
+  [*ID:* 33919],
+  [*NAME:* Fuji],
 )
 #v(24pt)
 #block(width: 100%, height: 1fr, writing-lines())

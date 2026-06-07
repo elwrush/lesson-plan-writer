@@ -218,16 +218,20 @@ def main():
 
     # Authorial voice check
     import importlib.util
+
     _av_path = str(Path(__file__).parent / "check_authorial_voice.py")
     _av_spec = importlib.util.spec_from_file_location("check_authorial_voice", _av_path)
     _av_mod = importlib.util.module_from_spec(_av_spec)
     _av_spec.loader.exec_module(_av_mod)
     av_exit = _av_mod.check_authorial_voice(html_path)
     if av_exit != 0:
-        all_warnings.append("Authorial voice violations found -- run check_authorial_voice.py for details")
+        all_warnings.append(
+            "Authorial voice violations found -- run check_authorial_voice.py for details"
+        )
 
     # Structural integrity check
     import re
+
     sec_opens = content.count("<section")
     sec_closes = content.count("</section>")
     div_opens = content.count("<div")
@@ -237,12 +241,16 @@ def main():
     print(f"             {div_opens} <div> opens, {div_closes} closes")
 
     if sec_opens != sec_closes:
-        all_errors.append(f"STRUCTURAL: {sec_opens} <section> opens but {sec_closes} </section> closes — DOM corruption will cause slides to be cut off")
+        all_errors.append(
+            f"STRUCTURAL: {sec_opens} <section> opens but {sec_closes} </section> closes — DOM corruption will cause slides to be cut off"
+        )
     if div_opens != div_closes:
-        all_errors.append(f"STRUCTURAL: {div_opens} <div> opens but {div_closes} </div> closes — DOM corruption will cause content to be cut off or slides to malfunction")
+        all_errors.append(
+            f"STRUCTURAL: {div_opens} <div> opens but {div_closes} </div> closes — DOM corruption will cause content to be cut off or slides to malfunction"
+        )
 
     # Per-section div balance check
-    sections = re.findall(r'(<section\b.*?</section>)', content, re.DOTALL)
+    sections = re.findall(r"(<section\b.*?</section>)", content, re.DOTALL)
     bad_slides = 0
     for sec in sections:
         aid = re.search(r'id="([^"]*)"', sec)
@@ -250,17 +258,22 @@ def main():
         s_div_o = sec.count("<div")
         s_div_c = sec.count("</div>")
         if s_div_o != s_div_c:
-            all_errors.append(f"STRUCTURAL: Slide '{sid}' has {s_div_o} <div> opens and {s_div_c} </div> closes — will cause slides after it to be cut off")
+            all_errors.append(
+                f"STRUCTURAL: Slide '{sid}' has {s_div_o} <div> opens and {s_div_c} </div> closes — will cause slides after it to be cut off"
+            )
             bad_slides += 1
     if bad_slides == 0:
         print(f"             {len(sections)} sections, all with balanced divs")
 
     # Unicode escape check — literal \\u... in HTML breaks rendering
     import re as _re
-    unicode_escapes = _re.findall(r'\\u[0-9a-fA-F]{4}', content)
+
+    unicode_escapes = _re.findall(r"\\u[0-9a-fA-F]{4}", content)
     if unicode_escapes:
         for ue in unicode_escapes[:5]:
-            all_errors.append(f"UNICODE: Literal '{ue}' found — should be actual Unicode character, not escape sequence")
+            all_errors.append(
+                f"UNICODE: Literal '{ue}' found — should be actual Unicode character, not escape sequence"
+            )
         if len(unicode_escapes) > 5:
             all_errors.append(f"UNICODE: ... and {len(unicode_escapes) - 5} more literal escapes")
 

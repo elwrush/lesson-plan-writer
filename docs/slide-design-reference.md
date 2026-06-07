@@ -87,7 +87,7 @@ All slide text (h2, h3, p, li) uses consistent styling via CSS in `templates/bas
 - **Pedagogical slides**: `class="pedagogical"` + `data-background-color="#1a237e"` — white text with teal background, white border-bottom on h2
 - **Vocabulary words**: `<span class="vocab-word">word</span>` — yellow (`#ffdd00`) bold with text shadow
 - **Transitions**: `data-background-color="#c0392b"` — red background
-- **End slide**: `data-background-color="#2c3e50"` — dark background
+
 
 ---
 

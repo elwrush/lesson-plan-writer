@@ -1,5 +1,6 @@
 {
   "$schema": "https://app.kilo.ai/config.json",
+  "lsp": true,
   "skills": {
     "paths": [".kilo/skills"]
   }

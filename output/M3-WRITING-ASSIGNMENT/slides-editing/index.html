@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Editing Carousel — Self and Peer Editing</title>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            /* =============================================
+               LESSON PLAN WRITER 3 — BASE SLIDE STYLES
+               Authoritative stylesheet for all presentations.
+               ============================================= */
+
+            /* --- CEFR Badges --- */
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                font-size: 0.7em;
+                padding: 4px 12px;
+                border-radius: 4px;
+                vertical-align: middle;
+                position: relative;
+                top: -2px;
+            }
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+
+            .reveal .a-badge {
+                display: inline-block;
+                padding: 0.1em 0.5em;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 0.85em;
+                min-width: 1.8em;
+                text-align: center;
+            }
+            .reveal .a-badge.a-cor {
+                background: rgba(76, 175, 80, 0.4);
+                color: #fff;
+            }
+            .reveal .a-badge.a-inc {
+                background: rgba(244, 67, 54, 0.4);
+                color: #fff;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+
+
+            /* --- Answer flex layout (replaces answer-table) --- */
+            .reveal .answer-list {
+                width: 100%;
+                font-size: 0.95em;
+            }
+            .reveal .a-row {
+                display: flex;
+                align-items: baseline;
+                padding: 0.5em 0;
+                border-bottom: 1px solid #fff;
+                gap: 0.5em;
+            }
+            .reveal .a-row:last-child { border-bottom: none; }
+            .reveal .a-num {
+                flex: 0 0 1.5em;
+                text-align: left;
+                color: #fff;
+                font-size: 0.95em;
+            }
+            .reveal .a-q {
+                flex: 0 0 auto;
+                min-width: 0;
+                margin-right: 0.5em;
+            }
+            .reveal .a-ans {
+                flex: 1 1 auto;
+                min-width: 0;
+                text-align: left;
+                padding: 0.1em 0.3em;
+                border-radius: 4px;
+            }
+            .reveal .a-ans.a-cor { color: #fff; }
+            .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+            .reveal .a-ans.a-inc { color: #fff; }
+            .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
+            /* Why column on answer rows — explanation text, fills remaining space */
+            .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+            /* S/V annotation underlines and labels for grammar identification */
+            .reveal .a-s { border-bottom: 2px solid #fff; }
+            .reveal .a-v { border-bottom: 3px solid #ffdd00; }
+            .reveal .a-ls { color: #ffdd00; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+            .reveal .a-lv { color: #fff; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+
+            /* --- Labels & captions --- */
+            .reveal .aim-label {
+                font-size: 0.85em;
+                color: #fff;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            .reveal .material-ref {
+                font-size: 0.85em;
+                color: #fff;
+                font-style: italic;
+                margin-top: 0.5em;
+            }
+            .reveal .source-cite {
+                font-size: 0.85em;
+                color: #fff;
+                font-style: italic;
+                margin-top: 0.3em;
+            }
+            .reveal .image-caption {
+                font-size: 0.85em;
+                color: #fff;
+                text-align: center;
+                margin-top: 0.2em;
+            }
+
+            /* --- Vocabulary slides --- */
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+            }
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal section.pedagogical .strategy-tip {
+                font-size: 0.85em;
+                font-style: italic;
+                color: #fff;
+                margin-bottom: 0.5em;
+            }
+            .reveal section.pedagogical .evidence {
+                font-size: 0.8em;
+                background: rgba(0,0,0,0.3);
+                padding: 0.4em 0.6em;
+                border-radius: 4px;
+                border-left: 3px solid rgba(255,255,255,0.4);
+            }
+
+            /* --- Text shield for full-opacity image backgrounds --- */
+            /* Uses display:inline-block + max-width for subtitle-style shielding.
+               inline-block keeps the background tight to the text.
+               max-width prevents full-width bars on very long text.
+               Elements stack naturally (block-level spacing) without ::after artifacts. */
+            .reveal .text-shield {
+                background: rgba(0, 0, 0, 0.55);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                line-height: 1.6;
+            }
+            .reveal .text-shield-light {
+                background: rgba(200, 200, 200, 0.65);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                color: #222;
+                line-height: 1.6;
+            }
+            /* Fragment variant: text already visible, background highlight on click */
+            .reveal .fragment.text-shield-light { opacity: 1; visibility: inherit; }
+            .reveal .fragment.text-shield-light.visible { background: rgba(200, 200, 200, 0.65); padding: 0.15em 0.6em; border-radius: 4px; }
+
+            /* --- Answer slides with both methods (p11 pattern) --- */
+            .reveal section.answer-slide p,
+            .reveal section.answer-slide li,
+            .reveal section.answer-slide h1,
+            .reveal section.answer-slide h2,
+            .reveal section.answer-slide h3,
+            .reveal section.answer-slide h4,
+            .reveal section.answer-slide h5,
+            .reveal section.answer-slide h6 { text-shadow: none !important; }
+            .reveal .p11-answer { width: 100%; font-size: 0.9em; text-align: left; }
+            .reveal .p11-badge { display: inline-block; padding: 0.15em 0.6em; border-radius: 4px; font-weight: bold; font-size: 0.85em; color: #ffdd00; }
+            .reveal .p11-original { font-size: 0.9em; color: #ffdd00; font-style: italic; padding: 0.4em 0; border-bottom: 3px solid rgba(255,255,255,0.15); margin: 0.5em 0; line-height: 1.5; }
+            .reveal .p11-method { padding: 0.3em 0; }
+            .reveal .p11-method p { margin: 0.1em 0; }
+            .reveal .p11-fix { color: #fff; font-size: 0.9em; margin-left: 0.5em !important; line-height: 1.5; }
+            .reveal .p11-fix span.cor-add { color: #ffdd00; border-bottom: 3px solid #fff; padding-bottom: 1px; }
+            .reveal .p11-why { color: #fff; font-size: 0.85em; font-style: italic; padding: 0.4em; background: rgba(0,0,0,0.2); border-radius: 4px; border-left: 3px solid #ffdd00; margin-top: 0.5em; line-height: 1.5; }
+
+            /* --- Fragment styles --- */
+            /* --- Yellow text for answers on green answer tables --- */
+            .reveal .answer-yellow { color: #ffdd00; }
+            .reveal .fragment.answer-yellow.visible { color: #ffdd00; }
+
+            .reveal table.answer-table th {
+                background: rgba(0, 0, 0, 0.2);
+                font-weight: bold;
+            }
+            .reveal .fragment.strike {
+                text-decoration: line-through;
+                opacity: 0.6;
+            }
+
+            /* --- YouTube iframe container (16:9 responsive) --- */
+            .reveal .iframe-container {
+                position: relative;
+                width: 90%;
+                padding-bottom: 50.625%;
+                height: 0;
+                overflow: hidden;
+                margin: 0 auto 0.5em;
+            }
+            .reveal .iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* --- Diagnostic talk structure slides (pedagogical, teal) --- */
+            .reveal .structure-talk h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal .structure-talk p,
+            .reveal .structure-talk li  { color: #fff; }
+            .reveal .structure-talk .structure-step {
+                font-size: 1.1em;
+                margin-bottom: 0.6em;
+            }
+            .reveal .structure-talk .transition-words {
+                font-size: 0.9em;
+                color: #ffdd00;
+                font-style: italic;
+                margin-top: 0.8em;
+                padding: 0.4em 0.6em;
+                background: rgba(0,0,0,0.2);
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+<!-- ════════════════════════════════════════════════════════════════════
+     SPLASH — Person editing writing, full-screen image, no text
+     ════════════════════════════════════════════════════════════════════ -->
+<section id="slide-splash" data-background-color="#1a1a2e" data-background-image="assets/editing.jpg" data-background-size="cover" data-background-transition="none">
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TITLE — Logo, topic, CEFR badge, strap line, CTA
+     ════════════════════════════════════════════════════════════════════ -->
+<section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/editing.jpg" data-background-size="cover" style="justify-content: center;">
+    <img src="assets/logo.png" style="height: 120px; margin: 0 auto 0.5em; display: block;" alt="ACT" />
+    <h2 style="font-size: 2.2em;"><span class="text-shield" style="line-height: 1.2;">Editing Carousel <span class="cefr-badge B2" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B2</span></span></h2>
+    <p style="font-size: 1em; color: #fff; margin-top: 0.5em;"><span class="text-shield">Good writing gets better</span></p>
+    <p style="font-size: 0.9em; color: #fff; font-weight: bold; margin-top: 0.3em;"><span class="text-shield" style="background: rgba(180, 0, 0, 0.65);">Let&rsquo;s Edit</span></p>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     OBJECTIVES — Three "I can" statements, static
+     ════════════════════════════════════════════════════════════════════ -->
+<section id="slide-objective" data-background-color="#1a1a2e">
+    <h2>Today&rsquo;s Objectives</h2>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">1.</span> I can self-edit my draft using a focused checklist.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">2.</span> I can peer-edit a classmate&rsquo;s draft and give helpful feedback.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">3.</span> I can produce a final version with corrections from both rounds.</p>
+    <aside class="notes">
+        <p>Stage aim: Set clear, measurable outcomes for the editing lesson.</p>
+        <p>Time: 1 min. Interaction: T-Ss.</p>
+        <p>Read each objective aloud. Explain that today is about improving writing, not writing something new.</p>
+    </aside>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     LEAD-IN — Before/After editing comparison, one pair per fragment
+     ════════════════════════════════════════════════════════════════════ -->
+<!-- PEDAGOGICAL INTENT: Student sees the headers "Rough" and "Edited" on entry. On each click, one sentence pair appears — rough on the left, its edited version on the right. The teacher discusses the specific changes in each pair before advancing, so students see exactly what editing transformed at sentence level. -->
+<!-- WHY THIS FEATURE: Fragment fade-up on each two-column row — the labels and column structure are visible on entry; each sentence pair reveals on click. This lets the teacher examine one transformation at a time. If all pairs were visible on entry, students would read ahead and miss the one-at-a-time discussion. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — one pair per click lets the teacher check understanding of each editing change before moving to the next. -->
+<!-- DESIGN MECHANISM: Each fragment row contains both the rough and edited version side by side in separate columns. If the rough and edited versions were on separate fragment rows (rough first, then edited), students couldn't compare them directly — they'd have to hold the rough in memory while looking at the edit. -->
+<section id="slide-lead-in" data-background-color="#1a1a2e">
+    <h2 style="font-size: 1.2em;">Spot the Differences</h2>
+    <div style="max-width: 1000px; margin: 0 auto; font-size: 0.78em;">
+        <div style="display: flex; gap: 1em; margin-bottom: 0.6em;">
+            <div style="flex: 1; text-align: center; color: #ffdd00; font-weight: bold;">Rough Draft</div>
+            <div style="flex: 1; text-align: center; color: #ffdd00; font-weight: bold;">Edited Version</div>
+        </div>
+        <div class="fragment fade-up" data-fragment-index="1" style="display: flex; gap: 1em; margin-bottom: 0.4em;">
+            <div style="flex: 1; border: 1px solid #fff; padding: 0.3em; background: rgba(255,255,255,0.05);">&ldquo;I have a close friend her name is Sara. She always listens to me.&rdquo; <span style="color: #ffdd00; font-size: 0.75em;">(run-on)</span></div>
+            <div style="flex: 1; border: 1px solid #ffdd00; padding: 0.3em; background: rgba(255,221,0,0.05);">&ldquo;I have a close friend named Sara, <span style="border-bottom: 2px solid #ffdd00;">and</span> she always listens to me.&rdquo; <span style="color: #fff; font-size: 0.75em;">(compound sentence)</span></div>
+        </div>
+        <div class="fragment fade-up" data-fragment-index="2" style="display: flex; gap: 1em; margin-bottom: 0.4em;">
+            <div style="flex: 1; border: 1px solid #fff; padding: 0.3em; background: rgba(255,255,255,0.05);">&ldquo;And makes me feel better.&rdquo; <span style="color: #ffdd00; font-size: 0.75em;">(fragment)</span></div>
+            <div style="flex: 1; border: 1px solid #ffdd00; padding: 0.3em; background: rgba(255,221,0,0.05);">&ldquo;<span style="border-bottom: 2px solid #fff;">She</span> makes me feel better <span style="border-bottom: 2px solid #ffdd00;">when I am feeling down</span>.&rdquo; <span style="color: #fff; font-size: 0.75em;">(complete sentence)</span></div>
+        </div>
+        <div class="fragment fade-up" data-fragment-index="3" style="display: flex; gap: 1em; margin-bottom: 0.4em;">
+            <div style="flex: 1; border: 1px solid #fff; padding: 0.3em; background: rgba(255,255,255,0.05);">&ldquo;Close friendships help teenagers feel less stressed they help you feel happier to.&rdquo; <span style="color: #ffdd00; font-size: 0.75em;">(run-on)</span></div>
+            <div style="flex: 1; border: 1px solid #ffdd00; padding: 0.3em; background: rgba(255,221,0,0.05);">&ldquo;Close friendships help teenagers feel less stressed, <span style="border-bottom: 2px solid #ffdd00;">so</span> they can feel happier too.&rdquo; <span style="color: #fff; font-size: 0.75em;">(compound sentence)</span></div>
+        </div>
+        <div class="fragment fade-up" data-fragment-index="4" style="display: flex; gap: 1em; margin-bottom: 0.4em;">
+            <div style="flex: 1; border: 1px solid #fff; padding: 0.3em; background: rgba(255,255,255,0.05);">&ldquo;All in all I think friends are important.&rdquo; <span style="color: #ffdd00; font-size: 0.75em;">(missing comma)</span></div>
+            <div style="flex: 1; border: 1px solid #ffdd00; padding: 0.3em; background: rgba(255,221,0,0.05);">&ldquo;All in all, I believe that having a true friend makes a big difference.&rdquo; <span style="color: #fff; font-size: 0.75em;">(linking phrase + stronger vocab)</span></div>
+        </div>
+    </div>
+    <aside class="notes">
+        <p>Stage aim: To show students what substantive editing looks like and preview the five station focus areas.</p>
+        <p>Time: 4 min. Interaction: T-Ss.</p>
+        <p>For each pair: read the rough version, ask what is wrong, then click to reveal the edited version. Discuss what changed. After all four pairs, board the five focus areas: compound sentences (pairs 1, 3), linking phrases (pair 4), complete sentences (pair 2), paragraph organisation (briefly), flow (overall). Explain the station rotation.</p>
+    </aside>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TRANSITION — Let's Review (red)
+     ════════════════════════════════════════════════════════════════════ -->
+<section id="slide-transition-review" data-background-color="#c0392b" data-background-transition="none">
+    <h2>Let&rsquo;s Review</h2>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     LANGUAGE REFRESHER 1/5 — Compound Sentences
+     ════════════════════════════════════════════════════════════════════ -->
+<!-- PEDAGOGICAL INTENT: Student sees the first editing focus area — compound sentences — with a rule reminder and example. One concept per slide so the teacher can reactivate one area at a time. -->
+<!-- WHY THIS FEATURE: Static — pedagogical teal. One focus per slide means the teacher addresses each area individually. No fragments — the full rule and example are visible on entry. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — one concept per slide means students focus on compound sentences before moving to paragraph structure, reducing cross-area interference during the rapid review. -->
+<!-- DESIGN MECHANISM: Each refresher slide has the same visual structure (teal bg, h2 label, rule line, example in yellow). If the layout changed between slides, students would spend mental energy adjusting to the new format instead of absorbing the content. -->
+<section id="slide-refresher-1" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
+    <h2>Compound Sentences</h2>
+    <p style="font-size: 1em; margin-top: 0.3em;">Two S-V pairs joined by a comma + coordinator</p>
+    <p style="font-size: 1em; color: #ffdd00; margin-top: 0.6em;"><em>I have a close friend, and she always listens to me.</em></p>
+    <aside class="notes">
+        <p>Time: ~50 s. Interaction: T-Ss.</p>
+        <p>Ask: &ldquo;What are the two S-V pairs?&rdquo; (I have, she listens). &ldquo;What coordinator joins them?&rdquo; (and). &ldquo;Could we use a different coordinator?&rdquo; (so, but).</p>
+    </aside>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     LANGUAGE REFRESHER 2/5 — Paragraph Structure
+     ════════════════════════════════════════════════════════════════════ -->
+<!-- PEDAGOGICAL INTENT: Student sees the three-part article framework with one-line reminders for each part. The structure is already familiar from the previous lesson — this just reactivates. -->
+<!-- WHY THIS FEATURE: Static — pedagogical teal. All three parts visible on entry so students see the full framework. No fragments — the three parts form one coherent structure. -->
+<!-- COGNITIVE PRINCIPLE: Spatial Contiguity — the three labels sit together on one slide so students see the progression from hook to reasons to conclusion. -->
+<!-- DESIGN MECHANISM: The three labels use the same terminology as the previous lesson (Hook, Reasons + Examples, Conclusion). If the labels changed (e.g., "Introduction" instead of "Hook"), students would have to map between two sets of terms. -->
+<section id="slide-refresher-2" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
+    <h2>Paragraph Structure</h2>
+    <div style="text-align: left; max-width: 500px; margin: 0.3em auto; font-size: 0.95em;">
+        <p style="margin: 0.4em 0;"><span style="color: #ffdd00;">Hook</span> &mdash; A question or statement to grab attention</p>
+        <p style="margin: 0.4em 0;"><span style="color: #ffdd00;">Reasons + Examples</span> &mdash; One idea per paragraph, with a personal story</p>
+        <p style="margin: 0.4em 0;"><span style="color: #ffdd00;">Conclusion</span> &mdash; Final opinion that broadens to a wider point</p>
+    </div>
+    <aside class="notes">
+        <p>Time: ~50 s. Interaction: T-Ss.</p>
+        <p>Ask: &ldquo;Point to each part in your own draft. Does your hook grab attention? Do your reasons have examples? Does your conclusion broaden?&rdquo;</p>
+    </aside>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     LANGUAGE REFRESHER 3/5 — Linking Phrases
+     ════════════════════════════════════════════════════════════════════ -->
+<!-- PEDAGOGICAL INTENT: Student sees the four linking phrase categories with examples. The categories match the linking phrase slides from the previous lesson, so students recognise the pattern. -->
+<!-- WHY THIS FEATURE: Static — pedagogical teal. The four categories with examples are visible on entry for quick scanning. One category per line with a concrete phrase. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — grouping by function (opinion, adding, contrasting, concluding) signals when to use each type. An alphabetical list would bury the function labels. -->
+<!-- DESIGN MECHANISM: Each category label is in yellow; the example phrase in white. If all text were the same colour, students couldn't distinguish the category from the example at a glance. -->
+<section id="slide-refresher-3" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
+    <h2>Linking Phrases</h2>
+    <div style="text-align: left; max-width: 500px; margin: 0.3em auto; font-size: 0.9em;">
+        <p style="margin: 0.3em 0;"><span style="color: #ffdd00;">Opinion</span> &mdash; <em>In my opinion, I believe that, From my point of view</em></p>
+        <p style="margin: 0.3em 0;"><span style="color: #ffdd00;">Adding</span> &mdash; <em>Also, In addition, Moreover</em></p>
+        <p style="margin: 0.3em 0;"><span style="color: #ffdd00;">Contrasting</span> &mdash; <em>However, Although, On the other hand</em></p>
+        <p style="margin: 0.3em 0;"><span style="color: #ffdd00;">Concluding</span> &mdash; <em>All in all, To sum up, In conclusion</em></p>
+    </div>
+    <aside class="notes">
+        <p>Time: ~50 s. Interaction: T-Ss.</p>
+        <p>Read each category. Ask: &ldquo;Call out one phrase from each category. Which category does &lsquo;Moreover&rsquo; belong to?&rdquo; (adding).</p>
+    </aside>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     LANGUAGE REFRESHER 4/5 — Complete Sentences
+     ════════════════════════════════════════════════════════════════════ -->
+<!-- PEDAGOGICAL INTENT: Student sees the three error types they should check for — fragments, run-ons, comma splices — each with a one-line example. The fix reminder gives a concrete strategy. -->
+<!-- WHY THIS FEATURE: Static — pedagogical teal. All three error types visible on entry so students see the full set. Each has an example and fix pattern. -->
+<!-- COGNITIVE PRINCIPLE: Comparison — showing the three error types together lets students distinguish between them. If each error were on a separate slide, students might miss the contrast between run-on and comma splice. -->
+<!-- DESIGN MECHANISM: Each error type uses the same label colour (yellow) and fix pattern (white). If the layout varied between types, students would need more time to parse each one — defeating the rapid-fire purpose. -->
+<section id="slide-refresher-4" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
+    <h2>Complete Sentences</h2>
+    <div style="text-align: left; max-width: 550px; margin: 0.3em auto; font-size: 0.9em;">
+        <p style="margin: 0.3em 0;"><span style="color: #ffdd00;">Fragment</span> &mdash; Missing S-V pair. Fix: add a subject or verb.</p>
+        <p style="margin: 0.3em 0;"><span style="color: #ffdd00;">Run-on</span> &mdash; Two S-V pairs with no conjunction. Fix: add comma + coordinator.</p>
+        <p style="margin: 0.3em 0;"><span style="color: #ffdd00;">Comma splice</span> &mdash; Two S-V pairs joined only by a comma. Fix: add a coordinator.</p>
+    </div>
+    <aside class="notes">
+        <p>Time: ~50 s. Interaction: T-Ss.</p>
+        <p>Display each error type. Ask: &ldquo;What&rsquo;s wrong here? How would you fix it?&rdquo; Students call out the fix.</p>
+    </aside>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     LANGUAGE REFRESHER 5/5 — Flow
+     ════════════════════════════════════════════════════════════════════ -->
+<!-- PEDAGOGICAL INTENT: Student sees a single reflective question about flow — the least rigid of the five areas. The question prompts students to think about readability rather than a rule to check. -->
+<!-- WHY THIS FEATURE: Static — pedagogical teal. A single question on screen. No fragments — the question is meant to be read and reflected on, not parsed step by step. -->
+<!-- COGNITIVE PRINCIPLE: Reflection — a single open question prompts metacognitive checking. If multiple questions were listed, students would scan rather than reflect. -->
+<!-- DESIGN MECHANISM: The question uses "you" (second person) to make it personally relevant. If it were phrased as a generic instruction ("Check that ideas connect logically"), students would process it as a rule rather than a self-check. -->
+<section id="slide-refresher-5" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
+    <h2>Flow</h2>
+    <p style="font-size: 1em; margin-top: 0.3em; font-style: italic; color: #ffdd00;">Does your article read smoothly from start to finish? Do the ideas connect in a logical order?</p>
+    <aside class="notes">
+        <p>Time: ~50 s. Interaction: T-Ss.</p>
+        <p>Explain: &ldquo;Flow is the hardest to define but the easiest to feel. Read your article to yourself and ask: does it make sense from beginning to end? If a sentence feels out of place, move it or remove it.&rdquo;</p>
+    </aside>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TRANSITION — Let's Edit (red)
+     ════════════════════════════════════════════════════════════════════ -->
+<section id="slide-transition-edit" data-background-color="#c0392b" data-background-transition="none">
+    <h2>Let&rsquo;s Edit</h2>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     STATION 1/5 — Sentence Doctor (fa-stethoscope)
+     ════════════════════════════════════════════════════════════════════ -->
+<!-- PEDAGOGICAL INTENT: Student sees a medical icon and the station name, signalling a diagnostic role. The focus, task, and verify step are visible on entry so the teacher can explain the station before the rotation starts. -->
+<!-- WHY THIS FEATURE: Static — pedagogical teal. All three rows (focus, task, verify) visible on entry so students see the full station workflow. The Font Awesome icon anchors the station visually and helps students remember which station is which. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the stethoscope icon + "Sentence Doctor" name signals the diagnostic nature of this station (checking compound sentence health). Without the icon, all five stations would look the same in memory. -->
+<!-- DESIGN MECHANISM: The icon is 2.5em in yellow, positioned above the station name. If the icon were smaller, it wouldn't function as a visual anchor; if it were placed inline with the text, it would compete with the station name for attention. -->
+<section id="slide-station-1" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
+    <p style="font-size: 2.5em; color: #ffdd00; margin-bottom: 0.1em;"><i class="fa-solid fa-stethoscope"></i></p>
+    <h2>Station 1 &mdash; Sentence Doctor</h2>
+    <p style="font-size: 1em; margin-top: 0.3em; color: #ffdd00;"><u>Focus: Compound sentences</u></p>
+    <div style="text-align: left; max-width: 550px; margin: 0.3em auto; font-size: 0.9em;">
+        <p style="margin: 0.3em 0; color: #fff;">Task: Circle coordinators. Count S-V pairs. Add missing commas before coordinators. Need at least 2 compound sentences.</p>
+        <p style="margin: 0.3em 0; color: #ffdd00;">Partner verify: Check for missed commas and coordinators. Does each compound sentence have two complete S-V pairs?</p>
+    </div>
+    <aside class="notes">
+        <p>Part of 24-min station rotation. Interaction: Ss-Ss.</p>
+        <p>Students self-edit first, then partner verifies. 4 min per station, then rotate clockwise. Station signs at each table have expanded task details. This slide is the pre-rotation explanation.</p>
+    </aside>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     STATION 2/5 — Paragraph Architect (fa-layer-group)
+     ════════════════════════════════════════════════════════════════════ -->
+<!-- PEDAGOGICAL INTENT: Student sees a layers icon representing structure. The station name and focus anchor the concept (building paragraph organisation) before the task and verify steps. -->
+<!-- WHY THIS FEATURE: Static — pedagogical teal. The layers icon + "Architect" name reinforces the idea of building structure. All rows visible on entry. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the layers icon communicates "stacking/organising" visually, which maps to paragraph structure. Students remember the icon-station association when rotating. -->
+<!-- DESIGN MECHANISM: The task uses concrete action verbs ("Draw", "Label") rather than abstract descriptions ("Check your paragraphs"). If the task were abstract, students would spend the station time figuring out what to do instead of doing it. -->
+<section id="slide-station-2" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
+    <p style="font-size: 2.5em; color: #ffdd00; margin-bottom: 0.1em;"><i class="fa-solid fa-layer-group"></i></p>
+    <h2>Station 2 &mdash; Paragraph Architect</h2>
+    <p style="font-size: 1em; margin-top: 0.3em; color: #ffdd00;"><u>Focus: Article structure</u></p>
+    <div style="text-align: left; max-width: 550px; margin: 0.3em auto; font-size: 0.9em;">
+        <p style="margin: 0.3em 0; color: #fff;">Task: Draw lines between your paragraphs. Label each section: [HOOK], [REASONS + EXAMPLES], [CONCLUSION]. If any section is missing, note it in the margin.</p>
+        <p style="margin: 0.3em 0; color: #ffdd00;">Partner verify: Can you identify all three parts in your partner&rsquo;s draft? Is each paragraph about one main idea?</p>
+    </div>
+    <aside class="notes">
+        <p>Part of 24-min station rotation. Interaction: Ss-Ss.</p>
+        <p>Students self-edit first, then partner verifies. 4 min per station, then rotate clockwise.</p>
+    </aside>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     STATION 3/5 — Link Master (fa-link)
+     ════════════════════════════════════════════════════════════════════ -->
+<!-- PEDAGOGICAL INTENT: Student sees a chain-link icon representing connections between ideas. The station focuses on transitions and cohesive devices — the words that link sentences together. -->
+<!-- WHY THIS FEATURE: Static — pedagogical teal. The link icon visually maps to "connecting ideas." All rows visible on entry. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the chain icon communicates connection visually. Students who forget what "Link Master" does can look at the icon and recall "linking" words. -->
+<!-- DESIGN MECHANISM: The task asks students to both underline linking phrases AND categorise them by function. If the task only asked students to underline (find), they would skip the categorisation step (analyse), which is where the deeper learning happens. -->
+<section id="slide-station-3" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
+    <p style="font-size: 2.5em; color: #ffdd00; margin-bottom: 0.1em;"><i class="fa-solid fa-link"></i></p>
+    <h2>Station 3 &mdash; Link Master</h2>
+    <p style="font-size: 1em; margin-top: 0.3em; color: #ffdd00;"><u>Focus: Transitions and cohesive devices</u></p>
+    <div style="text-align: left; max-width: 550px; margin: 0.3em auto; font-size: 0.9em;">
+        <p style="margin: 0.3em 0; color: #fff;">Task: Underline every linking phrase. Label each one by category: Op (opinion), Add (adding), Cont (contrasting), Concl (concluding). Check reference pronouns (it, this, they) — is it clear what they refer to?</p>
+        <p style="margin: 0.3em 0; color: #ffdd00;">Partner verify: Check your partner&rsquo;s category labels. Are they correct? Did they miss any reference pronouns that need fixing?</p>
+    </div>
+    <aside class="notes">
+        <p>Part of 24-min station rotation. Interaction: Ss-Ss.</p>
+        <p>Students self-edit first, then partner verifies. 4 min per station, then rotate clockwise.</p>
+    </aside>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     STATION 4/5 — Fragment Hunter (fa-bullseye)
+     ════════════════════════════════════════════════════════════════════ -->
+<!-- PEDAGOGICAL INTENT: Student sees a bullseye icon representing targeting and hunting down errors. The station name and focus signal that this is about finding and fixing sentence errors. -->
+<!-- WHY THIS FEATURE: Static — pedagogical teal. The bullseye icon communicates precision targeting. All rows visible on entry. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the bullseye icon maps to "hunting" for errors, making the station&rsquo;s purpose immediately recognisable even without reading the text. -->
+<!-- DESIGN MECHANISM: The task asks students to label each sentence with a symbol (checkmark/F/RO/CS) before fixing. If they skipped the labelling step and went straight to fixing, they wouldn't develop the skill of identifying error types — they'd just make intuitive corrections. -->
+<section id="slide-station-4" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
+    <p style="font-size: 2.5em; color: #ffdd00; margin-bottom: 0.1em;"><i class="fa-solid fa-bullseye"></i></p>
+    <h2>Station 4 &mdash; Fragment Hunter</h2>
+    <p style="font-size: 1em; margin-top: 0.3em; color: #ffdd00;"><u>Focus: Complete sentences</u></p>
+    <div style="text-align: left; max-width: 550px; margin: 0.3em auto; font-size: 0.9em;">
+        <p style="margin: 0.3em 0; color: #fff;">Task: Mark every sentence: ✓ (correct), F (fragment), RO (run-on), CS (comma splice). Fix every error you find. Pay special attention to sentences starting with &ldquo;Because.&rdquo;</p>
+        <p style="margin: 0.3em 0; color: #ffdd00;">Partner verify: Check every label. Do you agree? Read the fixed sentences aloud — do they sound complete?</p>
+    </div>
+    <aside class="notes">
+        <p>Part of 24-min station rotation. Interaction: Ss-Ss.</p>
+        <p>Students self-edit first, then partner verifies. 4 min per station, then rotate clockwise.</p>
+    </aside>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     STATION 5/5 — Sound Check (fa-headphones)
+     ════════════════════════════════════════════════════════════════════ -->
+<!-- PEDAGOGICAL INTENT: Student sees headphones icon representing listening. This station has no checkboxes — it is about reading aloud and listening for flow, which requires a different mental mode than the other four stations. -->
+<!-- WHY THIS FEATURE: Static — pedagogical teal. The headphones icon signals "listen," distinct from the other stations' icons (diagnose, build, link, target). This visual difference helps students switch modes when they reach this station. -->
+<!-- COGNITIVE PRINCIPLE: Modality — reading aloud engages auditory processing, which catches errors the eyes miss. The headphones icon cues students to switch from visual editing (stations 1-4) to auditory proofreading. -->
+<!-- DESIGN MECHANISM: The task is purely oral — no marking, no labelling, no checklist. If Sound Check had a written task like the other stations, students would stay in written-editing mode and miss the benefit of oral proofreading. -->
+<section id="slide-station-5" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
+    <p style="font-size: 2.5em; color: #ffdd00; margin-bottom: 0.1em;"><i class="fa-solid fa-headphones"></i></p>
+    <h2>Station 5 &mdash; Sound Check</h2>
+    <p style="font-size: 1em; margin-top: 0.3em; color: #ffdd00;"><u>Focus: Overall flow</u></p>
+    <div style="text-align: left; max-width: 550px; margin: 0.3em auto; font-size: 0.9em;">
+        <p style="margin: 0.3em 0; color: #fff;">Task: Read your entire article aloud to your partner. Read slowly and point to each word. Listen for anything that sounds wrong — missing words, awkward phrasing, unclear ideas.</p>
+        <p style="margin: 0.3em 0; color: #ffdd00;">Partner verify: After they finish, tell them one sentence that worked really well, and one place where the meaning was hard to follow.</p>
+    </div>
+    <aside class="notes">
+        <p>Part of 24-min station rotation. Interaction: Ss-Ss.</p>
+        <p>Students self-edit first (read aloud), then partner gives feedback. 4 min per station, then rotate clockwise.</p>
+    </aside>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     TRANSITION — Final Polish (red)
+     ════════════════════════════════════════════════════════════════════ -->
+<section id="slide-transition-polish" data-background-color="#c0392b" data-background-transition="none">
+    <h2>Final Polish</h2>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     WRITING TASK — Final checklist + timer (14 min)
+     ════════════════════════════════════════════════════════════════════ -->
+<!-- PEDAGOGICAL INTENT: Student sees a final requirements checklist alongside a 14-minute timer. The checklist mirrors the five station focuses so students consolidate everything into their final version. -->
+<!-- WHY THIS FEATURE: Static with data-timer — the checklist must remain visible for the full 14-minute writing period. Fragments would hide requirements and force students to remember them. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — the 14-minute timer segments the final polish into a clear window. The checklist provides sub-goals within that window. -->
+<!-- DESIGN MECHANISM: The checklist items match the station focuses exactly (compound sentences, paragraph structure, linking phrases, complete sentences). If the checklist introduced new criteria not covered at the stations, students would be confused about where to apply them. -->
+<section id="slide-writing-task" data-background-color="#1a1a2e" data-timer="840">
+    <h2 style="font-size: 1em;">Final Version &mdash; Checklist</h2>
+    <div style="max-width: 600px; margin: 0.2em auto; text-align: left; font-size: 0.9em;">
+        <p style="margin: 0.25em 0; color: #fff;"><span style="color: #ffdd00;">&square;</span> At least 2 correctly formed compound sentences</p>
+        <p style="margin: 0.25em 0; color: #fff;"><span style="color: #ffdd00;">&square;</span> Three clear paragraphs (hook, reasons, conclusion)</p>
+        <p style="margin: 0.25em 0; color: #fff;"><span style="color: #ffdd00;">&square;</span> At least 2 different linking phrase categories</p>
+        <p style="margin: 0.25em 0; color: #fff;"><span style="color: #ffdd00;">&square;</span> No fragments, run-ons, or comma splices</p>
+        <p style="margin: 0.25em 0; color: #fff;"><span style="color: #ffdd00;">&square;</span> All station corrections transferred to final version</p>
+    </div>
+    <aside class="notes">
+        <p>Stage aim: To give learners time to incorporate all corrections and produce a final version.</p>
+        <p>Time: 14 min. Interaction: S.</p>
+        <p>Students write their final version. Remind them to check each item on the checklist after writing. Circulate and support — prompt with questions rather than giving answers. Collect both the marked-up first draft (with station edits visible) and the final version for teacher assessment.</p>
+    </aside>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     SUMMARY — Checkmark statements
+     ════════════════════════════════════════════════════════════════════ -->
+<section id="slide-summary" data-background-color="#1a1a2e">
+    <h2>I can&hellip;</h2>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">&#10003;</span> self-edit my draft using a focused checklist</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">&#10003;</span> peer-edit a classmate&rsquo;s draft and give helpful feedback</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">&#10003;</span> produce a final version with corrections from both rounds</p>
+    <aside class="notes">
+        <p>Stage aim: To consolidate learning and give students a sense of progress.</p>
+        <p>Time: 1 min. Interaction: T-Ss.</p>
+        <p>Read each statement. Ask students to show thumbs-up/down for each one. Collect first drafts (with station marks) and final versions.</p>
+    </aside>
+</section>
+
+</div>
+        </div>
+
+        <!-- Mark.js (CDN) + mark plugin (local) -->
+        <!-- Timer plugin (local) -->
+        <script src="timer-plugin.js"></script>
+
+        <!-- Audio slideshow plugin (CDN) -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/audio-slideshow/plugin.js"></script>
+
+        <!-- reveal.js 5.1.0 via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                audio: {
+                    prefix: 'assets/',
+                    suffix: '.mp3',
+                    advance: -1,
+                    autoplay: false,
+                    defaultAudios: false,
+                    defaultDuration: 0,
+                    playerOpacity: 1.0,
+                    playerStyle: 'position: fixed; bottom: 30px; left: 25%; width: 50%; height:75px; z-index: 33;',
+                    startAtFragment: false,
+                },
+                plugins: [
+                    // WARNING: Every plugin here is loaded and initialized by reveal.js
+                    // at startup. If any plugin's init() function throws an error, the
+                    // entire presentation will show a BLANK PAGE. Always test new plugins
+                    // in a browser and check the console before committing to the template.
+                    // Third-party plugins that depend on external CDN libraries (like
+                    // mark.js) require special care — see SKILL.md for the plugin
+                    // testing protocol.
+                    TimerPlugin,
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                    RevealAudioSlideshow,
+                ],
+            });
+        </script>
+    </body>
+</html>

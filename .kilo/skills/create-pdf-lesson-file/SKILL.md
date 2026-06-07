@@ -203,3 +203,20 @@ Typst uses `\u{NNNN}` syntax for Unicode escape sequences — with **curly brace
 **Root cause:** The `\uNNNN` syntax (without braces) comes from Python, JavaScript, and Markdown. When answer keys are converted from `.md` to `.typ`, these escapes are copied verbatim and do NOT work in Typst.
 
 **Best practice:** Paste the actual Unicode character directly (em dash `—`, ellipsis `…`, etc.) instead of using escape sequences. This avoids the issue entirely and is more readable. Typst has first-class Unicode support — all UTF-8 characters work in content mode without escaping.
+
+### 7. HTML quote entities (`&ldquo;`, `&rdquo;`) render literally — use plain `"` instead
+
+Typst has a **`smartquote`** function enabled by default. It automatically converts straight `"` and `'` quotes into language-appropriate opening/closing curly quotes in the output. HTML entities like `&ldquo;`, `&rdquo;`, and `&rsquo;` are NOT valid Typst syntax — they pass through to the PDF as literal text.
+
+| Intended output | Correct JSON content | Wrong JSON content (renders literally) |
+|---|---|---|
+| Students read "The Cat" | `"... read \"The Cat\" ..."` | `"... read &ldquo;The Cat&rdquo; ..."` |
+| John's book | `"John's book"` | `"John&rsquo;s book"` |
+
+**Root cause:** `&ldquo;` / `&rdquo;` / `&rsquo;` are HTML character references. They are parsed by web browsers but ignored by Typst. When lesson plan procedure text or answer keys are written with HTML entities (common in slides HTML), they end up in the `.typ` output as raw text.
+
+**Fix:** Use plain `"` double quotes and `'` single quotes in JSON values. Python's `json.dumps()` auto-escapes them as `\"` in the file, and Typst's `smartquote` converts them to proper curly quotes in the PDF. Never use HTML entities in JSON content destined for Typst rendering.
+
+**To disable smart quotes globally** (if straight quotes are needed): `#set smartquote(enabled: false)` in the Typst template. To keep a single quote straight: escape it with backslash `\"` or `\'`.
+
+**See also:** [Typst smartquote documentation](https://typst.app/docs/reference/text/smartquote)

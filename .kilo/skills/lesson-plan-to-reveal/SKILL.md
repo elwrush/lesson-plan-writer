@@ -175,6 +175,18 @@ The template's base answer-list CSS provides structural layout (flex, alignment)
 </section>
 ```
 
+#### Title Slide Subtitle Rules — No Redundancy
+
+The title slide has three content lines: h2 (topic + CEFR badge), strap line (1em), and CTA (0.9em, crimson text-shield). Each must serve a **different function** — never repeat the same idea across lines.
+
+| Line | Function | Example | Do NOT |
+|------|----------|---------|--------|
+| **h2** | Topic + level | "CA: Writing a Profile B1" | — |
+| **Strap line (1em)** | Content hook — a question or tagline that builds curiosity about the topic | "What makes someone unforgettable?" | "Describe someone you know" (repeats topic) |
+| **CTA (0.9em, crimson)** | Activity signal — hints at what students will DO | "Let's Write" | "Let's Write a Profile" (repeats topic) |
+
+The strap line must be about the **content** (what makes this topic interesting), not about the lesson activity. The CTA must hint at the **lesson type** (read, write, listen, learn) without repeating the topic wording. If both lines talk about "describing" or "writing," the slide feels repetitive and students tune out.
+
 **Other image slides** (vocabulary, lead-in with photo): Use `data-background-image` with `text-shield` classes on all text elements.
 
 **When to use each approach:**
@@ -263,7 +275,8 @@ Every distinct exercise type MUST follow this four-slide sequence. This is the c
 
 | Stage type (from name/purpose) | Slide(s) to create | Content source |
 |---|---|---|
-| Lead-in — discussion / prediction | 1 slide with open question, dark `#1a1a2e` background | Stage procedure + user's context (from JSON) |
+| Lead-in — discussion / prediction with image | 1 question per slide (multiple slides if multiple categories). The image stays as background on all slides — same `data-background-image`, same `data-background-position`. | Stage procedure + user's context |
+| Lead-in — discussion / prediction (no image) | 1 slide with open question, dark `#1a1a2e` background | Stage procedure + user's context (from JSON) |
 | Lead-in — error analysis with auto-animate | 2-3 auto-animate slides: error sentences (transparent borders) → corrected sentences (visible borders) | Bespoke error sentences written in lesson plan JSON procedure text |
 | Diagnostic test (Test 1 in TTT) | 1 slide with all test items on screen, dark `#1a1a2e` background | Lesson plan JSON procedure text (bespoke items) — NOT source PDF |
 | Teach / Clarifying | 1-2 slides per concept taught (not per sub-rule); group related rules together | Stage procedure from JSON first; source PDF only for example sentences mentioned in that procedure |
@@ -272,11 +285,61 @@ Every distinct exercise type MUST follow this four-slide sequence. This is the c
 | Wrap-up | 1 summary slide | Stage procedure + learning objectives from JSON |
 | Vocabulary (if pre-teach stage exists) | 1 slide per word (max 5) | Stage 11 pre-teach vocabulary selection (from the write-lesson-plan workflow) |
 
-**Slide order**: Follow stage_number order from the JSON. Insert Title (slide 0) and Objective (slide 1) BEFORE stage 1. Insert End slide AFTER the last stage.
+#### Splitting Content Across Slides — When to Go Slide by Slide
+
+Some content should NOT be bundled on one slide. Split when any of these conditions apply:
+
+**1. Lead-in discussion with image background:** When using a portrait or photo as the background, put ONE discussion question per slide. The image stays the same across all slides (`data-background-image`, `data-background-position`, `data-background-size` identical). This prevents text boxes from overlapping or overflowing the slide boundaries, and lets the teacher focus the discussion on one category before advancing.
+
+**2. Pedagogical reference content (PET structure, linking phrases, language frames):** Teach ONE concept per slide. For example, the four-part PET article structure (title, opening, body, closing) gets four slides — one per part — each with its own rule and example. Similarly, linking phrases should be split into 2-3 categories per slide maximum. Descriptive language frames should be split into 2-3 frames per slide. This prevents a "wall of text" that students cannot copy effectively.
+
+**3. Grammar explanation slides:** Use a visual (scale, gradient, diagram) rather than a paragraph. If a textual explanation is unavoidable, keep it to 3 lines maximum — anything longer goes into the speaker notes.
+
+   **Visual scale pattern** (for adverbs of degree, intensity levels, etc.): A horizontal bar divided into coloured zones with the target words positioned below or inside each zone. This communicates the gradient relationship in one glance:
+   ```html
+   <div style="display: flex; height: 60px; border-radius: 8px; overflow: hidden;">
+       <div style="flex: 1; background: #1565c0; [...label...]">low</div>
+       <div style="flex: 1; background: #1976d2; [...label...]">medium</div>
+       <div style="flex: 1; background: #1e88e5; [...label...]">high</div>
+       <div style="flex: 1; background: #2196f3; [...label...]">very high</div>
+   </div>
+   <div style="display: flex; margin-top: 10px;">
+       <div style="flex: 1; text-align: center;">slightly</div>
+       <div style="flex: 1; text-align: center;">somewhat</div>
+       <div style="flex: 1; text-align: center;">very</div>
+       <div style="flex: 1; text-align: center;">extremely</div>
+   </div>
+   ```
+   **CRITICAL — Do NOT give away exercise answers:** If a grammar exercise asks students to classify specific words (e.g., adverbs of degree in Exercise 5), the pedagogical intro slide must use DIFFERENT example words from the exercise. Using the same words teaches the answer instead of teaching the concept.
+
+**4. Task slides with prompt + checklist:** If the content overflows the 720px viewport, use a side-by-side (flex) layout: prompt on the left, checklist on the right. Never stack vertically beyond 6-7 lines of text.
+
+#### PET Article Closing — Authentic Cambridge Handbook Pattern
+
+Do NOT use the "What about you?" rhetorical-question closing technique taught by third-party preparation sites. The **official Cambridge English handbook** (Candidate C, full marks across all four subscales) ends articles with a **concluding opinion or reflection** about the topic, not a question to the reader.
+
+**Official model (from Cambridge handbook, Content 5 / Comm Achievement 5 / Organisation 5 / Language 5):**
+> *"Laughing out loud is great! Laughing can help us to release stress and make us feel better. It may also make us more attractive too!"*
+
+**Pattern for profile articles:**
+1. Use a concluding transition: "All in all, …" / "To sum up, …" / "In conclusion, …"
+2. Give a personal opinion or general reflection about the person described
+3. End with the reason the person is memorable or important
+
+**Example for teaching slides:**
+> *"All in all, Nureyev was a truly remarkable person. His dedication to his art made him unforgettable, and that is what I admire most about him."*
+
+**Key rules:**
+- The closing should expand from the specific person to a wider reflection (what the examiner comments call "introduces a wider view")
+- DO NOT end with "What about you?" — this is not how the Cambridge handbook model answers end
+- DO NOT end with "That is my friend" — this loses marks in Communicative Achievement
+- Use the closing phrases from the linking-phrases slide: "All in all," "To sum up," "In conclusion,"
+
+**Slide order**: Follow stage_number order from the JSON. Insert Title (slide 0) and Objective (slide 1) BEFORE stage 1.
 
 **CRITICAL — Stable id attributes**: Every `<section>` MUST have a unique `id` attribute following the `slide-{kebab-name}` convention (e.g., `id="slide-title"`, `id="slide-lead-in"`, `id="slide-vocab-task"`, `id="slide-predict-entry"`). This prevents index confusion when slides are added or removed later. Locate by `id` via `scripts/locate_slide.py --id slide-name --html path/to/index.html`.
 
-**Speaker notes**: All slides EXCEPT transition slides and end slides must include `<aside class="notes">` containing:
+**Speaker notes**: All slides EXCEPT transition slides must include `<aside class="notes">` containing:
 - Stage aim from the JSON (`stage_aim`)
 - Timing (`time` field in minutes)
 - Interaction pattern (`interaction` field)
@@ -329,6 +392,41 @@ If `.a-num` is `text-align: right`, the number floats right and breaks the visua
 
 
 **CRITICAL — Add the inline style block from Step 2b before any answer slide.** Without it, the flex layout breaks on green backgrounds because the template's CSS is corrupted by a missing `}` in `.cefr-badge`.
+
+### Inline Sentence-Swap Pattern for Review Slides
+
+For open-class review slides where students identify errors (run-ons, comma splices, fragments), use the **inline sentence-swap** pattern. The correction replaces the original in the same screen position, rather than appearing as a separate line below.
+
+**When to use:**
+- Quick-fire review of 5-7 sentences at the start of a lesson
+- Correction replaces original at the same position — no eye travel
+- Teacher discusses each item live, then clicks to swap
+
+**CSS** (add as `<style>` block before the first review slide):
+```css
+.reveal .fragment.custom.sentence-swap { opacity: 1; visibility: inherit; }
+.reveal .fragment.custom.sentence-swap .corrected { display: none; }
+.reveal .fragment.custom.sentence-swap.visible .original { display: none; }
+.reveal .fragment.custom.sentence-swap.visible .corrected { display: inline; }
+```
+
+**HTML pattern** (each item follows this structure):
+```html
+<div style="margin-bottom: 0.8em;">
+    <span style="color: #ffdd00;">1.</span>
+    <span class="fragment custom sentence-swap" data-fragment-index="1" style="font-size: 0.95em;">
+        <span class="original" style="color: #fff;">&ldquo;Error sentence.&rdquo;</span>
+        <span class="corrected" style="color: #fff;">&ldquo;Corrected sentence.&rdquo; <span style="color: #ffdd00; font-size: 0.85em;">&mdash; Error type</span></span>
+    </span>
+</div>
+```
+
+**Key rules:**
+- Each item gets its own `data-fragment-index` so the teacher controls the pace — discuss sentence 1, then click to reveal correction 1, then discuss sentence 2, etc.
+- The original is visible on entry; the corrected version (with error-type badge) replaces it on click
+- Use `&ldquo;` `&rdquo;` for curly quotes around sentences
+- Error type label appears inside the corrected span with the fix
+- Split 7 sentences across 2 slides (4 + 3) to avoid crowding
 
 ### Answer Slides: Both-Methods Pattern (one per item)
 

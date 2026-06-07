@@ -1,0 +1,53 @@
+{
+  "teacher": "Ed Rush",
+  "duration": "46 minutes",
+  "date": "060526",
+  "topic": "Who do we care about most? — Editing Carousel",
+  "objective": "By the end of the lesson, learners will have edited their PET-style article at five focused editing stations — targeting compound sentences, paragraph structure, linking phrases and cohesive devices, sentence completeness, and overall flow — and produced a final version incorporating self-corrections and partner feedback.",
+  "materials": "- OFD3, Unit 1, pp. 12-13\n- Students' first drafts from the previous lesson\n- 5 station signs (printed or projected)\n- Timer visible to the class",
+  "lesson_plan": {
+    "shape": "F",
+    "shape_name": "Productive Skills (Traditional)",
+    "cefr_level": "B2",
+    "class": "M3",
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage": "Lead-in — What Good Editing Looks Like",
+        "stage_aim": "To show students what substantive editing looks like by comparing a rough draft with a revised version, and to preview the five editing stations they will rotate through.",
+        "procedure": "- Project two versions of the same short paragraph side by side: Version 1 (rough — a run-on string with no paragraph breaks, one transition, a fragment) and Version 2 (edited — two compound sentences, clear paragraph split, added linking phrase, corrected fragment).\n- Ask: What changed? How many differences can you spot?\n- Board the five editing focus areas as you elicit them: compound sentences, paragraph organisation, linking phrases, complete sentences, overall flow.\n- Explain: Today you will rotate through five editing stations, one for each focus area. At each station you edit your own draft first, then your partner verifies. Four minutes per station. When the timer beeps, move to the next station.",
+        "time": 4,
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 2,
+        "stage": "Language Refresher — Quick Station Previews",
+        "stage_aim": "To reactivate key language knowledge across all five station focus areas so students can begin editing immediately when they reach each station.",
+        "procedure": "- Rapid-fire review, one minute per area:\n  • Compound sentences: two S-V pairs + comma + coordinator. Display an example and a non-example. Students identify which is correct.\n  • Paragraph structure: three-part framework — Hook, Reasons + Examples, Conclusion. Ask students to point to each part in their own draft.\n  • Linking phrases: project the four categories (opinion, adding, contrasting, concluding). Students call out one phrase per category.\n  • Complete sentences: display a fragment, a run-on, and a comma splice. Students fix each one orally.\n  • Flow: what does it mean for a text to flow? (logical order, smooth connections between ideas).",
+        "time": 4,
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 3,
+        "stage": "Editing Carousel — Five Stations",
+        "stage_aim": "To give students focused, timed practice editing their drafts one aspect at a time while rotating through physical stations, with partner verification at each stop to deepen accuracy.",
+        "procedure": "- Students work in pairs. Each pair starts at a different station. Teacher starts the timer.\n- At each station, students spend 4 minutes completing the task on their own draft first, then having their partner verify.\n- When the timer sounds, all pairs rotate clockwise to the next station.\n- Repeat until all five stations are complete.\n\nStation 1 — Sentence Doctor (focus: compound sentences)\n  Task: \"Read every sentence in your draft. Find sentences with two S-V pairs. Circle the coordinator (and, but, so, or). If two S-V pairs are joined only by a comma, add the missing coordinator. Count your compound sentences. If you have fewer than 2, combine two simple sentences with a comma + coordinator.\"\n  Partner verify: \"Check your partner's corrections. Did they miss any missing commas or coordinators? Do all compound sentences have two complete S-V pairs?\"\n\nStation 2 — Paragraph Architect (focus: paragraph structure)\n  Task: \"Draw a line between your paragraphs. Label each one: [HOOK], [REASONS + EXAMPLES], [CONCLUSION]. If your draft is one block of text, decide where to split it and draw the breaks. If any section is missing, write a note in the margin about what to add.\"\n  Partner verify: \"Read your partner's labels. Can you see all three parts? Is each paragraph about one main idea?\"\n\nStation 3 — Link Master (focus: transitions and cohesive devices)\n  Task: \"Underline every linking phrase. Write the category above it: Op (opinion), Add (adding), Cont (contrasting), Concl (concluding). Then look for reference pronouns (it, this, they, that) — do they clearly point back to something? If a pronoun is unclear, replace it with the noun. Count your linking phrase types. If you have fewer than 2 different categories, add one.\"\n  Partner verify: \"Check your partner's underlining and labels. Did they miss any linking phrases? Are the categories correct?\"\n\nStation 4 — Fragment Hunter (focus: complete sentences)\n  Task: \"Read each sentence one by one. Mark it: ✓ for complete, — for fragment, RO for run-on, CS for comma splice. Fix every error you find. Pay special attention to sentences starting with 'Because' — they need a main clause.\"\n  Partner verify: \"Read your partner's marked-up draft. Do you agree with every label? Try reading the fixed sentences aloud — do they sound complete?\"\n\nStation 5 — Sound Check (focus: overall oral proofreading)\n  Task: \"Read your entire article aloud to your partner. Read slowly — point to each word as you go. Your partner listens for anything that sounds wrong: missing words, awkward phrasing, unclear ideas.\"\n  Partner verify: \"After your partner finishes reading, tell them: one sentence that worked really well, and one place where the meaning was hard to follow.\"",
+        "time": 24,
+        "interaction": "Ss-Ss"
+      },
+      {
+        "stage_number": 4,
+        "stage": "Final Polish — Incorporating Edits",
+        "stage_aim": "To give learners time to transfer all five stations' corrections and partner feedback into a clean final version of their article, consolidating the editing cycle.",
+        "procedure": "- Students use the remaining time to write a final version of their article, incorporating all corrections and improvements from the five stations.\n- Remind them to check their draft one last time for: at least 2 compound sentences, three clear paragraphs, at least 2 linking phrase categories, no fragments/run-ons/comma splices.\n- Circulate and support as needed — prompt with questions rather than writing corrections.\n- Collect both the marked-up first draft (with station edits visible) and the final version for teacher assessment.",
+        "time": 14,
+        "interaction": "S"
+      }
+    ]
+  },
+  "transcript": "none",
+  "answer_key": "none",
+  "slideshow_url": "",
+  "cefr_level": "B2",
+  "class": "M3"
+}

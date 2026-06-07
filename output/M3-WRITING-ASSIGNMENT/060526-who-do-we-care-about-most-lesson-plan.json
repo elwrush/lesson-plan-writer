@@ -1,0 +1,53 @@
+{
+  "teacher": "Ed Rush",
+  "duration": "46 minutes",
+  "date": "060526",
+  "topic": "Who do we care about most?",
+  "objective": "By the end of the lesson, learners will have written the first draft of a PET-style opinion essay on how close friendships can help teenagers become psychologically healthier, applying paragraph organisation, linking words, and a range of simple and complex sentence structures appropriate to B1 level.",
+  "materials": "- OFD3, Unit 1, pp. 12-13\n- Projector for displaying slides\n- Whiteboard / board pens",
+  "lesson_plan": {
+    "shape": "F",
+    "shape_name": "Productive Skills (Traditional)",
+    "cefr_level": "B2",
+    "class": "M3",
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage": "Lead-in — Emotional Support in Peer Groups",
+        "stage_aim": "To activate learners' interest in the theme of emotional support and draw out the connection between teenage mental health and the value of close friendships.",
+        "procedure": "- Display a photo of a teenager with a therapist (projected full-screen).\n- Elicit reactions: What do you think is happening in this picture? (evoke 'therapist,' 'counselor,' 'talking about feelings').\n- Follow up: What are the top 5 issues affecting teenagers today? Brainstorm as a class (stress, exams, social media, bullying, family problems).\n- Board key vocabulary and link to the lesson's writing focus: close friendships help teens cope with these issues.",
+        "time": 7,
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 2,
+        "stage": "Language Review — Sentence Structure",
+        "stage_aim": "To reactivate learners' knowledge of fragments, run-ons, comma splices, and compound sentences so they can apply these rules in their own writing.",
+        "procedure": "- Display 7 topic-related sentences on screen across two slides (items 1–4, then 5–7). Each sentence is a fragment, run-on, comma splice, or correct compound sentence.\n- For each item: ask learners to identify whether it is correct and, if not, to name the error type and suggest a fix.\n- Click to reveal the inline correction: the original sentence swaps to the corrected version in the same screen position with the error type labelled (e.g., 'Run-on', 'Comma splice', 'Fragment').\n- Keep this stage brisk — it is a review of prior learning, not initial instruction.",
+        "time": 8,
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 3,
+        "stage": "Task Preparation — PET Article Structure, Linking Phrases, and Demo",
+        "stage_aim": "To introduce the PET-style writing prompt, teach the three-part article structure (hook → reasons + examples → conclusion) with concrete examples, provide transferable linking phrases by function, and model sentence-combining via auto-animate demonstration.",
+        "procedure": "- Project the PET-style prompt in exact Cambridge format: 'ARTICLES WANTED — CLOSE FRIENDSHIPS. Write an article for your school magazine about how close friendships can help teenagers. Why is it important to have close friends? How can friends support you when you feel stressed? What have you learned from your closest friendship? The best articles will be published next month.'\n- Teach article structure in three separate pedagogical slides (teal background), one per part:\n  • Hook — start with a question or personal statement (example about a rescue dog)\n  • Reasons + Examples — one reason per paragraph with a short personal story (example about building trust with a rescue dog)\n  • Conclusion — final opinion or reflection that broadens to a wider point (example about trust taking time)\n- Display linking phrases in two slides (teal background), grouped by function:\n  • Opinions (In my opinion, I believe that, From my point of view) + Adding ideas (Also, In addition, Moreover)\n  • Contrasting (However, Although, On the other hand) + Concluding (All in all, To sum up, In conclusion)\n- Model sentence-combining via auto-animate demo: two simple sentences morph into one compound sentence with comma + coordinator, showing the structural transformation in place.\n- Board key language. Students copy structure and phrases into notebooks.",
+        "time": 10,
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 4,
+        "stage": "Writing Task — First Draft",
+        "stage_aim": "To give learners the opportunity to produce a first draft of a PET-style opinion essay, applying the organisational framework, linking devices, and sentence structures discussed.",
+        "procedure": "- Learners begin writing their first draft individually.\n- Keep the PET prompt and requirements checklist visible on screen (side-by-side layout). Checklist: a hook sentence, 2–3 reasons with examples, at least 2 linking phrases, at least 2 compound sentences, about 100 words, check for run-ons/comma splices/fragments.\n- Timer set to 21 minutes. Circulate and provide support as needed — prompt with questions rather than giving answers (e.g., 'What's your main opinion here?', 'Can you connect that idea with a linking word?').\n- If learners finish early, they can peer-check using the checklist.\n- Collect drafts at the end of the lesson for formative feedback.",
+        "time": 21,
+        "interaction": "S"
+      }
+    ]
+  },
+  "transcript": "none",
+  "answer_key": "none",
+  "slideshow_url": "https://elwrush.github.io/lesson-plan-writer/M3-WRITING-ASSIGNMENT/",
+  "cefr_level": "B2",
+  "class": "M3"
+}

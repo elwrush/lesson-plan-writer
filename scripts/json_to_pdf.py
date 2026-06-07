@@ -85,8 +85,19 @@ def validate_json(data):
 
 
 def normalize_topic(topic):
-    """Normalize topic for filename: lowercase, spaces to hyphens."""
-    return topic.lower().replace(" ", "-").replace("/", "-")
+    """Normalize topic for filename: lowercase, spaces to hyphens. Strip invalid Windows filename characters."""
+    return (
+        topic.lower()
+        .replace(" ", "-")
+        .replace("/", "-")
+        .replace(":", "")
+        .replace("?", "")
+        .replace('"', "")
+        .replace("|", "")
+        .replace("<", "")
+        .replace(">", "")
+        .replace("*", "")
+    )
 
 
 def get_output_path(json_path, topic):

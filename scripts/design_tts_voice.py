@@ -30,7 +30,7 @@ r = requests.post(
         "design_prompt": design_prompt,
         "voice_name": "us-midwest-female-vocab",
         "preview_text": preview_text,
-    }
+    },
 )
 r.raise_for_status()
 preview_id = r.json()["previewVoices"][0]["voiceId"]
@@ -44,7 +44,7 @@ r2 = requests.post(
         "displayName": "US Midwest Female (Vocabulary)",
         "description": "US midwest female voice, warm, clear, good syllable stress, for vocabulary word audio",
         "tags": ["custom", "vocabulary", "esl"],
-    }
+    },
 )
 r2.raise_for_status()
 voice_id = r2.json()["voiceId"]
