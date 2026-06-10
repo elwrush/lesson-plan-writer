@@ -231,18 +231,132 @@ Mitigation:
 2. If present, **replace the EPUB with a clean edition** — do not attempt to filter them out (the manifest structure may still reference them)
 3. Verify the publisher: legitimate editions show the actual publisher (e.g., "Walker Books") in the OPF metadata
 
+## Preferred source: Standard Ebooks
+
+For public-domain short stories and novels, **Standard Ebooks** (standardebooks.org) is strongly preferred over PDF extraction. Their XHTML is cleanly structured with proper `<p>` tags, no inline ads, no page-break artifacts, and no website navigation garbage.
+
+**Workflow:**
+1. Fetch the XHTML page via `requests` or `webfetch`
+2. Parse with BeautifulSoup
+3. Find the `<article>` or `<section>` containing the story
+4. Extract text from each `<p>` tag: `[p.get_text(strip=True) for p in article.find_all("p")]`
+5. Join with `\n\n` to preserve paragraph breaks
+6. Use this as the body text instead of PDF-extracted text
+
+**Why not American Literature (americanliterature.com):** Mediavine inline ads create artificial paragraph breaks. The site also requires Cloudflare-bypassing tools.
+
+**Why not plain PDF extraction:** PDF page boundaries create artificial paragraph breaks at sentence mid-points (e.g., "shoot off afresh\n\nunder" instead of "shoot off afresh under"). Character encoding (mojibake) is also a recurring issue.
+
+## PDF extraction (when web source unavailable)
+
+### Author/intro image extraction
+When the first page of a PDF contains a photo (e.g., author portrait), it can be extracted with PyMuPDF:
+```python
+page = doc[0]
+images = page.get_images()
+xref = images[0][0]
+base_image = doc.extract_image(xref)
+# save base_image["image"] to file
+```
+
+If the extracted image is low quality or unavailable, search Wikimedia Commons for a public-domain alternative (e.g., author portrait from Nadar).
+
+### Intelligent page joining (critical)
+When joining extracted PDF pages, **detect mid-sentence page breaks** to avoid artificial paragraph breaks:
+```python
+sentence_endings = {".", "!", "?", "\"", "'", "\u201d", "\u2019", "\u00bb", "\u2014"}
+prev_last = last_non_empty_line_of(prev_page)
+last_char = prev_last[-1] if prev_last else ""
+if last_char in sentence_endings:
+    join_with = "\n\n"  # natural paragraph break
+else:
+    join_with = "\n"    # sentence continues across page
+```
+
+### Website garbage stripping
+When extracting from web-sourced PDFs (americanliterature.com etc.), strip these patterns:
+- `"Copy Link"`, `"Rate:"`, `"Save to Library"`, `"FEATURED"`, `"COLLECTIONS"`, `"Share"`
+- `"Short Story of the Day"`, `"100 Great"`, `"Halloween"`, `"Christmas"`
+- `"SUBSCRIBE"`, `"Privacy Policy"`, `"YouTube"`, `"Pierrot"`
+- Date/time stamps matching `\d+/\d+/\d+,\s+\d+:\d+\s+(AM|PM)`
+- URL lines containing `americanliterature.com`
+- Page numbers matching `N/22` pattern
+- `"Paul's Mistress by Guy de Maupassant | Full Text"` (or any `" | Full Text"` variant)
+
+**Robust ending detection:** Find the story's last sentence and trim everything after it:
+```python
+story_end = "and she went off slowly"
+if story_end in body:
+    idx = body.rfind(story_end) + len(story_end)
+    eol = body.find("\n", idx)
+    body = body[:eol] if eol >= 0 else body[:idx]
+```
+
+## Adding a critical thinking question page (PyMuPDF)
+
+A question page can be appended to the final PDF using PyMuPDF. The page uses the same font as the booklet body (RobotoSerif 11pt).
+
+### Font registration and measurement
+**CRITICAL — do NOT guess font widths.** Use `fitz.Font.text_length()` for exact measurement:
+```python
+import fitz
+font_reg = fitz.Font(fontfile="path/to/RobotoSerif-Regular.otf")
+
+# Word-wrap using actual font metrics
+MAX_W = available_width - 5  # small buffer
+words = text.split()
+line = ""
+for word in words:
+    test = (line + " " + word).strip()
+    if font_reg.text_length(test, fontsize=11) > MAX_W and line:
+        page.insert_text(point, line, fontname="RoboReg", fontsize=11, ...)
+        y += line_height
+        line = word
+    else:
+        line = test
+```
+- `fitz.get_text_length()` does NOT support custom fonts (base 14 only). Use `Font.text_length()` instead.
+- `page.insert_textbox()` with custom fonts may return incorrect position values. Manual word-wrap with `Font.text_length()` is more reliable.
+- Always register the font with `page.insert_font(fontname="RoboReg", fontfile=path)` before `insert_text`.
+
+### A4 page layout for question page
+- A4 dimensions: 595 x 842 pt
+- Standard margins: 72pt (1 inch) all sides
+- Usable width: 595 - 144 = 451pt
+- RobotoSerif 11pt average char width: ~5.7pt → ~79 chars per line at max
+- Line height: 17pt (11pt × ~1.5 leading)
+- Ruled line spacing: 30pt for handwriting
+
+### Ruled lines
+Draw full-width horizontal lines at 30pt intervals:
+```python
+for i in range(15):
+    ly = y_start + i * 30
+    page.draw_line(fitz.Point(ML, ly), fitz.Point(PW - MR, ly), color=(0, 0, 0), width=0.5)
+```
+- 15 lines require ~450pt vertical space
+- Starting at Y≈160 gives a well-centered layout on A4
+
+### Inference question design
+B2-level critical thinking questions should test **inference** (reading between the lines), not literal recall. Pattern:
+- Reference two connected scenes/events in the story
+- Ask why the author placed them together
+- Ask what a metaphor/object reveals about a character's self-perception
+
 ## Common pitfalls
 
 | Symptom | Cause | Fix |
 |---------|-------|-----|
 | Entire text is one continuous paragraph | Tags stripped before `</p>` → `\n\n` conversion | Reorder: replace `</p>` first, then strip tags |
 | Title appears twice ("A Monster Calls A MONSTER CALLS") | `<title>` tag content not stripped | Add `re.sub(r'<title>.*?</title>', ...)` to extraction |
-| Chapter heading missing between sections | Heading stripped by `strip_leading_heading()` or manually | Insert a `CHAPTER N` heading with ornament divider in the combined text |
-| First chapter heading missing when using range | Only chapters after the first get ornament dividers; first chapter has no label | Always inject `#align(center)[*CHAPTER N*]` before the first chapter's text, not just between chapters |
-| Reflection questions run directly into story text | No page break or separator | Add `#pagebreak()` + ornament divider before questions |
-| Gloss words also taught in lesson slides | Overlap between pre-taught vocab and gloss list | Audit both lists before running bookbinder |
-| Line is a short stub, not decorative | Using `#line(length: 30%)` | Replace with centered `#align(center)[— · — · — · — · —]` |
-| EPUB has Chinese ads between chapters | Source is from chenjin5.com or similar | Replace with clean publisher edition |
+| Chapter heading missing between sections | Heading stripped by `strip_leading_heading()` or manually | Insert `CHAPTER N` heading with ornament divider |
+| Sentences split across pages ("afresh / under") | PDF pages joined with `\n\n` | Use intelligent page joining — detect mid-sentence breaks |
+| Text overflows A4 question page margins | Char-count-based wrap with wrong font metrics | Use `fitz.Font.text_length()` with actual font file |
+| Custom font text width wrong in PyMuPDF | Using `fitz.get_text_length()` (built-in fonts only) | Use `fitz.Font(fontfile=...).text_length(text, fontsize=N)` |
+| Website footer garbage in extracted text | Stripping only exact line matches | Add pattern-based detection: date regex, URL patterns, "Full Text", "Pierrot" |
+| Ruled lines off bottom of A4 page | `insert_textbox()` return value wrong for custom fonts | Manual word-wrap with `Font.text_length()` instead |
+| Intro paragraph has footnote markers | Gloss injector footnotes first occurrence | Italicise intro with `_..._` to visually separate, or accept as intentional |
+| Inline ads break paragraph flow in American Literature | Mediavine ads injected as `<div>` elements | Extract via `<p>` tags only, or switch to Standard Ebooks |
 
 ## Edge cases
 - **File not found**: "Error: input file not found at {path}"
@@ -253,3 +367,27 @@ Mitigation:
 - **Gloss word not found in text**: No error — the word simply won't appear in the output
 - **Chapter heading in source text**: The script automatically strips the first line of body text if it matches a chapter heading pattern (e.g., "Chapter 1", "CHAPTER 2", "Ch. 3") since the title page already communicates the chapter. No manual action needed.
 - **Gloss words on regeneration**: Always re-supply `--gloss` on regeneration. The script does not cache previous gloss entries — omitting `--gloss` produces an unglossed booklet.
+- **Cloudflare-blocked source**: americanliterature.com blocks direct requests. Use `webfetch` tool or switch to Standard Ebooks.
+- **Custom font text measurement**: `fitz.get_text_length()` does NOT work with custom fonts. Always use `fitz.Font(fontfile=...).text_length()`.
+- **Mid-sentence page break**: Detect via last non-whitespace character of the page; if not sentence-ending punctuation (.!?"'»—), join with `\n` instead of `\n\n`.
+- **Question page Y alignment**: With 15 ruled lines at 30pt spacing, start ruled lines at Y≈160 for centered layout on A4 (842pt page).
+- **Gloss semicolon trap**: Do NOT use semicolons inside gloss definitions — they are entry separators. Use commas instead.
+- **Typst emphasis vs story underscores**: Story text containing `_` (e.g. song lyrics) conflicts with Typst's `_..._` emphasis syntax. Use `#emph[...]` for preface italicisation instead of `_..._`, or escape underscores with `\_` in the body text.
+- **`typst compile` cp1252 crash on Windows**: `subprocess.run(text=True)` on stderr crashes on non-cp1252 output. Use `encoding="utf-8", errors="replace"` instead.
+- **EPUB extraction**: Use `ebooklib` to open `.epub` files, iterate items, find the target XHTML file by pattern (e.g. `06.xhtml`), parse with BeautifulSoup, extract `<p>` tag text. Skip heading-only paragraphs (`<h1>`, chapter titles) by filtering them out.
+- **Cover image**: Extracted images should be resized to max 1920px wide, saved as JPEG quality 85. Place in the body text as `#image("filename.jpg", height: 5.5cm)` centred. 1280×720 images work well at this height.
+- **EPUB paragraph extraction**: Use `p.get_text(separator=" ", strip=False).strip()` NOT `p.get_text(strip=True)`. The `strip=True` argument strips ALL internal whitespace, merging words across inline tags (e.g. `the <em>third</em> voyage` becomes `thethirdvoyage`). Always pass `separator=" "` to ensure spaces between inline elements, then call `.strip()` externally.
+- **Plain-text italics markers in EPUBs**: Some EPUBs use `_text_` as a plain-text convention for italics (not `<em>` tags), especially in song lyrics. After text extraction, do a targeted string replacement to convert these to Typst `#emph[...]`:
+  ```python
+  story_text = story_text.replace(
+      "\u201c_Oh, give me a June night\n\nThe moonlight and you_ ... \u201d",
+      "#emph[Oh, give me a June night\n\nThe moonlight and you]"
+  )
+  ```
+  Strip the `_` markers and wrapping curly quotes, keep the rest intact.
+- **Typst emphasis vs literal underscores**: If story text contains literal `_` characters (song lyrics, old-style italics markers), they conflict with Typst's `_..._` emphasis syntax. Two strategies:
+  - For intentional italics: use `#emph[...]` instead of `_..._` markers
+  - For literal underscores: escape as `\_` with `body.replace("_", "\\_")`
+  - Apply the underscore escape AFTER `#emph[...]` conversion so emphasized text renders correctly
+- **Header text variation**: Different detention groups use different labels (M2, M3, etc.). Set `HEADER_TEXT` dynamically per assignment. Don't hardcode in skill scripts.
+- **Page count in print statements**: Never hardcode page counts. Use `fitz.open()` to re-read the final PDF and get the actual page count.

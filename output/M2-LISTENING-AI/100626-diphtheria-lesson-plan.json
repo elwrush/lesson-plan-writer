@@ -1,0 +1,77 @@
+{
+    "teacher":  "Ed Rush",
+    "duration":  "46 minutes",
+    "date":  "100626",
+    "topic":  "Diphtheria",
+    "objective":  "By the end of the lesson, learners will have practiced and developed the sub-skills of listening for specific information and detail in the context of the history, outbreak, and government response to diphtheria in Australia.",
+    "materials":  "- BTN Classroom - Diphtheria (YouTube video: https://www.youtube.com/watch?v=tiluGfZ_AtU)\n- Bespoke listening worksheet with gapped outline and comprehension questions\n- Transcript and answer key",
+    "lesson_plan":  {
+                        "shape":  "E",
+                        "shape_name":  "Receptive Skills (Traditional)",
+                        "cefr_level":  "B1",
+                        "class":  "M2",
+                        "stages":  [
+                                       {
+                                           "stage_number":  1,
+                                           "stage":  "Lead-in — Disease in General",
+                                           "stage_aim":  "To activate learners\u0027 interest in the topic of disease and connect it to their own knowledge of health history in Thailand",
+                                           "procedure":  "- Elicit what students know about serious diseases. Ask: \"What diseases do you know about? Which ones are dangerous?\" Let a few students share.\n- Narrow the focus: ask about the history of disease in Thailand. \"What do you know about past disease outbreaks in Thailand?\" Elicit examples like polio, smallpox, or more recent ones. Discuss how vaccines helped control these diseases.\n- Introduce the listening: \"Today we\u0027re going to watch a BTN video about a disease called diphtheria. It was once very common in Australia and other countries, but vaccines almost wiped it out. But recently, there has been an outbreak in Australia, especially in remote Indigenous communities.\"\n- Interaction: T-Ss, Ss-Ss",
+                                           "time":  7,
+                                           "interaction":  "T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  2,
+                                           "stage":  "Pre-listening — Outline Strategy and Key Vocabulary",
+                                           "stage_aim":  "To introduce the outline note-taking format and pre-teach essential vocabulary for the listening text",
+                                           "procedure":  "- Distribute the worksheet. Project the outline format on the board. Explain that an outline uses Roman numerals (I, II, III) for main ideas and capital letters (A, B, C) for sub-points.\n- Tell students they will watch the video three times. Each time they focus on one part of the outline and fill the gaps with words from the video (max 3 words per gap).\n- Pre-teach key vocabulary from the transcript: contagious, antibodies, outbreak, bacteria, booster. Use simple definitions and a context sentence for each. Check understanding with quick concept questions.\n- Set the listening frame: \"Part 1 is about the history of diphtheria — who discovered it and how they found a treatment. Listen for names and dates.\"\n- Interaction: T-Ss",
+                                           "time":  7,
+                                           "interaction":  "T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  3,
+                                           "stage":  "Listening Part 1 — History of Diphtheria",
+                                           "stage_aim":  "To listen for specific historical information about diphtheria, its discovery, and the development of serum therapy and vaccines",
+                                           "procedure":  "- Play the first part of the video (0:00\u20131:14 on the YouTube video). Students complete gaps I.A.1\u2013I.C.1 on the outline.\n- Pause the video. Students answer Comprehension Questions 1\u20133 for Part 1.\n- Elicit answers from 2\u20133 students. Check outline gaps as a class. Clarify the connection between Hippocrates, Kitasato/von Behring, and the 1923 vaccine.\n- Set the listening frame for Part 2: \"Now the video shifts to the present day. Listen for the statistics about vaccination in Australia and the recent outbreak.\"\n- Interaction: S, T-Ss",
+                                           "time":  7,
+                                           "interaction":  "S"
+                                       },
+                                       {
+                                           "stage_number":  4,
+                                           "stage":  "Listening Part 2 — Vaccines and Outbreak",
+                                           "stage_aim":  "To listen for specific statistical information about vaccination rates in Australia and details about the current diphtheria outbreak",
+                                           "procedure":  "- Play the second part of the video (1:15\u20132:33). Students complete gaps II.A.1\u2013II.B.2 on the outline.\n- Pause the video. Students answer Comprehension Questions 1\u20133 for Part 2.\n- Brief class feedback. Focus on the statistics: 93% vaccination rate, 230 cases, Indigenous communities.\n- Set the listening frame for Part 3: \"The final part looks at what the government is doing about the outbreak. Listen for the names of two government ministers and what they say.\"\n- Interaction: S, T-Ss",
+                                           "time":  7,
+                                           "interaction":  "S"
+                                       },
+                                       {
+                                           "stage_number":  5,
+                                           "stage":  "Listening Part 3 — Government Response",
+                                           "stage_aim":  "To listen for specific information about government communication strategies and the vaccine rollout response",
+                                           "procedure":  "- Play the final part of the video (2:34\u20133:20). Students complete gaps III.A.1\u2013III.B.2 on the outline.\n- Pause the video. Students answer Comprehension Questions 1\u20133 for Part 3.\n- Class feedback. Highlight the two ministers\u0027 messages: language barriers and misinformation (McCarthy), re-emergence of old diseases (Butler).\n- Collect worksheets if desired.\n- Interaction: S, T-Ss",
+                                           "time":  7,
+                                           "interaction":  "S"
+                                       },
+                                       {
+                                           "stage_number":  6,
+                                           "stage":  "Post-listening — Discussion Techniques",
+                                           "stage_aim":  "To introduce simple phrases for expressing opinions and responding to others in a structured discussion",
+                                           "procedure":  "- Refer students to Part 4 of the worksheet. Display the discussion phrases on the board.\n- Model a short exchange with a volunteer. Show how to state an opinion, give a reason, and respond to a partner\u0027s view.\n- Emphasise that both partners should speak and that acknowledging the other person\u0027s idea makes the discussion stronger.\n- Interaction: T-Ss",
+                                           "time":  4,
+                                           "interaction":  "T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  7,
+                                           "stage":  "Think-Pair-Share — Vaccination and Responsibility",
+                                           "stage_aim":  "To apply ideas from the listening to a discussion about vaccination, using the discussion phrases practiced",
+                                           "procedure":  "- Refer students to the two Think-Pair-Share questions on the worksheet.\n- Question 1 (scaffolded): \"Should vaccination be compulsory for everyone? Use at least one piece of evidence from the video.\" Point out the suggested structure: say what you think, give evidence, summarise.\n- Question 2 (free practice, no scaffolding): \"How can governments make sure everyone has access to vaccines, especially in remote communities?\"\n- Think: Students write brief notes individually (2 min). Pair: Students discuss both questions in pairs, using the discussion techniques (3 min). Share: Elicit responses from 2\u20133 pairs for each question. Provide content and language feedback (2 min).\n- Interaction: S, Ss-Ss, T-Ss",
+                                           "time":  7,
+                                           "interaction":  "Ss-Ss"
+                                       }
+                                   ]
+                    },
+    "transcript":  "C:\\PROJECTS\\LESSON-PLAN-WRITER-3\\inputs\\M2-LISTENING-AI\\transcript.typ",
+    "answer_key":  "C:\\PROJECTS\\LESSON-PLAN-WRITER-3\\inputs\\M2-LISTENING-AI\\answer_key.typ",
+    "slideshow_url":  "https://elwrush.github.io/lesson-plan-writer/M2-LISTENING-AI/",
+    "cefr_level":  "B1",
+    "class":  "M2"
+}

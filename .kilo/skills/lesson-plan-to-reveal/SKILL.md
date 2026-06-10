@@ -42,19 +42,60 @@ When in doubt about phrasing, ask: "Would a teacher in the staffroom explain it 
 **⚠ KNOWN FIXES — MANDATORY READING BEFORE TOUCHING AUDIO/VIDEO/TIMER**:
 `docs/revealjs-known-issues.md` documents every hard-won fix for audio playback conflicts, timer-vs-audio exclusion, fragment audio timing, DOM integrity after scripted edits, and data-autoplay issues. **This file must be re-read every time the skill is loaded.** The fixes in this file were discovered through repeated production failures and hours of debugging — ignoring them will reproduce the same bugs.
 
-## ⚠ CRITICAL — Tier-1 Reference Hierarchy
+## ⚠ CRITICAL — Mandatory Pre-Write Ritual (Design Gate)
 
-**Pre-generation ritual — mandatory before Step 0:**
+**Complete these steps IN ORDER before writing ANY slide HTML. This is a design gate — no HTML is written until this ritual is complete.**
 
-0. **Read `docs/revealjs-known-issues.md`** — this file contains all documented fixes for audio playback, timer conflicts, fragment timing, DOM integrity, and data-autoplay issues. These were discovered through production failures and must be followed exactly. The TTS audio pattern in particular requires strict placement rules (audio inside the word fragment, not section-level; RevealAudioSlideshow removed from plugins).
+### Phase 0: Design Blueprint
 
-1. Open `templates/reference-slideshow.html` in a browser and scroll through EVERY slide type. This is a complete working slideshow with verified HTML patterns for every slide type (title, lead-in, diagnostic, teach, auto-animate pairs, strategy, task, answer with S/V annotations, summary, end). Identify which types you need for the current lesson. Copy the pattern, change only the content.
+Create a design blueprint document that maps every stage to its slides and specifies the pedagogical mechanism for each slide. Write the blueprint to `.kilo/plans/` as a plan file. The blueprint must include:
 
-2. **Cross-lesson dedup check**: Read `lesson_plan.stages[].procedure` for every stage. For any exercise referenced by name (e.g., "Practice 2D"), search the `output/` directory for OTHER lesson plan JSONs that reference the same exercise. If the exercise was already assigned in a prior lesson, flag it to the user — do NOT build duplicate slides unless the user explicitly confirms.
+1. **Stage-to-slide mapping** — list every `lesson_plan.stages[]` entry, what slide type(s) it produces, and which template pattern to copy from.
+
+2. **Per-slide design table** with columns: Slide ID | Stage | Type | Intent | Feature | Principle | Mechanism | Template Ref
+
+3. **Auto-animate pair check** — list every `data-auto-animate-id`, its slide count (must be ≥2), verify previous slide has NO auto-animate, verify same background on all siblings.
+
+4. **Answer slide sizing** — per exercise: item count → slide count → slide IDs. Flag >3 items.
+
+5. **Fragment verification** — list every fragment slide, verify no fragments on objectives/transitions/summaries.
+
+6. **Color/font audit** — verify backgrounds match slide type, verify no font-size below minimums.
+
+### Phase 1: Pre-generation Checklist
+
+Complete these checks AFTER the blueprint but BEFORE writing HTML:
+
+1. **Read `docs/revealjs-known-issues.md`** — mandatory pre-read for ALL audio, video, timer, and fragment work. This file documents hard-won production fixes for audio playback conflicts, timer-vs-audio exclusion, fragment timing, `data-autoplay` placement, and DOM integrity. Ignoring it will reproduce bugs that cost hours to debug.
+
+2. **Consult `docs/pedagogical-design-dictionary.md`** — the Mechanism Rubric defines principle-specific litmus-test questions for the DESIGN MECHANISM annotation. Every pedagogical slide's mechanism must pass its rubric question.
+
+3. **Open `templates/reference-slideshow.html`** in a browser and scroll through EVERY slide type. This is a complete working slideshow with verified HTML patterns. Identify which types you need for the current lesson. Copy the pattern, change only the content.
+
+4. **Copy `templates/base-slides-template.html`** — copy exactly. Do NOT modify the `<head>`, `<style>`, or `<script>` config unless adding a new plugin.
+
+5. **Verify colors:**
+   - Answer green = `#052e0d` — never `#1e7e34` or `#1a6b5a`
+   - Pedagogical teal = `#1a237e` — never any other blue
+   - Transition red = `#c0392b`
+   - Lead-in/filler dark = `#1a1a2e`
+
+6. **Verify font sizes:**
+   - Body text ≥1em, labels ≥0.9em
+   - Title h2 = 2.2em, logo = 120px, subheader = 1em
+   - Never use 0.7em or below for any text
+
+7. **Plan the slide count** — ensure no answer slide has >3 items. Split if needed. Verify total slide count is reasonable for the lesson duration.
+
+8. **Cross-lesson dedup check** — read `lesson_plan.stages[].procedure` for every stage. For any exercise referenced by name, search `output/` for other lesson plan JSONs referencing the same exercise. Flag duplicates.
+
+9. **Verify the base template has the `fragmentshown` handler** for `[data-vocab-trigger]` if the lesson includes vocab TTS audio. Without this handler, vocab audio will not play when the word fragment is revealed.
+
+### Design Hierarchy
 
 **The lesson plan JSON is the SOLE AUTHORITY for WHAT to teach. Everything else is HOW to present it.**
 
-Design slides using this **four-tier priority hierarchy** (after the pre-generation ritual above). Each tier overrides everything below it:
+Design slides using this **four-tier priority hierarchy** (after the ritual above). Each tier overrides everything below it:
 
 1. **👑 Tier 1 — The lesson plan JSON** (`output/{subfolder}/{mmddyy}-{topic}-lesson-plan.json`)
    - `lesson_plan.stages[]` defines EXACTLY what slides to build, in what order, with what timing
@@ -114,41 +155,56 @@ All slide `<section>` elements go between `<div class="slides">` and `</div>` in
 
 ### Vocabulary TTS Audio Pattern
 
+**⚠ MANDATORY PRE-READ:** Before generating any vocab audio or writing any audio-related HTML, read `docs/revealjs-known-issues.md` (specifically the "Audio Playback on Vocabulary Slides" section). This file documents the `data-vocab-audio` / `fragmentshown` playback approach (Approach B) and explains why `data-autoplay` inside fragments (Approach A) is broken (fires on slide entry instead of fragment reveal). Ignoring this will produce slides where audio plays at the wrong time or not at all.
+
 When a lesson plan includes pre-teach vocabulary, generate TTS audio clips and embed them in the vocabulary slides so the word is spoken aloud when the English word fragment is revealed.
 
 **Prerequisites:**
-1. Run `scripts/design_tts_voice.py` (one-time per voice) to design and publish a bespoke voice.
+1. Run `scripts/design_tts_voice.py` (one-time per voice) to design and publish a bespoke voice (skip if already done — voice ID is cached in `config/tts_vocab_voice.json`).
 2. Run `scripts/generate_vocab_audio.py` to create MP3 clips for each vocabulary word.
 
-**Slide structure:** Place the `<audio>` element INSIDE the English word's `<p class="fragment fade-up">`, NOT at the `<section>` level. Use `data-autoplay` so reveal.js plays it when that fragment becomes visible.
+**Generating audio (step-by-step):**
+
+After the teacher has selected the vocabulary words (max 5), generate the audio files:
+
+```powershell
+python scripts/generate_vocab_audio.py word1 word2 word3 --output-dir "output/{subfolder}/slides/assets"
+```
+
+This uses the Inworld TTS API to produce MP3 clips named `vocab-{word}.mp3` (e.g., `vocab-contagious.mp3`). The voice ID is loaded automatically from `config/tts_vocab_voice.json`. Requires `INWORLD_API_KEY` environment variable.
+
+**Slide structure:** Place the `<audio>` element at the `<section>` level (between the IPA and the word fragment) using `data-vocab-audio` attribute. Place `<span data-vocab-trigger></span>` inside the English word's fragment `<p>`. The `fragmentshown` event handler in the base template plays the audio exactly once when that fragment becomes visible.
 
 ```html
 <section id="slide-vocab-1" class="vocab-slide" data-background-color="#1a1a2e" data-background-transition="none">
     <div style="text-align: center; padding: 60px 40px;">
-        <p style="font-size: 1.8em; color: #ffdd00; letter-spacing: 0.05em;">
-            /fəˈnetɪk/
-        </p>
+        <h2 style="font-size: 1.4em; color: #ffdd00; margin-bottom: 0.8em;">Important Words</h2>
+        <p style="font-family: 'Times New Roman', Times, serif; font-size: 1.8em; color: #ffdd00; letter-spacing: 0.05em;">/fəˈnetɪk/</p>
+        <audio data-vocab-audio src="assets/vocab-word.mp3"></audio>
         <p class="fragment fade-up" style="font-size: 2.2em; color: #fff; font-weight: bold; margin-top: 0.5em;">
-            <!-- Audio inside the word fragment — plays when this fragment is revealed -->
-            <audio data-autoplay preload="auto" style="position: absolute; width: 0; height: 0; overflow: hidden;"
-                   src="assets/vocab-word.mp3"></audio>
-            <span class="vocab-word">word</span> <span style="color: #888; font-size: 0.5em;">(noun)</span>
+            <span data-vocab-trigger></span>
+            <span class="vocab-word">word</span> <span style="color: #fff; font-size: 0.6em;">(noun)</span>
         </p>
-        <p class="fragment fade-up" style="font-size: 1.2em; color: #fff; margin-top: 1em;">
+        <p class="fragment fade-up" style="color: #fff; margin-top: 1em;">
             Context sentence with <span class="vocab-word">word</span> highlighted.
         </p>
     </div>
+    <aside class="notes">Drill: teacher says → class repeats (×3).</aside>
 </section>
 ```
 
+**Subsequent vocab slides** (slides 2–5) omit the `<h2>Important Words</h2>` header. Everything else is identical.
+
 **Key rules:**
-- Audio fires on the **first fragment reveal** (English word), NOT on slide entry (phonemic script)
-- Use `data-autoplay` (not native HTML5 `autoplay`) — reveal.js's `startEmbeddedContent(el)` plays it when the fragment becomes `.visible`
-- Remove `RevealAudioSlideshow` from the plugins array — its `fragmentshown`/`fragmenthidden` handlers interfere with reliable single-playback
-- Do NOT use a custom `slidechanged` handler — let reveal.js manage playback via `data-autoplay` inside the fragment
-- Hide via `position: absolute; width: 0; height: 0; overflow: hidden` (not `display:none`) so the browser loads audio data
-- Add part-of-speech marker after the English word in smaller gray text: `word (noun)`
-- The phonemic script must use `font-family: 'Times New Roman', Times, serif;` for reliable IPA rendering
+- Audio fires on the **first fragment reveal** (English word), NOT on slide entry (phonemic script). The `fragmentshown` event handler in the base template listens for `[data-vocab-trigger]` on the shown fragment and plays the section-level `<audio data-vocab-audio>` element exactly once.
+- Use `data-vocab-audio` (not `data-autoplay`) on `<audio>` — this prevents reveal.js's `startEmbeddedContent()` from triggering playback on slide entry.
+- Remove `RevealAudioSlideshow` from the plugins array — its internal `fragmentshown`/`fragmenthidden` handlers conflict with the `data-vocab-audio` handler.
+- Do NOT add a custom `slidechanged` handler — the base template already includes the playback handler.
+- Hide audio via CSS (in base template): `audio[data-vocab-audio] { position: absolute; width: 0; height: 0; overflow: hidden; }` (not `display:none`) so the browser loads audio data.
+- Add part-of-speech marker after the English word in smaller white text: `<span style="color: #fff; font-size: 0.6em;">(noun)</span>`
+- The phonemic script must use `font-family: 'Times New Roman', Times, serif; font-size: 1.8em; color: #ffdd00; letter-spacing: 0.05em;` for reliable IPA rendering.
+- On the first vocab slide only, include `<h2 style="font-size: 1.4em; color: #ffdd00; margin-bottom: 0.8em;">Important Words</h2>`.
+- IPA is visible on entry. First click reveals the English word + plays audio. Second click reveals the context sentence.
 
 ### Step 2: Copy supporting files (timer plugin, logo)
 

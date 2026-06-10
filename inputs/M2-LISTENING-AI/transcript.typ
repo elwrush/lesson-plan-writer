@@ -1,0 +1,29 @@
+#set page(paper: "a4", margin: (x: 2cm, top: 1.5cm, bottom: 1.5cm))
+#set text(font: "Roboto", size: 10pt)
+#set par(leading: 0.35em)
+
+#align(center, text(size: 14pt, weight: "bold")[Transcript])
+#align(center, text(size: 10pt)[BTN Classroom — Diphtheria])
+#align(center, text(size: 9pt)[4 June 2026])
+
+#v(0.3em)
+#line(length: 100%, stroke: 0.5pt)
+#v(0.3em)
+
+*Tatenda:* This was a film that once played in movie theatres, warning people about a dangerous disease that affected thousands of children.
+
+PSA: Stop this needless death!
+
+*Tatenda:* Diphtheria is a contagious disease caused by toxin-producing bacteria, and it can infect the nose, throat, airways or skin. The disease was first described in 4th or 5th century BCE by Greek physician and philosopher Hippocrates, AKA the father of medicine, and, in the 1800s, it was given the name diphtheria, which translates to 'leather' in Greek, because that's kind of what it looked like in the throat.
+
+In the 1890s, there was a breakthrough. Scientists Kitasato Shibasaburo and Emil von Behring developed serum therapy. It involved injecting animals with diphtheria toxins to produce antibodies, which are proteins made by the immune system to fight off disease. They found that by giving those antibodies to other animals and eventually humans, they could stop them from getting sick. The discovery won Emil von Behring the first Nobel Prize in Physiology or Medicine in 1901. In 1923, a French researcher found a way to make a safer diphtheria vaccine, and countries around the world pushed to protect their populations.
+
+And it worked. This graph shows just how much diphtheria cases have fallen since the vaccine became widespread. Today, most Aussies get vaccinated when they're little. In fact, 93% of five-year-olds have had all their recommended doses of the diphtheria vaccine. 11-to-13-year-olds can also get a booster shot through school programs. But there are still gaps. And, recently, we've seen an outbreak of diphtheria.
+
+More than 230 people have tested positive for the disease in parts of Queensland, Western Australia, South Australia and the Northern Territory. Many of those cases are adults living in Indigenous communities, where authorities say there can be barriers to accessing vaccines.
+
+*Malarndirri McCarthy, Minister for Indigenous Australians:* We know that we've got over 100 Aboriginal languages. We need to ensure that the communication is there, not misinformation.
+
+*Mark Butler, Minister for Health and Aged Care:* Some of these diseases, which we thought had been largely consigned to the dustbin of history, like diphtheria, like measles, are showing a re-emergence not just here in Australia, but in a number of other countries where particularly childhood immunisation rates are dropping.
+
+In the last few weeks, more than 10,000 people in the NT alone have had a diphtheria vaccine. Authorities say the outbreak isn't over yet, but the number of new cases has gone down, and hopefully, soon, diphtheria will once again be a thing of the past.

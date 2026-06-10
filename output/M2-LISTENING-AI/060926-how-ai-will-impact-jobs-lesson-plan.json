@@ -1,0 +1,77 @@
+{
+    "teacher":  "Ed Rush",
+    "duration":  "46 minutes",
+    "date":  "060926",
+    "topic":  "How AI Will Impact Jobs",
+    "objective":  "By the end of the lesson, learners will have practiced and developed the sub-skills of listening for specific information and detail in the context of how AI is expected to affect the job market.",
+    "materials":  "- BTN Newsbreak 4 June 2026 - AI Report (YouTube video: https://www.youtube.com/watch?v=0gOqzcztjzA)\n- Bespoke listening worksheet with gapped outline and comprehension questions\n- Transcript and answer key",
+    "lesson_plan":  {
+                        "shape":  "E",
+                        "shape_name":  "Receptive Skills (Traditional)",
+                        "cefr_level":  "B1",
+                        "class":  "M2",
+                        "stages":  [
+                                       {
+                                           "stage_number":  1,
+                                           "stage":  "Lead-in — AI at Work",
+                                           "stage_aim":  "To get students thinking about AI in the workplace and what it might mean for different jobs",
+                                           "procedure":  "- Elicit what students know about AI. Ask: \"Have you used ChatGPT or other AI tools? What for?\" Let a few students share experiences.\n- Display the question: \"Will AI take our jobs?\" Put students in pairs to brainstorm jobs that AI could do instead of humans (1 min). Collect ideas on the board.\n- Narrow the focus: ask whether students think AI is mostly helpful or mostly a risk for workers. Show a quick hands-up poll.\n- Introduce the listening: \"We're going to watch a BTN Newsbreak report about AI and jobs. The reporter shares what a big company called Deloitte found. We'll watch it three times, each time with a different focus.\"\n- Interaction: T-Ss, Ss-Ss",
+                                           "time":  7,
+                                           "interaction":  "T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  2,
+                                           "stage":  "Pre-listening — Outline Strategy and Key Vocabulary",
+                                           "stage_aim":  "To introduce the outline note-taking format and pre-teach essential vocabulary for the listening task",
+                                           "procedure":  "- Distribute the worksheet. Project the outline format on the board. Explain that an outline uses Roman numerals (I, II, III) for main ideas and capital letters (A, B) for sub-points.\n- Tell students they will watch the AI segment three times. Each time they focus on one part of the outline and fill the gaps with words from the video (max 3 words per gap).\n- Pre-teach key vocabulary from the transcript: disrupted, enhanced, occupations, empathy, thoughtfully. Use simple definitions and a context sentence for each. Check understanding with quick concept questions.\n- Set the listening frame: \"Part 1 is about which jobs are at risk. The key information comes from a company called Deloitte. Listen for numbers and job names.\"\n- Interaction: T-Ss",
+                                           "time":  7,
+                                           "interaction":  "T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  3,
+                                           "stage":  "Listening Part 1 — Jobs at Risk",
+                                           "stage_aim":  "To listen for specific information about which jobs are most likely to be affected by AI and complete the first section of the outline",
+                                           "procedure":  "- Play the first part of the AI segment (0:00–0:43 on the YouTube video). Students complete gaps I.A.1–I.B.1 on the outline.\n- Pause the video. Students answer Comprehension Questions 1–3 for Part 1.\n- Elicit answers from 2–3 students. Check outline gaps as a class. Clarify any confusion about \"disrupted\" and \"82 occupations.\"\n- Set the listening frame for Part 2: \"Now the report shifts — not all AI effects are negative. Listen for which industries AI can actually help.\"\n- Interaction: S, T-Ss",
+                                           "time":  7,
+                                           "interaction":  "S"
+                                       },
+                                       {
+                                           "stage_number":  4,
+                                           "stage":  "Listening Part 2 — Jobs Enhanced by AI",
+                                           "stage_aim":  "To listen for detail about how AI can benefit certain jobs that rely on human skills",
+                                           "procedure":  "- Play the second part of the AI segment (0:44–1:02). Students complete gaps II.A.1–II.B.2 on the outline.\n- Pause the video. Students answer Comprehension Questions 1–3 for Part 2.\n- Brief class feedback. Focus on the three human skills (creativity, judgement, empathy) — check students can explain each one in simple terms.\n- Set the listening frame for Part 3: \"The final part talks about what the government is doing with AI and what experts say young people should do. Listen for the name of the AI system.\"\n- Interaction: S, T-Ss",
+                                           "time":  7,
+                                           "interaction":  "S"
+                                       },
+                                       {
+                                           "stage_number":  5,
+                                           "stage":  "Listening Part 3 — Working with AI",
+                                           "stage_aim":  "To listen for specific information about the AI system Mythos and expert advice for young people",
+                                           "procedure":  "- Play the final part of the AI segment (1:02–1:27). Students complete gaps III.A.1–III.B.2 on the outline.\n- Pause the video. Students answer Comprehension Questions 1–3 for Part 3.\n- Class feedback. Highlight the expert advice: learn to work with AI and use it thoughtfully. Ask students what \"thoughtfully\" means in their own words.\n- Collect worksheets if desired.\n- Interaction: S, T-Ss",
+                                           "time":  7,
+                                           "interaction":  "S"
+                                       },
+                                       {
+                                           "stage_number":  6,
+                                           "stage":  "Post-listening — Discussion Techniques",
+                                           "stage_aim":  "To introduce simple phrases for expressing opinions and responding to others in a structured discussion",
+                                           "procedure":  "- Refer students to Part 4 of the worksheet. Display the discussion phrases on the board: introducing a point (\"I think that ... because ...\", \"In my opinion, ...\", \"It seems to me that ...\", \"One thing I noticed was ...\") and responding to others (\"That's a good point. I'd add that ...\", \"I see what you mean. However, ...\", \"I hadn't thought of it that way.\", \"That's interesting. But what about ...?\").\n- Model a short exchange with a volunteer. Show how to state an opinion, give a reason, and respond to a partner's view.\n- Emphasise that both partners should speak and that acknowledging the other person's idea makes the discussion stronger.\n- Interaction: T-Ss",
+                                           "time":  4,
+                                           "interaction":  "T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  7,
+                                           "stage":  "Think-Pair-Share — AI and My Future",
+                                           "stage_aim":  "To apply ideas from the listening to personal opinions, using the discussion phrases practiced",
+                                           "procedure":  "- Refer students to the two Think-Pair-Share questions on the worksheet.\n- Question 1 (scaffolded): \"Which jobs do you think are most at risk from AI? Use at least one piece of evidence from the video.\" Point out the suggested structure: say what you think → give evidence from the video → summarise.\n- Question 2 (free practice, no scaffolding): \"How can young people prepare for a future with AI? What skills should they learn?\" No structure provided — students formulate their own response.\n- Think: Students write brief notes individually (2 min). Pair: Students discuss both questions in pairs, using the discussion techniques (3 min). Share: Elicit responses from 2–3 pairs for each question. Provide content and language feedback (2 min).\n- Interaction: S, Ss-Ss, T-Ss",
+                                           "time":  7,
+                                           "interaction":  "Ss-Ss"
+                                       }
+                                   ]
+                    },
+    "transcript":  "C:\\PROJECTS\\LESSON-PLAN-WRITER-3\\inputs\\M2-LISTENING-AI\\transcript.typ",
+    "answer_key":  "C:\\PROJECTS\\LESSON-PLAN-WRITER-3\\inputs\\M2-LISTENING-AI\\answer_key.typ",
+    "slideshow_url":  "https://elwrush.github.io/lesson-plan-writer/M2-LISTENING-AI/",
+    "cefr_level":  "B1",
+    "class":  "M2"
+}

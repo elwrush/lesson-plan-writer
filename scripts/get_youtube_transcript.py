@@ -46,10 +46,7 @@ def format_output(transcript: list) -> str:
 
 def filter_by_segment(transcript: list, start_sec: float, end_sec: float) -> list:
     """Filter transcript entries between start and end timestamps."""
-    return [
-        s for s in transcript
-        if s.start >= start_sec and s.start + s.duration <= end_sec
-    ]
+    return [s for s in transcript if s.start >= start_sec and s.start + s.duration <= end_sec]
 
 
 def main():

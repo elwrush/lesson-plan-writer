@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>Diphtheria — B1 Listening</title>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            /* =============================================
+               LESSON PLAN WRITER 3 — BASE SLIDE STYLES
+               Authoritative stylesheet for all presentations.
+               ============================================= */
+
+            /* --- CEFR Badges --- */
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                font-size: 0.7em;
+                padding: 4px 12px;
+                border-radius: 4px;
+                vertical-align: middle;
+                position: relative;
+                top: -2px;
+            }
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+
+            .reveal .a-badge {
+                display: inline-block;
+                padding: 0.1em 0.5em;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 0.85em;
+                min-width: 1.8em;
+                text-align: center;
+            }
+            .reveal .a-badge.a-cor {
+                background: rgba(76, 175, 80, 0.4);
+                color: #fff;
+            }
+            .reveal .a-badge.a-inc {
+                background: rgba(244, 67, 54, 0.4);
+                color: #fff;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+
+
+            /* --- Answer flex layout (replaces answer-table) --- */
+            .reveal .answer-list {
+                width: 100%;
+                font-size: 0.95em;
+            }
+            .reveal .a-row {
+                display: flex;
+                align-items: baseline;
+                padding: 0.5em 0;
+                border-bottom: 1px solid #fff;
+                gap: 0.5em;
+            }
+            .reveal .a-row:last-child { border-bottom: none; }
+            .reveal .a-num {
+                flex: 0 0 1.5em;
+                text-align: left;
+                color: #fff;
+                font-size: 0.95em;
+            }
+            .reveal .a-q {
+                flex: 0 0 auto;
+                min-width: 0;
+                margin-right: 0.5em;
+            }
+            .reveal .a-ans {
+                flex: 1 1 auto;
+                min-width: 0;
+                text-align: left;
+                padding: 0.1em 0.3em;
+                border-radius: 4px;
+            }
+            .reveal .a-ans.a-cor { color: #ffdd00; }
+            .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+            .reveal .a-ans.a-inc { color: #fff; }
+            .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
+            /* Why column on answer rows — explanation text, fills remaining space */
+            .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+            /* S/V annotation underlines and labels for grammar identification */
+            .reveal .a-s { border-bottom: 2px solid #fff; }
+            .reveal .a-v { border-bottom: 3px solid #ffdd00; }
+            .reveal .a-ls { color: #ffdd00; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+            .reveal .a-lv { color: #fff; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+
+            /* --- Labels & captions --- */
+            .reveal .aim-label {
+                font-size: 0.85em;
+                color: #fff;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            .reveal .material-ref {
+                font-size: 0.85em;
+                color: #fff;
+                font-style: italic;
+                margin-top: 0.5em;
+            }
+            .reveal .source-cite {
+                font-size: 0.85em;
+                color: #fff;
+                font-style: italic;
+                margin-top: 0.3em;
+            }
+            .reveal .image-caption {
+                font-size: 0.85em;
+                color: #fff;
+                text-align: center;
+                margin-top: 0.2em;
+            }
+
+            /* --- Vocabulary slides --- */
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+            }
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal section.pedagogical .strategy-tip {
+                font-size: 0.85em;
+                font-style: italic;
+                color: #fff;
+                margin-bottom: 0.5em;
+            }
+            .reveal section.pedagogical .evidence {
+                font-size: 0.8em;
+                background: rgba(0,0,0,0.3);
+                padding: 0.4em 0.6em;
+                border-radius: 4px;
+                border-left: 3px solid rgba(255,255,255,0.4);
+            }
+
+            /* --- Text shield for full-opacity image backgrounds --- */
+            /* Uses display:inline-block + max-width for subtitle-style shielding.
+               inline-block keeps the background tight to the text.
+               max-width prevents full-width bars on very long text.
+               Elements stack naturally (block-level spacing) without ::after artifacts. */
+            .reveal .text-shield {
+                background: rgba(0, 0, 0, 0.55);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                line-height: 1.6;
+            }
+            .reveal .text-shield-light {
+                background: rgba(200, 200, 200, 0.65);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                color: #fff;
+                line-height: 1.6;
+            }
+            /* Fragment variant: text already visible, background highlight on click */
+            .reveal .fragment.text-shield-light { opacity: 1; visibility: inherit; }
+            .reveal .fragment.text-shield-light.visible { background: rgba(200, 200, 200, 0.65); padding: 0.15em 0.6em; border-radius: 4px; }
+
+            /* --- Answer slides with both methods (p11 pattern) --- */
+            .reveal section.answer-slide p,
+            .reveal section.answer-slide li,
+            .reveal section.answer-slide h1,
+            .reveal section.answer-slide h2,
+            .reveal section.answer-slide h3,
+            .reveal section.answer-slide h4,
+            .reveal section.answer-slide h5,
+            .reveal section.answer-slide h6 { text-shadow: none !important; }
+            .reveal .p11-answer { width: 100%; font-size: 0.9em; text-align: left; }
+            .reveal .p11-badge { display: inline-block; padding: 0.15em 0.6em; border-radius: 4px; font-weight: bold; font-size: 0.85em; color: #ffdd00; }
+            .reveal .p11-original { font-size: 0.9em; color: #ffdd00; font-style: italic; padding: 0.4em 0; border-bottom: 3px solid rgba(255,255,255,0.15); margin: 0.5em 0; line-height: 1.5; }
+            .reveal .p11-method { padding: 0.3em 0; }
+            .reveal .p11-method p { margin: 0.1em 0; }
+            .reveal .p11-fix { color: #fff; font-size: 0.9em; margin-left: 0.5em !important; line-height: 1.5; }
+            .reveal .p11-fix span.cor-add { color: #ffdd00; border-bottom: 3px solid #fff; padding-bottom: 1px; }
+            .reveal .p11-why { color: #fff; font-size: 0.85em; font-style: italic; padding: 0.4em; background: rgba(0,0,0,0.2); border-radius: 4px; border-left: 3px solid #ffdd00; margin-top: 0.5em; line-height: 1.5; }
+
+            /* --- Fragment styles --- */
+            /* --- Yellow text for answers on green answer tables --- */
+            .reveal .answer-yellow { color: #ffdd00; }
+            .reveal .fragment.answer-yellow.visible { color: #ffdd00; }
+
+            .reveal table.answer-table th {
+                background: rgba(0, 0, 0, 0.2);
+                font-weight: bold;
+            }
+            .reveal .fragment.strike {
+                text-decoration: line-through;
+                opacity: 0.6;
+            }
+
+            /* --- YouTube iframe container (16:9 responsive) --- */
+            /* Default: width 90%, padding 50.625% (= 90 × 9/16). 
+               To resize, override BOTH width AND padding-bottom inline:
+               style="width: X%; padding-bottom: Y%;" where Y = X × 9/16 */
+            .reveal .iframe-container {
+                position: relative;
+                width: 90%;
+                padding-bottom: 50.625%;
+                height: 0;
+                overflow: hidden;
+                margin: 0 auto 0.5em;
+            }
+            .reveal .iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* --- Diagnostic talk structure slides (pedagogical, teal) --- */
+            .reveal .structure-talk h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal .structure-talk p,
+            .reveal .structure-talk li  { color: #fff; }
+            .reveal .structure-talk .structure-step {
+                font-size: 1.1em;
+                margin-bottom: 0.6em;
+            }
+            .reveal .structure-talk .transition-words {
+                font-size: 0.9em;
+                color: #ffdd00;
+                font-style: italic;
+                margin-top: 0.8em;
+                padding: 0.4em 0.6em;
+                background: rgba(0,0,0,0.2);
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+                <!-- ============================================================
+                     M2-LISTENING-AI — Diphtheria
+                     BTN Classroom · 4 June 2026
+                     32 slides · B1 · 46 min
+                     ============================================================ -->
+
+                <!-- ─── SPLASH ─────────────────────────────────────────── -->
+                <section id="slide-splash" data-background-color="#1a1a2e" data-background-image="assets/diphtheria-patient.jpg" data-background-size="cover" data-background-transition="none"></section>
+
+                <!-- ─── TITLE ──────────────────────────────────────────── -->
+                <section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/diphtheria-patient.jpg" data-background-size="cover" style="justify-content: center;">
+                    <img src="assets/logo.png" style="height: 120px; margin: 0 auto 0.5em; display: block;" alt="ACT" />
+                    <h2 style="font-size: 2.2em;"><span class="text-shield">Diphtheria <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></span></h2>
+                    <p style="font-size: 1em; margin-top: 0.3em;"><span class="text-shield">A disease from the past is back — what's happened?</span></p>
+                    <p style="font-size: 0.9em; font-weight: bold; color: #fff; margin-top: 0.3em;"><span style="background: rgba(180, 0, 0, 0.65); padding: 6px 16px; border-radius: 4px; display: inline-block;">Let's Watch and Find Out</span></p>
+                    <aside class="notes">Teacher: Ed Rush · M2 · B1 · 46 min. Show splash first (5 sec silent). Read title, badge, strap, CTA.</aside>
+                </section>
+
+                <!-- ─── OBJECTIVE ───────────────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees three "I can" outcomes that preview the diphtheria lesson structure -->
+                <!-- WHY THIS FEATURE: Static bullet list — all outcomes visible at once for orientation -->
+                <!-- COGNITIVE PRINCIPLE: Segmenting — three outcomes map to the three listening parts -->
+                <!-- DESIGN MECHANISM: Each bullet uses "I can" first-person framing linked to a specific part of the diphtheria story -->
+                <section id="slide-objective" data-background-color="#1a1a2e">
+                    <h2>Here's what you'll be able to do</h2>
+                    <ul style="font-size: 1.1em; line-height: 1.8;">
+                        <li><i class="fa-solid fa-check" style="color:#ffdd00;"></i> I can understand the history of diphtheria</li>
+                        <li><i class="fa-solid fa-check" style="color:#ffdd00;"></i> I can understand the current outbreak in Australia</li>
+                        <li><i class="fa-solid fa-check" style="color:#ffdd00;"></i> I can understand how the government is responding</li>
+                    </ul>
+                    <aside class="notes">Stage: Objective · 2 min · T-Ss. Read each outcome aloud. Connect to the three listening parts.</aside>
+                </section>
+
+                <!-- ─── LEAD-IN ─────────────────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student discusses disease in general, activates prior knowledge -->
+                <!-- WHY THIS FEATURE: Static question on dark background -- open questions for discussion; no fragments so teacher controls the conversational pace -->
+                <!-- COGNITIVE PRINCIPLE: Pre-training -- activates schemas about disease before the listening task -->
+                <!-- DESIGN MECHANISM: Two open questions (general diseases → Thailand history) with a directional prompt toward the Australian video. Without the narrowing sequence, students would jump from general discussion straight to Australia with no Thailand context -->
+                <section id="slide-lead-in" data-background-color="#1a1a2e">
+                    <h2>Let's get Started</h2>
+                    <p style="font-size: 1.1em; margin-top: 0.5em;">What serious diseases do you know about?</p>
+                    <p style="font-size: 1.1em; margin-top: 0.5em;">What do you know about the history of diphtheria in Thailand?</p>
+                    <aside class="notes">Stage 1 · Lead-in · 7 min · T-Ss, Ss-Ss. 1) Elicit diseases students know. 2) Discuss the history of diphtheria in Thailand — has it affected Thailand? Have vaccines helped? 3) Advance to the auto-animate pair to visualise Thailand's broader disease history, then point to the current Australian diphtheria outbreak.</aside>
+                </section>
+
+                <!-- ─── AUTO-ANIMATE: THAILAND DISEASE HISTORY (ENTRY) ──── -->
+                <!-- PEDAGOGICAL INTENT: Student sees three empty circular icons representing serious diseases that affected Thailand — the blank circles invite curiosity about what will fill them -->
+                <!-- WHY THIS FEATURE: Auto-animate across two slides — entry shows circles with transparent borders and plain labels; click reveals yellow borders + expanded details via CSS transition. Same pattern as M3 "Four Generations" auto-animate -->
+                <!-- COGNITIVE PRINCIPLE: Signaling — the animated yellow border morphing directs attention to each disease's identity -->
+                <!-- DESIGN MECHANISM: Each circle has data-id (g1-g3) and matching label (l1-l3) so auto-animate keeps them in place while borders and text transform. Identical structure to the M3 generations carousel. Without data-id on both circles and labels, the animations would snap instead of morphing smoothly -->
+                <section id="slide-thailand-entry" data-auto-animate data-auto-animate-id="thailand" data-background-color="#1a1a2e">
+                    <div style="overflow: hidden;">
+                        <h2 data-id="title">Diseases in Thailand's History</h2>
+                        <div style="display: flex; justify-content: space-around; margin-top: 1em;">
+                            <div style="text-align: center; flex: 1;">
+                                <div data-id="g1" style="border: 2px solid transparent; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 2em; color: #fff;">
+                                    <i class="fa-solid fa-virus"></i>
+                                </div>
+                                <p data-id="l1" style="color: #888; margin-top: 0.5em; font-size: 0.9em;">Smallpox</p>
+                            </div>
+                            <div style="text-align: center; flex: 1;">
+                                <div data-id="g2" style="border: 2px solid transparent; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 2em; color: #fff;">
+                                    <i class="fa-solid fa-biohazard"></i>
+                                </div>
+                                <p data-id="l2" style="color: #888; margin-top: 0.5em; font-size: 0.9em;">Polio</p>
+                            </div>
+                            <div style="text-align: center; flex: 1;">
+                                <div data-id="g3" style="border: 2px solid transparent; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 2em; color: #fff;">
+                                    <i class="fa-solid fa-bug"></i>
+                                </div>
+                                <p data-id="l3" style="color: #888; margin-top: 0.5em; font-size: 0.9em;">Cholera</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ─── AUTO-ANIMATE: THAILAND DISEASE HISTORY (REVEAL) ─── -->
+                <!-- PEDAGOGICAL INTENT: The empty circles transform with yellow borders and expanded labels — students see each disease's era and impact at a glance -->
+                <!-- WHY THIS FEATURE: Auto-animate smoothly transitions circles from transparent to yellow borders while labels fill in with details; fragments would blink text in rather than morphing -->
+                <!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the disease name and its key detail appear simultaneously, linked by the same circle -->
+                <!-- DESIGN MECHANISM: Each circle's border morphs to 3px solid #ffdd00, icon turns yellow, and label transforms from gray text to white+bold with a yellow detail line. A new 4th circle for diphtheria appears on the right, completing the narrowing arc to the lesson topic. Matching data-id on all elements keeps the animation in place -->
+                <section id="slide-thailand-reveal" data-auto-animate data-auto-animate-id="thailand" data-background-color="#1a1a2e">
+                    <div style="overflow: hidden;">
+                        <h2 data-id="title">Diseases in Thailand's History</h2>
+                        <div style="display: flex; justify-content: space-around; margin-top: 1em;">
+                            <div style="text-align: center; flex: 1;">
+                                <div data-id="g1" style="border: 3px solid #ffdd00; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 2em; color: #ffdd00;">
+                                    <i class="fa-solid fa-virus"></i>
+                                </div>
+                                <p data-id="l1" style="color: #fff; margin-top: 0.5em; font-size: 0.9em; font-weight: bold;">Smallpox<br><span style="color: #ffdd00; font-size: 0.85em;">Eradicated</span><br><span style="color: #fff; font-size: 0.75em; font-weight: normal;">Vaccines wiped it out</span></p>
+                            </div>
+                            <div style="text-align: center; flex: 1;">
+                                <div data-id="g2" style="border: 3px solid #ffdd00; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 2em; color: #ffdd00;">
+                                    <i class="fa-solid fa-biohazard"></i>
+                                </div>
+                                <p data-id="l2" style="color: #fff; margin-top: 0.5em; font-size: 0.9em; font-weight: bold;">Polio<br><span style="color: #ffdd00; font-size: 0.85em;">Controlled</span><br><span style="color: #fff; font-size: 0.75em; font-weight: normal;">Vaccines since 1950s</span></p>
+                            </div>
+                            <div style="text-align: center; flex: 1;">
+                                <div data-id="g3" style="border: 3px solid #ffdd00; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 2em; color: #ffdd00;">
+                                    <i class="fa-solid fa-bug"></i>
+                                </div>
+                                <p data-id="l3" style="color: #fff; margin-top: 0.5em; font-size: 0.9em; font-weight: bold;">Cholera<br><span style="color: #ffdd00; font-size: 0.85em;">Rare today</span><br><span style="color: #fff; font-size: 0.75em; font-weight: normal;">Clean water + vaccines</span></p>
+                            </div>
+                            <div style="text-align: center; flex: 1;">
+                                <div style="border: 3px solid #fff; border-radius: 50%; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 2em; color: #fff;">
+                                    <i class="fa-solid fa-skull-crossbones"></i>
+                                </div>
+                                <p style="color: #ffdd00; margin-top: 0.5em; font-size: 0.9em; font-weight: bold;">Diphtheria<br><span style="color: #fff; font-size: 0.75em; font-weight: normal;">Still exists in Thailand.</span><br><span style="color: #ffdd00; font-size: 0.85em;">🦘 Now in Australia</span><br><span style="color: #fff; font-size: 0.75em; font-weight: normal;">Let's watch the video →</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="notes">Advance to reveal. Say: "Diseases like smallpox, polio, and cholera once affected Thailand too. Vaccines helped control them. Now diphtheria, a similar disease that vaccines nearly wiped out, is back in Australia. Let's watch the video to find out why."</aside>
+                </section>
+
+                <!-- ─── TRANSITION: VOCAB ───────────────────────────────── -->
+                <section id="slide-transition-vocab" data-background-color="#c0392b"><h2>Key Vocabulary</h2></section>
+
+                <!-- ─── VOCAB 1: CONTAGIOUS ────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees the IPA, then the English word appears on click, then the context sentence — building understanding layer by layer -->
+                <!-- WHY THIS FEATURE: Fragment reveals on each click — word then context sentence; fragments let the teacher drill pronunciation before revealing the meaning -->
+                <!-- COGNITIVE PRINCIPLE: Modality — phonemic + written + contextual definitions reinforce the target word through three channels -->
+                <!-- DESIGN MECHANISM: IPA visible on entry (students decode), English word appears on first fragment click, context sentence on second fragment click -->
+                <section id="slide-vocab-1" class="vocab-slide" data-background-color="#1a1a2e" data-background-transition="none">
+                    <div style="text-align: center; padding: 60px 40px;">
+                        <h2 style="font-size: 1.4em; color: #ffdd00; margin-bottom: 0.8em;">Important Words</h2>
+                        <p style="font-family: 'Times New Roman', Times, serif; font-size: 1.8em; color: #ffdd00; letter-spacing: 0.05em;">/kənˈteɪdʒəs/</p>
+                        <audio data-vocab-audio src="assets/vocab-contagious.mp3"></audio>
+                        <p class="fragment fade-up" style="font-size: 2.2em; color: #fff; font-weight: bold; margin-top: 0.5em;">
+                            <span data-vocab-trigger></span>
+                            <span class="vocab-word">contagious</span> <span style="color: #fff; font-size: 0.6em;">(adjective)</span>
+                        </p>
+                        <p class="fragment fade-up" style="color: #fff; margin-top: 1em;">
+                            The flu is very <span class="vocab-word">contagious</span>. When one person gets it, many others get sick too.
+                        </p>
+                    </div>
+                    <aside class="notes">Drill: teacher says → class repeats (×3). Check: "If a disease is contagious, can it spread?" Yes.</aside>
+                </section>
+
+                <!-- ─── VOCAB 2: ANTIBODIES ───────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student decodes the IPA, then sees the English word on click, then the context sentence -->
+                <!-- WHY THIS FEATURE: Fragment reveals on each click — same pattern as M3 vocab slides for consistency -->
+                <!-- COGNITIVE PRINCIPLE: Modality — phonemic + written + contextual -->
+                <!-- DESIGN MECHANISM: Same IPA→word→context fragment pattern as slide-vocab-1 -->
+                <section id="slide-vocab-2" class="vocab-slide" data-background-color="#1a1a2e" data-background-transition="none">
+                    <div style="text-align: center; padding: 60px 40px;">
+                        <p style="font-family: 'Times New Roman', Times, serif; font-size: 1.8em; color: #ffdd00; letter-spacing: 0.05em;">/ˈæntɪˌbɒdiz/</p>
+                        <audio data-vocab-audio src="assets/vocab-antibodies.mp3"></audio>
+                        <p class="fragment fade-up" style="font-size: 2.2em; color: #fff; font-weight: bold; margin-top: 0.5em;">
+                            <span data-vocab-trigger></span>
+                            <span class="vocab-word">antibodies</span> <span style="color: #fff; font-size: 0.6em;">(noun)</span>
+                        </p>
+                        <p class="fragment fade-up" style="color: #fff; margin-top: 1em;">
+                            When you get a vaccine, your body makes <span class="vocab-word">antibodies</span>. These special proteins help fight the disease.
+                        </p>
+                    </div>
+                    <aside class="notes">Drill: teacher says → class repeats (×3). Connect to Part 1: "Serum therapy used antibodies from animals."</aside>
+                </section>
+
+                <!-- ─── VOCAB 3: OUTBREAK ─────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student decodes the IPA, then sees the English word on click, then the context sentence -->
+                <!-- WHY THIS FEATURE: Fragment reveals on each click — same M3 pattern -->
+                <!-- COGNITIVE PRINCIPLE: Modality -->
+                <!-- DESIGN MECHANISM: Same IPA→word→context fragment pattern -->
+                <section id="slide-vocab-3" class="vocab-slide" data-background-color="#1a1a2e" data-background-transition="none">
+                    <div style="text-align: center; padding: 60px 40px;">
+                        <p style="font-family: 'Times New Roman', Times, serif; font-size: 1.8em; color: #ffdd00; letter-spacing: 0.05em;">/ˈaʊtbreɪk/</p>
+                        <audio data-vocab-audio src="assets/vocab-outbreak.mp3"></audio>
+                        <p class="fragment fade-up" style="font-size: 2.2em; color: #fff; font-weight: bold; margin-top: 0.5em;">
+                            <span data-vocab-trigger></span>
+                            <span class="vocab-word">outbreak</span> <span style="color: #fff; font-size: 0.6em;">(noun)</span>
+                        </p>
+                        <p class="fragment fade-up" style="color: #fff; margin-top: 1em;">
+                            There was an <span class="vocab-word">outbreak</span> of food poisoning at school. Twenty students got sick from the same meal.
+                        </p>
+                    </div>
+                    <aside class="notes">Drill: teacher says → class repeats (×3). Connect to Part 2: "There's a diphtheria outbreak in Australia."</aside>
+                </section>
+
+                <!-- ─── VOCAB 4: BACTERIA ─────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student decodes the IPA, then sees the English word, then the context sentence -->
+                <!-- WHY THIS FEATURE: Fragment reveals — same M3 pattern -->
+                <!-- COGNITIVE PRINCIPLE: Modality -->
+                <!-- DESIGN MECHANISM: Same IPA→word→context fragment pattern -->
+                <section id="slide-vocab-4" class="vocab-slide" data-background-color="#1a1a2e" data-background-transition="none">
+                    <div style="text-align: center; padding: 60px 40px;">
+                        <p style="font-family: 'Times New Roman', Times, serif; font-size: 1.8em; color: #ffdd00; letter-spacing: 0.05em;">/bækˈtɪəriə/</p>
+                        <audio data-vocab-audio src="assets/vocab-bacteria.mp3"></audio>
+                        <p class="fragment fade-up" style="font-size: 2.2em; color: #fff; font-weight: bold; margin-top: 0.5em;">
+                            <span data-vocab-trigger></span>
+                            <span class="vocab-word">bacteria</span> <span style="color: #fff; font-size: 0.6em;">(noun)</span>
+                        </p>
+                        <p class="fragment fade-up" style="color: #fff; margin-top: 1em;">
+                            <span class="vocab-word">Bacteria</span> are tiny living things. Some bacteria can make you sick, but others are helpful.
+                        </p>
+                    </div>
+                    <aside class="notes">Drill: teacher says → class repeats (×3). "Diphtheria is caused by toxin-producing bacteria."</aside>
+                </section>
+
+                <!-- ─── VOCAB 5: BOOSTER ──────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student decodes the IPA, then sees the English word, then the context sentence -->
+                <!-- WHY THIS FEATURE: Fragment reveals — same M3 pattern -->
+                <!-- COGNITIVE PRINCIPLE: Modality -->
+                <!-- DESIGN MECHANISM: Same IPA→word→context fragment pattern -->
+                <section id="slide-vocab-5" class="vocab-slide" data-background-color="#1a1a2e" data-background-transition="none">
+                    <div style="text-align: center; padding: 60px 40px;">
+                        <p style="font-family: 'Times New Roman', Times, serif; font-size: 1.8em; color: #ffdd00; letter-spacing: 0.05em;">/ˈbuːstə/</p>
+                        <audio data-vocab-audio src="assets/vocab-booster.mp3"></audio>
+                        <p class="fragment fade-up" style="font-size: 2.2em; color: #fff; font-weight: bold; margin-top: 0.5em;">
+                            <span data-vocab-trigger></span>
+                            <span class="vocab-word">booster</span> <span style="color: #fff; font-size: 0.6em;">(noun)</span>
+                        </p>
+                        <p class="fragment fade-up" style="color: #fff; margin-top: 1em;">
+                            Children get a <span class="vocab-word">booster</span> shot a few years after their first vaccine to make the protection stronger.
+                        </p>
+                    </div>
+                    <aside class="notes">Drill: teacher says → class repeats (×3). "11-to-13-year-olds can get a booster in Australia."</aside>
+                </section>
+
+                <!-- ─── TRANSITION: PART 1 ─────────────────────────────── -->
+                <section id="slide-transition-p1" data-background-color="#c0392b"><h2>Part 1: History of Diphtheria</h2></section>
+
+                <!-- ─── PEDAGOGICAL: PART 1 ────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees what to listen for -- names of scientists and dates -->
+                <!-- WHY THIS FEATURE: Static pedagogical on teal -- focus bullets direct attention -->
+                <!-- COGNITIVE PRINCIPLE: Signaling -- tells learners to attend to names and dates -->
+                <!-- DESIGN MECHANISM: Two focus items (names + dates) map to outline gaps I.A.1--I.C.1 -->
+                <section id="slide-strategy-p1" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
+                    <h2>Listen for Names and Dates</h2>
+                    <p>This part tells the history of diphtheria. Listen for:</p>
+                    <ul style="font-size: 1.1em; line-height: 2;">
+                        <li><i class="fa-solid fa-user" style="color:#ffdd00;"></i> Who described the disease first?</li>
+                        <li><i class="fa-solid fa-calendar" style="color:#ffdd00;"></i> When were discoveries made?</li>
+                    </ul>
+                    <aside class="notes">Stage 3 · Listening Part 1 · 7 min · S, T-Ss. Play 0:00–1:14. Students complete outline I.A–I.C. Then comp Qs 1–3.</aside>
+                </section>
+
+                <!-- ─── MINISTER PREP: MALARNDIRRI MCCARTHY ─────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees who Malarndirri McCarthy is before hearing her speak -- a face and role to attach to the voice -->
+                <!-- WHY THIS FEATURE: Static slide with large photo and 2-sentence bio -- photo gives a visual anchor for the unfamiliar name before the listening task -->
+                <!-- COGNITIVE PRINCIPLE: Pre-training -- knowing the speaker's role before listening reduces cognitive load during the comprehension task -->
+                <!-- DESIGN MECHANISM: Large photo at top, name + role in yellow, two simple bio sentences below in white. Without this prep, B1 learners would hear "Minister for Indigenous Australians" and have no context for who is speaking -->
+                <section id="slide-prep-mccarthy" data-background-color="#1a1a2e">
+                    <div style="text-align: center; padding: 20px;">
+                        <img src="assets/malarndirri-mccarthy.jpg" style="height: 260px; border-radius: 8px; margin-bottom: 0.5em;" alt="Malarndirri McCarthy" />
+                        <h2 style="color: #ffdd00; font-size: 1.4em;">Malarndirri McCarthy</h2>
+                        <p style="color: #ffdd00; font-size: 0.9em; margin-bottom: 0.5em;">Minister for Indigenous Australians</p>
+                        <ul style="font-size: 0.9em; line-height: 1.6; text-align: left; display: inline-block; margin-top: 0.3em;">
+                            <li>Works for fair access to healthcare and education</li>
+                            <li>Speaks about communication in remote communities</li>
+                        </ul>
+                    </div>
+                    <aside class="notes">Briefly introduce Minister McCarthy. Say: "She is the Minister for Indigenous Australians. Listen to what she says about communication."</aside>
+                </section>
+
+                <!-- ─── MINISTER PREP: MARK BUTLER ───────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees who Mark Butler is before hearing him speak, matching the face to the title and role -->
+                <!-- WHY THIS FEATURE: Static slide with photo and bio -- same layout as previous prep slide so students don't need to re-orient -->
+                <!-- COGNITIVE PRINCIPLE: Pre-training -- front-loads the speaker identity so students focus on content, not on figuring out who is speaking -->
+                <!-- DESIGN MECHANISM: Same photo + name + role + two-sentence bio pattern as the McCarthy slide. The repetition lets students predict where to find information on each prep slide without re-orienting -->
+                <section id="slide-prep-butler" data-background-color="#1a1a2e">
+                    <div style="text-align: center; padding: 20px;">
+                        <img src="assets/mark-butler.jpg" style="height: 260px; border-radius: 8px; margin-bottom: 0.5em;" alt="Mark Butler" />
+                        <h2 style="color: #ffdd00; font-size: 1.4em;">Mark Butler</h2>
+                        <p style="color: #ffdd00; font-size: 0.9em; margin-bottom: 0.5em;">Minister for Health and Aged Care</p>
+                        <ul style="font-size: 0.9em; line-height: 1.6; text-align: left; display: inline-block; margin-top: 0.3em;">
+                            <li>Responsible for hospitals, medicines and vaccines</li>
+                            <li>Speaks about diseases returning due to low vaccination</li>
+                        </ul>
+                    </div>
+                    <aside class="notes">Briefly introduce Minister Butler. Say: "He is the Health Minister. Listen to what he says about diseases coming back."</aside>
+                </section>
+
+                <!-- ─── TASK: PART 1 ──────────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student watches the BTN diphtheria video with focus instruction above the player -->
+                <!-- WHY THIS FEATURE: YouTube embed with aspect-ratio ensures correct proportions -->
+                <!-- COGNITIVE PRINCIPLE: Temporal Contiguity -- video and instruction on same screen -->
+                <!-- DESIGN MECHANISM: One-line focus instruction above the iframe; teacher plays 0:00--1:14 -->
+                <section id="slide-task-p1" data-background-color="#1a1a2e" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <h2 style="margin-bottom: 0.3em;">Part 1: History</h2>
+                    <p style="margin-bottom: 0.3em; font-size: 0.95em;">Listen for the names and dates in the story of diphtheria.</p>
+                    <iframe src="https://www.youtube.com/embed/tiluGfZ_AtU?rel=0&amp;enablejsapi=1&amp;start=0&amp;end=74" style="width: 72%; max-width: 880px; aspect-ratio: 16 / 9; border: none; border-radius: 4px;" allowfullscreen></iframe>
+                    <p style="margin-top: 0.3em; font-size: 0.85em; color: #888;">Clips 0:00–1:14</p>
+                    <aside class="notes">Play 0:00--1:14. Students complete gaps I.A.1--I.C.1, then comp Qs 1--3.</aside>
+                </section>
+
+                <!-- ─── ANSWERS: PART 1A ─────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees Part 1 outline answers confirmed with transcript evidence -->
+                <!-- WHY THIS FEATURE: Per-row fragments -- each gap reveals independently so teacher can discuss before moving on -->
+                <!-- COGNITIVE PRINCIPLE: Feedback -- immediate confirmation of gap-fill answers -->
+                <!-- DESIGN MECHANISM: 3 items on green slide: I.A.1 (Hippocrates), I.A.2 (leather), I.B.1 (serum) -->
+                                <section id="slide-answers-p1a-1" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 1 -- Outline Answers — Item 1</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">1. I.A.1 -- First described by</p>
+                            <p class="fragment fade-up" data-fragment-index="1" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> Hippocrates</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="1" style="margin:0.1em 0 0 0;">"described by Greek physician and philosopher Hippocrates"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check each gap. Hippocrates = father of medicine. Leather name because of throat appearance.</aside>
+                </section>
+                <section id="slide-answers-p1a-2" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 1 -- Outline Answers — Item 2</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">2. I.A.2 -- Greek name means</p>
+                            <p class="fragment fade-up" data-fragment-index="2" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> leather</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="2" style="margin:0.1em 0 0 0;">"translates to 'leather' in Greek, because that's what it looked like in the throat"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check each gap. Hippocrates = father of medicine. Leather name because of throat appearance.</aside>
+                </section>
+                <section id="slide-answers-p1a-3" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 1 -- Outline Answers — Item 3</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">3. I.B.1 -- Scientists developed ___ therapy</p>
+                            <p class="fragment fade-up" data-fragment-index="3" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> serum</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="3" style="margin:0.1em 0 0 0;">"Kitasato and von Behring developed serum therapy"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check each gap. Hippocrates = father of medicine. Leather name because of throat appearance.</aside>
+                </section>
+
+
+                <!-- ─── ANSWERS: PART 1B ─────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees remaining Part 1 answers -->
+                <!-- WHY THIS FEATURE: Per-row fragments -- teacher controls reveal pace -->
+                <!-- COGNITIVE PRINCIPLE: Feedback -->
+                <!-- DESIGN MECHANISM: 3 items: I.B.2 (1901), I.C.1 (safer), Q1 -->
+                                <section id="slide-answers-p1b-1" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 1 -- More Answers — Item 1</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">1. I.B.2 -- Won Nobel Prize in</p>
+                            <p class="fragment fade-up" data-fragment-index="1" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> 1901</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="1" style="margin:0.1em 0 0 0;">"won the first Nobel Prize in Physiology or Medicine in 1901"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check answers. Nobel Prize in 1901 was the first ever. Safer vaccine in 1923.</aside>
+                </section>
+                <section id="slide-answers-p1b-2" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 1 -- More Answers — Item 2</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">2. I.C.1 -- A ___ vaccine was made</p>
+                            <p class="fragment fade-up" data-fragment-index="2" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> safer</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="2" style="margin:0.1em 0 0 0;">"a French researcher found a way to make a safer diphtheria vaccine in 1923"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check answers. Nobel Prize in 1901 was the first ever. Safer vaccine in 1923.</aside>
+                </section>
+                <section id="slide-answers-p1b-3" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 1 -- More Answers — Item 3</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">3. Q1 -- Who first described diphtheria?</p>
+                            <p class="fragment fade-up" data-fragment-index="3" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> Hippocrates, 4th--5th century BCE</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="3" style="margin:0.1em 0 0 0;">"first described in 4th or 5th century BCE by Greek physician Hippocrates"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check answers. Nobel Prize in 1901 was the first ever. Safer vaccine in 1923.</aside>
+                </section>
+
+
+                <!-- ─── ANSWERS: PART 1C ─────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees Q2 and Q3 answers -->
+                <!-- WHY THIS FEATURE: Per-row fragments -- each answer row reveals independently so the teacher can discuss one item before revealing the next; matching fragment indices on a-ans and a-why ensure answer plus evidence appear simultaneously -->
+                <!-- COGNITIVE PRINCIPLE: Feedback -->
+                <!-- DESIGN MECHANISM: 2 items: Q2 (serum therapy process) + Q3 (French researcher 1923) -->
+                                <section id="slide-answers-p1c-1" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 1 -- Q2 and Q3 — Item 1</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">2. Q2 -- How was serum therapy developed?</p>
+                            <p class="fragment fade-up" data-fragment-index="1" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> Injected animals to produce antibodies</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="1" style="margin:0.1em 0 0 0;">"injecting animals with diphtheria toxins to produce antibodies, then giving those to humans"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Say: "Now we know the history. Let's move to the present."</aside>
+                </section>
+                <section id="slide-answers-p1c-2" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 1 -- Q2 and Q3 — Item 2</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">3. Q3 -- When was a safer vaccine made?</p>
+                            <p class="fragment fade-up" data-fragment-index="2" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> 1923, by a French researcher</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="2" style="margin:0.1em 0 0 0;">"In 1923, a French researcher found a way to make a safer diphtheria vaccine"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Say: "Now we know the history. Let's move to the present."</aside>
+                </section>
+
+
+                <!-- ─── TRANSITION: PART 2 ─────────────────────────────── -->
+                <section id="slide-transition-p2" data-background-color="#c0392b"><h2>Part 2: Vaccines and Outbreak</h2></section>
+
+                <!-- ─── PEDAGOGICAL: PART 2 ────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees what to listen for -- statistics and locations -->
+                <!-- WHY THIS FEATURE: Static pedagogical on teal -- directs attention to numbers and places -->
+                <!-- COGNITIVE PRINCIPLE: Signaling -->
+                <!-- DESIGN MECHANISM: Two focus items (vaccination numbers + outbreak locations) map to outline II.A--II.B -->
+                <section id="slide-strategy-p2" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
+                    <h2>Listen for Numbers and Places</h2>
+                    <p>This part talks about the current situation. Listen for:</p>
+                    <ul style="font-size: 1.1em; line-height: 2;">
+                        <li><i class="fa-solid fa-percentage" style="color:#ffdd00;"></i> What percentage of kids are vaccinated?</li>
+                        <li><i class="fa-solid fa-location-dot" style="color:#ffdd00;"></i> Where is the outbreak happening?</li>
+                    </ul>
+                    <aside class="notes">Stage 4 · Listening Part 2 · 7 min · S, T-Ss. Play 1:15--2:33. Students complete II.A--II.B. Then comp Qs 1--3.</aside>
+                </section>
+
+                <!-- ─── TASK: PART 2 ──────────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student re-listens with focus on vaccination stats and outbreak details -->
+                <!-- WHY THIS FEATURE: Static instruction -- teacher replays from same video -->
+                <!-- COGNITIVE PRINCIPLE: Temporal Contiguity -->
+                <section id="slide-task-p2" data-background-color="#1a1a2e">
+                    <h2>Part 2: Vaccines and Outbreak</h2>
+                    <p style="margin-bottom: 0.5em;">Listen again (1:15–2:33). Focus on the numbers and places mentioned.</p>
+                    <iframe src="https://www.youtube.com/embed/tiluGfZ_AtU?rel=0&amp;enablejsapi=1&amp;start=75&amp;end=153" style="width: 72%; max-width: 880px; aspect-ratio: 16 / 9; border: none; border-radius: 4px;" allowfullscreen></iframe>
+                    <p style="margin-top: 0.3em; font-size: 0.85em; color: #888;">Clips 1:15–2:33</p>
+                    <aside class="notes">Replay 1:15--2:33. Students complete gaps II.A.1--II.B.2. Then comp Qs 1--3.</aside>
+                </section>
+
+                <!-- ─── ANSWERS: PART 2A ─────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees Part 2 outline answers -->
+                <!-- WHY THIS FEATURE: Per-row fragments -- each answer row reveals independently so the teacher can discuss one item before revealing the next; matching fragment indices on a-ans and a-why ensure answer plus evidence appear simultaneously -->
+                <!-- COGNITIVE PRINCIPLE: Feedback -->
+                <!-- DESIGN MECHANISM: 3 items: II.A.1 (93%), II.A.2 (booster), II.B.1 (230) -->
+                                <section id="slide-answers-p2a-1" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 2 -- Outline Answers — Item 1</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">1. II.A.1 -- ___% of 5-year-olds vaccinated</p>
+                            <p class="fragment fade-up" data-fragment-index="1" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> 93</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="1" style="margin:0.1em 0 0 0;">"93% of five-year-olds have had all their recommended doses"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check answers. 93% is high but not 100% -- there are still gaps.</aside>
+                </section>
+                <section id="slide-answers-p2a-2" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 2 -- Outline Answers — Item 2</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">2. II.A.2 -- A ___ is given at 11-13</p>
+                            <p class="fragment fade-up" data-fragment-index="2" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> booster</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="2" style="margin:0.1em 0 0 0;">"11-to-13-year-olds can also get a booster shot through school programs"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check answers. 93% is high but not 100% -- there are still gaps.</aside>
+                </section>
+                <section id="slide-answers-p2a-3" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 2 -- Outline Answers — Item 3</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">3. II.B.1 -- More than ___ cases</p>
+                            <p class="fragment fade-up" data-fragment-index="3" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> 230</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="3" style="margin:0.1em 0 0 0;">"More than 230 people have tested positive"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check answers. 93% is high but not 100% -- there are still gaps.</aside>
+                </section>
+
+
+                <!-- ─── ANSWERS: PART 2B ─────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees remaining Part 2 answers -->
+                <!-- WHY THIS FEATURE: Per-row fragments -- each answer row reveals independently so the teacher can discuss one item before revealing the next; matching fragment indices on a-ans and a-why ensure answer plus evidence appear simultaneously -->
+                <!-- COGNITIVE PRINCIPLE: Feedback -->
+                <!-- DESIGN MECHANISM: 3 items: II.B.2 (Indigenous) + Q1 + Q2 -->
+                                <section id="slide-answers-p2b-1" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 2 -- More Answers — Item 1</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">1. II.B.2 -- Many cases in ___ communities</p>
+                            <p class="fragment fade-up" data-fragment-index="1" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> Indigenous</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="1" style="margin:0.1em 0 0 0;">"Many cases are adults in Indigenous communities, with barriers to vaccines"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check answers. Indigenous communities face barriers to accessing vaccines.</aside>
+                </section>
+                <section id="slide-answers-p2b-2" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 2 -- More Answers — Item 2</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">2. Q1 -- What % of 5-year-olds vaccinated?</p>
+                            <p class="fragment fade-up" data-fragment-index="2" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> 93%</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="2" style="margin:0.1em 0 0 0;">"93% of five-year-olds have had all their recommended doses"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check answers. Indigenous communities face barriers to accessing vaccines.</aside>
+                </section>
+                <section id="slide-answers-p2b-3" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 2 -- More Answers — Item 3</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">3. Q2 -- Booster for 11-13?</p>
+                            <p class="fragment fade-up" data-fragment-index="3" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> Yes -- booster shot at school</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="3" style="margin:0.1em 0 0 0;">"11-to-13-year-olds can get a booster shot through school programs"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check answers. Indigenous communities face barriers to accessing vaccines.</aside>
+                </section>
+
+
+                <!-- ─── ANSWERS: PART 2C ─────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees Q3 about outbreak locations -->
+                <!-- WHY THIS FEATURE: Single-item slide -- one standalone answer closes the part; teacher can pause on this final answer before the next transition without needing to click through extra items -->
+                <!-- COGNITIVE PRINCIPLE: Feedback -->
+                <section id="slide-answers-p2c" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 2 -- Q3</h2>
+                    <div class="answer-list">
+                                                <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">3. Q3 -- Where are the cases? Affecting who?</p>
+                            <p class="fragment fade-up" data-fragment-index="1" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> QLD, WA, SA, NT -- Indigenous adults</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="1" style="margin:0.1em 0 0 0;">"parts of Queensland, WA, SA and NT. Many cases are adults in Indigenous communities."</p>
+                        </div>
+                    </div>
+                    <aside class="notes">Say: "Now let's hear what the government is doing about it."</aside>
+                </section>
+
+                <!-- ─── TRANSITION: PART 3 ─────────────────────────────── -->
+                <section id="slide-transition-p3" data-background-color="#c0392b"><h2>Part 3: Government Response</h2></section>
+
+                <!-- ─── PEDAGOGICAL: PART 3 ────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees what to listen for -- ministers' messages and the NT vaccine rollout -->
+                <!-- WHY THIS FEATURE: Static pedagogical on teal -->
+                <!-- COGNITIVE PRINCIPLE: Signaling -->
+                <!-- DESIGN MECHANISM: Two focus items (minister names + response numbers) map to outline III.A--III.B -->
+                <section id="slide-strategy-p3" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
+                    <h2>Listen for Government Responses</h2>
+                    <p>This part includes two government ministers. Listen for:</p>
+                    <ul style="font-size: 1.1em; line-height: 2;">
+                        <li><i class="fa-solid fa-language" style="color:#ffdd00;"></i> What communication barriers exist?</li>
+                        <li><i class="fa-solid fa-syringe" style="color:#ffdd00;"></i> What was the response in the NT?</li>
+                    </ul>
+                    <aside class="notes">Stage 5 · Listening Part 3 · 7 min. Play 2:34--3:20. Students complete III.A--III.B. Then comp Qs 1--3.</aside>
+                </section>
+
+                <!-- ─── TASK: PART 3 ──────────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student re-listens with final focus -->
+                <!-- WHY THIS FEATURE: Static instruction -- no YouTube embed needed since teacher replays from same video; text-only instruction prevents distraction during the re-listen task -->
+                <!-- COGNITIVE PRINCIPLE: Temporal Contiguity -->
+                <section id="slide-task-p3" data-background-color="#1a1a2e">
+                    <h2>Part 3: Government Response</h2>
+                    <p style="margin-bottom: 0.5em;">Listen again (2:34–3:20). Focus on what the ministers say and the NT vaccine numbers.</p>
+                    <iframe src="https://www.youtube.com/embed/tiluGfZ_AtU?rel=0&amp;enablejsapi=1&amp;start=154&amp;end=200" style="width: 72%; max-width: 880px; aspect-ratio: 16 / 9; border: none; border-radius: 4px;" allowfullscreen></iframe>
+                    <p style="margin-top: 0.3em; font-size: 0.85em; color: #888;">Clips 2:34–3:20</p>
+                    <aside class="notes">Replay 2:34--3:20. Students complete III.A--III.B. Then comp Qs 1--3.</aside>
+                </section>
+
+                <!-- ─── ANSWERS: PART 3A ─────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees Part 3 outline answers -->
+                <!-- WHY THIS FEATURE: Per-row fragments -- each answer row reveals independently so the teacher can discuss one item before revealing the next; matching fragment indices on a-ans and a-why ensure answer plus evidence appear simultaneously -->
+                <!-- COGNITIVE PRINCIPLE: Feedback -->
+                <!-- DESIGN MECHANISM: 3 items: III.A.1 (100 languages), III.A.2 (misinformation), III.B.1 (10,000) -->
+                                <section id="slide-answers-p3a-1" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 3 -- Outline Answers — Item 1</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">1. III.A.1 -- Over ___ Aboriginal languages</p>
+                            <p class="fragment fade-up" data-fragment-index="1" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> 100</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="1" style="margin:0.1em 0 0 0;">"We know that we've got over 100 Aboriginal languages"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check answers. 100+ languages means translation is a challenge.</aside>
+                </section>
+                <section id="slide-answers-p3a-2" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 3 -- Outline Answers — Item 2</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">2. III.A.2 -- Need to fight</p>
+                            <p class="fragment fade-up" data-fragment-index="2" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> misinformation</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="2" style="margin:0.1em 0 0 0;">"need to ensure the communication is there, not misinformation"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check answers. 100+ languages means translation is a challenge.</aside>
+                </section>
+                <section id="slide-answers-p3a-3" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 3 -- Outline Answers — Item 3</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">3. III.B.1 -- Over ___ vaccinated in the NT</p>
+                            <p class="fragment fade-up" data-fragment-index="3" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> 10,000</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="3" style="margin:0.1em 0 0 0;">"more than 10,000 people in the NT alone have had a diphtheria vaccine"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check answers. 100+ languages means translation is a challenge.</aside>
+                </section>
+
+
+                <!-- ─── ANSWERS: PART 3B ─────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees remaining Part 3 answers -->
+                <!-- WHY THIS FEATURE: Per-row fragments -- each answer row reveals independently so the teacher can discuss one item before revealing the next; matching fragment indices on a-ans and a-why ensure answer plus evidence appear simultaneously -->
+                <!-- COGNITIVE PRINCIPLE: Feedback -->
+                <!-- DESIGN MECHANISM: 3 items: III.B.2 (down) + Q1 (McCarthy) + Q2 (Butler) -->
+                                <section id="slide-answers-p3b-1" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 3 -- More Answers — Item 1</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">1. III.B.2 -- New cases are going</p>
+                            <p class="fragment fade-up" data-fragment-index="1" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> down</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="1" style="margin:0.1em 0 0 0;">"number of new cases has gone down"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check answers. Two ministers: McCarthy (Indigenous Australians) and Butler (Health).</aside>
+                </section>
+                <section id="slide-answers-p3b-2" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 3 -- More Answers — Item 2</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">2. Q1 -- McCarthy on communication?</p>
+                            <p class="fragment fade-up" data-fragment-index="2" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> Need good communication, not misinformation</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="2" style="margin:0.1em 0 0 0;">"over 100 Aboriginal languages. Need communication, not misinformation, reaching remote communities"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check answers. Two ministers: McCarthy (Indigenous Australians) and Butler (Health).</aside>
+                </section>
+                <section id="slide-answers-p3b-3" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 3 -- More Answers — Item 3</h2>
+                    <div class="answer-list">
+                        <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">3. Q2 -- Butler on disease re-emergence</p>
+                            <p class="fragment fade-up" data-fragment-index="3" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> Diseases returning due to dropping immunisation rates</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="3" style="margin:0.1em 0 0 0;">"diseases thought consigned to dustbin of history are showing re-emergence where immunisation rates are dropping"</p>
+                        
+                        </div>
+                    </div>
+                    <aside class="notes">Check answers. Two ministers: McCarthy (Indigenous Australians) and Butler (Health).</aside>
+                </section>
+
+
+                <!-- ─── ANSWERS: PART 3C ─────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees Q3 about NT changes -->
+                <!-- WHY THIS FEATURE: Single-item slide -- closes listening phase -->
+                <!-- COGNITIVE PRINCIPLE: Feedback -->
+                <section id="slide-answers-p3c" data-background-color="#052e0d" data-background-transition="none">
+                    <h2>Part 3 -- Q3</h2>
+                    <div class="answer-list">
+                                                <div style="margin-bottom: 0.8em;">
+                            <p style="color:#ffdd00; font-size:0.9em; margin:0;">3. Q3 -- How has the NT outbreak changed?</p>
+                            <p class="fragment fade-up" data-fragment-index="1" style="color:#fff; font-size:0.95em; margin:0.15em 0 0 0;"><span style="color:#ffdd00;"><i class="fa-solid fa-check"></i></span> 10,000 vaccinated, cases going down</p>
+                            <p class="fragment fade-up a-why" data-fragment-index="1" style="margin:0.1em 0 0 0;">"10,000 people in NT had vaccine. Cases have gone down but outbreak not over yet."</p>
+                        </div>
+                    </div>
+                    <aside class="notes">Say: "Now let's discuss what we've learned."</aside>
+                </section>
+
+                <!-- ─── TRANSITION: DISCUSS ────────────────────────────── -->
+                <section id="slide-transition-discuss" data-background-color="#c0392b"><h2>Let's Discuss</h2></section>
+
+                <!-- ─── DISCUSSION TECHNIQUES ──────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees functional language for opinions and responses -->
+                <!-- WHY THIS FEATURE: Static on teal -- all phrases visible for reference during pair work -->
+                <!-- COGNITIVE PRINCIPLE: Scaffolding -->
+                <section id="slide-discuss-tech" class="pedagogical" data-background-color="#1a237e" data-background-transition="none">
+                    <h2>Discussion Phrases</h2>
+                    <div style="display: flex; gap: 1em; justify-content: center;">
+                        <div style="flex: 1;">
+                            <p style="color:#ffdd00; font-weight: bold; margin-bottom: 0.3em;">Introduce your point:</p>
+                            <p style="font-size: 0.9em; line-height: 1.6;">"I think that ... because ..."</p>
+                            <p style="font-size: 0.9em; line-height: 1.6;">"In my opinion, ..."</p>
+                            <p style="font-size: 0.9em; line-height: 1.6;">"It seems to me that ..."</p>
+                            <p style="font-size: 0.9em; line-height: 1.6;">"One thing I noticed was ..."</p>
+                        </div>
+                        <div style="flex: 1;">
+                            <p style="color:#ffdd00; font-weight: bold; margin-bottom: 0.3em;">Respond to others:</p>
+                            <p style="font-size: 0.9em; line-height: 1.6;">"That's a good point. I'd add that ..."</p>
+                            <p style="font-size: 0.9em; line-height: 1.6;">"I see what you mean. However, ..."</p>
+                            <p style="font-size: 0.9em; line-height: 1.6;">"I hadn't thought of it that way."</p>
+                            <p style="font-size: 0.9em; line-height: 1.6;">"That's interesting. But what about ...?"</p>
+                        </div>
+                    </div>
+                    <aside class="notes">Stage 6 · Discussion Techniques · 4 min · T-Ss. Model exchange with volunteer.</aside>
+                </section>
+
+                <!-- ─── THINK-PAIR-SHARE ───────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees two discussion questions -- one scaffolded, one free -->
+                <!-- WHY THIS FEATURE: Static on dark -- both visible for pair work -->
+                <!-- COGNITIVE PRINCIPLE: Authenticity -->
+                <section id="slide-tps" data-background-color="#1a1a2e">
+                    <h2>Think-Pair-Share</h2>
+                    <div style="font-size: 0.95em; margin-top: 0.5em;">
+                        <p style="color:#ffdd00; font-weight: bold;">Question 1 (Use the structure below)</p>
+                        <p>Should vaccination be compulsory for everyone? Use at least one piece of evidence from the video.</p>
+                        <p style="font-size: 0.85em; margin-top: 0.3em; color: #ccc;">1. Say what you think → 2. Give evidence → 3. Summarise</p>
+                    </div>
+                    <div style="font-size: 0.95em; margin-top: 1em;">
+                        <p style="color:#ffdd00; font-weight: bold;">Question 2 (Your own way -- no structure)</p>
+                        <p>How can governments make sure everyone has access to vaccines, especially in remote communities?</p>
+                    </div>
+                    <aside class="notes">Stage 7 · Think-Pair-Share · 7 min. Think: 2 min. Pair: 3 min. Share: 2 min feedback. Use discussion phrases.</aside>
+                </section>
+
+                <!-- ─── TRANSITION: REVIEW ─────────────────────────────── -->
+                <section id="slide-transition-review" data-background-color="#c0392b"><h2>Let's Review</h2></section>
+
+                <!-- ─── SUMMARY ────────────────────────────────────────── -->
+                <!-- PEDAGOGICAL INTENT: Student sees three outcomes restated with checkmarks -->
+                <!-- WHY THIS FEATURE: Static bullet list -- all outcomes visible for review -->
+                <!-- COGNITIVE PRINCIPLE: Review -->
+                <section id="slide-summary" data-background-color="#1a1a2e">
+                    <h2>What you can do now</h2>
+                    <ul style="font-size: 1.1em; line-height: 1.8;">
+                        <li><i class="fa-solid fa-check" style="color:#ffdd00;"></i> I can understand the history of diphtheria</li>
+                        <li><i class="fa-solid fa-check" style="color:#ffdd00;"></i> I can understand the current outbreak in Australia</li>
+                        <li><i class="fa-solid fa-check" style="color:#ffdd00;"></i> I can understand how the government is responding</li>
+                    </ul>
+                    <aside class="notes">Elicit: "What did you learn about diphtheria?" Connect back to lead-in about disease in Thailand.</aside>
+                </section>
+
+                <!-- ─── END ────────────────────────────────────────────── -->
+                <section id="slide-end" data-background-color="#2c3e50">
+                    <h2>Thank you</h2>
+                    <p><em>Diphtheria</em> | B1</p>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- Mark.js (CDN) + mark plugin (local) -->
+        <!-- Timer plugin (local) -->
+        <script src="timer-plugin.js"></script>
+
+        <!-- reveal.js 5.1.0 via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                plugins: [
+                    // WARNING: Every plugin here is loaded and initialized by reveal.js
+                    // at startup. If any plugin's init() function throws an error, the
+                    // entire presentation will show a BLANK PAGE. Always test new plugins
+                    // in a browser and check the console before committing to the template.
+                    // Third-party plugins that depend on external CDN libraries (like
+                    // mark.js) require special care — see SKILL.md for the plugin
+                    // testing protocol.
+                    TimerPlugin,
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                ],
+            });
+
+            // Vocab TTS playback: when a fragment with [data-vocab-trigger] is shown,
+            // play the section-level <audio data-vocab-audio> element exactly once.
+            Reveal.on('fragmentshown', event => {
+                if (event.fragment.querySelector('[data-vocab-trigger]')) {
+                    const slide = event.fragment.closest('section');
+                    const audio = slide && slide.querySelector('audio[data-vocab-audio]');
+                    if (audio) {
+                        audio.currentTime = 0;
+                        audio.play().catch(() => {});
+                    }
+                }
+            });
+
+            // Auto-pause YouTube videos when leaving their slide
+            Reveal.on('slidechanged', event => {
+                document.querySelectorAll('iframe[src*="youtube"]').forEach(iframe => {
+                    const slide = iframe.closest('section');
+                    if (slide && slide !== event.currentSlide) {
+                        iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
