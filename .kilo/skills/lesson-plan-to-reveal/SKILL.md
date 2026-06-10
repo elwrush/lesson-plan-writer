@@ -11,6 +11,19 @@ Convert a lesson plan JSON into a reveal.js slideshow for ESL classroom delivery
 
 When designing slides, adopt the voice of an **experienced ESL teacher with training in instructional design and materials writing**. All pedagogical annotations, context sentences, and design decisions must be articulated from this perspective. The technical implementation (HTML, CSS, reveal.js) is *how* you achieve the pedagogical goals, but the reasoning should always be expressed in teaching terms, not engineering terms.
 
+### Prime Directive: Show, Don't Tell
+
+**Every slide must pass this test: if a student had to read more than one short sentence (≤15 words) to understand what's happening, the slide is wrong.** We teach by *showing*, not by making learners read.
+
+Consequences of this rule:
+- **One visual transformation per slide** — a before→after arrow, an underlined change, an icon filling in — not a list of four strategies with X/✓ comparisons
+- **No bullet lists of instructions** — the teacher speaks the instructions; the slide shows the *result* of following them
+- **No text explanations on screen** — if you need words to explain what the slide means, put them in `<aside class="notes">` and let the teacher say them
+- **A single crossed-out sentence with an arrow to short notes below it** teaches more than four labelled boxes with checkmarks and crosses
+- **Font size is your friend** — a single line at 1.3em is more impactful than four lines at 0.75em crammed into boxes
+
+The litmus test: look at the slide as if you don't know the lesson. If you have to *read* to understand it, redesign it so you can *see* what's happening.
+
 - **PEDAGOGICAL INTENT** annotations should sound like a veteran teacher justifying a classroom decision to a colleague ("Students need to see the contrast at a glance, not read two paragraphs"), not an engineer documenting code ("The section uses a two-column flex layout with a vertical divider").
 - **DESIGN MECHANISM** annotations should name the concrete design choice and what happens if it's removed, in teaching language ("If both columns were on separate slides, the comparison would be lost — students can't hold one in memory while they look at the other").
 - **Context sentences** for vocabulary should be written as a teacher would model the word's meaning: clear, natural, immediately understandable from context.
@@ -24,9 +37,16 @@ When in doubt about phrasing, ask: "Would a teacher in the staffroom explain it 
 
 **Slide design authority**: `docs/slide-design-reference.md` defines all slide types, fragment policies, text limits, vocabulary rules, and auto-animate patterns.
 
+**Phonemic script authority**: `docs/british-council-phonemic-chart.md` defines the exact IPA symbols for all phonemic transcriptions on vocabulary slides. British Council standard uses `/e/` not `/ɛ/`, `/əʊ/` not `/oʊ/`, `/ɒ/` not `/ɑ/`, `/ɪə/` not `/ɪr/`, and is non-rhotic (no final `/r/`). Always consult this chart before writing any phonemic transcription.
+
+**⚠ KNOWN FIXES — MANDATORY READING BEFORE TOUCHING AUDIO/VIDEO/TIMER**:
+`docs/revealjs-known-issues.md` documents every hard-won fix for audio playback conflicts, timer-vs-audio exclusion, fragment audio timing, DOM integrity after scripted edits, and data-autoplay issues. **This file must be re-read every time the skill is loaded.** The fixes in this file were discovered through repeated production failures and hours of debugging — ignoring them will reproduce the same bugs.
+
 ## ⚠ CRITICAL — Tier-1 Reference Hierarchy
 
 **Pre-generation ritual — mandatory before Step 0:**
+
+0. **Read `docs/revealjs-known-issues.md`** — this file contains all documented fixes for audio playback, timer conflicts, fragment timing, DOM integrity, and data-autoplay issues. These were discovered through production failures and must be followed exactly. The TTS audio pattern in particular requires strict placement rules (audio inside the word fragment, not section-level; RevealAudioSlideshow removed from plugins).
 
 1. Open `templates/reference-slideshow.html` in a browser and scroll through EVERY slide type. This is a complete working slideshow with verified HTML patterns for every slide type (title, lead-in, diagnostic, teach, auto-animate pairs, strategy, task, answer with S/V annotations, summary, end). Identify which types you need for the current lesson. Copy the pattern, change only the content.
 
@@ -66,7 +86,8 @@ Use `lesson-plan-to-reveal` when converting a lesson plan JSON to slides. The sk
 2. **Determines pedagogical intent** — for each slide block, states what the student must *see happen* on screen and which reveal.js feature achieves that (consulting the Feature Lookup Table in `docs/slide-design-reference.md`)
 3. **Reads source materials** — extracts exercise content from the source PDF and answer content from the answer key `.typ` file
 4. Copies the institution logo into `output/{subfolder}/slides/assets/`
-5. Copies `templates/base-slides-template.html` to `output/{subfolder}/slides/index.html`
+5. **Copies timer SFX files** (`blip.mp3`, `BELL.mp3`) from `C:\PROJECTS\SFX\` to `output/{subfolder}/slides/assets/` — the timer plugin needs these for countdown blips and end-of-time bell. Without them the timer runs silently.
+6. Copies `templates/base-slides-template.html` to `output/{subfolder}/slides/index.html`
 6. Builds slides one by one as raw HTML `<section>` elements, each preceded by a mandatory pedagogical intent annotation
 7. **Verifies every stage has at least one corresponding slide** — flags any stage that would be skipped
 8. Reports the output path
@@ -134,6 +155,8 @@ When a lesson plan includes pre-teach vocabulary, generate TTS audio clips and e
 ```powershell
 cp "templates/timer-plugin.js" "output/{subfolder}/slides/timer-plugin.js"
 cp "templates/timer-plugin.css" "output/{subfolder}/slides/timer-plugin.css"
+cp "C:\PROJECTS\SFX\blip.mp3" "output/{subfolder}/slides/assets/blip.mp3"
+cp "C:\PROJECTS\SFX\BELL.mp3" "output/{subfolder}/slides/assets/BELL.mp3"
 cp "templates/ACT.png" "output/{subfolder}/slides/assets/logo.png"
 ```
 
@@ -261,7 +284,7 @@ Every distinct exercise type MUST follow this four-slide sequence. This is the c
 |------|-----------|------------|---------|-------------|
 | 1 | **Transition** | `#c0392b` (red) | Heading only — signals phase change to students | Neither |
 | 2 | **Pedagogical** | `#1a237e` (teal), `class="pedagogical"` | Strategy instruction for the skill (e.g., how to listen for gist). May use auto-animate for keyword underline reveals. Differentiation challenge (`🏁 Want a challenge?`) shown here. | **No audio** — audio goes on the task slide |
-| 3 | **Task** | `#1a1a2e` (dark) | Exercise number + brief student-facing instruction. **Do NOT print full exercise text** — students have the workbook. | `data-audio-src` for listening exercises; `data-timer` for written exercises. **Never both** on the same slide. Also never put a timer on a slide with any audio (native `<audio autoplay>`, `<video>`, or embedded YouTube). |
+| 3 | **Task** | `#1a1a2e` (dark) | Exercise number + brief student-facing instruction. **Do NOT print full exercise text** — students have the workbook. Embedded YouTube videos use `.iframe-container` with inline `style="width: X%; padding-bottom: Y%;"` where Y = X × 9/16 to maintain 16:9 aspect ratio. **Never set width alone** — the padding-bottom must change proportionally or the aspect ratio breaks. | `data-audio-src` for listening exercises; `data-timer` for written exercises. **Never both** on the same slide. Also never put a timer on a slide with any audio (native `<audio autoplay>`, `<video>`, or embedded YouTube). |
 | 4 | **Answers** | `#052e0d` (green) | For simple reveals (T/F, MC): answer-list flex layout, max 3 items per slide. For error-correction with two fix methods: **both-methods pattern** (one item per slide, both M1 + M2). See "Answer Slides: Both-Methods Pattern" below. | Neither |
 
 **Key rules:**

@@ -1,0 +1,368 @@
+#set page(paper: "a4", margin: (x: 2cm, top: 1.5cm, bottom: 1.5cm))
+#set text(font: "Roboto", size: 11pt)
+#set par(leading: 0.45em)
+
+#align(center, text(size: 18pt, weight: "bold")[BTN High - Listening Worksheet])
+#align(center, text(size: 14pt)[Gen Z Gender Roles])
+#align(center, text(size: 10pt)[Episode 15 - 25 March 2026])
+
+#line(length: 100%, stroke: 0.5pt)
+
+#v(0.4em)
+
+#block(
+  stroke: (left: 3pt + black),
+  inset: 8pt,
+  [
+    *Instructions for Students*
+
+    *Emerging (B1):* As you listen, complete the outline below. Each gap is no more than *three words*. Your teacher will pause the video after each section so you can answer the comprehension questions.
+
+    *Established (B2):* Take your own notes as you listen. After each section, your teacher will give you the comprehension questions to answer without having seen them beforehand. The transcript is available at the end for reference.
+
+    *Both levels:* The video is divided into three parts. After each part there is time for discussion and questions.
+  ]
+)
+
+#v(0.6em)
+
+= Part 1: Traditional Gender Roles
+
+#v(0.3em)
+
+I. Traditional Gender Roles in Society
+
+  #h(2em) A. 1950s TV shows portrayed clear gender roles
+
+    #h(4em) 1. Women shown as the #underline(h(3.5cm))
+
+    #h(4em) 2. Men shown as the #underline(h(3.5cm))
+
+  #h(2em) B. Kings College study - 23,000 people from 29 countries
+
+    #h(4em) 1. Gen Z holds the #underline(h(3.5cm)) traditional beliefs
+
+    #h(4em) 2. #underline(h(1.5cm)) of Gen Z men believe a wife should obey her husband
+
+    #h(4em) 3. #underline(h(1.5cm)) of Gen Z men say a husband should have the final word
+
+  #h(2em) C. Attitudes beyond the home
+
+    #h(4em) 1. #underline(h(1.5cm)) of Gen Z men say enough has been done for gender equality
+
+    #h(4em) 2. #underline(h(1.5cm)) of Gen Z men feel men are now discriminated against
+
+#v(0.5em)
+
+*Comprehension Questions - Part 1*
+
+#v(0.2em)
+
+1. What did the Kings College study find about Gen Z's beliefs on gender roles compared to older generations?
+
+   #line(length: 100%)
+   #line(length: 100%)
+
+2. What percentage of Gen Z men think a husband should have the final word on important decisions?
+
+   #line(length: 100%)
+
+3. How do Gen Z women's views compare to Gen Z men's on these questions? Give one example.
+
+   #line(length: 100%)
+   #line(length: 100%)
+
+#pagebreak()
+
+= Part 2: The Role of Social Media
+
+#v(0.3em)
+
+II. The Role of Social Media
+
+  #h(2em) A. Josh Glover - facilitator at #underline(h(3.5cm))
+
+    #h(4em) 1. His organisation tackles #underline(h(3.5cm)) in schools
+
+    #h(4em) 2. Says social media helps bring back #underline(h(3.5cm)) gender norms
+
+  #h(2em) B. How social media algorithms work
+
+    #h(4em) 1. Algorithms create #underline(h(3.5cm)) where users hear agreeing voices
+
+    #h(4em) 2. No one presents #underline(h(3.5cm)) opinions
+
+    #h(4em) 3. Users only see opinions that get debunked or #underline(h(2.5cm))
+
+  #h(2em) C. The definition problem
+
+    #h(4em) 1. Teenage boys' definition of #underline(h(3cm)) differs from the intended meaning
+
+    #h(4em) 2. This results from algorithms and lack of #underline(h(3.5cm)) with people who hold different views
+
+#v(0.5em)
+
+*Comprehension Questions - Part 2*
+
+#v(0.2em)
+
+1. What is Man Cave and what does Josh Glover say their work involves?
+
+   #line(length: 100%)
+   #line(length: 100%)
+
+2. How do social media algorithms affect young people's views on gender roles, according to Josh?
+
+   #line(length: 100%)
+   #line(length: 100%)
+   #line(length: 100%)
+
+3. What does Josh say about how teenage boys define feminism compared to its intended meaning?
+
+   #line(length: 100%)
+   #line(length: 100%)
+
+#pagebreak()
+
+= Part 3: Tradwives and Solutions
+
+#v(0.3em)
+
+III. Tradwives and Solutions
+
+  #h(2em) A. "Tradwife" influencers
+
+    #h(4em) 1. Glamorise #underline(h(3.5cm)) lifestyles
+
+    #h(4em) 2. Create content about cooking, cleaning, and #underline(h(3.5cm)) roles
+
+  #h(2em) B. Effects on young people
+
+    #h(4em) 1. University of Melbourne study of 2,300 adults and 1,100 young people
+
+    #h(4em) 2. Support for violence to resist feminism was highest among #underline(h(3.5cm))
+
+    #h(4em) 3. Around #underline(h(1.5cm)) of boys aged 13-17 agree women lie about domestic and sexual violence
+
+  #h(2em) C. Josh's perspective on solutions
+
+    #h(4em) 1. Two parts needed: #underline(h(3cm)) and problem-solving
+
+    #h(4em) 2. Need for #underline(h(3.5cm)) conversations where people are not judged
+
+    #h(4em) 3. Importance of #underline(h(3.5cm)) - older generations investing in younger people
+
+#v(0.5em)
+
+*Comprehension Questions - Part 3*
+
+#v(0.2em)
+
+1. What is a "tradwife" and what kind of content do these influencers create?
+
+   #line(length: 100%)
+   #line(length: 100%)
+   #line(length: 100%)
+
+2. What did the University of Melbourne study find about adolescent boys' attitudes?
+
+   #line(length: 100%)
+   #line(length: 100%)
+
+3. According to Josh, what two things are needed to solve the problem, and why are safe conversations important?
+
+   #line(length: 100%)
+   #line(length: 100%)
+   #line(length: 100%)
+
+#pagebreak()
+
+= Part 4: Discussion
+
+#v(0.2em)
+
+== Discussion Techniques
+
+When sharing your ideas in class, try using these phrases to introduce your own views and to respond to others.
+
+#v(0.2em)
+
+*Introducing your point of view:*
+
+- "I think that ... because ..."
+- "In my opinion, ..."
+- "It seems to me that ..."
+- "One piece of evidence that supports this is ..."
+
+#v(0.2em)
+
+*Acknowledging someone else's point of view:*
+
+- "That's an interesting point. I'd add that ..."
+- "I see what you mean. However, ..."
+- "I hadn't thought of it that way. I think ..."
+- "You make a good point about ... but have you considered ...?"
+
+#v(0.4em)
+
+== Think-Pair-Share
+
+#v(0.2em)
+
+*Question 1 (Use the structure below to help you)*
+
+To what extent do you agree that Gen Z holds the strongest traditional beliefs about gender roles? Use at least two pieces of evidence from the video to support your answer.
+
+#v(0.2em)
+
+*Suggested structure:*
+
+1. State your position: "I (agree / partly agree / disagree) that ..."
+2. Evidence 1: "The video showed that ..."
+3. Evidence 2: "Another finding was that ..."
+4. Conclude: "Overall, this suggests that ..."
+
+#v(0.2em)
+
+*Your notes:*
+
+#line(length: 100%)
+#line(length: 100%)
+#line(length: 100%)
+#line(length: 100%)
+#line(length: 100%)
+
+#v(0.4em)
+
+*Question 2 (Respond in your own way - no set structure)*
+
+How can young people critically evaluate the social media content they see about gender roles?
+
+#v(0.2em)
+
+*Your notes:*
+
+#line(length: 100%)
+#line(length: 100%)
+#line(length: 100%)
+#line(length: 100%)
+#line(length: 100%)
+
+#pagebreak()
+
+= Transcript
+
+#v(0.3em)
+
+#set text(size: 10pt)
+#set par(leading: 0.35em)
+
+https://www.youtube.com/watch?v=qkX5CPXzjxs
+
+#v(0.2em)
+
+LEAVE IT TO BEAVER, 1957 OLD MOVIE: Starring Barbara Billingsley.
+
+JOE BARONIO, BTN REPORTER: If you watch TV shows from the 1950s, you get a fairly black-and-white picture of the roles men and women should play in a family.
+
+1950s TV SHOW: Well, whenever we cook inside, Mom always seems to cook it, but whenever we cook outside, you always do it. How come? Well, sort of traditional, I guess. You know, they say a woman's place is in the home, and I suppose as long as she's in the home, she might as well be in the kitchen.
+
+This is what some people call "traditional" gender roles, with a woman as the homemaker and the man as the breadwinner. But it's something that society has long since left behind, right?
+
+PERSON: I feel like we've got much more diversity now in like, in Gen Z. I just think it wouldn't really work in our society anymore yeah.
+
+PERSON: I think generations like boomers then maybe more likely to have more gender roles embedded in their like lifestyle, I guess.
+
+PERSON: Personally, I think like older generations, like maybe boomers, because that's what they grew around.
+
+PERSON: But I also think it's passed down to our parents, so like millennials.
+
+PERSON: Yeah kind of like what they're saying, like boomers, because I feel like now we like to challenge stereotypes and just go against gender roles.
+
+Well, it turns out that it's actually Gen Z that is most likely to want a family that looks like this. The Kings College Global Institute for Women's Leadership has released a study of more than 23-thousand people from 29 countries, including Australia.
+
+It found that of all generations from Baby Boomers to Gen Z, it's Gen Z that holds the strongest traditional beliefs when it comes to gender roles, with 31 per cent men and 18 per cent of women believing that a wife should always obey her husband. And 33 per cent of men and 19 per cent of women saying a husband should have the final word on important decisions in the home.
+
+These attitudes towards women extend beyond just home life. The study also asked about things like equality in society. 61 per cent of Gen Z men and 51 per cent of Gen Z women say they feel enough has already been done for gender equality, with 57 per cent of men and 38 per cent of women saying they feel men are now discriminated against.
+
+PERSON: That shocks me a lot, actually.
+
+PERSON: Yeah, that is really surprising.
+
+PERSON: It's definitely disappointing, but it, it also isn't very surprising.
+
+PERSON: Thinking about it now, I feel like lots of the jokes, I think that's where it comes from, the jokes in primary school leading up to high school, and then that belief just like consolidating in your head. I guess it's surprising, but like I get where it's coming from, yeah.
+
+JOSH GLOVER, MAN CAVE: It's not surprising. It's sad, but it's not surprising.
+
+This is Josh. He's a facilitator at Man Cave, which is an organisation tackling issues like gender stereotypes in schools. He says social media, particularly things like manosphere content which we've seen in the spotlight a bit recently...
+
+DOCUMENTARY: Do you consider yourself a misogynist? I love women and actually understand them.
+
+...is helping to bring back what were once seen as outdated gender norms.
+
+JOSH GLOVER: A lot of those men, a lot of those influencers hold traditional gender roles.
+
+JOSH GLOVER: The whole narrative of echo chambers and what algorithms do and send us into this little shoot where we're just hearing all these people who agree with each other
+
+TIKTOK: Women, actually don't want equal treatment, they couldn't handle it if they got it quite a number of them.
+
+JOSH GLOVER: And are sort of saying things that maybe have whispers of truth or elements of truth to it...
+
+TIKTOK: The elite control our world, they want all of you guys to be saved.
+
+JOSH GLOVER: But there's no one there to sort of present another opinion or the only alternative opinions you see are the ones where, you know, the person you agree with then like debunks or smashes or slams them in a debate or whatever it is.
+
+TIKTOK: The reason why women are useless is because you guys don't really have to be useless, sorry, useful.
+
+JOSH GLOVER: I just fundamentally think that a teenage boy's definition of feminism is very different to the intended definition of feminism like that's, that's just so clear. So, we're actually talking about almost two completely different things and that, I would say, is a result of a lack of ability for these two definitions to have conversations with each other. And that just happens from, from the way the algorithms work, and the lack of time that we're spending actually in conversation with, with others who may hold different views, basically.
+
+And it's not just men pushing this view on social media.
+
+YOUTUBE SHORT: Do most women have a cookbook? Do most women really know how to cater to a man? No. When you're talking, trying to sell a car, if you're trying to get married, right, please, I'm not saying that women are cars, it's just an analogy, but if you're trying to sell a car, you have to study the buyer and figure out what the buyers want.
+
+There are a lot of popular influencers who identify as "Tradwives", or traditional wives, and create content that's all about glamorising traditional domestic lifestyles.
+
+TIKTOK: I love to cook and clean, just, just don't tell the feminists, I love to do it, and I love to do it for a man. There's just something, I don't know, there's something within me as a woman, maybe it's almost turning 25, that got me thinking like, "This cooking and cleaning thing isn't bad", like I just don't understand why women wanted to work.
+
+PERSON: I think it's so disappointing that that's targeted towards young girls who still don't even know what they want to do when they're older. And I'm a firm believer that like we should all find our purpose. If your purpose is like raising a kid, that's great. But I also think that we should also pursue other things outside of just growing a family as a woman ourself. Like we're all individuals. We all need things outside of family and life.
+
+PERSON: It is a thing like a lot of people dream about, like having a baby and having a family at home. But then also if it's impacting some people to think like maybe I should be choosing this over my long dream that I've had since a kid.
+
+PERSON: Yeah, they paint it as something you want but, like that's not what women are down to, you want a career and everything, so yeah.
+
+But Josh says it's influencing the view of women and men.
+
+MARRIED AT FIRST SIGHT AUSTRALIA, TV SHOW (2026): I know exactly what I want in my wife. Someone that's submissive, someone that's not going to say, "Would you be a house-husband?". I don't know, she brings like this dominance thing to the relationship, and I want to be the one essentially calling the shots.
+
+JOSH GLOVER: The whole thing, the whole narrative of 'oh this is what women want I guess', women want to be in this 'tradwife' role which feminism is about choice and one of those choices is a traditional role and great. I wonder how much, again, kind of exactly the same thing that's happening with the manosphere influencers, it's like these 'tradwife' influencers, they don't actually care about what the best expression of being a woman is. They care about making money, and so whatever it is that's going to get them more money, that's the one they're going to present.
+
+The effects that gendered content have on young people can be extreme. A recent study from the University of Melbourne surveyed more than 2,300 adults and 1,100 young people aged 13 to 17, and found that support for the use of violence to resist feminism was highest among adolescent boys, followed closely by adolescent girls, and that around 40 per cent of boys aged 13 to 17 agreed that women lie about domestic and sexual violence, partly from social media exposure.
+
+JOSH GLOVER: There's some shock; there's some sadness. I feel so convicted that something's being missed as well. And, and by missed, I mean, are boy's missing kind of the impact of, of what they're saying? I think a lot of boys nowadays, from the same influencers, associate feminism with the thing that is making life challenging for them.
+
+TIKTOK: Feminism hasn't just hurt women; it's also hurt men because a lot of guys don't feel the need to rise up to their duties and be a protector or provider.
+
+PERSON: Feminism, just treating women how they should be treated, you know? Just like anyone else. Everyone should have the respect that they're given at birth.
+
+PERSON: Feminism and equality to me is everyone having equal rights, being able to do the same things, so it's not, it's not how whoever has more power is a good person, it's we should all have the same power in this day and age.
+
+Experts reckon there are bigger social problems that may be contributing to young people's desire for what some see as a more simple life. Gen Z are less likely to own homes than their parents were at their age, and are facing a growing gap between the rich and the poor. Josh reckons a lack of understanding and direction of how young men should act in a modern society also plays a huge role.
+
+JOSH GLOVER: I think there's resentment in that of young men feeling incredibly purposeless and also kind of worthless in our society. They're kind of going, 'Well, I don't really know if, if women are doing all the things that I thought was my job, like what's my job to do?' When we invited in the feminist movement, which as we talked about, powerful social movement to bring about more choice for women, we didn't really invite young men into their role to play in it powerfully. This is back to the whole traditional gender roles thing. That may have worked back in the day when you had to fight wars, and that's all men were doing. And like you better not cry on the battlefield because you actually need to hold it together. But like we're not in that context right now.
+
+Josh says it's a problem that needs to be recognised and addressed by all levels of society.
+
+JOSH GLOVER: I think, you know, two parts of solving a problem. First one is awareness, and then second part is the actual problem-solving bit together. You know we talk a lot at the Man Cave about the importance of village. We just need to be able to have conversations, be, and, and safe conversations. And a safe conversation is with someone where I can trust that I can talk this idea out and not experience being judged or not experienced being shamed. If you are an 18-year-old, 19-year-old, who's the younger people in your world who you can start investing into? You know, if you're a 25-year-old, who's the 18-year-old? If you're a 50-year-old, who's the 30-year-old? Like just that, that role modelling that we've really, really missed now.
+
+PERSON: I think trying to do it yourself can influence other people, and so if you can do that, then other people can get along with it.
+
+PERSON: The, the people that are older should be saying the right things about like feminism, feminism and like being positive about that.
+
+PERSON: I think we need to change how we speak on social media. I think we need to reassure each other more.
+
+PERSON: I feel like we have to be educated on how to engage and get influenced by social media, as it is very like manipulative of your ideas at a young age.
+
+PERSON: Thinking about what we're saying around our kids, those types of beliefs.
+
+PERSON: Just like little things that influence even just like little kids, that can really have an impact on who they are and who they become, and what they believe in their life. Yeah it's just little things.

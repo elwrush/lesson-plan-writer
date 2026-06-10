@@ -1,0 +1,53 @@
+{
+  "teacher": "Ed Rush",
+  "duration": "46 minutes",
+  "date": "090626",
+  "topic": "CA: Writing a Profile — Peer Edit Workshop",
+  "objective": "By the end of the lesson, learners will have given and received peer feedback on their profile drafts using a 3-point checklist (capitalisation, compound sentences, the hook) and produced a revised version incorporating that feedback.",
+  "materials": "- Students' first drafts from the previous lesson\n- Projector (for comparison paragraphs and model edit)\n- Timer visible to the class\n- Optional: coloured pens / pencils if available",
+  "lesson_plan": {
+    "shape": "F",
+    "shape_name": "Productive Skills (Traditional)",
+    "cefr_level": "B1",
+    "class": "M2-4A",
+    "stages": [
+      {
+        "stage_number": 1,
+        "stage": "Lead-in — Three things we have been working on",
+        "stage_aim": "To reactivate prior knowledge of capitalisation, compound sentences, and the hook, and to show students how these three areas make the difference between a weak first draft and a strong final article.",
+        "procedure": "- Project two versions of the opening of an article about learning to play football (a completely different topic from the students' own profile). Version A has capitalisation errors, all simple sentences, and a weak hook. Version B is corrected in all three areas. Pairs discuss: 'Which version is better? Why?' Elicit the three editing criteria: (1) capitalisation, (2) compound sentences, (3) the hook. Frame the lesson: 'Today you will swap drafts with a partner and check each other's work for exactly these three things.'",
+        "time": 5,
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 2,
+        "stage": "Model Edit — Watch me check a draft",
+        "stage_aim": "To demonstrate exactly how to check for capitalisation, compound sentences, and the hook using a think-aloud, so students know what to look for and how to mark it.",
+        "procedure": "- Project a sample paragraph about learning to bake a cake (another parallel topic — not football, not a profile). The paragraph has capitalisation errors, no compound sentences, and a weak hook. Teacher thinks aloud through all three checks, showing the marking system: C circle (capital needed), crossed-out capital (no capital needed), boxed coordinator, +coord (comma splice), and hook? marker. Clarify: 'You are not fixing your partner's draft. You are leaving marks and notes. They decide what to change.'",
+        "time": 6,
+        "interaction": "T-Ss"
+      },
+      {
+        "stage_number": 3,
+        "stage": "Peer Edit — Two Passes",
+        "stage_aim": "To give each student a reader's perspective on their draft through two focused passes — first for overall understanding, then for the three editing criteria.",
+        "procedure": "- Students swap drafts with a partner.\n**Pass 1 — Read for understanding (7 minutes):** Read silently. Mark ✓ for clear parts, ? for confusing parts. Do not correct anything yet.\n**Pass 2 — Three-check edit (13 minutes):** Apply the three checks: (1) Capitalisation — circle missing capitals (C), cross out unnecessary capitals, check 'I' is always capital, check apostrophes in contractions. (2) Compound sentences — box every coordinator (and, but, so, or), mark comma splices with +coord, suggest combining short sentences. (3) The hook — read the first sentence. ★ = strong hook, hook? = needs work.\n- After 20 minutes, students return the draft to its owner.",
+        "time": 20,
+        "interaction": "Ss-Ss"
+      },
+      {
+        "stage_number": 4,
+        "stage": "Final Polish — Your turn to revise",
+        "stage_aim": "To give students time to read their partner's feedback and produce a clean final version of their profile, deciding for themselves which changes to make.",
+        "procedure": "- Students look at their own draft with their partner's marks. Three things to check: (1) Capitalisation — fix every circled letter and crossed-out capital. (2) Compound sentences — fix comma splices, aim for at least 1 compound sentence. (3) The hook — revise the first sentence if marked hook?; try a question or a bold statement. Teacher circulates and prompts with questions. Students write or type the final version. Collect both drafts for teacher assessment.",
+        "time": 15,
+        "interaction": "S"
+      }
+    ]
+  },
+  "transcript": "none",
+  "answer_key": "none",
+  "slideshow_url": "https://elwrush.github.io/lesson-plan-writer/M2-WRITING-EDITING/",
+  "cefr_level": "B1",
+  "class": "M2-4A"
+}

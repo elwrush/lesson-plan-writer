@@ -1,70 +1,80 @@
-# Key Design Rules — lesson-plan-to-reveal
+# Key Design Rules — Slides
 
-**CRITICAL RULE 0 — NO GRAY TEXT.** Any text on any slide that the student must read MUST use solid white `#fff` or solid yellow `#ffdd00`. Gray `#888`, `#666`, `rgba(255,255,255,0.5)` (50% white), `rgba(255,255,255,0.7)` (70% white), and any other muted/low-opacity colors are **strictly banned on all backgrounds** — dark navy `#1a1a2e`, teal `#1a237e`, green `#052e0d`, red `#c0392b`, and dark blue-gray `#2c3e50` alike. At classroom projection distance, these render as invisible gray smudges.
+## Slide Types
 
-**Enforcement rules:**
-- Every visible text element must have `color: #fff` or `color: #ffdd00` — either explicit or inherited from a parent
-- `rgba(255,255,255, 0.85)` is the MAXIMUM dimming for any text element, and only for decorative/secondary metadata (source citations, material references) — NEVER for task instructions, answer text, strategy steps, labels, or student-facing content
-- The base template's `.aim-label { color: #888; }` and `.source-cite { color: #666; }` are **traps** — override them in the inline `<style>` block (Step 2b) to `#fff`
-- This rule applies universally — green slides are NOT the only affected case. Every background color in this project is dark enough that gray text is unreadable.
+| Slide type | Background | Content |
+|---|---|---|
+| Splash | `#1a1a2e` + image | Full-bleed image only, no text |
+| Title | `#1a1a2e` + image | Logo 120px, h2 2.2em, CEFR badge, rhetorical Q (1em), CTA (0.9em, crimson shield) |
+| Objective | `#1a1a2e` | 4 "I can" statements, static, numbered |
+| Transition | `#c0392b` | Heading only, no notes, no fragments |
+| Pedagogical | `#1a237e`, class="pedagogical" | One concept per slide, static, teal bg |
+| Vocabulary | `#1a1a2e`, class="vocab-slide" | Phonemic script → word + TTS → 1 context sentence |
+| Task | `#1a1a2e` | Exercise number + brief instruction only. Students have workbook. |
+| Answer | `#052e0d`, class="answer-slide" | h2 + aim-label + answer-list with a-ans.a-cor + a-why |
+| Summary | `#1a1a2e` | "I can" checkmarks, matches objectives |
+| End | `#2c3e50` | Topic + CEFR badge |
 
-1. **Student-facing content on screen only** — task instructions, questions, vocabulary, answers. Teacher procedure text goes in `<aside class="notes">`. "Ss" is never used on screen.
-2. **Objective slide uses accessible language** — avoid complex words like "identify", "distinguish", "inference". Use simple phrases. Tie outcomes to PET reading test.
-3. **Title slide: topic + CEFR badge + strap subheader** — NO date, teacher name, duration, or materials.
-4. **Task slides: brief student instructions** — extract task description from procedure, skip teacher-only instructions. Max 3 task lines on screen.
-5. **Stage names: student-friendly language** — "Lead-in" → "Let's get Started", "Reading for gist" → "What's the main idea?", "Reading for detail" → "Finding details", "Reading for inference" → "Making conclusions", "Post-reading" → "Let's Discuss", "Wrap-up" → "Let's Review"
-6. **Vocabulary slides** — generated AFTER lead-in stage. One word per slide with dark navy background. No sub-heading — the preceding red transition slide already signals the vocabulary phase. Yellow bold (#ffdd00) via `<span class="vocab-word">`.
-7. **Answer slides** — use `<div class="answer-list">` flex layout (NOT `<table class="answer-table">`). Green background `#052e0d`. Statements visible on entry. Structure each row as:
-    ```html
-    <div class="a-row">
-        <span class="a-num">#</span>
-        <span class="a-q">Statement text</span>
-        <span class="fragment fade-up a-ans a-cor"><i class="fa-solid fa-check"></i> Answer</span>
-    </div>
-    ```
-    - `a-cor` for correct answers, `a-inc` for incorrect (not `answer-correct`/`answer-incorrect`)
-    - `fragment fade-up` for animated reveal (not bare `fragment`)
-    - Font Awesome `fa-check`/`fa-times` for icons (never raw Unicode U+2713/U+2717)
-    - **Do NOT use `highlight-green`/`highlight-red`** (reveal.js keeps them at `opacity: 1`; they never hide)
-    - **CRITICAL — No gray text.** Per Rule 0, ALL text on green slides must be white `#fff` or yellow `#ffdd00` — including `.a-num`, `.a-q`, `.aim-label`, and any other element. Gray, blue, or muted colors are invisible at projection distance on `#052e0d`.
-8. **Transition slides: heading only (no subheader text).** The red background + icon + heading is sufficient — the teacher's spoken introduction bridges the gap. Remove all `<p>` elements from transition slides.
-9. **Backgrounds**: dark navy `#1a1a2e` (title, lead-in, vocabulary), red `#c0392b` (transitions), teal `#1a237e` (pedagogical/strategy), green `#052e0d` (answer tables), dark `#2c3e50` (end)
-10. **Title slide visuals**: Full-screen `data-background-image` with `data-background-color="#1a1a2e"` fallback. Logo at `120px`, h2 at `2.2em`, CEFR badge inline inside h2 (`vertical-align: middle`), subheader at `1em`. **Must add `style="justify-content: center;"`** to vertically center content. **ALL text (h2, subtitle) MUST use `class="text-shield"`** for readability — no `data-background-opacity` needed (image stays at full brightness). Do NOT use `r-stack` — it creates a letterbox effect.
-11. **Text highlighting**: white text, dark text-shadow, pedagogical sections use white-on-teal
-12. **Vocabulary words**: yellow boldface (`#ffdd00`) via `<span class="vocab-word">` — in both the word heading AND context sentence(s).
+## Color Rules (STRICT)
 
-    **IPA-first fragment reveal pattern** — Each vocab slide MUST show the phonemic script first (visible on entry), then reveal the English spelling AND the context sentence simultaneously on click via fragments with matching `data-fragment-index="1"`.
+- **Only `#fff` (white) and `#ffdd00` (yellow)** for ALL visible CSS properties: font color, borders, underlines, highlights
+- No `#888`, `#666`, `#ddd`, `#222` gray text anywhere
+- No `rgba(255,255,255,X)` with X < 1 — invisible at projection distance
+- No `box-shadow` on any slide (title slide text-shield uses it internally, but don't add it explicitly)
+- Answer green = `#052e0d`. Pedagogical teal = `#1a237e`. Transition red = `#c0392b`. Never `#1e7e34` or `#1a6b5a`.
 
-    **Sequence:**
-    1. **Entry** — Student sees IPA only (e.g., `/juː/`). No English word, no definition, no heading — the preceding red transition slide already announced vocabulary time.
-    2. **Click** — The English word (yellow, bold) and the implicative example sentence (white with yellow target word) appear simultaneously via `class="fragment" data-fragment-index="1"`.
+## Font Size Minimums
 
-    **Visual layout:**
-    ```html
-    <section class="vocab-slide" data-background-color="#1a1a2e">
-        <p><em>/juː/</em></p>
-        <p class="fragment" data-fragment-index="1"><span class="vocab-word">yew</span></p>
-        <p class="fragment" data-fragment-index="1" style="font-size:0.9em; margin-top:0.3em;">
-            <em>The churchyard is full of <span class="vocab-word">yew</span> trees, some over 2,000 years old.</em>
-        </p>
-    </section>
-    ```
+- Body text: ≥1em
+- Labels/annotations: ≥0.9em
+- Title h2: 2.2em
+- Logo: 120px
+- Subheader: 1em
+- POS markers: ≥0.6em (relative to parent)
+- Never go below 0.85em on any text (0.6em POS is allowed because base is 2.2em → rendered 1.32em)
 
-    **Rules:**
-    - The `data-fragment-index` MUST be `"1"` on both the word `<p>` and the sentence `<p>` so they reveal on the same click
-    - The `<span class="vocab-word">` on the target word within the sentence applies yellow boldface (`#ffdd00`) automatically via CSS
-    - Only the target word is yellow — never the entire sentence
-    - **No "Important Words" heading on any vocab slide** — the transition slide (red background, "Some important words") already signals the phase. A heading on the first vocab slide would be redundant.
+## Fragment Rules
 
-    **Test for implicative sentence:** Can a B2 student infer the word's meaning without a dictionary, without knowing the story, and with ONLY this one sentence on screen? If the sentence would still make sense with a blank in place of the target word, the context is insufficient.
+- Fragments reserved for answer reveal and vocabulary word reveal
+- NO fragments on: objectives, summaries, transitions, strategy steps, pedagogical slides
+- Use `data-fragment-index` for per-click control
+- Answer rows: `class="a-row fragment fade-up"` — entire row reveals on one click
 
-    | Good (implicative — single sentence is enough) | Bad (just a book quote — doesn't imply meaning) |
-    |---|---|
-    | *The churchyard is full of yew trees, some over 2,000 years old.* | *Conor can see the great yew tree outside his window.* |
-    | *The desert heat made the road ahead shimmering like water.* | *The monster's branches gather into a face, shimmering into a mouth and eyes.* |
-    | *The wild horse had never been ridden — it was completely untamed.* | *The monster's voice has a quality to it — wild and untamed.* |
+## Answer Slides
 
-    The implicative example must come from **general life experience** (weather, nature, school, home, work, animals, plants, common objects) — not from the story world. This ensures the student can access the meaning independently. A single well-chosen sentence does the job — a second "In the story..." sentence adds visual clutter and gray text students won't read.
-13. **Timer pill vs audio**: Never add `data-timer` to a slide that also has `data-audio-src`. Slides with audio playback should not have a timer pill — the two controls conflict visually and functionally.
-14. **Proper HTML lists for letters/numbers**: Never use manual lettering or numbering in `<p>` tags (e.g., `<p><strong>A</strong> Option text</p>`). Use semantically correct HTML lists instead: `<ol type="A">` for lettered options, `<ol>` for numbered items, `<ul>` for bullet points. Each item gets its own `<li>` element. This ensures proper alignment and accessibility.
-15. **Check/cross symbols: Font Awesome only, never Unicode**: Check marks (✓) and cross marks (✗) must use Font Awesome icons `<i class="fa-solid fa-check">` and `<i class="fa-solid fa-times">` — never raw Unicode characters U+2713 and U+2717. These Unicode characters do not render reliably across all browser/system font combinations. Font Awesome is loaded in the base template via CDN and renders consistently in every browser. Use `style="color:#4caf50;"` on check marks and `style="color:#ff5252;"` on cross marks for dark/teal/white backgrounds. On green `#052e0d` answer slides, use `style="color:#fff;"` for both (only white or yellow allowed on green backgrounds per rule 7).
+- One item per slide for comprehension answers (Q visible on entry, answer reveals)
+- Standard pattern: h2 → `p class="aim-label"` → `div.answer-list` → `div.a-row.fragment` → `span.a-ans.a-cor` + `span.a-why`
+- Answers in yellow (`#ffdd00` via `.a-ans.a-cor`), explanations in white (`#a-why`)
+- Checkmark: `<i class="fa-solid fa-check"></i>` (never unicode)
+- No `a-num` span when h2 already numbers the question
+
+## Vocabulary Slides
+
+- Phonemic script visible on entry (Times New Roman for IPA)
+- Word + TTS audio on first fragment reveal
+- Audio at section level with `data-vocab-audio` (not inside fragment)
+- `fragmentshown` handler checks `data-vocab-trigger` and plays audio
+- Single context sentence with target word in `<span class="vocab-word">`
+- IPA must follow British Council phonemic chart (`docs/british-council-phonemic-chart.md`)
+
+## Auto-Animate
+
+- Use only for structural transformations (empty→filled, error→correction)
+- Entry: transparent borders on changed elements
+- Reveal: white `#fff` or yellow `#ffdd00` borders
+- Both need matching `data-auto-animate-id`
+- Previous slide must NOT have `data-auto-animate`
+
+## Transitions
+
+- NO speaker notes
+- NO fragments
+- Heading only, no descriptive paragraphs
+- Red background `#c0392b` with `data-background-transition="none"`
+
+## Audio/TTS Rules
+
+- Vocab TTS: `data-vocab-audio` at section level, `data-vocab-trigger` on word fragment
+- Timer SFX: copy `blip.mp3` and `BELL.mp3` from `C:\PROJECTS\SFX\` to assets
+- Never put `data-timer` on a slide with audio or video
+- `RevealAudioSlideshow` must be removed from plugins when using vocab TTS

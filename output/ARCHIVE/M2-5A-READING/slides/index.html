@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>The Foods of Indonesia — B1 Reading</title>
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        <link rel="stylesheet" href="timer-plugin.css" />
+        <style>
+            /* =============================================
+               LESSON PLAN WRITER 3 — BASE SLIDE STYLES
+               Authoritative stylesheet for all presentations.
+               ============================================= */
+
+            /* --- CEFR Badges --- */
+            .cefr-badge {
+                display: inline-block;
+                color: white;
+                font-weight: bold;
+                font-size: 0.7em;
+                padding: 4px 12px;
+                border-radius: 4px;
+                vertical-align: middle;
+                position: relative;
+                top: -2px;
+            }
+            .reveal .title-logo {
+                display: block;
+                max-height: 100px;
+                margin: 0 auto 1em;
+            }
+
+            .reveal .a-badge {
+                display: inline-block;
+                padding: 0.1em 0.5em;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 0.85em;
+                min-width: 1.8em;
+                text-align: center;
+            }
+            .reveal .a-badge.a-cor {
+                background: rgba(76, 175, 80, 0.4);
+                color: #fff;
+            }
+            .reveal .a-badge.a-inc {
+                background: rgba(244, 67, 54, 0.4);
+                color: #fff;
+            }
+            .cefr-badge.A1 { background: #4caf50; }
+            .cefr-badge.A2 { background: #8bc34a; }
+            .cefr-badge.B1 { background: #2196f3; }
+            .cefr-badge.B2 { background: #2a76dd; }
+            .cefr-badge.C1 { background: #9c27b0; }
+            .cefr-badge.C2 { background: #f44336; }
+
+
+            /* --- Answer flex layout (replaces answer-table) --- */
+            .reveal .answer-list {
+                width: 100%;
+                font-size: 0.95em;
+            }
+            .reveal .a-row {
+                display: flex;
+                align-items: baseline;
+                padding: 0.5em 0;
+                border-bottom: 1px solid #fff;
+                gap: 0.5em;
+            }
+            .reveal .a-row:last-child { border-bottom: none; }
+            .reveal .a-num {
+                flex: 0 0 1.5em;
+                text-align: left;
+                color: #fff;
+                font-size: 0.95em;
+            }
+            .reveal .a-q {
+                flex: 0 0 auto;
+                min-width: 0;
+                margin-right: 0.5em;
+            }
+            .reveal .a-ans {
+                flex: 1 1 auto;
+                min-width: 0;
+                text-align: left;
+                padding: 0.1em 0.3em;
+                border-radius: 4px;
+            }
+            .reveal .a-ans.a-cor { color: #fff; }
+            .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
+            .reveal .a-ans.a-inc { color: #fff; }
+            .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
+            /* Why column on answer rows — explanation text, fills remaining space */
+            .reveal .a-why { flex: 1 1 auto; min-width: 0; text-align: left; color: #fff; font-size: 0.9em; line-height: 1.5; }
+            /* S/V annotation underlines and labels for grammar identification */
+            .reveal .a-s { border-bottom: 2px solid #fff; }
+            .reveal .a-v { border-bottom: 3px solid #ffdd00; }
+            .reveal .a-ls { color: #ffdd00; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+            .reveal .a-lv { color: #fff; font-size: 0.75em; font-style: italic; margin-right: 1px; }
+
+            /* --- Labels & captions --- */
+            .reveal .aim-label {
+                font-size: 0.85em;
+                color: #fff;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+            }
+            .reveal .material-ref {
+                font-size: 0.85em;
+                color: #fff;
+                font-style: italic;
+                margin-top: 0.5em;
+            }
+            .reveal .source-cite {
+                font-size: 0.85em;
+                color: #fff;
+                font-style: italic;
+                margin-top: 0.3em;
+            }
+            .reveal .image-caption {
+                font-size: 0.85em;
+                color: #fff;
+                text-align: center;
+                margin-top: 0.2em;
+            }
+
+            /* --- Vocabulary slides --- */
+            .reveal section.vocab-slide h2 { font-size: 2.2em; }
+            .reveal section.vocab-slide p  { font-size: 1.3em; line-height: 1.4; }
+            .reveal .vocab-word {
+                color: #ffdd00;
+                font-weight: bold;
+            }
+            .reveal section.pedagogical h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal section.pedagogical h3 { color: #fff; }
+            .reveal section.pedagogical p  { color: #fff; }
+            .reveal section.pedagogical li { color: #fff; }
+            .reveal section.pedagogical .strategy-tip {
+                font-size: 0.85em;
+                font-style: italic;
+                color: #fff;
+                margin-bottom: 0.5em;
+            }
+            .reveal section.pedagogical .evidence {
+                font-size: 0.8em;
+                background: rgba(0,0,0,0.3);
+                padding: 0.4em 0.6em;
+                border-radius: 4px;
+                border-left: 3px solid rgba(255,255,255,0.4);
+            }
+
+            /* --- Text shield for full-opacity image backgrounds --- */
+            /* Uses display:inline-block + max-width for subtitle-style shielding.
+               inline-block keeps the background tight to the text.
+               max-width prevents full-width bars on very long text.
+               Elements stack naturally (block-level spacing) without ::after artifacts. */
+            .reveal .text-shield {
+                background: rgba(0, 0, 0, 0.55);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                line-height: 1.6;
+            }
+            .reveal .text-shield-light {
+                background: rgba(200, 200, 200, 0.65);
+                padding: 0.15em 0.6em;
+                border-radius: 4px;
+                display: inline-block;
+                max-width: 90%;
+                text-shadow: none;
+                color: #222;
+                line-height: 1.6;
+            }
+            /* Fragment variant: text already visible, background highlight on click */
+            .reveal .fragment.text-shield-light { opacity: 1; visibility: inherit; }
+            .reveal .fragment.text-shield-light.visible { background: rgba(200, 200, 200, 0.65); padding: 0.15em 0.6em; border-radius: 4px; }
+
+            /* --- Answer slides with both methods (p11 pattern) --- */
+            .reveal section.answer-slide p,
+            .reveal section.answer-slide li,
+            .reveal section.answer-slide h1,
+            .reveal section.answer-slide h2,
+            .reveal section.answer-slide h3,
+            .reveal section.answer-slide h4,
+            .reveal section.answer-slide h5,
+            .reveal section.answer-slide h6 { text-shadow: none !important; }
+            .reveal .p11-answer { width: 100%; font-size: 0.9em; text-align: left; }
+            .reveal .p11-badge { display: inline-block; padding: 0.15em 0.6em; border-radius: 4px; font-weight: bold; font-size: 0.85em; color: #ffdd00; }
+            .reveal .p11-original { font-size: 0.9em; color: #ffdd00; font-style: italic; padding: 0.4em 0; border-bottom: 3px solid rgba(255,255,255,0.15); margin: 0.5em 0; line-height: 1.5; }
+            .reveal .p11-method { padding: 0.3em 0; }
+            .reveal .p11-method p { margin: 0.1em 0; }
+            .reveal .p11-fix { color: #fff; font-size: 0.9em; margin-left: 0.5em !important; line-height: 1.5; }
+            .reveal .p11-fix span.cor-add { color: #ffdd00; border-bottom: 3px solid #fff; padding-bottom: 1px; }
+            .reveal .p11-why { color: #fff; font-size: 0.85em; font-style: italic; padding: 0.4em; background: rgba(0,0,0,0.2); border-radius: 4px; border-left: 3px solid #ffdd00; margin-top: 0.5em; line-height: 1.5; }
+
+            /* --- Answer slide centering --- */
+            .reveal section.answer-slide { text-align: center; }
+            .reveal section.answer-slide h2 { text-align: center; }
+            .reveal section.answer-slide .answer-list { text-align: center; }
+            .reveal section.answer-slide .a-ans { text-align: center !important; }
+            .reveal section.answer-slide .a-why { text-align: center !important; }
+            .reveal section.answer-slide .a-row { align-items: center; }
+
+            /* --- Fragment styles --- */
+            /* --- Yellow text for answers on green answer tables --- */
+            .reveal .answer-yellow { color: #ffdd00; }
+            .reveal .fragment.answer-yellow.visible { color: #ffdd00; }
+
+            .reveal table.answer-table th {
+                background: rgba(0, 0, 0, 0.2);
+                font-weight: bold;
+            }
+            .reveal .fragment.strike {
+                text-decoration: line-through;
+                opacity: 0.6;
+            }
+
+            /* --- YouTube iframe container (16:9 responsive) --- */
+            .reveal .iframe-container {
+                position: relative;
+                width: 90%;
+                padding-bottom: 50.625%;
+                height: 0;
+                overflow: hidden;
+                margin: 0 auto 0.5em;
+            }
+            .reveal .iframe-container iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            /* --- Diagnostic talk structure slides (pedagogical, teal) --- */
+            .reveal .structure-talk h2 {
+                color: #fff;
+                border-bottom: 3px solid rgba(255,255,255,0.3);
+                padding-bottom: 0.3em;
+            }
+            .reveal .structure-talk p,
+            .reveal .structure-talk li  { color: #fff; }
+            .reveal .structure-talk .structure-step {
+                font-size: 1.1em;
+                margin-bottom: 0.6em;
+            }
+            .reveal .structure-talk .transition-words {
+                font-size: 0.9em;
+                color: #ffdd00;
+                font-style: italic;
+                margin-top: 0.8em;
+                padding: 0.4em 0.6em;
+                background: rgba(0,0,0,0.2);
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+
+<!-- PEDAGOGICAL INTENT: Student sees the frog-eating video image full-screen, priming them for the lesson topic before any text appears. -->
+<!-- WHY THIS FEATURE: Static splash — image-only, no text or notes. The full-bleed background primes curiosity without information. -->
+<!-- COGNITIVE PRINCIPLE: Pre-training — the visual primes the topic before the title provides structure. -->
+<!-- DESIGN MECHANISM: The splash uses a full-bleed data-background-image with no text-shield, no content, and no notes. If the splash had any text, it would compete with the title slide that follows. -->
+<section id="slide-splash" data-background-color="#1a1a2e" data-background-image="assets/frogs.jpg" data-background-size="cover">
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the lesson topic and CEFR level on a full-screen image background with the ACT logo. The topic hook and lesson-type CTA orient them to what they will do. -->
+<!-- WHY THIS FEATURE: Static — no animation needed for an orientation slide. text-shield ensures readability at full image opacity. justify-content: center prevents reveal.js from flex-starting content to the top. -->
+<!-- COGNITIVE PRINCIPLE: Coherence — only essential information (topic, level, logo, hook, CTA) is shown. No date, teacher name, or materials. -->
+<!-- DESIGN MECHANISM: The strap line is a rhetorical question ('What's for dinner in Indonesia?') that the CTA ('Let's Read and Find Out') answers. The question sparks curiosity about the topic's content, while the answer signals the activity type. Without the question-answer pairing, the subheader would be either purely informational or purely procedural -- not both. -->
+<section id="slide-title" data-background-color="#1a1a2e" data-background-image="assets/frogs.jpg" data-background-size="cover" data-background-transition="none" style="justify-content: center;">
+    <img src="assets/logo.png" style="height: 120px; margin: 0 auto 0.5em; display: block;" alt="ACT" />
+    <h2 style="font-size: 2.2em;"><span class="text-shield" style="white-space: nowrap;">The Foods of Indonesia <span class="cefr-badge B1" style="font-size: 0.6em; padding: 4px 14px; vertical-align: middle;">B1</span></span></h2>
+    <p style="font-size: 1em; margin-top: 0.5em;"><span class="text-shield">What's for dinner in Indonesia?</span></p>
+    <p style="font-size: 0.9em; margin-top: 0.3em; font-weight: bold; color: #fff; background: rgba(180, 0, 0, 0.65); display: inline-block; padding: 0.15em 0.6em; border-radius: 4px;">Let's Read and Find Out</p>
+    <aside class="notes">
+        Welcome Ss. Introduce the topic: "Today we're going to read about food in Indonesia. What do you know about Indonesian food?" Take a few ideas. Then: "Let's watch a short video first."
+        Timing: 2 min. Interaction: T-Ss.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the 3 lesson goals. Each 'I can' statement tells them what they will achieve by the end. -->
+<!-- WHY THIS FEATURE: Static — all outcomes visible simultaneously. No fragments. Teacher reads each aloud. -->
+<!-- COGNITIVE PRINCIPLE: Coherence — only the outcomes are shown. No extraneous details. -->
+<!-- DESIGN MECHANISM: Three numbered 'I can' statements map directly to the summary slide at the end. If the objectives were fragmented, students couldn't see the full scope of the lesson at once. -->
+<section id="slide-objective" data-background-color="#1a1a2e" data-background-transition="none">
+    <h2>Today's Goals</h2>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">1.</span> I can find the main idea of a text about food.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">2.</span> I can find specific details in a reading text.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><span style="color: #ffdd00;">3.</span> I can share my ideas and opinions about what I read.</p>
+    <aside class="notes">
+        Stage aim: To orient students to the lesson outcomes. Timing: 1 min. Interaction: T-Ss.
+        Procedure: Welcome Ss. Read each outcome aloud. Ask Ss to put up fingers: 1 finger = easy, 3 fingers = hard for each goal.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student watches a 1-minute YouTube video of people eating giant frogs in Indonesia. This sparks curiosity and activates prior knowledge. -->
+<!-- WHY THIS FEATURE: YouTube iframe embed plays the video in-slide. No audio plugin needed — YouTube handles playback natively. -->
+<!-- COGNITIVE PRINCIPLE: Multimedia — the video provides a concrete, memorable experience of Indonesian food culture before students encounter the written text. -->
+<!-- DESIGN MECHANISM: The video plays inline via embedded YouTube iframe. If shown as a separate link, students would leave the slideshow and lose the visual context. -->
+<section id="slide-lead-in-video" data-background-color="#1a1a2e" data-background-transition="none">
+    <h2>Let's Get Started</h2>
+    <p style="font-size: 0.9em; margin-bottom: 0.5em; color: #ffdd00;">What do you know about Indonesian food?</p>
+    <iframe width="760" height="430" src="https://www.youtube.com/embed/VqhJca0beE8" frameborder="0" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" style="border: none; display: block; margin: 0 auto;"></iframe>
+    <aside class="notes">
+        Stage 1 · 7 min · Ss-Ss
+        Aim: To spark curiosity about Indonesian food culture through an engaging video and activate prior knowledge.
+        Play the first minute of the YouTube video. Stop after 1 min. Ask: "What did you see?" In pairs, learners discuss what it suggests about Indonesian food culture and what they already know. Elicit 3-4 ideas as a class.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees 2 concrete discussion questions that connect the video to the lesson topic. They discuss in pairs before sharing with the class. -->
+<!-- WHY THIS FEATURE: Static slide — both questions visible simultaneously for pair discussion. No fragments needed; students discuss at their own pace. -->
+<!-- COGNITIVE PRINCIPLE: Personalization — questions use direct 'you' language and ask about students' own knowledge and reactions. -->
+<!-- DESIGN MECHANISM: Both discussion questions are visible simultaneously so pairs can discuss at their own pace without waiting for click reveals. If fragmented, faster pairs would wait on the teacher's clicks. -->
+<section id="slide-lead-in-discuss" data-background-color="#1a1a2e" data-background-transition="none">
+    <h2>Talk with Your Partner</h2>
+    <ol style="font-size: 1em; text-align: left;">
+        <li style="margin: 0.5em 0;">What did you see in the video?</li>
+        <li style="margin: 0.5em 0;">What does this tell us about food in Indonesia?</li>
+    </ol>
+    <aside class="notes">
+        Ss discuss in pairs for 2 min. Elicit ideas as a class.
+        Connect responses: "Indonesia is a country with amazing and different kinds of food — from street food to traditional dishes. Today we're going to read a text about food in Indonesia."
+    </aside>
+</section>
+
+<section id="slide-transition-vocab" data-background-color="#c0392b" data-background-transition="none">
+    <h2>Words to Know</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the task instruction for Exercise A — Vocabulary Preview. They begin working independently. -->
+<!-- WHY THIS FEATURE: Timer pill (300s) structures the work period. Static instruction — all information visible on entry. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — the timer gives a clear work boundary and helps students pace themselves. -->
+<!-- DESIGN MECHANISM: The data-timer attribute creates a visible countdown. Without it, students would have no pacing cue and might rush or linger too long. -->
+<section id="slide-exA-task" data-background-color="#1a1a2e" data-background-transition="none" data-timer="300">
+    <h2>Exercise A — Vocabulary Preview</h2>
+    <p><em>Match the words with the definitions. Work alone.</em></p>
+    <aside class="notes">
+        Stage 2 · 5 min · S (Individual)
+Aim: To introduce key vocabulary needed to understand the reading text.
+Learners complete Exercise A individually, matching the eight words with their definitions. 5 min. Then pair check + whole-class feedback.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 1 of Exercise A. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exA-ans-1" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise A — Item 1</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">farming</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;">c</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">growing crops or producing animal products</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answer. Ask Ss to share before clicking to reveal.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 2 of Exercise A. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exA-ans-2" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise A — Item 2</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">food stall</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;">g</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">a small building open at the front, used for selling food</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answer. Ask Ss to share before clicking to reveal.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 3 of Exercise A. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exA-ans-3" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise A — Item 3</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">groceries</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;">f</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">food you regularly buy in a store</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answer. Ask Ss to share before clicking to reveal.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 4 of Exercise A. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exA-ans-4" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise A — Item 4</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">herbs and spices</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;">d</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">things used to add flavor to food</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answer. Ask Ss to share before clicking to reveal.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 5 of Exercise A. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exA-ans-5" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise A — Item 5</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">industry</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;">h</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">people and organizations involved in producing goods</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answer. Ask Ss to share before clicking to reveal.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 6 of Exercise A. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exA-ans-6" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise A — Item 6</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">plant</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;">e</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">to put seeds in the ground to grow</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answer. Ask Ss to share before clicking to reveal.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 7 of Exercise A. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exA-ans-7" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise A — Item 7</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">processed food</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;">b</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">food changed from its natural state</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answer. Ask Ss to share before clicking to reveal.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 8 of Exercise A. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exA-ans-8" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise A — Item 8</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">soil</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;">a</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">the substance on the surface of the Earth where plants grow</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answer. Ask Ss to share before clicking to reveal.
+    </aside>
+</section>
+
+<section id="slide-transition-gist" data-background-color="#c0392b" data-background-transition="none">
+    <h2>What’s the Main Idea?</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 1 — Student sees the strategy title and the first step: look at the picture and heading to guess the topic. -->
+<!-- WHY THIS FEATURE: Auto-animate (1 of 4). Only Step 1 is visible. Subsequent slides will add steps while dimming previous ones. -->
+<!-- COGNITIVE PRINCIPLE: Worked Example — the strategy is modeled using the actual text's picture and heading as the concrete example. -->
+<!-- DESIGN MECHANISM: Each step gets its own auto-animate slide so the teacher can pause at each decision point. Without the slide boundary, all steps would be visible at once, overwhelming B1 learners. -->
+<section id="slide-strategy-skim-1" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="skim-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="skim-title">How to Skim</h2>
+        <p data-id="skim-strap" style="font-size: 0.9em; color: #ffdd00; margin-bottom: 0.3em;">Don't read every word. Read fast to get the general idea.</p>
+        <p data-id="skim-s1" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 1:</strong> Look at the picture and the heading.</u></p>
+        <p data-id="skim-a1" style="font-size: 0.85em; margin-left: 1.5em; color: #ffdd00;">"The Food of Indonesia" + a man cooking Kerak Telor</p>
+        <p data-id="skim-tip1" style="font-size: 0.85em; margin-top: 0.3em; color: rgba(255,255,255,0.85); font-style: italic;">The heading and picture tell you the topic before you read a single word.</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 2 — Student sees Step 1 dimmed and Step 2 appear: read only the first sentence of each paragraph. -->
+<!-- WHY THIS FEATURE: Auto-animate (2 of 4). Step 1 dims. Step 2 label and example appear. The title and strap persist via data-id. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the first-sentence strategy is the key to skimming. Dedicating a full slide signals its importance. -->
+<!-- DESIGN MECHANISM: Step 1 dims via changed CSS (opacity, font-size) on the same data-id elements. Without auto-animate, the dimming would require a jump-cut, losing the visual connection. -->
+<section id="slide-strategy-skim-2" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="skim-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="skim-title">How to Skim</h2>
+        <p data-id="skim-strap" style="font-size: 0.85em; color: rgba(255,255,255,0.6); margin-bottom: 0.2em;">Don't read every word. Read fast to get the general idea.</p>
+        <p data-id="skim-s1" style="font-size: 0.85em; margin-top: 0.2em; color: rgba(255,255,255,0.5);"><u><strong>Step 1:</strong> Look at the picture and the heading.</u></p>
+        <p data-id="skim-a1" style="font-size: 0.85em; margin-left: 1.5em; color: rgba(255,255,255,0.5);">"The Food of Indonesia" + Kerak Telor</p>
+        <p data-id="skim-s2" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 2:</strong> Read ONLY the first sentence of each paragraph.</u></p>
+        <p data-id="skim-a2" style="font-size: 0.85em; margin-left: 1.5em; color: #ffdd00;"><em>"Situated in a warm, tropical region, Indonesia has a lot of rain and sunshine..."</em></p>
+        <p data-id="skim-tip2" style="font-size: 0.85em; margin-top: 0.3em; color: rgba(255,255,255,0.85); font-style: italic;">That's from paragraph 1 — it tells you this text is about Indonesia's climate and farming.</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 3 — Student sees Steps 1-2 dimmed and Step 3 appear: find repeated words that reveal the text's themes. -->
+<!-- WHY THIS FEATURE: Auto-animate (3 of 4). Previous steps dim further. Step 3 appears with example keywords. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the repeated-keywords strategy trains students to recognize thematic words without reading every sentence. -->
+<!-- DESIGN MECHANISM: Repeated keywords (food, Indonesia, farming) are shown in yellow so students learn what to scan for. Without this explicit example, students would not know what 'repeated words' looks like. -->
+<section id="slide-strategy-skim-3" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="skim-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="skim-title">How to Skim</h2>
+        <p data-id="skim-s1" style="font-size: 0.85em; margin-top: 0.1em; color: rgba(255,255,255,0.3);"><u><strong>Step 1:</strong> Look at the picture.</u></p>
+        <p data-id="skim-s2" style="font-size: 0.85em; margin-top: 0.1em; color: rgba(255,255,255,0.3);"><u><strong>Step 2:</strong> Read first sentences.</u></p>
+        <p data-id="skim-s3" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 3:</strong> Find words that appear many times.</u></p>
+        <p data-id="skim-a3" style="font-size: 0.85em; margin-left: 1.5em; color: #ffdd00;">food · Indonesia · farming · crops · people</p>
+        <p data-id="skim-tip3" style="font-size: 0.85em; margin-top: 0.3em; color: rgba(255,255,255,0.85); font-style: italic;">These repeated words tell you the text is about Indonesian food and farming.</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 4 — Student sees the strategy culminate: check the summary against what you found while skimming. -->
+<!-- WHY THIS FEATURE: Auto-animate (4 of 4). Previous steps omitted to prevent content overflow. Only Step 4 is shown. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — the 4-step strategy is broken into 4 discrete slides. The teacher pauses at each step. -->
+<!-- DESIGN MECHANISM: Previous steps are omitted from this slide to prevent content overflow at 0.85em minimum font size. The teacher has already walked through Steps 1-3 — only Step 4's action matters now. -->
+<section id="slide-strategy-skim-4" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="skim-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="skim-title">How to Skim</h2>
+        <p data-id="skim-s4" style="font-size: 0.85em; margin-top: 0.3em;"><u><strong>Step 4:</strong> Check the summary.</u></p>
+        <p style="font-size: 0.95em; margin-left: 1.5em; margin-top: 0.3em; color: #ffdd00;">"Indonesia produces different plants and crops..."</p>
+        <p style="font-size: 0.85em; margin-top: 0.4em; color: rgba(255,255,255,0.9);">Your skim notes should match the summary. If not, skim again!</p>
+        <p style="margin-top: 0.8em; color: #ffdd00;"><i class="fa-solid fa-flag-checkered" style="color:#ffdd00;"></i> Want a challenge? Try to guess the missing summary words before you read.</p>
+    </div>
+    <aside class="notes">
+        Stage 3 · 10 min · Ss-Ss
+        Walk through each step. Then tell Ss: "Now you try. Open your books. Do Exercises B and C."
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the task instruction for Exercise B and C. They begin working independently. -->
+<!-- WHY THIS FEATURE: Timer pill (600s) structures the work period. Static instruction — all information visible on entry. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — the timer gives a clear work boundary and helps students pace themselves. -->
+<!-- DESIGN MECHANISM: The data-timer attribute creates a visible countdown. Without it, students would have no pacing cue and might rush or linger too long. -->
+<section id="slide-exBC-task" data-background-color="#1a1a2e" data-background-transition="none" data-timer="600">
+    <h2>Exercise B and C</h2>
+    <p><em>Exercise B: Look at the picture and heading. What is the text's purpose? Exercise C1: Skim the text. Check the topics that are mentioned. Exercise C2: Complete the summary.</em></p>
+    <aside class="notes">
+        Stage 3 · 10 min · Ss-Ss
+Step 1 (2 min): Ss look at picture + heading, answer Ex B. Quick feedback.
+Step 2 (3 min): Ss skim the text for Ex C1.
+Step 3 (5 min): Ss use their answers to complete the summary in Ex C2.
+Quick pair-check before feedback.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 1 of Exercise C1. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exC1-ans-1" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise C1 — Item 1</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">challenges today</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;"><i class="fa-solid fa-check" style="color:#ffdd00;"></i> yes</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">Paragraph 5 discusses challenges facing the food industry today.</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check topic. Ask Ss to share answer before revealing.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 2 of Exercise C1. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exC1-ans-2" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise C1 — Item 2</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">changes to diet and shopping</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;"><i class="fa-solid fa-check" style="color:#ffdd00;"></i> yes</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">Paragraph 4 describes how diets and shopping habits have changed.</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check topic. Ask Ss to share answer before revealing.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 3 of Exercise C1. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exC1-ans-3" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise C1 — Item 3</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">local dishes</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;"><i class="fa-solid fa-check" style="color:#ffdd00;"></i> yes</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">Paragraph 3 mentions Kerak Telor and street food culture.</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check topic. Ask Ss to share answer before revealing.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 4 of Exercise C1. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exC1-ans-4" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise C1 — Item 4</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">plants and crops</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;"><i class="fa-solid fa-check" style="color:#ffdd00;"></i> yes</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">Paragraphs 1 and 2 discuss farming, crops, and what Indonesia produces.</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check topic. Ask Ss to share answer before revealing.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 1 of Exercise C2. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exC2-ans-1" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise C2 — Item 1</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">produces different…</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;">plants and crops</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">From para 1-2: Indonesia grows many kinds of crops.</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check summary. Ask Ss to share before revealing.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 2 of Exercise C2. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exC2-ans-2" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise C2 — Item 2</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">herbs and spices used in…</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;">local dishes</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">From para 3: "a long history of cooking with herbs and spices" — street foods like Kerak Telor.</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check summary. Ask Ss to share before revealing.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 3 of Exercise C2. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exC2-ans-3" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise C2 — Item 3</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">However, … and … are changing</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;">diets</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">From para 4: "As Indonesia has become richer… local diets have gradually changed."</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check summary. Ask Ss to share before revealing.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 4 of Exercise C2. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exC2-ans-4" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise C2 — Item 4</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">and … habits are changing</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;">shopping</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">From para 4: "People still shop in traditional stores, but supermarkets sell more."</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check summary. Ask Ss to share before revealing.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 5 of Exercise C2. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exC2-ans-5" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise C2 — Item 5</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">One of the main …</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;">challenges</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">From para 5: "many challenges facing the Indonesian food industry."</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check summary. Ask Ss to share before revealing.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 6 of Exercise C2. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exC2-ans-6" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise C2 — Item 6</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">for the food industry …</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;">today</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">From para 5: The challenges are about current and future issues.</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check summary. Ask Ss to share before revealing.
+    </aside>
+</section>
+
+<section id="slide-transition-detail" data-background-color="#c0392b" data-background-transition="none">
+    <h2>True, False, or Not Given?</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 1 — Student sees the statement in yellow. The teacher reads it aloud and asks: 'What exactly does this sentence say?' -->
+<!-- WHY THIS FEATURE: Auto-animate (1 of 4). Step 1 label and the statement text visible. -->
+<!-- COGNITIVE PRINCIPLE: Worked Example — the first of 4 slides demonstrating the T/F/NG decision process on a real exercise item. -->
+<!-- DESIGN MECHANISM: Step 1 focuses only on reading comprehension: what does the statement actually claim? Without this explicit step, students jump to guessing without understanding the claim. -->
+<section id="slide-detail-step1" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="tfng-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">True, False, or Not Given?</h2>
+        <p style="font-size: 0.9em; color: rgba(255,255,255,0.7);">We’ll try one together from Exercise D.</p>
+        <p data-id="statement" style="font-size: 0.95em; color: #ffdd00; font-style: italic;">"Very few people now work in farming in Indonesia."</p>
+        <p data-id="s1" style="font-size: 0.85em; margin-top: 0.5em;"><u><strong>Step 1:</strong> Read each part carefully. What is being claimed?</u></p>
+        <p data-id="a1" style="font-size: 0.85em; margin-left: 1.5em; color: rgba(255,255,255,0.85);">The sentence claims that not many people work in farming now.</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 2 — Student sees key words highlighted. The teacher asks: 'Which paragraph talks about farming and people?' -->
+<!-- WHY THIS FEATURE: Auto-animate (2 of 4). Step 1 dims. New elements: Step 2 label + highlighted keywords (farming, people, work) with white underlines. -->
+<!-- COGNITIVE PRINCIPLE: Signaling — the underlines on 'farming', 'people', and 'work' draw attention to the exact words to search for in the text. -->
+<!-- DESIGN MECHANISM: Key words are underlined in white (structural emphasis). The paragraph number (paragraph 1) is given to direct the search. Without this slide, students would not know where to look in a multi-paragraph text. -->
+<section id="slide-detail-step2" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="tfng-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">True, False, or Not Given?</h2>
+        <p data-id="statement" style="font-size: 0.95em; color: #ffdd00; font-style: italic;">"Very few people now work in <span data-id="kw1" style="border-bottom: 2px solid #fff;">farming</span> in Indonesia."</p>
+        <p data-id="s1" style="font-size: 0.85em; margin-top: 0.3em; color: rgba(255,255,255,0.5);"><u><strong>Step 1:</strong> Read each part carefully.</u></p>
+        <p data-id="a1" style="font-size: 0.85em; margin-left: 1.5em; color: rgba(255,255,255,0.4);">Not many people work in farming.</p>
+        <p data-id="s2" style="font-size: 0.85em; margin-top: 0.5em;"><u><strong>Step 2:</strong> Find the key words. Which paragraph talks about them?</u></p>
+        <p data-id="a2" style="font-size: 0.85em; margin-left: 1.5em; color: #ffdd00;"><span data-id="kw1-l" style="border-bottom: 2px solid #fff;">farming</span>, <span data-id="kw2-l" style="border-bottom: 2px solid #fff;">people</span>, <span data-id="kw3-l" style="border-bottom: 2px solid #fff;">work</span> → Look in <strong>paragraph 1</strong>.</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 3 — Student sees the text quote alongside the original statement. The comparison highlights that the text and the statement CONTRADICT each other. -->
+<!-- WHY THIS FEATURE: Auto-animate (3 of 4). Previous 2 steps dim. New elements: Step 3 label + text quote comparison. -->
+<!-- COGNITIVE PRINCIPLE: Spatial Contiguity — the statement and the text quote are placed side by side for direct comparison. -->
+<!-- DESIGN MECHANISM: The statement ('Very few') and text quote ('A large percentage') are shown together so students see the contradiction visually. Without both visible simultaneously, students would need to hold one in memory while reading the other. -->
+<section id="slide-detail-step3" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="tfng-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">True, False, or Not Given?</h2>
+        <p data-id="statement" style="font-size: 0.85em; color: #ffdd00; font-style: italic;">"Very few people now work in <span data-id="kw1" style="border-bottom: 2px solid #fff;">farming</span> in Indonesia."</p>
+        <p data-id="s1" style="font-size: 0.85em; margin-top: 0.3em; color: rgba(255,255,255,0.4);"><u><strong>Step 1:</strong> Read each part carefully.</u></p>
+        <p data-id="s2" style="font-size: 0.85em; margin-top: 0.2em; color: rgba(255,255,255,0.4);"><u><strong>Step 2:</strong> Find the key words.</u></p>
+        <p data-id="s3" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 3:</strong> Compare with the text. What does paragraph 1 say?</u></p>
+        <p style="font-size: 0.85em; margin-left: 1.5em; margin-top: 0.3em;">
+            <span style="color: rgba(255,255,255,0.6);">Statement: "Very few people work in farming"</span><br/>
+            <span style="color: #fff;">Text: <em>"A large percentage of the population works in the farming industry."</em></span>
+        </p>
+        <p style="font-size: 0.85em; margin-left: 1.5em; margin-top: 0.3em; color: #ffdd00;">
+            "Very few" ≠ "A large percentage" → The text says the <strong>opposite</strong>.
+        </p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 4 — Student sees the final decision revealed: FALSE, with a summary of the reasoning chain. -->
+<!-- WHY THIS FEATURE: Auto-animate (4 of 4). Previous steps omitted to prevent content overflow. Only Step 4 + the answer is shown. -->
+<!-- COGNITIVE PRINCIPLE: Worked Example — the student witnesses the complete decision-making process from start to finish. -->
+<!-- DESIGN MECHANISM: The answer (FALSE) appears prominently in yellow with the contradicting text evidence directly below. Without the evidence quote, students would see only the answer without understanding WHY it's false vs not given. -->
+<section id="slide-detail-step4" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="tfng-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="title">True, False, or Not Given?</h2>
+        <p data-id="statement" style="font-size: 0.85em; color: rgba(255,255,255,0.5); font-style: italic;">"Very few people now work in farming in Indonesia."</p>
+        <p data-id="s4" style="font-size: 0.85em; margin-top: 0.5em;"><u><strong>Step 4:</strong> Decide. Is it T, F, or NG?</u></p>
+        <p style="font-size: 1.1em; margin-left: 1.5em; margin-top: 0.4em; color: #ffdd00; font-weight: bold;">Answer: FALSE</p>
+        <p style="font-size: 0.85em; margin-left: 1.5em; margin-top: 0.3em; color: rgba(255,255,255,0.9);">The text says "A large percentage" — that's the <strong>opposite</strong> of "very few." When the text says the opposite → <strong>False</strong>.</p>
+        <p style="font-size: 0.85em; margin-top: 0.6em; padding: 0.3em 0.8em; border: 1px solid #ffdd00; border-radius: 4px; display: inline-block;">
+            <strong>Not Given</strong> = text doesn't mention it. <strong>False</strong> = text says the opposite.
+        </p>
+    </div>
+    <aside class="notes">
+        Emphasize the NG vs FALSE distinction. Now say: "Now you try Exercise D. Read each sentence. Follow the same steps: 1) Read carefully, 2) Find keywords, 3) Compare with text, 4) Decide. You have 14 minutes."
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the task instruction for Exercise D — Close Reading. They begin working independently. -->
+<!-- WHY THIS FEATURE: Timer pill (840s) structures the work period. Static instruction — all information visible on entry. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — the timer gives a clear work boundary and helps students pace themselves. -->
+<!-- DESIGN MECHANISM: The data-timer attribute creates a visible countdown. Without it, students would have no pacing cue and might rush or linger too long. -->
+<section id="slide-exD-task" data-background-color="#1a1a2e" data-background-transition="none" data-timer="840">
+    <h2>Exercise D — Close Reading</h2>
+    <p><em>Read the text again. Write T (True), F (False), or NG (Not Given) for each sentence.</em></p>
+    <aside class="notes">
+        Stage 4 · 14 min · Ss-Ss
+Aim: To extract specific information and distinguish between stated, false, and unstated information.
+10 min individual work. Then 4 min pair check. Encourage Ss to underline the text evidence for each answer.
+After the timer, do class feedback with justification for each answer.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 1 of Exercise D. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exD-ans-1" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise D — Item 1</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">Very few people work in farming.</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;"><i class="fa-solid fa-check" style="color:#ffdd00;"></i> False</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">Text: "A large percentage of the population works in the farming industry." The text says the opposite.</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answer. Ask: "Which paragraph did you find the evidence in?" Emphasize False vs NG.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 2 of Exercise D. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exD-ans-2" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise D — Item 2</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">Indonesia does not produce any meat.</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;"><i class="fa-solid fa-check" style="color:#ffdd00;"></i> Not Given</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">Text mentions dairy and meat are imported (para 4), but doesn't say whether any meat IS produced in Indonesia.</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answer. Ask: "Which paragraph did you find the evidence in?" Emphasize False vs NG.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 3 of Exercise D. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exD-ans-3" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise D — Item 3</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">Herbs and spices are new in Indonesian cooking.</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;"><i class="fa-solid fa-check" style="color:#ffdd00;"></i> False</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">Text: "Indonesia has a long history of cooking with herbs and spices" (para 3). The opposite of "new."</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answer. Ask: "Which paragraph did you find the evidence in?" Emphasize False vs NG.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 4 of Exercise D. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exD-ans-4" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise D — Item 4</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">People now eat more processed foods.</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;"><i class="fa-solid fa-check" style="color:#ffdd00;"></i> True</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">Text: "the amount of dairy, meat, and sugar people eat has grown" and "supermarkets mostly sell processed foods" (para 4).</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answer. Ask: "Which paragraph did you find the evidence in?" Emphasize False vs NG.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees item 5 of Exercise D. The question is visible; the answer and explanation reveal on one click. -->
+<!-- WHY THIS FEATURE: fragment fade-up on the entire row reveals answer+why simultaneously. Stacked layout (flex-direction: column) puts answer above explanation, eliminating horizontal cramming. -->
+<!-- COGNITIVE PRINCIPLE: Temporal Contiguity — the answer and its explanation appear on the same click, reinforcing the connection. -->
+<!-- DESIGN MECHANISM: One item per slide with a stacked a-row means the answer appears ABOVE the explanation. If side by side, the explanation would be squeezed into a narrow column. The question is visible on entry (outside the fragment) so students recall the item before the answer appears. -->
+<section id="slide-exD-ans-5" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
+    <h2 style="font-size: 0.95em;">Exercise D — Item 5</h2>
+    <p style="color: #ffdd00; font-style: italic; margin-bottom: 0.5em;">Indonesia produces all the rice and sugar it needs.</p>
+    <div class="answer-list">
+        <div class="a-row fragment fade-up" style="flex-direction: column;">
+            <span class="a-ans" style="color: #ffdd00; font-size: 1.1em; font-weight: bold; margin-bottom: 0.3em; display: block;"><i class="fa-solid fa-check" style="color:#ffdd00;"></i> False</span>
+            <span class="a-why" style="display: block; line-height: 1.5;">Text: "In the past, produced enough rice and sugar… but now it needs to import these foods" (para 5). Opposite of what the statement says.</span>
+        </div>
+    </div>
+    <aside class="notes">
+        Check answer. Ask: "Which paragraph did you find the evidence in?" Emphasize False vs NG.
+    </aside>
+</section>
+
+<section id="slide-transition-discuss" data-background-color="#c0392b" data-background-transition="none">
+    <h2>Let’s Discuss</h2>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 1 — Student sees the discussion framework start with 'Think: What did the text say?' -->
+<!-- WHY THIS FEATURE: Auto-animate (1 of 4). Only Step 1 is visible. A modelled sentence starter shows how to begin. -->
+<!-- COGNITIVE PRINCIPLE: Worked Example — the teacher models one complete text-to-opinion response using Exercise E1. -->
+<!-- DESIGN MECHANISM: Step 1 starts with a factual recall from the text before asking students to form opinions. Without this step, students would skip comprehension and jump to opinion with nothing to base it on. -->
+<section id="slide-strategy-think-1" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="think-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="think-title">How to Discuss What You Read</h2>
+        <p data-id="think-s1" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 1:</strong> Think — What did the text say?</u></p>
+        <p data-id="think-a1" style="font-size: 0.85em; margin-left: 1.5em; margin-top: 0.3em; color: #fff;">"The text says that Indonesian people eat more processed food now."</p>
+        <p data-id="think-tip1" style="font-size: 0.85em; margin-top: 0.3em; color: rgba(255,255,255,0.85); font-style: italic;">Start with one fact from the reading.</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 2 — Student sees Step 1 dimmed and Step 2 appear: connect to your own country. -->
+<!-- WHY THIS FEATURE: Auto-animate (2 of 4). Step 1 dims. Step 2 appears with personal comparison starter. -->
+<!-- COGNITIVE PRINCIPLE: Personalization — connecting text information to personal experience creates meaningful learning. -->
+<!-- DESIGN MECHANISM: Step 2 adds a comparative sentence starter ('In my country...') so students have a concrete template. Without it, B1 learners often respond with one-word answers. -->
+<section id="slide-strategy-think-2" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="think-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="think-title">How to Discuss What You Read</h2>
+        <p data-id="think-s1" style="font-size: 0.85em; margin-top: 0.2em; color: rgba(255,255,255,0.5);"><u><strong>Step 1:</strong> Think — What did the text say?</u></p>
+        <p data-id="think-a1" style="font-size: 0.85em; margin-left: 1.5em; color: rgba(255,255,255,0.5);">"Indonesian people eat more processed food now."</p>
+        <p data-id="think-s2" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 2:</strong> Connect — Is it the same in your country?</u></p>
+        <p data-id="think-a2" style="font-size: 0.85em; margin-left: 1.5em; margin-top: 0.3em; color: #fff;">"In my country, we also eat more fast food than before."</p>
+        <p data-id="think-tip2" style="font-size: 0.85em; margin-top: 0.3em; color: rgba(255,255,255,0.85); font-style: italic;">Use: "In my country..." or "It's the same / different because..."</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 3 — Student sees Steps 1-2 dimmed and Step 3 appear: explain why you think that. -->
+<!-- WHY THIS FEATURE: Auto-animate (3 of 4). Previous steps dim. Step 3 introduces cause-effect reasoning. -->
+<!-- COGNITIVE PRINCIPLE: Segmenting — cause-effect reasoning is broken out as its own slide, giving students time to process. -->
+<!-- DESIGN MECHANISM: Step 3 adds a reason starter ('I think... because...') so students learn to support opinions with reasoning. Without this, students would state opinions without justification. -->
+<section id="slide-strategy-think-3" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="think-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="think-title">How to Discuss What You Read</h2>
+        <p data-id="think-s1" style="font-size: 0.85em; margin-top: 0.1em; color: rgba(255,255,255,0.3);"><u><strong>Step 1:</strong> Think.</u></p>
+        <p data-id="think-s2" style="font-size: 0.85em; margin-top: 0.1em; color: rgba(255,255,255,0.3);"><u><strong>Step 2:</strong> Connect to your country.</u></p>
+        <p data-id="think-s3" style="font-size: 0.85em; margin-top: 0.4em;"><u><strong>Step 3:</strong> Explain — Why do you think that?</u></p>
+        <p data-id="think-a3" style="font-size: 0.85em; margin-left: 1.5em; margin-top: 0.3em; color: #fff;">"I think this happens because people have less time to cook."</p>
+        <p data-id="think-tip3" style="font-size: 0.85em; margin-top: 0.3em; color: rgba(255,255,255,0.85); font-style: italic;">Use: "I think... because..." or "One reason is..."</p>
+    </div>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Step 4 — Student sees the full discussion framework complete. Step 4: ask your partner. -->
+<!-- WHY THIS FEATURE: Auto-animate (4 of 4). Previous steps omitted to prevent content overflow. Only Step 4 is shown. -->
+<!-- COGNITIVE PRINCIPLE: Personalization — the framework ends with a peer prompt, making the discussion social rather than individual. -->
+<!-- DESIGN MECHANISM: Step 4 prompts peer exchange ('What do you think?') so the discussion becomes collaborative. Without this, students would prepare their own answer but never share. -->
+<section id="slide-strategy-think-4" class="pedagogical" data-background-color="#1a237e" data-background-transition="none" data-auto-animate data-auto-animate-id="think-strategy">
+    <div style="overflow: hidden;">
+        <h2 data-id="think-title">How to Discuss What You Read</h2>
+        <p data-id="think-s4" style="font-size: 0.85em; margin-top: 0.3em;"><u><strong>Step 4:</strong> Discuss — Ask your partner.</u></p>
+        <p style="font-size: 0.95em; margin-left: 1.5em; margin-top: 0.3em; color: #ffdd00;">"What do you think?"</p>
+        <p style="font-size: 0.85em; margin-top: 0.4em; color: rgba(255,255,255,0.9);">Now try it yourself with Exercises E1 and E2.</p>
+        <p style="margin-top: 0.8em; color: #ffdd00;"><i class="fa-solid fa-flag-checkered" style="color:#ffdd00;"></i> Want a challenge? Add a second reason: "Another reason is..."</p>
+    </div>
+    <aside class="notes">
+        Stage 5 · 10 min · Ss-Ss
+        Walk through all 4 steps using Exercise E1 as the model.
+        Then Ss discuss in small groups: 6 min discussion, 4 min feedback.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the two discussion questions from Exercise E with sentence starters as scaffolding. -->
+<!-- WHY THIS FEATURE: Static — no fragments. Discussion is open-ended; students need access to all questions at once. -->
+<!-- COGNITIVE PRINCIPLE: Personalization — questions ask students to connect text information to their own country and opinions. -->
+<!-- DESIGN MECHANISM: Both E1 and E2 questions are visible simultaneously so groups can discuss both without waiting for clicks. Sentence starters below reduce the language barrier for B1 learners. -->
+<section id="slide-exE-task" data-background-color="#1a1a2e" data-background-transition="none">
+    <h2>Exercise E — Critical Thinking</h2>
+    <p style="text-align: left; font-size: 0.95em; color: #ffdd00; font-weight: bold;">E1:</p>
+    <p style="text-align: left; margin: 0.2em 0 0.8em 1.5em;">What changes in diet have there been in Indonesia? Have you had similar changes in your country?</p>
+    <p style="text-align: left; font-size: 0.95em; color: #ffdd00; font-weight: bold;">E2:</p>
+    <p style="text-align: left; margin: 0.2em 0 0.8em 1.5em;">Why do people eat more processed food today? What health problems can it cause?</p>
+    <hr style="border-color: rgba(255,255,255,0.2); margin: 0.5em 0;"/>
+    <p style="font-size: 0.85em; color: rgba(255,255,255,0.85);">Use these: "I think... because..." / "In my country..." / "One reason is..."</p>
+    <aside class="notes">
+        Ss discuss in small groups (4-6 min). Then whole-class feedback (4 min).
+        Collect 2-3 ideas from each question. Brief content and language correction.
+    </aside>
+</section>
+
+<!-- PEDAGOGICAL INTENT: Student sees the lesson outcomes restated with checkmarks. This mirrors the objective slide and creates a sense of completion. -->
+<!-- WHY THIS FEATURE: Static — all outcomes visible simultaneously. No fragments. Teacher elicits each one before showing. -->
+<!-- COGNITIVE PRINCIPLE: Consolidation — the summary mirrors the objective slide's exact wording. The checkmarks visually confirm achievement. -->
+<!-- DESIGN MECHANISM: The summary restates the objective slide's exact numbered 'I can...' wording. The Font Awesome checkmark icons differ from the yellow numbers on the objective slide, creating a 'before vs. after' contrast. -->
+<section id="slide-summary" data-background-color="#1a1a2e" data-background-transition="none">
+    <h2>I can...</h2>
+    <p style="text-align: left; margin: 0.5em 0;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> I can find the main idea of a text about food.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> I can find specific details in a reading text.</p>
+    <p style="text-align: left; margin: 0.5em 0;"><i class="fa-solid fa-check" style="color: #ffdd00;"></i> I can share my ideas and opinions about what I read.</p>
+    <aside class="notes">
+        Elicit: "What did you learn today?" Connect back to the objective slide.
+        Ask Ss to rate each outcome with fingers (1=easy, 3=hard) again — compare with the start of class.
+    </aside>
+</section>
+
+<section id="slide-end" data-background-color="#2c3e50" data-background-transition="none">
+    <h2>The Foods of Indonesia</h2>
+    <div><span class="cefr-badge B1">B1</span></div>
+</section>
+</div>
+        </div>
+
+        <!-- Mark.js (CDN) + mark plugin (local) -->
+        <!-- Timer plugin (local) -->
+        <script src="timer-plugin.js"></script>
+
+        <!-- Audio slideshow plugin (CDN) -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/audio-slideshow/plugin.js"></script>
+
+        <!-- reveal.js 5.1.0 via CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+        <script>
+            Reveal.initialize({
+                history: true,
+                slideNumber: "c/t",
+                transition: "slide",
+                width: 1280,
+                height: 720,
+                autoAnimateUnmatched: true,
+                audio: {
+                    prefix: 'assets/',
+                    suffix: '.mp3',
+                    advance: -1,
+                    autoplay: false,
+                    defaultAudios: false,
+                    defaultDuration: 0,
+                    playerOpacity: 1.0,
+                    playerStyle: 'position: fixed; bottom: 30px; left: 25%; width: 50%; height:75px; z-index: 33;',
+                    startAtFragment: false,
+                },
+                plugins: [
+                    // WARNING: Every plugin here is loaded and initialized by reveal.js
+                    // at startup. If any plugin's init() function throws an error, the
+                    // entire presentation will show a BLANK PAGE. Always test new plugins
+                    // in a browser and check the console before committing to the template.
+                    // Third-party plugins that depend on external CDN libraries (like
+                    // mark.js) require special care — see SKILL.md for the plugin
+                    // testing protocol.
+                    TimerPlugin,
+                    RevealHighlight,
+                    RevealMath.KaTeX,
+                    RevealNotes,
+                    RevealSearch,
+                    RevealZoom,
+                    RevealAudioSlideshow,
+                ],
+            });
+        </script>
+    </body>
+</html>

@@ -32,7 +32,7 @@ The base template is at `templates/base-slides-template.html` — copy it to `ou
 11. **Answer slides: max 3 items** — split exercises with >3 items across multiple slides (e.g., `-1-3`, `-4-5`). Each row uses answer-list flex layout with a-cor/a-inc and WHY.
 12. **Vocabulary pre-teach** — slides AFTER lead-in stage, one word per slide on dark background
 13. **Section transitions** between stages — heading only, red background (`#c0392b`), no descriptive paragraphs
-14. **Text highlighting** — all slides use text-shadow for readability; pedagogical slides use white-on-teal; vocabulary words use yellow boldface (`#ffdd00`)
+14. **Text highlighting** — all slides use white-on-dark for readability; pedagogical slides use white-on-teal; vocabulary words use yellow boldface (`#ffdd00`). `text-shadow` is NOT used — the base template CSS explicitly sets `text-shadow: none` on all slide text.
 
 ---
 

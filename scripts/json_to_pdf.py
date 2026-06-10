@@ -277,7 +277,9 @@ def build_typ_content(data, json_path=None):
     shape = lesson_plan.get("shape", "")
     shape_name = lesson_plan.get("shape_name", "")
     materials = data.get("materials", "")
-    slideshow_url = data.get("slideshow_url", "")
+    slideshow_url_raw = data.get("slideshow_url", "")
+    # Escape Typst special chars (% = comment in Typst content blocks)
+    slideshow_url = slideshow_url_raw.replace("%", "\\%")
     objective = data.get("objective", "")
 
     lines.append("#table(")

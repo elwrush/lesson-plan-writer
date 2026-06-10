@@ -1,39 +1,20 @@
-# Authorial Voice & Audience — lesson-plan-to-reveal
+# Authorial Voice & Audience — Slides
 
-This skill generates slides for **Thai secondary students (CEFR A2–B2)**. The default voice targets **B1** (Mathayom 2-3). All student-facing text on screen MUST follow these rules, with level-appropriate relaxations noted.
+## Prime Directive: Show, Don't Tell
 
-## Baseline (Applies to all CEFR levels)
+**Every slide must pass this test: if a student had to read more than one short sentence (≤15 words) to understand what's happening, the slide is wrong.** We teach by *showing*, not by making learners read.
 
-### 1. Person Rule
-All on-screen student-facing text MUST use **direct "you" imperatives**, never third person:
+- One visual transformation per slide (before→after arrow, underline change, icon filling in)
+- No bullet lists of instructions — the teacher speaks them
+- No text explanations on screen — put them in `<aside class="notes">`
+- A crossed-out sentence + arrow to short notes teaches more than labelled boxes
 
-| Wrong | Correct |
-|-------|---------|
-| "Students read the article again..." | "Read the article again." |
-| "They must correct the false statements." | "Correct the false statements." |
-| "Ss complete the task individually." | "Complete the task on your own." |
+## Audience Constraints
 
-**`<aside class="notes">` remains unrestricted** — teacher procedure can use full professional vocabulary.
+Target: **Mathayom Thai students (CEFR B1)**. B2+ lessons may relax some rules.
 
-### 2. Person Rule
-- Collective framing: "We can see...", "Our class can think about..."
-- Positive, concrete questions — avoid abstract philosophical prompts
-- Group participation questions, not individual introspection
-
-### 3. No Automatic Image Downloads
-When regenerating slides, **do not auto-download images**. Start with solid theme colors. Use gradients, images, or videos only when the teacher provides assets or when they serve a clear pedagogical purpose. Never fetch images independently.
-
-## B1 Default (Mathayom 2-3)
-
-### Vocabulary Ceiling
-No words above CEFR B1 on screen without inline definition:
-- "identify" → use "find"
-- "predict" → use "guess"
-- "convincing" → use "makes sense"
-- "distinguish" → use "tell the difference"
-- "evaluate" → use "decide"
-- "analyze" → use "look at carefully"
-- "infer" → use "understand what the writer means"
+### Vocabulary Ceiling (B1 default)
+No words above B1 on screen without inline definition. **Banned**: identify, predict, convincing, distinguish, evaluate, analyze, infer. **Use**: find, guess, makes sense, tell the difference, decide, look at.
 
 ### Sentence Complexity
 - Max 15 words per sentence on screen
@@ -41,13 +22,19 @@ No words above CEFR B1 on screen without inline definition:
 - One clause preferred, two max
 - No passive voice on screen
 
-### Summary: "I Can" Statements
-| Wrong | Correct |
-|-------|---------|
-| "Identify the main purpose" | "I can find the main idea" |
-| "Find key facts" | "I can find important facts" |
-| "Express opinions" | "I can share my ideas" |
+### Per-Slide Language Guidelines
 
-## B2 Adaptation
+| Slide type | B1 rule | Bad | Good |
+|---|---|---|---|
+| Objective | "what you CAN do" | "identify the main idea" | "find the main idea" |
+| Task instruction | Direct imperatives only | "Students read and complete" | "Read the article. Do Exercise 2." |
+| Transition | Simple warm-up Q | "What do you predict?" | "What do you think?" |
 
-For B2-level lessons, see `docs/slide-design-reference.md` (Authorial Voice & Audience → B2 Adaptation) for relaxed vocabulary ceiling and sentence complexity rules. All other Authorial Voice rules remain unchanged.
+## Authorial Voice
+
+When writing pedagogical annotations, adopt the voice of an **experienced EFL teacher with training in instructional design**. The four mandatory annotation lines must use teaching language:
+
+- **PEDAGOGICAL INTENT**: "Student sees the error sentence transform into the corrected version" — NOT "The auto-animate morphs the element"
+- **WHY THIS FEATURE**: "Auto-animate keeps both versions visible so students can compare before and after" — NOT "Auto-animate uses CSS transitions between matched data-id elements"
+- **COGNITIVE PRINCIPLE**: Name from Mayer's 12 (Signaling, Segmenting, Spatial Contiguity, Coherence, etc.)
+- **DESIGN MECHANISM**: Name a specific concrete choice and what happens if you remove it — "The period is wrapped in a transparent-border span that reserves layout space. Without the reserved width, the morph would cause line jump and students would lose the comparison."

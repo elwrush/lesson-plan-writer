@@ -1,0 +1,77 @@
+{
+    "teacher":  "Ed Rush",
+    "duration":  "46 minutes",
+    "date":  "060926",
+    "topic":  "Gen Z Gender Roles",
+    "objective":  "By the end of the lesson, learners will have practiced and developed the sub-skills of listening for detail and specific information in the context of Gen Z gender roles and the influence of social media on generational beliefs.",
+    "materials":  "- BTN High Episode 15 - Gen Z Gender Roles (YouTube video: https://www.youtube.com/watch?v=qkX5CPXzjxs)\n- Teacher resource worksheet (BTN High)\n- Bespoke listening worksheet with transcript and answer key",
+    "lesson_plan":  {
+                        "shape":  "E",
+                        "shape_name":  "Receptive Skills (Traditional)",
+                        "cefr_level":  "B2",
+                        "class":  "M3",
+                        "stages":  [
+                                       {
+                                           "stage_number":  1,
+                                           "stage":  "Lead-in - Generations Orientation",
+                                           "stage_aim":  "To activate learners\u0027 interest in generational identity and set the context for a listening task about Gen Z gender roles",
+                                           "procedure":  "- Elicit what students know about generational labels: Baby Boomers, Gen X, Millennials, Gen Z. Display a simple timeline on the board showing birth year ranges. Ask students which generation they belong to and what stereotypes they have heard about each group.\n- Narrow the focus to Gen Z: ask students to brainstorm words or ideas they associate with their own generation. What events, technology, or social changes have shaped Gen Z?\n- Introduce the listening topic: \"We\u0027re going to watch a BTN High video about Gen Z and gender roles. This is a long, authentic listening task at B2 level, so we\u0027ll break it into three parts with pauses.\"\n- Interaction: T-Ss, Ss-Ss",
+                                           "time":  7,
+                                           "interaction":  "T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  2,
+                                           "stage":  "Pre-listening - Outlines and Key Vocabulary",
+                                           "stage_aim":  "To equip learners with academic outline note-taking strategies and essential vocabulary for accessing the listening text",
+                                           "procedure":  "- Distribute the worksheet. Project the outline format on the board. Explain that an academic outline uses Roman numerals for main ideas, capital letters for sub-points, and numbers for supporting details.\n- Explain the two-tier approach: Emerging students (B1) will complete the gapped outline while listening; Established students (B2) will take their own notes without outline support. Both groups will answer the same comprehension questions at each pause.\n- Pre-teach 6 vocabulary items from the transcript: manosphere, echo chambers, tradwives, misogynist, breadwinner, submissive. Provide a context sentence for each and check understanding.\n- Set the listening frame: tell students what Section I covers (traditional gender roles and the Kings College study findings). Play Part 1.\n- Interaction: T-Ss",
+                                           "time":  7,
+                                           "interaction":  "T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  3,
+                                           "stage":  "Listening - Part 1: Traditional Gender Roles",
+                                           "stage_aim":  "To listen for specific statistical information about Gen Z\u0027s traditional beliefs and complete the first section of the outline",
+                                           "procedure":  "- Play the first third of the video (up to the Kings College statistics on obedience and final word). Students complete gaps I.A-I.C on the outline, or take free notes.\n- Pause the video. Students answer Comprehension Questions 1-3 for Part 1.\n- Elicit answers from 2-3 students. Clarify any misunderstandings before moving on.\n- Set the listening frame for Part 2: the video will shift to social media\u0027s role (Man Cave, algorithms, echo chambers).\n- Interaction: S, T-Ss",
+                                           "time":  7,
+                                           "interaction":  "S"
+                                       },
+                                       {
+                                           "stage_number":  4,
+                                           "stage":  "Listening - Part 2: The Role of Social Media",
+                                           "stage_aim":  "To listen for detail about how social media algorithms influence gender role beliefs among young people",
+                                           "procedure":  "- Play the second third of the video (from Josh Glover\u0027s introduction through his comments on echo chambers and the definition of feminism). Students complete gaps II.A-II.C on the outline, or take free notes.\n- Pause the video. Students answer Comprehension Questions 1-3 for Part 2.\n- Brief class feedback. Focus particularly on Josh\u0027s distinction between teenage boys\u0027 definition of feminism and the intended meaning.\n- Set the listening frame for Part 3: tradwife influencers, the University of Melbourne study, and Josh\u0027s proposed solutions.\n- Interaction: S, T-Ss",
+                                           "time":  7,
+                                           "interaction":  "S"
+                                       },
+                                       {
+                                           "stage_number":  5,
+                                           "stage":  "Listening - Part 3: Tradwives and Solutions",
+                                           "stage_aim":  "To listen for detail about tradwife content, the University of Melbourne study findings, and Josh\u0027s proposed solutions",
+                                           "procedure":  "- Play the final third of the video (from tradwife influencers through Josh\u0027s comments on safe conversations and role modelling). Students complete gaps III.A-III.C, or take free notes.\n- Pause the video. Students answer Comprehension Questions 1-3 for Part 3.\n- Class feedback. Draw attention to Josh\u0027s two-part problem-solving framework (awareness + problem-solving together) and the emphasis on safe conversations.\n- Collect worksheets for assessment if desired.\n- Interaction: S, T-Ss",
+                                           "time":  7,
+                                           "interaction":  "S"
+                                       },
+                                       {
+                                           "stage_number":  6,
+                                           "stage":  "Post-listening - Discussion Techniques",
+                                           "stage_aim":  "To introduce functional language for introducing and acknowledging points of view in structured discussion",
+                                           "procedure":  "- Refer students to Part 4 of the worksheet. Display the discussion techniques on the board: phrases for introducing a point of view (\"I think that ... because ...\", \"In my opinion ...\", \"It seems to me that ...\") and for acknowledging others\u0027 views (\"That\u0027s an interesting point. I\u0027d add that ...\", \"I see what you mean. However, ...\", \"I hadn\u0027t thought of it that way.\").\n- Model a short exchange with a volunteer student. Show how to state a position, offer evidence, and respond to a partner\u0027s view.\n- Emphasise that both partners should speak and that acknowledging the other person\u0027s idea strengthens the discussion.\n- Interaction: T-Ss",
+                                           "time":  4,
+                                           "interaction":  "T-Ss"
+                                       },
+                                       {
+                                           "stage_number":  7,
+                                           "stage":  "Think-Pair-Share - Critical Thinking",
+                                           "stage_aim":  "To apply evidence from the listening to critical discussion questions, using the discussion techniques practiced",
+                                           "procedure":  "- Refer students to the two Think-Pair-Share questions on the worksheet.\n- Question 1 (controlled, with scaffolding): \"To what extent do you agree that Gen Z holds the strongest traditional beliefs about gender roles? Use at least two pieces of evidence from the video.\" Point out the suggested structure: state position, give evidence 1, give evidence 2, conclude.\n- Question 2 (free practice, no scaffolding): \"How can young people critically evaluate the social media content they see about gender roles?\" No structure provided - students formulate their own response.\n- Think: Students write brief notes individually (2 min). Pair: Students discuss both questions in pairs, using the discussion techniques (3 min). Share: Elicit responses from 2-3 pairs for each question. Provide content and language feedback (2 min).\n- Interaction: S, Ss-Ss, T-Ss",
+                                           "time":  7,
+                                           "interaction":  "Ss-Ss"
+                                       }
+                                   ]
+                    },
+    "transcript":  "C:\\PROJECTS\\LESSON-PLAN-WRITER-3\\inputs\\M3-LISTENING-GENDER-ROLES\\transcript.typ",
+    "answer_key":  "C:\\PROJECTS\\LESSON-PLAN-WRITER-3\\inputs\\M3-LISTENING-GENDER-ROLES\\answer_key.typ",
+    "slideshow_url":  "https://elwrush.github.io/lesson-plan-writer/M3-LISTENING-GENDER-ROLES/",
+    "cefr_level":  "B2",
+    "class":  "M3"
+}

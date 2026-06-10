@@ -90,7 +90,7 @@
                 padding: 0.1em 0.3em;
                 border-radius: 4px;
             }
-            .reveal .a-ans.a-cor { color: #fff; }
+            .reveal .a-ans.a-cor { color: #ffdd00; }
             .reveal .a-ans.a-cor.visible { background: rgba(76, 175, 80, 0.3); }
             .reveal .a-ans.a-inc { color: #fff; }
             .reveal .a-ans.a-inc.visible { background: rgba(244, 67, 54, 0.3); }
@@ -178,7 +178,7 @@
                 display: inline-block;
                 max-width: 90%;
                 text-shadow: none;
-                color: #222;
+                color: #fff;
                 line-height: 1.6;
             }
             /* Fragment variant: text already visible, background highlight on click */
@@ -218,6 +218,9 @@
             }
 
             /* --- YouTube iframe container (16:9 responsive) --- */
+            /* Default: width 90%, padding 50.625% (= 90 × 9/16). 
+               To resize, override BOTH width AND padding-bottom inline:
+               style="width: X%; padding-bottom: Y%;" where Y = X × 9/16 */
             .reveal .iframe-container {
                 position: relative;
                 width: 90%;
@@ -641,9 +644,6 @@
         <!-- Timer plugin (local) -->
         <script src="timer-plugin.js"></script>
 
-        <!-- Audio slideshow plugin (CDN) -->
-        <script src="https://cdn.jsdelivr.net/npm/reveal.js-plugins@latest/audio-slideshow/plugin.js"></script>
-
         <!-- reveal.js 5.1.0 via CDN -->
         <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
@@ -660,17 +660,6 @@
                 width: 1280,
                 height: 720,
                 autoAnimateUnmatched: true,
-                audio: {
-                    prefix: 'assets/',
-                    suffix: '.mp3',
-                    advance: -1,
-                    autoplay: false,
-                    defaultAudios: false,
-                    defaultDuration: 0,
-                    playerOpacity: 1.0,
-                    playerStyle: 'position: fixed; bottom: 30px; left: 25%; width: 50%; height:75px; z-index: 33;',
-                    startAtFragment: false,
-                },
                 plugins: [
                     // WARNING: Every plugin here is loaded and initialized by reveal.js
                     // at startup. If any plugin's init() function throws an error, the
@@ -685,7 +674,6 @@
                     RevealNotes,
                     RevealSearch,
                     RevealZoom,
-                    RevealAudioSlideshow,
                 ],
             });
         </script>

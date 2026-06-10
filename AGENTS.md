@@ -13,7 +13,7 @@ Before writing any HTML, CSS, Typst, slide markup, or configuration, **read the 
 - Slide attributes: check `templates/base-slides-template.html` for the exact attribute pattern
 - Typst syntax: check `.kilo/skills/create-pdf-lesson-file/SKILL.md` (Typst Pitfalls section)
 - Slide structure: check the most recently built `output/*/slides/index.html`
-- Reveal.js bugs: check `docs/revealjs-known-issues.md` before debugging audio, fragment, or plugin issues
+- Reveal.js bugs: **MANDATORY PRE-READ** `docs/revealjs-known-issues.md` before ANY audio, TTS, timer, or fragment work — this file documents hard-won production fixes for audio playback conflicts, timer-vs-audio exclusion, fragment timing, data-autoplay placement, and DOM integrity. Ignoring it will reproduce bugs that cost hours to debug.
 
 ## Two pipelines
 
@@ -270,7 +270,7 @@ If any rule is unclear, ask. Do not guess.
 - **Vocabulary context sentences** — Context sentences for vocabulary words must make the meaning completely obvious from context alone. Use a two-sentence pattern: the first sentence uses the target word in natural context; the second sentence rephrases or demonstrates the meaning with simpler language. The sentences do NOT need to connect to the lesson's reading or listening text.
   ✅ Good: "Her job is to **recruit** new employees. Last week she gave jobs to five new people."
   ❌ Bad: "The police use special tests to **recruit** super recognizers." (does not make the meaning obvious)
-- **Vocabulary word display** — On vocabulary slides: the English word is followed by a part-of-speech marker in smaller gray text, e.g. `remarkable (adjective)`. The target word in the context sentence must be wrapped in `<span class="vocab-word">` so it renders in yellow. The phonemic script must use `font-family: 'Times New Roman', Times, serif;` for reliable IPA character rendering.
+- **Vocabulary word display** — On vocabulary slides: the English word is followed by a part-of-speech marker in smaller gray text, e.g. `remarkable (adjective)`. The target word in the context sentence must be wrapped in `<span class="vocab-word">` so it renders in yellow. The phonemic script must use `font-family: 'Times New Roman', Times, serif;` for reliable IPA character rendering. **All IPA transcriptions must use British Council phonemic symbols** (`docs/british-council-phonemic-chart.md`) — `/e/` not `/ɛ/`, `/əʊ/` not `/oʊ/`, `/ɒ/` not `/ɑ/`, `/ɪə/` not `/ɪr/`, non-rhotic (no final `/r/`).
 
 ## Pedagogical Strategy Slides — Design Principles
 
@@ -413,9 +413,9 @@ Decorative slide icons (`.slide-icon`, `.transition-icon`, `.pedagogical-icon`, 
 These rules exist because they were violated in production and cost hours to debug. Do not bypass them.
 
 ### Audio playback on vocabulary slides
-- Audio must be placed **inside the word's `<p class="fragment fade-up">`** with `data-autoplay`. It fires on fragment reveal, NOT on slide entry.
-- Remove `RevealAudioSlideshow` from the plugins array when using vocab TTS — its `fragmentshown`/`fragmenthidden` handlers interfere with native `<audio>` playback.
-- Never use both `autoplay` (native HTML5) and `data-autoplay` (reveal.js) on the same element — they both fire independently, causing double-play.
+- Audio is placed at the `<section>` level with `data-vocab-audio` attribute — NOT inside a fragment with `data-autoplay`. The `data-autoplay` inside fragments approach is broken (GitHub issue #724 — fires on slide entry instead of fragment reveal).
+- A `fragmentshown` handler checks for `[data-vocab-trigger]` on the shown fragment, then plays the section-level audio exactly once. See `docs/revealjs-known-issues.md` (Approach B) for the exact pattern.
+- Remove `RevealAudioSlideshow` from the plugins array — its `fragmentshown`/`fragmenthidden` handlers interfere with native `<audio>` playback.
 - Hide audio via `position: absolute; width: 0; height: 0; overflow: hidden` (not `display:none`) so the browser loads audio data.
 
 ### DOM integrity after scripted edits
