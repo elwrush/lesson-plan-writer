@@ -58,7 +58,6 @@
             .cefr-badge.C1 { background: #9c27b0; }
             .cefr-badge.C2 { background: #f44336; }
 
-
             /* --- Answer flex layout (replaces answer-table) --- */
             .reveal .answer-list {
                 width: 100%;
@@ -263,7 +262,14 @@
                 height: 0;
                 overflow: hidden;
             }
-        </style>
+        
+    .reveal .fragment.custom.out-blank { opacity: 1; visibility: inherit; }
+    .reveal .fragment.custom.out-blank .blank { display: inline; }
+    .reveal .fragment.custom.out-blank .ans { display: none; }
+    .reveal .fragment.custom.out-blank.visible .blank { display: none; }
+    .reveal .fragment.custom.out-blank.visible .ans { display: inline; }
+
+</style>
     </head>
     <body>
         <div class="reveal">
@@ -695,57 +701,38 @@
 <!-- WHY THIS FEATURE: Fragment on the answer row lets the teacher discuss the question first before revealing the answer. Embedded YouTube iframe lets the teacher replay the evidence without leaving the slide. -->
 <!-- COGNITIVE PRINCIPLE: Temporal Contiguity — answer + transcript quote appear simultaneously, linked to the same source. -->
 <!-- DESIGN MECHANISM: The question is visible on slide entry. The answer reveals on click with a checkmark icon, transcript quote as WHY, and a 60%-width YouTube iframe below cued to the exact evidence timestamp (1:18-1:47). -->
-<section id="slide-ans-p1-q1" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
-    <h2>Part 1 — Question 1</h2>
-    <p class="aim-label" style="margin-bottom: 0.5em;">What did the Kings College study find about Gen Z's beliefs on gender roles compared to older generations?</p>
-    <div class="answer-list">
-        <div class="a-row fragment fade-up">
-            
-            <span class="a-ans a-cor"><i class="fa-solid fa-check"></i> Gen Z holds the <strong>strongest</strong> traditional beliefs. 31% of men say a wife should obey. 33% say husband has final word.</span>
-            <span class="a-why">"It's Gen Z that hold the strongest traditional beliefs" — Para 1</span>
-        </div>
-    </div>
-    <aside class="notes">
-        Discuss the answer. Play the embedded clip to replay the evidence at 1:18-1:47.
-    </aside>
-</section>
 
 <!-- ══════════════════════════════════════════════════════════════════
      ANSWER — Part 1, Question 2
      ════════════════════════════════════════════════════════════════ -->
-<section id="slide-ans-p1-q2" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
-    <h2>Part 1 — Question 2</h2>
-    <p class="aim-label" style="margin-bottom: 0.5em;">What percentage of Gen Z men think a husband should have the final word on important decisions?</p>
-    <div class="answer-list">
-        <div class="a-row fragment fade-up">
-            
-            <span class="a-ans a-cor"><i class="fa-solid fa-check"></i> <strong>33%</strong> of Gen Z men</span>
-            <span class="a-why">"33% of men... a husband should have the final word" — Para 1</span>
-        </div>
-    </div>
-    <aside class="notes">
-        Discuss. Play clip at 1:43-1:47.
-    </aside>
-</section>
 
 <!-- ══════════════════════════════════════════════════════════════════
      ANSWER — Part 1, Question 3
      ════════════════════════════════════════════════════════════════ -->
-<section id="slide-ans-p1-q3" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
-    <h2>Part 1 — Question 3</h2>
-    <p class="aim-label" style="margin-bottom: 0.5em;">How do Gen Z women's views compare to Gen Z men's on these questions? Give one example.</p>
-    <div class="answer-list">
-        <div class="a-row fragment fade-up">
-            
-            <span class="a-ans a-cor"><i class="fa-solid fa-check"></i> Women agree much less. 18% vs 31% on obedience. 19% vs 33% on final word.</span>
-            <span class="a-why">"31% of men and 18% of women believing a wife should always obey her husband" — Para 1</span>
-        </div>
+
+<section id="slide-outline-p1" data-background-color="#1a1a2e" data-background-transition="none">
+    <h2 style="font-size: 1.6em; color: #ffdd00;">Part 1: Traditional Gender Roles</h2>
+    <div style="font-size: 0.85em; line-height: 1.6; padding: 0 1em;">
+        <p style="padding-left: 0px; margin: 0.2em 0;"><span style="color: #fff;">I. Traditional Gender Roles in Society</span></p>
+        <p style="padding-left: 20px; margin: 0.2em 0;"><span style="color: #fff;">A. 1950s TV shows portrayed clear gender roles</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">1. Women shown as the </span><span class="fragment custom out-blank" data-fragment-index="1"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">homemaker</span></span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">2. Men shown as the </span><span class="fragment custom out-blank" data-fragment-index="2"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">breadwinner</span></span></p>
+        <p style="padding-left: 20px; margin: 0.2em 0;"><span style="color: #fff;">B. Kings College study — 23,000 people from 29 countries</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">1. Gen Z holds the </span><span class="fragment custom out-blank" data-fragment-index="3"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">strongest</span></span><span style="color: #fff;"> traditional beliefs</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">2. </span><span class="fragment custom out-blank" data-fragment-index="4"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">31%</span></span><span style="color: #fff;"> of Gen Z men believe a wife should obey her husband</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">3. </span><span class="fragment custom out-blank" data-fragment-index="5"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">33%</span></span><span style="color: #fff;"> of Gen Z men say a husband should have the final word</span></p>
+        <p style="padding-left: 20px; margin: 0.2em 0;"><span style="color: #fff;">C. Attitudes beyond the home</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">1. </span><span class="fragment custom out-blank" data-fragment-index="6"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">61%</span></span><span style="color: #fff;"> of Gen Z men say enough has been done for gender equality</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">2. </span><span class="fragment custom out-blank" data-fragment-index="7"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">57%</span></span><span style="color: #fff;"> of Gen Z men feel men are now discriminated against</span></p>
     </div>
-    <aside class="notes">
-        Discuss the gender gap in responses. Play clip at 1:35-2:07.
-    </aside>
+    <aside class="notes">Review outline answers with class. Click through each blank to reveal the answer. Discuss any questions students have about why each answer is correct.</aside>
 </section>
 
+    <section id="slide-timer-p1" data-background-color="#1a1a2e" data-background-transition="none" data-timer="180">
+        <h2>Part 1 — Comprehension</h2>
+        <p style="font-size: 0.9em;">Discuss the questions with your partner.</p>
+        <p style="font-size: 0.8em; color: #ffdd00; margin-top: 1em;">You have 3 minutes.</p>
+    </section>
 <!-- ══════════════════════════════════════════════════════════════════
      TRANSITION — Part 2
      ════════════════════════════════════════════════════════════════ -->
@@ -773,57 +760,38 @@
 <!-- ══════════════════════════════════════════════════════════════════
      ANSWER — Part 2, Question 1
      ════════════════════════════════════════════════════════════════ -->
-<section id="slide-ans-p2-q1" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
-    <h2>Part 2 — Question 1</h2>
-    <p class="aim-label" style="margin-bottom: 0.5em;">What is Man Cave and what does Josh Glover do there?</p>
-    <div class="answer-list">
-        <div class="a-row fragment fade-up">
-            
-            <span class="a-ans a-cor"><i class="fa-solid fa-check"></i> Josh works at <strong>Man Cave</strong>. They tackle gender stereotypes in schools.</span>
-            <span class="a-why">"An organisation tackling issues like gender stereotypes in schools" — Para 2</span>
-        </div>
-    </div>
-    <aside class="notes">
-        Discuss. Play clip at 2:33-2:40.
-    </aside>
-</section>
 
 <!-- ══════════════════════════════════════════════════════════════════
      ANSWER — Part 2, Question 2
      ════════════════════════════════════════════════════════════════ -->
-<section id="slide-ans-p2-q2" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
-    <h2>Part 2 — Question 2</h2>
-    <p class="aim-label" style="margin-bottom: 0.5em;">How do social media algorithms affect young people's views on gender roles, according to Josh?</p>
-    <div class="answer-list">
-        <div class="a-row fragment fade-up">
-            
-            <span class="a-ans a-cor"><i class="fa-solid fa-check"></i> Algorithms create <strong>echo chambers</strong>. Users only hear voices they agree with. No one shows the other side.</span>
-            <span class="a-why">"The whole narrative of echo chambers... there's no one there to present another opinion" — Para 2</span>
-        </div>
-    </div>
-    <aside class="notes">
-        Discuss echo chambers. Play clip at 3:13-3:51.
-    </aside>
-</section>
 
 <!-- ══════════════════════════════════════════════════════════════════
      ANSWER — Part 2, Question 3
      ════════════════════════════════════════════════════════════════ -->
-<section id="slide-ans-p2-q3" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
-    <h2>Part 2 — Question 3</h2>
-    <p class="aim-label" style="margin-bottom: 0.5em;">What does Josh say about how teenage boys define feminism compared to its intended meaning?</p>
-    <div class="answer-list">
-        <div class="a-row fragment fade-up">
-            
-            <span class="a-ans a-cor"><i class="fa-solid fa-check"></i> Boys' idea of feminism is "very different" from its real meaning — "almost two completely different things."</span>
-            <span class="a-why">"A teenage boy's definition of feminism is very different to the intended definition" — Para 2</span>
-        </div>
+
+<section id="slide-outline-p2" data-background-color="#1a1a2e" data-background-transition="none">
+    <h2 style="font-size: 1.6em; color: #ffdd00;">Part 2: The Role of Social Media</h2>
+    <div style="font-size: 0.85em; line-height: 1.6; padding: 0 1em;">
+        <p style="padding-left: 0px; margin: 0.2em 0;"><span style="color: #fff;">II. The Role of Social Media</span></p>
+        <p style="padding-left: 20px; margin: 0.2em 0;"><span style="color: #fff;">A. Josh Glover — facilitator at </span><span class="fragment custom out-blank" data-fragment-index="1"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">Man Cave</span></span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">1. His organisation tackles </span><span class="fragment custom out-blank" data-fragment-index="2"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">gender stereotypes</span></span><span style="color: #fff;"> in schools</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">2. Social media helps bring back </span><span class="fragment custom out-blank" data-fragment-index="3"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">outdated</span></span><span style="color: #fff;"> gender norms</span></p>
+        <p style="padding-left: 20px; margin: 0.2em 0;"><span style="color: #fff;">B. How social media algorithms work</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">1. Algorithms create </span><span class="fragment custom out-blank" data-fragment-index="4"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">echo chambers</span></span><span style="color: #fff;"> where users hear agreeing voices</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">2. No one presents </span><span class="fragment custom out-blank" data-fragment-index="5"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">alternative</span></span><span style="color: #fff;"> opinions</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">3. Users only see opinions that get debunked or </span><span class="fragment custom out-blank" data-fragment-index="6"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">smashed</span></span></p>
+        <p style="padding-left: 20px; margin: 0.2em 0;"><span style="color: #fff;">C. The definition problem</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">1. Teenage boys’ definition of </span><span class="fragment custom out-blank" data-fragment-index="7"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">feminism</span></span><span style="color: #fff;"> differs from the intended meaning</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">2. This results from algorithms and lack of </span><span class="fragment custom out-blank" data-fragment-index="8"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">conversation</span></span><span style="color: #fff;"> with people who hold different views</span></p>
     </div>
-    <aside class="notes">
-        Discuss the disconnect. Play clip at 3:58-4:26.
-    </aside>
+    <aside class="notes">Review outline answers with class. Click through each blank to reveal the answer. Discuss any questions students have about why each answer is correct.</aside>
 </section>
 
+    <section id="slide-timer-p2" data-background-color="#1a1a2e" data-background-transition="none" data-timer="180">
+        <h2>Part 2 — Comprehension</h2>
+        <p style="font-size: 0.9em;">Discuss the questions with your partner.</p>
+        <p style="font-size: 0.8em; color: #ffdd00; margin-top: 1em;">You have 3 minutes.</p>
+    </section>
 <!-- ══════════════════════════════════════════════════════════════════
      TRANSITION — Part 3
      ════════════════════════════════════════════════════════════════ -->
@@ -851,58 +819,39 @@
 <!-- ══════════════════════════════════════════════════════════════════
      ANSWER — Part 3, Question 1
      ════════════════════════════════════════════════════════════════ -->
-<section id="slide-ans-p3-q1" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
-    <h2>Part 3 — Question 1</h2>
-    <p class="aim-label" style="margin-bottom: 0.5em;">What is a "tradwife" and what content do these influencers create?</p>
-    <div class="answer-list">
-        <div class="a-row fragment fade-up">
-            
-            <span class="a-ans a-cor"><i class="fa-solid fa-check"></i> <strong>Tradwives</strong> = traditional wives. They glamorise cooking, cleaning, and staying home.</span>
-            <span class="a-why">"Identify as tradwives... create content glamorizing traditional domestic lifestyles" — Para 3</span>
-        </div>
-    </div>
-    <aside class="notes">
-        Discuss tradwife content. Play clip at 4:45-5:12.
-    </aside>
-</section>
 
 <!-- ══════════════════════════════════════════════════════════════════
      ANSWER — Part 3, Question 2
      ════════════════════════════════════════════════════════════════ -->
-<section id="slide-ans-p3-q2" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
-    <h2>Part 3 — Question 2</h2>
-    <p class="aim-label" style="margin-bottom: 0.5em;">What did the University of Melbourne study find about adolescent boys' attitudes?</p>
-    <div class="answer-list">
-        <div class="a-row fragment fade-up">
-            
-            <span class="a-ans a-cor"><i class="fa-solid fa-check"></i> <strong>Adolescent boys</strong> most likely to support violence against feminism. <strong>40%</strong> of boys 13-17 say women lie about violence.</span>
-            <span class="a-why">"Support for violence to resist feminism was highest amongst adolescent boys... around 40% agreed" — Para 3</span>
-        </div>
-    </div>
-    <aside class="notes">
-        Discuss the study findings. Play clip at 6:47-7:15.
-    </aside>
-</section>
 
 <!-- ══════════════════════════════════════════════════════════════════
      ANSWER — Part 3, Question 3
      ════════════════════════════════════════════════════════════════ -->
-<section id="slide-ans-p3-q3" class="answer-slide" data-background-color="#052e0d" data-background-transition="none">
-    <h2>Part 3 — Question 3</h2>
-    <p class="aim-label" style="margin-bottom: 0.5em;">According to Josh, what two things are needed to solve the problem, and why are safe conversations important?</p>
-    <div class="answer-list">
-        <div class="a-row fragment fade-up">
-            
-            <span class="a-ans a-cor"><i class="fa-solid fa-check"></i> (1) <strong>Awareness</strong> and (2) <strong>problem-solving together</strong>. Safe conversations = no judgment, no shame.</span>
-            <span class="a-why">"First one is awareness... problem-solving bit together... a safe conversation is with someone where I can trust I won't be judged" — Para 3</span>
-        </div>
+
+<section id="slide-outline-p3" data-background-color="#1a1a2e" data-background-transition="none">
+    <h2 style="font-size: 1.6em; color: #ffdd00;">Part 3: Tradwives and Solutions</h2>
+    <div style="font-size: 0.85em; line-height: 1.6; padding: 0 1em;">
+        <p style="padding-left: 0px; margin: 0.2em 0;"><span style="color: #fff;">III. Tradwives and Solutions</span></p>
+        <p style="padding-left: 20px; margin: 0.2em 0;"><span style="color: #fff;">A. "Tradwife" influencers</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">1. Glamorise </span><span class="fragment custom out-blank" data-fragment-index="1"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">traditional domestic</span></span><span style="color: #fff;"> lifestyles</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">2. Create content about cooking, cleaning, and </span><span class="fragment custom out-blank" data-fragment-index="2"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">domestic</span></span><span style="color: #fff;"> roles</span></p>
+        <p style="padding-left: 20px; margin: 0.2em 0;"><span style="color: #fff;">B. Effects on young people</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">1. University of Melbourne study of 2,300 adults and 1,100 young people</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">2. Support for violence to resist feminism was highest among </span><span class="fragment custom out-blank" data-fragment-index="3"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">adolescent boys</span></span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">3. Around </span><span class="fragment custom out-blank" data-fragment-index="4"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">40%</span></span><span style="color: #fff;"> of boys aged 13-17 agree women lie about domestic and sexual violence</span></p>
+        <p style="padding-left: 20px; margin: 0.2em 0;"><span style="color: #fff;">C. Josh’s perspective on solutions</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">1. Two parts needed: </span><span class="fragment custom out-blank" data-fragment-index="5"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">awareness</span></span><span style="color: #fff;"> and problem-solving</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">2. Need for </span><span class="fragment custom out-blank" data-fragment-index="6"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">safe</span></span><span style="color: #fff;"> conversations where people are not judged</span></p>
+        <p style="padding-left: 40px; margin: 0.2em 0;"><span style="color: #fff;">3. Importance of </span><span class="fragment custom out-blank" data-fragment-index="7"><span class="blank" style="color: #888;">____________</span><span class="ans" style="color: #ffdd00;">role modelling</span></span><span style="color: #fff;"> — older generations investing in younger people</span></p>
     </div>
-    <aside class="notes">
-        Discuss the two-part solution. Play clip at 9:33-10:00.
-        Emphasise the importance of role modelling and safe conversations.
-    </aside>
+    <aside class="notes">Review outline answers with class. Click through each blank to reveal the answer. Discuss any questions students have about why each answer is correct.</aside>
 </section>
 
+    <section id="slide-timer-p3" data-background-color="#1a1a2e" data-background-transition="none" data-timer="180">
+        <h2>Part 3 — Comprehension</h2>
+        <p style="font-size: 0.9em;">Discuss the questions with your partner.</p>
+        <p style="font-size: 0.8em; color: #ffdd00; margin-top: 1em;">You have 3 minutes.</p>
+    </section>
 <!-- ══════════════════════════════════════════════════════════════════
      TRANSITION — Discussion Techniques
      ════════════════════════════════════════════════════════════════ -->

@@ -135,19 +135,19 @@ Use `lesson-plan-to-reveal` when converting a lesson plan JSON to slides. The sk
 
 ## Workflow
 
-### Step 0: Create the slides directory
+### Step 1: Generate the slide scaffold
+
+After Phase 0 (Design Blueprint) is complete and you know the exact slide count:
 
 ```powershell
-mkdir "output/{subfolder}/slides/assets"
+python scripts/scaffold_slides.py --count <N> --output "output/{subfolder}/slides/index.html"
 ```
 
-### Step 1: Copy the base template
+This copies the base template, creates `assets/`, copies SFX files and the logo, and inserts `<N>` empty `<section>` elements with stable IDs (`slide-0`, `slide-1`, ...). **The scaffold guarantees every tag is balanced from the start.**
 
-```powershell
-cp "templates/base-slides-template.html" "output/{subfolder}/slides/index.html"
-```
+**Do NOT write `<section>` elements from scratch.** Fill each slide one at a time using the Edit tool — target the `<!-- TODO: Fill slide N content here -->` placeholder and replace it with the slide's HTML content.
 
-All slide `<section>` elements go between `<div class="slides">` and `</div>` in `index.html`. The `<head>`, `<style>`, `<body>`, `<script>` boilerplate is already complete — never edit it unless adding a new reveal.js plugin.
+The `<head>`, `<style>`, `<body>`, `<script>` boilerplate is already complete — never edit it unless adding a new reveal.js plugin.
 
 **Note:** The base template already includes the [audio-slideshow](https://github.com/rajgoel/reveal.js-plugins/tree/master/audio-slideshow) plugin (CDN-loaded) and the `TimerPlugin` in `Reveal.initialize()`. To add audio to a slide, use `data-audio-src="assets/file.mp3"` on the `<section>` element. Audio files go in `slides/assets/`. The plugin is configured with `advance: -1` (no auto-advance) — teacher controls playback via hover controls or `A` key. See the `audio:` config block in `Reveal.initialize()` for details.
 
@@ -823,24 +823,35 @@ When the user asks to modify a specific slide:
 
 ### Step 5: Verify output
 
-**Prefer revealjs-validator over bespoke scripts.** The project includes `revealjs-validator` (npm dev dependency) which checks 66 rules derived from the official Reveal.js docs. Run it in project mode for cross-file validation:
+Run these checks **in order**. Each must pass before proceeding to the next.
 
-```bash
-npx revealjs-validator --project "output/{subfolder}/slides/"
-```
+1. **Design rule check** — catches banned colors, rgba text, box-shadow, answer-slide structural violations:
+   ```bash
+   python scripts/lint_slides.py --project "output/{subfolder}/slides/"
+   ```
 
-You can also target a single slideshow for faster iteration using the `--slideshow-html` CLI argument:
-```bash
-python -m pytest tests/test_slide_structure.py --slideshow-html "output/{subfolder}/slides/index.html" -v --tb=short
-```
+2. **Overflow check** — catches content extending beyond slide boundaries (the linter and validator can't detect visual overflow):
+   ```bash
+   python scripts/check_overflow.py --project "output/{subfolder}/slides/"
+   ```
+   Fix any overflowing slides (reduce content, split across slides, or use smaller text) before proceeding.
 
-This catches broken auto-animate pairs, invalid fragment classes, missing assets, CSS misuse, and more. **However, the validator only checks static HTML structure — it CANNOT detect runtime errors that cause a blank page.** A presentation can pass all 66 rules and still show a blank screen due to a JavaScript error during `Reveal.initialize()`.
+3. **Structural validation** — checks 66 reveal.js rules (auto-animate pairs, fragment classes, missing assets, CSS misuse):
+   ```bash
+   npx revealjs-validator --project "output/{subfolder}/slides/"
+   ```
+   For faster iteration on a single slideshow:
+   ```bash
+   python -m pytest tests/test_slide_structure.py --slideshow-html "output/{subfolder}/slides/index.html" -v --tb=short
+   ```
 
-**CRITICAL — Browser test every build:** After the validator passes, open the slides in a browser and check the JavaScript console (`F12` → Console tab):
-- Verify the page shows content (not blank/white)
-- Verify NO red errors appear in the console
-- Common runtime errors: undefined plugin references, CDN failures, plugin `init()` crashes
-- If the page is blank, remove recently added plugins from the `plugins` array first, then debug
+   **The validator only checks static HTML structure — it CANNOT detect runtime errors that cause a blank page.** A presentation can pass all 66 rules and still show a blank screen.
+
+4. **CRITICAL — Browser test every build:** After the validator passes, open the slides in a browser and check the JavaScript console (`F12` → Console tab):
+   - Verify the page shows content (not blank/white)
+   - Verify NO red errors appear in the console
+   - Common runtime errors: undefined plugin references, CDN failures, plugin `init()` crashes
+   - If the page is blank, remove recently added plugins from the `plugins` array first, then debug
 
 For the specific checks the validator doesn't cover (e.g., lesson plan stage coverage, answer table sizing, speaking notes on every slide), write a focused Python verification script to `C:\Users\elwru\AppData\Local\Temp\kilo\` that uses `in` operator checks.
 

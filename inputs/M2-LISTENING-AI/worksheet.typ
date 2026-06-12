@@ -1,12 +1,48 @@
-#set page(paper: "a4", margin: (x: 2cm, top: 1.5cm, bottom: 1.5cm))
 #set text(font: "Roboto", size: 11pt)
-#set par(leading: 0.45em)
+#set par(leading: 0.65em)
 
-#align(center, text(size: 18pt, weight: "bold")[BTN Classroom - Listening Worksheet])
+#show: doc => {
+  set page(paper: "a4", margin: (x: 0.75in, top: 1in, bottom: 0.75in))
+  doc
+}
+
+#let writing-lines(spacing: 12mm) = {
+  layout(size => {
+    let line-tile = tiling(
+      size: (size.width, spacing),
+      place(bottom, line(length: size.width, stroke: 0.5pt + luma(180)))
+    )
+    rect(width: 100%, height: 100%, fill: line-tile, stroke: none)
+  })
+}
+
+#block(
+  stroke: (bottom: 0.5pt + black),
+  inset: (bottom: 6pt),
+  grid(
+    columns: (1fr, 2fr, 1fr),
+    align: (left + horizon, center + horizon, right + horizon),
+    image("/templates/ACT.png", height: 1.2cm),
+    text(size: 16pt, weight: "bold")[Mathayom Program],
+    image("/templates/cambridge.png", height: 1.6cm),
+  )
+)
+#v(12pt)
+#grid(
+  columns: (auto, 1fr, auto, 1fr, auto, 1fr),
+  column-gutter: 0.5em,
+  align: bottom + left,
+  [*CLASS:*], [#h(3em, weak: true)],
+  [*ID:*], [#h(3em, weak: true)],
+  [*NAME:*], [#h(4em, weak: true)],
+)
+#v(6pt)
+#line(length: 100%, stroke: 0.5pt + luma(180))
+#v(12pt)
+
+#align(center, text(size: 16pt, weight: "bold")[BTN Classroom - Listening Worksheet])
 #align(center, text(size: 14pt)[Diphtheria])
-#align(center, text(size: 10pt)[4 June 2026])
-
-#line(length: 100%, stroke: 0.5pt)
+#align(center, text(size: 10pt, fill: luma(80))[4 June 2026])
 
 #v(0.4em)
 
@@ -30,21 +66,24 @@
 
 I. History of Diphtheria
 
+#let fl = box(width: 3.5cm, stroke: (bottom: 0.5pt + black))
+#let fls = box(width: 1.5cm, stroke: (bottom: 0.5pt + black))
+
   #h(2em) A. About the disease
 
-    #h(4em) 1. First described by #underline(h(3.5cm))
+    #h(4em) 1. First described by #fl
 
-    #h(4em) 2. Greek name means #underline(h(3.5cm))
+    #h(4em) 2. Greek name means #fl
 
   #h(2em) B. Medical breakthrough (1890s)
 
-    #h(4em) 1. Scientists developed #underline(h(3.5cm)) therapy
+    #h(4em) 1. Scientists developed #fl therapy
 
-    #h(4em) 2. Won the first Nobel Prize in #underline(h(2.5cm))
+    #h(4em) 2. Won the first Nobel Prize in #fls
 
   #h(2em) C. Safer vaccine (1923)
 
-    #h(4em) 1. A #underline(h(3.5cm)) vaccine was made
+    #h(4em) 1. A #fl vaccine was made
 
 #v(0.5em)
 
@@ -76,15 +115,15 @@ II. Vaccines and Outbreak in Australia
 
   #h(2em) A. Vaccination in Australia
 
-    #h(4em) 1. #underline(h(1.5cm))% of 5-year-olds are vaccinated
+    #h(4em) 1. #fls% of 5-year-olds are vaccinated
 
-    #h(4em) 2. A #underline(h(3.5cm)) is given at ages 11-13
+    #h(4em) 2. A #fl is given at ages 11-13
 
   #h(2em) B. Current outbreak
 
-    #h(4em) 1. More than #underline(h(1.5cm)) cases
+    #h(4em) 1. More than #fls cases
 
-    #h(4em) 2. Many cases in #underline(h(3.5cm)) communities
+    #h(4em) 2. Many cases in #fl communities
 
 #v(0.5em)
 
@@ -115,15 +154,15 @@ III. Government Response
 
   #h(2em) A. Communication problems
 
-    #h(4em) 1. Over #underline(h(1.5cm)) Aboriginal languages
+    #h(4em) 1. Over #fls Aboriginal languages
 
-    #h(4em) 2. Need to fight #underline(h(3.5cm))
+    #h(4em) 2. Need to fight #fl
 
   #h(2em) B. Response so far
 
-    #h(4em) 1. Over #underline(h(3.5cm)) vaccinated in the NT
+    #h(4em) 1. Over #fl vaccinated in the NT
 
-    #h(4em) 2. New cases are going #underline(h(3.5cm))
+    #h(4em) 2. New cases are going #fl
 
 #v(0.5em)
 
@@ -196,11 +235,7 @@ Should vaccination be compulsory for everyone? Use at least one piece of evidenc
 
 *Your notes:*
 
-#line(length: 100%)
-#line(length: 100%)
-#line(length: 100%)
-#line(length: 100%)
-#line(length: 100%)
+#block(width: 100%, height: 210pt, writing-lines())
 
 #v(0.4em)
 
@@ -212,11 +247,7 @@ How can governments make sure everyone has access to vaccines, especially in rem
 
 *Your notes:*
 
-#line(length: 100%)
-#line(length: 100%)
-#line(length: 100%)
-#line(length: 100%)
-#line(length: 100%)
+#block(width: 100%, height: 210pt, writing-lines())
 
 #pagebreak()
 

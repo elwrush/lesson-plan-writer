@@ -1,12 +1,38 @@
-#set page(paper: "a4", margin: (x: 2cm, top: 1.5cm, bottom: 1.5cm))
 #set text(font: "Roboto", size: 11pt)
 #set par(leading: 0.45em)
 
-#align(center, text(size: 18pt, weight: "bold")[BTN Classroom - Answer Key])
-#align(center, text(size: 14pt)[Diphtheria])
-#align(center, text(size: 10pt)[4 June 2026])
+#show: doc => {
+  set page(paper: "a4", margin: (x: 0.75in, top: 1in, bottom: 0.75in))
+  doc
+}
 
-#line(length: 100%, stroke: 0.5pt)
+#block(
+  stroke: (bottom: 0.5pt + black),
+  inset: (bottom: 6pt),
+  grid(
+    columns: (1fr, 2fr, 1fr),
+    align: (left + horizon, center + horizon, right + horizon),
+    image("/templates/ACT.png", height: 1.2cm),
+    text(size: 16pt, weight: "bold")[Mathayom Program],
+    image("/templates/cambridge.png", height: 1.6cm),
+  )
+)
+#v(12pt)
+#grid(
+  columns: (auto, 1fr, auto, 1fr, auto, 1fr),
+  column-gutter: 0.5em,
+  align: bottom + left,
+  [*CLASS:*], [#h(3em, weak: true)],
+  [*ID:*], [#h(3em, weak: true)],
+  [*NAME:*], [#h(4em, weak: true)],
+)
+#v(6pt)
+#line(length: 100%, stroke: 0.5pt + luma(180))
+#v(12pt)
+
+#align(center, text(size: 16pt, weight: "bold")[BTN Classroom - Answer Key])
+#align(center, text(size: 14pt)[Diphtheria])
+#align(center, text(size: 10pt, fill: luma(80))[4 June 2026])
 
 #v(0.4em)
 
@@ -100,7 +126,7 @@ III.B.2: New cases are going *down*
 
 == Think-Pair-Share Question 1 (Controlled — with scaffolding)
 
-*Should vaccination be compulsory for everyone? Use at least one piece of evidence from the video.*
+*Should vaccination be required for everyone? Use at least one piece of evidence from the video.*
 
 *Model answer using the suggested structure:*
 

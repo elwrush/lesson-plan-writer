@@ -93,7 +93,15 @@ When modifying `build_typ_content()` in `scripts/json_to_pdf.py` or debugging Ty
 2. **Local `typst-author` skill docs** (`.kilo/skills/typst-author/docs/`) — bundled snapshot, useful offline but may be stale. Cross-reference against the remote repo.
 3. **Local packed repo** (`knowledge-base/typst-packed.json`) — a repomix snapshot that predates this session. It is the **stale-est** source. Use only when offline.
 4. **Never guess or rely on training data.** Every function call, parameter name, set rule, and show rule must be confirmed against one of the sources above.
-5. **Follow read-edit-compile-check**: make a change, run `python scripts/json_to_pdf.py ...`, read errors, fix.
+5. **Validate before output (MANDATORY):** Before writing ANY `.typ` file to disk, validate it through `scripts/typst_check.py`:
+   ```powershell
+   python scripts/typst_check.py path/to/file.typ
+   ```
+   For inline snippets (not yet written to disk), pipe via stdin:
+   ```powershell
+   echo "$typstContent" | python scripts/typst_check.py -
+   ```
+   If validation fails, read the error output, fix the code, and re-validate. Do NOT write the file until validation passes (exit code 0). Then proceed to `typst compile`.
 
 Key pitfalls:
 - `#set par(leading: Xem)` is **additional** spacing, not a line-height multiplier

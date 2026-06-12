@@ -11,7 +11,7 @@
 
 Before writing any HTML, CSS, Typst, slide markup, or configuration, **read the template or an existing file that already does what you need**. The correct pattern is always in the codebase already — guessing or generating from training data wastes time and causes errors. Specifically:
 - Slide attributes: check `templates/base-slides-template.html` for the exact attribute pattern
-- Typst syntax: check `.kilo/skills/create-pdf-lesson-file/SKILL.md` (Typst Pitfalls section)
+- Typst syntax: **MANDATORY PRE-READ** `.kilo/skills/create-pdf-lesson-file/SKILL.md` (Typst Pitfalls section) AND `.kilo/skills/create-bespoke-materials/SKILL.md` (Hard-Won Lessons section — covers underline, ruled lines, font minimums, list escaping, page format, grayscale, and every other bespoke-material Typst trap). Failure to consult this before writing any `.typ` file for bespoke materials will reproduce bugs that cost hours to debug.
 - Slide structure: check the most recently built `output/*/slides/index.html`
 - Reveal.js bugs: **MANDATORY PRE-READ** `docs/revealjs-known-issues.md` before ANY audio, TTS, timer, or fragment work — this file documents hard-won production fixes for audio playback conflicts, timer-vs-audio exclusion, fragment timing, data-autoplay placement, and DOM integrity. Ignoring it will reproduce bugs that cost hours to debug.
 
@@ -109,16 +109,35 @@ A lint command is defined at `.kilo/command/lint.md` — invoke via Kilo CLI.
 
 ## Typst Error Reference
 
-When Typst compilation fails, the most common causes are documented in the `create-pdf-lesson-file` skill at: `.kilo/skills/create-pdf-lesson-file/SKILL.md` (section: **Typst Pitfalls — Compile Errors and Fixes**).
+**BEFORE editing any `.typ` file, you MUST read BOTH of these documents. This is not optional — guessing Typst syntax from training data has cost hours of debugging in this project.**
 
-Five known error patterns covered:
+### Primary reference for lesson-plan PDFs
+`.kilo/skills/create-pdf-lesson-file/SKILL.md` (section: **Typst Pitfalls — Compile Errors and Fixes**)
+
+Five known error patterns:
 1. **Bold only at word boundaries** — `*M*y` fails; use `#strong[M]y`
 2. **`#` inside content blocks** — `[*#*]` fails; use `[*\#*]`
 3. **Raw blocks are markup, not function arguments** — `#raw(```)``` invalid; use `` ``` `` directly
 4. **`#raw()` takes a string** — no backtick syntax inside function calls
 5. **No markdown pipe tables** — use `#table(columns: N, ...)` instead
 
-**Before modifying any `.typ` file or `json_to_pdf.py`, read the Categorised Typst Pitfalls section in that skill first.** Do not guess Typst syntax from training data.
+### Primary reference for bespoke materials / worksheets
+`.kilo/skills/create-bespoke-materials/SKILL.md` (section: **Hard-Won Lessons**)
+
+**MANDATORY PRE-READ** before any `.typ` file for worksheets. Critical traps:
+- **`#underline(h(...))` is invisible** — use `#box(stroke: bottom)` or `#ul(N)` (underscores).
+- **Ruled lines** — `line()` in `for` loop with `v(ls/2)`, NOT `tiling()`, `table()`, `table.hlines()` (doesn't exist), `grid()`, or `block(stroke: bottom)` (empty blocks don't render).
+- **No `+` list syntax for outlines** — `+` adds excessive block spacing; `set enum(spacing: 0em)` destroys line breaks. Use `\\` with `#h()` indentation instead.
+- **Demographics centering** — use `#align(center, text(size: 14pt)[...])` with `#h(2em)` gaps. NOT `#grid()` with `1fr` columns. Do NOT prefix placeholders with `#` (e.g. `#M3-5A` is parsed as a variable name).
+- **Font minimums** — 14pt body, 12pt absolute minimum for any text. At booklet scale (70.7%), 12pt → ~8.5pt, 14pt → ~9.9pt.
+- **Gray washout** — use `black` for all lines. `luma()` washes out on grayscale.
+- **Page format** — A4 pages (not A5). Printer booklet function handles folding. Header is regular content on page 1 only.
+- **`#pagebreak()` only before Discussion and Transcript** — Parts 1-3 flow continuously.
+- **Comprehension questions must be inferential** — NOT recall from outline blanks.
+- **`repeat(n, value)`** requires content, not lengths. Use `(value,) * n`.
+- **`#` before placeholders** — `#CLASS_PLACEHOLDER` after replacement becomes `#M3-5A` which Typst parses as a variable. Use bare text `CLASS_PLACEHOLDER` inside content blocks.
+
+**If you are writing ANY Typst code for bespoke materials, you MUST read `.kilo/skills/create-bespoke-materials/SKILL.md` first. Failure to do so will reproduce bugs that cost hours to debug.**
 
 ## Content transforms (in json_to_pdf.py build_typ_content)
 

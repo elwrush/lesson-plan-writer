@@ -1,12 +1,51 @@
-#set page(paper: "a4", margin: (x: 2cm, top: 1.5cm, bottom: 1.5cm))
 #set text(font: "Roboto", size: 11pt)
-#set par(leading: 0.45em)
+#set par(leading: 0.65em)
 
-#align(center, text(size: 18pt, weight: "bold")[BTN High - Listening Worksheet])
+#show: doc => {
+  set page(paper: "a4", margin: (x: 0.75in, top: 1in, bottom: 0.75in))
+  doc
+}
+
+#let fl = box(width: 3.5cm, stroke: (bottom: 0.5pt + black))
+#let fls = box(width: 1.5cm, stroke: (bottom: 0.5pt + black))
+
+#let writing-lines(spacing: 12mm) = {
+  layout(size => {
+    let line-tile = tiling(
+      size: (size.width, spacing),
+      place(bottom, line(length: size.width, stroke: 0.5pt + luma(180)))
+    )
+    rect(width: 100%, height: 100%, fill: line-tile, stroke: none)
+  })
+}
+
+#block(
+  stroke: (bottom: 0.5pt + black),
+  inset: (bottom: 6pt),
+  grid(
+    columns: (1fr, 2fr, 1fr),
+    align: (left + horizon, center + horizon, right + horizon),
+    image("/templates/ACT.png", height: 1.2cm),
+    text(size: 16pt, weight: "bold")[Mathayom Program],
+    image("/templates/cambridge.png", height: 1.6cm),
+  )
+)
+#v(12pt)
+#grid(
+  columns: (auto, 1fr, auto, 1fr, auto, 1fr),
+  column-gutter: 0.5em,
+  align: bottom + left,
+  [*CLASS:*], [#h(3em, weak: true)],
+  [*ID:*], [#h(3em, weak: true)],
+  [*NAME:*], [#h(4em, weak: true)],
+)
+#v(6pt)
+#line(length: 100%, stroke: 0.5pt + luma(180))
+#v(12pt)
+
+#align(center, text(size: 16pt, weight: "bold")[BTN High - Listening Worksheet])
 #align(center, text(size: 14pt)[Gen Z Gender Roles])
-#align(center, text(size: 10pt)[Episode 15 - 25 March 2026])
-
-#line(length: 100%, stroke: 0.5pt)
+#align(center, text(size: 10pt, fill: luma(80))[Episode 15 - 25 March 2026])
 
 #v(0.4em)
 
@@ -34,23 +73,23 @@ I. Traditional Gender Roles in Society
 
   #h(2em) A. 1950s TV shows portrayed clear gender roles
 
-    #h(4em) 1. Women shown as the #underline(h(3.5cm))
+    #h(4em) 1. Women shown as the #fl
 
-    #h(4em) 2. Men shown as the #underline(h(3.5cm))
+    #h(4em) 2. Men shown as the #fl
 
   #h(2em) B. Kings College study - 23,000 people from 29 countries
 
-    #h(4em) 1. Gen Z holds the #underline(h(3.5cm)) traditional beliefs
+    #h(4em) 1. Gen Z holds the #fl traditional beliefs
 
-    #h(4em) 2. #underline(h(1.5cm)) of Gen Z men believe a wife should obey her husband
+    #h(4em) 2. #fls of Gen Z men believe a wife should obey her husband
 
-    #h(4em) 3. #underline(h(1.5cm)) of Gen Z men say a husband should have the final word
+    #h(4em) 3. #fls of Gen Z men say a husband should have the final word
 
   #h(2em) C. Attitudes beyond the home
 
-    #h(4em) 1. #underline(h(1.5cm)) of Gen Z men say enough has been done for gender equality
+    #h(4em) 1. #fls of Gen Z men say enough has been done for gender equality
 
-    #h(4em) 2. #underline(h(1.5cm)) of Gen Z men feel men are now discriminated against
+    #h(4em) 2. #fls of Gen Z men feel men are now discriminated against
 
 #v(0.5em)
 
@@ -82,23 +121,23 @@ II. The Role of Social Media
 
   #h(2em) A. Josh Glover - facilitator at #underline(h(3.5cm))
 
-    #h(4em) 1. His organisation tackles #underline(h(3.5cm)) in schools
+    #h(4em) 1. His organisation tackles #fl in schools
 
-    #h(4em) 2. Says social media helps bring back #underline(h(3.5cm)) gender norms
+    #h(4em) 2. Says social media helps bring back #fl gender norms
 
   #h(2em) B. How social media algorithms work
 
-    #h(4em) 1. Algorithms create #underline(h(3.5cm)) where users hear agreeing voices
+    #h(4em) 1. Algorithms create #fl where users hear agreeing voices
 
-    #h(4em) 2. No one presents #underline(h(3.5cm)) opinions
+    #h(4em) 2. No one presents #fl opinions
 
-    #h(4em) 3. Users only see opinions that get debunked or #underline(h(2.5cm))
+    #h(4em) 3. Users only see opinions that get debunked or #fl
 
   #h(2em) C. The definition problem
 
-    #h(4em) 1. Teenage boys' definition of #underline(h(3cm)) differs from the intended meaning
+    #h(4em) 1. Teenage boys' definition of #fl differs from the intended meaning
 
-    #h(4em) 2. This results from algorithms and lack of #underline(h(3.5cm)) with people who hold different views
+    #h(4em) 2. This results from algorithms and lack of #fl with people who hold different views
 
 #v(0.5em)
 
@@ -132,25 +171,25 @@ III. Tradwives and Solutions
 
   #h(2em) A. "Tradwife" influencers
 
-    #h(4em) 1. Glamorise #underline(h(3.5cm)) lifestyles
+    #h(4em) 1. Glamorise #fl lifestyles
 
-    #h(4em) 2. Create content about cooking, cleaning, and #underline(h(3.5cm)) roles
+    #h(4em) 2. Create content about cooking, cleaning, and #fl roles
 
   #h(2em) B. Effects on young people
 
     #h(4em) 1. University of Melbourne study of 2,300 adults and 1,100 young people
 
-    #h(4em) 2. Support for violence to resist feminism was highest among #underline(h(3.5cm))
+    #h(4em) 2. Support for violence to resist feminism was highest among #fl
 
-    #h(4em) 3. Around #underline(h(1.5cm)) of boys aged 13-17 agree women lie about domestic and sexual violence
+    #h(4em) 3. Around #fls of boys aged 13-17 agree women lie about domestic and sexual violence
 
   #h(2em) C. Josh's perspective on solutions
 
-    #h(4em) 1. Two parts needed: #underline(h(3cm)) and problem-solving
+    #h(4em) 1. Two parts needed: #fl and problem-solving
 
-    #h(4em) 2. Need for #underline(h(3.5cm)) conversations where people are not judged
+    #h(4em) 2. Need for #fl conversations where people are not judged
 
-    #h(4em) 3. Importance of #underline(h(3.5cm)) - older generations investing in younger people
+    #h(4em) 3. Importance of #fl - older generations investing in younger people
 
 #v(0.5em)
 
@@ -226,11 +265,7 @@ To what extent do you agree that Gen Z holds the strongest traditional beliefs a
 
 *Your notes:*
 
-#line(length: 100%)
-#line(length: 100%)
-#line(length: 100%)
-#line(length: 100%)
-#line(length: 100%)
+#block(width: 100%, height: 210pt, writing-lines())
 
 #v(0.4em)
 
@@ -242,11 +277,7 @@ How can young people critically evaluate the social media content they see about
 
 *Your notes:*
 
-#line(length: 100%)
-#line(length: 100%)
-#line(length: 100%)
-#line(length: 100%)
-#line(length: 100%)
+#block(width: 100%, height: 210pt, writing-lines())
 
 #pagebreak()
 
