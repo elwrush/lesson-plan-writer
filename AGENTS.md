@@ -10,9 +10,9 @@
 ## Golden Rule: Pattern-first, not guess-first
 
 Before writing any HTML, CSS, Typst, slide markup, or configuration, **read the template or an existing file that already does what you need**. The correct pattern is always in the codebase already — guessing or generating from training data wastes time and causes errors. Specifically:
-- Slide attributes: check `templates/base-slides-template.html` for the exact attribute pattern
+- Slide attributes: check `.kilo/skills/create-beautiful-slideshows/SKILL.md` (Pandoc Markdown pipeline)
 - Typst syntax: **MANDATORY PRE-READ** `.kilo/skills/create-pdf-lesson-file/SKILL.md` (Typst Pitfalls section) AND `.kilo/skills/create-bespoke-materials/SKILL.md` (Hard-Won Lessons section — covers underline, ruled lines, font minimums, list escaping, page format, grayscale, and every other bespoke-material Typst trap). Failure to consult this before writing any `.typ` file for bespoke materials will reproduce bugs that cost hours to debug.
-- Slide structure: check the most recently built `output/*/slides/index.html`
+- Slide structure: check the most recently built `output/*/slides/slides.md`
 - Reveal.js bugs: **MANDATORY PRE-READ** `docs/revealjs-known-issues.md` before ANY audio, TTS, timer, or fragment work — this file documents hard-won production fixes for audio playback conflicts, timer-vs-audio exclusion, fragment timing, data-autoplay placement, and DOM integrity. Ignoring it will reproduce bugs that cost hours to debug.
 
 ## Two pipelines
@@ -24,14 +24,29 @@ Before writing any HTML, CSS, Typst, slide markup, or configuration, **read the 
 
 The Lua filter reads `## Stage N:` headings from the Markdown body and generates a Typst `#table()` with colored stage headers. The agent writes pure Markdown — no Typst, no HTML, no JSON intermediary.
 
-**Old JSON pipeline** (`json_to_pdf.py`) still works for existing JSON lesson plans. New lesson plans use the Markdown format.
+### Slides (Markdown → Pandoc → reveal.js)
 
-### Slides (template-based)
-1. **`write-lesson-plan` skill** → JSON (archived skill — use Markdown for new PDF plans)
-2. **`lesson-plan-to-reveal` skill** → copies `templates/base-slides-template.html` → hand-builds `index.html` with raw HTML `<section>` elements in `output/{subfolder}/slides/`
-3. **`/git-pages` command** (or `publish-to-github-pages` skill in `.kilo/skills/`) → deploys all slideshows in `output/` to gh-pages
+**Primary pipeline (new):** Agent writes pure Markdown `slides.md` → Pandoc converts to reveal.js HTML → Lua filters inject audio/YouTube → CSS styles.
 
-**Markdown pipeline is permanently abandoned.** All slides are raw HTML `<section>` elements. `scripts/json_to_markdown.py` is deprecated — do not use for new presentations. Auto-animate requires sibling `<section data-auto-animate>` elements, which cannot be produced from the markdown plugin.
+1. **`create-beautiful-slideshows` skill** → writes `output/{subfolder}/slides/slides.md` (pure Pandoc Markdown)
+2. **Build:** `pandoc slides.md -t revealjs -s --slide-level=1 -o index.html -V revealjs-url="..." -V theme=black -V margin=0.125 --css="slides-pandoc.css" --include-in-header="slides-header.html" --lua-filter="youtube-embed.lua" --lua-filter="audio-autoplay.lua"`
+3. **Serve:** `python -m http.server 8000` from the slides directory (required for YouTube embeds)
+4. **`/git-pages` command** → deploys all slideshows in `output/` to gh-pages
+
+**Lua filters** (in `scripts/`):
+- `audio-autoplay.lua` — reads `data-audio-src` from headings, injects `<audio data-autoplay>`
+- `youtube-embed.lua` — converts `::: {.youtube} video-id :::` to responsive iframe
+
+**Key conventions:**
+- `--slide-level=1` for flat horizontal slides (no vertical nesting)
+- `#` headings create slides, `##` is NOT used for slide breaks
+- Fragment reveals: `::: {.fragment .answer-reveal}`
+- Speaker notes: `::: notes ... :::`
+- Text shields: `::: {.shield}` or `::: {.title-row}` for readability on image backgrounds
+- YouTube: `::: {.youtube} VIDEO_ID :::` (not `data-background-iframe` which causes fullscreen + Error 153)
+- Audio: `{data-audio-src="file.mp3"}` on the `#` heading
+
+See `.kilo/skills/create-beautiful-slideshows/SKILL.md` for full conventions.
 
 ## Key commands
 
@@ -41,14 +56,20 @@ The Lua filter reads `## Stage N:` headings from the Markdown body and generates
 # /git-pages — Deploy slides subfolder to gh-pages with landing page
 # /lint — Run ruff check --fix and ruff format
 
-# PDF (from project root — new Markdown pipeline)
+# PDF
 python scripts/build_lesson_pdf.py output/<subfolder>/<file>.md
 
-# PDF (from project root — old JSON pipeline, still works)
-python scripts/json_to_pdf.py output/<subfolder>/<file>.json
+# Slides (from slides/ directory — new Markdown pipeline)
+pandoc slides.md -t revealjs -s --slide-level=1 -o index.html \
+  -V revealjs-url="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0" \
+  -V theme=black -V margin=0.125 \
+  --css="slides-pandoc.css" \
+  --include-in-header="slides-header.html" \
+  --lua-filter="youtube-embed.lua" \
+  --lua-filter="audio-autoplay.lua"
 
-# Slides — copy base template + hand-build sections
-cp "templates/base-slides-template.html" "output/<subfolder>/slides/index.html"
+# Slides — serve locally (required for YouTube embeds)
+python -m http.server 8000
 
 # Slide validation (runs 66 reveal.js rule checks)
 npx revealjs-validator --project "output/<subfolder>/slides/"
@@ -60,7 +81,6 @@ python scripts/pixabay_download.py --query "topic" --type image --count 3
 # Tests (67 total, 11 new for Markdown pipeline)
 python -m pytest tests/ -v
 python -m pytest tests/test_build_lesson_pdf.py -v      # 11 tests — Markdown pipeline
-python -m pytest tests/test_json_to_pdf.py -v            # 18 tests
 python -m pytest tests/test_json_to_markdown.py -v       # 26 tests
 python -m pytest tests/test_git_pages_safety.py -v       # 12 tests — red-green safety guard for /git-pages
 
@@ -110,8 +130,7 @@ A lint command is defined at `.kilo/command/lint.md` — invoke via Kilo CLI.
 ## PDF rendering (Typst)
 
 - Renderer: `typst compile` (NOT Quarto — abandoned, it ignored `format: typst`)
-- **New pipeline:** Static template `templates/lesson-plan.typ` (hash-locked, never agent-edited) + Lua filter `scripts/lesson-tables.lua` (converts Markdown `## Stage` headings to a `#table()`)
-- **Old pipeline:** `.typ` content generated by `build_typ_content()` in `scripts/json_to_pdf.py` (Python f-strings, compiled with `typst compile`)
+- Pipeline: Static template `templates/lesson-plan.typ` (hash-locked, never agent-edited) + Lua filter `scripts/lesson-tables.lua` (converts Markdown `## Stage` headings to a `#table()`)
 - Font: Roboto OTF from `%APPDATA%\TinyTeX\texmf-dist\fonts\opentype\google\roboto\` via `--font-path`
 - Logos: `templates/Image_20260324_141022.png` (ACT), `templates/cambridge.png` (Cambridge) — page-1 content only, not a page header
 - Logo band is rendered as page-1 content (a `#block` + `#grid`), not as a page header. Cambridge on left, C·E·L Mathayom center, ACT on right. Margins are uniform at 0.75in.
@@ -151,9 +170,7 @@ Five known error patterns:
 
 ## Content transforms
 
-**New Markdown pipeline:** The agent writes stage aims and dates directly in final form. No Python-level transforms needed.
-
-**Old JSON pipeline** (`json_to_pdf.py build_typ_content`):
+The agent writes stage aims and dates directly in final form. No Python-level transforms needed.
 - Date: `050726` → `7 May, 2026`
 - Stage aims: robotic templates humanized (e.g. "To reading for gist" → "To understand the general idea of the text")
 - Procedure: minute indicators stripped (`3 min.` → ``)
@@ -251,11 +268,12 @@ After reading the lesson plan JSON and the reference templates, create a design 
 The blueprint is a planning document — no HTML at this stage. Reference template patterns by type name only. Write the blueprint to `.kilo/plans/` as a plan file before proceeding to Phase 1.
 
 **Phase 1: Pre-generation**
-1. **Open `templates/reference-slideshow.html`** — scroll through EVERY slide type. This is a complete working slideshow with verified patterns. Identify which types you need, guided by the blueprint.
-2. **Open `templates/base-slides-template.html`** — copy the `<head>` and `<script>` blocks exactly. Do not modify.
-3. **Verify colors**: answer green = `#052e0d`, pedagogical teal = `#1a237e`. Never use `#1e7e34` or `#1a6b5a`.
-4. **Verify font sizes**: body text ≥1em, labels ≥0.9em, title h2=2.2em, logo=120px, subheader=1em. Never use 0.7em.
-5. **Plan the slide count**: ensure no answer slide has >3 items. Split if needed.
+1. **Read the existing slides.md or generate the key slide patterns from the lesson plan** — identify which types you need (title, objectives, CCQ, structure, model answer, task, summary).
+2. **Read `scripts/slides-pandoc.css`** — understand available CSS classes (`.shield`, `.title-row`, `.answer-reveal`, etc.).
+3. **Read `scripts/audio-autoplay.lua` and `scripts/youtube-embed.lua`** — understand what the Lua filters do.
+4. **Verify colors**: answer yellow = `#ffdd00`, body white = `#fff`. Text-shield background = `rgba(0,0,0,0.55)`. Never use custom CSS.
+5. **Verify font sizes**: body text ≥1em, h1=1.3em, blockquote=0.85em.
+6. **Plan the slide count**: ensure no slide has content that overflows the viewport.
 
 **Phase 2: Generation rules**
 6. **Copy, don't invent** — use reference examples. Change content only, not structure.
@@ -477,7 +495,7 @@ Never put `data-timer` on a slide that plays any audio or video, regardless of m
 - Typst CLI (NOT Quarto-embedded version)
 - Roboto OTF fonts (TinyTeX or system)
 - `@kilocode/plugin` in `.kilo/` and `.kilocode/` (tool internal, not for edits)
-- reveal.js 5.x via CDN (loaded from `templates/base-slides-template.html`, no npm needed)
+- reveal.js 5.x via CDN (loaded from Pandoc's default template via `-V revealjs-url=...`, no npm needed)
 
 ## Image replacement workflow (frequent task)
 
@@ -544,47 +562,25 @@ This checks for banned colors (old teal/green/blue/orange), `text-shadow` CSS, `
 
 ## Authorial Voice for Slide Design
 
-When designing or editing slides, you are an **experienced ESL teacher with training in instructional design and materials writing**, not a software engineer. See the `lesson-plan-to-reveal` skill's **Authorial Voice** section for detailed guidance on how to phrase pedagogical annotations, context sentences, and design rationale in teaching terms, not engineering terms.
+When designing or editing slides, you are an **experienced ESL teacher with training in instructional design and materials writing**, not a software engineer. See `.kilo/skills/create-beautiful-slideshows/SKILL.md` for detailed guidance on how to phrase pedagogical annotations, context sentences, and design rationale in teaching terms, not engineering terms.
 
 When the user asks to edit a slide at a reveal.js URL (e.g., `index.html#/7`):
 
-1. **Run `scripts/locate_slide.py`** to determine the slide section:
+1. **Run `scripts/locate_slide.py`** to find the corresponding slide heading:
    ```bash
    python scripts/locate_slide.py "file:///path/to/index.html#/7"
    # OR
    python scripts/locate_slide.py 7 --slides-dir path/to/slides/
    ```
-2. The script outputs JSON with slide index, section name, heading, and line numbers
-3. Edit `index.html` directly using the line numbers from the output — the slide is a raw HTML `<section>` element
-4. No regeneration needed — just reload the browser
-5. **When adding a new slide**, insert a new `<section>` element at the correct position in `<div class="slides">`. All subsequent slide indices shift by +1.
+2. The script outputs the slide index and heading text
+3. Edit the corresponding `#` heading and content in `slides.md`
+4. **Rebuild with Pandoc** — don't edit `index.html` directly:
+   ```bash
+   pandoc slides.md -t revealjs -s --slide-level=1 -o index.html ...
+   ```
+5. Reload the browser to see changes
 
-### Stable slide IDs — preferred method
-
-**To avoid index confusion**, every `<section>` should have a stable `id` attribute (e.g., `id="slide-title"`, `id="slide-lead-in"`). Unlike numerical indices, IDs don't shift when slides are added or removed.
-
-To locate a slide by its stable ID:
-```bash
-python scripts/locate_slide.py --id slide-objective --html path/to/slides/index.html
-```
-
-The script returns the line numbers and content for that slide regardless of its position in the sequence.
-
-**Naming convention:** Use kebab-case prefixes matching the lesson stage:
-- `slide-title`, `slide-objective`
-- `slide-lead-in`, `slide-diagnosis-reveal`
-- `slide-pet-scale-1`, `slide-pet-scale-2`
-- `slide-test1-{range}` (e.g., `slide-test1-1-3`)
-- `slide-test2-entry`, `slide-test2-reveal`
-- `slide-transition-{target}` (e.g., `slide-transition-learn`)
-- `slide-teach-{topic}` (e.g., `slide-teach-sentence-def`, `slide-teach-commands`)
-- `slide-quick-check`
-- `slide-transition-{topic}` (e.g., `slide-transition-capitals`)
-- `slide-cap-rules-1-3`, `slide-cap-rules-4-6`
-- `slide-did-you-know`
-- `slide-p2b-task`, `slide-p2b-answers-{range}`
-- `slide-p7-task`, `slide-p7-corrected-{range}`
-- `slide-summary`, `slide-end`
+**Always edit `slides.md`, never `index.html`.** The HTML is regenerated from Markdown.
 
 ## reveal.js Codebase
 
