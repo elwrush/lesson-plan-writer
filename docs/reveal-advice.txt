@@ -1,0 +1,57 @@
+Reveal.js is actually an even easier case than Typst, because it has first-class Markdown support baked in — both directly in reveal.js itself and via Pandoc's dedicated revealjs writer. The strategy is the same: push the agent toward Markdown + a handful of small, well-known directive comments, and keep the actual HTML/JS scaffolding static and untouched.
+Option 1 — reveal.js's own Markdown plugin
+Reveal.js ships a RevealMarkdown plugin that lets a whole deck live in a single markdown file, referenced from a tiny, static HTML shell:
+html<div class="reveal">
+  <div class="slides">
+    <section data-markdown="slides.md"
+             data-separator="^\n---\n$"
+             data-separator-vertical="^\n--\n$"
+             data-separator-notes="^Notes:"></section>
+  </div>
+</div>
+The agent then only ever edits slides.md. Slides are separated by ---, vertical/stacked slides by --, and speaker notes by a Notes: section. That HTML shell is written once and never touched again — it's pure boilerplate.
+For per-slide or per-element config (backgrounds, transitions, fragments), reveal's markdown plugin supports special HTML-comment directives:
+markdown## Title slide
+<!-- .slide: data-background="#1a1a1a" data-transition="zoom" -->
+
+- First point <!-- .element: class="fragment" -->
+- Second point <!-- .element: class="fragment" -->
+These are short, formulaic, single-line comments — much harder to botch than nesting <section> tags by hand, and easy to spot-check.
+Option 2 — Pandoc's revealjs writer
+If you'd rather generate a fully standalone .html (no separate plugin/shell needed), Pandoc can go straight from markdown to a complete reveal.js presentation:
+bashpandoc slides.md -t revealjs -s -o slides.html --slide-level=2
+Frontmatter controls theme/transition/etc.:
+yaml---
+title: My Deck
+theme: moon
+transition: slide
+---
+--slide-level=2 means ## headings start new horizontal slides (with # as section titles), incremental lists come from -i or wrapping a list in a {.incremental} fenced div, speaker notes from a ::: notes div, and side-by-side layouts from ::: columns / ::: column divs — all still plain markdown-ish syntax, no raw HTML required.
+Option 3 — Quarto, if you want more power
+Quarto (built on Pandoc) has a particularly polished revealjs format — same markdown/div-based syntax as above but with richer support for things like auto-incrementing fragments, tabsets, embedded code execution, and multiple built-in themes, all configured through YAML and fenced divs rather than raw HTML/JS.
+Escape hatch + workflow
+Markdown allows inline raw HTML, and both reveal.js's plugin and Pandoc pass it through verbatim — so for a genuinely custom widget (an embed, a custom transition, inline SVG), you drop a small raw HTML block right where it's needed, keeping the blast radius small and easy to debug.
+For the kilo workflow, this collapses to: agent edits slides.md, a one-line build script runs pandoc ... -o slides.html (or just serves the markdown directly via reveal.js's plugin), and you open it in a browser. There's no LSP step needed at all in most cases, since the output is either generated HTML or a static shell that never changes — the agent's error surface is just markdown plus a handful of one-line comment directives.
+
+the  problem as far as I understand is that markdown cannot handle auto-animate at all
+
+That's a fair concern, but it's narrower than it first appears — the slide-level trigger and a surprising amount of the element-matching actually do work from plain markdown. The gap is real, but it's confined to a specific case (matching non-text elements, and especially animated code diffs).
+The trigger itself works fine in markdown. Reveal's markdown plugin supports the same <!-- .slide: --> and <!-- .element: --> comment directives I mentioned earlier, and data-auto-animate is just an attribute set via those:
+markdown<!-- .slide: data-auto-animate -->
+## Title
+- One
+- Two
+- Three
+
+---
+
+<!-- .slide: data-auto-animate -->
+## Title
+- Three
+- Two
+- One
+If you're going the Pandoc route instead, the equivalent is a heading attribute: ## Title {data-auto-animate=}.
+Automatic matching covers more than you'd think. Reveal matches elements between two adjacent data-auto-animate slides by content + node type + DOM order by default — so headings that move/resize, paragraphs whose text changes, and lists that reorder or gain/lose items generally animate correctly with zero extra markup. This is the bulk of "build up a slide" style auto-animate, and markdown handles it fine.
+Where it genuinely breaks down is when automatic matching has nothing to go on — e.g. a styled <div> with no text, or matching specific lines across two code blocks for a "diff" animation. For that, reveal needs an explicit data-id on the element, via <!-- .element: data-id="..." -->. This directive does work for ordinary markdown elements (paragraphs, list items, etc.), but code blocks are the awkward case: marked's code-block rendering combined with the .element comment can be finicky about exactly where the comment sits relative to the fenced block, and you're essentially fighting the markdown parser at that point — not a great trade for "remove fragile syntax."
+So for the specific auto-animate-code-diff use case, I'd treat those slides as the deliberate exception rather than trying to force them through markdown: write that handful of <section data-auto-animate>...<pre><code data-id="code">... blocks as raw HTML, sitting alongside your <section data-markdown="..."> sections in the same deck (reveal only processes sections that have data-markdown — plain <section> elements are left alone, so mixing is fine). Everything else — text builds, bullet reveals, layout changes — stays in markdown with the <!-- .slide: data-auto-animate --> / <!-- .element: data-id="..." --> comments.
+If you end up doing a lot of code-walkthrough decks, it's also worth writing a tiny generator script: feed it a sequence of code snapshots (or a single annotated file with step markers), have it spit out the data-id-matched <section> sequence automatically. That turns "agent hand-writes fragile HTML" into "agent edits plain code + a script does the templating" — same philosophy as the markdown approach, just applied to the one piece markdown can't reach.
