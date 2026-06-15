@@ -9,13 +9,12 @@ __pycache__/
 # Kilo (tooling config, not source)
 .kilocode/
 
+# Generated output (lesson plans, slides, audio, PDFs — code backup only)
+output/
+
 # PDF output (generated)
 PDF/
 *.pdf
-
-# Temp files
-output/**/_temp_*
-output/.image-cache/
 
 # Large input files (epub, etc.)
 *.epub
