@@ -18,11 +18,14 @@ Before writing any HTML, CSS, Typst, slide markup, or configuration, **read the 
 ## Two pipelines
 
 ### PDF (new: Markdown → Pandoc → Typst)
+
 1. Agent writes a `.md` file in `output/{subfolder}/` with YAML frontmatter (metadata) + Markdown body (stages, materials)
 2. **`build-excellent-lesson-plans` skill** → `python scripts/build_lesson_pdf.py output/{subfolder}/lesson.md`
 3. Pipeline: `.md` → Pandoc (with `templates/lesson-plan.typ` + Lua filter `scripts/lesson-tables.lua`) → Typst compile → `PDF/{subfolder}/lesson-plan.pdf`
 
 The Lua filter reads `## Stage N:` headings from the Markdown body and generates a Typst `#table()` with colored stage headers. The agent writes pure Markdown — no Typst, no HTML, no JSON intermediary.
+
+**Before writing any Typst code, read the pipeline primer at `C:\Users\elwru\.config\kilo\reference\markdown-pandoc-pipeline-primer.md`** — it explains why Markdown → Pandoc is preferred over raw Typst, how Lua filters work, and when raw Typst is actually necessary.
 
 ### Slides (Markdown → Pandoc → reveal.js)
 
