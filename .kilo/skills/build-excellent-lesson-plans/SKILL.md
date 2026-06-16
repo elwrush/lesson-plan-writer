@@ -46,7 +46,7 @@ materials:
   - "BTN video (Episode 15)"
   - "YouTube clip: Andrew Tate (https://www.youtube.com/watch?v=...)"
   - "Slide deck"
-slideshow_url: "https://example.com/slides"
+slideshow_url: "https://elwrush.github.io/lesson-plan-writer/SUBFOLDER/index.html"
 main_aim: "By the end of the lesson, learners will have..."
 subsidiary_aim: "Learners will also have practiced..."
 transcript: "output/.../transcript_tate.typ"
@@ -71,7 +71,7 @@ transcript: "output/.../transcript_tate.typ"
 **Optional YAML fields:**
 - `transcript` — path to a `.typ` transcript file. If present, appended to the PDF after the stages.
 - `answer_key` — path to a `.typ` answer key file. Only include when the lesson actually has an answer key. If absent, no answer key header appears.
-- `slideshow_url` — URL of the lesson slideshow. Renders as a gray-shaded row in the info table.
+- `slideshow_url` — URL of the lesson slideshow. Renders as a gray-shaded row in the info table. **Compute from git remote:** run `git remote get-url origin`, extract `{owner}` and `{repo}`, then use `https://{owner}.github.io/{repo}/{subfolder}/index.html` where `{subfolder}` matches the output directory name. Do NOT guess or hardcode. The `/git-pages` command also auto-updates this field after deployment for both JSON and Markdown lesson plan files.
 
 **Stage aim style:** Write aims in natural English. Vary sentence openers. Avoid robotic templates like "To lead-in" or "To reading for gist".
 

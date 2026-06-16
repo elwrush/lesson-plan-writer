@@ -222,12 +222,12 @@ def compile_typst(typst_source, output_pdf):
 
     Writes Pandoc output as a temp .typ file in the project root
     so template-relative image paths resolve correctly.
-    Kept on error for debugging."""
+    Always cleans up the temp file — errors print to stderr but do NOT leave
+    orphaned temp files in the project root."""
     # Write temp .typ in the project root for template-relative paths like templates/cambridge.png
     temp_typ = PROJECT_ROOT / f"_temp_lesson_{uuid.uuid4().hex[:8]}.typ"
     temp_typ.write_text(typst_source, encoding="utf-8")
 
-    # Build typst compile command
     proc = None
     typst_cmd = ["typst", "compile"]
     if ROBOTO_FONT_DIR.exists():
@@ -244,23 +244,21 @@ def compile_typst(typst_source, output_pdf):
     except subprocess.TimeoutExpired:
         if proc:
             proc.kill()
+        temp_typ.unlink(missing_ok=True)
         print("FATAL: Typst timed out (60s)", file=sys.stderr)
-        print(f"  Temp file kept for debugging: {temp_typ}")
         sys.exit(1)
     except FileNotFoundError:
-        print("FATAL: Typst CLI not found. Install from https://github.com/typst/typst", file=sys.stderr)
         temp_typ.unlink(missing_ok=True)
+        print("FATAL: Typst CLI not found. Install from https://github.com/typst/typst", file=sys.stderr)
         sys.exit(1)
 
     if proc.returncode != 0:
         err_text = stderr.decode("utf-8", errors="replace")[:1000] if stderr else "(no stderr)"
+        temp_typ.unlink(missing_ok=True)
         print(f"FATAL: Typst compile failed (exit {proc.returncode})", file=sys.stderr)
         print(f"  {err_text}", file=sys.stderr)
-        print(f"\n  Temp file kept for debugging: {temp_typ}")
-        print(f"  Run: cd . && typst compile \"{temp_typ.name}\" test.pdf")
         sys.exit(1)
 
-    # Success — clean up temp file
     temp_typ.unlink(missing_ok=True)
     return True
 

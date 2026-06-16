@@ -305,17 +305,19 @@ Write-Host "Worktree removed. Still on main."
 $subfolder = $presentations[0].subfolder
 Write-Host ""
 Write-Host "Deployed: $subfolder"
-Write-Host "  https://$owner.github.io/$repo/$subfolder/"
+Write-Host "  https://$owner.github.io/$repo/$subfolder/index.html"
 Write-Host ""
 Write-Host "Landing page: https://$owner.github.io/$repo/"
 ```
 
-### Step 10a: Write URL to lesson plan JSON
+### Step 10a: Write URL to lesson plan file (JSON or Markdown)
 ```powershell
+$url = "https://$owner.github.io/$repo/$([System.Uri]::EscapeUriString("$subfolder/"))index.html"
+
+# Try JSON first
 $lessonPlanJson = Get-ChildItem -Path "output/$subfolder" -Filter "*-lesson-plan.json" | Select-Object -First 1
 if ($lessonPlanJson) {
     $jsonContent = Get-Content $lessonPlanJson.FullName -Raw | ConvertFrom-Json
-    $url = "https://$owner.github.io/$repo/$([System.Uri]::EscapeUriString("$subfolder/"))"
     if ($jsonContent.slideshow_url -ne $url) {
         $jsonContent | Add-Member -MemberType NoteProperty -Name "slideshow_url" -Value $url -Force
         $jsonContent | ConvertTo-Json -Depth 10 | Set-Content $lessonPlanJson.FullName
@@ -324,7 +326,33 @@ if ($lessonPlanJson) {
         Write-Host "  URL already up to date in $($lessonPlanJson.Name)"
     }
 } else {
-    Write-Warning "  No lesson plan JSON found in output/$subfolder/"
+    # Fall back to Markdown lesson plan file (YAML frontmatter)
+    $lessonPlanMd = Get-ChildItem -Path "output/$subfolder" -Filter "*-lesson-plan.md" | Select-Object -First 1
+    if (-not $lessonPlanMd) {
+        $lessonPlanMd = Get-ChildItem -Path "output/$subfolder" -Filter "*.md" | Where-Object {
+            (Get-Content $_.FullName -TotalCount 1) -eq "---"
+        } | Select-Object -First 1
+    }
+    if ($lessonPlanMd) {
+        $content = Get-Content $lessonPlanMd.FullName -Raw
+        if ($content -match '(?<=slideshow_url:\s*")[^"]+(?=")') {
+            $currentUrl = $matches[0]
+            if ($currentUrl -ne $url) {
+                $content = $content -replace '(slideshow_url:\s*")[^"]+(")', "`$1$url`$2"
+                Set-Content -Path $lessonPlanMd.FullName -Value $content
+                Write-Host "  Wrote URL to $($lessonPlanMd.Name)"
+            } else {
+                Write-Host "  URL already up to date in $($lessonPlanMd.Name)"
+            }
+        } else {
+            # No slideshow_url field yet — add it after the shape_name line
+            $content = $content -replace '(shape_name: "[^"]+")', "`$1`nslideshow_url: `"$url`""
+            Set-Content -Path $lessonPlanMd.FullName -Value $content
+            Write-Host "  Added slideshow_url to $($lessonPlanMd.Name)"
+        }
+    } else {
+        Write-Warning "  No lesson plan file found in output/$subfolder/"
+    }
 }
 ```
 
