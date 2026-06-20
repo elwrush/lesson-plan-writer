@@ -132,6 +132,20 @@ $ahead = [int](git rev-list --count origin/main..HEAD)
 Write-Host "Committed v$ver (${ahead} ahead of origin)"
 ```
 
+### Step 8: Capture learnings
+If the session involved a bug fix, pattern change, or new approach worth remembering, append an entry to the global learnings file at `C:\Users\elwru\.kilo\learnings.md`. Use this format:
+
+```markdown
+## YYYY-MM-DD: [lesson-plan-writer] Brief description
+
+**Context:** What was being done
+**Fix:** What was done to fix it
+**Pattern:** The general principle to apply next time
+**Files:** path/to/file.py
+```
+
+Ask the user: "Add a learnings entry for this session? (Y/n)" — if Y, prompt for the description and append.
+
 ## Edge cases
 - **Review fails**: ask user whether to continue or abort
 - **Nothing to commit**: stop before staging

@@ -212,13 +212,32 @@ Example blueprint table (from the M3 Speaking Gender Roles slides):
 | slide-summary | Summary | 3 "I can" checkmarks | Static | Signaling — consolidate |
 | slide-end | End | Topic + badge on `#2c3e50` | Solid bg | Coherence — clean close |
 
-**Rules for every slide:**
-1. Every slide has a **unique slide ID** (stable across edits)
-2. Every content slide has `::: notes` with timing and interaction
-3. Transitions (phase changes) use **red bg** (`data-background-color="#c0392b"`)
-4. Image backgrounds get **text shields** (`.shield`, `.title-row`)
-5. Solid backgrounds get **plain Markdown** (no shields needed)
-6. Fragment answers use `:::{.fragment .answer-reveal}` for yellow-bold reveals
+**Pedagogical rules (ESL authorial voice):**
+7. **One concept per slide** — no multi-step or multi-point slides. If a slide needs 6+ bullets, split it.
+8. **Exercise slides reference the textbook number** in the heading, e.g. `# Exercise 3: Scan the text`.
+9. **Response complexity determines answer reveal type** (see tier table below).
+10. **Production slides show success criteria only** — e.g. "Use 3 comparatives + 2 superlatives". The teacher elicits the full model live.
+11. **Skill pre-teach = 1 slide max** — one concrete example (e.g. skim highlight), not a methodology explanation. Reference previous exposure when applicable.
+12. **Listening transcript excerpts go on-slide** — 2-3 lines max in a shielded div with the exercise number. Students have pen and paper only, so the excerpt must be visible.
+13. **Reading passages stay off-slide** — students use handouts or the board. Slides reference paragraph/line numbers only.
+
+**Slide count cap:**
+- 35–40 slides max for a 46-minute lesson
+- 6 fixed overhead: splash, title, objectives, transition, summary, end
+- ~30 remaining for stages: ~5 per major stage, ~2 per minor stage
+- Three-slide sequences (Pattern L high tier) reserved for the 2–3 highest-value exercises only
+
+**Response complexity tiers:**
+
+| Tier | Skill level | Exercise type | Answer reveal | Support |
+|------|-------------|--------------|---------------|---------|
+| Low | Recall | Skim/scan, T/F, gap-fill, multiple choice | Simple click reveal (`fragment`) | Reference paragraph or line number |
+| Mid | Manipulation | Match, order, label, categorise, complete | Auto-animate transform (moves to correct position) | Visual confirmation of the relationship |
+| High | Production / Inference | Paraphrase, justify, infer, evaluate, create | Three-slide sequence: prompt → answer → explanation | Explanation with transcript or text quote |
+
+**Body-text limit:**
+- Max 25 words of body text per content slide (headings excluded). If exceeded, split or use fragments.
+- No more than 5 bullet points per slide.
 
 Reference blueprints in `.kilo/plans/*-blueprint.md` for real examples.
 
@@ -558,6 +577,148 @@ Thank students. Preview next lesson. Time: 0.5 min.
 :::
 ```
 
+### Pattern K: Auto-animate match (mid-order tier)
+
+For matching exercises where students connect items (e.g. statements to responses, words to definitions). Use auto-animate pairs so elements slide into their matched position — students see the *relationship*, not just the result.
+
+Slide 1 — source items displayed:
+```markdown
+# Exercise 4: Match {data-auto-animate="match-e4"}
+
+::: {.columns}
+- Statement A
+- Statement B
+- Statement C
+:::
+
+::: {.columns}
+- Response 1
+- Response 2
+- Response 3
+:::
+```
+
+Slide 2 — items moved to matched positions:
+```markdown
+# Exercise 4: Match {data-auto-animate="match-e4"}
+
+::: {.columns}
+- Statement A → Response 2
+- Statement B → Response 3
+- Statement C → Response 1
+:::
+
+::: notes
+Reveal after pair work. Time: 1 min. T-Ss.
+:::
+```
+
+**Constraint:** No more than 3 auto-animate pairs per presentation. Overuse dilutes the effect.
+
+### Pattern L: Tiered answer reveal
+
+Three concrete implementations matching the tier table. Choose based on exercise skill level:
+
+**Low tier — fragment click reveal** (for recall: skim/scan, T/F, gap-fill):
+```markdown
+# Exercise 2: Scan the text
+
+What does the writer say about social media?
+
+:::{.fragment .answer-reveal}
+Reduces face-to-face interaction (para 2).
+:::
+
+::: notes
+Students scan for 1 min, then click to reveal. Time: 1.5 min. Ss individual → T-Ss.
+:::
+```
+
+**Mid tier — auto-animate transform** (for manipulation: match, order, categorise — see Pattern K).
+
+**High tier — three-slide sequence** (for production/inference: justify, infer, evaluate). Reserved for the 2–3 most important exercises:
+
+```markdown
+# Reading: Make an inference {data-auto-animate="infer-e6"}
+
+Why does the writer mention the 2019 study?
+
+::: notes
+Prompt. Students discuss in pairs. Time: 2 min. Ss-Ss.
+:::
+```
+
+```markdown
+# Reading: Make an inference {data-auto-animate="infer-e6"}
+
+Why does the writer mention the 2019 study?
+
+**A:** To show the trend is recent, not long-standing.
+
+::: notes
+Reveal after pair discussion. Time: 1 min. T-Ss.
+:::
+```
+
+```markdown
+# Reading: Make an inference — Why this answer?
+
+The writer says "Since 2019, the pattern has shifted" (para 3).
+
+"Shifted" implies a change from a previous state. The date anchors the claim — without 2019, the trend could be decades old.
+
+::: notes
+Walk through the evidence. Time: 1 min. T-Ss.
+:::
+```
+
+### Pattern M: Skill pre-teach slide (1-slide, minimal)
+
+One concrete example showing what the skill looks like in practice. No multi-slide methodology.
+
+```markdown
+# Skimming: Find the main idea
+
+Don't read every word. Look at:
+
+- **First sentence** of each paragraph
+- **Headings** and **bold** words
+- **Repeated** words
+
+::: {.example-box}
+*Example:* "Deforestation has **increased** 40% since 2010. The **Amazon** lost 2 million hectares last year. **Brazil** has pledged to reverse the trend."
+→ Main idea: Deforestation of the Amazon is growing.
+:::
+
+::: notes
+Model the skill. "I look at first sentences and repeated words." Time: 1.5 min. T-Ss.
+:::
+```
+
+### Pattern N: Transcript snippet on solid background
+
+For listening exercises. Students have pen and paper only, so the 2–3 line excerpt goes directly on a shielded div. Reference the exercise number in the heading.
+
+```markdown
+# Listening: Exercise 3 {data-background-color="#1a1a2e"}
+
+::: {.shield}
+**Speaker A:** ...that's why I think remote work is here to stay.
+**Speaker B:** But what about team culture?
+
+**Interviewer:** Some companies report lower collaboration.
+:::
+
+::: {.fragment .answer-reveal}
+Speaker A supports remote work. Speaker B questions it.
+**Key clue:** "But" signals disagreement.
+:::
+
+::: notes
+Play audio: 1:20–1:45. Students listen, then read excerpt. Time: 2 min. Ss individual → T-Ss.
+:::
+```
+
 ---
 
 ## Phase 4: Validate Before Building
@@ -728,6 +889,15 @@ After deployment, update `slideshow_url` in the lesson plan `.md` file.
 - **Do not place multiple logo files in assets/** — one `assets/logo.png`
 - **Do not use `---` to separate slides** — use `# ` headings only
 - **Do not skip the blueprint phase** — always create stage-to-slide mapping first
+- **Do not write teacher questions or elicitation scripts** — the teacher elicits live. Show the prompt or task only.
+- **Do not reproduce full model texts on slides** — show success criteria (e.g. "Use 5 quantifiers"). The teacher and class build the model together.
+- **Do not display full reading passages** — students use handouts or the board. Reference paragraph/line numbers.
+- **Do not copy entire transcript entries** — show only the 2–3 relevant lines on a shielded div.
+- **Do not include procedural notes (pair work, timing) on visible content** — that belongs in `::: notes`.
+- **Do not use vocabulary above the target CEFR level in instructions** — task language must be comprehensible.
+- **Do not exceed 25 body-text words per content slide** — split or fragment if needed.
+- **Do not exceed 40 slides total for a 46-minute lesson** — cap enforced during blueprint phase.
+- **Do not use more than 3 auto-animate pairs per presentation** — overuse dilutes the effect.
 
 ---
 

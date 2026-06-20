@@ -1,11 +1,31 @@
 # AGENTS.md — Lesson Plan Writer 3
 
+## Self-Improvement Loop
+
+At session start, read `C:\Users\elwru\.kilo\learnings.md` and apply any relevant lessons tagged `[lesson-plan-writer]`. After completing a fix or discovering a better approach, append an entry to that file with date, context, fix, and pattern.
+
 ## Environment
 
 - **OS:** Windows AMD64 (win32 sys.platform)
 - **Shell:** PowerShell
 - **Python:** 3.x
 - **PowerShell quoting trap:** Inline `python -c "..."` with complex quoting (regex, nested quotes, f-strings with backslashes) ALWAYS hits PowerShell escaping issues. **Never use inline `python -c` for complex code.** Instead: write the Python script to `C:\Users\elwru\AppData\Local\Temp\kilo\*.py` via the Write tool, then execute via `python "C:\Users\elwru\AppData\Local\Temp\kilo\*.py"`. This avoids all quoting problems.
+
+## Codebase search
+
+Choosing the right search method:
+
+| You want to... | Use | Why |
+|---|---|---|
+| Find a literal string (no regex) | `rg -F "text"` via bash | Fastest, no escaping needed |
+| Match a pattern (word, prefix, structure) | `grep` tool with `include="*.py"` | RegExp with scoping; built-in tool |
+| Find files by name pattern | `glob` tool with `pattern="**/*.py"` | Globbing, not regex |
+| Search across specific file types | `grep` tool with `include="*.{py,md}"` | Scoped, no noise |
+| Multi-line / structural pattern | `rg -U -z` via bash, or `task` explorer agent | Regex can't do multi-line well; an agent can read + reason |
+| Find where a feature/concept is implemented | `task(..., subagent_type="explore")` with a prompt describing what it does | Matches intent, not just text |
+| Search all code history | `git log -p -S "pattern" -- "*.py"` via bash | Searches commits, not just working tree |
+
+Tools available: `rg` (ripgrep), `Select-String` (PowerShell), built-in `grep`/`glob` tools.
 
 ## Golden Rule: Pattern-first, not guess-first
 
