@@ -163,7 +163,7 @@ index.html (self-contained reveal.js presentation)
 | **Lesson plan as PDF** | MD → Pandoc → Typst | Structured stages table, consistent layout, no Typst debugging |
 | **Classroom slides** | MD → Pandoc → Reveal.js | Auto-animate, fragments, audio, YouTube, CSS-controlled styling |
 | **Worksheets/ handouts** | Raw Typst (if you must) | Highly custom layout (ruled lines, boxes, etc.) — but see SKILL.md first |
-| **Bespoke materials** | MD → Pandoc → Typst (preferred) | Even for worksheets, start with Markdown and use Pandoc to get correct Typst. Only drop to raw Typst for pixel-level layout that Pandoc can't express. See `.kilo/skills/create-formal-ruled-paper/SKILL.md` or `create-formative-ruled-paper/SKILL.md`. |
+| **Bespoke materials** | MD → Pandoc → Typst (preferred) | Even for worksheets, start with Markdown and use Pandoc to get correct Typst. Only drop to raw Typst for pixel-level layout that Pandoc can't express. See `C:\PROJECTS\CONSUMABLES\.kilo\skills\create-formal-ruled-paper\SKILL.md` or `create-formative-ruled-paper\SKILL.md`. |
 
 **Rule of thumb:** If the output has a repeating structure (stages, questions, items), use Pandoc + Lua. The filter handles the repetition. If the output requires absolute positioning, ruled lines at exact spacing, or multi-column layouts that Pandoc doesn't support, you may need raw Typst — but only after consulting the skill document.
 
