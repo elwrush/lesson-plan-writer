@@ -1,0 +1,485 @@
+# Doc Alignment Audit: LESSON-PLAN-WRITER-3
+
+Scanned: 269 doc files, 30 CLI flags, 110 test functions
+
+## WARNINGS
+
+- **`missing-file`** `AGENTS.md` line 8: references `C:\Users\elwru\AppData\Local\Temp\kilo\*.py` which does not exist on disk
+- **`missing-file`** `AGENTS.md` line 14: references `output/*/slides/slides.md` which does not exist on disk
+- **`missing-file`** `AGENTS.md` line 14: references `output/*/slides/slides.md` which does not exist on disk
+- **`missing-file`** `AGENTS.md` line 20: references `output/{subfolder}/` which does not exist on disk
+- **`missing-file`** `AGENTS.md` line 90: references `lesson.md` which does not exist on disk
+- **`missing-file`** `AGENTS.md` line 100: references `slides.md` which does not exist on disk
+- **`missing-file`** `AGENTS.md` line 102: references `output/{subfolder}/slides/slides.md` which does not exist on disk
+- **`missing-file`** `AGENTS.md` line 102: references `output/{subfolder}/slides/slides.md` which does not exist on disk
+- **`missing-file`** `AGENTS.md` line 103: references `output/{subfolder}/slides/assets/` which does not exist on disk
+- **`missing-file`** `AGENTS.md` line 104: references `output/{subfolder}/slides/` which does not exist on disk
+- **`missing-file`** `AGENTS.md` line 146: references `slides.md` which does not exist on disk
+- **`missing-file`** `AGENTS.md` line 150: references `slides.md` which does not exist on disk
+- **`missing-file`** `AGENTS.md` line 165: references `https://cdn.pixabay.com/photo/{year}/{month}/{day}/{id}_1280.jpg` which does not exist on disk
+- **`missing-file`** `AGENTS.md` line 173: references `output/{subfolder}/slides/assets/` which does not exist on disk
+- **`missing-file`** `AGENTS.md` line 174: references `slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\command\create-beautiful-slideshow.md` line 19: references `slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\command\create-beautiful-slideshow.md` line 20: references `output/{subfolder}/slides/assets/` which does not exist on disk
+- **`missing-file`** `.kilo\command\create-beautiful-slideshow.md` line 21: references `output/{subfolder}/slides/` which does not exist on disk
+- **`missing-file`** `.kilo\command\download-web-image.md` line 11: references `output/{subfolder}/slides/assets/my_image.jpg` which does not exist on disk
+- **`missing-file`** `.kilo\command\download-web-image.md` line 11: references `output/{subfolder}/slides/assets/my_image.jpg` which does not exist on disk
+- **`missing-file`** `.kilo\command\git-pages.md` line 52: references `slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\command\slideshow-to-pptx.md` line 10: references `output/{subfolder}/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\command\slideshow-to-pptx.md` line 10: references `output/{subfolder}/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\command\slideshow-to-pptx.md` line 10: references `output/{subfolder}/pptx/{topic}-lesson-plan.pptx` which does not exist on disk
+- **`missing-file`** `.kilo\command\slideshow-to-pptx.md` line 24: references `output/{subfolder}/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\command\slideshow-to-pptx.md` line 24: references `output/{subfolder}/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778162427322-proud-cabin.md` line 15: references `output/.image-cache/` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778162427322-proud-cabin.md` line 26: references `output/.image-cache/` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778202993521-stellar-nebula.md` line 4: references `output/substitute-lesson-1-M3/site/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778202993521-stellar-nebula.md` line 4: references `output/substitute-lesson-1-M3/site/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778202993521-stellar-nebula.md` line 8: references `output/substitute-lesson-1-M3/images/image-name.jpg` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778202993521-stellar-nebula.md` line 8: references `output/substitute-lesson-1-M3/images/image-name.jpg` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778204145052-curious-mountain.md` line 40: references `secrets.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778204145052-curious-mountain.md` line 67: references `~/.kilocode/package.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778204145052-curious-mountain.md` line 77: references `sessions/session.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778204145052-curious-mountain.md` line 197: references `~/.kilocode/package.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778205909632-clever-eagle.md` line 11: references `SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778205909632-clever-eagle.md` line 22: references `.kilocode/skills/pixabay-image-search/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778205909632-clever-eagle.md` line 38: references `.kilocode/skills/pixabay-image-search/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 17: references `output/subfolder/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 17: references `output/subfolder/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 41: references `output/subfolder/slides/` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 106: references `slides/assets/vocab-{word}-{hash}.jpg` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 145: references `slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 146: references `slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 153: references `templates/reveal-custom.html.jinja` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 154: references `scripts/build_slides.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 154: references `scripts/build_slides.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 173: references `docs/slide-design-reference.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 173: references `docs/slide-design-reference.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 182: references `.kilocode/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 190: references `.kilocode/skills/publish-to-github-pages/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 191: references `output/{subfolder}/site/*` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 191: references `output/{subfolder}/slides/*` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 217: references `docs/slide-design-reference.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 217: references `docs/slide-design-reference.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 219: references `.kilocode/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 220: references `.kilocode/skills/publish-to-github-pages/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 223: references `templates/reveal-custom.html.jinja` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778208605966-calm-river.md` line 245: references `slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778405215784-shiny-forest.md` line 43: references `*-slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778405215784-shiny-forest.md` line 43: references `*-slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778412749307-witty-wizard.md` line 19: references `050726-what-connects-us-slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778412749307-witty-wizard.md` line 23: references `assets/pixabay_4867454_1.jpg` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778412749307-witty-wizard.md` line 24: references `assets/pixabay_7338021_1.jpg` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778412749307-witty-wizard.md` line 25: references `assets/vocab-gap-cache_20c895dd.jpg` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778412749307-witty-wizard.md` line 26: references `assets/vocab-frustration-cache_d2a63bdf.jpg` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778412749307-witty-wizard.md` line 27: references `assets/vocab-redefine-cache_f014d1ce.jpg` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778412749307-witty-wizard.md` line 28: references `assets/vocab-workplace-cache_fc0e748d.jpg` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778412749307-witty-wizard.md` line 157: references `output/substitute-lesson-1-M3/slides/050726-what-connects-us-slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778412749307-witty-wizard.md` line 157: references `output/substitute-lesson-1-M3/slides/050726-what-connects-us-slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778412749307-witty-wizard.md` line 158: references `docs/slide-design-reference.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778412749307-witty-wizard.md` line 158: references `docs/slide-design-reference.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778412749307-witty-wizard.md` line 161: references `output/substitute-lesson-1-M3/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778412749307-witty-wizard.md` line 161: references `output/substitute-lesson-1-M3/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778550046435-clever-otter.md` line 49: references `output/{subfolder}/pptx/` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778550046435-clever-otter.md` line 63: references `.kilocode/skills/slideshow-to-pptx/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778550046435-clever-otter.md` line 65: references `scripts/build_pptx_from_screenshots.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778550046435-clever-otter.md` line 65: references `scripts/build_pptx_from_screenshots.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778550046435-clever-otter.md` line 70: references `output/substitute-lesson-1-M3/pptx/` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778559222827-witty-sailor.md` line 45: references `../gh-pages-worktree/` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778559222827-witty-sailor.md` line 74: references `../lpw-gh-pages/` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778632357608-silent-tiger.md` line 12: references `.kilo/command/create-pdf-lesson-file.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778632357608-silent-tiger.md` line 12: references `.kilo/command/create-pdf-lesson-file.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778632357608-silent-tiger.md` line 22: references `.kilo/command/lesson-plan-to-reveal.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778632357608-silent-tiger.md` line 22: references `.kilo/command/lesson-plan-to-reveal.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778632357608-silent-tiger.md` line 46: references `.kilo/command/write-lesson-plan.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778632357608-silent-tiger.md` line 46: references `.kilo/command/write-lesson-plan.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778632357608-silent-tiger.md` line 52: references `output/{input_subfolder}/{mmddyy}-{topic}-lesson-plan.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778632357608-silent-tiger.md` line 52: references `output/{input_subfolder}/{mmddyy}-{topic}-lesson-plan.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778632936167-eager-mountain.md` line 4: references `.kilo/skills/typst-document-creator/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778632936167-eager-mountain.md` line 4: references `.kilo/skills/typst-document-creator/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778632936167-eager-mountain.md` line 8: references `.kilo/skills/typst-document-creator/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778632936167-eager-mountain.md` line 8: references `.kilo/skills/typst-document-creator/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778632936167-eager-mountain.md` line 14: references `SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778729474888-silent-wolf.md` line 60: references `output/M3_Lesson01_Listening/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778729474888-silent-wolf.md` line 60: references `output/M3_Lesson01_Listening/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778729474888-silent-wolf.md` line 67: references `output/M3_Lesson01_Listening/slides/audio/` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778729474888-silent-wolf.md` line 69: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778729474888-silent-wolf.md` line 69: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778729474888-silent-wolf.md` line 101: references `output/M3_Lesson01_Listening/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778729474888-silent-wolf.md` line 101: references `output/M3_Lesson01_Listening/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778729474888-silent-wolf.md` line 102: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778729474888-silent-wolf.md` line 102: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778812345170-glowing-cactus.md` line 77: references `assets/logo.png` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778812345170-glowing-cactus.md` line 85: references `output/REX-LESSON-01/051526-politeness-lesson-plan.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778812345170-glowing-cactus.md` line 85: references `output/REX-LESSON-01/051526-politeness-lesson-plan.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778812345170-glowing-cactus.md` line 86: references `output/REX-LESSON-01/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778812345170-glowing-cactus.md` line 86: references `output/REX-LESSON-01/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778812345170-glowing-cactus.md` line 87: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778812345170-glowing-cactus.md` line 87: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778812345170-glowing-cactus.md` line 88: references `logo.png` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778812345170-glowing-cactus.md` line 88: references `phubbing.jpg` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778812345170-glowing-cactus.md` line 88: references `pixabay_1979261_1.jpg` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778812345170-glowing-cactus.md` line 88: references `output/REX-LESSON-01/slides/assets/` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778861471780-lucky-river.md` line 14: references `templates/lesson-plan-native.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778861471780-lucky-river.md` line 14: references `templates/lesson-plan-native.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778861471780-lucky-river.md` line 16: references `scripts/migrate_answer_keys.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778861471780-lucky-river.md` line 16: references `scripts/migrate_answer_keys.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778861471780-lucky-river.md` line 30: references `tests/suite/foundations/eval.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778861471780-lucky-river.md` line 30: references `tests/suite/foundations/eval.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778861471780-lucky-river.md` line 56: references `templates/lesson-plan-native.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778861471780-lucky-river.md` line 56: references `templates/lesson-plan-native.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778861471780-lucky-river.md` line 58: references `scripts/migrate_answer_keys.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778861471780-lucky-river.md` line 58: references `scripts/migrate_answer_keys.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778861471780-lucky-river.md` line 66: references `.kilo/skills/create-pdf-lesson-file/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778861471780-lucky-river.md` line 66: references `.kilo/skills/create-pdf-lesson-file/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778861471780-lucky-river.md` line 67: references `.kilo/skills/write-lesson-plan/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778861471780-lucky-river.md` line 67: references `.kilo/skills/write-lesson-plan/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778865753462-lucky-circuit.md` line 10: references `.kilo/command/review.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778865753462-lucky-circuit.md` line 10: references `.kilo/command/review.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778865753462-lucky-circuit.md` line 29: references `output/*/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778865753462-lucky-circuit.md` line 29: references `output/*/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778865753462-lucky-circuit.md` line 50: references `output/*/*.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778865753462-lucky-circuit.md` line 50: references `output/*/*.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778865753462-lucky-circuit.md` line 56: references `scripts/*.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778865753462-lucky-circuit.md` line 56: references `scripts/*.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778865753462-lucky-circuit.md` line 115: references `.kilo/command/review.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1778865753462-lucky-circuit.md` line 115: references `.kilo/command/review.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779067614468-neon-panda.md` line 132: references `output/M3_Lesson02_Speaking/051826-delivering-a-podcast-lesson-plan.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779067614468-neon-panda.md` line 132: references `output/M3_Lesson02_Speaking/051826-delivering-a-podcast-lesson-plan.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779067614468-neon-panda.md` line 142: references `output/M3_Lesson02_Speaking/051826-delivering-a-podcast-lesson-plan.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779067614468-neon-panda.md` line 142: references `output/M3_Lesson02_Speaking/051826-delivering-a-podcast-lesson-plan.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779067614468-neon-panda.md` line 148: references `output/M3_Lesson02_Speaking/slides/assets/` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779067614468-neon-panda.md` line 149: references `output/M3_Lesson02_Speaking/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779067614468-neon-panda.md` line 149: references `output/M3_Lesson02_Speaking/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779067614468-neon-panda.md` line 150: references `output/M3_Lesson02_Speaking/slides/timer-plugin.js` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779067614468-neon-panda.md` line 151: references `output/M3_Lesson02_Speaking/slides/timer-plugin.css` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779067614468-neon-panda.md` line 151: references `output/M3_Lesson02_Speaking/slides/timer-plugin.css` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779067614468-neon-panda.md` line 152: references `output/M3_Lesson02_Speaking/slides/assets/logo.png` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779067614468-neon-panda.md` line 152: references `output/M3_Lesson02_Speaking/slides/assets/logo.png` which does not exist on disk
+- **`missing-script`** `.kilo\plans\1779067614468-neon-panda.md` line 408: references script `timer-plugin.css` but no matching file found
+- **`missing-file`** `.kilo\plans\1779160426860-curious-planet.md` line 252: references `symbols.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779163286083-amber-gorilla.md` line 26: references `.kilo/skills/insert-pdf-to-template/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779163286083-amber-gorilla.md` line 26: references `.kilo/skills/insert-pdf-to-template/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779163286083-amber-gorilla.md` line 42: references `C:\Users\elwru\AppData\Local\Temp\kilo\insert_pdf_to_template.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779163286083-amber-gorilla.md` line 139: references `output/{source_pdf_stem}_with_header.pdf` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779239295680-eager-wolf.md` line 14: references `answer-key.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779239295680-eager-wolf.md` line 14: references `answer-key.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779239295680-eager-wolf.md` line 23: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779239295680-eager-wolf.md` line 23: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779239295680-eager-wolf.md` line 425: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779239295680-eager-wolf.md` line 425: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779239295680-eager-wolf.md` line 436: references `C:\Users\elwru\AppData\Local\Temp\kilo\slides_sections.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779324464773-eager-forest.md` line 92: references `answer_key.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779324464773-eager-forest.md` line 116: references `answer_key.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779331554502-slide-plan.md` line 90: references `C:\Users\elwru\AppData\Local\Temp\kilo\slides_sections.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779366428200-glowing-river.md` line 16: references `output/.../slides/assets/` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779366428200-glowing-river.md` line 137: references `C:\Users\elwru\AppData\Local\Temp\kilo\slides_sections.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779366428200-glowing-river.md` line 190: references `C:\Users\elwru\AppData\Local\Temp\kilo\slides_sections.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779366428200-glowing-river.md` line 195: references `C:\Users\elwru\AppData\Local\Temp\kilo\slides_sections.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779366428200-glowing-river.md` line 210: references `logo.png` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779626079301-brave-falcon.md` line 4: references `output/Reading-REX-03/052426-social-media-and-society-lesson-plan.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779626079301-brave-falcon.md` line 4: references `output/Reading-REX-03/052426-social-media-and-society-lesson-plan.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779626079301-brave-falcon.md` line 5: references `output/Reading-REX-03/answer_key.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779626079301-brave-falcon.md` line 5: references `output/Reading-REX-03/answer_key.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779626079301-brave-falcon.md` line 9: references `output/Reading-REX-03/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779626079301-brave-falcon.md` line 9: references `output/Reading-REX-03/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779626079301-brave-falcon.md` line 10: references `output/Reading-REX-03/slides/assets/logo.png` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779626079301-brave-falcon.md` line 10: references `output/Reading-REX-03/slides/assets/logo.png` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779626079301-brave-falcon.md` line 11: references `output/Reading-REX-03/slides/timer-plugin.js` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779626079301-brave-falcon.md` line 12: references `output/Reading-REX-03/slides/timer-plugin.css` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779626079301-brave-falcon.md` line 12: references `output/Reading-REX-03/slides/timer-plugin.css` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779626079301-brave-falcon.md` line 325: references `C:\Users\elwru\AppData\Local\Temp\kilo\slides_sections.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779843998066-nimble-garden.md` line 13: references `.kilo/skills/build-a-monolog/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779843998066-nimble-garden.md` line 13: references `.kilo/skills/build-a-monolog/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779843998066-nimble-garden.md` line 14: references `.kilo/command/build-a-monolog.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779843998066-nimble-garden.md` line 14: references `.kilo/command/build-a-monolog.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779843998066-nimble-garden.md` line 114: references `output/{subfolder}/monolog-{timestamp}.mp3` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779843998066-nimble-garden.md` line 114: references `output/{subfolder}/monolog-{timestamp}.mp3` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779843998066-nimble-garden.md` line 266: references `readme.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779843998066-nimble-garden.md` line 267: references `output/monologs/{YYYYMMDD}-{topic}.mp3` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779843998066-nimble-garden.md` line 267: references `output/monologs/{YYYYMMDD}-{topic}.mp3` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1779843998066-nimble-garden.md` line 269: references `C:\Users\elwru\AppData\Local\Temp\kilo\*.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780198991726-neon-wolf.md` line 650: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780198991726-neon-wolf.md` line 650: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 185: references `docs/pedagogical-design-dictionary.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 185: references `docs/pedagogical-design-dictionary.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 207: references `docs/pedagogical-design-dictionary.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 207: references `docs/pedagogical-design-dictionary.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 210: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 210: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 281: references `docs/pedagogical-design-dictionary.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 281: references `docs/pedagogical-design-dictionary.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 353: references `docs/pedagogical-design-dictionary.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 353: references `docs/pedagogical-design-dictionary.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 432: references `docs/pedagogical-design-dictionary.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 432: references `docs/pedagogical-design-dictionary.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 438: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 438: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 516: references `references/key-design-rules.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 517: references `references/authorial-voice.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 518: references `references/common-pitfalls.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 564: references `references/key-design-rules.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 571: references `references/key-design-rules.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 578: references `references/key-design-rules.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 581: references `references/authorial-voice.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 588: references `references/authorial-voice.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 595: references `references/authorial-voice.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 598: references `references/common-pitfalls.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 605: references `references/common-pitfalls.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 612: references `references/common-pitfalls.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 620: references `.kilo/skills/lesson-plan-to-reveal/references/key-design-rules.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 620: references `.kilo/skills/lesson-plan-to-reveal/references/key-design-rules.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 621: references `.kilo/skills/lesson-plan-to-reveal/references/authorial-voice.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 621: references `.kilo/skills/lesson-plan-to-reveal/references/authorial-voice.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 622: references `.kilo/skills/lesson-plan-to-reveal/references/common-pitfalls.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 622: references `.kilo/skills/lesson-plan-to-reveal/references/common-pitfalls.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 651: references `output/M3-WRITING-COMPOUND-SENTENCES/310526-compound-sentences-lesson-plan.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 651: references `output/M3-WRITING-COMPOUND-SENTENCES/310526-compound-sentences-lesson-plan.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 652: references `inputs/M3-WRITING-COMPOUND-SENTENCES/answer_key.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 653: references `inputs/M3-WRITING-COMPOUND-SENTENCES/m3-lesson-plan.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 829: references `output/M3-WRITING-COMPOUND-SENTENCES/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 829: references `output/M3-WRITING-COMPOUND-SENTENCES/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 847: references `output/M3-WRITING-COMPOUND-SENTENCES-L2/310526-comma-rules-and-freewriting-lesson-plan.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 847: references `output/M3-WRITING-COMPOUND-SENTENCES-L2/310526-comma-rules-and-freewriting-lesson-plan.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 848: references `inputs/M3-WRITING-COMPOUND-SENTENCES/answer_key.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 849: references `inputs/M3-WRITING-COMPOUND-SENTENCES/m3-lesson-plan.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 1005: references `output/M3-WRITING-COMPOUND-SENTENCES-L2/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780278765634-stellar-cabin.md` line 1005: references `output/M3-WRITING-COMPOUND-SENTENCES-L2/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1780285250714-misty-forest.md` line 232: references `C:\Users\elwru\AppData\Local\Temp\kilo\slides_sections.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1785698533996-restless-forest.md` line 7: references `.kilocode/skills/publish-to-github-pages/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1785698533996-restless-forest.md` line 51: references `output/{subfolder}/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1785698533996-restless-forest.md` line 51: references `output/{subfolder}/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\1785698533996-restless-forest.md` line 113: references `.kilocode/skills/publish-to-github-pages/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 104: references `scripts/build_lesson_plan_pdf.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 104: references `scripts/build_lesson_plan_pdf.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 514: references `scripts/lint_lesson_markdown.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 514: references `scripts/lint_lesson_markdown.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 651: references `scripts/build_lesson_plan_pdf.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 651: references `scripts/build_lesson_plan_pdf.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 652: references `scripts/lint_lesson_markdown.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 652: references `scripts/lint_lesson_markdown.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 665: references `build_lesson_plan_pdf.py` which does not exist on disk
+- **`missing-file`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 665: references `lint_lesson_markdown.py` which does not exist on disk
+- **`missing-script`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 665: references script `build_lesson_plan_pdf.py` but no matching file found
+- **`missing-script`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 665: references script `lint_lesson_markdown.py` but no matching file found
+- **`missing-file`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 666: references `lint_lesson_markdown.py` which does not exist on disk
+- **`missing-script`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 666: references script `lint_lesson_markdown.py` but no matching file found
+- **`missing-file`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 667: references `build_lesson_plan_pdf.py` which does not exist on disk
+- **`missing-script`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 667: references script `build_lesson_plan_pdf.py` but no matching file found
+- **`missing-file`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 668: references `build_lesson_plan_pdf.py` which does not exist on disk
+- **`missing-script`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 668: references script `build_lesson_plan_pdf.py` but no matching file found
+- **`missing-file`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 669: references `build_lesson_plan_pdf.py` which does not exist on disk
+- **`missing-script`** `.kilo\plans\build-excellent-lesson-plans-development-plan.md` line 669: references script `build_lesson_plan_pdf.py` but no matching file found
+- **`missing-file`** `.kilo\plans\compound-sentences-lessons.md` line 92: references `C:\\PROJECTS\\LESSON-PLAN-WRITER-3\\inputs\\M2-WRITING-COMPOUND-SENTENCES\\answer_key.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\compound-sentences-lessons.md` line 136: references `C:\\PROJECTS\\LESSON-PLAN-WRITER-3\\inputs\\M2-WRITING-COMPOUND-SENTENCES\\answer_key.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\compound-sentences-lessons.md` line 164: references `C:\PROJECTS\LESSON-PLAN-WRITER-3\inputs\M2-WRITING-COMPOUND-SENTENCES\answer_key.typ` which does not exist on disk
+- **`missing-file`** `.kilo\plans\mcp-evaluation.md` line 40: references `main.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\mcp-evaluation.md` line 44: references `opencode.json` which does not exist on disk
+- **`missing-file`** `.kilo\plans\mcp-evaluation.md` line 199: references `create-pedagogical-slides.py` which does not exist on disk
+- **`missing-script`** `.kilo\plans\mcp-evaluation.md` line 199: references script `create-pedagogical-slides.py` but no matching file found
+- **`missing-file`** `.kilo\plans\peer-edit-slides-blueprint.md` line 5: references `output/M3-WRITING-ASSIGNMENT/slides/` which does not exist on disk
+- **`missing-file`** `.kilo\plans\peer-edit-slides-blueprint.md` line 5: references `output/M3-WRITING-EDITING/slides/` which does not exist on disk
+- **`missing-file`** `.kilo\plans\peer-edit-slides-blueprint.md` line 93: references `output/M3-WRITING-EDITING/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\peer-edit-slides-blueprint.md` line 93: references `output/M3-WRITING-EDITING/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\plans\peer-edit-slides-blueprint.md` line 94: references `output/M3-WRITING-EDITING/slides/timer-plugin.js` which does not exist on disk
+- **`missing-file`** `.kilo\plans\peer-edit-slides-blueprint.md` line 95: references `output/M3-WRITING-EDITING/slides/timer-plugin.css` which does not exist on disk
+- **`missing-file`** `.kilo\plans\peer-edit-slides-blueprint.md` line 95: references `output/M3-WRITING-EDITING/slides/timer-plugin.css` which does not exist on disk
+- **`missing-file`** `.kilo\plans\peer-edit-slides-blueprint.md` line 96: references `output/M3-WRITING-EDITING/slides/assets/logo.png` which does not exist on disk
+- **`missing-file`** `.kilo\plans\peer-edit-slides-blueprint.md` line 96: references `output/M3-WRITING-EDITING/slides/assets/logo.png` which does not exist on disk
+- **`missing-file`** `.kilo\plans\peer-edit-slides-blueprint.md` line 97: references `output/M3-WRITING-ASSIGNMENT/slides/assets/anxiety.webp` which does not exist on disk
+- **`missing-file`** `.kilo\plans\peer-edit-slides-blueprint.md` line 97: references `output/M3-WRITING-EDITING/slides/assets/anxiety.webp` which does not exist on disk
+- **`missing-file`** `.kilo\plans\slides-blueprint-editing-carousel.md` line 4: references `assets/editing.jpg` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 15: references `.kilo/skills/create-pdf-lesson-file/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 15: references `.kilo/skills/create-pdf-lesson-file/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 41: references `.kilo/skills/create-bespoke-materials/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 41: references `.kilo/skills/create-bespoke-materials/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 100: references `blip.mp3` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 100: references `BELL.mp3` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 100: references `output/.../slides/assets/` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 101: references `output/.../slides/assets/` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 115: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 115: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 197: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 197: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 238: references `.kilo/skills/create-pdf-lesson-file/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 238: references `.kilo/skills/create-pdf-lesson-file/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 239: references `.kilo/skills/create-bespoke-materials/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 239: references `.kilo/skills/create-bespoke-materials/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 241: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\three-friction-reductions.md` line 241: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\tts-vocab-auto-play.md` line 213: references `vocab-face-recognition.mp3` which does not exist on disk
+- **`missing-file`** `.kilo\plans\tts-vocab-auto-play.md` line 227: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\plans\tts-vocab-auto-play.md` line 227: references `.kilo/skills/lesson-plan-to-reveal/SKILL.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 23: references `lesson.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 29: references `output/{subfolder}/` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 50: references `output/{subfolder}/` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 93: references `https://{owner}.github.io/{repo}/{subfolder}/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 125: references `output/m3-gender/lesson.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 125: references `answer-key.typ` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 125: references `output/m3-gender/lesson.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 17: references `slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 19: references `output/{subfolder}/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 19: references `output/{subfolder}/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 37: references `slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 93: references `slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 93: references `output/{subfolder}/slides/` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 99: references `assets/logo.png` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 107: references `assets/logo.png` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 111: references `assets/logo.png` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 223: references `.kilo/plans/*-blueprint.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 223: references `.kilo/plans/*-blueprint.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 686: references `reference/CSS.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 687: references `reference/TROUBLESHOOTING.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 697: references `slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 699: references `output/M3-SPEAKING-TBL-GENDER-ROLES/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 699: references `output/M3-SPEAKING-TBL-GENDER-ROLES/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 728: references `assets/logo.png` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-formal-ruled-paper\SKILL.md` line 123: references `--lua-filter=scripts/ruled-paper.lua` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-formative-ruled-paper\SKILL.md` line 123: references `--lua-filter=scripts/ruled-paper.lua` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 24: references `output/{subfolder}/slides/` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 46: references `output/{subfolder}/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 46: references `output/{subfolder}/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 46: references `output/{subfolder}/slides/assets/` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 89: references `slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 90: references `C:\PROJECTS\...\slides\index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 91: references `file:///C:/PROJECTS/.../slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 95: references `output/{subfolder}/pptx/slides.pdf` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 113: references `output/{subfolder}/pptx/{topic}-lesson-plan.pptx` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 160: references `output/{subfolder}/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 160: references `output/{subfolder}/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 161: references `output/{subfolder}/slides/assets/` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 162: references `output/{subfolder}/pptx/slides.pdf` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 163: references `output/{subfolder}/pptx/{topic}-lesson-plan.pptx` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 177: references `output/m3-gender/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 177: references `output/m3-gender/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 179: references `output/m3-gender/slides/presentation.pptx` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 78: references `docs/reference/syntax.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 78: references `docs/reference/syntax.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 79: references `docs/reference/styling.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 79: references `docs/reference/styling.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 80: references `docs/reference/scripting.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 80: references `docs/reference/scripting.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 81: references `docs/guides/page-setup.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 81: references `docs/guides/tables.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 81: references `docs/guides/page-setup.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 81: references `docs/guides/tables.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 82: references `docs/tutorial/writing-in-typst.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 82: references `docs/guides/*.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 82: references `docs/reference/**/*.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 82: references `docs/tutorial/writing-in-typst.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 82: references `docs/guides/*.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\SKILL.md` line 82: references `docs/reference/**/*.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\docs\guides\for-latex-users.md` line 241: references `conf.typ` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\docs\reference\scripting.md` line 219: references `bar.typ` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\docs\reference\scripting.md` line 220: references `bar.typ` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\docs\reference\scripting.md` line 221: references `bar.typ` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\docs\reference\scripting.md` line 221: references `bar.typ` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\docs\tutorial\making-a-template.md` line 263: references `conf.typ` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\docs\reference\foundations\function.md` line 66: references `foo.typ` which does not exist on disk
+- **`missing-file`** `.kilo\skills\typst-author\docs\reference\introspection\query.md` line 72: references `example.typ` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\reference\TROUBLESHOOTING.md` line 13: references `assets/logo.png` which does not exist on disk
+- **`missing-file`** `docs\pandoc-typst-pipeline-research.md` line 72: references `lesson.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 25: references `.kilo/command/<name>.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 25: references `.kilo/skills/<name>/SKILL.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 25: references `.kilo/command/<name>.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 25: references `.kilo/skills/<name>/SKILL.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 80: references `.kilo/skills/*/SKILL.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 80: references `.kilo/skills/*/SKILL.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 81: references `docs/slide-design-reference.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 81: references `docs/slide-design-reference.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 86: references `output/*/slides/index.html` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 86: references `output/*/slides/index.html` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 92: references `output/*/*.json` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 92: references `output/*/*.json` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 97: references `scripts/*.py` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 97: references `scripts/*.py` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 153: references `.kilo/command/review.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 153: references `.kilo/command/review.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 217: references `docs/revealjs-known-issues.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 217: references `docs/revealjs-known-issues.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 219: references `toggle_helpers\kilo\forensic_audit_v2.py` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 219: references `output/*/lesson-plan.json` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 219: references `inputs/*/answer_key.typ` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 219: references `output/*/lesson-plan.json` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 220: references `toggle_helpers\kilo\forensic_codebase.py` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 220: references `.kilo/skills/*/SKILL.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 220: references `docs/revealjs-known-issues.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 220: references `.kilo/skills/*/SKILL.md` which does not exist on disk
+- **`missing-file`** `docs\review-help.md` line 220: references `docs/revealjs-known-issues.md` which does not exist on disk
+
+## INFO
+
+- **`flag-mismatch`** `.kilo\command\lint.md` line 11: uses flag `--fix` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\command\lint.md` line 12: uses flag `--fix` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\plans\1778208605966-calm-river.md` line 25: uses flag `--section` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\plans\1778208605966-calm-river.md` line 86: uses flag `--section` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\plans\1778208605966-calm-river.md` line 120: uses flag `---` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\plans\1778208605966-calm-river.md` line 146: uses flag `--merge` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\plans\1778208605966-calm-river.md` line 186: uses flag `--section` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\plans\1778208605966-calm-river.md` line 186: uses flag `--merge` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\plans\1778408778944-nimble-circuit.md` line 102: uses flag `--no-images` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\plans\1778408778944-nimble-circuit.md` line 106: uses flag `--no-images` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\plans\1778550046435-clever-otter.md` line 10: uses flag `--screenshots` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\plans\1778550046435-clever-otter.md` line 28: uses flag `--screenshots` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\plans\1778550046435-clever-otter.md` line 30: uses flag `--screenshots-directory` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\plans\1778550046435-clever-otter.md` line 71: uses flag `--screenshots` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\reference\markdown-pandoc-pipeline-primer.md` line 261: uses flag `--typst-input` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\reference\markdown-pandoc-pipeline-primer.md` line 261: uses flag `--input` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\reference\markdown-pandoc-pipeline-primer.md` line 268: uses flag `--citeproc` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\reference\markdown-pandoc-pipeline-primer.md` line 289: uses flag `--extract-media` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\bind-a-book\SKILL.md` line 108: uses flag `--leading` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 69: uses flag `--typst-input` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 577: uses flag `---` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 729: uses flag `---` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 89: uses flag `--allow-file-access-from-files` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.1.0.md` line 36: uses flag `--open` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.10.0.md` line 87: uses flag `--open` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.11.0.md` line 191: uses flag `--color` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.11.0.md` line 197: uses flag `--vendor-openssl` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.11.0.md` line 199: uses flag `--timings` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.12.0.md` line 206: uses flag `--pages` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.12.0.md` line 207: uses flag `--package-path` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.12.0.md` line 207: uses flag `--package-cache-path` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.12.0.md` line 208: uses flag `--ignore-system-fonts` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.12.0.md` line 209: uses flag `--make-deps` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.12.0.md` line 210: uses flag `--pretty` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.12.0.md` line 211: uses flag `--backup-path` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.12.0.md` line 215: uses flag `--cert` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.12.0.md` line 220: uses flag `--open` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.13.0.md` line 185: uses flag `--features` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.13.0.md` line 189: uses flag `--make-deps` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.13.0.md` line 190: uses flag `--make-deps` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.13.0.md` line 191: uses flag `--make-deps` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.14.0.md` line 247: uses flag `--ignore-embedded-fonts` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.14.0.md` line 248: uses flag `--no-pdf-tags` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.14.0.md` line 249: uses flag `--target` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.14.0.md` line 250: uses flag `--deps` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.14.0.md` line 250: uses flag `--deps-format` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.14.0.md` line 251: uses flag `--make-deps` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.14.0.md` line 251: uses flag `--deps` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.14.0.md` line 296: uses flag `--make-deps` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.14.0.md` line 296: uses flag `--deps` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.2.0.md` line 18: uses flag `--open` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.3.0.md` line 57: uses flag `--update` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.3.0.md` line 58: uses flag `--subtest` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.7.0.md` line 88: uses flag `--font-paths` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.7.0.md` line 90: uses flag `--font-paths` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.8.0.md` line 74: uses flag `--format` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.8.0.md` line 75: uses flag `--cert` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\changelog\0.8.0.md` line 76: uses flag `--one` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\reference\png.md` line 30: uses flag `--ppi` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\reference\png.md` line 31: uses flag `--pages` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\reference\svg.md` line 23: uses flag `--pages` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\reference\syntax.md` line 39: uses flag `---` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\reference\foundations\datetime.md` line 158: uses flag `--creation-timestamp` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\reference\html\index.md` line 24: uses flag `--no-reload` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\reference\html\index.md` line 25: uses flag `--no-serve` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\reference\introspection\query.md` line 94: uses flag `--field` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\reference\introspection\query.md` line 102: uses flag `--one` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\reference\introspection\query.md` line 112: uses flag `--target` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\reference\text\text.md` line 62: uses flag `--font-paths` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\typst-author\docs\reference\text\text.md` line 62: uses flag `--ignore-system-fonts` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\create-beautiful-slideshows\reference\CSS.md` line 17: uses flag `---` — not found in any script's add_argument
+
+
+---
+**Summary:** 0 blockers, 401 warnings, 71 infos

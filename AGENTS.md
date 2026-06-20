@@ -85,18 +85,6 @@ python -m pre_commit run --all-files
 
 A lint command is defined at `.kilo/command/lint.md` — invoke via Kilo CLI.
 
-## JSON schema (legacy — not the primary pipeline)
-
-The JSON lesson plan format is no longer the primary pipeline. The primary pipeline uses Markdown lesson plans (`lesson.md` with YAML frontmatter) via the `build-excellent-lesson-plans` skill. The JSON schema below remains for reference only — it applies to any remaining legacy JSON files.
-
-- Top-level: `teacher`, `duration`, `date` (DDMMYY), `topic`, `materials`, `lesson_plan`
-- `lesson_plan` keys: `shape`, `shape_name`, `cefr_level`, `class`, `stages[]`
-- Each stage: `stage_number`, `stage`, `stage_aim`, `procedure`, `time`, `interaction`
-- Optional top-level: `transcript`, `answer_key`, `cefr_level`, `class`, `objective`
-- `answer_key` value: `"none"`, or a file path to `.typ` markup (`.md` files are NOT accepted — the markdown intermediary was removed)
-- **`lesson_plan` and `answer_key` use underscore** (not hyphen). The test fixture has a bug — uses `answer-key` — ignore it; production JSON always uses `answer_key`.
-- Shape templates (A–G) at `knowledge-base/lesson plan shapes/json/shape-{letter}.json`
-
 ## PDF pipeline (Markdown → Pandoc → Typst → PDF)
 
 - **Skill:** `build-excellent-lesson-plans` — writes `lesson.md` with YAML frontmatter + Markdown body
