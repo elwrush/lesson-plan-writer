@@ -1,0 +1,8 @@
+[project]
+name = "lesson-plan-writer-3"
+root = "."
+
+[font]
+paths = [
+  "C:/Users/elwru/AppData/Local/Programs/TinyTeX/texmf-var/fonts/opentype/public/roboto"
+]

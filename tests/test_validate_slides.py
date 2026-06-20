@@ -17,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 from validate_slides import (
     check_fenced_div_balance,
     check_horizontal_rules,
+    check_inline_css,
     check_missing_files,
     check_raw_html,
     check_speaker_notes,
@@ -231,7 +232,7 @@ class TestCheckHorizontalRules:
         md = "---\ntitle: Test\n---\n\n# Slide 1\n\nContent\n"
         warnings = check_horizontal_rules(md)
         # The YAML frontmatter has --- at lines 1 and 3, should not be flagged
-        yaml_warnings = [w for w in warnings if "frontmatter" not in w.lower()]
+        [w for w in warnings if "frontmatter" not in w.lower()]
         # Check that we're not flagging YAML delimiters as slide breaks
         assert len(warnings) == 0
 
@@ -311,3 +312,82 @@ Another note
         slides = parse_slides(md)
         assert slides[0]["has_speaker_notes"] is True
         assert slides[1]["has_speaker_notes"] is True
+
+
+# ── Inline CSS guard (red-green for agent's own writing) ──────────────────
+
+
+class TestCheckInlineCss:
+    """The agent writes pure Pandoc Markdown — no inline CSS.
+
+    If the agent writes `style=` in slides.md, the build must fail.
+    All styling must go through Lua filters or the shared CSS file.
+    """
+
+    def test_clean_md_passes(self):
+        """Pure Pandoc Markdown with no style attributes passes."""
+        md = """\
+#  {#splash data-background-image="assets/bg.jpg"}
+
+# Title
+
+::: {.shield}
+Subtitle
+:::
+
+::: notes
+Test.
+:::
+"""
+        errors = check_inline_css(md)
+        assert len(errors) == 0
+
+    def test_inline_css_is_detected(self):
+        """Any `style=` in Markdown body is flagged."""
+        md = """\
+# Slide
+<div style="color: red;">
+Bad
+</div>
+"""
+        errors = check_inline_css(md)
+        assert len(errors) >= 1
+        assert "style=" in errors[0]
+
+    def test_style_in_fenced_div_attrs_is_detected(self):
+        """Even style in fenced div attributes is forbidden — use Lua filter."""
+        md = """\
+# Slide
+
+::: {.shield style="padding: 0;"}
+Text
+:::
+"""
+        errors = check_inline_css(md)
+        assert len(errors) >= 1
+
+    def test_style_in_bracketed_span_is_detected(self):
+        """Even style in bracketed spans is forbidden — use Lua filter."""
+        md = """\
+# Slide
+
+[text]{style="color: red;"}
+"""
+        errors = check_inline_css(md)
+        assert len(errors) >= 1
+
+    def test_data_attributes_not_flagged(self):
+        """data-background-image and similar are NOT style attributes."""
+        md = """\
+#  {#splash data-background-image="assets/bg.jpg" data-background-size="cover"}
+"""
+        errors = check_inline_css(md)
+        assert len(errors) == 0
+
+    def test_heading_attrs_no_style_not_flagged(self):
+        """Heading attributes without style= pass."""
+        md = """\
+# Slide {#my-id .custom-class}
+"""
+        errors = check_inline_css(md)
+        assert len(errors) == 0

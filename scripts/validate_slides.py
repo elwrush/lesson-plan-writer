@@ -225,6 +225,27 @@ def check_horizontal_rules(md: str) -> list[str]:
     return warnings
 
 
+def check_inline_css(md: str) -> list[str]:
+    """Check for forbidden inline CSS (`style=` attributes) in slides.md.
+
+    The agent writes PURE Pandoc Markdown only — no inline CSS. All styling
+    must come from:
+      - slides-pandoc.css (shared CSS file)
+      - Lua filters (shield-block.lua, etc.)
+      - Pandoc Markdown constructs (fenced divs, bracketed spans with classes)
+
+    If custom styling is needed, add it to the Lua filter, not to Markdown.
+    """
+    errors = []
+    for i, line in enumerate(md.split("\n"), start=1):
+        if re.search(r"style\s*=", line):
+            errors.append(
+                f"Line {i}: inline CSS found (`style=`). "
+                f"Do NOT write style attributes in Markdown — use a Lua filter."
+            )
+    return errors
+
+
 def check_youtube_ids(slides: list[dict]) -> list[str]:
     """Check YouTube fenced divs have valid video IDs."""
     errors = []
@@ -294,6 +315,12 @@ def main():
     warn_count = 0
 
     # ── checks that produce errors (blocking) ──
+
+    # 0. Inline CSS — agent writes Pandoc Markdown only
+    css_errors = check_inline_css(md)
+    for msg in css_errors:
+        err(msg)
+        error_count += 1
 
     # 1. Speaker notes
     notes_errors = check_speaker_notes(slides)

@@ -18,7 +18,6 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 try:
     from youtube_transcript_api import YouTubeTranscriptApi
-    from youtube_transcript_api.formatters import TextFormatter
 except ImportError:
     print("ERROR: Install youtube-transcript-api: pip install youtube-transcript-api")
     sys.exit(1)
@@ -38,7 +37,7 @@ def format_output(transcript: list) -> str:
     lines = []
     for snippet in transcript:
         ts = format_timestamp(snippet.start)
-        dur = format_timestamp(snippet.duration)
+        format_timestamp(snippet.duration)
         text = snippet.text.strip()
         lines.append(f"[{ts}] {text}")
     return "\n".join(lines)

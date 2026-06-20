@@ -1,0 +1,45 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/lua-language-server/main/locale/en_us/schema.json",
+  "runtime.version": "Lua 5.4",
+  "diagnostics.enable": true,
+  "diagnostics.globals": [
+    "FORMAT",
+    "PANDOC_VERSION",
+    "PANDOC_API_VERSION",
+    "PANDOC_READER_OPTIONS",
+    "PANDOC_WRITER_OPTIONS",
+    "PANDOC_SCRIPT_FILE",
+    "PANDOC_STATE",
+    "lpeg",
+    "re"
+  ],
+  "diagnostics.severity": {
+    "syntax-error": "Error",
+    "undefined-field": "Error",
+    "undefined-global": "Warning",
+    "need-check-nil": "Warning",
+    "inject-field": "Warning",
+    "param-type-mismatch": "Warning",
+    "return-type-mismatch": "Warning",
+    "assign-type-mismatch": "Warning",
+    "cast-local-type": "Warning",
+    "cast-type-mismatch": "Warning",
+    "unused-local": "Warning",
+    "redefined-local": "Warning",
+    "assign-type-mismatch": "Warning"
+  },
+  "workspace.checkThirdParty": false,
+  "workspace.ignoreDir": [
+    ".git",
+    ".pytest_cache",
+    "__pycache__",
+    "node_modules",
+    "output",
+    "tmp",
+    "general-assets",
+    "assets"
+  ],
+  "workspace.library": [
+    ".lua"
+  ]
+}

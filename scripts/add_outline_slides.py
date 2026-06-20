@@ -25,7 +25,6 @@ def build_outline_slide(slide_id, heading, items, fragment_start=0):
             # No blank - plain text
             lines.append(f'        <p {style}><span style="color: #fff;">{before}</span></p>')
         else:
-            a_style = "display: none;"
             b_color = "#888"
             html = (
                 f"        <p {style}>"

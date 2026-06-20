@@ -75,7 +75,7 @@ def analyze_results(response: dict) -> dict:
 
     for r in high_score_results:
         title = r.get("title", "")
-        url = r.get("url", "")
+        r.get("url", "")
         content = r.get("content", "")
 
         # Check indicators

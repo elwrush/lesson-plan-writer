@@ -45,13 +45,14 @@ Before writing any Markdown, slide markup, or configuration, **read the template
 python scripts/build_lesson_pdf.py output/<subfolder>/<file>.md
 
 # Slides (from slides/ directory)
+$slidesDir = Resolve-Path "."
 pandoc slides.md -t revealjs -s --slide-level=1 -o index.html \
   -V revealjs-url="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0" \
   -V theme=black -V width=1280 -V height=720 -V margin=0.04 \
   --css="slides-pandoc.css" \
   --include-in-header="slides-header.html" \
-  --lua-filter="youtube-embed.lua" \
-  --lua-filter="audio-autoplay.lua"
+  --lua-filter="$slidesDir\youtube-embed.lua" \
+  --lua-filter="$slidesDir\audio-autoplay.lua"
 
 # Slides — serve locally (required for YouTube embeds)
 python -m http.server 8000
@@ -113,18 +114,22 @@ A lint command is defined at `.kilo/command/lint.md` — invoke via Kilo CLI.
   2. Copy assets (images, logos, audio) to `output/{subfolder}/slides/assets/`
   3. Copy infrastructure files to `output/{subfolder}/slides/`:
      - `scripts/slides-pandoc.css` → `slides-pandoc.css`
+     - `scripts/slide-helper.lua` → `slide-helper.lua` (required by both Lua filters)
+     - `scripts/shield-block.lua` → `shield-block.lua` (forces adjacent `.shield` divs to stack vertically)
      - `scripts/youtube-embed.lua` → `youtube-embed.lua`
      - `scripts/audio-autoplay.lua` → `audio-autoplay.lua`
       - **Copy** `scripts/slides-header.html` (shared, never write HTML by hand)
   4. Build from the `slides/` directory:
      ```bash
+     $slidesDir = Resolve-Path "."
      pandoc slides.md -t revealjs -s --slide-level=1 -o index.html \
        -V revealjs-url="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0" \
        -V theme=black -V width=1280 -V height=720 -V margin=0.04 \
        --css="slides-pandoc.css" \
        --include-in-header="slides-header.html" \
-       --lua-filter="youtube-embed.lua" \
-       --lua-filter="audio-autoplay.lua"
+       --lua-filter="$slidesDir\shield-block.lua" \
+       --lua-filter="$slidesDir\youtube-embed.lua" \
+       --lua-filter="$slidesDir\audio-autoplay.lua"
      ```
   5. Serve locally: `python -m http.server 8000`
 - **Lua filters:** `audio-autoplay.lua` (audio from heading attrs), `youtube-embed.lua` (YouTube to iframe)
@@ -165,6 +170,7 @@ The only output formats are Markdown. Pandoc + Lua filters handle all HTML/Typst
 - **Pandoc Markdown syntax** → search via Tavily or use Context7 for the Pandoc docs
 - **Lua filter patterns** → search the Pandoc Lua filter documentation via Context7 or Tavily
 - **No raw HTML** — use Pandoc Markdown fenced divs `::: {.class}`, bracketed spans `[text]{.class}`, and heading attributes `{data-key=value}`
+**No inline CSS (`style=`) in slides.md** — all styling goes through Lua filters (`shield-block.lua`, etc.) or the shared CSS file. The validation script (`validate_slides.py`) will fail the build if `style=` is found in Markdown. The test suite (`tests/test_validate_slides.py::TestCheckInlineCss`) enforces this as red-green.
 - **No raw Typst** — the `build-excellent-lesson-plans` skill's Lua filter handles all Typst table generation
 
 ## Image replacement workflow

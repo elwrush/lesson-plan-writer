@@ -67,17 +67,11 @@
   font-weight: bold;
 }
 
-/* --- CEFR badge inside title row --- */
+/* --- CEFR level text inside title row --- */
 .reveal .cefr-badge {
-  display: inline-block;
-  background: #2a76dd;
-  color: white;
+  color: #ffdd00;
+  font-size: 1.8em;
   font-weight: bold;
-  font-size: 0.6em;
-  padding: 4px 12px;
-  border-radius: 4px;
-  vertical-align: middle;
-  margin-left: 0.4em;
 }
 
 /* --- Fragment answer reveals: hidden until clicked, then yellow --- */

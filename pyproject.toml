@@ -12,3 +12,18 @@ ignore = ["E501"]
 
 [tool.ruff.format]
 quote-style = "double"
+
+[tool.pyright]
+include = ["scripts", "tests", "*.py"]
+exclude = ["output", "tmp", "general-assets", "assets", "inputs", "cloned-voices"]
+typeCheckingMode = "standard"
+reportUnusedImport = "warning"
+reportIncompatibleMethodOverride = "warning"
+reportAttributeAccessIssue = "error"
+
+# Known false positive: sys.stdout.reconfigure(encoding="utf-8") is a runtime
+# Python feature not statically visible to pyright. We use it project-wide.
+# Suppress via per-file ignore; individual files below.
+[[tool.pyright.perFileConfig]]
+fileMatchPattern = "**/scripts/*.py"
+reportAttributeAccessIssue = "warning"
