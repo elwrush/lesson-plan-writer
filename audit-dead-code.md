@@ -1,6 +1,6 @@
 # Dead Code Audit: LESSON-PLAN-WRITER-3
 
-Scanned: 427 definitions, 36 assets
+Scanned: 407 definitions, 36 assets
 
 ## WARNINGS
 

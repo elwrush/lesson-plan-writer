@@ -53,20 +53,6 @@ This is a paragraph in Typst.
 #lorem(50)
 ```
 
-## When to Use
-
-Use this skill when:
-- The user explicitly asks to write, edit, or debug Typst (.typ) code
-- The user asks Typst syntax or API reference questions
-- A document needs quick Typst prototyping
-
-Do NOT use this skill when:
-- The Markdown → Pandoc → Typst pipeline can handle the task (use `build-excellent-lesson-plans` or `create-beautiful-slideshows` instead)
-- The output is slides or lesson plans — those have dedicated skills
-
-**Trigger:** When the user explicitly asks Typst-related questions or requests Typst code.
-
-
 ## Workflows
 
 - **Creating a new Typst project**: Use the "Minimal document example" above as a starting point. Skim the tutorial for the basics ([docs/tutorial/writing-in-typst.md](docs/tutorial/writing-in-typst.md)), then create the `.typ` file(s). After each `.typ` edit, follow the post-edit formatting checks below when `typstyle` is available.

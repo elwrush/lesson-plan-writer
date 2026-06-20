@@ -1,11 +1,10 @@
 # Redundancy Audit: LESSON-PLAN-WRITER-3
 
-Scanned: 41 Python files, 3 Lua files
+Scanned: 38 Python files, 2 Lua files
 
 ## WARNINGS
 
 - [py] `scripts\analyze_pdf.py` and `scripts\probe_pdf.py` — 100% similar (likely duplicate)
-- [lua] `scripts\lesson-tables.lua` and `scripts\ruled-paper.lua` — 100% similar (likely duplicate)
 - [css] `M3_Lesson01_Listening\timer-plugin.css` and `templates\timer-plugin.css` — 100% CSS class overlap
 - [css] `M3_Lesson01_Listening\timer-plugin.css` and `output\default\slides\timer-plugin.css` — 100% CSS class overlap
 - [css] `scripts\slides-pandoc.css` and `output\M3-WRITING-CA-FEEDBACK\slides\slides-pandoc.css` — 100% CSS class overlap
@@ -26,4 +25,4 @@ Scanned: 41 Python files, 3 Lua files
 
 
 ---
-**Summary:** 0 blockers, 15 warnings, 1 infos
+**Summary:** 0 blockers, 14 warnings, 1 infos

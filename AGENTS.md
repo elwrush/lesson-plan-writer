@@ -13,16 +13,6 @@ Before writing any Markdown, slide markup, or configuration, **read the template
 - Slide attributes: check `.kilo/skills/create-beautiful-slideshows/SKILL.md` (Pandoc Markdown pipeline)
 - Slide structure: check the most recently built `output/*/slides/slides.md`
 
-## Two pipelines
-
-### PDF (new: Markdown → Pandoc → Typst)
-
-1. Agent writes a `.md` file in `output/{subfolder}/` with YAML frontmatter (metadata) + Markdown body (stages, materials)
-2. **`build-excellent-lesson-plans` skill** → `python scripts/build_lesson_pdf.py output/{subfolder}/lesson.md`
-3. Pipeline: `.md` → Pandoc (with `templates/lesson-plan.typ` + Lua filter `scripts/lesson-tables.lua`) → Typst compile → `PDF/{subfolder}/lesson-plan.pdf`
-
-The Lua filter reads `## Stage N:` headings from the Markdown body and generates a Typst `#table()` with colored stage headers. The agent writes pure Markdown — no Typst, no HTML, no JSON intermediary.
-
 ## Key commands
 
 ```bash
@@ -49,8 +39,8 @@ python -m http.server 8000
 # Pixabay image download
 python scripts/pixabay_download.py --query "topic" --type image --count 3
 
-# Tests (107 total)
-python -m pytest tests/ -v
+# Tests
+python -m pytest tests/ -v --tb=short
 
 # Locate slide by reveal.js index (deterministic editing)
 python scripts/locate_slide.py "file:///path/to/index.html#/7"
@@ -175,3 +165,18 @@ When asked to replace a slide background image with a Pixabay URL:
 6. **Rebuild with pandoc**
 
 The `compress_image` function: resize to 1920px max edge, JPEG quality=80, optimize=True (Pillow).
+
+## Consumables — moved to separate project
+
+Ruled paper, bookbinding, and PDF template insertion have moved to `C:\PROJECTS\CONSUMABLES` (https://github.com/elwrush/consumables). Run consumable workflows from that project, not here.
+
+## Codebase audit
+
+Run the full audit pipeline from any project root:
+```powershell
+python "C:\Users\elwru\.config\kilo\skills\audit-codebase\scripts\find_dead_code.py" --root .
+python "C:\Users\elwru\.config\kilo\skills\audit-codebase\scripts\map_redundancy.py" --root .
+python "C:\Users\elwru\.config\kilo\skills\audit-codebase\scripts\check_doc_alignment.py" --root .
+python "C:\Users\elwru\.config\kilo\skills\audit-codebase\scripts\find_hallucinations.py" --root . --skip-urls
+```
+All four scripts are stdlib-only. Reports write to `audit-*.md` at the project root.
