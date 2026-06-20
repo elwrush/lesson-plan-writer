@@ -6,9 +6,9 @@ Verifies that:
 - The PDF is non-empty and contains expected content (title, table headers, observations box)
 """
 
+import os
 import subprocess
 import sys
-import os
 from pathlib import Path
 
 import pytest
@@ -72,8 +72,8 @@ class TestSpeakingGradingPipeline:
     def test_md_body_contains_expected_elements(self):
         """Red: verify the test Markdown has all required elements."""
         assert "class: M2-4A" in MINIMAL_MD
-        assert "student_id: \"30321\"" in MINIMAL_MD
-        assert "name: \"Alin\"" in MINIMAL_MD
+        assert 'student_id: "30321"' in MINIMAL_MD
+        assert 'name: "Alin"' in MINIMAL_MD
         assert "Speaking Grading Sheet" in MINIMAL_MD
         assert "::: {.score}" in MINIMAL_MD
         assert "::: {.observations}" in MINIMAL_MD
@@ -96,11 +96,22 @@ class TestSpeakingGradingPipeline:
         try:
             # Step 1: Pandoc → Typst
             r = subprocess.run(
-                [PANDOC, str(md_path), "-t", "typst",
-                 "--template", str(TEMPLATE),
-                 "--lua-filter", str(LUA_FILTER),
-                 "-o", str(typ_path), "--wrap=none"],
-                capture_output=True, text=True, timeout=30,
+                [
+                    PANDOC,
+                    str(md_path),
+                    "-t",
+                    "typst",
+                    "--template",
+                    str(TEMPLATE),
+                    "--lua-filter",
+                    str(LUA_FILTER),
+                    "-o",
+                    str(typ_path),
+                    "--wrap=none",
+                ],
+                capture_output=True,
+                text=True,
+                timeout=30,
             )
             assert r.returncode == 0, f"Pandoc failed: {r.stderr[:300]}"
 
@@ -112,10 +123,19 @@ class TestSpeakingGradingPipeline:
 
             # Step 2: Typst → PDF
             r = subprocess.run(
-                [TYPST, "compile", "--root", str(ROOT),
-                 "--font-path", str(FONT),
-                 str(typ_path), str(pdf_path)],
-                capture_output=True, text=True, timeout=60,
+                [
+                    TYPST,
+                    "compile",
+                    "--root",
+                    str(ROOT),
+                    "--font-path",
+                    str(FONT),
+                    str(typ_path),
+                    str(pdf_path),
+                ],
+                capture_output=True,
+                text=True,
+                timeout=60,
             )
             assert r.returncode == 0, f"Typst failed: {r.stderr[:300]}"
             assert pdf_path.exists(), "PDF should exist"
@@ -124,6 +144,7 @@ class TestSpeakingGradingPipeline:
             # Verify PDF contains expected text
             try:
                 import fitz
+
                 doc = fitz.open(str(pdf_path))
                 assert len(doc) == 1, "Should be a single page"
                 text = ""
@@ -161,19 +182,39 @@ class TestSpeakingGradingPipeline:
 
         try:
             r = subprocess.run(
-                [PANDOC, str(md_path), "-t", "typst",
-                 "--template", str(TEMPLATE),
-                 "--lua-filter", str(LUA_FILTER),
-                 "-o", str(typ_path), "--wrap=none"],
-                capture_output=True, text=True, timeout=30,
+                [
+                    PANDOC,
+                    str(md_path),
+                    "-t",
+                    "typst",
+                    "--template",
+                    str(TEMPLATE),
+                    "--lua-filter",
+                    str(LUA_FILTER),
+                    "-o",
+                    str(typ_path),
+                    "--wrap=none",
+                ],
+                capture_output=True,
+                text=True,
+                timeout=30,
             )
             assert r.returncode == 0
 
             r = subprocess.run(
-                [TYPST, "compile", "--root", str(ROOT),
-                 "--font-path", str(FONT),
-                 str(typ_path), str(pdf_path)],
-                capture_output=True, text=True, timeout=60,
+                [
+                    TYPST,
+                    "compile",
+                    "--root",
+                    str(ROOT),
+                    "--font-path",
+                    str(FONT),
+                    str(typ_path),
+                    str(pdf_path),
+                ],
+                capture_output=True,
+                text=True,
+                timeout=60,
             )
             assert r.returncode == 0
             assert pdf_path.exists()

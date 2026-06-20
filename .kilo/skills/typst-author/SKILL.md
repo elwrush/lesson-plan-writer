@@ -3,7 +3,24 @@ name: typst-author
 description: Generate idiomatic Typst (.typ) code, edit and troubleshoot Typst documents and projects, and answer Typst syntax/reference questions. Use when working with .typ files or when the user explicitly asks for Typst document creation, editing, debugging, compilation, formatting, template work, or package usage.
 ---
 
-# typst-author skill
+# Typst Author
+
+## Purpose
+
+Generate, edit, and debug idiomatic Typst (.typ) code with accurate syntax and up-to-date API knowledge. Handles all Typst tasks: document creation, template work, layout design, table formatting, and compilation troubleshooting. Avoids common traps like `else` without `#`, `json(str)` treating input as file paths, and hash-in-content context mode errors.
+
+## When to Use
+
+Use this skill when:
+- The user explicitly asks to write, edit, or debug Typst (.typ) code
+- The user asks Typst syntax or API reference questions
+- A document needs quick Typst prototyping
+
+Do NOT use this skill when:
+- The Markdown → Pandoc → Typst pipeline can handle the task (use `build-excellent-lesson-plans` or `create-beautiful-slideshows` instead)
+- The output is slides or lesson plans — those have dedicated skills
+
+**Trigger:** When the user explicitly asks Typst-related questions or requests Typst code.
 
 ## Overview
 
@@ -35,6 +52,20 @@ This is a paragraph in Typst.
 
 #lorem(50)
 ```
+
+## When to Use
+
+Use this skill when:
+- The user explicitly asks to write, edit, or debug Typst (.typ) code
+- The user asks Typst syntax or API reference questions
+- A document needs quick Typst prototyping
+
+Do NOT use this skill when:
+- The Markdown → Pandoc → Typst pipeline can handle the task (use `build-excellent-lesson-plans` or `create-beautiful-slideshows` instead)
+- The output is slides or lesson plans — those have dedicated skills
+
+**Trigger:** When the user explicitly asks Typst-related questions or requests Typst code.
+
 
 ## Workflows
 
@@ -140,6 +171,21 @@ When working on large projects, consider organizing the project across multiple 
 
 - Use `#include "file.typ"` to split into multiple files
 - Relevant documentation: [docs/reference/foundations/module.md](docs/reference/foundations/module.md)
+## Examples
+
+### Example 1: Debug a compile error
+
+**Request:** "Why is my table not rendering in Typst?"
+
+**Action taken:** Check the error output, identify missing `#table()` context, fix by adding column definitions.
+
+### Example 2: Quick document prototype
+
+**Request:** "Write a simple invoice template in Typst"
+
+**Action taken:** Produce standalone .typ file with grid layout, table, and basic formatting.
+
+
 
 ## Troubleshooting
 

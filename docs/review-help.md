@@ -215,7 +215,7 @@ This project's audit/forensic scripts are at `scripts/` and serve as working exa
 | Script | What it checks | Reference doc |
 |--------|---------------|---------------|
 | `lint_slides.py` | Banned colors, text-shadow, box-shadow, answer-slide structure, CEFR consistency, structural tag balance (`<section>` + `<div>` + per-section), literal Unicode escapes, authorial voice | `docs/revealjs-known-issues.md`, `AGENTS.md` |
-| `check_authorial_voice.py` | Pedagogical annotation quality (lazy references, thin WHY lines, technical-only mechanisms, identical annotations) | `.kilo/skills/lesson-plan-to-reveal/SKILL.md` (Authorial Voice section) |
+| `check_authorial_voice.py` | Pedagogical annotation quality (lazy references, thin WHY lines, technical-only mechanisms, identical annotations) | `.kilo/skills/create-beautiful-slideshows/SKILL.md` (Design Rules section) |
 | `toggle_helpers\kilo\forensic_audit_v2.py` | Lesson plan JSON vs slides: stage coverage, exercise content, answer accuracy, no hallucinated content | `output/*/lesson-plan.json` + `inputs/*/answer_key.typ` |
 | `toggle_helpers\kilo\forensic_codebase.py` | Documentation vs implementation: AGENTS.md rules, skill rules, known-issues.md, linter coverage | `AGENTS.md`, `.kilo/skills/*/SKILL.md`, `docs/revealjs-known-issues.md` |
 

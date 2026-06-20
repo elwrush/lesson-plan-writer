@@ -9,11 +9,13 @@ description: Converts a reveal.js HTML slideshow to a full-visual-fidelity Power
 
 Convert a reveal.js HTML slideshow (`index.html` with `assets/`) into a Microsoft PowerPoint `.pptx` file that preserves the **full visual appearance** of the original presentation. Each slide is rendered via Chrome headless and placed as a full-slide rasterized image in the PPTX.
 
-**Pipeline position:** After `lesson-plan-to-reveal` (which generates the HTML slideshow).
+**Pipeline position:** After `create-beautiful-slideshows` (which generates the HTML slideshow from Markdown via Pandoc).
 
 **Why not Pandoc?** Pandoc's `-f html -t pptx` strips all visual styling — backgrounds, Font Awesome icons, vocabulary highlighting, colors, and layout are all lost. Decktape renders each slide exactly as it appears in the browser, preserving everything.
 
 **Trade-off:** The PPTX slides are rasterized images. Text is NOT editable in PowerPoint. The output is a visual reproduction suitable for projection, printing, or distribution.
+
+**Trigger:** `/slideshow-to-pptx` command or when the user asks to convert a reveal.js slideshow to PowerPoint.
 
 ## When to Use This Skill
 
@@ -25,7 +27,7 @@ Use `slideshow-to-pptx` when:
 
 Do NOT use this skill when:
 - The PPTX must have editable text
-- First-time slide generation is needed (use `lesson-plan-to-reveal` first)
+- First-time slide generation is needed (use `create-beautiful-slideshows` first)
 
 ## Prerequisites
 
@@ -166,3 +168,19 @@ Remove-Item "output/{subfolder}/pptx/slides.pdf"
 - Node.js 18+ (for Decktape via `npm install -g decktape`)
 - Python 3.x packages: `PyMuPDF`, `python-pptx`, `Pillow`
 - Chrome/Chromium (bundled with Puppeteer inside Decktape — no separate install)
+## Examples
+
+### Example 1: Full slideshow to PPTX
+
+**Request:** "Convert the M3 gender roles slides to PowerPoint"
+
+**Action taken:** Run Decktape on `output/m3-gender/slides/index.html`, extract PDF pages as images, assemble into PPTX via python-pptx.
+
+**Output:** `output/m3-gender/slides/presentation.pptx`
+
+### Example 2: Muted audio handling
+
+**Request:** "PPTX has slides with autoplay audio"
+
+**Action taken:** Decktape renders each slide as a static image. Audio is not transferred — PPTX slides are visual-only. Note this limitation in the output.
+

@@ -23,6 +23,7 @@ from build_lesson_pdf import (
 
 # ── Helper: minimal valid lesson.md ──
 
+
 def _make_md(content, topic="Test Topic"):
     """Write a .md temp file and return its Path."""
     header = f"""---
@@ -70,6 +71,7 @@ MINIMAL_STAGES = """
 # UNIT TESTS — validation logic (no Pandoc/Typst needed)
 # ══════════════════════════════════════════════════════════════════════════
 
+
 class TestParseFrontmatter:
     """YAML frontmatter parsing."""
 
@@ -84,6 +86,7 @@ class TestParseFrontmatter:
 
     def test_missing_frontmatter_exits(self):
         import pytest
+
         path = _make_md("Just text, no --- markers\n", topic="")
         path.write_text("Just text, no YAML frontmatter\n", encoding="utf-8")
         try:
@@ -97,15 +100,29 @@ class TestValidateMetadata:
     """Required YAML field checks."""
 
     def test_all_fields_present_no_warnings(self):
-        meta = {"topic": "T", "teacher": "T", "formatted_date": "D",
-                "duration": "46", "cefr_level": "B2",
-                "class": "M3", "shape": "G", "shape_name": "TBL"}
+        meta = {
+            "topic": "T",
+            "teacher": "T",
+            "formatted_date": "D",
+            "duration": "46",
+            "cefr_level": "B2",
+            "class": "M3",
+            "shape": "G",
+            "shape_name": "TBL",
+        }
         warnings = validate_metadata(meta)
         assert len(warnings) == 0
 
     def test_missing_topic_produces_warning(self):
-        meta = {"teacher": "T", "formatted_date": "D", "duration": "46",
-                "cefr_level": "B2", "class": "M3", "shape": "G", "shape_name": "TBL"}
+        meta = {
+            "teacher": "T",
+            "formatted_date": "D",
+            "duration": "46",
+            "cefr_level": "B2",
+            "class": "M3",
+            "shape": "G",
+            "shape_name": "TBL",
+        }
         warnings = validate_metadata(meta)
         assert any("topic" in w for w in warnings)
 
@@ -159,6 +176,7 @@ class TestOutputPath:
 # INTEGRATION TESTS — requires Pandoc + Typst on PATH
 # ══════════════════════════════════════════════════════════════════════════
 
+
 def _has_pandoc():
     return subprocess.run(["pandoc", "--version"], capture_output=True).returncode == 0
 
@@ -174,6 +192,7 @@ class TestPandocTypstIntegration:
         if not _has_pandoc():
             pytest.skip("Pandoc not installed")
         from build_lesson_pdf import pandoc_to_typst
+
         path = _make_md(MINIMAL_STAGES)
         try:
             typst_source = pandoc_to_typst(path)
@@ -187,6 +206,7 @@ class TestPandocTypstIntegration:
         if not _has_pandoc() or not _has_typst():
             pytest.skip("Pandoc or Typst not installed")
         from build_lesson_pdf import compile_typst, pandoc_to_typst
+
         path = _make_md(MINIMAL_STAGES)
         pdf_path = path.parent / "test_output.pdf"
         try:

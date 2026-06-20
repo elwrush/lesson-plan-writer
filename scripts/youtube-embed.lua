@@ -5,8 +5,14 @@
 -- Usage:  ::: {.youtube}
 --         VIDEO_ID
 --         :::
+--
+-- Uses slide-helper.lua for HTML generation (loaded via dofile).
 
 if FORMAT:match('revealjs') then
+  local source = debug.getinfo(1).source:gsub('^@', '')
+  local script_dir = source:match("(.*[/\\])")
+  local slide = dofile(script_dir .. 'slide-helper.lua')
+
   function Div(d)
     if d.classes:includes('youtube') then
       local video_id = nil
@@ -23,12 +29,7 @@ if FORMAT:match('revealjs') then
       end
 
       if video_id then
-        local src = 'https://www.youtube.com/embed/' .. video_id
-        local html = '<div class="iframe-container" style="width: 80%; padding-bottom: 45%;">'
-          .. '<iframe src="' .. src .. '" '
-          .. 'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" '
-          .. 'referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>'
-        return pandoc.RawBlock('html', html)
+        return pandoc.RawBlock('html', slide.youtube_iframe(video_id))
       end
     end
   end

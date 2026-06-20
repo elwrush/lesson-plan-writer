@@ -41,14 +41,21 @@ ROBOTO_FONT_DIR = Path(
 
 # ── Required YAML frontmatter keys ──
 REQUIRED_META = [
-    "topic", "teacher", "formatted_date", "duration",
-    "cefr_level", "class", "shape", "shape_name",
+    "topic",
+    "teacher",
+    "formatted_date",
+    "duration",
+    "cefr_level",
+    "class",
+    "shape",
+    "shape_name",
 ]
 
 
 # ══════════════════════════════════════════════════════════════════════════
 # TEMPLATE VERIFICATION
 # ══════════════════════════════════════════════════════════════════════════
+
 
 def verify_template():
     """Check template exists and hash matches lock file."""
@@ -85,6 +92,7 @@ def verify_template():
 # MARKDOWN VALIDATION (lint step)
 # ══════════════════════════════════════════════════════════════════════════
 
+
 def parse_frontmatter(md_path):
     """Parse YAML frontmatter from a Markdown file.
 
@@ -96,13 +104,13 @@ def parse_frontmatter(md_path):
     text = md_path.read_text(encoding="utf-8")
 
     # Extract between --- markers
-    m = re.match(r'^---\s*\n(.*?)\n---', text, re.DOTALL)
+    m = re.match(r"^---\s*\n(.*?)\n---", text, re.DOTALL)
     if not m:
         print(f"FATAL: No YAML frontmatter (--- ... ---) found in {md_path.name}", file=sys.stderr)
         sys.exit(1)
 
     frontmatter = m.group(1)
-    body = text[m.end():].strip()
+    body = text[m.end() :].strip()
 
     try:
         meta = yaml.safe_load(frontmatter)
@@ -135,7 +143,7 @@ def lint_markdown(md_path):
     warnings.extend(validate_metadata(meta))
 
     # Check stage headings in Markdown body
-    stage_headings = re.findall(r'^##\s+Stage\s+(\d+):', body, re.MULTILINE)
+    stage_headings = re.findall(r"^##\s+Stage\s+(\d+):", body, re.MULTILINE)
     if not stage_headings:
         warnings.append("FATAL: No '## Stage N:' headings found in body")
     else:
@@ -144,7 +152,7 @@ def lint_markdown(md_path):
         if stage_nums != expected:
             warnings.append(f"WARNING: Non-sequential stage numbers: {stage_nums}")
 
-        time_matches = re.findall(r'\*\*Time:\*\*\s+(\d+)', body)
+        time_matches = re.findall(r"\*\*Time:\*\*\s+(\d+)", body)
         if time_matches:
             total_time = sum(int(t) for t in time_matches)
             duration_str = str(meta.get("duration", ""))
@@ -168,6 +176,7 @@ def lint_markdown(md_path):
 # PANDOC → TYPST → PDF
 # ══════════════════════════════════════════════════════════════════════════
 
+
 def pandoc_to_typst(md_path):
     """Run Pandoc to convert Markdown → Typst via template.
 
@@ -177,12 +186,18 @@ def pandoc_to_typst(md_path):
     proc = None
     cmd = [
         "pandoc",
-        "--from", "markdown+yaml_metadata_block",
-        "--template", str(TEMPLATE),
-        "--lua-filter", str(LUA_FILTER),
-        "--to", "typst",
-        "--wrap", "none",
-        "--eol", "lf",
+        "--from",
+        "markdown+yaml_metadata_block",
+        "--template",
+        str(TEMPLATE),
+        "--lua-filter",
+        str(LUA_FILTER),
+        "--to",
+        "typst",
+        "--wrap",
+        "none",
+        "--eol",
+        "lf",
         str(md_path),
     ]
 
@@ -249,7 +264,10 @@ def compile_typst(typst_source, output_pdf):
         sys.exit(1)
     except FileNotFoundError:
         temp_typ.unlink(missing_ok=True)
-        print("FATAL: Typst CLI not found. Install from https://github.com/typst/typst", file=sys.stderr)
+        print(
+            "FATAL: Typst CLI not found. Install from https://github.com/typst/typst",
+            file=sys.stderr,
+        )
         sys.exit(1)
 
     if proc.returncode != 0:
@@ -266,6 +284,7 @@ def compile_typst(typst_source, output_pdf):
 # ══════════════════════════════════════════════════════════════════════════
 # PDF LINTING
 # ══════════════════════════════════════════════════════════════════════════
+
 
 def lint_pdf(pdf_path, expected_texts=None):
     """Validate the generated PDF using PyPDF2.
@@ -305,12 +324,12 @@ def lint_pdf(pdf_path, expected_texts=None):
     # Check all pages for expected text and mojibake
     # PyPDF2 extracts with spacing artifacts (e.g. "T eacher"), so normalize
     all_text = " ".join((p.extract_text() or "") for p in reader.pages)
-    normalized_all = re.sub(r'\s+', '', all_text)
+    normalized_all = re.sub(r"\s+", "", all_text)
 
     if expected_texts:
         for text in expected_texts:
             if text:
-                normalized_text = re.sub(r'\s+', '', text)
+                normalized_text = re.sub(r"\s+", "", text)
                 if normalized_text not in normalized_all:
                     warnings.append(f"WARNING: Expected text '{text}' not found in PDF")
 
@@ -323,6 +342,7 @@ def lint_pdf(pdf_path, expected_texts=None):
 # ══════════════════════════════════════════════════════════════════════════
 # OUTPUT PATH
 # ══════════════════════════════════════════════════════════════════════════
+
 
 def get_output_pdf_path(md_path, meta):
     """Determine output PDF path.
@@ -339,9 +359,13 @@ def get_output_pdf_path(md_path, meta):
         topic.lower()
         .replace(" ", "-")
         .replace("/", "-")
-        .replace(":", "").replace("?", "")
-        .replace('"', "").replace("|", "")
-        .replace("<", "").replace(">", "").replace("*", "")
+        .replace(":", "")
+        .replace("?", "")
+        .replace('"', "")
+        .replace("|", "")
+        .replace("<", "")
+        .replace(">", "")
+        .replace("*", "")
     )
 
     filename = f"{today}-{topic_file}-lesson-plan.pdf"
@@ -363,6 +387,7 @@ def get_output_pdf_path(md_path, meta):
 # APPENDIX RESOLUTION
 # ══════════════════════════════════════════════════════════════════════════
 
+
 def resolve_appendix(path_str, base_dir):
     """Resolve an appendix file path relative to base_dir. Returns None if not found."""
     if not path_str or path_str == "none":
@@ -381,12 +406,16 @@ def read_appendix_content(path):
         content = path.read_text(encoding="utf-8")
         # Strip set page / set text / set par commands (template provides these)
         content = re.sub(
-            r'^#set\s+(page|text|par)\s*\([^)]*\)\s*(\n|$)+',
-            '', content, flags=re.MULTILINE,
+            r"^#set\s+(page|text|par)\s*\([^)]*\)\s*(\n|$)+",
+            "",
+            content,
+            flags=re.MULTILINE,
         )
         content = re.sub(
-            r'^#show:\s*doc\s*=>\s*\{[^}]*\set\s+page[^}]*\}',
-            '', content, flags=re.MULTILINE | re.DOTALL,
+            r"^#show:\s*doc\s*=>\s*\{[^}]*\set\s+page[^}]*\}",
+            "",
+            content,
+            flags=re.MULTILINE | re.DOTALL,
         )
         return content.strip()
     except Exception as e:
@@ -397,6 +426,7 @@ def read_appendix_content(path):
 # ══════════════════════════════════════════════════════════════════════════
 # MAIN
 # ══════════════════════════════════════════════════════════════════════════
+
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -422,7 +452,7 @@ def main():
     meta, body = parse_frontmatter(md_path)
     print(f"  Topic: {meta.get('topic', '?')}")
     print(f"  Teacher: {meta.get('teacher', '?')}")
-    stage_count = len(re.findall(r'^##\s+Stage\s+\d+:', body, re.MULTILINE))
+    stage_count = len(re.findall(r"^##\s+Stage\s+\d+:", body, re.MULTILINE))
     print(f"  Stages: {stage_count}")
 
     ok = lint_markdown(md_path)

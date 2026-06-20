@@ -8,7 +8,6 @@ interleaves: St1, St2, blank, blank, St3, St4, blank, blank...
 import os
 import subprocess
 import sys
-import uuid
 from pathlib import Path
 
 import fitz  # PyMuPDF
@@ -40,6 +39,7 @@ for c in _PANDOC_CANDIDATES:
 if not PANDOC_EXE:
     # Fallback: try PATH
     import shutil
+
     PANDOC_EXE = shutil.which("pandoc")
 
 _TYPST_CANDIDATES = [
@@ -52,6 +52,7 @@ for c in _TYPST_CANDIDATES:
         break
 if not TYPST_EXE:
     import shutil
+
     TYPST_EXE = shutil.which("typst")
 
 for tool, name in [(PANDOC_EXE, "pandoc"), (TYPST_EXE, "typst")]:
@@ -69,16 +70,25 @@ def query_supabase(class_filter):
     """Query Supabase classlists table for students."""
     r = subprocess.run(
         [
-            "supabase", "db", "query", "--linked", "-o", "json",
-            f"SELECT student_id, name, class FROM classlists WHERE class = '{class_filter}' ORDER BY name;"
+            "supabase",
+            "db",
+            "query",
+            "--linked",
+            "-o",
+            "json",
+            f"SELECT student_id, name, class FROM classlists WHERE class = '{class_filter}' ORDER BY name;",
         ],
-        capture_output=True, text=True, encoding="utf-8", timeout=30,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=30,
     )
     if r.returncode != 0:
         print(f"Supabase error: {r.stderr[:500]}")
         sys.exit(1)
 
     import json
+
     return json.loads(r.stdout)
 
 
@@ -113,12 +123,17 @@ def compile_student(md_path, pdf_path):
         [
             PANDOC_EXE,
             str(md_path),
-            "-t", "typst",
-            "--lua-filter", str(LUA_FILTER),
-            "-o", str(typ_path),
+            "-t",
+            "typst",
+            "--lua-filter",
+            str(LUA_FILTER),
+            "-o",
+            str(typ_path),
             "--wrap=none",
         ],
-        capture_output=True, text=True, timeout=30,
+        capture_output=True,
+        text=True,
+        timeout=30,
     )
     if r1.returncode != 0:
         print(f"  Pandoc error: {r1.stderr[:300]}")
@@ -126,13 +141,18 @@ def compile_student(md_path, pdf_path):
 
     r2 = subprocess.run(
         [
-            TYPST_EXE, "compile",
-            "--root", str(PROJECT_ROOT),
-            "--font-path", str(FONT_PATH),
+            TYPST_EXE,
+            "compile",
+            "--root",
+            str(PROJECT_ROOT),
+            "--font-path",
+            str(FONT_PATH),
             str(typ_path),
             str(pdf_path),
         ],
-        capture_output=True, text=True, timeout=60,
+        capture_output=True,
+        text=True,
+        timeout=60,
     )
     if r2.returncode != 0:
         print(f"  Typst error: {r2.stderr[:300]}")
@@ -149,7 +169,7 @@ def interleave_booklet(student_pdfs, blank_pdf, output_path):
     blank_page = blank_doc[0]  # single blank page, used twice per pair
 
     # Pair students
-    pairs = [(student_pdfs[i], student_pdfs[i+1]) for i in range(0, len(student_pdfs) - 1, 2)]
+    pairs = [(student_pdfs[i], student_pdfs[i + 1]) for i in range(0, len(student_pdfs) - 1, 2)]
     if len(student_pdfs) % 2 == 1:
         # Odd student out: pair with themselves
         pairs.append((student_pdfs[-1], student_pdfs[-1]))
@@ -178,9 +198,11 @@ def interleave_booklet(student_pdfs, blank_pdf, output_path):
 
 def main():
     import argparse
+
     parser = argparse.ArgumentParser()
-    parser.add_argument("--class", dest="class_filter", default="M2-4A",
-                        help="Class to generate (e.g. M3-5A)")
+    parser.add_argument(
+        "--class", dest="class_filter", default="M2-4A", help="Class to generate (e.g. M3-5A)"
+    )
     args = parser.parse_args()
     class_filter = args.class_filter
 

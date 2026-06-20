@@ -13,6 +13,20 @@ Stage all working-tree changes, increment the semantic version from `VERSION` (`
 - Git remote `origin` configured
 - `/review` command available for pre-commit lint/tests
 
+## When to Use
+
+Use this skill when:
+- The user asks to commit, back up, or save all current work to git
+- The review-only mode is requested (`/git-backup --review`)
+- Significant changes have been made across multiple file categories
+
+Do NOT use this skill when:
+- Only a small, experimental change needs a quick commit (consider manual `git commit`)
+- No changes have been made yet (run `git status` first to verify)
+
+**Trigger:** `/git-backup` command or when the user asks to commit and push changes.
+
+
 ## Workflow
 
 ### Step 0: Run review
@@ -127,3 +141,24 @@ Write-Host "Committed v$ver (${ahead} ahead of origin)"
   - Rename it to a shorter path, or
   - Add a gitignore entry for the file type/pattern, then re-run `git add -A`
   - The most common cause is large `.epub` files from archives with very long metadata filenames — these should be gitignored globally via `*.epub`
+
+## Examples
+
+### Example 1: Full backup
+
+**Request:** "Back up my work"
+
+**Action taken:** Stage all changes, run lint + tests, bump VERSION, generate categorised commit message, present to user for confirmation, commit to main, push.
+
+### Example 2: Review only
+
+**Request:** "Show me what would be committed"
+
+**Action taken:** Run `/git-backup --review` — stages everything, runs quality checks, prints the commit message, then un-stages without committing.
+
+### Example 3: After slides build
+
+**Request:** "Save the slides I just built"
+
+**Action taken:** Stage new slides output + assets, generate commit message categorised under `lessons/slides`, commit, push.
+

@@ -1,3 +1,8 @@
+---
+name: build-excellent-lesson-plans
+description: Generate professional lesson plan PDFs from Markdown using the three-layer Markdown → Pandoc → Typst → PDF pipeline.
+---
+
 # Skill: build-excellent-lesson-plans
 
 ## Purpose
@@ -23,6 +28,20 @@ Agent writes lesson.md → build_lesson_pdf.py (validates + Pandoc + Lua filter 
 - **Stage numbering:** Sequential from 1. No gaps.
 - **Output location:** Input `.md` in `output/{subfolder}/` → PDF in `PDF/{subfolder}/`.
 - **Stages in Markdown body, not YAML.** YAML frontmatter is for simple metadata strings only. The Lua filter reads `## Stage N:` headings and builds the stage table.
+
+## When to Use
+
+Use this skill when:
+- A teacher needs a professional lesson plan PDF generated from Markdown
+- Stages need to be formatted as a colored table with timing and interaction columns
+- Optional answer key or transcript appendices are needed
+
+Do NOT use this skill when:
+- Raw Typst output is needed (use `typst-author` skill instead)
+- The lesson plan is already in a different format that needs conversion first
+
+**Trigger:** `/build-excellent-lesson-plans` command or when the user asks to generate a lesson plan PDF.
+
 
 ## Workflow
 
@@ -97,6 +116,33 @@ Open the PDF and check:
 - Total timing matches duration
 - Aims are natural English
 - Bullet points render correctly throughout
+## Examples
+
+### Example 1: Full lesson with answer key
+
+**Request:** "Generate lesson plan for Gender Stereotypes lesson"
+
+**Action taken:** Write `output/m3-gender/lesson.md` with YAML frontmatter and stage Markdown, run `python scripts/build_lesson_pdf.py output/m3-gender/lesson.md`, append answer key from `answer-key.typ`.
+
+**Output:** `PDF/m3-gender/lesson-plan.pdf`
+
+### Example 2: Lesson with transcript appendix
+
+**Request:** "Lesson plan with video transcript appended"
+
+**Action taken:** Add `transcript: output/m3-gender/transcript.typ` to YAML frontmatter, run the build script.
+
+**Output:** PDF with transcript appended after stages table.
+
+### Example 3: Minimal no-frills lesson
+
+**Request:** "Quick lesson plan, no extras"
+
+**Action taken:** Write minimal YAML + stages, run build script without `transcript` or `answer_key` fields.
+
+**Output:** Clean PDF with only the lesson plan content.
+
+
 
 ## Key principles
 

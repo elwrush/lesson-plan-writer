@@ -27,6 +27,9 @@ Generate a reveal.js slideshow from an existing lesson plan using the Markdown �
 
 - See `.kilo/skills/create-beautiful-slideshows/SKILL.md` for full conventions
 - All slides are horizontal (`--slide-level=1`) — no vertical nesting
+- **No raw HTML** — agent writes only Pandoc Markdown and copies shared infrastructure
 - Audio uses `data-audio-src` heading attribute (Lua filter injects `<audio data-autoplay>`)
 - YouTube uses `::: {.youtube} video-id :::` fenced div (Lua filter converts to iframe)
 - Fragments use `::: {.fragment .answer-reveal}` for clickthrough reveals
+- **Red/green testing:** `python -m pytest tests/ -v --tb=short` before and after writing
+- **Validation:** `python scripts/validate_slides.py output/{subfolder}/slides/slides.md` before building

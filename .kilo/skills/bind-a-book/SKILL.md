@@ -6,6 +6,7 @@ description: Converts text files (epub, pdf, txt, md) into A5 booklet PDFs with 
 # Skill: Bind a Book
 
 ## Purpose
+
 Take a source text file and produce a print-ready A5 booklet PDF with:
 - Serif font (RobotoSerif) at 11pt
 - Book-standard margins (16mm inside / 11mm outside / 14mm top/bottom)
@@ -13,6 +14,20 @@ Take a source text file and produce a print-ready A5 booklet PDF with:
 - Title page with book title, author, and decorative rule
 - Optional gloss footnotes (superscript numbers with definitions at page bottom)
 - Automatic page numbering
+
+## When to Use
+
+Use this skill when:
+- The user provides or requests conversion of an EPUB, PDF, TXT, or MD file into a print-ready booklet
+- A5 format with book-standard margins is needed
+- Optional gloss footnotes are needed (non-gloss footnotes are discarded)
+- The output is intended for printing and binding
+
+Do NOT use this skill when:
+- The output needs to remain editable (use Pandoc to PDF instead)
+- Standard binding is not needed (A4 single-page output is preferred)
+
+**Trigger:** `/bind-a-book` command or when the user asks to convert a file into a booklet PDF.
 
 ## Workflow
 
@@ -115,6 +130,33 @@ To run this step:
 3. The template adds a narrow school header band (logos + horizontal rule) on page 1 only
 
 **Page count**: The source PDF page count (excluding the template's own first page) is `{page_count}`. After insertion into the template, the final PDF has `{page_count + 1}` pages (template = 1 + booklet = N). Always re-derive page counts — do not reuse cached counts from previous runs.
+## Examples
+
+### Example 1: Convert EPUB to booklet
+
+**Request:** "Bind moby-dick.epub into a booklet"
+
+**Action taken:** Extract text via `ebooklib`, parse chapters, pipe through Pandoc + Typst, compile to A5 PDF with gloss footnotes.
+
+**Output:** `PDF/BOOKLETS/moby-dick-booklet.pdf`
+
+### Example 2: Convert text with gloss words
+
+**Request:** "Bind story.txt with gloss for: sailor, whale"
+
+**Action taken:** Read text, insert gloss footnote markers, compile to A5 PDF.
+
+**Output:** `PDF/BOOKLETS/story-booklet.pdf`
+
+### Example 3: PDF chapter range
+
+**Request:** "Bind chapters 3-5 from this PDF"
+
+**Action taken:** Extract pages via pymupdf, compile to A5 booklet.
+
+**Output:** `PDF/BOOKLETS/excerpt-booklet.pdf`
+
+
 
 ## File locations
 - **Script:** `C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\bookbinder.py`

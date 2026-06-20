@@ -1,10 +1,29 @@
-# Skill: create-formative-ruled-paper
+---
+name: create-formative-ruled-paper
+description: Generate A4 ruled writing paper with Mathayom header and student demographics, interleaved into A5 booklets for mechanical slicing. No agent-written Typst — Lua filter generates all Typst code.
+---
+
+# Skill: Create Formative Ruled Paper
 
 ## Purpose
 
 Generate A4 ruled writing paper with Mathayom header and student demographics, ready for mechanical slicing into A5 2-sided booklets. No Typst is written by the agent — the Lua filter generates all Typst code from Markdown metadata.
 
 **Output:** `PDF/FORMATIVE-RULED/{CLASS}-ruled-booklet.pdf`
+
+## When to Use
+
+Use this skill when:
+- A teacher needs formative assessment writing paper in A5 booklet form
+- Multiple students need interleaved pages for mechanical slicing
+- Student demographics (name, class, ID) should appear on each booklet
+- Blank pages need to be inserted between students for cutting margins
+
+Do NOT use this skill when:
+- A4 duplex output is needed (use `create-formal-ruled-paper` instead)
+- Only blank ruled paper without demographics is needed
+
+**Trigger:** `/create-formative-ruled-paper` command or when the user asks to generate ruled writing booklets for formative assessment.
 
 ## Pipeline
 
@@ -56,51 +75,13 @@ blank: true
 
 \*Not required when `blank: true`.
 
-## How It Works
+## Workflow
 
-### 1. Agent writes Markdown
+### Step 1 — Write Markdown
+
 Only YAML frontmatter. No body content. No Typst. No HTML.
 
-### 2. Lua filter (`scripts/ruled-paper.lua`) generates Typst
-
-Normal mode (2 pages):
-- **Page 1:** Header (Cambridge left · C·E·L Mathayom center · ACT right) → student demographics → ruled lines filling remaining space
-- **Page 2:** Ruled lines only (no header)
-
-Blank mode (1 page):
-- Ruled lines filling the entire page from top margin
-
-**Dynamic line calculation:** Uses `#block(height: 1fr, layout(size => { ... }))` which measures remaining page space and calculates `n = size.height / ls`. No hardcoded line count.
-
-### 3. Python wrapper (`scripts/gen_formative_ruled.py`) handles batch production
-
-- Queries Supabase classlist with `-o json` output
-- Generates individual Markdown files → Pandoc → Typst → PDF (2 pages each)
-- Generates one blank 1-page PDF
-- Interleaves: **St1, St2, blank, blank, St3, St4, blank, blank...**
-- Pairs odd students with themselves
-- Outputs single combined PDF per class
-
-### 4. Booklet Production Pattern (4-page signatures)
-
-Print 2-sided, 2-up on A4. After mechanical slicing, each student gets an A5 sheet:
-
-| Sheet half | Front | Back |
-|------------|-------|------|
-| Student A | Name + ruled lines | Blank ruled paper |
-| Student B | Name + ruled lines | Blank ruled paper |
-
-**Page order in booklet PDF:**
-
-| Block pages | Content |
-|-------------|---------|
-| 1 | Student A page 1 |
-| 2 | Student B page 1 |
-| 3 | Blank ruled (page 1 of 2) |
-| 4 | Blank ruled (page 2 of 2) |
-| 5-8 | Next pair... |
-
-## Invocation
+### Step 2 — Run Python Batch Script
 
 ```powershell
 # Full class booklet (recommended):
@@ -111,20 +92,49 @@ pandoc student.md -t typst --lua-filter=scripts/ruled-paper.lua -o student.typ
 typst compile --root "." --font-path "$env:APPDATA\TinyTeX\texmf-dist\fonts\opentype\google\roboto" student.typ student.pdf
 ```
 
-## Scripts & Files
+### Step 3 — Verify Output
 
-| File | Purpose |
-|------|---------|
-| `scripts/ruled-paper.lua` | Lua filter — reads YAML, generates Typst |
-| `scripts/gen_formative_ruled.py` | Python wrapper — Supabase query, batch compile, interleave |
-| `templates/cambridge.png` | Cambridge logo (header left) |
-| `templates/Image_20260324_141022.png` | ACT logo (header right) |
+Check `PDF/FORMATIVE-RULED/{CLASS}-ruled-booklet.pdf`:
+- Page order: St1, St2, blank, blank, St3, St4, blank, blank...
+- Each 4-page block = one A5 booklet when printed 2-up on A4 and sliced
+- Normal mode (2 pages): header page + ruled page
+- Blank mode (1 page): ruled lines only
+
+## Examples
+
+### Example 1: Full class booklet
+
+**Request:** "Generate formative ruled booklets for M3-5A"
+
+**Action taken:** Run `python scripts/gen_formative_ruled.py --class M3-5A`. Script queries Supabase, generates individual Markdown files, pipes through Pandoc + Lua filter → Typst → PDF, interleaves with blanks, outputs combined booklet.
+
+**Output:** `PDF/FORMATIVE-RULED/M3-5A-ruled-booklet.pdf`
+
+### Example 2: Odd student count
+
+**Request:** "Only 3 students in this class"
+
+**Action taken:** Same command. The interleaver pairs the last student with themselves (duplicate name page). Printer receives one spare A5 sheet.
+
+### Example 3: Debug single student
+
+**Request:** "Test rendering for one student"
+
+**Action taken:** Write a Markdown file with one student's YAML, run pandoc directly with `--lua-filter=scripts/ruled-paper.lua`, then `typst compile` to inspect the single PDF.
+
+## Error Handling
+
+| Symptom | Likely cause | Fix |
+|---------|-------------|-----|
+| `--root "."` error | Typst cannot resolve `/templates/` | Verify `--root "."` in `typst compile` |
+| Font not found | TinyTeX font path incorrect | Resolve full path to Roboto OTF directory |
+| `_` in output renders italic | Typst interprets underscore as emphasis | Use `-` instead of `_` in all values |
+| Supabase query fails | Linked project not configured | Verify `--project-ref hdpwaqprrgnndkgzmnan` |
+| cp1252 decode error | Supabase table output contains box-drawing chars | Use `supabase db query --linked -o json` |
 
 ## Hard-Won Lessons
 
 ### 1. Fill remaining space, don't count lines
-Previous versions hardcoded `#ruled-lines(22)` which broke when margins or content changed. The correct pattern:
-
 ```typst
 #block(height: 1fr, layout(size => {
   let n = int(size.height / ls)
@@ -136,45 +146,34 @@ Previous versions hardcoded `#ruled-lines(22)` which broke when margins or conte
 }))
 ```
 
-Using `1fr` + `layout()` measures remaining page space dynamically.
-
 ### 2. No horizontal rule under demographics
-Separating demographics from ruled lines with a `#line()` causes spacing issues. Just use `#v(2.5em)` gap — cleaner, fewer edge cases.
+Use `#v(2.5em)` gap instead of `#line()` — cleaner, fewer edge cases.
 
 ### 3. Supabase JSON output avoids encoding issues
-Use `supabase db query --linked -o json "SELECT ..."` instead of the default table format. The box-drawing characters cause cp1252 decode errors in Python subprocess pipes.
+Use `supabase db query --linked -o json "SELECT ..."`.
 
 ### 4. Tool path resolution on Windows
-Winget-installed pandoc/typst live in `C:\Users\elwru\AppData\Local\Microsoft\WinGet\Packages\...` which is NOT on the system PATH that Python `subprocess` inherits. The script must resolve full paths:
-
-```python
-_PANDOC_CANDIDATES = [
-    r"C:\Users\elwru\...\Pandoc\pandoc.exe",
-    r"C:\Program Files\Pandoc\pandoc.exe",
-]
-```
+Winget-installed pandoc/typst are NOT on system PATH. The script must resolve full paths.
 
 ### 5. Nil metadata handling in Lua filters
-When YAML fields like `class` or `student_id` are absent (e.g., blank mode), `doc.meta["class"]` returns nil. `pandoc.utils.stringify(nil)` crashes. Always guard:
+Always guard: `if v == nil then return "" end`.
 
-```lua
-local function mv(key)
-  local v = doc.meta[key]
-  if v == nil then return "" end
-  return pandoc.utils.stringify(v)
-end
-```
-
-### 6. `#pagebreak()` requires context for dynamic spacing
-`#pagebreak()` after the first page's `block(height: 1fr)` may interact unexpectedly. The pattern used: page 1 has header + lines, explicit `#pagebreak()`, then page 2 has its own `block(height: 1fr)` for ruled lines only.
-
-### 7. Odd-student handling
-For classes with an odd number of students, the last student is paired with themselves (duplicate name page). This produces a valid 4-page block. The printer receives one spare sheet per class.
+### 6. Odd-student handling
+Last student duplicates with themselves to produce a valid 4-page block.
 
 ## Known Constraints
 
 - `--root "."` is required for `typst compile` to resolve `/templates/` paths.
 - Font path must point to TinyTeX Roboto OTF directory.
-- `_` in values is forbidden (Typst interprets it as emphasis delimiter) — use `-` as placeholder.
+- `_` in values is forbidden — use `-` as placeholder.
 - Body Markdown content is ignored — only YAML metadata is read.
-- The classlist query uses the linked Supabase project (`--project-ref hdpwaqprrgnndkgzmnan`).
+- The classlist query uses the linked Supabase project.
+
+## Scripts & Files
+
+| File | Purpose |
+|------|---------|
+| `scripts/ruled-paper.lua` | Lua filter — reads YAML, generates Typst |
+| `scripts/gen_formative_ruled.py` | Python wrapper — Supabase query, batch compile, interleave |
+| `templates/cambridge.png` | Cambridge logo (header left) |
+| `templates/Image_20260324_141022.png` | ACT logo (header right) |

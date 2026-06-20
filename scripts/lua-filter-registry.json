@@ -1,0 +1,124 @@
+{
+  "_version": 1,
+  "_description": "Curated registry of known existing Pandoc Lua filters. When adding a custom filter, search Tavily first. If a pre-existing solution exists here, use it instead of writing bespoke code.",
+  "_sources": [
+    "https://github.com/pandoc/lua-filters (being retired → pandoc-ext)",
+    "https://github.com/pandoc-ext",
+    "https://github.com/topics/pandoc-filter (200+ repositories)"
+  ],
+  "filters": [
+    {
+      "name": "revealjs-codeblock",
+      "source": "https://github.com/pandoc/lua-filters/tree/master/revealjs-codeblock",
+      "description": "Code block framing for reveal.js slides",
+      "superseded_by": "--syntax-highlighting=idiomatic (Pandoc 3.9+)",
+      "slide_relevant": true
+    },
+    {
+      "name": "include-files",
+      "source": "https://github.com/pandoc/lua-filters/tree/master/include-files",
+      "description": "Include external Markdown files via fenced divs",
+      "superseded_by": null,
+      "slide_relevant": true
+    },
+    {
+      "name": "include-code-files",
+      "source": "https://github.com/pandoc/lua-filters/tree/master/include-code-files",
+      "description": "Include code from external files",
+      "superseded_by": null,
+      "slide_relevant": true
+    },
+    {
+      "name": "columns",
+      "source": "https://github.com/pandoc-ext/columns",
+      "description": "Multicolumn layout in Markdown",
+      "superseded_by": null,
+      "slide_relevant": true
+    },
+    {
+      "name": "diagram",
+      "source": "https://github.com/pandoc-ext/diagram",
+      "description": "Generate diagrams from Mermaid/Dot/PlantUML code blocks",
+      "superseded_by": null,
+      "slide_relevant": false
+    },
+    {
+      "name": "pagebreak",
+      "source": "https://github.com/pandoc/lua-filters/tree/master/pagebreak",
+      "description": "Page breaks in PDF output",
+      "superseded_by": null,
+      "slide_relevant": false
+    },
+    {
+      "name": "pandoc-quotes.lua",
+      "source": "https://github.com/pandoc/lua-filters/tree/master/pandoc-quotes.lua",
+      "description": "Change default quotation marks per language",
+      "superseded_by": null,
+      "slide_relevant": false
+    },
+    {
+      "name": "wordcount",
+      "source": "https://github.com/pandoc/lua-filters/tree/master/wordcount",
+      "description": "Count words in document",
+      "superseded_by": null,
+      "slide_relevant": false
+    },
+    {
+      "name": "abstract-to-meta",
+      "source": "https://github.com/pandoc/lua-filters/tree/master/abstract-to-meta",
+      "description": "Move abstract section to metadata",
+      "superseded_by": null,
+      "slide_relevant": false
+    },
+    {
+      "name": "track-changes",
+      "source": "https://github.com/pandoc/lua-filters/tree/master/track-changes",
+      "description": "Track changes (Lua filter version)",
+      "superseded_by": null,
+      "slide_relevant": false
+    },
+    {
+      "name": "section-refs",
+      "source": "https://github.com/pandoc/lua-filters/tree/master/section-refs",
+      "description": "Cross-reference sections",
+      "superseded_by": null,
+      "slide_relevant": false
+    },
+    {
+      "name": "citation-style-language (via --citeproc)",
+      "source": "built into Pandoc",
+      "description": "Built-in citation processing (not a separate Lua filter)",
+      "superseded_by": null,
+      "slide_relevant": false
+    }
+  ],
+  "custom_filters": {
+    "description": "These are our project's custom Lua filters. Each must justify why no existing solution was suitable.",
+    "entries": [
+      {
+        "name": "youtube-embed.lua",
+        "purpose": "Convert ::: {.youtube} fenced div to responsive YouTube iframe",
+        "why_no_existing": "No existing Pandoc Lua filter for in-slide YouTube embeds with responsive 16:9 container. The built-in reveal.js writer does not support YouTube embeds.",
+        "tavily_searched": "2026-06-20",
+        "search_query": "pandoc lua filter reveal.js youtube embed responsive iframe",
+        "search_verified": true
+      },
+      {
+        "name": "audio-autoplay.lua",
+        "purpose": "Inject <audio data-autoplay> from heading attribute for reveal.js autoplay",
+        "why_no_existing": "No existing Lua filter for reveal.js audio autoplay from heading attrs. Pandoc's reveal.js writer does not support audio autoplay natively.",
+        "tavily_searched": "2026-06-20",
+        "search_query": "pandoc lua filter reveal.js audio autoplay heading attribute",
+        "search_verified": true
+      },
+      {
+        "name": "slide-helper.lua",
+        "purpose": "Shared library module providing HTML generation functions used by other filters",
+        "why_no_existing": "This is a library (not a standalone filter) that consolidates HTML generation for all other custom filters. No equivalent in pandoc-ext.",
+        "tavily_searched": "2026-06-20",
+        "search_query": "pandoc lua module shared library helper functions reveal.js",
+        "search_verified": true
+      }
+    ]
+  }
+}
