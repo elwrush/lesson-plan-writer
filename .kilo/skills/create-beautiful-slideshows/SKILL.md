@@ -10,6 +10,15 @@ description: Generate reveal.js slideshows from lesson plans using the Markdown 
 **Lua filters handle:** Audio autoplay, YouTube embeds  
 **CSS handles:** Styling, shields, fragments, responsive sizing  
 
+## CSS/HTML FILES ARE FORBIDDEN
+
+- Do NOT read any .css, .html, or .htm file
+- Do NOT edit any .css, .html, or .htm file
+- slides-pandoc.css is **hash-locked** — `validate_slides.py` fails the build if it has been modified (even whitespace)
+- slides-header.html is **copy-only** — its source is at `scripts/slides-header.html`; never write HTML by hand
+- If a visual problem exists, the fix is ALWAYS in Pandoc Markdown or a Lua filter — NEVER in CSS
+- The `style=` attribute is forbidden in slides.md — use Pandoc fenced divs, bracketed spans, or Lua filters 
+
 ---
 
 ## Purpose
@@ -31,6 +40,74 @@ Do NOT use this skill when:
 - The output needs editable text in slides (PPTX from `slideshow-to-pptx` is rasterized)
 
 **Trigger:** `/create-beautiful-slideshow` command or when the user asks to generate slides for a lesson plan.
+
+## Pedagogical Requirements
+
+### Tiered Differentiation (Standard / Advanced / Elite)
+
+Our classes contain a wide range of ability levels. **Every main task slide must offer tiered challenges** so students can self-select the level that matches their readiness.
+
+The three-tier framework:
+
+| Tier | Scaffolding | Description |
+|------|------------|-------------|
+| **Standard** | Full support | Students have the task scaffold visible (questions, prompts, word bank). Complete the task with full reference material. |
+| **Advanced** | Partial support | Students do NOT have the task scaffold visible during input. They take notes while listening/reading, then answer from their notes. |
+| **Elite** | Minimal support | Students complete the task from memory and understanding alone. No notes, no reference material during input or response. |
+
+**How to apply by skill:**
+
+- **Reading:** Standard = questions visible while reading. Advanced = read first, take notes, then answer from notes. Elite = read once, no notes, answer from understanding.
+- **Listening:** Standard = questions visible before + during audio. Advanced = listen first, take notes, then answer from notes. Elite = listen once, no notes, answer from memory.
+- **Speaking:** Standard = planned response with bullet points visible. Advanced = planned response from notes only. Elite = spontaneous response, no planning time.
+- **Writing:** Standard = model structure + word bank visible. Advanced = outline only, write independently. Elite = no outline, write freely from topic alone.
+
+**How to display on slides:**
+
+Font Awesome (`fa-solid`) is available via `slides-header.html` for icons. Use it to distinguish the three tiers at a glance.
+
+Display depends on whether the slide has an **image background** or a **plain dark background**:
+
+**Plain dark slides (no image):** Use three paragraphs with bold tier labels and FA icons — no shields:
+
+```markdown
+### Reading Challenge
+
+<i class="fa-solid fa-book-open"></i> **Standard** — Read the text and answer the questions on your worksheet.
+
+<i class="fa-solid fa-pencil"></i> **Advanced** — Read the text without looking at the questions. Take notes, then answer from your notes.
+
+<i class="fa-solid fa-star"></i> **Elite** — Read the text once. Do not take notes. Answer from memory.
+```
+
+**Image-background slides:** Use three `.shield` divs (the dark semi-transparent background ensures text readability over the image):
+
+```markdown
+### Reading Challenge
+
+::: {.shield}
+<i class="fa-solid fa-book-open"></i> **Standard** — Read the text and answer the questions on your worksheet.
+:::
+
+::: {.shield}
+<i class="fa-solid fa-pencil"></i> **Advanced** — Read the text without looking at the questions. Take notes, then answer from your notes.
+:::
+
+::: {.shield}
+<i class="fa-solid fa-star"></i> **Elite** — Read the text once. Do not take notes. Answer from memory.
+:::
+```
+
+In both cases, the tier icon + bold label + description gives a clean, scannable layout. The `.shield` wrapper is used ONLY when there is an image background; otherwise plain paragraphs suffice.
+
+**When differentiation is NOT needed:**
+- Lead-in / warmer slides (activation only, no task)
+- Transition / phase divider slides
+- Summary / wrap-up slides
+- Slides that display only a short stimulus (quote, image, single question for whole-class response)
+- Title and objectives slides
+
+**Key principle:** Students all receive the same input (text, video, audio, prompt). Differentiation controls the *access method* — how much scaffolding they use while processing that input. The tiers give students agency to choose their challenge level.
 
 ## Architecture
 
@@ -84,7 +161,7 @@ The Pandoc community maintains an ecosystem of reusable Lua filters. These are *
 
 The `pandoc/lua-filters` repository is being retired in favor of individual repositories under the [pandoc-ext](https://github.com/pandoc-ext) organization — search GitHub topic `pandoc-filter` for 200+ available filters.
 
-**Do NOT install these unless explicitly needed.** The current filter stack (youtube-embed.lua + audio-autoplay.lua + slide-helper.lua) covers all slide needs. New filters should only be added when a specific feature cannot be expressed in Markdown.
+**Standard filters (always include):** youtube-embed.lua + audio-autoplay.lua + shield-block.lua + box-keywords.lua + reading-feedback.lua + autocue.lua + slide-helper.lua. Add more only when a specific feature cannot be expressed in Markdown.
 
 ### Files
 
@@ -97,6 +174,10 @@ The `pandoc/lua-filters` repository is being retired in favor of individual repo
 | `shield-block.lua` | Forces `.shield` divs to stack vertically (block display) | Copy from `scripts/shield-block.lua` |
 | `audio-autoplay.lua` | Injects `<audio data-autoplay>` from heading attrs | Copy from `scripts/audio-autoplay.lua` |
 | `youtube-embed.lua` | Converts `::: {.youtube}` to iframe | Copy from `scripts/youtube-embed.lua` |
+| `box-keywords.lua` | Adds yellow-bordered boxes around `[key]{.box}` spans — visual reinforcer for key terms | Copy from `scripts/box-keywords.lua` |
+| `reading-feedback.lua` | Auto-assigns `data-id` on table answer cells for reveal.js auto-animate; adds white row lines to tables | Copy from `scripts/reading-feedback.lua` |
+| `autocue.lua` | Wraps `::: {.autocue}` divs in scrolling teleprompter container (speeds: `.a2`, `.b1`, `.b2`) | Copy from `scripts/autocue.lua` |
+| `autocue.html` | CSS `@keyframes` for scrolling text animation | **Copy** from `scripts/autocue.html` if lesson has autocue slides |
 | `slides-header.html` | `<meta referrer>` for YouTube embeds | **Copy** from `scripts/slides-header.html` |
 | `assets/logo.png` | Institution logo on title slide | **Agent copies** from `templates/ACT.png` |
 | `assets/splash.*` | Splash/background image for title slide | Source varies — see Images section below |
@@ -117,15 +198,9 @@ The `pandoc/lua-filters` repository is being retired in favor of individual repo
 **Copy** (do not write) from `scripts/slides-header.html` — a shared one-line HTML file maintained by the developer:
 
 ```powershell
-Copy-Item "scripts/slides-header.html" "output/{subfolder}/slides/"
-```
+Copy-Item "scripts/slides-header.html","scripts/autocue.html" "output/{subfolder}/slides/"
 
-### Infrastructure files
-
-Copy all Lua filters, CSS, and the shared helper library to the slides directory:
-
-```powershell
-Copy-Item "scripts/slides-pandoc.css","scripts/youtube-embed.lua","scripts/audio-autoplay.lua","scripts/slide-helper.lua" -Destination "output/{subfolder}/slides/"
+Copy-Item "scripts/slides-pandoc.css","scripts/youtube-embed.lua","scripts/audio-autoplay.lua","scripts/slide-helper.lua","scripts/shield-block.lua","scripts/box-keywords.lua","scripts/reading-feedback.lua","scripts/autocue.lua" -Destination "output/{subfolder}/slides/"
 ```
 
 ### Build Command (Pandoc 3.9+)
@@ -140,6 +215,11 @@ pandoc slides.md -t revealjs -s --slide-level=1 -o index.html \
   -V width=1280 -V height=720 -V margin=0.04 \
   --css="slides-pandoc.css" \
   --include-in-header="slides-header.html" \
+  --include-in-header="autocue.html" \
+  --lua-filter="$slidesDir\autocue.lua" \
+  --lua-filter="$slidesDir\reading-feedback.lua" \
+  --lua-filter="$slidesDir\box-keywords.lua" \
+  --lua-filter="$slidesDir\shield-block.lua" \
   --lua-filter="$slidesDir\youtube-embed.lua" \
   --lua-filter="$slidesDir\audio-autoplay.lua"
 ```
@@ -215,6 +295,7 @@ After the browser opens, manually verify:
 - Speaking notes present in presenter view (press S)
 - CEFR badge renders correctly (if used)
 - Auto-animate pairs morph smoothly (if used)
+- Differentiation tiers present on every main task slide — FA icons + bold labels (shields only on image-bg slides)
 
 ---
 
@@ -265,6 +346,9 @@ After deployment, update `slideshow_url` in the lesson plan `.md` file.
 
 ## What NOT to Do
 
+- **Do not read any .css, .html, or .htm file** — these are generated output or shared styling, never patterns to follow
+- **Do not edit any .css, .html, or .htm file** — slides-pandoc.css is hash-locked, slides-header.html is copy-only. Visual fixes go through Pandoc Markdown or Lua filters only.
+- **Do not edit any .lua file without first running a Context7 search** for the Pandoc Lua filter API function you intend to use. Cite the search result in the edit rationale.
 - **Do not write raw HTML** — use Pandoc Markdown only (this includes HTML files like `slides-header.html` — always copy, never write)
 - **Do not write inline CSS (`style=`) in slides.md** — all styling goes through shared CSS files or Lua filters. The validation script (`validate_slides.py`) checks this and will fail the build if found.
 - **Do not use `--slide-level=2`** — creates vertical slides
@@ -285,6 +369,7 @@ After deployment, update `slideshow_url` in the lesson plan `.md` file.
 - **Do not exceed 25 body-text words per content slide** — split or fragment if needed.
 - **Do not exceed 40 slides total for a 46-minute lesson** — cap enforced during blueprint phase.
 - **Do not use more than 3 auto-animate pairs per presentation** — overuse dilutes the effect.
+- **Do not present undifferentiated tasks** — every main task slide must offer the three-tier challenge (Standard / Advanced / Elite). See [Pedagogical Requirements](#pedagogical-requirements) for the framework and display pattern.
 
 ---
 
@@ -292,15 +377,23 @@ After deployment, update `slideshow_url` in the lesson plan `.md` file.
 
 ```
 1. Run existing tests (green baseline)
-2. Create stage-to-slide mapping blueprint
-3. Set up slides/ directory (assets, CSS, Lua, header)
-4. Write slides.md (pure Pandoc Markdown — **no `style=` attributes**, no raw HTML)
-5. Validate: python scripts/validate_slides.py output/{subfolder}/slides/slides.md
-6. Build: pandoc slides.md ... (from slides/ directory)
-7. Re-test: python -m pytest tests/ -v --tb=short
-8. Serve: background_process start --command "python -m http.server 8000" --workdir "output/{subfolder}/slides/"
-9. Open browser at http://localhost:8000/ and review (see Phase 7 checklist)
-10. Stop the background server when done
-11. Deploy: /git-pages {subfolder}
-12. Update slideshow_url in lesson plan .md
+2. **Read the lesson plan** and write a bespoke design prompt — reference `.kilo/prompts/slide-design-exemplar.md` as the model
+3. Create a stage-to-slide design blueprint in `.kilo/plans/` — reference `.kilo/plans/M3-WRITING-CA-FEEDBACK-blueprint.md` as the format model
+4. **Plan differentiation tiers** — for each main task slide, decide Standard / Advanced / Elite access levels
+5. Set up slides/ directory (assets, CSS, Lua, header)
+6. Write slides.md (pure Pandoc Markdown — **no `style=` attributes**, no raw HTML) — include three-tier differentiation with FA icons (shields only for image-background slides)
+7. Validate: python scripts/validate_slides.py output/{subfolder}/slides/slides.md
+8. Build: pandoc slides.md ... (from slides/ directory)
+9. Re-test: python -m pytest tests/ -v --tb=short
+10. Serve: background_process start --command "python -m http.server 8000" --workdir "output/{subfolder}/slides/"
+11. Open browser at http://localhost:8000/ and review (see Phase 7 checklist)
+12. Stop the background server when done
+13. Deploy: /git-pages {subfolder}
+14. Update slideshow_url in lesson plan .md
 ```
+
+### Before ANY .lua file edit
+
+1. Search via Context7 for the relevant Pandoc Lua filter API function
+2. If Context7 is down or doesn't have the answer, fall back to Tavily web search: `pandoc lua filter <topic>`
+3. Cite the search result in the edit rationale

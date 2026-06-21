@@ -4,6 +4,73 @@
 
 At session start, read `C:\Users\elwru\.kilo\learnings.md` and apply any relevant lessons tagged `[lesson-plan-writer]`. After completing a fix or discovering a better approach, append an entry to that file with date, context, fix, and pattern.
 
+## Workflow: Blueprint-first, then slides
+
+**Never write slides.md directly.** The blueprint is the design document; slides.md is a mechanical translation.
+
+### Phase 1: Write the Blueprint
+
+File: `.kilo/plans/{lesson}-blueprint.md`
+
+Write a per-slide design table. For EVERY slide, answer:
+
+| Slide ID | Intent (what teacher says) | Feature | Principle | Mechanism | Content |
+|----------|---------------------------|---------|-----------|-----------|---------|
+| unique-id | Teacher script / purpose | Which feature(s) used | Why this feature here | How it's implemented | Approx word count |
+
+Feature choices (from existing Lua filters, not bespoke code):
+- **auto-animate** — jumbled→correct table pairs for visual process demonstration. ALL non-moving elements must get stable `data-id`.
+- **boxed text** — `[keyword]{.box}` via `box-keywords.lua`. Use ONLY for critical vocabulary, signal phrases, grammar targets. Never box answers.
+- **fragments** — `[**answer**]{.fragment .answer-reveal}` for click-through reveals (video answers, vocab answers).
+- **tables** — Pandoc pipe tables for structured data. `reading-feedback.lua` adds white row lines and auto-animate data-ids to tables with an "Answer" column.
+- **red transitions** — `data-background-color="#c0392b"` on section headings for cognitive phase breaks.
+- **challenge tiers** — FA icons (`fa-book-open`, `fa-pencil`, `fa-star`) with bold labels. Full descriptions first time, icons-only thereafter.
+
+Blueprint must be reviewed and approved before any slides.md writing begins.
+
+### Phase 2: Write slides.md
+
+Translate the blueprint into Pandoc Markdown. No pedagogical decisions at this stage — pure mechanical conversion.
+
+```markdown
+# Slide Heading {#slide-id data-feature="value"}
+
+::: {.feature-class}
+Content
+:::
+```
+
+### Phase 3: Build and test
+
+```powershell
+$slidesDir = Resolve-Path "."
+pandoc slides.md ... (see build command below)
+python -m pytest tests/ -v --tb=short -k "{lesson-slug}"
+```
+
+After tests pass, run the audit-codebase pipeline to catch structural issues before committing:
+
+```powershell
+python "C:\Users\elwru\.config\kilo\skills\audit-codebase\scripts\find_dead_code.py" --root .
+python "C:\Users\elwru\.config\kilo\skills\audit-codebase\scripts\map_redundancy.py" --root .
+python "C:\Users\elwru\.config\kilo\skills\audit-codebase\scripts\check_doc_alignment.py" --root .
+python "C:\Users\elwru\.config\kilo\skills\audit-codebase\scripts\find_hallucinations.py" --root . --skip-urls
+```
+
+Review `audit-*.md` reports for any BLOCKER findings and fix before committing.
+
+### Slide sequence template
+
+```
+1. splash          — background image from Pixabay (check with image agent)
+2. title           — rhetorical question + call to action (template pattern)
+3. objectives      — table: left column numbers, right column objectives
+4. transition      — red background if major phase shift
+5. strategy        — pedagogical advice (auto-animate or plain list)
+6. task+timer      — instruction + timer pill
+7. answers         — lower order: bare answers. Higher order: answer + explanation + evidence, one per slide
+```
+
 ## Environment
 
 - **OS:** Windows AMD64 (win32 sys.platform)
@@ -29,9 +96,11 @@ Tools available: `rg` (ripgrep), `Select-String` (PowerShell), built-in `grep`/`
 
 ## Golden Rule: Pattern-first, not guess-first
 
-Before writing any Markdown, slide markup, or configuration, **read the template or an existing file that already does what you need**. The correct pattern is always in the codebase already — guessing or generating from training data wastes time and causes errors. Specifically:
+Before writing any Markdown, slide markup, or configuration, **read a Markdown or Lua file that already does what you need**. The correct pattern is always in the codebase already — guessing or generating from training data wastes time and causes errors. Specifically:
 - Slide attributes: check `.kilo/skills/create-beautiful-slideshows/SKILL.md` (Pandoc Markdown pipeline)
 - Slide structure: check the most recently built `output/*/slides/slides.md`
+- Lua filter patterns: check an existing `scripts/*.lua` file
+- **Do NOT read .css, .html, or .htm files** — these are generated output or shared styling, not patterns to follow
 
 ## Key commands
 
@@ -49,10 +118,11 @@ $slidesDir = Resolve-Path "."
 pandoc slides.md -t revealjs -s --slide-level=1 -o index.html \
   -V revealjs-url="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0" \
   -V theme=black -V width=1280 -V height=720 -V margin=0.04 \
-  --css="slides-pandoc.css" \
-  --include-in-header="slides-header.html" \
-  --lua-filter="$slidesDir\youtube-embed.lua" \
-  --lua-filter="$slidesDir\audio-autoplay.lua"
+   --css="slides-pandoc.css" \
+   --include-in-header="slides-header.html" \
+   --lua-filter="$slidesDir\autocue.lua" \
+   --lua-filter="$slidesDir\youtube-embed.lua" \
+   --lua-filter="$slidesDir\audio-autoplay.lua"
 
 # Slides — serve locally (required for YouTube embeds)
 python -m http.server 8000
@@ -118,15 +188,21 @@ A lint command is defined at `.kilo/command/lint.md` — invoke via Kilo CLI.
      - `scripts/shield-block.lua` → `shield-block.lua` (forces adjacent `.shield` divs to stack vertically)
      - `scripts/youtube-embed.lua` → `youtube-embed.lua`
      - `scripts/audio-autoplay.lua` → `audio-autoplay.lua`
-      - **Copy** `scripts/slides-header.html` (shared, never write HTML by hand)
+     - `scripts/box-keywords.lua` → `box-keywords.lua` (yellow-bordered boxes for key terms)
+     - `scripts/reading-feedback.lua` → `reading-feedback.lua` (auto-animate table feedback)
+      - `scripts/autocue.lua` → `autocue.lua` (teleprompter scrolling text — self-contained, no companion HTML needed)
+     - **Copy** `scripts/slides-header.html` (shared, never write HTML by hand)
   4. Build from the `slides/` directory:
      ```bash
      $slidesDir = Resolve-Path "."
      pandoc slides.md -t revealjs -s --slide-level=1 -o index.html \
        -V revealjs-url="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0" \
        -V theme=black -V width=1280 -V height=720 -V margin=0.04 \
-       --css="slides-pandoc.css" \
-       --include-in-header="slides-header.html" \
+        --css="slides-pandoc.css" \
+        --include-in-header="slides-header.html" \
+        --lua-filter="$slidesDir\autocue.lua" \
+       --lua-filter="$slidesDir\reading-feedback.lua" \
+       --lua-filter="$slidesDir\box-keywords.lua" \
        --lua-filter="$slidesDir\shield-block.lua" \
        --lua-filter="$slidesDir\youtube-embed.lua" \
        --lua-filter="$slidesDir\audio-autoplay.lua"
@@ -136,6 +212,24 @@ A lint command is defined at `.kilo/command/lint.md` — invoke via Kilo CLI.
 - **CSS:** `scripts/slides-pandoc.css` — shields, fragments, title row, CEFR badges
 - **`slides-header.html`:** shared file at `scripts/slides-header.html` — copy to each slides directory (never write HTML by hand)
 - Reference: `.kilo/skills/create-beautiful-slideshows/SKILL.md` (full conventions, slide patterns, CSS reference)
+
+## Differentiation (Tiered Challenges)
+
+Every main task slide must offer **three-tier differentiation** (Standard / Advanced / Elite) to accommodate the wide ability range in class:
+
+- **Standard:** Full scaffolding — task prompts visible during input/activity
+- **Advanced:** Partial scaffolding — students take notes, then answer from notes
+- **Elite:** Minimal scaffolding — students complete from memory and understanding alone
+
+**Display pattern:**
+- **Plain dark slides (no image background):** Three paragraphs with bold tier labels and Font Awesome icons — no `.shield` wrapper
+- **Image-background slides:** Three stacked `.shield` divs (dark backdrop ensures readability over the image)
+
+Font Awesome icons (`fa-solid`) are loaded via `slides-header.html`. Use `fa-book-open` for Standard, `fa-pencil` for Advanced, `fa-star` for Elite.
+
+This applies to reading, listening, speaking, and writing task slides. See `.kilo/skills/create-beautiful-slideshows/SKILL.md#pedagogical-requirements` for the full framework and examples.
+
+Non-task slides (lead-in, transition, summary, title) are exempt.
 
 ## Content transforms
 
@@ -164,13 +258,26 @@ When editing a slide at a reveal.js URL (e.g., `index.html#/7`):
 
 **Always edit `slides.md`, never `index.html`.** The HTML is regenerated from Markdown.
 
+## CSS/HTML FILES ARE FORBIDDEN
+
+- Do NOT read any .css, .html, or .htm file
+- Do NOT edit any .css, .html, or .htm file
+- slides-pandoc.css is **hash-locked** — `validate_slides.py` fails the build if it has been modified (even whitespace)
+- slides-header.html is **copy-only** — its source is at `scripts/slides-header.html`; never write HTML by hand
+- If a visual problem exists, the fix is ALWAYS in Pandoc Markdown or a Lua filter — NEVER in CSS
+- The `style=` attribute is forbidden in slides.md — use Pandoc fenced divs, bracketed spans, or Lua filters
+
 ## Research — Pandoc/Lua only
 
 The only output formats are Markdown. Pandoc + Lua filters handle all HTML/Typst generation. If you don't know how to do something:
-- **Pandoc Markdown syntax** → search via Tavily or use Context7 for the Pandoc docs
-- **Lua filter patterns** → search the Pandoc Lua filter documentation via Context7 or Tavily
+- **Pandoc Markdown syntax** → Context7 first (faster, authoritative). Fall back to Tavily: "pandoc markdown \<topic\>"
+- **Lua filter patterns** → Context7 first for the Pandoc Lua filter API. Fall back to Tavily: "pandoc lua filter \<topic\>"
+- **Before ANY edit to a .lua file** (shield-block.lua, youtube-embed.lua, etc.):
+  1. Search via Context7 for the relevant Pandoc Lua filter API function
+  2. If Context7 is down or doesn't have the answer, fall back to Tavily web search: `pandoc lua filter <topic>`
+  3. Cite the search result in the edit rationale
 - **No raw HTML** — use Pandoc Markdown fenced divs `::: {.class}`, bracketed spans `[text]{.class}`, and heading attributes `{data-key=value}`
-**No inline CSS (`style=`) in slides.md** — all styling goes through Lua filters (`shield-block.lua`, etc.) or the shared CSS file. The validation script (`validate_slides.py`) will fail the build if `style=` is found in Markdown. The test suite (`tests/test_validate_slides.py::TestCheckInlineCss`) enforces this as red-green.
+- **No inline CSS (`style=`) in slides.md** — all styling goes through shared CSS files or Lua filters. The validation script (`validate_slides.py`) will fail the build if `style=` is found in Markdown. The test suite (`tests/test_validate_slides.py::TestCheckInlineCss`) enforces this as red-green.
 - **No raw Typst** — the `build-excellent-lesson-plans` skill's Lua filter handles all Typst table generation
 
 ## Image replacement workflow

@@ -83,6 +83,7 @@
         if (finished) return; // timer expired, must reset first
         startBtn.classList.add("timer-pill__btn--hidden");
         pauseBtn.classList.remove("timer-pill__btn--hidden");
+        playBlip(); // blip on start (also for autostart)
         // Record current minute for minute-blip tracking
         lastMinute = Math.floor(secondsLeft / 60);
         intervalId = setInterval(tick, 1000);
@@ -126,18 +127,17 @@
         secondsLeft--;
         displayEl.textContent = formatTime(secondsLeft);
 
-        // Blip at every minute boundary
-        var currentMinute = Math.floor(secondsLeft / 60);
-        if (lastMinute !== -1 && currentMinute !== lastMinute) {
-            playBlip();
-        }
-        lastMinute = currentMinute;
-
-        // Bell warning at &le;10 seconds
-        if (secondsLeft <= WARNING_THRESHOLD && !warned) {
-            warned = true;
+        // Last 10 seconds: blip every second
+        if (secondsLeft <= WARNING_THRESHOLD) {
             pillEl.classList.add("timer-pill--warning");
-            playBell();
+            playBlip();
+        } else {
+            // Blip at every minute boundary
+            var currentMinute = Math.floor(secondsLeft / 60);
+            if (lastMinute !== -1 && currentMinute !== lastMinute) {
+                playBlip();
+            }
+            lastMinute = currentMinute;
         }
     }
 
@@ -180,6 +180,8 @@
 
         displayEl.textContent = formatTime(secondsLeft);
         showPill();
+        // Autostart timer on slide entry
+        onStart();
     }
 
     var TimerPlugin = {
@@ -209,4 +211,56 @@
 
     // Expose globally so slides-template.html can register it
     window.TimerPlugin = TimerPlugin;
+
+    // Auto-init: poll for reveal.js, then bind directly
+    (function autoInit() {
+        var check = setInterval(function() {
+            if (typeof Reveal !== 'undefined') {
+                clearInterval(check);
+                var readyCheck = setInterval(function() {
+                    if (Reveal.isReady()) {
+                        clearInterval(readyCheck);
+                        createPill();
+                        blipAudio = new Audio(BLIP_AUDIO_SRC);
+                        blipAudio.preload = "auto";
+                        bellAudio = new Audio(BELL_AUDIO_SRC);
+                        bellAudio.preload = "auto";
+                        Reveal.on('slidechanged', function() {
+                            loadSlideTimer(Reveal);
+                        });
+                        Reveal.on('paused', function() {
+                            if (intervalId !== null) onPause();
+                        });
+                        loadSlideTimer(Reveal);
+                    }
+                }, 50);
+            }
+        }, 50);
+    })();
+})();
+
+// Auto-init: poll for reveal.js, then bind directly (not a registered plugin)
+(function autoInit() {
+    var check = setInterval(function() {
+        if (typeof Reveal !== 'undefined') {
+            clearInterval(check);
+            var readyCheck = setInterval(function() {
+                if (Reveal.isReady()) {
+                    clearInterval(readyCheck);
+                    createPill();
+                    blipAudio = new Audio(BLIP_AUDIO_SRC);
+                    blipAudio.preload = "auto";
+                    bellAudio = new Audio(BELL_AUDIO_SRC);
+                    bellAudio.preload = "auto";
+                    Reveal.on('slidechanged', function() {
+                        loadSlideTimer(Reveal);
+                    });
+                    Reveal.on('paused', function() {
+                        if (intervalId !== null) onPause();
+                    });
+                    loadSlideTimer(Reveal);
+                }
+            }, 50);
+        }
+    }, 50);
 })();

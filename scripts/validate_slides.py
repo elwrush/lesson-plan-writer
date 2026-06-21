@@ -19,6 +19,7 @@ Exit codes:
     2 — errors found (build should not proceed)
 """
 
+import hashlib
 import re
 import sys
 from pathlib import Path
@@ -144,7 +145,16 @@ def check_raw_html(slides: list[dict]) -> list[str]:
         matches = html_pattern.findall(stripped)
         if matches:
             # Filter common allowed patterns
-            allowed_prefixes = ("</div", "<div ", "<section", "</section", "<aside", "</aside")
+            allowed_prefixes = (
+                "</div",
+                "<div ",
+                "<section",
+                "</section",
+                "<aside",
+                "</aside",
+                "<i ",
+                "</i",
+            )
             real_matches = [m for m in matches if not m.startswith(allowed_prefixes)]
             if real_matches:
                 errors.append(
@@ -273,6 +283,35 @@ def check_youtube_ids(slides: list[dict]) -> list[str]:
     return errors
 
 
+def check_css_hash() -> list[str]:
+    """Check slides-pandoc.css hash hasn't been modified.
+
+    The canonical CSS file at scripts/slides-pandoc.css is hash-locked.
+    Any modification (even whitespace) will be caught here.
+    Visual fixes must go through Pandoc Markdown or Lua filters — never CSS.
+    """
+    errors = []
+    scripts_dir = Path(__file__).resolve().parent
+    css_path = scripts_dir / "slides-pandoc.css"
+    hash_path = css_path.with_suffix(".css.sha256")
+
+    if not hash_path.exists():
+        errors.append(f"Hash file not found: {hash_path}. Run the hash-lock setup to generate it.")
+        return errors
+
+    stored_hash = hash_path.read_text(encoding="utf-8").strip()
+    current_hash = hashlib.sha256(css_path.read_bytes()).hexdigest()
+
+    if stored_hash != current_hash:
+        errors.append(
+            f"slides-pandoc.css has been modified (hash mismatch).\n"
+            f"  This file is hash-locked. Do NOT edit CSS.\n"
+            f"  Visual fixes go through Pandoc Markdown attributes or Lua filters.\n"
+            f"  If intentional, regenerate the hash: update {hash_path.name}"
+        )
+    return errors
+
+
 def count_slides(slides: list[dict]) -> dict:
     """Produce slide statistics."""
     total = len(slides)
@@ -316,7 +355,13 @@ def main():
 
     # ── checks that produce errors (blocking) ──
 
-    # 0. Inline CSS — agent writes Pandoc Markdown only
+    # 0. CSS hash-lock — ensure slides-pandoc.css hasn't been edited
+    css_hash_errors = check_css_hash()
+    for msg in css_hash_errors:
+        err(msg)
+        error_count += 1
+
+    # 1. Inline CSS — agent writes Pandoc Markdown only
     css_errors = check_inline_css(md)
     for msg in css_errors:
         err(msg)

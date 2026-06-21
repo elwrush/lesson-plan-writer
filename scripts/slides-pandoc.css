@@ -19,40 +19,6 @@
   margin-bottom: 0.5em;
 }
 
-/* --- Title slide logo (small overlay) --- */
-.reveal .title-logo {
-  display: block;
-  max-height: 108px;
-  width: auto;
-  margin: 0 auto 0.5em;
-}
-
-/* --- Shield for text readability on image backgrounds --- */
-.reveal .shield {
-  background: rgba(0, 0, 0, 0.55);
-  padding: 0.15em 0.6em;
-  border-radius: 4px;
-  display: inline-block;
-  text-shadow: none;
-  line-height: 1.4;
-  margin-bottom: 0.15em;
-}
-/* Tighten spacing between paragraphs inside a shield */
-.reveal .shield p {
-  margin: 0.1em 0;
-}
-
-/* --- Title row: stretch full width, dark shield behind --- */
-.reveal .title-row {
-  background: rgba(0, 0, 0, 0.55);
-  padding: 0.2em 0.6em;
-  border-radius: 4px;
-  display: inline-block;
-  white-space: nowrap;
-  text-shadow: none;
-  margin-bottom: 0.5em;
-}
-
 /* --- Title text within the title row --- */
 .reveal .slide-title {
   font-size: 1.8em;
@@ -62,7 +28,7 @@
 
 /* --- CTA text (bottom strap) --- */
 .reveal .cta-text {
-  font-size: 1.1em;
+  font-size: 1.3em;
   color: #ffdd00;
   font-weight: bold;
 }
