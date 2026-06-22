@@ -1,16 +1,29 @@
-# Temp files
+# Generated slideshows and lesson plans (deployed to gh-pages)
+output/
+
+# Old archive content (not actively maintained)
+inputs/ARCHIVE/
+PDF/
+docs/
+M3_Lesson01_Listening/
+
+# Temp and generated files
+tmp/
+voice-test/
 tavily_*.json
 *.vtt
 t.txt
 node_modules/
-
-tmp/
-voice-test/
 scripts/__pycache__/
 tests/__pycache__/
 
 # Converted images
 templates/26-01-2026-LP-*/
 
-# Search result cache
-tavily_*.json
+# Media files (not stored in git)
+*.mp3
+*.m4a
+*.wav
+*.ogg
+*.mp4
+*.webm
