@@ -21,6 +21,7 @@ from validate_slides import (
     check_missing_files,
     check_raw_html,
     check_speaker_notes,
+    check_unauthorized_assets,
     check_youtube_ids,
     parse_slides,
 )
@@ -390,4 +391,42 @@ Text
 # Slide {#my-id .custom-class}
 """
         errors = check_inline_css(md)
+        assert len(errors) == 0
+
+    def test_unauthorized_css_reported(self, tmp_path):
+        """Unauthorized .css file in slides directory is flagged."""
+        md = tmp_path / "slides.md"
+        md.write_text("# Slide\ncontent\n")
+        css = tmp_path / "custom.css"
+        css.write_text("body { color: red; }")
+        errors = check_unauthorized_assets(md)
+        assert len(errors) == 1
+        assert "Unauthorized" in errors[0]
+
+    def test_unauthorized_html_reported(self, tmp_path):
+        """Unauthorized .html file in slides directory is flagged."""
+        md = tmp_path / "slides.md"
+        md.write_text("# Slide\ncontent\n")
+        html = tmp_path / "custom.html"
+        html.write_text("<div></div>")
+        errors = check_unauthorized_assets(md)
+        assert len(errors) == 1
+        assert "Unauthorized" in errors[0]
+
+    def test_allowed_assets_pass(self, tmp_path):
+        """slides-pandoc.css and slides-header.html are allowed."""
+        md = tmp_path / "slides.md"
+        md.write_text("# Slide\ncontent\n")
+        css = tmp_path / "slides-pandoc.css"
+        css.write_text("/* hash-locked */")
+        html = tmp_path / "slides-header.html"
+        html.write_text("<!-- header -->")
+        errors = check_unauthorized_assets(md)
+        assert len(errors) == 0
+
+    def test_no_assets_no_errors(self, tmp_path):
+        """No CSS/HTML files at all means no errors."""
+        md = tmp_path / "slides.md"
+        md.write_text("# Slide\ncontent\n")
+        errors = check_unauthorized_assets(md)
         assert len(errors) == 0

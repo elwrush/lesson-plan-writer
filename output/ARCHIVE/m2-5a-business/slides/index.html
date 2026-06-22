@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>slides</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme">
+  <link rel="stylesheet" href="slides-pandoc.css"/>
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link rel="stylesheet" href="timer-plugin.css" />
+  <script src="timer-plugin.js"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="splash" class="slide level1"
+data-background-image="assets/splash.jpg" data-background-size="cover"
+style="justify-content: flex-start !important;">
+<h1 data-background-image="assets/splash.jpg"
+data-background-size="cover"
+style="justify-content: flex-start !important;"></h1>
+</section>
+<section id="title" class="slide level1"
+data-background-image="assets/splash.jpg" data-background-size="cover"
+style="justify-content: flex-start !important;">
+<h1 data-background-image="assets/splash.jpg"
+data-background-size="cover"
+style="justify-content: flex-start !important;"></h1>
+<div style="text-align: center; margin: 10px 0 0 0;">
+<img data-src="assets/logo.png" class="title-logo" width="120" />
+</div>
+<div class="title-row"
+style="padding: 0.1em 0.4em; background: rgba(0, 0, 0, 0.55); border-radius: 4px; display: inline-block; white-space: nowrap; text-shadow: none; margin-bottom: 0.3em;">
+<span class="slide-title"><strong>What makes a business
+successful?</strong></span>
+</div>
+<div class="shield"
+style="display: flex; align-items: center; width: fit-content; margin: 0.1em auto; padding: 0.1em 0.4em; background: rgba(0, 0, 0, 0.55); border-radius: 4px; text-shadow: none; line-height: 1.3;">
+<span class="cta-text">Let’s read and find out!</span>
+</div>
+<aside class="notes">
+<p>Welcome students. Introduce the topic: “Today we’re going to explore
+what makes a company valuable — and you might be surprised by the
+answer.” Time: 1 min. T-Ss.</p>
+</aside>
+</section>
+<section id="objectives" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">Today you will…</h1>
+<ul>
+<li><p>Listen for specific information about young
+entrepreneurs</p></li>
+<li><p>Read for supporting details in a business article</p></li>
+<li><p>Discuss what makes a company valuable</p></li>
+</ul>
+<aside class="notes">
+<p>Read through the objectives. “By the end of this lesson, you will be
+able to…” Time: 1 min. T-Ss.</p>
+</aside>
+</section>
+<section id="autocue-intro" class="slide level1"
+data-background-color="#c0392b"
+style="justify-content: flex-start !important;">
+<h1 data-background-color="#c0392b"
+style="justify-content: flex-start !important;">How Fast Can You
+Read?</h1>
+<aside class="notes">
+<p>“Let’s start with a reading challenge. B1 level text — B2 speed. Read
+as it scrolls.” Time: 0.5 min. T-Ss.</p>
+</aside>
+</section>
+<section id="autocue-b2" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">B2 Challenge</h1>
+<div class="autocue-outer autocue-speed-b2">
+<style>
+@keyframes autocue-scroll {
+  0% { transform: translateY(46%); }
+  100% { transform: translateY(-100%); }
+}
+.autocue-outer {
+  height: 320px; overflow: hidden; position: relative;
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;
+  padding: 0 16px; background: rgba(0,0,0,0.3); text-align: left;
+}
+.autocue-inner {
+  position: absolute; width: calc(100% - 32px);
+  font-size: 1.1em; line-height: 1.6; text-align: left;
+  animation: autocue-scroll linear forwards;
+  animation-duration: 45s;
+}
+.autocue-badge {
+  position: absolute; bottom: 8px; right: 12px;
+  display: inline-block; padding: 2px 10px;
+  border-radius: 4px; font-size: 0.7em; font-weight: bold;
+  text-transform: uppercase; z-index: 2;
+}
+.autocue-speed-a2 .autocue-badge { background: #27ae60; color: #fff; }
+.autocue-speed-b1 .autocue-badge { background: #f39c12; color: #fff; }
+.autocue-speed-b2 .autocue-badge { background: #e74c3c; color: #fff; }
+.autocue-toggle {
+  position: absolute; top: 8px; right: 12px; z-index: 2;
+  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+  color: #fff; border-radius: 4px; padding: 2px 10px;
+  font-size: 1em; cursor: pointer; line-height: 1.4;
+}
+.autocue-toggle:hover { background: rgba(255,255,255,0.3); }
+</style>
+
+<button class="autocue-toggle">⏸</button><span class="autocue-badge">B2</span>
+<div class="autocue-inner">
+<p>Arnott’s is one of Australia’s most famous food companies. It was
+founded in 1865 by Scottish immigrant William Arnott. He started by
+baking bread, but soon realised that biscuits lasted longer and could be
+transported further.</p>
+<p>Today, Arnott’s produces over 60 million biscuits every day. Its most
+famous product is the Tim Tam — a chocolate-covered biscuit that
+Australians love. The company has become a national icon.</p>
+<p>What made Arnott’s successful? First, quality — Arnott’s always used
+good ingredients. Second, branding — the red Arnott’s logo is recognised
+by 99% of Australians. Third, innovation — when they created Tim Tams in
+1964, they invented a completely new product category.</p>
+<p>The company also understood customer psychology. Arnott’s biscuits
+were marketed as affordable treats during difficult economic times,
+which built strong emotional connections with customers that last for
+generations.</p>
+<hr />
+</div>
+</div>
+</section>
+<section id="autocue-check" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">Check Your
+Reading</h1>
+<p><strong>True or false?</strong></p>
+<ol type="1">
+<li>Arnott’s was founded in 1865. <span
+class="fragment"><strong>True</strong></span></li>
+<li>Arnott’s produces 6 million biscuits every day. <span
+class="fragment"><strong>False</strong></span></li>
+<li>The Tim Tam was created in 1964. <span
+class="fragment"><strong>True</strong></span></li>
+</ol>
+<aside class="notes">
+<p>Click to reveal answers. “This text was about customer service,
+branding, and experience — exactly what we’re studying today.” Time: 1
+min. T-Ss.</p>
+</aside>
+</section>
+<section id="lead-in" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">What habits lead to
+success?</h1>
+<p>Discuss with a partner:</p>
+<ul>
+<li>What habits help people succeed?</li>
+<li>What skills do you need?</li>
+<li>What should you avoid doing?</li>
+</ul>
+<aside class="notes">
+<p>Pairs discuss. Elicit 4-5 ideas on the board. Then open books to p.44
+— introduce the 4 infographic tips. Ask students which one they agree
+with most and why. Transition to video. Time: 5 min. Pairs → T-Ss.</p>
+</aside>
+</section>
+<section id="video-challenge" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">You’re about to
+watch a video</h1>
+<p><i class="fa-solid fa-book-open"></i> <strong>Standard</strong> —
+Read the handout while watching.</p>
+<p><i class="fa-solid fa-pencil"></i> <strong>Advanced</strong> — Take
+notes, then check with the handout.</p>
+<p><i class="fa-solid fa-star"></i> <strong>Elite</strong> — No notes.
+Answer from memory.</p>
+<aside class="notes">
+<p>Explain the three levels. Students choose their tier BEFORE the video
+starts. Time: 1 min. T-Ss.</p>
+</aside>
+</section>
+<section id="video-intro" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">Young Entrepreneurs
+in China</h1>
+<div class="iframe-container" style="width: 80%; padding-bottom: 45%;"><iframe src="https://www.youtube.com/embed/gRSHbEn0kLQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+<aside class="notes">
+<p>Play the video. Students complete handout p.45 at their chosen level.
+Time: 8 min. Indiv.</p>
+</aside>
+</section>
+<section id="video-questions" class="slide level1" data-timer="120"
+style="justify-content: flex-start !important;">
+<h1 data-timer="120"
+style="justify-content: flex-start !important;">Complete the
+Questions</h1>
+<p>Complete the questions on <strong>p.45</strong></p>
+<p>When you’re done, check with a partner.</p>
+<aside class="notes">
+<p>Ss pair-check their video answers. Ask 2-3 pairs to share before
+revealing. Time: 2 min. Pairs.</p>
+</aside>
+</section>
+<section id="video-feedback" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">Check Your
+Answers</h1>
+<ol type="1">
+<li><span class="fragment answer-reveal"><strong>to be
+entrepreneurs</strong></span></li>
+<li><span class="fragment answer-reveal"><strong>was
+bored</strong></span></li>
+<li><span
+class="fragment answer-reveal"><strong>isn’t</strong></span></li>
+<li><span
+class="fragment answer-reveal"><strong>experienced</strong></span></li>
+</ol>
+<aside class="notes">
+<p>Reveal each answer on click. After all answers: “Do you agree with
+Cui Ernan that entrepreneurship isn’t for everyone? Why did Song leave
+his safe job?” Time: 3 min. T-Ss.</p>
+</aside>
+</section>
+<section id="transition-vocab" class="slide level1"
+data-background-color="#c0392b"
+style="justify-content: flex-start !important;">
+<h1 data-background-color="#c0392b"
+style="justify-content: flex-start !important;">Let’s review some
+vocabulary</h1>
+<p>The video talked about entrepreneurs. Now these words will help you
+understand the reading.</p>
+<aside class="notes">
+<p>Phase transition: Video → Vocabulary. “The video was about young
+entrepreneurs. Now we’re moving to the reading. These words appear in
+the text — let’s make sure you know them.” Time: 0.5 min. T-Ss.</p>
+</aside>
+</section>
+<section id="vocab" class="slide level1" data-timer="300"
+style="justify-content: flex-start !important;">
+<h1 data-timer="300"
+style="justify-content: flex-start !important;">Vocabulary</h1>
+<p><strong>Ex A (p. 46):</strong> Complete the sentences.</p>
+<p>brand · customer service · excellence · logo · quality · trust ·
+value</p>
+<ol type="1">
+<li>Do you <span
+class="fragment answer-reveal"><strong>trust</strong></span> sales
+staff?</li>
+<li>How important is good <span
+class="fragment answer-reveal"><strong>customer
+service</strong></span>?</li>
+<li>What <span
+class="fragment answer-reveal"><strong>brand</strong></span> of clothing
+is most popular?</li>
+<li><span
+class="fragment answer-reveal"><strong>Excellence</strong></span> in
+customer service is the most important thing.</li>
+<li>What adds <span
+class="fragment answer-reveal"><strong>value</strong></span> to a
+business?</li>
+<li>A company <span
+class="fragment answer-reveal"><strong>logo</strong></span> is something
+people remember.</li>
+<li>Good <span
+class="fragment answer-reveal"><strong>quality</strong></span> products
+or cheap products?</li>
+</ol>
+<aside class="notes">
+<p>Ss complete individually, then compare with a partner. Click to
+reveal each answer. Time: 5 min. Indiv → Pairs → T-Ss.</p>
+</aside>
+</section>
+<section id="transition-global" class="slide level1"
+data-background-color="#c0392b"
+style="justify-content: flex-start !important;">
+<h1 data-background-color="#c0392b"
+style="justify-content: flex-start !important;">Global Reading</h1>
+<aside class="notes">
+<p>“We’re going to read now. First — how to find the main idea quickly.”
+Time: 0.5 min. T-Ss.</p>
+</aside>
+</section>
+<section id="skim-intro" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">How to Skim</h1>
+<p><strong>Three rules:</strong></p>
+<ol type="1">
+<li>Read the <strong>first sentence</strong> of each paragraph</li>
+<li>Ask: <em>“What is this paragraph about?”</em></li>
+<li><strong>Match</strong> each question to the paragraph with the same
+topic</li>
+</ol>
+<aside class="notes">
+<p>“Rule 1: first sentence tells you the topic of the paragraph. Rule 2:
+identify the topic. Rule 3: find which question matches that topic.
+You’re not looking for the exact words — you’re looking for the same
+idea.” Time: 1 min. T-Ss.</p>
+</aside>
+</section>
+<section id="reading-challenge" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">Choose Your
+Challenge</h1>
+<p><i class="fa-solid fa-book-open"></i> <strong>Standard</strong></p>
+<p><i class="fa-solid fa-pencil"></i> <strong>Advanced</strong></p>
+<p><i class="fa-solid fa-star"></i> <strong>Elite</strong></p>
+<aside class="notes">
+<p>“Remember the challenge? Choose your level and start the task.” Time:
+0.5 min. T-Ss.</p>
+</aside>
+</section>
+<section id="reading-global" class="slide level1" data-timer="480"
+style="justify-content: flex-start !important;">
+<h1 data-timer="480"
+style="justify-content: flex-start !important;">Global Reading</h1>
+<p><strong>Ex C (p. 46):</strong> Match the questions to paragraphs
+2–4.</p>
+<ol type="1">
+<li>What do <strong>brands</strong> say about people?</li>
+<li>How important is <strong>customer service</strong>?</li>
+<li>How important are <strong>quality products</strong>?</li>
+</ol>
+<aside class="notes">
+<p>Ss work at their chosen level. After timer, pair check. Time: 8 min.
+Indiv → Pairs.</p>
+</aside>
+</section>
+<section id="reading-global-feedback-jumbled" class="slide level1"
+data-auto-animate="">
+<h1 data-auto-animate="">Check Your Reading</h1>
+<table>
+<thead>
+<tr>
+<th style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="col_paragraph">Paragraph</span></p></th>
+<th style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="col_answer">Answer</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="col_2">Paragraph 2</span></p></td>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="a3">what brands say about people</span></p></td>
+</tr>
+<tr>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="col_3">Paragraph 3</span></p></td>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="a1">how important customer service is</span></p></td>
+</tr>
+<tr>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="col_4">Paragraph 4</span></p></td>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="a2">how important quality products are</span></p></td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>“Look at the answers on the right. They’re in the wrong order. Watch
+as they fly to the correct paragraphs.” Time: 1 min. T-Ss.</p>
+</aside>
+</section>
+<section id="reading-global-feedback-correct" class="slide level1"
+data-auto-animate="">
+<h1 data-auto-animate="">Check Your Reading</h1>
+<table>
+<thead>
+<tr>
+<th style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="col_paragraph">Paragraph</span></p></th>
+<th style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="col_answer">Answer</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="col_2">Paragraph 2</span></p></td>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="a1">how important customer service is</span></p></td>
+</tr>
+<tr>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="col_3">Paragraph 3</span></p></td>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="a2">how important quality products are</span></p></td>
+</tr>
+<tr>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="col_4">Paragraph 4</span></p></td>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;"><p><span
+data-id="a3">what brands say about people</span></p></td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>“Now the answers match the correct paragraphs. Paragraph 2 is about
+customer service. Paragraph 3 is about quality products. Paragraph 4 is
+about what brands say.” Time: 1 min. T-Ss.</p>
+</aside>
+</section>
+<section id="transition-close" class="slide level1"
+data-background-color="#c0392b"
+style="justify-content: flex-start !important;">
+<h1 data-background-color="#c0392b"
+style="justify-content: flex-start !important;">Close Reading</h1>
+<aside class="notes">
+<p>“Skimming told us which paragraph talks about what. Now we go deeper
+— finding the specific evidence.” Time: 0.5 min. T-Ss.</p>
+</aside>
+</section>
+<section id="close-how" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">Close Reading — How
+it works</h1>
+<p><strong>Supporting details</strong> prove the main idea.</p>
+<p>Look for signal phrases:</p>
+<table>
+<thead>
+<tr>
+<th style="border-bottom: 1px solid white; padding: 6px 12px;">Type</th>
+<th style="border-bottom: 1px solid white; padding: 6px 12px;">Signal
+phrases</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td
+style="border-bottom: 1px solid white; padding: 6px 12px;">Examples</td>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;">such as,
+for instance, one example is</td>
+</tr>
+<tr>
+<td
+style="border-bottom: 1px solid white; padding: 6px 12px;">Reasons</td>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;">because,
+due to, in order to</td>
+</tr>
+<tr>
+<td
+style="border-bottom: 1px solid white; padding: 6px 12px;">Explanations</td>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;">in other
+words, which means</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>“Supporting details are the evidence that proves a main idea. How do
+you find them? Look for signal phrases — words that tell you a detail is
+coming. Such as, because, in other words — these are your clues.” Time:
+2 min. T-Ss.</p>
+</aside>
+</section>
+<section id="close-example" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">Close Reading —
+Example</h1>
+<p><strong>Main idea:</strong> <span class="box"
+style="border: 2px solid #ffdd00; border-radius: 4px; padding: 1px 7px; display: inline-block;">Regular
+exercise</span> is <span class="box"
+style="border: 2px solid #ffdd00; border-radius: 4px; padding: 1px 7px; display: inline-block;">good</span>
+for your <span class="box"
+style="border: 2px solid #ffdd00; border-radius: 4px; padding: 1px 7px; display: inline-block;">health</span>.</p>
+<table>
+<thead>
+<tr>
+<th
+style="text-align: left; border-bottom: 1px solid white; padding: 6px 12px;">Signal
+phrase</th>
+<th
+style="text-align: left; border-bottom: 1px solid white; padding: 6px 12px;">Type</th>
+<th
+style="text-align: left; border-bottom: 1px solid white; padding: 6px 12px;">Supporting
+detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td
+style="text-align: left; border-bottom: 1px solid white; padding: 6px 12px;"><strong>because</strong></td>
+<td
+style="text-align: left; border-bottom: 1px solid white; padding: 6px 12px;">Reason</td>
+<td
+style="text-align: left; border-bottom: 1px solid white; padding: 6px 12px;">reduces
+the risk of heart disease</td>
+</tr>
+<tr>
+<td
+style="text-align: left; border-bottom: 1px solid white; padding: 6px 12px;"><strong>For
+instance</strong></td>
+<td
+style="text-align: left; border-bottom: 1px solid white; padding: 6px 12px;">Example</td>
+<td
+style="text-align: left; border-bottom: 1px solid white; padding: 6px 12px;">helps
+you sleep better</td>
+</tr>
+<tr>
+<td
+style="text-align: left; border-bottom: 1px solid white; padding: 6px 12px;"><strong>In
+other words</strong></td>
+<td
+style="text-align: left; border-bottom: 1px solid white; padding: 6px 12px;">Explanation</td>
+<td
+style="text-align: left; border-bottom: 1px solid white; padding: 6px 12px;">improves
+concentration</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Your turn — find the signal phrases in the text, then the
+details.</strong></p>
+<aside class="notes">
+<p>“See how the signal phrases from the table work in real sentences?
+Because introduces a reason, for instance introduces an example, in
+other words explains. Now in your text, find these signal phrases and
+the details that follow them.” Time: 2 min. T-Ss.</p>
+</aside>
+</section>
+<section id="close-challenge" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">Choose Your
+Challenge</h1>
+<p><i class="fa-solid fa-book-open"></i> <strong>Standard</strong></p>
+<p><i class="fa-solid fa-pencil"></i> <strong>Advanced</strong></p>
+<p><i class="fa-solid fa-star"></i> <strong>Elite</strong></p>
+<aside class="notes">
+<p>“Remember the challenge levels? Same format — choose the right level
+for this closer reading.” Time: 0.5 min. T-Ss.</p>
+</aside>
+</section>
+<section id="reading-close" class="slide level1" data-timer="480"
+style="justify-content: flex-start !important;">
+<h1 data-timer="480"
+style="justify-content: flex-start !important;">Close Reading</h1>
+<p><strong>Ex D (p. 48):</strong> Complete the supporting details.</p>
+<ol type="1">
+<li>You can return a broken product, but you <span class="box"
+style="border: 2px solid #ffdd00; border-radius: 4px; padding: 1px 7px; display: inline-block;">cannot
+return</span> ____</li>
+<li>It is more expensive to <span class="box"
+style="border: 2px solid #ffdd00; border-radius: 4px; padding: 1px 7px; display: inline-block;">attract</span>
+____ than to <span class="box"
+style="border: 2px solid #ffdd00; border-radius: 4px; padding: 1px 7px; display: inline-block;">keep
+old ones</span></li>
+<li>A lot of companies sell the <span class="box"
+style="border: 2px solid #ffdd00; border-radius: 4px; padding: 1px 7px; display: inline-block;">same</span>
+____</li>
+<li>People are willing to <span class="box"
+style="border: 2px solid #ffdd00; border-radius: 4px; padding: 1px 7px; display: inline-block;">spend
+a lot of money on</span> ____ products</li>
+<li>People do not <span class="box"
+style="border: 2px solid #ffdd00; border-radius: 4px; padding: 1px 7px; display: inline-block;">need</span>
+____, but they are still <span class="box"
+style="border: 2px solid #ffdd00; border-radius: 4px; padding: 1px 7px; display: inline-block;">popular</span></li>
+<li>People like to buy brands that <span class="box"
+style="border: 2px solid #ffdd00; border-radius: 4px; padding: 1px 7px; display: inline-block;">represent</span>
+____</li>
+</ol>
+<aside class="notes">
+<p>Groups of 3: compare which details match main ideas (Ex D2). Justify
+using the text. Whole-class feedback. Time: 8 min. Pairs → Group.</p>
+</aside>
+</section>
+<section id="detail-1" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">Detail 1</h1>
+<p><span class="y"
+style="color: #ffdd00; font-weight: bold;"><strong>rude customer
+service</strong> (Par 2)</span></p>
+<p>You can return a faulty product, but bad service can’t be
+returned.</p>
+<p><em>“…rude customer service, unlike a faulty product, cannot be
+returned”</em></p>
+</section>
+<section id="detail-2" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">Detail 2</h1>
+<p><span class="y"
+style="color: #ffdd00; font-weight: bold;"><strong>new
+customers</strong> (Par 2)</span></p>
+<p>It costs more to find new customers than to keep the ones you already
+have.</p>
+<p><em>“…the cost of attracting a new customer is much higher than the
+cost of keeping an existing one”</em></p>
+</section>
+<section id="detail-3" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">Detail 3</h1>
+<p><span class="y"
+style="color: #ffdd00; font-weight: bold;"><strong>product</strong> (Par
+2)</span></p>
+<p>When companies sell similar things, good service is what makes them
+stand out.</p>
+<p><em>“…two or more companies are selling basically the same
+product”</em></p>
+</section>
+<section id="detail-4" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">Detail 4</h1>
+<p><span class="y"
+style="color: #ffdd00; font-weight: bold;"><strong>good-quality</strong>
+(Par 3)</span></p>
+<p>People buy quality products even when they don’t strictly need
+them.</p>
+<p><em>“…people are willing to spend a lot of money on good-quality
+products even when they do not need them”</em></p>
+</section>
+<section id="detail-5" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">Detail 5</h1>
+<p><span class="y" style="color: #ffdd00; font-weight: bold;"><strong>a
+watch</strong> (Par 3)</span></p>
+<p>Watches are no longer essential for telling time, but people still
+buy them.</p>
+<p><em>“…A watch is no longer essential, so why are these expensive
+items still popular?”</em></p>
+</section>
+<section id="detail-6" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">Detail 6</h1>
+<p><span class="y"
+style="color: #ffdd00; font-weight: bold;"><strong>who they are</strong>
+(Par 4)</span></p>
+<p>People buy brands that match how they want to be seen by others.</p>
+<p><em>“…we like to buy brands that represent how we like to present
+ourselves to others”</em></p>
+</section>
+<section id="d2-answer" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">D2 — Match details
+to main ideas</h1>
+<table>
+<colgroup>
+<col style="width: 75%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th style="border-bottom: 1px solid white; padding: 6px 12px;">Detail
+(from Ex D1)</th>
+<th
+style="text-align: center; border-bottom: 1px solid white; padding: 6px 12px;">Main
+idea</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;">You can
+return a broken product, but you cannot return rude customer
+service.</td>
+<td
+style="text-align: center; border-bottom: 1px solid white; padding: 6px 12px;"><span
+class="fragment y"
+style="color: #ffdd00; font-weight: bold;"><strong>B</strong></span></td>
+</tr>
+<tr>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;">It is
+more expensive to attract new customers than to keep old ones.</td>
+<td
+style="text-align: center; border-bottom: 1px solid white; padding: 6px 12px;"><span
+class="fragment y"
+style="color: #ffdd00; font-weight: bold;"><strong>B</strong></span></td>
+</tr>
+<tr>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;">A lot of
+companies sell the same product.</td>
+<td
+style="text-align: center; border-bottom: 1px solid white; padding: 6px 12px;"><span
+class="fragment y"
+style="color: #ffdd00; font-weight: bold;"><strong>B</strong></span></td>
+</tr>
+<tr>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;">People
+are willing to spend a lot of money on good-quality products.</td>
+<td
+style="text-align: center; border-bottom: 1px solid white; padding: 6px 12px;"><span
+class="fragment y"
+style="color: #ffdd00; font-weight: bold;"><strong>C</strong></span></td>
+</tr>
+<tr>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;">People do
+not need a watch, but they are still popular.</td>
+<td
+style="text-align: center; border-bottom: 1px solid white; padding: 6px 12px;"><span
+class="fragment y"
+style="color: #ffdd00; font-weight: bold;"><strong>A</strong></span></td>
+</tr>
+<tr>
+<td style="border-bottom: 1px solid white; padding: 6px 12px;">People
+like to buy brands that represent who they are.</td>
+<td
+style="text-align: center; border-bottom: 1px solid white; padding: 6px 12px;"><span
+class="fragment y"
+style="color: #ffdd00; font-weight: bold;"><strong>A</strong></span></td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>Click through each fragment to reveal the main idea letter. “A =
+brand identity, details 5,6. B = customer service, details 1,2,3. C =
+quality, detail 4.” Time: 2 min. T-Ss.</p>
+</aside>
+</section>
+<section id="transition-think" class="slide level1"
+data-background-color="#c0392b"
+style="justify-content: flex-start !important;">
+<h1 data-background-color="#c0392b"
+style="justify-content: flex-start !important;">What do you think?</h1>
+<aside class="notes">
+<p>Phase transition: Reading → Critical thinking. Time: 0.5 min.</p>
+</aside>
+</section>
+<section id="critical-thinking" class="slide level1" data-timer="300"
+style="justify-content: flex-start !important;">
+<h1 data-timer="300"
+style="justify-content: flex-start !important;">What adds the most
+value?</h1>
+<p>customer service · a well-known brand · quality products</p>
+<p><strong>Think about it:</strong></p>
+<ol type="1">
+<li><strong>Identify</strong> the three options</li>
+<li><strong>Find</strong> evidence in the text for each one</li>
+<li><strong>Decide</strong> which adds the most value — give a
+reason</li>
+<li><strong>Consider</strong> what someone who disagrees might say</li>
+</ol>
+<div class="fragment">
+<blockquote>
+<p>I think <strong>__</strong> adds the most value because
+<strong>__</strong> . Someone might disagree and say <strong>__</strong>
+.</p>
+</blockquote>
+</div>
+<aside class="notes">
+<p>Model the four-step thinking process. Pairs choose their own option
+and follow the steps. Share reasoning with the class. Time: 5 min. Pairs
+→ T-Ss.</p>
+</aside>
+</section>
+<section id="discussion" class="slide level1"
+style="justify-content: flex-start !important;">
+<h1 style="justify-content: flex-start !important;">What else adds
+value?</h1>
+<p>From what you’ve learned today — what else adds value to a
+company?</p>
+<p>Think about:</p>
+<ul>
+<li>How staff feel about their work</li>
+<li>How fast customers get help</li>
+<li>Whether prices are fair</li>
+</ul>
+<p>Can you think of a real company that does this well?</p>
+<aside class="notes">
+<p>Pairs discuss. Encourage students to challenge each other politely.
+Share examples from their own experience. Time: 3 min. Pairs → T-Ss.</p>
+</aside>
+<section id="autocue-global-script" style="display:none">
+<script>
+(function() {
+  if (typeof Reveal === 'undefined') return;
+  Reveal.on('slidechanged', function(event) {
+    var containers = event.currentSlide.querySelectorAll('.autocue-outer');
+    for (var i = 0; i < containers.length; i++) {
+      var inner = containers[i].querySelector('.autocue-inner');
+      if (!inner) continue;
+      inner.style.animation = 'none';
+      void inner.offsetHeight;
+      inner.style.animation = '';
+    }
+    var buttons = event.currentSlide.querySelectorAll('.autocue-toggle');
+    for (var j = 0; j < buttons.length; j++) {
+      buttons[j].onclick = function() {
+        var inner = this.parentElement.querySelector('.autocue-inner');
+        if (!inner) return;
+        if (inner.style.animationPlayState === 'paused') {
+          inner.style.animationPlayState = 'running';
+          this.textContent = '⏸';
+        } else {
+          inner.style.animationPlayState = 'paused';
+          this.textContent = '▶';
+        }
+      };
+    }
+  });
+})();
+</script>
+</section>
+
+</section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/search/search.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1280,
+
+        height: 720,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.04,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>

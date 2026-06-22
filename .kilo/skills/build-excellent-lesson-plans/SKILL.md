@@ -1,6 +1,8 @@
 ---
 name: build-excellent-lesson-plans
 description: Generate professional lesson plan PDFs from Markdown using the three-layer Markdown → Pandoc → Typst → PDF pipeline.
+license: MIT
+metadata: author=Ed Rush (C·E·L Mathayom / ACT)
 ---
 
 # Skill: build-excellent-lesson-plans
@@ -62,7 +64,11 @@ Welcome to the Lesson Plan Writer!
 I'll help you create a structured lesson plan.
 ```
 
-### Step 2: Shape (question tool with options)
+### Step 2: Read Creative Techniques
+
+Read `references/CREATIVE_TECHNIQUES.md` before picking a shape. Ask the 7 questions from that document — the objective and creative approach should choose the shape, not the other way around.
+
+### Step 3: Shape (question tool with options)
 Display the shapes in your response text, then call `question` with options A–G:
 
 | Shape | Name |
@@ -279,55 +285,7 @@ The build pipeline uses these files:
 - `scripts/lesson-tables.lua` — Pandoc Lua filter that reads `## Stage N:` headings and generates Typst `#table()` with colored headers
 - `scripts/build_lesson_pdf.py` — Entry point: validates Markdown, runs Pandoc + Lua filter, compiles Typst, lints PDF
 - `knowledge-base/lesson plan shapes/json/shape-{letter}.json` — Shape templates defining stage structure per lesson type
-
-See also `.kilo/skills/build-excellent-lesson-plans/SKILL.md` (this document) for full workflow details.
-
-## Scripts
-
-- `scripts/build_lesson_pdf.py` — Main build script: validates markdown, runs Pandoc → Typst pipeline, lints output PDF, appends answer key/transcript
-- `scripts/lesson-tables.lua` — Pandoc Lua filter for stage table generation
-- `scripts/linter_pdf_content.py` — Post-build PDF content linting
-
-## Examples
-
-### Example 1: Receptive skills listening lesson
-
-**Request:** "Create a lesson plan for the M3 listening lesson based on the transcript."
-
-**Action taken:** Greeted user, loaded shape E (Receptive Skills), collected metadata (teacher, duration, CEFR, topic, class, materials, subfolder). Wrote `output/{subfolder}/lesson.md` with YAML frontmatter and body stages matching shape E. Ran `python scripts/build_lesson_pdf.py output/{subfolder}/lesson.md` to generate PDF. Verified masthead, info table, aim block, and stage table matched the template.
-
-**Output:** `PDF/M3_Lesson01_Listening/050726-listening-lesson-plan.pdf`
-
-### Example 2: Productive skills with answer key appendix
-
-**Request:** "Lesson plan for M2 writing CA feedback — 46 min, B1."
-
-**Action taken:** Loaded shape F (Productive Skills). Collected metadata. Wrote lesson.md with writing CA feedback stage structure. Added `answer_key: "output/{subfolder}/answer-key.typ"` to YAML frontmatter. Ran build script which appended the answer key as an appendix section. Verified PDF included both lesson stages and appendix.
-
-**Output:** `PDF/M2-WRITING-CA-FEEDBACK/050726-ca-feedback-lesson-plan.pdf`
-
----
-
-## Error Handling
-
-| Symptom | Likely cause | Fix |
-|---------|-------------|-----|
-| `build_lesson_pdf.py` exits with code 1 | Markdown validation failed (missing frontmatter, stage headings) | Check `lesson.md` for required YAML fields and `## Stage N:` heading format |
-| Typst compilation fails with "unknown font family" | Font path not set or Roboto not installed | Verify TinyTeX Roboto OTFs in `--font-path` |
-| Stage table renders with wrong column headers | Stage headings use wrong format | Ensure headings match `## Stage N:` exactly (with colon) |
-| Output PDF is empty or missing body | Pandoc or Typst pipeline error | Run `build_lesson_pdf.py --verbose` to see intermediate output |
-| "Template hash mismatch" error | `templates/lesson-plan.typ` was modified | Delete `.template-lock.json` and re-run, or restore original template |
-
----
-
-## Reference
-
-The build pipeline uses these files:
-
-- `templates/lesson-plan.typ` — Typst page setup, masthead, info table, aim block
-- `scripts/lesson-tables.lua` — Pandoc Lua filter that reads `## Stage N:` headings and generates Typst `#table()` with colored headers
-- `scripts/build_lesson_pdf.py` — Entry point: validates Markdown, runs Pandoc + Lua filter, compiles Typst, lints PDF
-- `knowledge-base/lesson plan shapes/json/shape-{letter}.json` — Shape templates defining stage structure per lesson type
+- `references/CREATIVE_TECHNIQUES.md` — Creative techniques to explore BEFORE picking a shape (problem-first, comparative input, persona-based, drama, McKinsey-style)
 
 See also `.kilo/skills/build-excellent-lesson-plans/SKILL.md` (this document) for full workflow details.
 

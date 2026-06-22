@@ -1,60 +1,16 @@
-# Python
-__pycache__/
-*.pyc
-*.pyo
-.pytest_cache/
-.ruff_cache/
-.ruff_cache/
-
-# Kilo (tooling config, not source)
-.kilocode/
-
-# Generated output (lesson plans, slides, audio, PDFs — code backup only)
-output/
-
-# PDF output (generated)
-PDF/
-*.pdf
-
-# Large input files (epub, etc.)
-*.epub
-
-# Image files (code-only repo; media goes to gh-pages)
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.webp
-*.bmp
-*.ico
-
-# Office documents (source, not code)
-*.doc
-*.docx
-*.xls
-*.xlsx
-
-# Audio/media files (code-only repo)
-*.mp3
-*.m4a
-*.wav
-*.ogg
-*.opus
-*.avif
-voice-test/
-
-# Node.js
+# Temp files
+tavily_*.json
+*.vtt
+t.txt
 node_modules/
 
-# IDE
-.vscode/
+tmp/
+voice-test/
+scripts/__pycache__/
+tests/__pycache__/
 
-# OS
-Thumbs.db
-Desktop.ini
+# Converted images
+templates/26-01-2026-LP-*/
 
-
-# Build infrastructure assets (not lesson media — required for PDF pipeline)
-!templates/ACT.png
-!templates/Image_20260324_141022.png
-!templates/cambridge.png
+# Search result cache
+tavily_*.json

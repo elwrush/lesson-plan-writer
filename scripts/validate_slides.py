@@ -273,13 +273,45 @@ def check_youtube_ids(slides: list[dict]) -> list[str]:
                         if candidate == ":::":
                             break  # closing without content
                         if candidate and not candidate.startswith(":::"):
-                            # Check it's a valid 11-char YouTube ID
-                            if not re.match(r"^[a-zA-Z0-9_-]{8,15}$", candidate):
+                            # Strip query parameters (e.g. ?start=1148)
+                            clean_id = candidate.split("?")[0]
+                            # Check it's a valid 8-15 char YouTube ID
+                            if not re.match(r"^[a-zA-Z0-9_-]{8,15}$", clean_id):
                                 errors.append(
                                     f"Slide {slide['line_start']}: suspicious YouTube ID "
                                     f"'{candidate}'"
                                 )
                             break
+    return errors
+
+
+ALLOWED_HTML = {"slides-header.html", "autocue.html", "splash-annotations.html"}
+ALLOWED_CSS = {"slides-pandoc.css"}
+
+
+def check_unauthorized_assets(md_path: Path) -> list[str]:
+    """Scans the slides directory for CSS/HTML files not in the allowed list.
+    
+    The agent writes only Pandoc Markdown and Lua filters. No CSS/HTML files
+    may be created — only the shared infrastructure files are permitted.
+    """
+    errors = []
+    slides_dir = md_path.parent
+    if not slides_dir.is_dir():
+        return errors
+
+    for f in sorted(slides_dir.iterdir()):
+        if f.suffix in (".css", ".html", ".htm"):
+            if f.name in ALLOWED_HTML or f.name in ALLOWED_CSS:
+                continue
+            # Generated build output — not an authored file
+            if f.name == "index.html":
+                continue
+            errors.append(
+                f"Unauthorized {f.suffix} file: {f.name}\n"
+                f"  Only Pandoc Markdown and Lua filters are permitted.\n"
+                f"  Delete {f.name} or convert its content to a Lua filter."
+            )
     return errors
 
 
@@ -354,6 +386,12 @@ def main():
     warn_count = 0
 
     # ── checks that produce errors (blocking) ──
+
+    # 0. Unauthorized CSS/HTML — agent writes only Markdown + Lua filters
+    asset_errors = check_unauthorized_assets(md_path)
+    for msg in asset_errors:
+        err(msg)
+        error_count += 1
 
     # 0. CSS hash-lock — ensure slides-pandoc.css hasn't been edited
     css_hash_errors = check_css_hash()

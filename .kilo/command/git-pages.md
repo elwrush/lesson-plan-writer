@@ -12,7 +12,7 @@ If `subfolder` is provided, only that slideshow is deployed/updated. If omitted,
 
 **Update** = the slideshow subfolder ALREADY exists on gh-pages. Overwrites the existing files, regenerates the landing page, and pushes.
 
-**Do NOT ask the user whether to deploy or update — detect it automatically.** Check if `git ls-tree --name-only origin/gh-paths 2>$null` lists the subfolder. If yes → update. If no → new deploy.
+**Do NOT ask the user whether to deploy or update — detect it automatically.** Check if `git ls-tree --name-only origin/gh-pages 2>$null` lists the subfolder. If yes → update. If no → new deploy.
 
 Examples:
 ```
@@ -165,14 +165,12 @@ if ($ghPagesExists) {
     $bootstrapDir = "$env:TEMP\gh-pages-bootstrap"
     if (Test-Path $bootstrapDir) { Remove-Item -Recurse -Force $bootstrapDir }
     New-Item -ItemType Directory -Force -Path $bootstrapDir | Out-Null
-    Push-Location $bootstrapDir
-    git init
-    git remote add origin $remoteUrl
-    New-Item -ItemType File -Name ".gitkeep" -Value "" | Out-Null
-    git add -A
-    git commit -m "Initial empty gh-pages"
-    git push origin HEAD:gh-pages
-    Pop-Location
+    git -C $bootstrapDir init
+    git -C $bootstrapDir remote add origin $remoteUrl
+    New-Item -ItemType File -Path (Join-Path $bootstrapDir ".gitkeep") -Value "" | Out-Null
+    git -C $bootstrapDir add -A
+    git -C $bootstrapDir commit -m "Initial empty gh-pages"
+    git -C $bootstrapDir push origin HEAD:gh-pages --force
     Remove-Item -Recurse -Force $bootstrapDir
 
     # Now add the worktree
@@ -386,7 +384,7 @@ if ($lessonPlanJson -and $jsonContent.slideshow_url -eq $url) {
 - **No argument**: prompts interactively for the subfolder name
 - **Not found**: lists available slideshows and exits
 - **New deploy vs update**: detected automatically in Step 0 by checking `git ls-tree --name-only origin/gh-pages`. Do NOT ask the user.
-- **First deploy (gh-pages branch doesn't exist)**: pushes an empty commit from an isolated `git init` in %TEMP% — never touches the working tree. Then proceeds with the normal worktree flow.
+- **First deploy (gh-pages branch doesn't exist)**: pushes an empty commit from an isolated `git init` in %TEMP% (via `git -C`, never Push-Location). Then proceeds with the normal worktree flow.
 - **Update (subfolder already exists)**: files are simply overwritten in Step 6. The old files are replaced; the landing page is regenerated with all presentations.
 - **gh not authenticated**: aborts with instruction to run `gh auth login`
 - **Worktree add fails**: exits with error; main directory untouched; stale worktree cleaned up

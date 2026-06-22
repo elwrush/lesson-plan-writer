@@ -8,11 +8,7 @@ At session start, read `C:\Users\elwru\.kilo\learnings.md` and apply any relevan
 
 1. **Load learnings** — `read("C:/Users/elwru/.kilo/learnings.md")` for `[lesson-plan-writer]` entries
 2. **Load the skill** — `skill("create-beautiful-slideshows")`
-3. **Fetch canonical template** — run:
-   ```powershell
-   Get-ChildItem output/*/slides/slides.md | Sort LastWriteTime -Descending | Select -First 1 | Get-Content -TotalCount 25
-   ```
-   This yields the MOST RECENTLY built title slide pattern. Read lines 1-20. Use this as the verbatim starting point.
+ 3. **Read Proven Markdown Patterns** in `.kilo/skills/create-beautiful-slideshows/SKILL.md`. The skill is the canonical reference — not the most recently built slides.md, which may use outdated patterns. Read the full Title slide, Objectives, and Fragment sections before writing slides.md.
 4. **Audit existing work** — if resuming a session, run `git status` and `git diff --name-only` to see what changed
 
 ## Skill Authoring Rule
@@ -116,13 +112,12 @@ Review `audit-*.md` reports for any BLOCKER findings and fix before committing.
 ### Slide sequence template
 
 ```
-1. splash          — background image from Pixabay (check with image agent)
-2. title           — rhetorical question + call to action (template pattern)
-3. objectives      — table: left column numbers, right column objectives
-4. transition      — red background if major phase shift
-5. strategy        — pedagogical advice (auto-animate or plain list)
-6. task+timer      — instruction + timer pill
-7. answers         — lower order: bare answers. Higher order: answer + explanation + evidence, one per slide
+1. title           — background image, logo, rhetorical question + CTA in two `.shield` divs
+2. objectives      — table: left column numbers, right column objectives
+3. transition      — red background if major phase shift
+4. strategy        — pedagogical advice (auto-animate or plain list)
+5. task+timer      — instruction + timer pill
+6. answers         — lower order: bare answers. Higher order: answer + explanation + evidence, one per slide
 ```
 
 ## Environment
@@ -150,14 +145,12 @@ Tools available: `rg` (ripgrep), `Select-String` (PowerShell), built-in `grep`/`
 
 ## Golden Rule: Pattern-first, not guess-first
 
-Before writing any Markdown, slide markup, or configuration, **read a Markdown or Lua file that already does what you need**. The correct pattern is always in the codebase already — guessing or generating from training data wastes time and causes errors. Specifically:
+Before writing any Markdown, slide markup, or configuration, **read a template or reference section in the relevant SKILL.md**. The SKILL.md's templates are the sole canonical reference — not the most recently built slides.md, which may use outdated or rejected patterns. Specifically:
 - Slide attributes: check `.kilo/skills/create-beautiful-slideshows/SKILL.md` (Pandoc Markdown pipeline)
-- Slide structure: check the most recently built `output/*/slides/slides.md` — run:
-  ```powershell
-  Get-ChildItem output/*/slides/slides.md | Sort LastWriteTime -Descending | Select -First 1 | Get-Content -TotalCount 25
-  ```
+- Slide structure: check the SKILL.md's Proven Markdown Patterns section (the template patterns, not past builds)
 - Lua filter patterns: check an existing `scripts/*.lua` file
 - **Do NOT read .css, .html, or .htm files** — these are generated output or shared styling, not patterns to follow
+- **Do NOT read previous slides.md files** — they may reflect inferior past knowledge, bias new work, and hinder learning. The SKILL.md is the authority.
 
 ## Key commands
 
@@ -178,6 +171,15 @@ pandoc slides.md -t revealjs -s --slide-level=1 -o index.html \
    --css="slides-pandoc.css" \
    --include-in-header="slides-header.html" \
    --lua-filter="$slidesDir\autocue.lua" \
+   --lua-filter="$slidesDir\reading-feedback.lua" \
+   --lua-filter="$slidesDir\split-list.lua" \
+   --lua-filter="$slidesDir\click-table.lua" \
+   --lua-filter="$slidesDir\left-table.lua" \
+   --lua-filter="$slidesDir\fa-yellow.lua" \
+   --lua-filter="$slidesDir\vocab-audio-fragment.lua" \
+   --lua-filter="$slidesDir\timer-inject.lua" \
+   --lua-filter="$slidesDir\box-keywords.lua" \
+   --lua-filter="$slidesDir\shield-block.lua" \
    --lua-filter="$slidesDir\youtube-embed.lua" \
    --lua-filter="$slidesDir\audio-autoplay.lua"
 
@@ -265,37 +267,38 @@ A lint command is defined at `.kilo/command/lint.md` — invoke via Kilo CLI.
 - **Workflow:**
   1. Write `output/{subfolder}/slides/slides.md` in Pandoc Markdown
   2. Copy assets (images, logos, audio) to `output/{subfolder}/slides/assets/`
-  3. Copy infrastructure files to `output/{subfolder}/slides/`:
-     - `scripts/slides-pandoc.css` → `slides-pandoc.css`
-     - `scripts/slide-helper.lua` → `slide-helper.lua` (required by both Lua filters)
-     - `scripts/shield-block.lua` → `shield-block.lua` (forces adjacent `.shield` divs to stack vertically)
-     - `scripts/youtube-embed.lua` → `youtube-embed.lua`
-     - `scripts/audio-autoplay.lua` → `audio-autoplay.lua`
-     - `scripts/box-keywords.lua` → `box-keywords.lua` (yellow-bordered boxes for key terms)
-     - `scripts/reading-feedback.lua` → `reading-feedback.lua` (auto-animate table feedback)
-      - `scripts/autocue.lua` → `autocue.lua` (teleprompter scrolling text — self-contained, no companion HTML needed)
-     - **Copy** `scripts/slides-header.html` (shared, never write HTML by hand)
+   3. Copy infrastructure files to `output/{subfolder}/slides/`:
+      - `scripts/slides-pandoc.css` → `slides-pandoc.css`
+      - `scripts/slide-helper.lua` → `slide-helper.lua` (required by both Lua filters)
+      - `scripts/shield-block.lua` → `shield-block.lua` (forces adjacent `.shield` divs to stack vertically)
+      - `scripts/youtube-embed.lua` → `youtube-embed.lua`
+      - `scripts/audio-autoplay.lua` → `audio-autoplay.lua`
+      - `scripts/box-keywords.lua` → `box-keywords.lua` (yellow-bordered boxes for key terms)
+      - `scripts/reading-feedback.lua` → `reading-feedback.lua` (auto-animate table feedback)
+      - `scripts/autocue.lua` → `autocue.lua` (teleprompter scrolling text)
+      - **Copy** `scripts/slides-header.html` (shared, never write HTML by hand)
+      - **Note:** If any `scripts/*.lua` was edited during the session, re-copy it with `-Force` to ensure the slides directory has the latest version.
   4. Build from the `slides/` directory:
      ```bash
-     $slidesDir = Resolve-Path "."
      pandoc slides.md -t revealjs -s --slide-level=1 -o index.html \
        -V revealjs-url="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0" \
        -V theme=black -V width=1280 -V height=720 -V margin=0.04 \
         --css="slides-pandoc.css" \
         --include-in-header="slides-header.html" \
-        --lua-filter="$slidesDir\autocue.lua" \
-       --lua-filter="$slidesDir\reading-feedback.lua" \
-       --lua-filter="$slidesDir\split-list.lua" \
-       --lua-filter="$slidesDir\click-table.lua" \
-       --lua-filter="$slidesDir\left-table.lua" \
-       --lua-filter="$slidesDir\fa-yellow.lua" \
-       --lua-filter="$slidesDir\vocab-audio-fragment.lua" \
-       --lua-filter="$slidesDir\timer-inject.lua" \
-       --lua-filter="$slidesDir\box-keywords.lua" \
-       --lua-filter="$slidesDir\shield-block.lua" \
-       --lua-filter="$slidesDir\youtube-embed.lua" \
-       --lua-filter="$slidesDir\audio-autoplay.lua"
+        --lua-filter="./autocue.lua" \
+       --lua-filter="./reading-feedback.lua" \
+       --lua-filter="./split-list.lua" \
+       --lua-filter="./click-table.lua" \
+       --lua-filter="./left-table.lua" \
+       --lua-filter="./fa-yellow.lua" \
+       --lua-filter="./vocab-audio-fragment.lua" \
+       --lua-filter="./timer-inject.lua" \
+       --lua-filter="./box-keywords.lua" \
+       --lua-filter="./shield-block.lua" \
+       --lua-filter="./youtube-embed.lua" \
+       --lua-filter="./audio-autoplay.lua"
      ```
+     Note: Use `./` not `$slidesDir\` to avoid PowerShell path resolution issues. The `autocue.lua` and other shared filters require `slide-helper.lua` in the same directory — this is set up in the copy step above.
   5. Serve locally: `python -m http.server 8000`
 - **Lua filters:** `audio-autoplay.lua` (audio from heading attrs), `youtube-embed.lua` (YouTube to iframe)
 - **CSS:** `scripts/slides-pandoc.css` — shields, fragments, title row, CEFR badges
