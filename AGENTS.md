@@ -4,6 +4,60 @@
 
 At session start, read `C:\Users\elwru\.kilo\learnings.md` and apply any relevant lessons tagged `[lesson-plan-writer]`. After completing a fix or discovering a better approach, append an entry to that file with date, context, fix, and pattern.
 
+## Pre-session Checklist (Run BEFORE any work)
+
+1. **Load learnings** — `read("C:/Users/elwru/.kilo/learnings.md")` for `[lesson-plan-writer]` entries
+2. **Load the skill** — `skill("create-beautiful-slideshows")`
+3. **Fetch canonical template** — run:
+   ```powershell
+   Get-ChildItem output/*/slides/slides.md | Sort LastWriteTime -Descending | Select -First 1 | Get-Content -TotalCount 25
+   ```
+   This yields the MOST RECENTLY built title slide pattern. Read lines 1-20. Use this as the verbatim starting point.
+4. **Audit existing work** — if resuming a session, run `git status` and `git diff --name-only` to see what changed
+
+## Skill Authoring Rule
+
+**Every SKILL.md must follow `.kilo/skills/_TEMPLATE.md`.** Before creating or editing any skill, read the template verbatim. The template defines the required sections and their order:
+
+1. YAML frontmatter (`name`, `description`)
+2. `## Purpose` with Output line
+3. `## When to Use` with conditions, Trigger, and anti-patterns
+4. `## Workflow (N Steps)` — numbered steps, each a coherent action
+5. `## Examples` — at least 2 real scenarios
+6. `## Error Handling` — symptom/cause/fix table
+7. `## Reference` — files in `reference/` subdirectory
+8. `## Scripts` — automation scripts shipped with the skill
+
+If you find a skill that doesn't match this structure, restructure it. Ignorance of the template is not an excuse — agents are expected to find and apply it.
+
+## Execution Gates (MANDATORY — violations cause 2-hour sessions)
+
+### Gate 1: Blueprint Approval Gate
+**Before any slides.md is written, the blueprint must be reviewed and approved by the user.**
+- Write the blueprint at `.kilo/plans/{lesson}-blueprint.md`
+- Present it for review
+- **Wait for explicit approval** — do NOT write slides.md until told "approved"
+- If the blueprint is rejected, fix it and re-present. Do not proceed until approval is received.
+- The blueprint must include exact Markdown patterns, not descriptions. Every slide gets a code block showing the precise syntax.
+
+### Gate 2: One-Issue → Full-Audit Rule
+**When the user reports ONE problem, do NOT fix just that problem.** Immediately read the ENTIRE slides.md against the SKILL.md and blueprint. Find and list ALL deviations. Fix them in ONE pass. Present the full list before editing.
+
+### Gate 3: Skill Re-load Rule
+**After any rejection or failure, re-load the relevant SKILL.md** to refresh the pedagogical principles before making the next edit. The patterns are documented there — reading them eliminates guesswork.
+
+### Gate 4: Research Before Syntax
+**Never write Pandoc syntax you haven't verified.** Before ANY table, grid, pipe, or complex Markdown:
+1. Search Context7 for "pandoc markdown grid table" or equivalent
+2. Check the MOST RECENT slides.md for the pattern
+3. Only then write Markdown
+
+### Gate 5: No Shared Lua Edits
+**Never modify scripts/*.lua files** that are shared infrastructure. `reading-feedback.lua`, `slide-helper.lua`, `shield-block.lua`, `box-keywords.lua`, `audio-autoplay.lua`, `youtube-embed.lua` are shared across ALL projects. Create new standalone filters in `scripts/` with unique names. If a shared filter needs a behavioral change, ask the user first.
+
+### Gate 6: Hallucination Guard
+**After writing any answer slide, verify every stat and fact against the source transcription.** If the source doesn't contain a specific number, date, or location, do not include it. "The Pacific is the largest ocean" (source says this) is fine. "63 million square miles" (not in source) is a hallucination.
+
 ## Workflow: Blueprint-first, then slides
 
 **Never write slides.md directly.** The blueprint is the design document; slides.md is a mechanical translation.
@@ -98,7 +152,10 @@ Tools available: `rg` (ripgrep), `Select-String` (PowerShell), built-in `grep`/`
 
 Before writing any Markdown, slide markup, or configuration, **read a Markdown or Lua file that already does what you need**. The correct pattern is always in the codebase already — guessing or generating from training data wastes time and causes errors. Specifically:
 - Slide attributes: check `.kilo/skills/create-beautiful-slideshows/SKILL.md` (Pandoc Markdown pipeline)
-- Slide structure: check the most recently built `output/*/slides/slides.md`
+- Slide structure: check the most recently built `output/*/slides/slides.md` — run:
+  ```powershell
+  Get-ChildItem output/*/slides/slides.md | Sort LastWriteTime -Descending | Select -First 1 | Get-Content -TotalCount 25
+  ```
 - Lua filter patterns: check an existing `scripts/*.lua` file
 - **Do NOT read .css, .html, or .htm files** — these are generated output or shared styling, not patterns to follow
 
@@ -136,6 +193,32 @@ python -m pytest tests/ -v --tb=short
 # Locate slide by reveal.js index (deterministic editing)
 python scripts/locate_slide.py "file:///path/to/index.html#/7"
 python scripts/locate_slide.py 7 --slides-dir path/to/slides/
+```
+
+## Lua Filter Quality — Static Type Checking
+
+Lua filters use **Lua Language Server (LuaLS)** with `rnwst/pandoc-lua-types` for static type checking and autocompletion.
+
+**Setup is already in place:**
+- `lua-language-server` — installed via Scoop at `C:\Users\elwru\scoop\shims\lua-language-server.exe`
+- `.luarc.json` — project root config, points `workspace.library` to `.lua/`
+- `.lua/` — upstream `rnwst/pandoc-lua-types` type definitions for pandoc's Lua API
+
+**Before writing any Lua filter, run static analysis:**
+```powershell
+lua-language-server --check="scripts/my-filter.lua" --config=".luarc.json"
+```
+
+This catches: undefined fields, type mismatches, wrong return types, and missing pandoc API functions — all before pandoc runs. Use this as the pre-write gate, analogous to `typst-check` for `.typ` files.
+
+If `lua-language-server` reports a type error for a pandoc function you're calling, check that the function exists in `pandoc.org/lua-filters.html` for your pandoc version. The type defs track the upstream API; a mismatch usually means the API changed between versions.
+
+**To update type definitions** (when pandoc updates):
+```powershell
+Remove-Item -Recurse -LiteralPath ".lua" -Force
+git clone --depth 1 https://github.com/rnwst/pandoc-lua-types.git .lua
+Remove-Item -Recurse -LiteralPath ".lua/.git" -Force
+Remove-Item -LiteralPath ".lua/.gitmodules", ".lua/README.md", ".lua/COPYING", ".lua/lua-reader-writer-options.ods" -ErrorAction SilentlyContinue
 ```
 
 ## Linting & Quality
@@ -202,6 +285,12 @@ A lint command is defined at `.kilo/command/lint.md` — invoke via Kilo CLI.
         --include-in-header="slides-header.html" \
         --lua-filter="$slidesDir\autocue.lua" \
        --lua-filter="$slidesDir\reading-feedback.lua" \
+       --lua-filter="$slidesDir\split-list.lua" \
+       --lua-filter="$slidesDir\click-table.lua" \
+       --lua-filter="$slidesDir\left-table.lua" \
+       --lua-filter="$slidesDir\fa-yellow.lua" \
+       --lua-filter="$slidesDir\vocab-audio-fragment.lua" \
+       --lua-filter="$slidesDir\timer-inject.lua" \
        --lua-filter="$slidesDir\box-keywords.lua" \
        --lua-filter="$slidesDir\shield-block.lua" \
        --lua-filter="$slidesDir\youtube-embed.lua" \

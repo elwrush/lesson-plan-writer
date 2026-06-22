@@ -25,13 +25,14 @@ Examples:
 2. Warns if none found and stops
 3. **Detects** whether this is a new deploy or an update (by checking gh-pages branch for the subfolder)
 4. Runs `/lint`
-5. Copies the slideshow to a temp staging directory
-6. Creates/updates a git worktree for the gh-pages branch in a **separate** temp directory
-7. Copies the slideshow into its own subfolder inside the worktree (overwrites if updating)
-8. Regenerates the root `index.html` (card grid listing ALL presentations on gh-pages)
-9. Commits and pushes from the worktree
-10. Removes the worktree — `main` is never switched away from
-11. Prints the URL
+5. **Rebuilds `index.html` from `slides.md`** using pandoc with auto-discovered Lua filters (prevents stale-HTML deploys)
+6. Copies the slideshow to a temp staging directory
+7. Creates/updates a git worktree for the gh-pages branch in a **separate** temp directory
+8. Copies the slideshow into its own subfolder inside the worktree (overwrites if updating)
+9. Regenerates the root `index.html` (card grid listing ALL presentations on gh-pages)
+10. Commits and pushes from the worktree
+11. Removes the worktree — `main` is never switched away from
+12. Prints the URL
 
 ## Safety
 **This command NEVER switches branches in the main working tree.** All gh-pages operations happen inside a `git worktree` — a separate directory that acts as an independent checkout. If anything fails, the main project directory is completely untouched. No stashing, no `git clean`, no `Remove-Item` on project files.
@@ -109,7 +110,21 @@ if ($remoteUrl -match "github\.com[:\/](.+)/(.+)\.git") {
 python -m ruff check --fix . ; python -m ruff format .
 ```
 
-### Step 4: Copy slideshows to a staging temp directory
+### Step 4: Rebuild index.html from slides.md (prevents stale-HTML deploys)
+This step runs pandoc to regenerate `index.html` from `slides.md` using the Lua filters
+present in the slides directory. If `index.html` is already newer than `slides.md`,
+rebuild is skipped (use `--force` to override).
+
+```powershell
+$slidesDir = Resolve-Path "output/$targetSubfolder/slides"
+python scripts/rebuild_slides.py $slidesDir
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Rebuild failed — fix the error and try again"
+    exit 1
+}
+```
+
+### Step 5: Copy slideshows to a staging temp directory
 ```powershell
 $staging = "$env:TEMP\gh-pages-staging"
 if (Test-Path $staging) { Remove-Item -Recurse -Force -Path $staging }
@@ -119,12 +134,12 @@ foreach ($p in $presentations) {
     $src = "output/$($p.subfolder)/slides"
     $dst = Join-Path $staging $p.subfolder
     New-Item -ItemType Directory -Force -Path $dst | Out-Null
-    Copy-Item -Recurse -Force "$src\*" $dst
+    robocopy "$src" "$dst" /E /IS /NFL /NDL /NJH /NJS /NP
     Write-Host "  Copied $($p.subfolder) to staging"
 }
 ```
 
-### Step 5: Add the gh-pages worktree (shared by both new deploy and update)
+### Step 6: Add the gh-pages worktree (shared by both new deploy and update)
 ```powershell
 $worktreeDir = "$env:TEMP\gh-pages-worktree"
 
@@ -171,7 +186,7 @@ if ($ghPagesExists) {
 Write-Host "Worktree ready at $worktreeDir"
 ```
 
-### Step 6: Copy all slideshows into the worktree
+### Step 7: Copy all slideshows into the worktree
 ```powershell
 Get-ChildItem -Path $staging -Directory | ForEach-Object {
     $subfolder = $_.Name
@@ -182,7 +197,7 @@ Get-ChildItem -Path $staging -Directory | ForEach-Object {
 }
 ```
 
-### Step 7: Generate/update root landing page (card grid)
+### Step 8: Generate/update root landing page (card grid)
 ```powershell
 # All path/file operations target $worktreeDir explicitly.
 # All git commands use git -C $worktreeDir.
@@ -286,7 +301,7 @@ $cardsHtml    </div>
 Set-Content -Path (Join-Path $worktreeDir "index.html") -Value $landingPage -NoNewline
 ```
 
-### Step 8: Commit and push from worktree
+### Step 9: Commit and push from worktree
 ```powershell
 $date = Get-Date -Format "ddMMyy"
 git -C $worktreeDir add -A
@@ -294,13 +309,13 @@ git -C $worktreeDir commit -m "Deploy $($presentations[0].subfolder) ($date)"
 git -C $worktreeDir push origin gh-pages
 ```
 
-### Step 9: Clean up worktree and return to main
+### Step 10: Clean up worktree and return to main
 ```powershell
 git worktree remove $worktreeDir
 Write-Host "Worktree removed. Still on main."
 ```
 
-### Step 10: Print URL
+### Step 11: Print URL
 ```powershell
 $subfolder = $presentations[0].subfolder
 Write-Host ""
@@ -310,7 +325,7 @@ Write-Host ""
 Write-Host "Landing page: https://$owner.github.io/$repo/"
 ```
 
-### Step 10a: Write URL to lesson plan file (JSON or Markdown)
+### Step 11a: Write URL to lesson plan file (JSON or Markdown)
 ```powershell
 $url = "https://$owner.github.io/$repo/$([System.Uri]::EscapeUriString("$subfolder/"))index.html"
 
@@ -356,7 +371,7 @@ if ($lessonPlanJson) {
 }
 ```
 
-### Step 10b: Republish PDF with updated slideshow URL
+### Step 11b: Republish PDF with updated slideshow URL
 If the lesson plan JSON was updated in step 10a, regenerate the PDF so the Slideshow URL cell reflects the deployment URL.
 ```powershell
 if ($lessonPlanJson -and $jsonContent.slideshow_url -eq $url) {

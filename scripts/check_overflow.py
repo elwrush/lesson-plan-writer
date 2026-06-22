@@ -32,7 +32,7 @@ def _start_server(directory: Path, port: int) -> HTTPServer:
         def __init__(self, *args, **kwargs):
             super().__init__(*args, directory=str(directory), **kwargs)
 
-        def log_message(self, format, *args):
+        def log_message(self, _format, *args):
             pass  # suppress server log output
 
     server = HTTPServer(("127.0.0.1", port), Handler)

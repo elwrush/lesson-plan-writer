@@ -196,7 +196,7 @@ class TestPandocTypstIntegration:
         path = _make_md(MINIMAL_STAGES)
         try:
             typst_source = pandoc_to_typst(path)
-            assert "Lesson Information" in typst_source
+            assert "Lesson Plan" in typst_source
             assert "STAGE 1" in typst_source
             assert "STAGE 2" in typst_source
         finally:

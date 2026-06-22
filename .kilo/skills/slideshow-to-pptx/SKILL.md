@@ -9,6 +9,8 @@ description: Converts a reveal.js HTML slideshow to a full-visual-fidelity Power
 
 Convert a reveal.js HTML slideshow (`index.html` with `assets/`) into a Microsoft PowerPoint `.pptx` file that preserves the **full visual appearance** of the original presentation. Each slide is rendered via Chrome headless and placed as a full-slide rasterized image in the PPTX.
 
+**Output:** `output/{subfolder}/pptx/{topic}-lesson-plan.pptx`
+
 **Pipeline position:** After `create-beautiful-slideshows` (which generates the HTML slideshow from Markdown via Pandoc).
 
 **Why not Pandoc?** Pandoc's `-f html -t pptx` strips all visual styling — backgrounds, Font Awesome icons, vocabulary highlighting, colors, and layout are all lost. Decktape renders each slide exactly as it appears in the browser, preserving everything.
@@ -183,4 +185,30 @@ Remove-Item "output/{subfolder}/pptx/slides.pdf"
 **Request:** "PPTX has slides with autoplay audio"
 
 **Action taken:** Decktape renders each slide as a static image. Audio is not transferred — PPTX slides are visual-only. Note this limitation in the output.
+
+
+---
+
+## Error Handling
+
+| Symptom | Likely cause | Fix |
+|---------|-------------|-----|
+| Decktape fails with "Page closed before capture" | `--load-pause` too short | Increase `--load-pause` to 5000 or more |
+| Decktape cannot open `file://` URL | Missing `--chrome-arg=--allow-file-access-from-files` | Add the flag to allow local file access |
+| PPTX has wrong number of slides | Decktape captured extra slides or missed some | Check `slides.pdf` page count before running the PPTX build |
+| `pdf_to_pptx.py` fails with import error | Missing Python packages | `pip install PyMuPDF python-pptx Pillow` |
+| PPTX images are low resolution | Zoom factor too low in `pdf_to_pptx.py` | The script targets 1920px on the long edge; verify source PDF is not scaled down |
+
+---
+
+## Reference
+
+- `scripts/pdf_to_pptx.py` — Python script that renders PDF pages as images and assembles them into a PPTX
+- `output/{subfolder}/slides/index.html` — Input reveal.js slideshow
+- `output/{subfolder}/pptx/slides.pdf` — Intermediate Decktape output (can be deleted after PPTX is built)
+
+## Scripts
+
+- `scripts/pdf_to_pptx.py` — Build script: opens Decktape PDF with PyMuPDF, renders each page as high-resolution PNG, assembles into PPTX with python-pptx
+
 

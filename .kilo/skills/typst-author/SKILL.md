@@ -9,6 +9,8 @@ description: Generate idiomatic Typst (.typ) code, edit and troubleshoot Typst d
 
 Generate, edit, and debug idiomatic Typst (.typ) code with accurate syntax and up-to-date API knowledge. Handles all Typst tasks: document creation, template work, layout design, table formatting, and compilation troubleshooting. Avoids common traps like `else` without `#`, `json(str)` treating input as file paths, and hash-in-content context mode errors.
 
+**Output:** Typst `.typ` source files or compiled PDF output, depending on the task.
+
 ## When to Use
 
 Use this skill when:
@@ -53,11 +55,27 @@ This is a paragraph in Typst.
 #lorem(50)
 ```
 
-## Workflows
+## Workflow
 
-- **Creating a new Typst project**: Use the "Minimal document example" above as a starting point. Skim the tutorial for the basics ([docs/tutorial/writing-in-typst.md](docs/tutorial/writing-in-typst.md)), then create the `.typ` file(s). After each `.typ` edit, follow the post-edit formatting checks below when `typstyle` is available.
-- **Editing existing content**: Locate the target text and apply changes; confirm syntax against the reference when needed ([docs/reference/](docs/reference/)). After each modified `.typ` file, follow the post-edit formatting checks below.
-- **Formatting & Styling**: Consult the styling guide ([docs/reference/styling.md](docs/reference/styling.md)) for `set rule`, `show rule`, and custom themes.
+### Step 1 — Read relevant documentation
+
+Use local file search to find the relevant syntax in the bundled `docs/` folder. Verify function names, parameters, and syntax against local docs before generating code. See [docs/tutorial/writing-in-typst.md](docs/tutorial/writing-in-typst.md) for the tutorial and [docs/reference/](docs/reference/) for the API reference.
+
+### Step 2 — Generate or modify .typ source
+
+Generate or modify the `.typ` source according to the user's request. Follow the "Minimal document example" pattern for new projects. For existing content, locate the target text and apply changes.
+
+### Step 3 — Run post-edit formatting checks
+
+After each `.typ` file modification, run `typstyle --check <file>`. If it fails, inspect with `typstyle --diff <file>` and decide whether to apply formatting with `typstyle -i <file>`.
+
+### Step 4 — Validate
+
+Validate with `typst compile` after formatting is complete, or use `typst query` for probing uncertain behavior.
+
+### Step 5 — Summarize touched files and outcomes
+
+Summarize the edited files and outcomes for the user. Provide full `.typ` content only when requested.
 
 ## Documentation
 
@@ -145,6 +163,29 @@ text(...)[(#numbering(...))]
 - Using LaTeX syntax (do **NOT** use `\begin{...}`, `\section`, or other LaTeX commands).
 - Hallucinating environments (e.g., `tabular` does not exist; use `table`).
 
+
+## Reference
+
+Bundled documentation in `.kilo/skills/typst-author/docs/`:
+
+- `docs/tutorial/writing-in-typst.md` — Getting started tutorial
+- `docs/reference/syntax.md` — Complete syntax reference
+- `docs/reference/styling.md` — Show/set rules and custom themes
+- `docs/reference/scripting.md` — Scripting and runtime behavior
+- `docs/guides/page-setup.md` — Page layout and margins
+- `docs/guides/tables.md` — Table creation and formatting
+- `docs/reference/foundations/array.md` — Array syntax
+- `docs/reference/foundations/dictionary.md` — Dictionary syntax
+- `docs/reference/foundations/content.md` — Content block syntax
+- `docs/reference/foundations/module.md` — Multi-file project organization
+- `docs/reference/introspection/query.md` — Query API for probes
+- `docs/reference/introspection/metadata.md` — Metadata API for probes
+
+## Scripts
+
+This skill does not ship standalone scripts. It uses `typst compile` and `typst query` for validation, and `typstyle` for formatting. The workflow is implemented directly in the skill steps.
+
+
 ## Advanced features
 
 - **Custom themes**: See [docs/reference/styling.md](docs/reference/styling.md) for theme creation.
@@ -173,24 +214,13 @@ When working on large projects, consider organizing the project across multiple 
 
 
 
-## Troubleshooting
+## Error Handling
 
-### Missing font warnings
-
-If you see "unknown font family" warnings, remove the font specification to use system defaults. Note: Font warnings don't prevent compilation; the document will use fallback fonts.
-
-### Template/Package not found
-
-If import fails with "package not found":
-
-- Verify exact package name and version on Typst Universe.
-- Check for typos in `@preview/package:version` syntax.
-
-### Compilation errors
-
-Common fixes:
-
-- **"expected content, found ..."**: You're using code where markup is expected - wrap in `#{ }` or use proper syntax.
-- **"expected expression, found ..."**: Missing `#` (or `#(...)`) in markup/content blocks.
-- **"unknown variable"**: Check spelling, ensure imports are correct.
-- **Array/dictionary errors**: Review syntax - use `()` for both, dictionaries need `key: value`, singleton arrays are `(elem,)`.
+| Symptom | Likely cause | Fix |
+|---------|-------------|-----|
+| "unknown font family" warnings | Font not installed or font path not set | Remove the font specification to use system defaults; warnings are non-fatal |
+| "package not found" | Typo in package name or version | Verify exact package name and version on Typst Universe; check `@preview/package:version` syntax |
+| "expected content, found ..." | Using code where markup is expected | Wrap in `#{ }` or use proper syntax |
+| "expected expression, found ..." | Missing `#` in markup/content blocks | Add `#` (or `#(...)`) before code expressions inside `[...]` |
+| "unknown variable" | Spelling error or missing import | Check variable spelling and ensure imports are correct |
+| Array/dictionary errors | Wrong delimiter used | Use `()` for both arrays and dictionaries; dictionaries need `key: value` syntax; singleton arrays are `(elem,)`

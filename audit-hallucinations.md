@@ -4,6 +4,7 @@ Scanned: Python imports, Lua requires, asset refs, subprocess cmds, URLs
 
 ## WARNINGS
 
+- **`lua-require`** in `.lua\globals.lua`: require(`lpeg.library.lpeg`) — no .lua file found at any expected path
 - **`asset-bg-image`** in `scripts\json_to_markdown.py`: line 446: references `{image_path}` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\{image_path})
 - **`asset-bg-image`** in `scripts\json_to_markdown.py`: line 450: references `{rel_path}` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\{rel_path})
 - **`asset-bg-image`** in `scripts\json_to_markdown.py`: line 455: references `{rel_path}` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\{rel_path})
@@ -11,13 +12,13 @@ Scanned: Python imports, Lua requires, asset refs, subprocess cmds, URLs
 - **`asset-bg-image`** in `scripts\json_to_markdown.py`: line 772: references `assets/{rel_path}` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\assets\{rel_path})
 - **`asset-bg-image`** in `scripts\json_to_markdown.py`: line 839: references `{found}` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\{found})
 - **`asset-bg-image`** in `scripts\json_to_markdown.py`: line 845: references `{found}` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\{found})
-- **`asset-audio-src`** in `scripts\validate_slides.py`: line 182: references `assets/file.mp3` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\assets\file.mp3)
-- **`asset-html-src`** in `scripts\validate_slides.py`: line 182: references `assets/file.mp3` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\assets\file.mp3)
-- **`asset-audio-src`** in `scripts\validate_slides.py`: line 183: references `([^` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\([^)
-- **`asset-bg-image`** in `scripts\validate_slides.py`: line 184: references `assets/file.jpg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\assets\file.jpg)
-- **`asset-bg-image`** in `scripts\validate_slides.py`: line 185: references `([^` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\([^)
-- **`asset-markdown-img`** in `scripts\validate_slides.py`: line 186: references `assets/file.png` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\assets\file.png)
-- **`asset-markdown-img-alt`** in `scripts\validate_slides.py`: line 186: references `assets/file.png` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\assets\file.png)
+- **`asset-audio-src`** in `scripts\validate_slides.py`: line 191: references `assets/file.mp3` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\assets\file.mp3)
+- **`asset-html-src`** in `scripts\validate_slides.py`: line 191: references `assets/file.mp3` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\assets\file.mp3)
+- **`asset-audio-src`** in `scripts\validate_slides.py`: line 192: references `([^` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\([^)
+- **`asset-bg-image`** in `scripts\validate_slides.py`: line 193: references `assets/file.jpg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\assets\file.jpg)
+- **`asset-bg-image`** in `scripts\validate_slides.py`: line 194: references `([^` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\([^)
+- **`asset-markdown-img`** in `scripts\validate_slides.py`: line 195: references `assets/file.png` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\assets\file.png)
+- **`asset-markdown-img-alt`** in `scripts\validate_slides.py`: line 195: references `assets/file.png` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\scripts\assets\file.png)
 - **`asset-bg-image`** in `templates\base-slides-template.html`: line 311: references `assets/background.jpg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\templates\assets\background.jpg)
 - **`asset-html-src`** in `templates\base-slides-template.html`: line 312: references `assets/logo.png` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\templates\assets\logo.png)
 - **`asset-bg-image`** in `templates\base-slides-template.html`: line 622: references `assets/photo.jpg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\templates\assets\photo.jpg)
@@ -118,6 +119,15 @@ Scanned: Python imports, Lua requires, asset refs, subprocess cmds, URLs
 - **`asset-bg-image`** in `.kilo\plans\1780198991726-neon-wolf.md`: line 287: references `{bg_image}` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\plans\{bg_image})
 - **`asset-html-src`** in `.kilo\plans\1780198991726-neon-wolf.md`: line 290: references `assets/logo.png` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\plans\assets\logo.png)
 - **`asset-bg-image`** in `.kilo\plans\1780278765634-stellar-cabin.md`: line 421: references `assets/background.jpg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\plans\assets\background.jpg)
+- **`asset-bg-image`** in `.kilo\plans\M2-4A-AMAZING-PHOTOS-blueprint.md`: line 39: references `assets/splash.jpg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\plans\assets\splash.jpg)
+- **`asset-markdown-img`** in `.kilo\plans\M3-COLUMBUS-blueprint.md`: line 23: references `columbus.jpg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\plans\columbus.jpg)
+- **`asset-markdown-img-alt`** in `.kilo\plans\M3-COLUMBUS-blueprint.md`: line 23: references `columbus.jpg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\plans\columbus.jpg)
+- **`asset-bg-image`** in `.kilo\plans\M3-COLUMBUS-blueprint.md`: line 43: references `assets/splash.jpg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\plans\assets\splash.jpg)
+- **`asset-bg-image`** in `.kilo\plans\M3-COLUMBUS-blueprint.md`: line 50: references `assets/splash.jpg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\plans\assets\splash.jpg)
+- **`asset-markdown-img`** in `.kilo\plans\M3-COLUMBUS-blueprint.md`: line 52: references `assets/logo.png` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\plans\assets\logo.png)
+- **`asset-markdown-img-alt`** in `.kilo\plans\M3-COLUMBUS-blueprint.md`: line 52: references `assets/logo.png` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\plans\assets\logo.png)
+- **`asset-markdown-img`** in `.kilo\plans\M3-COLUMBUS-blueprint.md`: line 115: references `assets/columbus.jpg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\plans\assets\columbus.jpg)
+- **`asset-markdown-img-alt`** in `.kilo\plans\M3-COLUMBUS-blueprint.md`: line 115: references `assets/columbus.jpg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\plans\assets\columbus.jpg)
 - **`asset-bg-image`** in `.kilo\plans\slides-blueprint-v2.md`: line 47: references `assets/anxiety.webp` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\plans\assets\anxiety.webp)
 - **`asset-html-src`** in `.kilo\plans\slides-super-recognizers-design-blueprint.md`: line 81: references `assets/vocab-{word}.mp3` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\plans\assets\vocab-{word}.mp3)
 - **`asset-html-src`** in `.kilo\plans\slides-super-recognizers-design-blueprint.md`: line 92: references `assets/vocab-prosopagnosia.mp3` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\plans\assets\vocab-prosopagnosia.mp3)
@@ -129,6 +139,12 @@ Scanned: Python imports, Lua requires, asset refs, subprocess cmds, URLs
 - **`asset-html-src`** in `.kilo\reference\markdown-pandoc-pipeline-primer.md`: line 58: references `file.mp3` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\reference\file.mp3)
 - **`asset-audio-src`** in `.kilo\reference\markdown-pandoc-pipeline-primer.md`: line 156: references `file.mp3` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\reference\file.mp3)
 - **`asset-html-src`** in `.kilo\reference\markdown-pandoc-pipeline-primer.md`: line 156: references `file.mp3` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\reference\file.mp3)
+- **`asset-bg-image`** in `.kilo\skills\create-beautiful-slideshows\SKILL.md`: line 494: references `assets/splash.jpg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\assets\splash.jpg)
+- **`asset-bg-image`** in `.kilo\skills\create-beautiful-slideshows\SKILL.md`: line 496: references `assets/splash.jpg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\assets\splash.jpg)
+- **`asset-markdown-img`** in `.kilo\skills\create-beautiful-slideshows\SKILL.md`: line 498: references `assets/logo.png` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\assets\logo.png)
+- **`asset-markdown-img-alt`** in `.kilo\skills\create-beautiful-slideshows\SKILL.md`: line 498: references `assets/logo.png` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\assets\logo.png)
+- **`asset-audio-src`** in `.kilo\skills\create-beautiful-slideshows\SKILL.md`: line 610: references `assets/vocab-navigator.mp3` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\assets\vocab-navigator.mp3)
+- **`asset-html-src`** in `.kilo\skills\create-beautiful-slideshows\SKILL.md`: line 610: references `assets/vocab-navigator.mp3` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\assets\vocab-navigator.mp3)
 - **`asset-html-src`** in `.kilo\skills\typst-author\docs\tutorial\advanced-styling.md`: line 7: references `/assets/3-advanced-team-settings.png` but file does not exist (resolved: C:\assets\3-advanced-team-settings.png)
 - **`asset-html-src`** in `.kilo\skills\typst-author\docs\tutorial\advanced-styling.md`: line 320: references `/assets/3-advanced-paper.png` but file does not exist (resolved: C:\assets\3-advanced-paper.png)
 - **`asset-html-src`** in `.kilo\skills\typst-author\docs\tutorial\formatting.md`: line 52: references `/assets/2-formatting-autocomplete.png` but file does not exist (resolved: C:\assets\2-formatting-autocomplete.png)
@@ -143,4 +159,4 @@ Scanned: Python imports, Lua requires, asset refs, subprocess cmds, URLs
 
 
 ---
-**Summary:** 0 blockers, 136 warnings, 0 infos
+**Summary:** 0 blockers, 152 warnings, 0 infos

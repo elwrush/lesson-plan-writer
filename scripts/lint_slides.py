@@ -50,14 +50,13 @@ CEFR_EXEMPT_LINES = [
 ]
 
 
-def check_banned_colors(content, filepath):
+def check_banned_colors(content):
     """Check for colors that violate the design rules."""
     errors = []
     lines = content.split("\n")
     for i, line in enumerate(lines, 1):
         for color, desc in BANNED_COLORS:
             if color in line:
-                # Skip CEFR badge CSS
                 is_cefr = any(ex in line for ex in CEFR_EXEMPT_LINES)
                 if is_cefr:
                     continue
@@ -65,19 +64,18 @@ def check_banned_colors(content, filepath):
     return errors
 
 
-def check_rgba_text_color(content, filepath):
+def check_rgba_text_color(content):
     """Check for rgba(255,255,255,X) with X < 1 used as text color."""
     warnings = []
     lines = content.split("\n")
     for i, line in enumerate(lines, 1):
-        # Match color: rgba(255,255,255,0.X) patterns
         matches = re.findall(r"color:\s*rgba\(255,\s*255,\s*255,\s*0\.\d+\)", line, re.IGNORECASE)
         for m in matches:
             warnings.append(f"  Line {i}: rgba text color with alpha < 1: {m}")
     return warnings
 
 
-def check_text_shadow(content, filepath):
+def check_text_shadow(content):
     """Check for text-shadow CSS declarations."""
     warnings = []
     lines = content.split("\n")
@@ -87,23 +85,21 @@ def check_text_shadow(content, filepath):
     return warnings
 
 
-def check_box_shadow(content, filepath):
+def check_box_shadow(content):
     """Check for box-shadow (banned on all slides except title)."""
     warnings = []
     lines = content.split("\n")
     for i, line in enumerate(lines, 1):
         if "box-shadow" in line.lower():
-            # Allow in timer-plugin.css (not index.html)
             warnings.append(f"  Line {i}: box-shadow found")
     return warnings
 
 
-def check_answer_slides(content, filepath):
+def check_answer_slides(content):
     """Check answer slides for structural issues."""
     errors = []
     warnings = []
 
-    # Find all answer-slide sections
     pattern = r'<section[^>]*class="[^"]*answer-slide[^"]*"[^>]*>'
     sections = list(re.finditer(pattern, content))
 
@@ -151,7 +147,7 @@ def check_answer_slides(content, filepath):
     return errors, warnings
 
 
-def check_cefr_consistency(content, filepath):
+def check_cefr_consistency(content):
     """Check that all CEFR badges use the same level."""
     badges = re.findall(r"cefr-badge\s+([AB]\d)", content)
     if len(badges) >= 2:
@@ -183,27 +179,27 @@ def main():
     print()
 
     # Run checks
-    errors = check_banned_colors(content, html_path)
+    errors = check_banned_colors(content)
     all_errors.extend(errors)
     for e in errors:
         print(f"  ERROR: {e}")
 
-    warnings = check_rgba_text_color(content, html_path)
+    warnings = check_rgba_text_color(content)
     all_warnings.extend(warnings)
     for w in warnings:
         print(f"  WARN: {w}")
 
-    warnings = check_text_shadow(content, html_path)
+    warnings = check_text_shadow(content)
     all_warnings.extend(warnings)
     for w in warnings:
         print(f"  WARN: {w}")
 
-    warnings = check_box_shadow(content, html_path)
+    warnings = check_box_shadow(content)
     all_warnings.extend(warnings)
     for w in warnings:
         print(f"  WARN: {w}")
 
-    ans_errors, ans_warnings = check_answer_slides(content, html_path)
+    ans_errors, ans_warnings = check_answer_slides(content)
     all_errors.extend(ans_errors)
     all_warnings.extend(ans_warnings)
     for e in ans_errors:
@@ -211,7 +207,7 @@ def main():
     for w in ans_warnings:
         print(f"  WARN: {w}")
 
-    cefr_errors = check_cefr_consistency(content, html_path)
+    cefr_errors = check_cefr_consistency(content)
     all_errors.extend(cefr_errors)
     for e in cefr_errors:
         print(f"  ERROR: {e}")

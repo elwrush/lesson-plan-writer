@@ -1140,7 +1140,6 @@ def generate_answer_slides(answer_key_content):
 
         if stripped.startswith("*") and not stripped.startswith("**"):
             continue
-            continue
 
         answer_match = re.search(r"\*\*Answer:\*\*\s*(.+)", stripped)
         if answer_match:

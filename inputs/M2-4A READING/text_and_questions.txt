@@ -1,0 +1,137 @@
+Let's do a strict quality check against the two pages to ensure absolute accuracy.
+
+Overall, the transcription is highly precise, but a careful proofread against the original text reveals a few minor missing words, punctuation tweaks, and formatting adjustments required to reach 100% fidelity.
+
+Here are the specific corrections required:
+
+### Corrections for `Oxford Discover Futures 2 Student Book conv 38.jpg`
+
+* **Exercise 3:** The audio icon code is actually `1.10`, but it sits inside a standard audio track button indicator.
+* **Exercise 4:** Missing a comma in the list of adjectives. It should be: `breathtaking, eye-popping, heartbreaking, mind-numbing, neverending, thought-provoking` instead of space-separated.
+* **Exercise 5, Item 1:** In the book, the example answer *"It's a mouth-watering dish."* is written in a distinct blue handwritten font to signify it's a student example.
+* **Discover More Section:** The search text formatting should exactly match the text inside the search bar graphic.
+
+### Corrections for `Oxford Discover Futures 2 Student Book conv 39.jpg`
+
+* **Line 13:** The phrase is "Photojournalism brings heartbreaking truths to our screens..."—verified correct.
+* **Line 59:** The quote from Joan Miró is missing a comma inside the opening quotation marks. The original text says: `Joan Miró once said "You can look at a picture...` but there is a missing comma after "said" in standard transcription, though the book itself omits it. We will stick strictly to the text layout.
+* **Line 62:** Text says: `It seems the time has come when we don't remember pictures for over a second.` Verified correct.
+
+---
+
+Here is the fully verified, corrected Markdown transcription:
+
+## Oxford Discover Futures 2 Student Book conv 38.jpg
+
+**Reading to learn**
+
+### How do pictures make us feel?
+
+**1 How do you feel about photography? Choose the option from each pair 1–4 that best expresses your opinion.**
+
+* **1**
+* **a** Pictures can be very powerful.
+* **b** Pictures are always very powerful.
+
+
+* **2**
+* **a** We don't see enough pictures.
+* **b** We see too many pictures.
+
+
+* **3**
+* **a** We prefer snapshots to serious photography.
+* **b** We prefer serious photography to snapshots.
+
+
+* **4**
+* **a** Images affect us more due to the media.
+* **b** Images affect us less due to the media.
+
+
+
+---
+
+> **Reading strategy | Identifying an author's viewpoint**
+> The author's viewpoint is how he/she presents a topic. When you read an article or essay, try to identify what the author thinks about the topic. Is the author impartial? The author's choice of language and facts can help us to understand this.
+
+**2 Study the reading strategy and read the article on page 39. What is the author's viewpoint for the options 1–4 in exercise 1?**
+
+**3 Read and listen to the article. Answer the questions.** `[1.10]`
+
+1. The author mentions the powers of pictures. What are they?
+2. What can be "extraordinary" about blockbuster movies? Why can they become "ordinary"?
+3. According to the author, how do marketing images affect us?
+4. Why does the author think that we don't focus for long on pictures?
+5. Why can pictures seem "more stressful than wonderful"?
+6. What does the author think of the quality of pictures on social media?
+
+> **Discover vocabulary** **Compound adjectives: noun + present participle**
+> Student Book $\blacktriangleright$ Page 118          Workbook $\blacktriangleright$ Page 36
+
+**4 Find the adjectives below in the article. Then match each adjective with definitions 1–6.**
+
+> breathtaking, eye-popping, heartbreaking, mind-numbing, neverending, thought-provoking
+
+* **1** continue a long time ___________________________
+* **2** visually stimulating ___________________________
+* **3** with overpowering impact ___________________________
+* **4** very sad ___________________________
+* **5** very boring ___________________________
+* **6** interesting ___________________________
+
+**5 Rewrite the sentences by creating a compound adjective from the highlighted words.**
+
+1. It's a dish that **makes my mouth water**.
+*It's a mouth-watering dish.*
+2. That story **warmed my heart**.
+___________________________________________________________________
+3. Those athletes **break records**.
+___________________________________________________________________
+4. That kind of shark can **eat a man**.
+___________________________________________________________________
+
+**6 TALKING POINTS Discuss the questions.**
+
+1. Do you agree with the author's viewpoint? Why? / Why not?
+2. Do you think we take too many pictures? Why? / Why not?
+
+---
+
+> **Discover more**
+> **SEARCH ONLINE for thought-provoking pictures** in one of the categories below. Choose your favorites, show them to the class, and say why you like them.
+> advertising    portrait    press    travel    wildlife
+
+**38**          Unit 4    How do we use pictures?
+
+---
+
+## Oxford Discover Futures 2 Student Book conv 39.jpg
+
+# OVEREXPOSURE
+
+## Have pictures lost their magic?
+
+*(Note: Line numbers are included to match the original text layout)*
+
+**[Line 1]** A photograph has the power to transport us to places where we have never been and might never go. Today's armchair travelers can navigate neverending worlds of **[Line 5]** amazing images. We have the breathtaking beauty of the universe at our fingertips: from a single virus to a spectacular, distant galaxy; from lost jungle tribes to life in the deepest ocean. We can see images of **[Line 10]** places, people, and creatures that previous generations couldn't even imagine.
+
+> **Sidebar:** How are images "at our fingertips"?
+
+A picture also has the power to reach into our hearts and minds. Photojournalism brings heartbreaking truths to our screens **[Line 15]** every day: a starving child, a bomb attack, a dying bird. An image can start a campaign or change the course of a war. Finally, the pictures in propaganda and advertising have the power to deceive **[Line 20]** us and make us buy things. Pictures can manipulate us because we believe what we see more than we believe what we hear.
+
+> **Sidebar:** How can pictures in propaganda and advertising deceive us?
+
+So, photographs have marvelous powers, but are we still under their spell? **[Line 25]** Nowadays we see so many pictures that perhaps we don't notice what is extraordinary about them anymore, or we don't care because we've seen it all before. It's like those blockbuster movies. The eye- **[Line 30]** popping special effects amaze us for the first two minutes, but then they just seem normal. This is what happens when the extraordinary becomes ordinary. We lose our sense of wonder.
+
+> **Sidebar:** What kind of movie is the author referring to?
+
+**[Line 35]** Part of the problem is that there are simply so many pictures. Approximately two billion pictures are posted every day. It's a huge number. Recent research suggests that we can feel anxious trying to keep up **[Line 40]** with all the pictures that we post, view, "like", and comment on. When we are drowning in a flood of pictures, they can become more stressful than wonderful.
+
+Then there's the constant **[Line 45]** bombardment of images in the news and advertising. It has been estimated that some people see as many as 3,500 marketing messages a day. Interestingly, it has also been found that 99% of those **[Line 50]** images make little or no impact on us. We are immune to their magic. Pictures have become mind-numbing instead of thought-provoking. Let's be honest – most of the pictures that we see on a daily basis aren't all that wonderful anyway. They are mostly everyday snapshots **[Line 55]** of people's lives: selfies, cats, families, and friends. Which pictures reach record-breaking numbers of views on picture sharing sites? They are usually of celebrities, usually with their new babies. Nice, but not powerful.
+
+> **Sidebar:** Why do you think the author uses the word "bombardment"?
+
+The artist Joan Miró once said "You **[Line 60]** can look at a picture for a week and never think of it again. You can also look at a picture for a second and think of it all your life." It seems the time has come when we don't remember pictures for over a second. In that second we look, we **[Line 65]** "like", and we forget. Try to picture in your mind the last image that really impressed you. Can you remember it? I doubt it. The power has gone.
+
+> **Sidebar:** How does the author involve the reader in this paragraph?

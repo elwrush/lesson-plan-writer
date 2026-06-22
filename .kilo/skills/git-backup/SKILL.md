@@ -8,6 +8,8 @@ description: Stages all changes, auto-generates a categorised multi-line commit 
 ## Purpose
 Stage all working-tree changes, increment the semantic version from `VERSION` (`v{M}.{m}.{p}`), generate a structured commit message categorised by file type (skills/commands/scripts/lessons), confirm with the user, commit to main, and push to origin.
 
+**Output:** Git commit pushed to `origin/main` with updated `VERSION` file.
+
 ## Prerequisites
 - `gh` CLI authenticated
 - Git remote `origin` configured
@@ -146,15 +148,27 @@ If the session involved a bug fix, pattern change, or new approach worth remembe
 
 Ask the user: "Add a learnings entry for this session? (Y/n)" — if Y, prompt for the description and append.
 
-## Edge cases
-- **Review fails**: ask user whether to continue or abort
-- **Nothing to commit**: stop before staging
-- **Push fails**: error is printed; local commit is preserved
-- **Custom message rejected**: empty message aborts the operation
-- **Filename too long for git**: If `git add -A` fails with "Filename too long" or "unable to index file", identify the offending file and either:
-  - Rename it to a shorter path, or
-  - Add a gitignore entry for the file type/pattern, then re-run `git add -A`
-  - The most common cause is large `.epub` files from archives with very long metadata filenames — these should be gitignored globally via `*.epub`
+
+## Reference
+
+- `VERSION` — Project root file storing the current semantic version (`v{M}.{m}.{p}`)
+- `AGENTS.md` — Workflow rules and execution gates that the review step validates against
+- `.kilo/command/git-backup.md` — Kilo CLI command definition for `/git-backup`
+
+## Scripts
+
+This skill does not ship standalone scripts. It uses standard git commands (`git add`, `git commit`, `git push`) and the `/review` command for pre-commit quality checks. The workflow is implemented directly in the skill steps, not in external scripts.
+
+
+## Error Handling
+
+| Symptom | Likely cause | Fix |
+|---------|-------------|-----|
+| Review fails | Lint or test suite failed | Ask user whether to continue or abort |
+| Nothing to commit | Working tree is clean | Stop before staging; no action needed |
+| Push fails | Remote unreachable or rejected | Error is printed; local commit is preserved |
+| Custom message rejected | User entered empty message | Abort the operation |
+| Filename too long for git | Large `.epub` files with long metadata filenames | Rename the offending file to a shorter path, or add a gitignore entry for the file type/pattern, then re-run `git add -A` |
 
 ## Examples
 
