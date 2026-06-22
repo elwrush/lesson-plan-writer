@@ -1,6 +1,7 @@
 # Skills Compliance Audit
 
 Checks all SKILL.md files against the Kilo CLI Agent Skills specification.
+Also validates project-local skills against `.kio/skills/_TEMPLATE.md` section structure.
 
 **Summary:** 0 blockers, 0 warnings, 20 infos
 
