@@ -1069,6 +1069,67 @@ def generate_task_slide_no_steps(stage, data):
     return "\n".join(lines)
 
 
+def _format_answer(answer):
+    """Format a single answer line into a fragment span."""
+    answer = answer.strip()
+    if answer.startswith("F."):
+        correction = answer[2:].strip()
+        return (
+            '✗ **False** <!-- .element: class="fragment highlight-red" -->',
+            f'✓ *{escape_md(correction)}* <!-- .element: class="fragment highlight-green" -->',
+        )
+    elif answer == "T":
+        return ('✓ **True** <!-- .element: class="fragment highlight-green" -->',)
+    elif answer.lower() in ["students' own answers.", "students own answers."]:
+        return ('✓ Students\' own answers. <!-- .element: class="fragment highlight-green" -->',)
+    elif answer and len(answer) <= 3:
+        return (f'✓ **{escape_md(answer)}** <!-- .element: class="fragment highlight-green" -->',)
+    return ()
+
+
+def _process_answer_line(stripped, current_slide_lines):
+    """Handle **Answer:** patterns in answer key lines."""
+    answer_match = re.search(r"\*\*Answer:\*\*\s*(.+)", stripped)
+    if answer_match:
+        formatted = _format_answer(answer_match.group(1))
+        for line in formatted:
+            current_slide_lines.append(line)
+        return True
+    return False
+
+
+def _process_answers_heading(stripped, current_slide_lines):
+    """Handle **Answers:** heading in answer key."""
+    if stripped == "**Answers:**":
+        current_slide_lines.append(
+            '✓ Students\' own answers. <!-- .element: class="fragment highlight-green" -->'
+        )
+        return True
+    return False
+
+
+def _process_question_line(stripped, current_slide_lines):
+    """Handle numbered question lines like '1. **Question text**'."""
+    q_match = re.match(r"^(\d+)\.\s+\*\*(.+?)\*\*", stripped)
+    if q_match:
+        _, question_text = q_match.groups()
+        if len(question_text) > 100:
+            question_text = question_text[:97] + "..."
+        current_slide_lines.append(f"**{escape_md(question_text)}**")
+        return True
+    return False
+
+
+def _process_option_line(stripped, current_slide_lines):
+    """Handle multiple-choice option lines like 'a. Option text'."""
+    opt_match = re.match(r"^([a-c])\.\s+(.+)", stripped)
+    if opt_match:
+        letter, text = opt_match.groups()
+        current_slide_lines.append(f"{letter}. {escape_md(text)}")
+        return True
+    return False
+
+
 def generate_answer_slides(answer_key_content):
     if not answer_key_content:
         return ""
@@ -1107,84 +1168,25 @@ def generate_answer_slides(answer_key_content):
         if stripped == "---":
             continue
 
-        answer_match = re.search(r"\*\*Answer:\*\*\s*(.+)", stripped)
-        if answer_match:
-            answer = answer_match.group(1).strip()
-            if answer.startswith("F."):
-                correction = answer[2:].strip()
-                current_slide_lines.append(
-                    '✗ **False** <!-- .element: class="fragment highlight-red" -->'
-                )
-                current_slide_lines.append(
-                    f'✓ *{escape_md(correction)}* <!-- .element: class="fragment highlight-green" -->'
-                )
-            elif answer == "T":
-                current_slide_lines.append(
-                    '✓ **True** <!-- .element: class="fragment highlight-green" -->'
-                )
-            elif answer.lower() in ["students' own answers.", "students own answers."]:
-                current_slide_lines.append(
-                    '✓ Students\' own answers. <!-- .element: class="fragment highlight-green" -->'
-                )
-            elif answer and len(answer) <= 3:
-                current_slide_lines.append(
-                    f'✓ **{escape_md(answer)}** <!-- .element: class="fragment highlight-green" -->'
-                )
+        if _process_answer_line(stripped, current_slide_lines):
             continue
 
-        if stripped == "**Answers:**":
-            current_slide_lines.append(
-                '✓ Students\' own answers. <!-- .element: class="fragment highlight-green" -->'
-            )
+        if _process_answers_heading(stripped, current_slide_lines):
             continue
 
         if stripped.startswith("*") and not stripped.startswith("**"):
             continue
 
-        answer_match = re.search(r"\*\*Answer:\*\*\s*(.+)", stripped)
-        if answer_match:
-            answer = answer_match.group(1).strip()
-            if answer.startswith("F."):
-                correction = answer[2:].strip()
-                current_slide_lines.append(
-                    '✗ **False** <!-- .element: class="fragment highlight-red" -->'
-                )
-                current_slide_lines.append(
-                    f'✓ *{escape_md(correction)}* <!-- .element: class="fragment highlight-green" -->'
-                )
-            elif answer == "T":
-                current_slide_lines.append(
-                    '✓ **True** <!-- .element: class="fragment highlight-green" -->'
-                )
-            elif answer.lower() in ["students' own answers.", "students own answers."]:
-                current_slide_lines.append(
-                    '✓ Students\' own answers. <!-- .element: class="fragment highlight-green" -->'
-                )
-            elif answer and len(answer) <= 3:
-                current_slide_lines.append(
-                    f'✓ **{escape_md(answer)}** <!-- .element: class="fragment highlight-green" -->'
-                )
+        if _process_answer_line(stripped, current_slide_lines):
             continue
 
-        if stripped == "**Answers:**":
-            current_slide_lines.append(
-                '✓ Students\' own answers. <!-- .element: class="fragment highlight-green" -->'
-            )
+        if _process_answers_heading(stripped, current_slide_lines):
             continue
 
-        q_match = re.match(r"^(\d+)\.\s+\*\*(.+?)\*\*", stripped)
-        if q_match:
-            num, question_text = q_match.groups()
-            if len(question_text) > 100:
-                question_text = question_text[:97] + "..."
-            current_slide_lines.append(f"**{escape_md(question_text)}**")
+        if _process_question_line(stripped, current_slide_lines):
             continue
 
-        opt_match = re.match(r"^([a-c])\.\s+(.+)", stripped)
-        if opt_match:
-            letter, text = opt_match.groups()
-            current_slide_lines.append(f"{letter}. {escape_md(text)}")
-            continue
+        _process_option_line(stripped, current_slide_lines)
 
     if current_slide_lines:
         slides.append("\n".join(current_slide_lines))
@@ -1569,65 +1571,92 @@ def merge_sections(existing_md, new_sections):
     return "\n".join(result)
 
 
+def _section_dispatch(section_id):
+    """Return (handler, needs_stages) for a section_id, or None."""
+    handlers = {
+        "title": lambda d, sd, tip, ta, lp: generate_title_slide(d, tip, ta, sd, lp),
+        "objective": lambda d, sd, tip, ta, lp: generate_objective_slide(d),
+        "leadin": lambda d, sd, tip, ta, lp: _section_stage_match(
+            d, sd, "lead-in", lambda s: generate_leadin_slide(s, d, sd)
+        ),
+        "prereading": lambda d, sd, tip, ta, lp: _section_stage_match(
+            d, sd, "gist", lambda s: generate_prereading_slide(s, d, sd)
+        ),
+        "answers": lambda d, sd, tip, ta, lp: _section_answers(d),
+        "summary": lambda d, sd, tip, ta, lp: generate_summary_slide(d),
+        "end": lambda d, sd, tip, ta, lp: generate_end_slide(d),
+    }
+    if section_id in handlers:
+        return handlers[section_id]
+    if section_id.startswith("vocab"):
+        return lambda d, sd, tip, ta, lp: _section_vocab(d, sd)
+    if section_id.startswith("task-"):
+        stage_num = _parse_stage_num(section_id)
+        if stage_num is not None:
+            return lambda d, sd, tip, ta, lp: _section_task(d, stage_num)
+    if section_id.startswith("transition-"):
+        stage_num = _parse_stage_num(section_id)
+        if stage_num is not None:
+            return lambda d, sd, tip, ta, lp: _section_transition(d, stage_num)
+    return None
+
+
+def _parse_stage_num(section_id):
+    """Extract stage number from section IDs like 'task-3' or 'transition-2'."""
+    try:
+        return int(section_id.split("-")[1])
+    except (ValueError, IndexError):
+        return None
+
+
+def _section_stage_match(data, slides_dir, keyword, handler):
+    """Find a stage by keyword and apply the handler."""
+    stages = data.get("lesson_plan", {}).get("stages", [])
+    for stage in stages:
+        if keyword in stage.get("stage", "").lower():
+            return handler(stage)
+    return None
+
+
+def _section_vocab(data, slides_dir):
+    vocab_slides = generate_vocabulary_slides(data, slides_dir)
+    if vocab_slides:
+        return "\n\n---\n\n".join(vocab_slides)
+    return None
+
+
+def _section_task(data, stage_num):
+    stages = data.get("lesson_plan", {}).get("stages", [])
+    for stage in stages:
+        if stage.get("stage_number", 0) == stage_num:
+            return generate_task_slide(stage, data)
+    return None
+
+
+def _section_transition(data, stage_num):
+    stages = data.get("lesson_plan", {}).get("stages", [])
+    for i, stage in enumerate(stages):
+        if stage.get("stage_number", i) == stage_num and i > 0:
+            question = get_transition_question(stage.get("stage", ""), stage)
+            return generate_transition_slide(
+                stage.get("stage", ""), stage_num, stages[i - 1].get("stage", ""), question
+            )
+    return None
+
+
+def _section_answers(data):
+    answer_key_content = parse_answer_key(data)
+    if answer_key_content:
+        return generate_answer_slides(answer_key_content)
+    return None
+
+
 def generate_section(data, section_id, slides_dir, title_image_path, title_attribution, logo_path):
     """Generate a single slide section by ID."""
-    if section_id == "title":
-        return generate_title_slide(
-            data, title_image_path, title_attribution, slides_dir, logo_path
-        )
-    elif section_id == "objective":
-        return generate_objective_slide(data)
-    elif section_id.startswith("vocab"):
-        vocab_slides = generate_vocabulary_slides(data, slides_dir)
-        if vocab_slides:
-            return "\n\n---\n\n".join(vocab_slides)
+    handler = _section_dispatch(section_id)
+    if handler is None:
         return None
-    elif section_id == "leadin":
-        stages = data.get("lesson_plan", {}).get("stages", [])
-        for stage in stages:
-            if "lead-in" in stage.get("stage", "").lower():
-                return generate_leadin_slide(stage, data, slides_dir)
-        return None
-    elif section_id == "prereading":
-        stages = data.get("lesson_plan", {}).get("stages", [])
-        for stage in stages:
-            if "gist" in stage.get("stage", "").lower():
-                return generate_prereading_slide(stage, data, slides_dir)
-        return None
-    elif section_id.startswith("task-"):
-        try:
-            stage_num = int(section_id.split("-")[1])
-        except (ValueError, IndexError):
-            return None
-        stages = data.get("lesson_plan", {}).get("stages", [])
-        for stage in stages:
-            if stage.get("stage_number", 0) == stage_num:
-                return generate_task_slide(stage, data)
-        return None
-    elif section_id.startswith("transition-"):
-        try:
-            stage_num = int(section_id.split("-")[1])
-        except (ValueError, IndexError):
-            return None
-        stages = data.get("lesson_plan", {}).get("stages", [])
-        prev_name = ""
-        for i, stage in enumerate(stages):
-            if stage.get("stage_number", i) == stage_num and i > 0:
-                question = get_transition_question(stage.get("stage", ""), stage)
-                return generate_transition_slide(
-                    stage.get("stage", ""), stage_num, stages[i - 1].get("stage", ""), question
-                )
-        return None
-    elif section_id == "answers":
-        answer_key_content = parse_answer_key(data)
-        if answer_key_content:
-            return generate_answer_slides(answer_key_content)
-        return None
-    elif section_id == "summary":
-        return generate_summary_slide(data)
-    elif section_id == "end":
-        return generate_end_slide(data)
-    return None
+    return handler(data, slides_dir, title_image_path, title_attribution, logo_path)
 
 
 if __name__ == "__main__":

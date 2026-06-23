@@ -216,6 +216,37 @@ VIDEO_ID
 
 ---
 
+## Movie clip ≠ exact text match (expected)
+
+When using a movie clip to introduce characters before a reading, **the clip does not need to match the reading text word-for-word.** The M3 Outsiders lesson used a drive-in scene clip that was different from Chapter 2. The M2 Monster Calls lesson used a "Conor Gets Attacked" clip that has different dialogue than Chapter 3.
+
+**What matters:** The clip shows the same characters, the same power dynamics, and the same voices. Students hear Harry's menacing tone, Lily's fury, Conor's silence — even if the specific lines differ from the book. The pedagogical purpose is character introduction through voice observation, not text matching.
+
+Pattern: movie clip → student discussion of character voices → fragment reveals confirming descriptors → read the actual text. The clip primes the ear; the text builds comprehension.
+
+---
+
+## Breaking Bad approach (reusable template)
+
+The Breaking Bad approach is a proven 10-stage arc for dramatic reading lessons that works across CEFR levels (tested at B2 and A2/B1):
+
+1. **Splash** — Heisenberg image (transformation metaphor)
+2. **Lead-in** — Speaking feedback → reframe as acting (boxed keyword: "voice is your instrument")
+3. **Pre-watch** — Define table read + set viewing task (2 fragments)
+4. **Primary input** — Breaking Bad table read (YouTube: MqfSr8Gu9zI)
+5. **Comparative input** — Same scene, filmed (YouTube: 3A-Ck_2Na6s)
+6. **Guided noticing** — Comparison pipe table with fragment reveals
+7. **Principle** — "getting into a role" (boxed keyword → fragment reveal)
+8. **Personalize** — "What if you weren't YOU?" fragments
+9. **Red transition** — Phase change to the lesson's source text
+10. **Secondary input** — Movie clip of the reading text's characters → character descriptors as fragments
+11. **Read-aloud** — Assign student roles, teacher narrates
+12. **Wrap-up** — One-word reflection + next lesson preview
+
+**Adaptation across levels:** For lower CEFR (A2/B1): simpler vocabulary in fragments, fewer character descriptors, fewer slides per stage. The structure stays identical — only the language complexity changes.
+
+---
+
 ## Vocabulary slides (phonemic script → word+audio → context)
 
 ```markdown

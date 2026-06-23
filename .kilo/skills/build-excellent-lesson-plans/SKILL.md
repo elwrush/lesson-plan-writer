@@ -28,6 +28,7 @@ Agent writes lesson.md → build_lesson_pdf.py (validates + Pandoc + Lua filter 
 
 - **Duration:** Standard lesson is 46 minutes. Total stage times must always match stated duration.
 - **Stage numbering:** Sequential from 1. No gaps.
+- **Stage table columns:** The Lua filter (`lesson-tables.lua`) generates a 5-column table: Time | Stage | Goal | Procedure | Int. The narrow "Stage" column between Time and Goal shows the stage number (1, 2, 3…) for quick visual reference. Headers are bold; stage name rows have a light gray (`luma(230)`) background spanning all 5 columns.
 - **Output location:** Input `.md` in `output/{subfolder}/` → PDF in `PDF/{subfolder}/`.
 - **Stages in Markdown body, not YAML.** YAML frontmatter is for simple metadata strings only. The Lua filter reads `## Stage N:` headings and builds the stage table.
 
@@ -283,6 +284,8 @@ The build pipeline uses these files:
 
 - `templates/lesson-plan.typ` — Typst page setup, masthead, info table, aim block
 - `scripts/lesson-tables.lua` — Pandoc Lua filter that reads `## Stage N:` headings and generates Typst `#table()` with colored headers
+- `scripts/table-align.lua` — Pandoc Lua filter that catches `Table` AST elements and replaces `align(center)` with `align(left)` before the Typst writer runs
+- `scripts/pagebreak.lua` — Pandoc Lua filter that converts `---` to `#pagebreak()` in Typst output and adds a pagebreak before the appendix header
 - `scripts/build_lesson_pdf.py` — Entry point: validates Markdown, runs Pandoc + Lua filter, compiles Typst, lints PDF
 - `knowledge-base/lesson plan shapes/json/shape-{letter}.json` — Shape templates defining stage structure per lesson type
 - `references/CREATIVE_TECHNIQUES.md` — Creative techniques to explore BEFORE picking a shape (problem-first, comparative input, persona-based, drama, McKinsey-style)
@@ -293,5 +296,7 @@ See also `.kilo/skills/build-excellent-lesson-plans/SKILL.md` (this document) fo
 
 - `scripts/build_lesson_pdf.py` — Main build script: validates markdown, runs Pandoc → Typst pipeline, lints output PDF, appends answer key/transcript
 - `scripts/lesson-tables.lua` — Pandoc Lua filter for stage table generation
+- `scripts/table-align.lua` — Pandoc Lua filter that replaces `align(center)` with `align(left)` for all pipe tables in Typst output
+- `scripts/pagebreak.lua` — Pandoc Lua filter: converts `---` to `#pagebreak()`, ensures appendix starts on a new page
 - `scripts/linter_pdf_content.py` — Post-build PDF content linting
 

@@ -152,15 +152,8 @@ Scanned: Python imports, Lua requires, asset refs, subprocess cmds, URLs
 - **`asset-markdown-img-alt`** in `.kilo\skills\create-beautiful-slideshows\references\PATTERNS.md`: line 40: references `assets/logo.png` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\references\assets\logo.png)
 - **`asset-audio-src`** in `.kilo\skills\create-beautiful-slideshows\references\PATTERNS.md`: line 226: references `assets/vocab-navigator.mp3` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\references\assets\vocab-navigator.mp3)
 - **`asset-html-src`** in `.kilo\skills\create-beautiful-slideshows\references\PATTERNS.md`: line 226: references `assets/vocab-navigator.mp3` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\references\assets\vocab-navigator.mp3)
-- **`asset-audio-src`** in `.kilo\skills\create-beautiful-slideshows\scripts\validate_slides.py`: line 191: references `assets/file.mp3` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\scripts\assets\file.mp3)
-- **`asset-html-src`** in `.kilo\skills\create-beautiful-slideshows\scripts\validate_slides.py`: line 191: references `assets/file.mp3` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\scripts\assets\file.mp3)
-- **`asset-audio-src`** in `.kilo\skills\create-beautiful-slideshows\scripts\validate_slides.py`: line 192: references `([^` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\scripts\([^)
-- **`asset-bg-image`** in `.kilo\skills\create-beautiful-slideshows\scripts\validate_slides.py`: line 193: references `assets/file.jpg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\scripts\assets\file.jpg)
-- **`asset-bg-image`** in `.kilo\skills\create-beautiful-slideshows\scripts\validate_slides.py`: line 194: references `([^` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\scripts\([^)
-- **`asset-markdown-img`** in `.kilo\skills\create-beautiful-slideshows\scripts\validate_slides.py`: line 195: references `assets/file.png` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\scripts\assets\file.png)
-- **`asset-markdown-img-alt`** in `.kilo\skills\create-beautiful-slideshows\scripts\validate_slides.py`: line 195: references `assets/file.png` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\skills\create-beautiful-slideshows\scripts\assets\file.png)
 - **`asset-html-src`** in `.kilo\node_modules\zod\README.md`: line 2: references `logo.svg` but file does not exist (resolved: C:\PROJECTS\LESSON-PLAN-WRITER-3\.kilo\node_modules\zod\logo.svg)
 
 
 ---
-**Summary:** 0 blockers, 156 warnings, 0 infos
+**Summary:** 0 blockers, 149 warnings, 0 infos

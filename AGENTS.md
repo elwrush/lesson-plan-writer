@@ -1,15 +1,10 @@
 # AGENTS.md — Lesson Plan Writer 3
 
-## Self-Improvement Loop
-
-At session start, read `C:\Users\elwru\.kilo\learnings.md` and apply any relevant lessons tagged `[lesson-plan-writer]`. After completing a fix or discovering a better approach, append an entry to that file with date, context, fix, and pattern.
-
 ## Pre-session Checklist (Run BEFORE any work)
 
-1. **Load learnings** — `read("C:/Users/elwru/.kilo/learnings.md")` for `[lesson-plan-writer]` entries
-2. **Load the skill** — `skill("create-beautiful-slideshows")`
- 3. **Read Proven Markdown Patterns** in `.kilo/skills/create-beautiful-slideshows/SKILL.md`. The skill is the canonical reference — not the most recently built slides.md, which may use outdated patterns. Read the full Title slide, Objectives, and Fragment sections before writing slides.md.
-4. **Audit existing work** — if resuming a session, run `git status` and `git diff --name-only` to see what changed
+1. **Load the skill** — `skill("create-beautiful-slideshows")`
+2. **Read Proven Markdown Patterns** in `.kilo/skills/create-beautiful-slideshows/SKILL.md`. The skill is the canonical reference — not the most recently built slides.md, which may use outdated patterns. Read the full Title slide, Objectives, and Fragment sections before writing slides.md.
+3. **Audit existing work** — if resuming a session, run `git status` and `git diff --name-only` to see what changed
 
 ## Skill Authoring Rule
 

@@ -81,16 +81,17 @@ function Pandoc(doc)
 
   -- ── Build Typst table ──
   local t = '= Lesson Stages\n\n#table(\n'
-  t = t .. '  columns: (auto, 1fr, 2fr, auto),\n'
+  t = t .. '  columns: (auto, auto, 1fr, 2fr, auto),\n'
   t = t .. '  stroke: 1pt,\n'
-  t = t .. '  table.header([*Time*], [*Goal*], [*Procedure*], [*Int*]),\n'
+  t = t .. '  table.header([*Time*], [*Stage*], [*Goal*], [*Procedure*], [*Int*]),\n'
   t = t .. '  ..(\n'
 
   for _, row in ipairs(stage_groups) do
-    t = t .. '    table.cell(colspan: 4, fill: luma(230))[\n'
+    t = t .. '    table.cell(colspan: 5, fill: luma(230))[\n'
     t = t .. '      *STAGE ' .. row.num .. ': ' .. escape_typst(row.name) .. '*\n'
     t = t .. '    ],\n'
     t = t .. '    [' .. row.time .. ' min],\n'
+    t = t .. '    [' .. row.num .. '],\n'
     t = t .. '    [' .. escape_typst(row.aim) .. '],\n'
     t = t .. '    [\n'
     for _, item in ipairs(row.procedure) do

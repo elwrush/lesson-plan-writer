@@ -291,7 +291,7 @@ ALLOWED_CSS = {"slides-pandoc.css"}
 
 def check_unauthorized_assets(md_path: Path) -> list[str]:
     """Scans the slides directory for CSS/HTML files not in the allowed list.
-    
+
     The agent writes only Pandoc Markdown and Lua filters. No CSS/HTML files
     may be created — only the shared infrastructure files are permitted.
     """

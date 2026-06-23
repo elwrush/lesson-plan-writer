@@ -91,6 +91,7 @@ class TestSpeakingGradingPipeline:
         pdf_path = ROOT / "PDF" / "PRONUNCIATION-MARKING-SHEETS" / "test_grading_pipeline.pdf"
 
         md_path.parent.mkdir(parents=True, exist_ok=True)
+        pdf_path.parent.mkdir(parents=True, exist_ok=True)
         md_path.write_text(MINIMAL_MD, encoding="utf-8")
 
         try:
@@ -178,6 +179,7 @@ class TestSpeakingGradingPipeline:
         pdf_path = ROOT / "PDF" / "PRONUNCIATION-MARKING-SHEETS" / "test_grading_pipeline.pdf"
 
         md_path.parent.mkdir(parents=True, exist_ok=True)
+        pdf_path.parent.mkdir(parents=True, exist_ok=True)
         md_path.write_text(MINIMAL_MD, encoding="utf-8")
 
         try:

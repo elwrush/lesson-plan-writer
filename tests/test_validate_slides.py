@@ -14,7 +14,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
-from validate_slides import (
+from scripts.validate_slides import (
     check_fenced_div_balance,
     check_horizontal_rules,
     check_inline_css,

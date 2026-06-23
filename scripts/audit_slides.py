@@ -87,30 +87,21 @@ def safe_print(text):
     print(safe)
 
 
-def audit(plan_path, html_path, verbose=False):
-    """Run the audit and return (pass_count, fail_count, issues)."""
-    plan = load_json(plan_path)
-    html = load_html(html_path)
+def _check_helper(condition, msg, issues, passes, verbose):
+    """Check a single condition, record pass/fail."""
+    if condition:
+        passes.append(True)
+        if verbose:
+            safe_print(f"  PASS: {msg}")
+    else:
+        issues.append(msg)
+        safe_print(f"  FAIL: {msg}")
 
-    stages = extract_stage_info(plan)
-    slides = extract_slide_info(html)
 
+def _check_stage_coverage(stages, slides, verbose=False):
+    """Check every lesson-plan stage has at least one matching slide."""
     issues = []
-    passes = 0
-
-    def check(condition, msg):
-        nonlocal passes
-        if condition:
-            passes += 1
-            if verbose:
-                safe_print(f"  PASS: {msg}")
-        else:
-            issues.append(msg)
-            safe_print(f"  FAIL: {msg}")
-
-    safe_print(f"\n--- Audit: {plan_path.name} vs {html_path.name} ---\n")
-
-    # 1. Stage coverage
+    passes = []
     safe_print("Stage coverage:")
     for stage in stages:
         stage_num = stage["number"]
@@ -126,55 +117,75 @@ def audit(plan_path, html_path, verbose=False):
             keywords = stage_name.lower().replace("?", "").split()
             keywords = [k for k in keywords if len(k) > 3]
             matching = [s for s in slides if any(k in s["title"].lower() for k in keywords)]
-        check(
+        _check_helper(
             len(matching) > 0,
             f'Stage {stage_num} "{stage_name}" has {len(matching)} matching slide(s)',
+            issues,
+            passes,
+            verbose,
         )
         if verbose and matching:
             for s in matching:
                 safe_print(f"    -> Slide {s['index']}: {s['title'][:55]}")
+    return len(passes), issues
 
-    # 2. Exercise name consistency
-    safe_print("\nExercise references:")
+
+def _check_exercise_consistency(stages, slides, verbose=False):
+    """Check every exercise in the lesson plan appears on slides and vice versa."""
+    issues = []
+    passes = []
+
     plan_exercises = set()
     for stage in stages:
-        for ref_type, ref_name, ref_title in stage["refs"]:
+        for ref_type, ref_name, _ in stage["refs"]:
             if ref_type == "exercise":
                 plan_exercises.add(ref_name)
 
     slide_exercises = set()
     for slide in slides:
-        for ref_type, ref_name, ref_title in slide["refs"]:
+        for ref_type, ref_name, _ in slide["refs"]:
             if ref_type == "exercise":
                 slide_exercises.add(ref_name)
 
+    safe_print("\nExercise references:")
     for ex in sorted(plan_exercises):
         found = any(
             ex.lower() in s["title"].lower() or ex.lower() in str(s["refs"]).lower() for s in slides
         )
         if not found and ("Test" in ex or "Diagnostic" in ex):
-            # Bespoke diagnostics legitimately replace textbook exercises
-            passes += 1
+            passes.append(True)
             if verbose:
                 safe_print(
                     f'  PASS: Exercise "{ex}" (lesson plan) — bespoke diagnostic replaces this'
                 )
         else:
-            check(found, f'Exercise "{ex}" (lesson plan) is referenced on slides')
+            _check_helper(
+                found,
+                f'Exercise "{ex}" (lesson plan) is referenced on slides',
+                issues,
+                passes,
+                verbose,
+            )
 
     for ex in sorted(slide_exercises):
         found = ex in plan_exercises
         if not found:
             if "Test" in ex or "Quick" in ex:
-                passes += 1
+                passes.append(True)
                 if verbose:
                     safe_print(f'  PASS: Exercise "{ex}" is bespoke (diagnostic/test)')
             else:
                 issues.append(f'Exercise "{ex}" appears in slides but not in lesson plan')
                 safe_print(f'  FAIL: Exercise "{ex}" appears in slides but not in lesson plan')
 
-    # 3. Page number consistency
-    safe_print("\nPage references:")
+    return len(passes), issues
+
+
+def _check_page_consistency(stages, slides, verbose=False):
+    """Check every page reference in the lesson plan appears on slides."""
+    issues = []
+    passes = []
+
     plan_pages = set()
     for stage in stages:
         for ref_type, ref_val, _ in stage["refs"]:
@@ -187,16 +198,31 @@ def audit(plan_path, html_path, verbose=False):
             if ref_type == "page":
                 slide_pages.add(ref_val)
 
+    safe_print("\nPage references:")
     for pg in sorted(plan_pages):
         found = any(pg in str(s["refs"]) or pg in s["title"] for s in slides)
-        check(found, f'Page "{pg}" (from lesson plan) appears in slides')
+        _check_helper(
+            found, f'Page "{pg}" (from lesson plan) appears in slides', issues, passes, verbose
+        )
 
     for pg in sorted(slide_pages):
-        check(pg in plan_pages, f'Page "{pg}" appears in slides but not in lesson plan')
+        _check_helper(
+            pg in plan_pages,
+            f'Page "{pg}" appears in slides but not in lesson plan',
+            issues,
+            passes,
+            verbose,
+        )
 
-    # 4. Content quality checks
+    return len(passes), issues
+
+
+def _check_content_quality(html, verbose=False):
+    """Check for banned text patterns in slide content."""
+    issues = []
+    passes = []
+
     safe_print("\nContent quality:")
-    # Only check inside <div class="slides">...</div> (exclude script configs, header, footer)
     slides_match = re.search(r'<div\s+class="slides"[^>]*>(.*?)</div>\s*</div>', html, re.DOTALL)
     slides_content = slides_match.group(1) if slides_match else html
     visible = re.sub(r"<aside class=\"notes\">.*?</aside>", "", slides_content, flags=re.DOTALL)
@@ -204,7 +230,34 @@ def audit(plan_path, html_path, verbose=False):
 
     banned_patterns = ["Source: First Steps", "Teacher:", "Duration:"]
     for pattern in banned_patterns:
-        check(pattern not in full_text_no_tags, f'No banned text "{pattern}" on slides')
+        _check_helper(
+            pattern not in full_text_no_tags,
+            f'No banned text "{pattern}" on slides',
+            issues,
+            passes,
+            verbose,
+        )
+
+    return len(passes), issues
+
+
+def audit(plan_path, html_path, verbose=False):
+    """Run the audit and return (pass_count, fail_count, issues)."""
+    plan = load_json(plan_path)
+    html = load_html(html_path)
+
+    stages = extract_stage_info(plan)
+    slides = extract_slide_info(html)
+
+    safe_print(f"\n--- Audit: {plan_path.name} vs {html_path.name} ---\n")
+
+    p1, issues1 = _check_stage_coverage(stages, slides, verbose)
+    p2, issues2 = _check_exercise_consistency(stages, slides, verbose)
+    p3, issues3 = _check_page_consistency(stages, slides, verbose)
+    p4, issues4 = _check_content_quality(html, verbose)
+
+    passes = p1 + p2 + p3 + p4
+    issues = issues1 + issues2 + issues3 + issues4
 
     safe_print(f"\n{'=' * 50}")
     total_checks = passes + len(issues)

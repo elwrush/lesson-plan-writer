@@ -3,18 +3,9 @@
 Checks all SKILL.md files against the Kilo CLI Agent Skills specification.
 Also validates project-local skills against `.kilo/skills/_TEMPLATE.md` section structure.
 
-**Summary:** 0 blockers, 49 warnings, 20 infos
+**Summary:** 0 blockers, 46 warnings, 18 infos
 
 ## WARNING
-
-- **.\.kilo\skills\git-backup**: 'git-backup' (project (.kilo/skills/)) missing 'scripts/' directory
-  Fix: Create .\.kilo\skills\git-backup\scripts/ with Bundled automation scripts or tools
-
-- **.\.kilo\skills\git-backup**: 'git-backup' (project (.kilo/skills/)) missing 'references/' directory
-  Fix: Create .\.kilo\skills\git-backup\references/ with Deep-dive documentation or API design patterns
-
-- **.\.kilo\skills\git-backup**: 'git-backup' (project (.kilo/skills/)) missing 'templates/' directory
-  Fix: Create .\.kilo\skills\git-backup\templates/ with Boilerplate code or configuration templates
 
 - **.\.kilo\skills\slideshow-to-pptx**: 'slideshow-to-pptx' (project (.kilo/skills/)) missing 'scripts/' directory
   Fix: Create .\.kilo\skills\slideshow-to-pptx\scripts/ with Bundled automation scripts or tools
@@ -162,9 +153,6 @@ Also validates project-local skills against `.kilo/skills/_TEMPLATE.md` section 
 - **.\.kilo\skills\create-beautiful-slideshows\SKILL.md**: 'create-beautiful-slideshows' (project (.kilo/skills/)) missing optional 'compatibility' field
   Fix: Add compatibility: <value> to frontmatter
 
-- **.\.kilo\skills\git-backup\SKILL.md**: 'git-backup' (project (.kilo/skills/)) missing optional 'license' field
-  Fix: Add license: <value> to frontmatter
-
 - **.\.kilo\skills\slideshow-to-pptx\SKILL.md**: 'slideshow-to-pptx' (project (.kilo/skills/)) missing optional 'license' field
   Fix: Add license: <value> to frontmatter
 
@@ -193,9 +181,6 @@ Also validates project-local skills against `.kilo/skills/_TEMPLATE.md` section 
   Fix: Add license: <value> to frontmatter
 
 - **C:\Users\elwru\.kilo\skills\typst-check\SKILL.md**: 'typst-check' (global (~/.kilo/skills/)) missing optional 'license' field
-  Fix: Add license: <value> to frontmatter
-
-- **C:\Users\elwru\.kilo\skills\write-a-lua\SKILL.md**: 'write-a-lua' (global (~/.kilo/skills/)) missing optional 'license' field
   Fix: Add license: <value> to frontmatter
 
 - **C:\Users\elwru\.kilo\skills\write-typst-documents\SKILL.md**: 'write-typst-documents' (global (~/.kilo/skills/)) missing optional 'license' field

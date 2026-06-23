@@ -17,6 +17,7 @@ All Python code lives in .py files.
 """
 
 import hashlib
+import io
 import json
 import os
 import re
@@ -191,7 +192,11 @@ def pandoc_to_typst(md_path):
         "--template",
         str(TEMPLATE),
         "--lua-filter",
+        "scripts/table-align.lua",
+        "--lua-filter",
         str(LUA_FILTER),
+        "--lua-filter",
+        "scripts/pagebreak.lua",
         "--to",
         "typst",
         "--wrap",
@@ -432,7 +437,8 @@ def read_appendix_content(path):
 
 
 def main():
-    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    # Enable UTF-8 for console output
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
     print("build_lesson_pdf.py — Markdown → Pandoc → Typst → PDF\n")
 
     verify_template()

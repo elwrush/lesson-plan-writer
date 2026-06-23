@@ -15,10 +15,14 @@ Parameters:
 Output: JSON with downloaded files, attribution, and source URLs.
 """
 
-import sys, requests, json, os, time
+import json
+import sys
+import time
 from io import BytesIO
-from PIL import Image
 from pathlib import Path
+
+import requests
+from PIL import Image
 
 API_URL = "https://commons.wikimedia.org/w/api.php"
 HEADERS = {
@@ -26,9 +30,10 @@ HEADERS = {
 }
 ASPECT_CONFIG = {
     "landscape": {"target": 1.78, "min_ratio": 1.3, "max_ratio": 2.5},
-    "portrait":  {"target": 0.75, "min_ratio": 0.3, "max_ratio": 0.9},
-    "any":       {"target": None,  "min_ratio": 0.0, "max_ratio": 100.0},
+    "portrait": {"target": 0.75, "min_ratio": 0.3, "max_ratio": 0.9},
+    "any": {"target": None, "min_ratio": 0.0, "max_ratio": 100.0},
 }
+
 
 def api_get(params, retries=3):
     """Make an API request with retry and backoff on 429."""
@@ -44,6 +49,7 @@ def api_get(params, retries=3):
         else:
             r.raise_for_status()
     raise RuntimeError(f"API request failed after {retries} retries (last status: {r.status_code})")
+
 
 def search_images(query, count=3, min_width=800, aspect="landscape"):
     """Search Commons for images matching query. Returns list of matching image dicts."""
@@ -65,11 +71,15 @@ def search_images(query, count=3, min_width=800, aspect="landscape"):
     hits = []
     for hit in results:
         title = hit["title"]
-        if any(title.lower().endswith(ext) for ext in (".ogg", ".ogv", ".pdf", ".svg", ".webm", ".mp3", ".wav")):
+        if any(
+            title.lower().endswith(ext)
+            for ext in (".ogg", ".ogv", ".pdf", ".svg", ".webm", ".mp3", ".wav")
+        ):
             continue
 
         params2 = {
-            "action": "query", "format": "json",
+            "action": "query",
+            "format": "json",
             "titles": title,
             "prop": "imageinfo",
             "iiprop": "url|extmetadata|dimensions|mime",
@@ -95,20 +105,25 @@ def search_images(query, count=3, min_width=800, aspect="landscape"):
                 pass
             license_name = "Unknown"
             try:
-                license_name = info.get("extmetadata", {}).get("LicenseShortName", {}).get("value", "Unknown")
+                license_name = (
+                    info.get("extmetadata", {}).get("LicenseShortName", {}).get("value", "Unknown")
+                )
             except Exception:
                 pass
 
-            hits.append({
-                "title": page["title"],
-                "url": info["url"],
-                "thumb_url": info.get("thumburl", info["url"]),
-                "width": w, "height": h,
-                "ratio": round(ratio, 2),
-                "author": author,
-                "license": license_name,
-                "source_url": f"https://commons.wikimedia.org/wiki/{page['title'].replace(' ', '_')}",
-            })
+            hits.append(
+                {
+                    "title": page["title"],
+                    "url": info["url"],
+                    "thumb_url": info.get("thumburl", info["url"]),
+                    "width": w,
+                    "height": h,
+                    "ratio": round(ratio, 2),
+                    "author": author,
+                    "license": license_name,
+                    "source_url": f"https://commons.wikimedia.org/wiki/{page['title'].replace(' ', '_')}",
+                }
+            )
             break
 
         time.sleep(0.5)  # Be polite between API calls
@@ -119,6 +134,7 @@ def search_images(query, count=3, min_width=800, aspect="landscape"):
         hits.sort(key=lambda h: h["ratio"], reverse=True)
 
     return hits[:count]
+
 
 def download_and_compress(url, output_path):
     """Download an image, compress it, and save to output_path."""
@@ -131,14 +147,25 @@ def download_and_compress(url, output_path):
     img.convert("RGB").save(output_path, "JPEG", quality=80, optimize=True)
     return output_path
 
+
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="Search and download images from Wikimedia Commons")
+
+    parser = argparse.ArgumentParser(
+        description="Search and download images from Wikimedia Commons"
+    )
     parser.add_argument("--query", required=True, help="Search term")
-    parser.add_argument("--count", type=int, default=3, help="Number of images (default: 3, max: 10)")
+    parser.add_argument(
+        "--count", type=int, default=3, help="Number of images (default: 3, max: 10)"
+    )
     parser.add_argument("--output", default=".", help="Output directory")
     parser.add_argument("--min-width", type=int, default=800, help="Minimum image width")
-    parser.add_argument("--aspect", choices=["landscape", "portrait", "any"], default="landscape", help="Aspect ratio preference")
+    parser.add_argument(
+        "--aspect",
+        choices=["landscape", "portrait", "any"],
+        default="landscape",
+        help="Aspect ratio preference",
+    )
     args = parser.parse_args()
     args.count = min(args.count, 10)
 
@@ -146,19 +173,21 @@ def main():
     result = {"files": [], "errors": []}
 
     for i, hit in enumerate(hits):
-        filename = f"commons_{i+1}.jpg"
+        filename = f"commons_{i + 1}.jpg"
         out_path = Path(args.output) / filename
         try:
             download_and_compress(hit["url"], out_path)
-            result["files"].append({
-                "path": str(out_path),
-                "filename": filename,
-                "width": hit["width"],
-                "height": hit["height"],
-                "ratio": hit["ratio"],
-                "attribution": f"{hit['author']} ({hit['license']})",
-                "source_url": hit["source_url"],
-            })
+            result["files"].append(
+                {
+                    "path": str(out_path),
+                    "filename": filename,
+                    "width": hit["width"],
+                    "height": hit["height"],
+                    "ratio": hit["ratio"],
+                    "attribution": f"{hit['author']} ({hit['license']})",
+                    "source_url": hit["source_url"],
+                }
+            )
             print(f"  Downloaded: {filename} ({hit['width']}x{hit['height']})", file=sys.stderr)
         except Exception as e:
             result["errors"].append({"url": hit["url"], "error": str(e)})
@@ -166,6 +195,6 @@ def main():
 
     print(json.dumps(result, indent=2))
 
+
 if __name__ == "__main__":
     main()
-

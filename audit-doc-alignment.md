@@ -1,6 +1,6 @@
 # Doc Alignment Audit: LESSON-PLAN-WRITER-3
 
-Scanned: 277 doc files, 23 CLI flags, 134 test functions
+Scanned: 276 doc files, 23 CLI flags, 134 test functions
 
 ## WARNINGS
 
@@ -308,9 +308,7 @@ Scanned: 277 doc files, 23 CLI flags, 134 test functions
 - **`missing-file`** `.kilo\plans\M3-COLUMBUS-blueprint.md` line 269: references `inputs/M3-COLUMBUS/1700s_1770_CookclaimsAustralia_10.jpg` which does not exist on disk
 - **`missing-file`** `.kilo\plans\M3-COLUMBUS-blueprint.md` line 269: references `assets/splash.jpg` which does not exist on disk
 - **`missing-file`** `.kilo\plans\M3-COLUMBUS-blueprint.md` line 270: references `assets/columbus.jpg` which does not exist on disk
-- **`missing-file`** `.kilo\plans\m3-drama-series-lessons-2-4.md` line 170: references `output/M3-LESSON02-DRAMA/lesson.md` which does not exist on disk
 - **`missing-file`** `.kilo\plans\m3-drama-series-lessons-2-4.md` line 170: references `slides/slides.md` which does not exist on disk
-- **`missing-file`** `.kilo\plans\m3-drama-series-lessons-2-4.md` line 170: references `output/M3-LESSON02-DRAMA/lesson.md` which does not exist on disk
 - **`missing-file`** `.kilo\plans\m3-drama-series-lessons-2-4.md` line 171: references `output/M3-LESSON03-DRAMA/lesson.md` which does not exist on disk
 - **`missing-file`** `.kilo\plans\m3-drama-series-lessons-2-4.md` line 171: references `slides/slides.md` which does not exist on disk
 - **`missing-file`** `.kilo\plans\m3-drama-series-lessons-2-4.md` line 171: references `output/M3-LESSON03-DRAMA/lesson.md` which does not exist on disk
@@ -380,52 +378,52 @@ Scanned: 277 doc files, 23 CLI flags, 134 test functions
 - **`missing-file`** `.kilo\skills\_TEMPLATE.md` line 96: references `scripts/validate.py` which does not exist on disk
 - **`missing-file`** `.kilo\skills\_TEMPLATE.md` line 97: references `scripts/build.py` which does not exist on disk
 - **`missing-file`** `.kilo\skills\_TEMPLATE.md` line 97: references `scripts/build.py` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 24: references `lesson.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 30: references `output/{subfolder}/` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 68: references `references/CREATIVE_TECHNIQUES.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 107: references `output/{subfolder}/` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 118: references `output/{subfolder}/lesson.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 118: references `output/{subfolder}/lesson.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 229: references `shape-a.json` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 230: references `shape-b.json` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 231: references `shape-c.json` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 232: references `shape-d.json` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 233: references `shape-e.json` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 234: references `shape-f.json` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 235: references `shape-g.json` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 253: references `output/{subfolder}/lesson.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 253: references `output/{subfolder}/lesson.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 271: references `lesson.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 287: references `references/CREATIVE_TECHNIQUES.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 20: references `slides.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 26: references `slides.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 28: references `output/{subfolder}/slides/index.html` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 28: references `output/{subfolder}/slides/index.html` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 73: references `references/PATTERNS.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 99: references `references/PATTERNS.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 122: references `.kilo/plans/{lesson}-blueprint.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 122: references `.kilo/plans/{lesson}-blueprint.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 129: references `references/PATTERNS.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 146: references `.kilo/plans/{lesson}-blueprint.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 146: references `.kilo/plans/{lesson}-blueprint.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 152: references `references/PATTERNS.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 155: references `references/ARCHITECTURE.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 158: references `references/ARCHITECTURE.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 161: references `references/PATTERNS.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 169: references `references/ARCHITECTURE.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 182: references `references/ARCHITECTURE.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 196: references `slides.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 197: references `output/M3-SPEAKING-TBL-GENDER-ROLES/slides/index.html` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 197: references `output/M3-SPEAKING-TBL-GENDER-ROLES/slides/index.html` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 202: references `output/M3-WRITING-CA-FEEDBACK/slides/index.html` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 202: references `output/M3-WRITING-CA-FEEDBACK/slides/index.html` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 207: references `output/m2-5a-business/slides/index.html` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 207: references `output/m2-5a-business/slides/index.html` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 223: references `references/TROUBLESHOOTING.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 229: references `references/PATTERNS.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 230: references `references/ARCHITECTURE.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 231: references `references/CSS.md` which does not exist on disk
-- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 232: references `references/TROUBLESHOOTING.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 25: references `lesson.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 31: references `output/{subfolder}/` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 69: references `references/CREATIVE_TECHNIQUES.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 108: references `output/{subfolder}/` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 119: references `output/{subfolder}/lesson.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 119: references `output/{subfolder}/lesson.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 230: references `shape-a.json` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 231: references `shape-b.json` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 232: references `shape-c.json` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 233: references `shape-d.json` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 234: references `shape-e.json` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 235: references `shape-f.json` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 236: references `shape-g.json` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 254: references `output/{subfolder}/lesson.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 254: references `output/{subfolder}/lesson.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 272: references `lesson.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 290: references `references/CREATIVE_TECHNIQUES.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 21: references `slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 27: references `slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 29: references `output/{subfolder}/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 29: references `output/{subfolder}/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 74: references `references/PATTERNS.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 100: references `references/PATTERNS.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 123: references `.kilo/plans/{lesson}-blueprint.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 123: references `.kilo/plans/{lesson}-blueprint.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 130: references `references/PATTERNS.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 147: references `.kilo/plans/{lesson}-blueprint.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 147: references `.kilo/plans/{lesson}-blueprint.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 153: references `references/PATTERNS.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 156: references `references/ARCHITECTURE.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 159: references `references/ARCHITECTURE.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 162: references `references/PATTERNS.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 170: references `references/ARCHITECTURE.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 183: references `references/ARCHITECTURE.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 197: references `slides.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 198: references `output/M3-SPEAKING-TBL-GENDER-ROLES/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 198: references `output/M3-SPEAKING-TBL-GENDER-ROLES/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 203: references `output/M3-WRITING-CA-FEEDBACK/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 203: references `output/M3-WRITING-CA-FEEDBACK/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 208: references `output/m2-5a-business/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 208: references `output/m2-5a-business/slides/index.html` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 224: references `references/TROUBLESHOOTING.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 230: references `references/PATTERNS.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 231: references `references/ARCHITECTURE.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 232: references `references/CSS.md` which does not exist on disk
+- **`missing-file`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 233: references `references/TROUBLESHOOTING.md` which does not exist on disk
 - **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 12: references `output/{subfolder}/pptx/{topic}-lesson-plan.pptx` which does not exist on disk
 - **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 26: references `output/{subfolder}/slides/` which does not exist on disk
 - **`missing-file`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 48: references `output/{subfolder}/slides/index.html` which does not exist on disk
@@ -553,7 +551,9 @@ Scanned: 277 doc files, 23 CLI flags, 134 test functions
 - **`flag-mismatch`** `.kilo\reference\markdown-pandoc-pipeline-primer.md` line 261: uses flag `--input` — not found in any script's add_argument
 - **`flag-mismatch`** `.kilo\reference\markdown-pandoc-pipeline-primer.md` line 268: uses flag `--citeproc` — not found in any script's add_argument
 - **`flag-mismatch`** `.kilo\reference\markdown-pandoc-pipeline-primer.md` line 289: uses flag `--extract-media` — not found in any script's add_argument
-- **`flag-mismatch`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 121: uses flag `---` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 287: uses flag `---` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\build-excellent-lesson-plans\SKILL.md` line 299: uses flag `---` — not found in any script's add_argument
+- **`flag-mismatch`** `.kilo\skills\create-beautiful-slideshows\SKILL.md` line 122: uses flag `---` — not found in any script's add_argument
 - **`flag-mismatch`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 91: uses flag `--allow-file-access-from-files` — not found in any script's add_argument
 - **`flag-mismatch`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 196: uses flag `--load-pause` — not found in any script's add_argument
 - **`flag-mismatch`** `.kilo\skills\slideshow-to-pptx\SKILL.md` line 196: uses flag `--load-pause` — not found in any script's add_argument
@@ -608,4 +608,4 @@ Scanned: 277 doc files, 23 CLI flags, 134 test functions
 
 
 ---
-**Summary:** 0 blockers, 527 warnings, 71 infos
+**Summary:** 0 blockers, 525 warnings, 73 infos
