@@ -192,7 +192,7 @@ def pandoc_to_typst(md_path):
         "--template",
         str(TEMPLATE),
         "--lua-filter",
-        "scripts/table-align.lua",
+        "scripts/table-content-fit.lua",
         "--lua-filter",
         str(LUA_FILTER),
         "--lua-filter",

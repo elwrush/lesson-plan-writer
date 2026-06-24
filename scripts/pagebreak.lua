@@ -1,7 +1,12 @@
+-- pagebreak.lua
+-- Converts horizontal rules (---) to #pagebreak() in Typst.
+-- Adds a pagebreak before ## Appendix headings.
+-- Runs before table-content-fit.lua in the pipeline — no Table dependency.
+
 if FORMAT:match('typst') then
   function Pandoc(doc)
     local new_blocks = {}
-    for i, block in ipairs(doc.blocks) do
+    for _, block in ipairs(doc.blocks) do
       if block.t == 'Header' and block.level == 2 then
         local text = ''
         for _, inline in ipairs(block.content) do

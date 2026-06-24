@@ -80,7 +80,7 @@ function Pandoc(doc)
   end
 
   -- ── Build Typst table ──
-  local t = '= Lesson Stages\n\n#table(\n'
+  local t = '#table(\n'
   t = t .. '  columns: (auto, 1fr, 2fr, auto),\n'
   t = t .. '  stroke: 1pt,\n'
   t = t .. '  table.header([*Time*], [*Goal*], [*Procedure*], [*Int*]),\n'

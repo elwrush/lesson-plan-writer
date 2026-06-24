@@ -24,7 +24,7 @@ Examples:
 1. Scans `output/` for the requested slideshow
 2. Warns if none found and stops
 3. **Detects** whether this is a new deploy or an update (by checking gh-pages branch for the subfolder)
-4. Runs `/lint`
+4. Runs fast lint (ruff + encoding — skips pyright/LuaLS which are development-time checks)
 5. **Rebuilds `index.html` from `slides.md`** using pandoc with auto-discovered Lua filters (prevents stale-HTML deploys)
 6. Copies the slideshow to a temp staging directory
 7. Creates/updates a git worktree for the gh-pages branch in a **separate** temp directory
@@ -105,9 +105,12 @@ if ($remoteUrl -match "github\.com[:\/](.+)/(.+)\.git") {
 }
 ```
 
-### Step 3: Lint
+### Step 3: Fast lint (deployment-only — skip pyright/LuaLS which take ~6s)
+
+Deployment lint only runs encoding, ruff, and unicode checks. Full type-checking (pyright, LuaLS) is a development-time gate, not a deployment gate.
+
 ```powershell
-python -m ruff check --fix . ; python -m ruff format .
+python scripts/check_encoding.py ; python scripts/check_unicode_symbols.py --fix ; if ($?) { python -m ruff check --fix . ; python -m ruff format . }
 ```
 
 ### Step 4: Rebuild index.html from slides.md (prevents stale-HTML deploys)
@@ -139,31 +142,37 @@ foreach ($p in $presentations) {
 }
 ```
 
-### Step 6: Add the gh-pages worktree (shared by both new deploy and update)
+### Step 6: Shallow clone gh-pages (fast — only latest commit, no history)
 
-**PowerShell trap:** Never append `2>&1` to a multi-line command — it gets parsed as a separate command name. Use `2>$null` for stderr suppression and check `$?` instead of `$LASTEXITCODE` after redirects.
+Replaces `git worktree add` which checked out all 40+ presentations on disk. Shallow clone (`--depth 1`) only downloads the latest commit — same data, no history.
+
+**PowerShell trap:** Never append `2>&1` to a multi-line command — it gets parsed as a separate command name. Use `2>$null` for stderr suppression.
 
 ```powershell
 $worktreeDir = "$env:TEMP\gh-pages-worktree"
 
-# Remove any leftover worktree from a previous run
-git worktree remove $worktreeDir 2>$null
+# Remove any leftover from a previous run
 if (Test-Path $worktreeDir) { Remove-Item -Recurse -Force -Path $worktreeDir }
 
-# Fetch the remote gh-pages branch
-git fetch origin gh-pages 2>$null
-$ghPagesExists = $?
+# Shallow clone — only the latest commit, no history
+git clone --branch gh-pages --single-branch --depth 1 "https://github.com/$owner/$repo.git" $worktreeDir 2>$null
+if (-not $?) {
+    Write-Host "gh-pages branch does not exist yet — starting fresh"
+    New-Item -ItemType Directory -Force -Path $worktreeDir | Out-Null
+    git -C $worktreeDir init
+    git -C $worktreeDir checkout --orphan gh-pages
+}
 ```
 
-### Step 7: Copy all slideshows into the worktree
+### Step 7: Copy the current slideshow into the clone
+
+Only the current subfolder is copied. All other presentations stay untouched on gh-pages.
+
 ```powershell
-Get-ChildItem -Path $staging -Directory | ForEach-Object {
-    $subfolder = $_.Name
-    $destDir = Join-Path $worktreeDir $subfolder
-    New-Item -ItemType Directory -Force -Path $destDir | Out-Null
-    Copy-Item -Recurse -Force "$($_.FullName)\*" "$destDir/"
-    Write-Host "  Deployed $subfolder"
-}
+$destDir = Join-Path $worktreeDir $targetSubfolder
+New-Item -ItemType Directory -Force -Path $destDir | Out-Null
+robocopy "$staging\$targetSubfolder" "$destDir" /E /IS /NFL /NDL /NJH /NJS /NP
+Write-Host "  Deployed $targetSubfolder"
 ```
 
 ### Step 8: Generate/update root landing page (card grid)

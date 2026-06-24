@@ -63,11 +63,14 @@ def test_red_phase_would_fail():
 class TestGreenPhaseRequired:
     """GREEN PHASE: Must-have safety patterns."""
 
-    def test_uses_git_worktree(self):
+    def test_uses_isolated_checkout(self):
         content = load_command_file()
-        assert "git worktree add" in content, (
-            "Must use git worktree add to check out gh-pages in an isolated directory.\n"
-            "Without this, the command operates on the main working tree and risks destruction."
+        has_worktree = "git worktree add" in content
+        has_shallow_clone = "git clone" in content and "--depth 1" in content
+        assert has_worktree or has_shallow_clone, (
+            "Must use git worktree add OR git clone --depth 1 to check out gh-pages "
+            "in an isolated directory. Without this, the command operates on the "
+            "main working tree and risks destruction."
         )
 
     def test_uses_git_C_flag(self):  # noqa: N802

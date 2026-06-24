@@ -33,7 +33,7 @@ Agent writes lesson.md → build_lesson_pdf.py (validates + Pandoc + Lua filter 
 
 - **Duration:** Standard lesson is 46 minutes. Total stage times must always match stated duration.
 - **Stage numbering:** Sequential from 1. No gaps.
-- **Stage table columns:** The Lua filter (`lesson-tables.lua`) generates a 5-column table: Time | Stage | Goal | Procedure | Int. The narrow "Stage" column between Time and Goal shows the stage number (1, 2, 3…) for quick visual reference. Headers are bold; stage name rows have a light gray (`luma(230)`) background spanning all 5 columns.
+- **Stage table columns:** The Lua filter (`lesson-tables.lua`) generates a 4-column table: Time | Goal | Procedure | Int. Headers are bold; stage name rows have a light gray (`luma(230)`) background spanning all 4 columns.
 - **Output location:** Input `.md` in `output/{subfolder}/` → PDF in `PDF/{subfolder}/`.
 - **Stages in Markdown body, not YAML.** YAML frontmatter is for simple metadata strings only. The Lua filter reads `## Stage N:` headings and builds the stage table.
 
@@ -190,7 +190,7 @@ Open the PDF and check:
 - Masthead (Cambridge logo · C·E·L Mathayom · ACT logo)
 - Info table: teacher, date, class, duration, CEFR, shape, materials, slideshow URL (gray-shaded)
 - Lesson aims with left accent bar (main aim bold, subsidiary aim bold)
-- Stage table with colored headers (luma(230) fill) and five columns: Time, Stage, Goal, Procedure, Int
+- Stage table with colored headers (luma(230) fill) and four columns: Time, Goal, Procedure, Int
 - Total timing matches duration
 - Aims are natural English
 - Bullet points render correctly throughout
@@ -289,7 +289,7 @@ The build pipeline uses these files:
 
 - `templates/lesson-plan.typ` — Typst page setup, masthead, info table, aim block
 - `scripts/lesson-tables.lua` — Pandoc Lua filter that reads `## Stage N:` headings and generates Typst `#table()` with colored headers
-- `scripts/table-align.lua` — Pandoc Lua filter that catches `Table` AST elements and replaces `align(center)` with `align(left)` before the Typst writer runs
+- `scripts/table-content-fit.lua` — Pandoc Lua filter that catches `Table` AST elements, sets content-aware column widths, and replaces `align(center)` with `align(left)` by stripping the Pandoc 3.10 `#figure(kind: table)` wrapper
 - `scripts/pagebreak.lua` — Pandoc Lua filter that converts `---` to `#pagebreak()` in Typst output and adds a pagebreak before the appendix header
 - `scripts/build_lesson_pdf.py` — Entry point: validates Markdown, runs Pandoc + Lua filter, compiles Typst, lints PDF
 - `knowledge-base/lesson plan shapes/json/shape-{letter}.json` — Shape templates defining stage structure per lesson type
@@ -301,7 +301,7 @@ See also `.kilo/skills/build-excellent-lesson-plans/SKILL.md` (this document) fo
 
 - `scripts/build_lesson_pdf.py` — Main build script: validates markdown, runs Pandoc → Typst pipeline, lints output PDF, appends answer key/transcript
 - `scripts/lesson-tables.lua` — Pandoc Lua filter for stage table generation
-- `scripts/table-align.lua` — Pandoc Lua filter that replaces `align(center)` with `align(left)` for all pipe tables in Typst output
+- `scripts/table-content-fit.lua` — Pandoc Lua filter that replaces `align(center)` with `align(left)` for all pipe tables in Typst output and sets content-aware column widths
 - `scripts/pagebreak.lua` — Pandoc Lua filter: converts `---` to `#pagebreak()`, ensures appendix starts on a new page
 - `scripts/linter_pdf_content.py` — Post-build PDF content linting
 

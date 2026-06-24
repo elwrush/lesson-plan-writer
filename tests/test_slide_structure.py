@@ -250,3 +250,208 @@ class TestFragmentClasses:
                 f"in {path.parent.parent.name}/. "
                 f"reveal.js keeps '{cls}' at opacity:1 — fragments never hide."
             )
+
+
+class TestFilterOutput:
+    """Verify Lua filters injected expected DOM output into the HTML.
+
+    Each test checks that if a filter-dependent feature is used in slides.md,
+    the corresponding HTML artifact from that filter appears in index.html.
+    A missing artifact means the filter was omitted from the build command.
+    """
+
+    # ── Timer filter ──
+
+    def _find_slides_md(self, html_path):
+        """Return slides.md content from the same directory as index.html."""
+        slides_md = html_path.parent / "slides.md"
+        if slides_md.exists():
+            return slides_md.read_text(encoding="utf-8")
+        return ""
+
+    def test_timer_filter_active(self, slideshow):
+        """If slides.md has data-timer, HTML must have the timer pill container."""
+        content, path = slideshow
+        md = self._find_slides_md(path)
+        if "data-timer" not in md:
+            return  # no timer feature used — skip
+        # timer-inject.lua injects a div with data-timer + position: fixed
+        has_timer_div = bool(
+            re.search(
+                r'<div\s+data-timer="\d+"[^>]*'
+                r'style="[^"]*position:\s*fixed[^"]*bottom:\s*20px',
+                content,
+            )
+        )
+        assert has_timer_div, (
+            f"{path.parent.parent.name}/ uses data-timer in slides.md "
+            f"but no timer pill found in HTML. "
+            f"timer-inject.lua may be missing from the build command."
+        )
+
+    # ── FA yellow filter ──
+
+    def test_fa_yellow_filter_active(self, slideshow):
+        """If HTML has Font Awesome icons, they must carry the #ffd700 style."""
+        content, path = slideshow
+        if "fa-" not in content:
+            return  # no FA icons — skip
+        fa_tags = re.findall(r'<i[^>]*class="[^"]*\bfa-[^"]*"[^>]*>', content)
+        for tag in fa_tags:
+            has_yellow = "#ffd700" in tag or "color: #ffd700" in tag
+            assert has_yellow, (
+                f"{path.parent.parent.name}/ has Font Awesome icon without "
+                f"#ffd700 styling: {tag[:100]}. "
+                f"fa-yellow.lua may be missing from the build command."
+            )
+        # Verify AT LEAST one icon has the styling (filter ran)
+        styled_fa = re.findall(
+            r'<i[^>]*style="[^"]*#ffd700[^"]*"[^>]*class="[^"]*\bfa-[^"]*"[^>]*>', content
+        )
+        if fa_tags:
+            assert len(styled_fa) > 0, (
+                f"{path.parent.parent.name}/ has {len(fa_tags)} FA icon(s) but none "
+                f"have #ffd700 styling. fa-yellow.lua may be missing from build command."
+            )
+
+    # ── YouTube embed filter ──
+
+    def test_youtube_filter_active(self, slideshow):
+        """If :::
+        {.youtube} is used, HTML must contain a YouTube iframe inside iframe-container."""
+        content, path = slideshow
+        if "youtube.com/embed/" not in content:
+            return  # no YouTube embeds — skip
+        has_container = "iframe-container" in content
+        assert has_container, (
+            f"{path.parent.parent.name}/ has youtube.com/embed/ in HTML "
+            f'but no <div class="iframe-container"> wrapper. '
+            f"youtube-embed.lua may be generating raw iframes without the "
+            f"responsive container."
+        )
+
+    # ── Audio autoplay filter ──
+
+    def test_audio_autoplay_filter_active(self, slideshow):
+        """If data-audio-src is used, HTML must contain <audio data-autoplay>."""
+        content, path = slideshow
+        md = self._find_slides_md(path)
+        if "data-audio-src" not in md:
+            return  # no audio feature used — skip
+        has_audio = bool(re.search(r"<audio\s+data-autoplay", content))
+        assert has_audio, (
+            f"{path.parent.parent.name}/ uses data-audio-src in slides.md "
+            f"but no <audio data-autoplay> found in HTML. "
+            f"audio-autoplay.lua may be missing from the build command."
+            if has_audio
+            else ""
+        )
+
+    # ── Shield block filter ──
+
+    def test_shield_divs_render(self, slideshow):
+        """If slides.md uses shield divs, they must be present in HTML."""
+        content, path = slideshow
+        md = self._find_slides_md(path)
+        if "::: {.shield}" not in md:
+            return
+        shield_count_md = md.count("::: {.shield}")
+        shield_count_html = len(re.findall(r'<div\s+class="[^"]*\bshield\b[^"]*"', content))
+        assert shield_count_html == shield_count_md, (
+            f"{path.parent.parent.name}/ has {shield_count_md} shield divs "
+            f"in slides.md but only {shield_count_html} in HTML. "
+            f"shield-block.lua may be missing from the build command."
+        )
+
+
+class TestAnswerRevealUsage:
+    """`.answer-reveal` (yellow) is for answer/review slides only.
+
+    Non-answer reveals (character descriptors, discussion prompts, skill
+    explanations) must use `.white-reveal` (white). Yellow text on a
+    non-answer slide visually confuses students into thinking it's a
+    correct answer.
+    """
+
+    ALLOWED_ANSWER_SLIDE_PREFIXES = ("answer-",)
+
+    def test_answer_reveal_only_on_answer_slides(self, slideshow):
+        content, path = slideshow
+        if ".fragment" not in content:
+            return
+
+        # Find all fragment elements grouped by their parent section ID
+        # Pattern: <section id="slide-X"> ... <span class="fragment answer-reveal">
+        violations = []
+        sections = re.finditer(
+            r'<section[^>]*id="(?P<sid>[^"]+)"[^>]*>.*?</section>',
+            content,
+            re.DOTALL,
+        )
+        for sec in sections:
+            sid = sec.group("sid")
+            # Check if this is an allowed answer slide
+            is_answer_slide = any(
+                sid.startswith(prefix) for prefix in self.ALLOWED_ANSWER_SLIDE_PREFIXES
+            )
+            if is_answer_slide:
+                continue
+
+            # Find answer-reveal fragments in this non-answer slide
+            answer_frags = re.findall(
+                r'class="[^"]*\bfragment\b[^"]*\banswer-reveal\b[^"]*"',
+                sec.group(0),
+            )
+            if answer_frags:
+                violations.append(f"\n  {sid}: {len(answer_frags)} `.answer-reveal` element(s)")
+
+        assert not violations, (
+            f"{path.parent.parent.name}/ has `.answer-reveal` on non-answer slides:"
+            + "".join(violations)
+            + "\n\nNon-answer reveals must use `.white-reveal` instead of `.answer-reveal`. "
+            + "Yellow text signals 'correct answer' — don't use it for prompts or descriptors."
+        )
+
+
+class TestNoAutoTitleSlide:
+    """No `title:` in YAML frontmatter — Pandoc generates an unstyled auto-title-slide.
+
+    SKILL.md rule:
+      "Do not put title: in YAML frontmatter — Pandoc generates an unstyled
+       auto-title-slide before the splash. Remove title: from frontmatter
+       entirely to suppress it."
+    """
+
+    def test_no_title_in_yaml_frontmatter(self, slideshow):
+        _content, path = slideshow
+        slides_md = path.parent / "slides.md"
+        if not slides_md.exists():
+            return  # no slides.md to check — skip
+
+        md_text = slides_md.read_text(encoding="utf-8")
+
+        # YAML frontmatter is delimited by --- at the very start of the file
+        if not md_text.startswith("---"):
+            return  # no YAML frontmatter — nothing to check
+
+        # Find the closing ---
+        end_idx = md_text.find("---", 3)
+        if end_idx == -1:
+            return  # malformed YAML — skip
+
+        frontmatter = md_text[3:end_idx].strip()
+        has_title = False
+        title_line = ""
+
+        for line in frontmatter.split("\n"):
+            stripped = line.strip()
+            if stripped.startswith("title:") or stripped.startswith("title "):
+                has_title = True
+                title_line = stripped
+                break
+
+        assert not has_title, (
+            f"{path.parent.parent.name}/ has `{title_line}` in YAML frontmatter. "
+            f"This generates an unstyled auto-title-slide before the splash. "
+            f"Remove the `title:` line entirely to suppress it."
+        )
