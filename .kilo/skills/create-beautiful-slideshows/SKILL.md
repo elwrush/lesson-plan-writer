@@ -116,7 +116,12 @@ Lead-in, transition, summary, stimulus-only slides, title and objectives slides.
 - **Do not write inline CSS (`style=`) in slides.md** — validation will fail
 - **Do not use `--slide-level=2`** — creates vertical slides
 - **Do not use `data-background-iframe` for YouTube** — Error 153
-- **Do not put `title:` in YAML frontmatter** — Pandoc generates an unstyled auto-title-slide before the splash. Remove `title:` from frontmatter entirely to suppress it. The browser `<title>` will default to the filename, which is acceptable.
+- **Do not put `title:` in YAML frontmatter** — Pandoc generates an unstyled auto-title-slide before the splash. Use `pagetitle:` instead to set the HTML `<title>` tag without triggering the auto title slide:
+  ```yaml
+  ---
+  pagetitle: "Lesson Name"
+  ---
+  ```
 - **Do not embed pedagogical intent annotations inline in slides.md** — comments between YAML frontmatter and the first `#` heading create phantom `<section>` elements with no id. Comments that follow a heading (no blank line) are invisible to the test (which looks 2000 chars before the `<section>` tag). Use the `splash-annotations.html` companion file pattern instead (see `references/PATTERNS.md`).
 - **Do not use `##` for slide breaks** — only `#`
 - **Do not invent statistics** — source from lesson plan or transcript

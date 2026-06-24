@@ -175,24 +175,40 @@ Get-ChildItem -Path $staging -Directory | ForEach-Object {
 import subprocess, os, re, sys
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
-worktree = r'$env:TEMP\gh-pages-worktree'
-
-result = subprocess.run(['git', '-C', worktree, 'ls-tree', '--name-only', 'HEAD'],
-                       capture_output=True, text=True, timeout=30)
-dirs = [d.strip() for d in result.stdout.splitlines() if d.strip() and d.strip() != 'index.html']
+# Read ALL directories from gh-pages via git (not filesystem)
+result = subprocess.run(
+    ['git', 'ls-tree', '--name-only', 'origin/gh-pages'],
+    capture_output=True, text=True, timeout=30
+)
+all_entries = [e.strip() for e in result.stdout.splitlines() if e.strip()]
+slide_dirs = [e for e in all_entries if e != 'index.html' and e != 'ARCHIVE']
 
 presentations = []
-for d in dirs:
-    html_path = os.path.join(worktree, d, 'index.html')
-    if os.path.exists(html_path):
-        with open(html_path, 'r', encoding='utf-8', errors='replace') as f:
-            content = f.read(5000)
-        if '<div class=\"slides\">' in content:
-            title_match = re.search(r'<title>(.*?)</title>', content)
-            title = title_match.group(1) if title_match else 'Presentation'
-            presentations.append({'dir': d, 'title': title})
+for d in sorted(slide_dirs):
+    html = subprocess.run(
+        ['git', 'show', f'origin/gh-pages:{d}/index.html'],
+        capture_output=True, timeout=15
+    )
+    if html.returncode != 0:
+        presentations.append({'dir': d, 'title': d})
+        continue
 
-presentations.sort(key=lambda p: p['dir'])
+    try:
+        content = html.stdout.decode('utf-8', errors='replace')[:5000]
+    except UnicodeDecodeError:
+        content = html.stdout.decode('cp1252', errors='replace')[:5000]
+
+    title_match = re.search(r'<title>\s*(.*?)\s*</title>', content, re.DOTALL)
+    if title_match:
+        title = title_match.group(1).strip()
+        title = title.replace('&ndash;', '\u2013').replace('&mdash;', '\u2014')
+        title = title.replace('&#8211;', '\u2013').replace('&#8212;', '\u2014')
+        title = title.replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>')
+        if title.lower() in ('slides', 'presentation', ''):
+            title = d
+    else:
+        title = d
+    presentations.append({'dir': d, 'title': title})
 
 cards = []
 for p in presentations:
@@ -250,11 +266,11 @@ landing = '''<!DOCTYPE html>
     <div class=\"grid\">
 ''' + cards_html + '''
     </div>
-    <footer>Lesson Plan Writer 3</footer>
+    <footer>Lesson Plan Writer 3 &mdash; ''' + str(len(presentations)) + ''' presentations</footer>
 </body>
 </html>'''
 
-with open(os.path.join(worktree, 'index.html'), 'w', encoding='utf-8') as f:
+with open(os.path.join(r'$env:TEMP\gh-pages-worktree', 'index.html'), 'w', encoding='utf-8') as f:
     f.write(landing)
 
 print(f'Landing page generated -- {len(presentations)} presentations')
@@ -273,7 +289,8 @@ if ($LASTEXITCODE -ne 0) {
 $date = Get-Date -Format "ddMMyy"
 git -C $worktreeDir add -A
 git -C $worktreeDir commit -m "Deploy $($presentations[0].subfolder) ($date)"
-git -C $worktreeDir push origin gh-pages
+# Must use HEAD:gh-pages because worktree is in detached HEAD state
+git -C $worktreeDir push origin HEAD:gh-pages
 ```
 
 ### Step 10: Clean up worktree and return to main

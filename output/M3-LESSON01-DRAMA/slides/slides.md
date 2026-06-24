@@ -1,5 +1,5 @@
 ---
-title: "Voice and Character -- Introduction to Dramatic Reading"
+pagetitle: "Voice and Character -- Introduction to Dramatic Reading"
 ---
 
 #  {#slide-splash data-background-image="assets/splash.jpg" data-background-size="cover"}
