@@ -102,6 +102,8 @@ Write: "What's the class name or identifier?" in your response text. Wait for th
 ### Step 8: Materials (chat)
 Write: "What materials will you use? (e.g., coursebook unit and pages, video links, handouts)" in your response text. Wait for the user's chat reply.
 
+**Materials scope:** Only list curriculum materials: textbooks, bespoke worksheets/handouts, audio tracks, video clips/links. Do NOT list classroom supplies (whiteboard, screen, paper, pens) or images (photos, clip art, splash images). These are implied classroom resources that bloat the info table.
+
 ### Step 9: Output subfolder (chat)
 Write: "What subfolder should I use under `output/`?" in your response text. Wait for the user's chat reply.
 
@@ -147,8 +149,6 @@ Optional YAML fields (only include if provided):
 **Body format:**
 
 ```
-= Lesson Stages
-
 ## Stage 1: Stage Name
 
 **Time:** 5 min  |  **Interaction:** T-Ss
@@ -185,7 +185,7 @@ Open the PDF and check:
 - Masthead (Cambridge logo · C·E·L Mathayom · ACT logo)
 - Info table: teacher, date, class, duration, CEFR, shape, materials, slideshow URL (gray-shaded)
 - Lesson aims with left accent bar (main aim bold, subsidiary aim bold)
-- Stage table with colored headers (luma(230) fill) and four columns: Time, Goal, Procedure, Int
+- Stage table with colored headers (luma(230) fill) and five columns: Time, Stage, Goal, Procedure, Int
 - Total timing matches duration
 - Aims are natural English
 - Bullet points render correctly throughout

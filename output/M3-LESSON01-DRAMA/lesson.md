@@ -13,13 +13,10 @@ materials:
   - "Breaking Bad filmed scene -- Blood Money (https://www.youtube.com/watch?v=3A-Ck_2Na6s)"
   - "The Outsiders movie -- drive-in scene, 19:08 to 23:30 (https://www.youtube.com/watch?v=CvyYEWSK1-w&t=19m08s)"
   - "The Outsiders Chapter 2 (from 'Dally came striding back...' to end of chapter)"
-  - "Whiteboard / screen for comparison table"
 main_aim: "By the end of the lesson, learners will be better able to identify how actors use voice to create character and to apply this awareness in a group dramatic reading of Chapter 2 of The Outsiders."
 subsidiary_aim: "Learners will have developed the sub-skills of watching for detail (comparing table read vs filmed performance) and reading aloud with character-appropriate intonation, pace, and emotion."
 slideshow_url: "https://elwrush.github.io/lesson-plan-writer/M3-LESSON01-DRAMA/index.html"
 ---
-
-= Lesson Stages
 
 ## Stage 1: Lead-in -- Speaking Feedback
 

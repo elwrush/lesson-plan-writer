@@ -3,7 +3,7 @@
 Checks all SKILL.md files against the Kilo CLI Agent Skills specification.
 Also validates project-local skills against `.kilo/skills/_TEMPLATE.md` section structure.
 
-**Summary:** 0 blockers, 46 warnings, 18 infos
+**Summary:** 0 blockers, 45 warnings, 18 infos
 
 ## WARNING
 
@@ -91,14 +91,23 @@ Also validates project-local skills against `.kilo/skills/_TEMPLATE.md` section 
 - **C:\Users\elwru\.kilo\skills\typst-check**: 'typst-check' (global (~/.kilo/skills/)) missing 'templates/' directory
   Fix: Create C:\Users\elwru\.kilo\skills\typst-check\templates/ with Boilerplate code or configuration templates
 
-- **C:\Users\elwru\.kilo\skills\write-a-lua**: 'write-a-lua' (global (~/.kilo/skills/)) missing 'scripts/' directory
-  Fix: Create C:\Users\elwru\.kilo\skills\write-a-lua\scripts/ with Bundled automation scripts or tools
+- **C:\Users\elwru\.kilo\skills\write-a-lua\scripts**: 'write-a-lua' (global (~/.kilo/skills/)) 'scripts/' directory is empty
+  Fix: Add files to C:\Users\elwru\.kilo\skills\write-a-lua\scripts/
 
-- **C:\Users\elwru\.kilo\skills\write-a-lua**: 'write-a-lua' (global (~/.kilo/skills/)) missing 'references/' directory
-  Fix: Create C:\Users\elwru\.kilo\skills\write-a-lua\references/ with Deep-dive documentation or API design patterns
+- **C:\Users\elwru\.kilo\skills\write-a-lua\references**: 'write-a-lua' (global (~/.kilo/skills/)) 'references/' directory is empty
+  Fix: Add files to C:\Users\elwru\.kilo\skills\write-a-lua\references/
 
-- **C:\Users\elwru\.kilo\skills\write-a-lua**: 'write-a-lua' (global (~/.kilo/skills/)) missing 'templates/' directory
-  Fix: Create C:\Users\elwru\.kilo\skills\write-a-lua\templates/ with Boilerplate code or configuration templates
+- **C:\Users\elwru\.kilo\skills\write-a-lua\templates**: 'write-a-lua' (global (~/.kilo/skills/)) 'templates/' directory is empty
+  Fix: Add files to C:\Users\elwru\.kilo\skills\write-a-lua\templates/
+
+- **C:\Users\elwru\.kilo\skills\write-a-skill**: 'write-a-skill' (global (~/.kilo/skills/)) missing 'scripts/' directory
+  Fix: Create C:\Users\elwru\.kilo\skills\write-a-skill\scripts/ with Bundled automation scripts or tools
+
+- **C:\Users\elwru\.kilo\skills\write-a-skill**: 'write-a-skill' (global (~/.kilo/skills/)) missing 'references/' directory
+  Fix: Create C:\Users\elwru\.kilo\skills\write-a-skill\references/ with Deep-dive documentation or API design patterns
+
+- **C:\Users\elwru\.kilo\skills\write-a-skill**: 'write-a-skill' (global (~/.kilo/skills/)) missing 'templates/' directory
+  Fix: Create C:\Users\elwru\.kilo\skills\write-a-skill\templates/ with Boilerplate code or configuration templates
 
 - **C:\Users\elwru\.kilo\skills\write-typst-documents**: 'write-typst-documents' (global (~/.kilo/skills/)) missing 'scripts/' directory
   Fix: Create C:\Users\elwru\.kilo\skills\write-typst-documents\scripts/ with Bundled automation scripts or tools
@@ -132,18 +141,6 @@ Also validates project-local skills against `.kilo/skills/_TEMPLATE.md` section 
 
 - **C:\Users\elwru\.config\kilo\skills\research-skills**: 'research-skills' (config (~/.config/kilo/skills/)) missing 'templates/' directory
   Fix: Create C:\Users\elwru\.config\kilo\skills\research-skills\templates/ with Boilerplate code or configuration templates
-
-- **C:\Users\elwru\.config\kilo\skills\transcribe-audio**: 'transcribe-audio' (config (~/.config/kilo/skills/)) missing 'scripts/' directory
-  Fix: Create C:\Users\elwru\.config\kilo\skills\transcribe-audio\scripts/ with Bundled automation scripts or tools
-
-- **C:\Users\elwru\.config\kilo\skills\transcribe-audio**: 'transcribe-audio' (config (~/.config/kilo/skills/)) missing 'references/' directory
-  Fix: Create C:\Users\elwru\.config\kilo\skills\transcribe-audio\references/ with Deep-dive documentation or API design patterns
-
-- **C:\Users\elwru\.config\kilo\skills\transcribe-audio**: 'transcribe-audio' (config (~/.config/kilo/skills/)) missing 'templates/' directory
-  Fix: Create C:\Users\elwru\.config\kilo\skills\transcribe-audio\templates/ with Boilerplate code or configuration templates
-
-- **C:\Users\elwru\.config\kilo\skills\transcribe-audio\SKILL.md**: 'transcribe-audio' (config (~/.config/kilo/skills/)) is 883 lines (recommended max 500)
-  Fix: Move detailed patterns/references to references/ files. Keep SKILL.md as core instructions only.
 
 ## INFO
 
@@ -183,6 +180,9 @@ Also validates project-local skills against `.kilo/skills/_TEMPLATE.md` section 
 - **C:\Users\elwru\.kilo\skills\typst-check\SKILL.md**: 'typst-check' (global (~/.kilo/skills/)) missing optional 'license' field
   Fix: Add license: <value> to frontmatter
 
+- **C:\Users\elwru\.kilo\skills\write-a-skill\SKILL.md**: 'write-a-skill' (global (~/.kilo/skills/)) missing optional 'license' field
+  Fix: Add license: <value> to frontmatter
+
 - **C:\Users\elwru\.kilo\skills\write-typst-documents\SKILL.md**: 'write-typst-documents' (global (~/.kilo/skills/)) missing optional 'license' field
   Fix: Add license: <value> to frontmatter
 
@@ -196,8 +196,5 @@ Also validates project-local skills against `.kilo/skills/_TEMPLATE.md` section 
   Fix: Add license: <value> to frontmatter
 
 - **C:\Users\elwru\.config\kilo\skills\research-skills\SKILL.md**: 'research-skills' (config (~/.config/kilo/skills/)) missing optional 'license' field
-  Fix: Add license: <value> to frontmatter
-
-- **C:\Users\elwru\.config\kilo\skills\transcribe-audio\SKILL.md**: 'transcribe-audio' (config (~/.config/kilo/skills/)) missing optional 'license' field
   Fix: Add license: <value> to frontmatter
 

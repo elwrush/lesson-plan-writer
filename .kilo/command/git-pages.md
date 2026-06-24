@@ -140,6 +140,9 @@ foreach ($p in $presentations) {
 ```
 
 ### Step 6: Add the gh-pages worktree (shared by both new deploy and update)
+
+**PowerShell trap:** Never append `2>&1` to a multi-line command — it gets parsed as a separate command name. Use `2>$null` for stderr suppression and check `$?` instead of `$LASTEXITCODE` after redirects.
+
 ```powershell
 $worktreeDir = "$env:TEMP\gh-pages-worktree"
 
@@ -149,39 +152,7 @@ if (Test-Path $worktreeDir) { Remove-Item -Recurse -Force -Path $worktreeDir }
 
 # Fetch the remote gh-pages branch
 git fetch origin gh-pages 2>$null
-$ghPagesExists = $LASTEXITCODE -eq 0
-
-if ($ghPagesExists) {
-    Write-Host "Adding worktree for existing gh-pages branch..."
-    git worktree add $worktreeDir gh-pages 2>$null
-    if ($LASTEXITCODE -ne 0) {
-        Write-Error "Failed to create worktree. Exiting — no project files touched."
-        exit 1
-    }
-} else {
-    # First deploy: push empty commit to gh-pages from isolated temp repo
-    # NEVER touches the main working tree — no checkout, no git rm, no clean
-    Write-Host "Creating gh-pages branch for first deploy..."
-    $bootstrapDir = "$env:TEMP\gh-pages-bootstrap"
-    if (Test-Path $bootstrapDir) { Remove-Item -Recurse -Force $bootstrapDir }
-    New-Item -ItemType Directory -Force -Path $bootstrapDir | Out-Null
-    git -C $bootstrapDir init
-    git -C $bootstrapDir remote add origin $remoteUrl
-    New-Item -ItemType File -Path (Join-Path $bootstrapDir ".gitkeep") -Value "" | Out-Null
-    git -C $bootstrapDir add -A
-    git -C $bootstrapDir commit -m "Initial empty gh-pages"
-    git -C $bootstrapDir push origin HEAD:gh-pages --force
-    Remove-Item -Recurse -Force $bootstrapDir
-
-    # Now add the worktree
-    git worktree add $worktreeDir gh-pages
-    if ($LASTEXITCODE -ne 0) {
-        Write-Error "Failed to create worktree after first deploy. Exiting."
-        exit 1
-    }
-}
-
-Write-Host "Worktree ready at $worktreeDir"
+$ghPagesExists = $?
 ```
 
 ### Step 7: Copy all slideshows into the worktree
@@ -196,39 +167,46 @@ Get-ChildItem -Path $staging -Directory | ForEach-Object {
 ```
 
 ### Step 8: Generate/update root landing page (card grid)
+
+**Do NOT build the landing page inline in PowerShell here-strings.** PowerShell's `@""@` syntax breaks on CSS curly braces, and `2>&1` at the end of multi-line blocks is parsed as a separate command. Use a Python script written to `$env:TEMP\kilo\gen_landing.py` instead.
+
 ```powershell
-# All path/file operations target $worktreeDir explicitly.
-# All git commands use git -C $worktreeDir.
-# No Push-Location — it doesn't survive across separate command executions.
-$allPresentations = @()
-git -C $worktreeDir ls-tree --name-only HEAD | Where-Object { $_ -ne "index.html" } | ForEach-Object {
-    $dir = $_
-    $htmlPath = Join-Path $worktreeDir "$dir/index.html"
-    if ((Test-Path $htmlPath) -and (Select-String -Path $htmlPath -Pattern '<div class="slides">' -Quiet)) {
-        $content = Get-Content $htmlPath -Raw
-        $title = if ($content -match '<title>(.*?)</title>') { $matches[1] } else { "Presentation" }
-        $allPresentations += @{ dir = $dir; title = $title }
-    }
-}
+@"
+import subprocess, os, re, sys
+sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
-# Generate landing page HTML
-$cardsHtml = ""
-foreach ($p in $allPresentations) {
-    $cardsHtml += @"
-            <a href="$($p.dir)/" class="card">
-                <div class="card-title">$($p.title)</div>
-                <div class="card-dir">$($p.dir)</div>
-            </a>
+worktree = r'$env:TEMP\gh-pages-worktree'
 
-"@
-}
+result = subprocess.run(['git', '-C', worktree, 'ls-tree', '--name-only', 'HEAD'],
+                       capture_output=True, text=True, timeout=30)
+dirs = [d.strip() for d in result.stdout.splitlines() if d.strip() and d.strip() != 'index.html']
 
-$landingPage = @"
-<!DOCTYPE html>
-<html lang="en">
+presentations = []
+for d in dirs:
+    html_path = os.path.join(worktree, d, 'index.html')
+    if os.path.exists(html_path):
+        with open(html_path, 'r', encoding='utf-8', errors='replace') as f:
+            content = f.read(5000)
+        if '<div class=\"slides\">' in content:
+            title_match = re.search(r'<title>(.*?)</title>', content)
+            title = title_match.group(1) if title_match else 'Presentation'
+            presentations.append({'dir': d, 'title': title})
+
+presentations.sort(key=lambda p: p['dir'])
+
+cards = []
+for p in presentations:
+    cards.append(f'            <a href=\"{p[\"dir\"]}/\" class=\"card\">')
+    cards.append(f'                <div class=\"card-title\">{p[\"title\"]}</div>')
+    cards.append(f'                <div class=\"card-dir\">{p[\"dir\"]}</div>')
+    cards.append(f'            </a>')
+cards_html = chr(10).join(cards)
+
+landing = '''<!DOCTYPE html>
+<html lang=\"en\">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset=\"utf-8\" />
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />
     <title>Lesson Plan Slides</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -241,12 +219,7 @@ $landingPage = @"
             align-items: center;
             padding: 60px 20px;
         }
-        h1 {
-            font-size: 2.2em;
-            color: #1a1a2e;
-            margin-bottom: 40px;
-            text-align: center;
-        }
+        h1 { font-size: 2.2em; color: #1a1a2e; margin-bottom: 40px; text-align: center; }
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -266,37 +239,33 @@ $landingPage = @"
             flex-direction: column;
             gap: 8px;
         }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-        }
-        .card-title {
-            font-size: 1.15em;
-            font-weight: 600;
-            color: #1a1a2e;
-        }
-        .card-dir {
-            font-size: 0.85em;
-            color: #888;
-            font-family: 'Consolas', monospace;
-        }
-        footer {
-            margin-top: 50px;
-            font-size: 0.85em;
-            color: #aaa;
-        }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+        .card-title { font-size: 1.15em; font-weight: 600; color: #1a1a2e; }
+        .card-dir { font-size: 0.85em; color: #888; font-family: 'Consolas', monospace; }
+        footer { margin-top: 50px; font-size: 0.85em; color: #aaa; }
     </style>
 </head>
 <body>
     <h1>Lesson Plan Slides</h1>
-    <div class="grid">
-$cardsHtml    </div>
+    <div class=\"grid\">
+''' + cards_html + '''
+    </div>
     <footer>Lesson Plan Writer 3</footer>
 </body>
-</html>
-"@
+</html>'''
 
-Set-Content -Path (Join-Path $worktreeDir "index.html") -Value $landingPage -NoNewline
+with open(os.path.join(worktree, 'index.html'), 'w', encoding='utf-8') as f:
+    f.write(landing)
+
+print(f'Landing page generated -- {len(presentations)} presentations')
+"@ | Set-Content -LiteralPath "$env:TEMP\kilo\gen_landing.py" -Encoding UTF8
+
+# Execute the landing page generator
+python "$env:TEMP\kilo\gen_landing.py"
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "Landing page generation failed"
+    exit 1
+}
 ```
 
 ### Step 9: Commit and push from worktree
@@ -390,3 +359,4 @@ if ($lessonPlanJson -and $jsonContent.slideshow_url -eq $url) {
 - **Worktree add fails**: exits with error; main directory untouched; stale worktree cleaned up
 - **Push fails**: worktree is left on disk for manual recovery; error is printed
 - **Landing page**: regenerated each time, listing ALL presentations on gh-pages
+- **PowerShell `2>&1` trap**: Never append `2>&1` to a multi-line PowerShell command — it gets parsed as a separate command name (e.g., `The term '2>&1' is not recognized`). Use `2>$null` for stderr suppression and check `if ($?)` for exit code. For getting stdout+stderr combined, redirect to a file instead. This applies to ALL PowerShell commands in this file, not just git commands.
