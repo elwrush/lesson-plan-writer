@@ -1,9 +1,10 @@
 ---
 name: typst-author
 description: Generate idiomatic Typst (.typ) code, edit and troubleshoot Typst documents and projects, and answer Typst syntax/reference questions. Use when working with .typ files or when the user explicitly asks for Typst document creation, editing, debugging, compilation, formatting, template work, or package usage.
+license: MIT
 ---
 
-# Typst Author
+# Skill: Typst Author
 
 ## Purpose
 

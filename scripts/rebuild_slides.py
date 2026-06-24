@@ -71,9 +71,21 @@ def rebuild(slides_dir: str, force: bool = False) -> int:
     for lf in lua_filters:
         cmd.extend(["--lua-filter", lf])
 
+    # Discover companion HTML files for --include-in-header
+    # (e.g. splash-annotations.html, but NOT slides-header.html or index.html)
+    header_files = []
+    for f in sorted(slides.glob("*.html")):
+        if f.name in ("slides-header.html", "index.html"):
+            continue
+        header_files.append(f.name)
+    for hf in header_files:
+        cmd.extend(["--include-in-header", hf])
+
     filter_names = [pathlib.Path(f).name for f in lua_filters]
     print(f"Rebuilding {slides_dir} ...")
     print(f"  Filters: {filter_names}")
+    if header_files:
+        print(f"  Header includes: {header_files}")
 
     result = subprocess.run(
         cmd,

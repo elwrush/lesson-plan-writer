@@ -2,7 +2,12 @@
 name: build-excellent-lesson-plans
 description: Generate professional lesson plan PDFs from Markdown using the three-layer Markdown → Pandoc → Typst → PDF pipeline.
 license: MIT
-metadata: author=Ed Rush (C·E·L Mathayom / ACT)
+compatibility:
+  - python3
+  - pandoc
+  - typst
+metadata:
+  author: Ed Rush (C·E·L Mathayom / ACT)
 ---
 
 # Skill: build-excellent-lesson-plans

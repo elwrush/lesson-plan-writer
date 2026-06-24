@@ -1,6 +1,7 @@
 ---
 name: slideshow-to-pptx
 description: Converts a reveal.js HTML slideshow to a full-visual-fidelity PowerPoint .pptx file. Uses Decktape to render each slide as a PDF page via Chrome headless, then extracts pages as high-resolution images and assembles them into a PPTX using PyMuPDF and python-pptx.
+license: MIT
 ---
 
 # Skill: Slideshow to PPTX

@@ -370,7 +370,7 @@ if ($lessonPlanJson -and $jsonContent.slideshow_url -eq $url) {
 - **No argument**: prompts interactively for the subfolder name
 - **Not found**: lists available slideshows and exits
 - **New deploy vs update**: detected automatically in Step 0 by checking `git ls-tree --name-only origin/gh-pages`. Do NOT ask the user.
-- **First deploy (gh-pages branch doesn't exist)**: pushes an empty commit from an isolated `git init` in %TEMP% (via `git -C`, never Push-Location). Then proceeds with the normal worktree flow.
+- **First deploy (gh-pages branch doesn't exist)**: uses `bootstrapDir` — pushes an empty commit from an isolated `git init` in %TEMP% (via `git -C`, never Push-Location). Then proceeds with the normal worktree flow.
 - **Update (subfolder already exists)**: files are simply overwritten in Step 6. The old files are replaced; the landing page is regenerated with all presentations.
 - **gh not authenticated**: aborts with instruction to run `gh auth login`
 - **Worktree add fails**: exits with error; main directory untouched; stale worktree cleaned up

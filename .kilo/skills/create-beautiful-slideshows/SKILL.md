@@ -2,7 +2,12 @@
 name: create-beautiful-slideshows
 description: Generate reveal.js slideshows from lesson plans using the Markdown → Pandoc → reveal.js pipeline.
 license: MIT
-metadata: author=Ed Rush (C·E·L Mathayom / ACT)
+compatibility:
+  - python3
+  - pandoc
+  - reveal.js
+metadata:
+  author: Ed Rush (C·E·L Mathayom / ACT)
 ---
 
 # Skill: Create Beautiful Slideshows

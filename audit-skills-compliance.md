@@ -3,27 +3,27 @@
 Checks all SKILL.md files against the Kilo CLI Agent Skills specification.
 Also validates project-local skills against `.kilo/skills/_TEMPLATE.md` section structure.
 
-**Summary:** 0 blockers, 45 warnings, 18 infos
+**Summary:** 0 blockers, 45 warnings, 15 infos
 
 ## WARNING
 
-- **.\.kilo\skills\slideshow-to-pptx**: 'slideshow-to-pptx' (project (.kilo/skills/)) missing 'scripts/' directory
-  Fix: Create .\.kilo\skills\slideshow-to-pptx\scripts/ with Bundled automation scripts or tools
+- **.\.kilo\skills\slideshow-to-pptx\scripts**: 'slideshow-to-pptx' (project (.kilo/skills/)) 'scripts/' directory is empty
+  Fix: Add files to .\.kilo\skills\slideshow-to-pptx\scripts/
 
-- **.\.kilo\skills\slideshow-to-pptx**: 'slideshow-to-pptx' (project (.kilo/skills/)) missing 'references/' directory
-  Fix: Create .\.kilo\skills\slideshow-to-pptx\references/ with Deep-dive documentation or API design patterns
+- **.\.kilo\skills\slideshow-to-pptx\references**: 'slideshow-to-pptx' (project (.kilo/skills/)) 'references/' directory is empty
+  Fix: Add files to .\.kilo\skills\slideshow-to-pptx\references/
 
-- **.\.kilo\skills\slideshow-to-pptx**: 'slideshow-to-pptx' (project (.kilo/skills/)) missing 'templates/' directory
-  Fix: Create .\.kilo\skills\slideshow-to-pptx\templates/ with Boilerplate code or configuration templates
+- **.\.kilo\skills\slideshow-to-pptx\templates**: 'slideshow-to-pptx' (project (.kilo/skills/)) 'templates/' directory is empty
+  Fix: Add files to .\.kilo\skills\slideshow-to-pptx\templates/
 
-- **.\.kilo\skills\typst-author**: 'typst-author' (project (.kilo/skills/)) missing 'scripts/' directory
-  Fix: Create .\.kilo\skills\typst-author\scripts/ with Bundled automation scripts or tools
+- **.\.kilo\skills\typst-author\scripts**: 'typst-author' (project (.kilo/skills/)) 'scripts/' directory is empty
+  Fix: Add files to .\.kilo\skills\typst-author\scripts/
 
-- **.\.kilo\skills\typst-author**: 'typst-author' (project (.kilo/skills/)) missing 'references/' directory
-  Fix: Create .\.kilo\skills\typst-author\references/ with Deep-dive documentation or API design patterns
+- **.\.kilo\skills\typst-author\references**: 'typst-author' (project (.kilo/skills/)) 'references/' directory is empty
+  Fix: Add files to .\.kilo\skills\typst-author\references/
 
-- **.\.kilo\skills\typst-author**: 'typst-author' (project (.kilo/skills/)) missing 'templates/' directory
-  Fix: Create .\.kilo\skills\typst-author\templates/ with Boilerplate code or configuration templates
+- **.\.kilo\skills\typst-author\templates**: 'typst-author' (project (.kilo/skills/)) 'templates/' directory is empty
+  Fix: Add files to .\.kilo\skills\typst-author\templates/
 
 - **C:\Users\elwru\.kilo\skills\context7-docs**: 'context7-docs' (global (~/.kilo/skills/)) missing 'scripts/' directory
   Fix: Create C:\Users\elwru\.kilo\skills\context7-docs\scripts/ with Bundled automation scripts or tools
@@ -144,17 +144,11 @@ Also validates project-local skills against `.kilo/skills/_TEMPLATE.md` section 
 
 ## INFO
 
-- **.\.kilo\skills\build-excellent-lesson-plans\SKILL.md**: 'build-excellent-lesson-plans' (project (.kilo/skills/)) missing optional 'compatibility' field
-  Fix: Add compatibility: <value> to frontmatter
+- **.\.kilo\skills\slideshow-to-pptx\SKILL.md**: 'slideshow-to-pptx' (project (.kilo/skills/)) missing optional 'metadata' field
+  Fix: Add metadata: <value> to frontmatter
 
-- **.\.kilo\skills\create-beautiful-slideshows\SKILL.md**: 'create-beautiful-slideshows' (project (.kilo/skills/)) missing optional 'compatibility' field
-  Fix: Add compatibility: <value> to frontmatter
-
-- **.\.kilo\skills\slideshow-to-pptx\SKILL.md**: 'slideshow-to-pptx' (project (.kilo/skills/)) missing optional 'license' field
-  Fix: Add license: <value> to frontmatter
-
-- **.\.kilo\skills\typst-author\SKILL.md**: 'typst-author' (project (.kilo/skills/)) missing optional 'license' field
-  Fix: Add license: <value> to frontmatter
+- **.\.kilo\skills\typst-author\SKILL.md**: 'typst-author' (project (.kilo/skills/)) missing optional 'metadata' field
+  Fix: Add metadata: <value> to frontmatter
 
 - **C:\Users\elwru\.kilo\skills\context7-docs\SKILL.md**: 'context7-docs' (global (~/.kilo/skills/)) missing optional 'license' field
   Fix: Add license: <value> to frontmatter
@@ -184,9 +178,6 @@ Also validates project-local skills against `.kilo/skills/_TEMPLATE.md` section 
   Fix: Add license: <value> to frontmatter
 
 - **C:\Users\elwru\.kilo\skills\write-typst-documents\SKILL.md**: 'write-typst-documents' (global (~/.kilo/skills/)) missing optional 'license' field
-  Fix: Add license: <value> to frontmatter
-
-- **C:\Users\elwru\.config\kilo\skills\audit-codebase\SKILL.md**: 'audit-codebase' (config (~/.config/kilo/skills/)) missing optional 'license' field
   Fix: Add license: <value> to frontmatter
 
 - **C:\Users\elwru\.config\kilo\skills\build-a-monolog\SKILL.md**: 'build-a-monolog' (config (~/.config/kilo/skills/)) missing optional 'license' field
