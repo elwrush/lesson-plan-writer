@@ -99,15 +99,15 @@ The deep sea produces 70% of our oxygen and regulates Earth's temperature.
 
 [**frontier**]{.fragment .answer-reveal}
 
-[They represented a **frontier** to explore, much like outer space today.]{.fragment .white-reveal}
+[In the 1800s, American **frontiers** pushed westward into lands that no explorer from the East had ever seen before.]{.fragment .white-reveal}
 
 #  {#slide-vocab-2}
 
-/kənˈsɜːnz/
+/ɪkˈstrɔːrdɪnəri/
 
-[**concerns**]{.fragment .answer-reveal}
+[**extraordinary**]{.fragment .answer-reveal}
 
-[Tales often reflected the **concerns** of the time, like fear of radiation.]{.fragment .white-reveal}
+[It's **extraordinary** that we know more about Mars than our own ocean — most people find this hard to believe.]{.fragment .white-reveal}
 
 #  {#slide-vocab-3}
 
@@ -115,7 +115,7 @@ The deep sea produces 70% of our oxygen and regulates Earth's temperature.
 
 [**hostile**]{.fragment .answer-reveal}
 
-[Nothing could survive such a **hostile** environment — cold, dark, and with enormous pressure.]{.fragment .white-reveal}
+[Few plants can survive the desert's **hostile** conditions — extreme heat, no water, and strong winds make it almost impossible.]{.fragment .white-reveal}
 
 #  {#slide-vocab-4}
 
@@ -123,15 +123,15 @@ The deep sea produces 70% of our oxygen and regulates Earth's temperature.
 
 [**thriving**]{.fragment .answer-reveal}
 
-[The deepest parts of the ocean have **thriving** ecosystems with tube worms and clams.]{.fragment .white-reveal}
+[The garden was **thriving** after the rain — flowers blooming, plants growing taller, everything looked healthy and full of life.]{.fragment .white-reveal}
 
 #  {#slide-vocab-5}
 
-/ˈkruːʃəl/
+/səbˈmɜːdʒd/
 
-[**crucial**]{.fragment .answer-reveal}
+[**submerged**]{.fragment .answer-reveal}
 
-[The deep sea is **crucial** to the survival of all life on Earth.]{.fragment .white-reveal}
+[When the river flooded, the village was completely **submerged** — only the church roof was still visible above the water.]{.fragment .white-reveal}
 
 #  {#slide-transition-task data-background-color="#c0392b"}
 
