@@ -161,19 +161,17 @@ The deep sea produces 70% of our oxygen and regulates Earth's temperature.
 2. Mark your worksheet: **Correct** / **Half correct** / **Wrong**.
 3. Write your CEFR level in the box at the top of your worksheet.
 
-#  {#slide-transition-discussion data-background-color="#c0392b"}
+#  {#slide-transition-writing data-background-color="#c0392b"}
 
-[**Discussion**]{.highlight}
+[**Writing**]{.highlight}
 
-# Discussion {#slide-discussion data-timer="300"}
+# Timed Writing {#slide-timed-writing data-timer="480"}
 
-**The deep sea is the most important and least known part of our planet.**
+**Governments spend billions of dollars on space exploration, but the deep sea — which covers 71% of our planet — remains largely unknown. Should we spend more money exploring the deep sea instead?**
 
-<i class="fa-solid fa-book-open"></i> **Standard** — Discuss: Do you agree? What can we do to learn more and protect it? Use vocabulary from the text.
+Try to write at least **80 words**.
 
-<i class="fa-solid fa-pencil"></i> **Advanced** — Discuss from notes. Refer to at least two facts from the text. Use 2-3 vocabulary words.
-
-<i class="fa-solid fa-star"></i> **Elite** — Discuss from memory without notes. Make a clear argument with evidence from the text.
+You have **8 minutes**.
 
 #  {#slide-wrap-up}
 
