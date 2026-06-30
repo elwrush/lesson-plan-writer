@@ -1,0 +1,33 @@
+# Pydantic compliance allowlist — leaf utilities not part of data-flow pipeline
+# These scripts use json.dumps/json.loads for local file IO, not structured data.
+scripts/pixabay_download.py
+scripts/check_vocab_levels.py
+scripts/design_tts_voice.py
+scripts/locate_slide.py
+scripts/search_commons.py
+scripts/tavily_search.py
+scripts/typst_check.py
+scripts/generate_vocab_audio.py
+scripts/rebuild_slides.py
+scripts/check_overflow.py
+scripts/check_authorial_voice.py
+scripts/check_pedagogical_intent.py
+scripts/check_unicode_symbols.py
+scripts/check_encoding.py
+scripts/lint_slides.py
+scripts/scaffold_slides.py
+scripts/add_outline_slides.py
+scripts/serve_slides.py
+scripts/get_youtube_transcript.py
+scripts/linter_pdf_content.py
+scripts/pdf_to_pptx.py
+scripts/test_typst_output.py
+scripts/analyze_pdf.py
+scripts/audit_slides.py
+scripts/validate_slides.py
+# build_lesson_pdf.py refactored but verify_template() uses json.dumps for hash-lock output (legitimate)
+scripts/build_lesson_pdf.py
+# json_to_pdf.py, json_to_markdown.py — refactored, Pydantic-compliant
+# tests/test_json_to_markdown.py and tests/test_json_to_pdf.py use raw json.dumps in test fixtures
+tests/test_json_to_markdown.py
+tests/test_json_to_pdf.py

@@ -107,8 +107,8 @@ class TestValidateMetadata:
             "duration": "46",
             "cefr_level": "B2",
             "class": "M3",
-            "shape": "G",
-            "shape_name": "TBL",
+            "shape": "TBL",
+            "shape_name": "Task-Based Learning",
         }
         warnings = validate_metadata(meta)
         assert len(warnings) == 0
@@ -120,8 +120,8 @@ class TestValidateMetadata:
             "duration": "46",
             "cefr_level": "B2",
             "class": "M3",
-            "shape": "G",
-            "shape_name": "TBL",
+            "shape": "TBL",
+            "shape_name": "Task-Based Learning",
         }
         warnings = validate_metadata(meta)
         assert any("topic" in w for w in warnings)

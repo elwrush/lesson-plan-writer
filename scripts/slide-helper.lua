@@ -45,10 +45,10 @@ end
 --- @return table  {Div} containing the timer HTML
 function M.timer_div(seconds)
   local html = '<div data-timer="' .. tostring(seconds) .. '" '
-    .. 'style="position: fixed; bottom: 20px; right: 20px; '
-    .. 'background: rgba(0,0,0,0.7); color: #ffdd00; '
-    .. 'padding: 8px 16px; border-radius: 4px; '
-    .. 'font-size: 1.2em; z-index: 100;"></div>'
+    .. 'style="position: fixed; top: 20px; right: 20px; '
+    .. 'background: rgba(0,0,0,0.85); color: #ffdd00; '
+    .. 'padding: 12px 20px; border-radius: 6px; '
+    .. 'font-size: 1.5em; z-index: 100; font-weight: bold;"></div>'
   return pandoc.RawBlock('html', html)
 end
 

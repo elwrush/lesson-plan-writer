@@ -1,0 +1,25 @@
+# Leaf utility scripts excluded from spec-coverage
+# These are CLI tools with no shared data model — not worth speccing
+add_outline_slides
+analyze_pdf
+check_authorial_voice
+check_encoding
+check_overflow
+check_pedagogical_intent
+check_unicode_symbols
+check_vocab_levels
+design_tts_voice
+generate_vocab_audio
+get_youtube_transcript
+lint_slides
+linter_pdf_content
+locate_slide
+pdf_to_pptx
+pixabay_download
+rebuild_slides
+scaffold_slides
+search_commons
+serve_slides
+tavily_search
+test_typst_output
+typst_check

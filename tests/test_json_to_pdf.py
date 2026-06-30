@@ -24,9 +24,9 @@ VALID_LESSON_PLAN = {
     "date": "050726",
     "topic": "Test Topic",
     "objective": "Test objective",
-    "materials": "Test materials",
+    "materials": [{"name": "Test materials", "type": "handout"}],
     "lesson_plan": {
-        "shape": "A",
+        "shape": "PPP",
         "shape_name": "Text-based Presentation",
         "cefr_level": "B1",
         "class": "M3",
@@ -36,7 +36,7 @@ VALID_LESSON_PLAN = {
                 "stage": "Lead-in",
                 "stage_aim": "To lead-in",
                 "procedure": "- Step 1\n- Step 2",
-                "time": 5,
+                "time": "5 min.",
                 "interaction": "T-Ss",
             }
         ],

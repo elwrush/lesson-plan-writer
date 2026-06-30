@@ -1,0 +1,53 @@
+installed:
+- agent-context
+- ci-guard
+- fleet
+settings:
+  auto_execute_hooks: true
+hooks:
+  after_tasks:
+  - extension: fleet
+    command: speckit.fleet.review
+    enabled: true
+    optional: true
+    priority: 10
+    prompt: Run cross-model review to evaluate plan and tasks before implementation?
+    description: Pre-implementation review gate
+    condition: null
+  before_implement:
+  - extension: ci-guard
+    command: speckit.ci-guard.check
+    enabled: true
+    optional: true
+    priority: 10
+    prompt: Run spec compliance checks before implementation?
+    description: Verify spec artifacts are complete and consistent before starting
+      implementation
+    condition: null
+  after_implement:
+  - extension: ci-guard
+    command: speckit.ci-guard.drift
+    enabled: true
+    optional: true
+    priority: 10
+    prompt: Check for spec drift after implementation?
+    description: Detect any divergence between spec requirements and implemented code
+    condition: null
+  after_specify:
+  - extension: agent-context
+    command: speckit.agent-context.update
+    enabled: true
+    optional: true
+    priority: 10
+    prompt: Execute speckit.agent-context.update?
+    description: Refresh agent context after specification
+    condition: null
+  after_plan:
+  - extension: agent-context
+    command: speckit.agent-context.update
+    enabled: true
+    optional: true
+    priority: 10
+    prompt: Execute speckit.agent-context.update?
+    description: Refresh agent context after planning
+    condition: null

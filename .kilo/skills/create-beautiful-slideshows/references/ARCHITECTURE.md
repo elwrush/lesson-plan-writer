@@ -59,15 +59,24 @@ Search GitHub topic `pandoc-filter` for 200+ available community filters.
 # Logo
 Copy-Item ".kilo/skills/create-beautiful-slideshows/templates/ACT.png" "output/{subfolder}/slides/assets/logo.png"
 
-# Core infrastructure
+# Core Lua filters
 $skillScripts = ".kilo/skills/create-beautiful-slideshows/scripts"
-Copy-Item "$skillScripts/youtube-embed.lua","$skillScripts/audio-autoplay.lua","$skillScripts/slide-helper.lua","$skillScripts/shield-block.lua","$skillScripts/box-keywords.lua","$skillScripts/reading-feedback.lua","$skillScripts/autocue.lua" -Destination "output/{subfolder}/slides/"
+Copy-Item "$skillScripts/youtube-embed.lua","$skillScripts/audio-autoplay.lua","$skillScripts/slide-helper.lua","$skillScripts/shield-block.lua","$skillScripts/box-keywords.lua","$skillScripts/reading-feedback.lua" -Destination "output/{subfolder}/slides/"
+
+# Project-specific Lua filters (not in skill)
+Copy-Item "scripts/timer-inject.lua","scripts/presentation-defaults.lua" "output/{subfolder}/slides/"
 
 # Shared project infrastructure (not in skill)
 Copy-Item "scripts/slides-pandoc.css","scripts/slides-header.html" "output/{subfolder}/slides/"
+
+# Timer plugins and assets
+Copy-Item "templates/timer-plugin.js","templates/timer-plugin.css" "output/{subfolder}/slides/"
 ```
 
+**Old presentational filters removed** — `slide-font-size.lua`, `fa-yellow.lua`, `white-reveal.lua`, `vocab-size.lua` are no longer needed. Use `presentation-defaults.lua` instead (consolidates all four).
+
 **If any `scripts/*.lua` was edited during the session, re-copy with `-Force`.**
+**If `slide-helper.lua` is edited, re-copy it — `timer-inject.lua` loads it via `dofile`.**
 
 ---
 
@@ -79,19 +88,22 @@ Run from the `slides/` directory:
 pandoc slides.md -t revealjs -s --slide-level=1 -o index.html `
   -V revealjs-url="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0" `
   -V theme=black -V width=1280 -V height=720 -V margin=0.04 `
+  -V autoSlide=999999 `
    --css="slides-pandoc.css" `
    --include-in-header="slides-header.html" `
-   --lua-filter="./autocue.lua" `
+   --lua-filter="./presentation-defaults.lua" `
    --lua-filter="./reading-feedback.lua" `
    --lua-filter="./box-keywords.lua" `
    --lua-filter="./shield-block.lua" `
    --lua-filter="./youtube-embed.lua" `
-   --lua-filter="./audio-autoplay.lua"
+   --lua-filter="./audio-autoplay.lua" `
+   --lua-filter="./timer-inject.lua"
 ```
 
-Use `./` not `$slidesDir\` to avoid PowerShell path issues.
-
----
+- `-V autoSlide=999999` is required for `data-autoslide` to work on per-slide auto-advance sequences
+- 7 filters (down from 9) — old `slide-font-size.lua`, `fa-yellow.lua`, `white-reveal.lua`, `vocab-size.lua` consolidated into `presentation-defaults.lua`
+- `timer-inject.lua` requires `timer-plugin.js` and `timer-plugin.css` in the slides directory, plus `assets/blip.mp3` and `assets/BELL.mp3` for audio alerts
+- `--lua-filter` paths use `./` (not `$slidesDir\`) to avoid PowerShell path issues
 
 ## Validate Before Build
 

@@ -14,61 +14,25 @@ import shutil
 import sys
 from pathlib import Path
 
+from pydantic import ValidationError
+
 PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from src.models import LessonPlan  # noqa: E402
+
 OUTPUT_DIR = PROJECT_ROOT / "output"
 TEMPLATES_DIR = PROJECT_ROOT / "templates"
 REFERENCE_DOC = PROJECT_ROOT / "docs" / "slide-design-reference.md"
 SLIDES_TEMPLATE = PROJECT_ROOT / "templates" / "slides-template.html"
 
-REQUIRED_FIELDS = [
-    "teacher",
-    "duration",
-    "date",
-    "topic",
-    "materials",
-    "lesson_plan",
-]
-
-REQUIRED_LESSON_PLAN_FIELDS = [
-    "shape",
-    "shape_name",
-    "cefr_level",
-    "class",
-    "stages",
-]
-
-REQUIRED_STAGE_FIELDS = [
-    "stage_number",
-    "stage",
-    "stage_aim",
-    "procedure",
-    "time",
-    "interaction",
-]
-
-
-# Note: Pixabay search/download functions were removed. Images must be passed via --image CLI arg.
-
 
 def validate_json(data):
-    errors = []
-    for field in REQUIRED_FIELDS:
-        if field not in data:
-            errors.append(f"Missing required field: {field}")
-        elif not data[field]:
-            errors.append(f"Empty required field: {field}")
-
-    if "lesson_plan" in data and isinstance(data["lesson_plan"], dict):
-        lp = data["lesson_plan"]
-        for field in REQUIRED_LESSON_PLAN_FIELDS:
-            if field not in lp:
-                errors.append(f"Missing required lesson_plan field: {field}")
-            elif field == "stages" and (not lp[field] or not isinstance(lp[field], list)):
-                errors.append("lesson_plan.stages must be a non-empty array")
-    else:
-        errors.append("lesson_plan must be a valid object")
-
-    return errors
+    try:
+        LessonPlan.model_validate(data)
+        return []
+    except ValidationError as e:
+        return [str(e)]
 
 
 def format_date(date_str):
@@ -150,7 +114,11 @@ def parse_answer_key(data):
 def extract_keywords(data):
     """Extract 3-5 challenging CEFR-level words from lesson context."""
     topic = data.get("topic", "").lower()
-    materials = data.get("materials", "").lower()
+    materials_raw = data.get("materials", "")
+    if isinstance(materials_raw, list):
+        materials = " ".join(m.get("name", "") for m in materials_raw).lower()
+    else:
+        materials = str(materials_raw).lower()
     objective = data.get("objective", "").lower()
     cefr = data.get("lesson_plan", {}).get("cefr_level", "")
 
@@ -883,9 +851,16 @@ def friendly_stage_name(stage_name):
     return mappings.get(stage_name, stage_name)
 
 
+def _materials_str(data) -> str:
+    raw = data.get("materials", "")
+    if isinstance(raw, list):
+        return ", ".join(m.get("name", "") for m in raw)
+    return str(raw)
+
+
 def generate_prereading_slide(stage, data, slides_dir=None):
     topic = data.get("topic", "")
-    materials = data.get("materials", "")
+    materials = _materials_str(data)
 
     bg_directive = (
         '<!-- .slide: data-background-gradient="linear-gradient(to bottom, #f5f0eb, #e8ddd3)" -->'

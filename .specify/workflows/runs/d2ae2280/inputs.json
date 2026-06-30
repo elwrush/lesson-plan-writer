@@ -1,0 +1,7 @@
+{
+  "inputs": {
+    "spec": "Pydantic data models for lesson plans. Models: LessonPlan (teacher, duration, date, topic, materials, lesson_plan), LessonPlanMeta (shape, shape_name, cefr_level, class -> class_name, stages), Stage (stage_number, stage, stage_aim, procedure, time, interaction), Material (name, type, page). field_validator decorators enforce: date format (dd/mm/yy, d Month YYYY, or ddmmyy), stage_number >= 1, time format 'N min.', interaction in {T-Ss, Ss-Ss, S-S, S-Ss, T-S, Group, Individual}, cefr_level in {A1-C2}, shape in {ESA, PPP, TBL, Test-Teach-Test, Guided Discovery}. Files: src/models.py, src/__init__.py, tests/test_models.py (20 tests). Has existing implementation \u2014 spec is backfill to document the model contract.",
+    "integration": "kilocode",
+    "scope": "full"
+  }
+}

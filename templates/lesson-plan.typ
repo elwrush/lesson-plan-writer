@@ -31,9 +31,8 @@ $if(topic)$
   [*Lesson Shape:*], [$shape$ ($shape_name$)],
 $if(materials)$  [*Materials:*], table.cell(colspan: 3)[$for(materials)$- $materials$
 $endfor$],
-$endif$$if(slideshow_url)$  [*Slideshow URL:*], table.cell(colspan: 3, fill: luma(190))[$slideshow_url$],
-$endif$)
-
+$endif$  [*Slideshow URL:*], table.cell(colspan: 3, fill: luma(190))[$if(slideshow_url)$$slideshow_url$$endif$],
+)
 $if(main_aim)$#v(0.5em)
 = Lesson Aim
 #block(stroke: (left: 2pt + black), inset: 8pt)[

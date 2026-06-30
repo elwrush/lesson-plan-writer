@@ -58,6 +58,9 @@ function Pandoc(doc)
           local a = text:match("^Aim:%s*(.+)$")
           if a then
             current_group.aim = a
+          else
+            -- Other para text (e.g. Vocabulary list) → procedure
+            table.insert(current_group.procedure, text)
           end
         end
 

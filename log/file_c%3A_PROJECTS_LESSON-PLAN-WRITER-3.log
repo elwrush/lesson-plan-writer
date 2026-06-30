@@ -1,0 +1,271 @@
+[15:41:41.196][info] [#0:C:/Users/elwru/scoop/apps/lua-language-server/current\main.lua:71]: Lua Lsp startup, root: 	C:/Users/elwru/scoop/apps/lua-language-server/current
+[15:41:41.197][info] [#0:C:/Users/elwru/scoop/apps/lua-language-server/current\main.lua:72]: ROOT:	C:/Users/elwru/scoop/apps/lua-language-server/current
+[15:41:41.197][info] [#0:C:/Users/elwru/scoop/apps/lua-language-server/current\main.lua:73]: LOGPATH:	.\log
+[15:41:41.197][info] [#0:C:/Users/elwru/scoop/apps/lua-language-server/current\main.lua:74]: METAPATH:	C:/Users/elwru/scoop/apps/lua-language-server/current/meta
+[15:41:41.197][info] [#0:C:/Users/elwru/scoop/apps/lua-language-server/current\main.lua:75]: VERSION:	3.18.2-dev
+[15:41:41.235][info] [#0:script\language.lua:137]: VSC language: nil
+[15:41:41.236][info] [#0:script\language.lua:138]: LS  language: en-us
+[15:41:41.236][info] [#0:script\client.lua:657]: Client init	{
+  capabilities = {
+    textDocument = {
+      completion = {
+        completionItem = {
+          tagSupport = {
+            valueSet = { 1, 2 }
+          }
+        }
+      }
+    },
+    workspace = {
+      configuration = true
+    }
+  },
+  initializationOptions = {
+    changeConfiguration = true,
+    trustByClient = true,
+    useSemanticByRange = true,
+    viewDocument = true
+  },
+  rootUri = "file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3"
+}
+[15:41:41.236][info] [#0:script\language.lua:137]: VSC language: nil
+[15:41:41.236][info] [#0:script\language.lua:138]: LS  language: en-us
+[15:41:41.236][info] [#0:script\workspace\workspace.lua:38]: Workspace init root: 	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3
+[15:41:41.236][info] [#0:script\workspace\workspace.lua:42]: Log path: 	./log/file_c%3A_PROJECTS_LESSON-PLAN-WRITER-3.log
+[15:41:41.248][info] [#0:script\workspace\workspace.lua:48]: Workspace create: 	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3
+[15:41:41.249][warn] [#0:script\config\loader.lua:116]: No config?	nil
+[15:41:41.250][info] [#0:script\provider\provider.lua:56]: Load config from .luarc.json/.luarc.jsonc	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3
+[15:41:41.250][info] [#0:script\provider\provider.lua:57]: {
+  ["$schema"] = "https://raw.githubusercontent.com/LuaLS/lua-language-server/main/locale/en_us/schema.json",
+  ["diagnostics.enable"] = true,
+  ["diagnostics.globals"] = { "FORMAT", "PANDOC_VERSION", "PANDOC_API_VERSION", "PANDOC_READER_OPTIONS", "PANDOC_WRITER_OPTIONS", "PANDOC_SCRIPT_FILE", "PANDOC_STATE", "lpeg", "re" },
+  ["diagnostics.severity"] = {
+    ["assign-type-mismatch"] = "Warning",
+    ["cast-local-type"] = "Warning",
+    ["cast-type-mismatch"] = "Warning",
+    ["inject-field"] = "Warning",
+    ["need-check-nil"] = "Warning",
+    ["param-type-mismatch"] = "Warning",
+    ["redefined-local"] = "Warning",
+    ["return-type-mismatch"] = "Warning",
+    ["syntax-error"] = "Error",
+    ["undefined-field"] = "Error",
+    ["undefined-global"] = "Warning",
+    ["unused-local"] = "Warning"
+  },
+  ["runtime.version"] = "Lua 5.4",
+  ["workspace.checkThirdParty"] = false,
+  ["workspace.ignoreDir"] = { ".git", ".pytest_cache", "__pycache__", "node_modules", "output", "tmp", "general-assets", "assets" },
+  ["workspace.library"] = { ".lua" }
+}
+[15:41:41.250][warn] [#0:script\config\loader.lua:116]: No config?	nil
+[15:41:41.250][info] [#0:script\provider\provider.lua:65]: Load config from client	fallback
+[15:41:41.250][info] [#0:script\provider\provider.lua:66]: nil
+[15:41:41.250][info] [#0:script\library.lua:216]: Init builtin library at:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3
+[15:41:41.303][info] [#0:script\library.lua:216]: Init builtin library at:	nil
+[15:41:41.346][warn] [#0:script\config\loader.lua:116]: No config?	nil
+[15:41:41.347][info] [#0:script\provider\provider.lua:56]: Load config from .luarc.json/.luarc.jsonc	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3
+[15:41:41.347][info] [#0:script\provider\provider.lua:57]: {
+  ["$schema"] = "https://raw.githubusercontent.com/LuaLS/lua-language-server/main/locale/en_us/schema.json",
+  ["diagnostics.enable"] = true,
+  ["diagnostics.globals"] = { "FORMAT", "PANDOC_VERSION", "PANDOC_API_VERSION", "PANDOC_READER_OPTIONS", "PANDOC_WRITER_OPTIONS", "PANDOC_SCRIPT_FILE", "PANDOC_STATE", "lpeg", "re" },
+  ["diagnostics.severity"] = {
+    ["assign-type-mismatch"] = "Warning",
+    ["cast-local-type"] = "Warning",
+    ["cast-type-mismatch"] = "Warning",
+    ["inject-field"] = "Warning",
+    ["need-check-nil"] = "Warning",
+    ["param-type-mismatch"] = "Warning",
+    ["redefined-local"] = "Warning",
+    ["return-type-mismatch"] = "Warning",
+    ["syntax-error"] = "Error",
+    ["undefined-field"] = "Error",
+    ["undefined-global"] = "Warning",
+    ["unused-local"] = "Warning"
+  },
+  ["runtime.version"] = "Lua 5.4",
+  ["workspace.checkThirdParty"] = false,
+  ["workspace.ignoreDir"] = { ".git", ".pytest_cache", "__pycache__", "node_modules", "output", "tmp", "general-assets", "assets" },
+  ["workspace.library"] = { ".lua" }
+}
+[15:41:41.347][warn] [#0:script\config\loader.lua:116]: No config?	nil
+[15:41:41.347][info] [#0:script\provider\provider.lua:65]: Load config from client	fallback
+[15:41:41.347][info] [#0:script\provider\provider.lua:66]: nil
+[15:41:41.347][info] [#0:script\workspace\workspace.lua:330]: Preload start:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3
+[15:41:41.351][info] [#0:script\workspace\workspace.lua:336]: Scan files at:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3
+[15:41:41.365][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/os.lua
+[15:41:41.366][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/math.lua
+[15:41:41.366][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/basic.lua
+[15:41:41.366][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/debug.lua
+[15:41:41.366][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/string.lua
+[15:41:41.366][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/package.lua
+[15:41:41.366][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/io.lua
+[15:41:41.367][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/coroutine.lua
+[15:41:41.367][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/utf8.lua
+[15:41:41.367][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/table.lua
+[15:41:41.367][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.368][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/builtin.lua
+[15:41:41.368][info] [#0:script\workspace\workspace.lua:330]: Preload start:	<fallback>
+[15:41:41.370][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/os.lua
+[15:41:41.370][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/math.lua
+[15:41:41.370][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/basic.lua
+[15:41:41.370][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/debug.lua
+[15:41:41.370][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/string.lua
+[15:41:41.370][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/io.lua
+[15:41:41.371][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/utf8.lua
+[15:41:41.371][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/package.lua
+[15:41:41.371][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/table.lua
+[15:41:41.371][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/coroutine.lua
+[15:41:41.371][info] [#0:script\workspace\workspace.lua:359]: Scan library at:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/builtin.lua
+[15:41:41.371][info] [#0:script\workspace\workspace.lua:385]: Found 88 files at:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3
+[15:41:41.371][info] [#0:script\workspace\loading.lua:160]: Load files from disk:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3
+[15:41:41.371][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/builtin.lua , size = 0.302 KB
+[15:41:41.372][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/builtin.lua
+[15:41:41.372][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/globals.lua , size = 3.363 KB
+[15:41:41.373][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.373][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/cli.lua , size = 1.802 KB
+[15:41:41.374][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.374][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/format.lua , size = 1.594 KB
+[15:41:41.375][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.375][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/image.lua , size = 1.244 KB
+[15:41:41.375][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.375][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/json.lua , size = 1.470 KB
+[15:41:41.376][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.376][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/layout.lua , size = 7.817 KB
+[15:41:41.383][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.384][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/log.lua , size = 1.092 KB
+[15:41:41.384][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.384][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/mediabag.lua , size = 4.542 KB
+[15:41:41.386][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.386][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/path.lua , size = 3.477 KB
+[15:41:41.388][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.388][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/scaffolding.lua , size = 3.026 KB
+[15:41:41.390][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.391][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/structure.lua , size = 3.186 KB
+[15:41:41.392][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.392][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/system.lua , size = 4.141 KB
+[15:41:41.393][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.393][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/template.lua , size = 2.661 KB
+[15:41:41.395][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.395][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/text.lua , size = 2.666 KB
+[15:41:41.396][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.396][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/types.lua , size = 0.490 KB
+[15:41:41.397][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.397][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/utils.lua , size = 7.057 KB
+[15:41:41.399][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.399][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/zip.lua , size = 3.352 KB
+[15:41:41.401][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.401][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc.lua , size = 20.092 KB
+[15:41:41.417][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.417][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/types.lua , size = 34.437 KB
+[15:41:41.434][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua
+[15:41:41.435][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/table.lua , size = 5.134 KB
+[15:41:41.441][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/table.lua
+[15:41:41.441][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/utf8.lua , size = 2.448 KB
+[15:41:41.443][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/utf8.lua
+[15:41:41.443][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/coroutine.lua , size = 2.669 KB
+[15:41:41.444][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/coroutine.lua
+[15:41:41.445][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/io.lua , size = 6.566 KB
+[15:41:41.449][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/io.lua
+[15:41:41.450][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/package.lua , size = 3.050 KB
+[15:41:41.452][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/package.lua
+[15:41:41.452][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/string.lua , size = 6.608 KB
+[15:41:41.462][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/string.lua
+[15:41:41.463][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/debug.lua , size = 7.812 KB
+[15:41:41.466][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/debug.lua
+[15:41:41.466][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/basic.lua , size = 17.708 KB
+[15:41:41.472][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/basic.lua
+[15:41:41.473][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/math.lua , size = 8.911 KB
+[15:41:41.476][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/math.lua
+[15:41:41.476][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/os.lua , size = 5.926 KB
+[15:41:41.479][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/os.lua
+[15:41:41.479][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/build-excellent-lesson-plans/scripts/lesson-tables.lua , size = 3.931 KB
+[15:41:41.482][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/build-excellent-lesson-plans/scripts/pagebreak.lua , size = 0.951 KB
+[15:41:41.483][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/build-excellent-lesson-plans/scripts/table-content-fit.lua , size = 3.152 KB
+[15:41:41.485][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/create-beautiful-slideshows/scripts/audio-autoplay.lua , size = 0.747 KB
+[15:41:41.486][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/create-beautiful-slideshows/scripts/autocue.lua , size = 4.263 KB
+[15:41:41.487][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/create-beautiful-slideshows/scripts/box-keywords.lua , size = 0.539 KB
+[15:41:41.488][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/create-beautiful-slideshows/scripts/click-table.lua , size = 2.899 KB
+[15:41:41.489][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/create-beautiful-slideshows/scripts/fa-yellow.lua , size = 0.619 KB
+[15:41:41.490][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/create-beautiful-slideshows/scripts/left-table.lua , size = 2.689 KB
+[15:41:41.491][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/create-beautiful-slideshows/scripts/reading-feedback.lua , size = 5.761 KB
+[15:41:41.494][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/create-beautiful-slideshows/scripts/shield-block.lua , size = 2.162 KB
+[15:41:41.495][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/create-beautiful-slideshows/scripts/slide-helper.lua , size = 6.089 KB
+[15:41:41.497][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/create-beautiful-slideshows/scripts/split-list.lua , size = 1.520 KB
+[15:41:41.498][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/create-beautiful-slideshows/scripts/timer-inject.lua , size = 0.627 KB
+[15:41:41.499][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/create-beautiful-slideshows/scripts/vocab-audio-fragment.lua , size = 0.892 KB
+[15:41:41.499][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/create-beautiful-slideshows/scripts/white-reveal.lua , size = 0.208 KB
+[15:41:41.500][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.kilo/skills/create-beautiful-slideshows/scripts/youtube-embed.lua , size = 0.989 KB
+[15:41:41.500][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/globals.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/cli.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/format.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/image.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/json.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/layout.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/log.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/mediabag.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/path.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/scaffolding.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/structure.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/system.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/template.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/text.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/types.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/utils.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc/zip.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/pandoc.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/.lua/types.lua
+[15:41:41.501][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/audio-autoplay.lua , size = 0.747 KB
+[15:41:41.502][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/auto-animate.lua , size = 0.349 KB
+[15:41:41.502][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/autocue.lua , size = 4.263 KB
+[15:41:41.503][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/box-keywords.lua , size = 0.539 KB
+[15:41:41.504][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/click-block.lua , size = 0.721 KB
+[15:41:41.505][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/click-table.lua , size = 2.899 KB
+[15:41:41.506][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/fa-yellow.lua , size = 0.619 KB
+[15:41:41.507][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/left-table.lua , size = 2.689 KB
+[15:41:41.509][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/lesson-tables.lua , size = 3.931 KB
+[15:41:41.510][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/pagebreak.lua , size = 0.951 KB
+[15:41:41.511][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/reading-feedback.lua , size = 5.761 KB
+[15:41:41.513][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/shield-block.lua , size = 2.162 KB
+[15:41:41.514][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/slide-helper.lua , size = 6.089 KB
+[15:41:41.517][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/speaking-grading-sheet.lua , size = 3.124 KB
+[15:41:41.521][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/splash-annotations.lua , size = 0.606 KB
+[15:41:41.522][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/split-list.lua , size = 1.520 KB
+[15:41:41.524][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/table-content-fit.lua , size = 3.152 KB
+[15:41:41.527][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/timer-inject.lua , size = 0.627 KB
+[15:41:41.528][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/vocab-animate.lua , size = 0.552 KB
+[15:41:41.529][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/vocab-audio-fragment.lua , size = 0.892 KB
+[15:41:41.531][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/white-reveal.lua , size = 0.208 KB
+[15:41:41.531][info] [#0:script\workspace\loading.lua:100]: Preload file at: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3/scripts/youtube-embed.lua , size = 0.989 KB
+[15:41:41.533][info] [#0:script\workspace\loading.lua:172]: Loaded files takes [0.162] sec: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3
+[15:41:41.533][info] [#0:script\workspace\loading.lua:181]: Compile files takes [0.000] sec: file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3
+[15:41:41.533][info] [#0:script\workspace\loading.lua:182]: Loaded finish:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3
+[15:41:41.533][info] [#0:script\workspace\workspace.lua:387]: Preload finish at:	file:///c%3A/PROJECTS/LESSON-PLAN-WRITER-3
+[15:41:42.150][info] [#0:script\workspace\workspace.lua:385]: Found 11 files at:	<fallback>
+[15:41:42.150][info] [#0:script\workspace\loading.lua:160]: Load files from disk:	<fallback>
+[15:41:42.150][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/builtin.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/builtin.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/coroutine.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/coroutine.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/table.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/table.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/package.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/package.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/utf8.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/utf8.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/io.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/io.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/string.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/string.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/debug.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/debug.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/basic.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/basic.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/math.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/math.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:88]: Skip loaded file: file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/os.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:112]: ++++As library of:	file:///c%3A/Users/elwru/scoop/apps/lua-language-server/current/meta/Lua%205.4%20en-us%20utf8/os.lua
+[15:41:42.150][info] [#0:script\workspace\loading.lua:172]: Loaded files takes [0.000] sec: <fallback>
+[15:41:42.150][info] [#0:script\workspace\loading.lua:181]: Compile files takes [0.000] sec: <fallback>
+[15:41:42.150][info] [#0:script\workspace\loading.lua:182]: Loaded finish:	<fallback>
+[15:41:42.150][info] [#0:script\workspace\workspace.lua:387]: Preload finish at:	<fallback>

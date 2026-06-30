@@ -1,0 +1,32 @@
+{
+  "run_id": "d2ae2280",
+  "workflow_id": "speckit",
+  "status": "failed",
+  "current_step_index": 0,
+  "current_step_id": "specify",
+  "step_results": {
+    "specify": {
+      "type": "command",
+      "integration": "kilocode",
+      "model": null,
+      "options": {},
+      "input": {
+        "args": "Pydantic data models for lesson plans. Models: LessonPlan (teacher, duration, date, topic, materials, lesson_plan), LessonPlanMeta (shape, shape_name, cefr_level, class -> class_name, stages), Stage (stage_number, stage, stage_aim, procedure, time, interaction), Material (name, type, page). field_validator decorators enforce: date format (dd/mm/yy, d Month YYYY, or ddmmyy), stage_number >= 1, time format 'N min.', interaction in {T-Ss, Ss-Ss, S-S, S-Ss, T-S, Group, Individual}, cefr_level in {A1-C2}, shape in {ESA, PPP, TBL, Test-Teach-Test, Guided Discovery}. Files: src/models.py, src/__init__.py, tests/test_models.py (20 tests). Has existing implementation \u2014 spec is backfill to document the model contract."
+      },
+      "output": {
+        "command": "speckit.specify",
+        "integration": "kilocode",
+        "model": null,
+        "options": {},
+        "input": {
+          "args": "Pydantic data models for lesson plans. Models: LessonPlan (teacher, duration, date, topic, materials, lesson_plan), LessonPlanMeta (shape, shape_name, cefr_level, class -> class_name, stages), Stage (stage_number, stage, stage_aim, procedure, time, interaction), Material (name, type, page). field_validator decorators enforce: date format (dd/mm/yy, d Month YYYY, or ddmmyy), stage_number >= 1, time format 'N min.', interaction in {T-Ss, Ss-Ss, S-S, S-Ss, T-S, Group, Individual}, cefr_level in {A1-C2}, shape in {ESA, PPP, TBL, Test-Teach-Test, Guided Discovery}. Files: src/models.py, src/__init__.py, tests/test_models.py (20 tests). Has existing implementation \u2014 spec is backfill to document the model contract."
+        },
+        "exit_code": 1,
+        "dispatched": false
+      },
+      "status": "failed"
+    }
+  },
+  "created_at": "2026-06-30T13:22:38.793711+00:00",
+  "updated_at": "2026-06-30T13:22:38.893439+00:00"
+}

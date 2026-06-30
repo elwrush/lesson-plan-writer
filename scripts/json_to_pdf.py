@@ -17,8 +17,14 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
+from pydantic import ValidationError
+
 # Project root
 PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from src.models import LessonPlan  # noqa: E402
+
 TEMPLATES_DIR = PROJECT_ROOT / "templates"
 PDF_OUTPUT_DIR = PROJECT_ROOT / "PDF"
 
@@ -27,61 +33,13 @@ ROBOTO_FONT_DIR = Path(
     os.path.expandvars(r"%APPDATA%\TinyTeX\texmf-dist\fonts\opentype\google\roboto")
 )
 
-# Required fields in lesson plan JSON
-REQUIRED_FIELDS = [
-    "teacher",
-    "duration",
-    "date",
-    "topic",
-    "materials",
-    "lesson_plan",
-]
-
-REQUIRED_LESSON_PLAN_FIELDS = [
-    "shape",
-    "shape_name",
-    "cefr_level",
-    "class",
-    "stages",
-]
-
-REQUIRED_STAGE_FIELDS = [
-    "stage_number",
-    "stage",
-    "stage_aim",
-    "procedure",
-    "time",
-    "interaction",
-]
-
 
 def validate_json(data):
-    """Validate lesson plan JSON against required schema."""
-    errors = []
-
-    for field in REQUIRED_FIELDS:
-        if field not in data:
-            errors.append(f"Missing required field: {field}")
-        elif not data[field]:
-            errors.append(f"Empty required field: {field}")
-
-    if "lesson_plan" in data and isinstance(data["lesson_plan"], dict):
-        lp = data["lesson_plan"]
-        for field in REQUIRED_LESSON_PLAN_FIELDS:
-            if field not in lp:
-                errors.append(f"Missing required lesson_plan field: {field}")
-            elif field == "stages" and (not lp[field] or not isinstance(lp[field], list)):
-                errors.append("lesson_plan.stages must be a non-empty array")
-
-        if "stages" in lp and isinstance(lp["stages"], list):
-            for i, stage in enumerate(lp["stages"]):
-                for field in REQUIRED_STAGE_FIELDS:
-                    if field not in stage:
-                        errors.append(f"Missing required field in stage {i + 1}: {field}")
-    else:
-        errors.append("lesson_plan must be a valid object")
-
-    return errors
+    try:
+        LessonPlan.model_validate(data)
+        return []
+    except ValidationError as e:
+        return [str(e)]
 
 
 def normalize_topic(topic):
@@ -276,7 +234,11 @@ def build_typ_content(data, json_path=None):
     cefr = lesson_plan.get("cefr_level", "")
     shape = lesson_plan.get("shape", "")
     shape_name = lesson_plan.get("shape_name", "")
-    materials = data.get("materials", "")
+    materials_raw = data.get("materials", "")
+    if isinstance(materials_raw, list):
+        materials = ", ".join(m.get("name", "") for m in materials_raw)
+    else:
+        materials = str(materials_raw)
     slideshow_url_raw = data.get("slideshow_url", "")
     # Escape Typst special chars (% = comment in Typst content blocks)
     slideshow_url = slideshow_url_raw.replace("%", "\\%")
@@ -355,8 +317,8 @@ def build_typ_content(data, json_path=None):
                 lines.append("= Transcript")
                 lines.append("")
                 lines.append(transcript_content)
-            except Exception:
-                pass
+            except Exception as exc:
+                print(f"WARNING: Failed to read transcript: {exc}", file=sys.stderr)
 
     # Answer Key (only .typ files accepted — markdown intermediary is forbidden)
     answer_key = data.get("answer_key", "")
@@ -372,8 +334,8 @@ def build_typ_content(data, json_path=None):
                 lines.append("= Answer Key")
                 lines.append("")
                 lines.append(ak_content)
-            except Exception:
-                pass
+            except Exception as exc:
+                print(f"WARNING: Failed to read answer key: {exc}", file=sys.stderr)
 
     # Notes section (pedagogical notes, book background, etc.)
     notes = data.get("notes", "")
@@ -466,7 +428,7 @@ def read_json_with_encoding_fix(path):
         json.loads(text)
         return text, True
     except (UnicodeDecodeError, json.JSONDecodeError):
-        pass
+        print(f"  Note: Strategy 1 failed for {path.name}, trying BOM strip", file=sys.stderr)
 
     # Strategy 2: try UTF-8 with BOM stripped
     if seen_utf8_bom:
@@ -479,8 +441,8 @@ def read_json_with_encoding_fix(path):
                 return fixed, True
             json.loads(text)
             return text, True
-        except (UnicodeDecodeError, json.JSONDecodeError):
-            pass
+        except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+            print(f"  Note: Strategy 2 failed: {exc}", file=sys.stderr)
 
     # Strategy 3: reconstruct corrupted byte-level UTF-8
     # The raw bytes are valid UTF-8 but were stored as Latin-1 (cp1252).
@@ -494,8 +456,8 @@ def read_json_with_encoding_fix(path):
         json.loads(final)
         print(f"  Note: Reconstructed byte-level mojibake in {path.name}")
         return final, True
-    except Exception:
-        pass
+    except Exception as exc:
+        print(f"  Note: Strategy 3 failed: {exc}", file=sys.stderr)
 
     # Strategy 4: replace orphaned Latin-1 control bytes
     try:
@@ -513,8 +475,8 @@ def read_json_with_encoding_fix(path):
         json.loads(text)
         print(f"  Note: Reconstructed orphaned bytes in {path.name}")
         return text, True
-    except Exception:
-        pass
+    except Exception as exc:
+        print(f"  Note: Strategy 4 failed: {exc}", file=sys.stderr)
 
     # Final: try reading with UTF-8 and raise the original error
     return raw.decode("utf-8"), False
@@ -591,13 +553,13 @@ def convert_json_to_pdf(json_path, output_dir=None):
     # Clean up temporary files
     try:
         temp_typ.unlink()
-    except Exception:
-        pass
+    except Exception as exc:
+        print(f"WARNING: Could not remove temp file {temp_typ}: {exc}", file=sys.stderr)
     for f in copied_files:
         try:
             f.unlink()
-        except Exception:
-            pass
+        except Exception as exc:
+            print(f"WARNING: Could not remove temp file {f}: {exc}", file=sys.stderr)
 
     return success
 

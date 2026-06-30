@@ -5,3 +5,13 @@ repos:
       - id: ruff
         args: [--fix]
       - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: validate
+        name: Full validation suite
+        description: ruff → pytest → spec_coverage → pydantic_compliance → spec_required → ci_guard
+        entry: uv run make validate
+        language: system
+        pass_filenames: false
+        always_run: true

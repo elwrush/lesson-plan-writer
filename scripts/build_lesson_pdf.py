@@ -27,8 +27,14 @@ import uuid
 from datetime import datetime
 from pathlib import Path
 
+from pydantic import ValidationError
+
 # ── Paths ──
 PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from src.models import LessonPlanFrontmatter  # noqa: E402
+
 TEMPLATES_DIR = PROJECT_ROOT / "templates"
 TEMPLATE = TEMPLATES_DIR / "lesson-plan.typ"
 LUA_FILTER = PROJECT_ROOT / "scripts" / "lesson-tables.lua"
@@ -39,19 +45,6 @@ PDF_OUTPUT_DIR = PROJECT_ROOT / "PDF"
 ROBOTO_FONT_DIR = Path(
     os.path.expandvars(r"%APPDATA%\TinyTeX\texmf-dist\fonts\opentype\google\roboto")
 )
-
-# ── Required YAML frontmatter keys ──
-REQUIRED_META = [
-    "topic",
-    "teacher",
-    "formatted_date",
-    "duration",
-    "cefr_level",
-    "class",
-    "shape",
-    "shape_name",
-]
-
 
 # ══════════════════════════════════════════════════════════════════════════
 # TEMPLATE VERIFICATION
@@ -127,11 +120,14 @@ def parse_frontmatter(md_path):
 
 
 def validate_metadata(meta):
-    """Check required metadata fields exist. Returns list of warning strings."""
+    """Check required metadata fields via Pydantic model. Returns list of warning strings."""
     warnings = []
-    for key in REQUIRED_META:
-        if key not in meta or not meta.get(key):
-            warnings.append(f"MISSING: '{key}' in YAML frontmatter")
+    try:
+        LessonPlanFrontmatter.model_validate(meta)
+    except ValidationError as e:
+        for err in e.errors():
+            field = ".".join(str(p) for p in err["loc"])
+            warnings.append(f"MISSING/INVALID: '{field}' in YAML frontmatter — {err['msg']}")
     return warnings
 
 
