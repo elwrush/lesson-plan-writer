@@ -222,26 +222,57 @@
 
 
 
-<section data-background-color="#fafafa" data-transition="fade">
+  
+
+<section data-background-color="#fafafa" data-transition="fade" data-auto-animate>
   <div style="border-left: 6px solid #22c55e; padding-left: 16px; margin-bottom: 12px;">
     <small style="color: #22c55e; font-weight: 600; text-transform: uppercase;">Controlled Practice</small>
   </div>
 
   
-  <h2 style="font-size: 2.2em; margin-bottom: 0.3em;">Unscramble the sentence</h2>
+  <h2 style="font-size: 2.2em; margin-bottom: 0.3em;" data-id="title">Unscramble the sentence</h2>
   
 
   
   
   
     
-    <p style="font-size: 1.4em; margin-bottom: 0.2em;"><span class="fragment">you / ever / eaten / have / sushi?</span></p>
+    <p style="font-size: 1.4em; margin-bottom: 0.2em;" data-id="body"><span class="fragment">you / ever / eaten / have / sushi?</span></p>
     
   
   
 
   
-  <aside class="notes">Students write the correct order: 'Have you ever eaten sushi?' Check as a class. (2 min)</aside>
+  <aside class="notes">Show scrambled words. Students write the correct order. (1 min)</aside>
+  
+</section>
+
+
+
+
+
+  
+
+<section data-background-color="#fafafa" data-transition="fade" data-auto-animate>
+  <div style="border-left: 6px solid #22c55e; padding-left: 16px; margin-bottom: 12px;">
+    <small style="color: #22c55e; font-weight: 600; text-transform: uppercase;">Controlled Practice</small>
+  </div>
+
+  
+  <h2 style="font-size: 2.2em; margin-bottom: 0.3em;" data-id="title">Correct order</h2>
+  
+
+  
+  
+  
+    
+    <p style="font-size: 1.4em; margin-bottom: 0.2em;" data-id="body"><span class="fragment">Have you ever eaten sushi?</span></p>
+    
+  
+  
+
+  
+  <aside class="notes">Reveal the answer. The words animate from scrambled to correct. (1 min)</aside>
   
 </section>
 
@@ -376,8 +407,8 @@
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/reveal.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/plugin/notes/notes.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/plugin/highlight/highlight.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/plugin/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/plugin/highlight.js"></script>
   <script>
     Reveal.initialize({
       plugins: [RevealNotes, RevealHighlight]
