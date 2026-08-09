@@ -13,6 +13,7 @@
   <style>
     .reveal .shield{display:flex;align-items:center;width:fit-content;margin:0.6em auto;padding:0.1em 0.4em;background:rgba(0,0,0,0.55);border-radius:4px;text-shadow:none;line-height:1.3}.reveal .cta-text{color:#ffdd00;font-size:1.3em;font-weight:700}.box-word{display:inline-block;border:2px solid #ffdd00;border-radius:4px;padding:1px 7px;font-weight:700;color:#ffdd00}.reveal .slides section{padding:0 8px !important}.reveal .slides section h2{font-size:44px !important;width:100%;margin-left:auto;margin-right:auto}.reveal .slides section > div:not(.shield):not(.cta-box):not(.title-logo-wrap){width:100%;margin-left:auto;margin-right:auto}.reveal .title-logo{display:inline}.cta-box{display:inline-block;border:2px solid #ffdd00;border-radius:6px;padding:0.6em 1.2em;margin:1em auto;text-align:center}.cta-box p{color:#ffdd00;font-weight:700;font-size:1.2em;margin:0}.fragment{transition:all 0.2s ease}.vocab-phon{color:#fff;font-size:1em;font-style:italic}.vocab-ctx{color:#fff;font-size:1em;font-style:italic;max-width:700px;line-height:1.5}.video-box{width:95%;max-width:900px;margin:0 auto;aspect-ratio:16/9}.video-box iframe{width:100%;height:100%;border:none}.strategy-label{color:#ffdd00;font-size:0.85em;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5em}.q-block{border-left:3px solid #ffdd00;padding-left:1em;margin:1em 0;text-align:left}
   </style>
+  <link rel="stylesheet" href="timer-plugin.css">
 </head>
 <body>
   <div class="reveal">
@@ -99,7 +100,7 @@
 
 <section
   
-  data-id="slide-recall-1"
+  data-id="slide-recall-1" data-timer="120" data-timer-autostart="true"
   data-fragment-index="4"
   data-background-color="#1a1a2e" data-background-size="cover"
   style="justify-content:flex-start!important"
@@ -115,11 +116,7 @@
   
   
     
-    <div>What are the four parts of a question?
-
-Which side did you choose? Tell your partner.
-
-<p style="color:#ffdd00;text-align:center;font-size:38px;font-weight:700;margin-top:22px">Opinion &mdash; Reason &mdash; Evidence</p></div>
+    <div>What are the four parts of a question?<br><br>Which side did you choose? Tell your partner.<br><br><p style="color:#ffdd00;text-align:center;font-size:38px;font-weight:700;margin-top:22px">Opinion &mdash; Reason &mdash; Evidence</p></div>
     
   
   
@@ -286,7 +283,7 @@ Which side did you choose? Tell your partner.
 
 <section
   
-  data-id="slide-task-ideas-1"
+  data-id="slide-task-ideas-1" data-timer="300" data-timer-autostart="true"
   data-fragment-index="14"
   data-background-color="#c0392b" data-background-size="cover"
   style="justify-content:flex-start!important"
@@ -302,9 +299,7 @@ Which side did you choose? Tell your partner.
   
   
     
-    <div><span class="box-word">Think</span> of positives and negatives for both sides of your topic.
-
-Write them in the table on your worksheet.</div>
+    <div><span class="box-word">Think</span> of positives and negatives for both sides of your topic.<br><br>Write them in the table on your worksheet.</div>
     
   
   
@@ -357,7 +352,7 @@ Write them in the table on your worksheet.</div>
 
 <section
   
-  data-id="slide-task-plan-1"
+  data-id="slide-task-plan-1" data-timer="360" data-timer-autostart="true"
   data-fragment-index="17"
   data-background-color="#c0392b" data-background-size="cover"
   style="justify-content:flex-start!important"
@@ -373,9 +368,7 @@ Write them in the table on your worksheet.</div>
   
   
     
-    <div><span class="box-word">Choose</span> your three best ideas.
-
-<span class="box-word">Write</span> sentences with the expressions from Exercise 6.</div>
+    <div><span class="box-word">Choose</span> your three best ideas.<br><br><span class="box-word">Write</span> sentences with the expressions from Exercise 6.</div>
     
   
   
@@ -418,6 +411,7 @@ Write them in the table on your worksheet.</div>
 
     </div>
   </div>
+  <script src="timer-plugin.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
@@ -431,7 +425,7 @@ Write them in the table on your worksheet.</div>
       width: 1280,
       height: 720,
       transition: "slide",
-      plugins: [ RevealNotes, RevealHighlight, RevealSearch, RevealZoom ]
+      plugins: [ RevealNotes, RevealHighlight, RevealSearch, RevealZoom, TimerPlugin ]
     });
   </script>
 </body>
