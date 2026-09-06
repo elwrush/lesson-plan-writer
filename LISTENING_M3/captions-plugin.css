@@ -1,0 +1,73 @@
+/* captions-plugin.css — Large high-contrast captions below the audio player. */
+
+/* Collapse the black video area — keep the full control bar, no wasted space. */
+.caption-video {
+  height: 64px !important;
+  object-fit: cover;
+  background: transparent !important;
+  border-radius: 6px;
+}
+/* Hide the video's own caption rendering (native ::cue) — we render our own. */
+.caption-video::cue {
+  visibility: hidden;
+}
+/* Keep native video controls fully sized. */
+.caption-video::-webkit-media-controls {
+  height: 100%;
+}
+
+/* The wrapper centres the player + overlay column. */
+.captions-wrap {
+  width: 70%;
+  max-width: 640px;
+  margin: 6px auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* The caption line: large, bold, high-contrast, room-readable. */
+.caption-overlay {
+  margin-top: 14px;
+  min-height: 70px;
+  width: 100%;
+  text-align: center;
+  font-size: 38px;
+  line-height: 1.3;
+  font-weight: 800;
+  color: #ffdd00;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.95);
+  background: rgba(0, 0, 0, 0.65);
+  padding: 12px 20px;
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.15s;
+  pointer-events: none;
+}
+.caption-overlay.caption-on {
+  opacity: 1;
+}
+.caption-overlay:empty {
+  opacity: 0;
+}
+
+/* ── Non-Chrome warning badge ─────────────────────────────────────── */
+/* Fixed at the top-centre; only injected by JS when a non-Chrome browser is
+   detected (captions rely on Chrome's WebVTT rendering). */
+.browser-badge {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: #c0392b;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  text-align: center;
+  white-space: nowrap;
+}
